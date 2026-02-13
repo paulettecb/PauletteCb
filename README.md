@@ -3,7 +3,6 @@
 A modern, playful, privacy-first personal page with:
 - Rounded glassmorphism cards and transparent layers.
 - Sections for About, Experience, Projects, and Contact.
-- Hero image currently uses an external placeholder (easy to swap later).
 - Automatic language detection based on browser locale.
 - Manual language switcher for testing and overrides.
 
