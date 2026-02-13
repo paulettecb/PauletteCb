@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paulette C | Personal Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow"></div>
+
+    <header class="topbar glass">
+      <h1 class="brand">Paulette C</h1>
+      <div class="lang-controls">
+        <label for="language-select" id="language-label">Language</label>
+        <select id="language-select" aria-label="Language selector">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="pt">Português</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero glass card">
+        <div class="hero-layout">
+          <div>
+            <p class="eyebrow" id="hero-eyebrow">Hello there ✨</p>
+            <h2 id="headline">Front-End Lead Developer + Psychology Student of Human Systems</h2>
+            <p id="intro-line">
+              I build digital systems for a living and study human systems for fun.
+            </p>
+          </div>
+          <img
+            class="profile-photo"
+            src="assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png"
+            alt="Paulette smiling with Kenna"
+            onerror="this.onerror=null;this.src='https://placehold.co/720x960/ffffff/8e1d48?text=Photo+Coming+Soon';"
+          />
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card glass" id="about">
+          <h3 id="about-title">About</h3>
+          <p id="about-p1">
+            I’m a Front-End Lead Developer and psychology student exploring the intersection of
+            technology and human behavior. I work at the edge where logic meets emotion.
+          </p>
+          <p id="about-p2">
+            By day, I lead front-end development projects focused on performance and architecture.
+            By night, I study psychology to understand how minds (including my own) navigate
+            complexity.
+          </p>
+          <p id="about-p3">
+            My curious ADHD brain thrives on abstraction, pattern recognition, and interdisciplinary
+            thinking. I don’t see chaos; I see systems waiting to be understood.
+          </p>
+          <p id="about-p4">
+            When I’m not building or studying systems, I’m training my life companions, Kenna (my
+            Border Collie), and negotiating creative boundaries with Rodolfo (my cat), daily
+            reminders that intelligence comes in many forms.
+          </p>
+        </article>
+
+        <article class="card glass" id="experience">
+          <h3 id="experience-title">Experience</h3>
+          <ul>
+            <li id="exp-1-title"><strong>Front-End Lead Developer</strong></li>
+            <li id="exp-1-detail">
+              Leading development of high-performance web experiences with scalable architecture,
+              design system alignment, and maintainable component strategy.
+            </li>
+            <li id="exp-2-title"><strong>Psychology Student</strong></li>
+            <li id="exp-2-detail">
+              Studying cognition, emotion, and behavior to better understand how humans process
+              information, make decisions, and adapt to complexity.
+            </li>
+          </ul>
+        </article>
+
+        <article class="card glass" id="projects">
+          <h3 id="projects-title">Projects</h3>
+          <div class="project-list">
+            <div class="project">
+              <h4 id="project-1-title">Project Placeholder 01</h4>
+              <p id="project-1-desc">
+                Coming soon ✨ This is where your first featured build will go.
+              </p>
+            </div>
+            <div class="project">
+              <h4 id="project-2-title">Project Placeholder 02</h4>
+              <p id="project-2-desc">
+                Coming soon ✨ Another project card waiting for your next idea.
+              </p>
+            </div>
+            <div class="project">
+              <h4 id="project-3-title">Project Placeholder 03</h4>
+              <p id="project-3-desc">
+                Coming soon ✨ A playful experiment is loading here soon.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card glass" id="contact">
+          <h3 id="contact-title">Contact</h3>
+          <p id="contact-copy">Want to connect? Say hi on Instagram:</p>
+          <a class="link-pill" href="https://instagram.com/paulettecb" target="_blank" rel="noreferrer">
+            @paulettecb
+          </a>
+          <p class="small-note" id="contact-note">
+            Public Instagram only. No phone or work contact shared.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
