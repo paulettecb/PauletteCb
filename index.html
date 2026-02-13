@@ -7,13 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="background-glow"></div>
+    <div class="playful-wiggles" aria-hidden="true"></div>
 
     <header class="topbar glass">
       <h1 class="brand">Paulette C</h1>
@@ -38,16 +39,22 @@
             <p id="intro-line">
               I build digital systems for a living and study human systems for fun.
             </p>
+            <div class="hero-badges" aria-label="Highlights">
+              <span class="badge">Architecture</span>
+              <span class="badge">Human Behavior</span>
+              <span class="badge">Creative Systems</span>
+            </div>
           </div>
           <img
             class="profile-photo"
             src="assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png"
             alt="Paulette smiling with Kenna"
-            onerror="this.onerror=null;this.src='https://placehold.co/720x960/ffffff/8e1d48?text=Photo+Coming+Soon';"
+            onerror="this.onerror=null;this.src='https://placehold.co/720x960/f8eef1/8e1d48?text=Photo+Coming+Soon';"
           />
         </div>
       </section>
 
+      <div class="color-band" aria-hidden="true"></div>
       <section class="grid">
         <article class="card glass" id="about">
           <h3 id="about-title">About</h3>
@@ -88,25 +95,49 @@
         </article>
 
         <article class="card glass" id="projects">
-          <h3 id="projects-title">Projects</h3>
+          <div class="projects-head">
+            <h3 id="projects-title">Projects</h3>
+            <span class="tiny-pill">Visual Lab</span>
+          </div>
+          <div class="project-stickers" aria-hidden="true">
+            <span class="sticker s1"></span><span class="sticker s2"></span><span class="sticker s3"></span>
+          </div>
           <div class="project-list">
             <div class="project">
               <h4 id="project-1-title">Project Placeholder 01</h4>
               <p id="project-1-desc">
                 Coming soon ✨ This is where your first featured build will go.
               </p>
+              <div class="project-meter" aria-hidden="true"><span style="width: 28%"></span></div>
             </div>
             <div class="project">
               <h4 id="project-2-title">Project Placeholder 02</h4>
               <p id="project-2-desc">
                 Coming soon ✨ Another project card waiting for your next idea.
               </p>
+              <div class="project-meter" aria-hidden="true"><span style="width: 52%"></span></div>
             </div>
             <div class="project">
               <h4 id="project-3-title">Project Placeholder 03</h4>
               <p id="project-3-desc">
                 Coming soon ✨ A playful experiment is loading here soon.
               </p>
+              <div class="project-meter" aria-hidden="true"><span style="width: 40%"></span></div>
+            </div>
+          </div>
+
+          <div class="insight-board" aria-label="Decorative visual board">
+            <div class="mini-chart card-like">
+              <p>Creative Flow</p>
+              <div class="bars">
+                <span style="height: 38%"></span><span style="height: 64%"></span><span style="height: 54%"></span>
+                <span style="height: 76%"></span><span style="height: 59%"></span><span style="height: 82%"></span>
+                <span style="height: 48%"></span>
+              </div>
+            </div>
+            <div class="ring-wrap card-like">
+              <p>Focus Balance</p>
+              <div class="ring"></div>
             </div>
           </div>
         </article>
