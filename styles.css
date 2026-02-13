@@ -34,14 +34,12 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -3;
-  background:
-    radial-gradient(200px 400px at 8% 20%, rgba(243, 63, 158, 0.84) 0 55%, transparent 56%),
-    radial-gradient(180px 360px at 24% 52%, rgba(255, 143, 47, 0.84) 0 55%, transparent 56%),
-    radial-gradient(180px 360px at 42% 20%, rgba(243, 63, 158, 0.82) 0 55%, transparent 56%),
-    radial-gradient(180px 350px at 58% 58%, rgba(255, 143, 47, 0.82) 0 55%, transparent 56%),
-    radial-gradient(180px 370px at 76% 22%, rgba(243, 63, 158, 0.82) 0 55%, transparent 56%),
-    radial-gradient(180px 340px at 92% 56%, rgba(255, 143, 47, 0.82) 0 55%, transparent 56%);
-  opacity: 0.46;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 900'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='26'%3E%3Cpath stroke='%23f85ba9' d='M-60 120 C 60 20, 140 220, 260 120 S 460 20, 580 120 780 220, 900 120'/%3E%3Cpath stroke='%23ff8e33' d='M-80 310 C 40 210, 120 410, 240 310 S 440 210, 560 310 760 410, 880 310'/%3E%3Cpath stroke='%23e0a42e' d='M20 520 C 140 420, 220 620, 340 520 S 540 420, 660 520 860 620, 980 520'/%3E%3Cpath stroke='%23f33f9e' d='M-40 710 C 80 610, 160 810, 280 710 S 480 610, 600 710 800 810, 920 710'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(160deg, rgba(255, 190, 220, 0.35), rgba(255, 171, 200, 0.12));
+  background-size: cover;
+  background-position: center;
+  opacity: 0.62;
 }
 
 body::after {
@@ -55,17 +53,15 @@ body::after {
 
 .playful-wiggles {
   position: fixed;
-  inset: -10% -10%;
+  inset: -2%;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(250px 140px at 6% 36%, transparent 55%, rgba(243, 63, 158, 0.45) 56% 70%, transparent 71%),
-    radial-gradient(320px 140px at 24% 74%, transparent 52%, rgba(255, 143, 47, 0.5) 53% 68%, transparent 69%),
-    radial-gradient(320px 160px at 44% 34%, transparent 52%, rgba(224, 164, 46, 0.52) 53% 68%, transparent 69%),
-    radial-gradient(300px 160px at 67% 72%, transparent 52%, rgba(243, 63, 158, 0.5) 53% 68%, transparent 69%),
-    radial-gradient(300px 150px at 88% 30%, transparent 52%, rgba(255, 143, 47, 0.5) 53% 68%, transparent 69%);
-  filter: blur(2px) saturate(108%);
-  opacity: .8;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 900'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath stroke='%23ff8e33' stroke-width='10' d='M-40 180 C 80 80, 160 280, 280 180 S 480 80, 600 180 800 280, 920 180 1120 80, 1240 180'/%3E%3Cpath stroke='%23f33f9e' stroke-width='10' d='M-40 360 C 80 260, 160 460, 280 360 S 480 260, 600 360 800 460, 920 360 1120 260, 1240 360'/%3E%3Cpath stroke='%23e0a42e' stroke-width='10' d='M-40 540 C 80 440, 160 640, 280 540 S 480 440, 600 540 800 640, 920 540 1120 440, 1240 540'/%3E%3Cpath stroke='%23f85ba9' stroke-width='10' d='M-40 720 C 80 620, 160 820, 280 720 S 480 620, 600 720 800 820, 920 720 1120 620, 1240 720'/%3E%3Ccircle cx='110' cy='95' r='6' fill='%23f33f9e'/%3E%3Ccircle cx='450' cy='140' r='6' fill='%23ff8e33'/%3E%3Ccircle cx='760' cy='90' r='6' fill='%23e0a42e'/%3E%3Ccircle cx='1030' cy='150' r='6' fill='%23f33f9e'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: .45;
+  mix-blend-mode: multiply;
 }
 
 .background-glow {
