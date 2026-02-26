@@ -16,18 +16,48 @@
         </div>
 
         <article class="architectural-panel" aria-label="Architectural system schematic">
-          <div class="schematic-row" aria-hidden="true">
-            <span class="schematic-block">CORE</span>
+          <div class="schematic-row">
+            <span
+              class="schematic-block"
+              :class="{ 'is-active': activeSection === 'core' }"
+              tabindex="0"
+              @mouseenter="setActiveSection('core')"
+              @focus="setActiveSection('core')"
+              @mouseleave="clearActiveSection"
+              @blur="clearActiveSection"
+            >
+              CORE
+            </span>
             <span class="schematic-link"></span>
-            <span class="schematic-block">MODULE</span>
+            <span
+              class="schematic-block"
+              :class="{ 'is-active': activeSection === 'module' }"
+              tabindex="0"
+              @mouseenter="setActiveSection('module')"
+              @focus="setActiveSection('module')"
+              @mouseleave="clearActiveSection"
+              @blur="clearActiveSection"
+            >
+              MODULE
+            </span>
             <span class="schematic-link"></span>
-            <span class="schematic-block">EXTENSION</span>
+            <span
+              class="schematic-block"
+              :class="{ 'is-active': activeSection === 'extension' }"
+              tabindex="0"
+              @mouseenter="setActiveSection('extension')"
+              @focus="setActiveSection('extension')"
+              @mouseleave="clearActiveSection"
+              @blur="clearActiveSection"
+            >
+              EXTENSION
+            </span>
           </div>
         </article>
       </section>
 
       <section class="system-blocks" aria-label="System components overview">
-        <article class="system-card">
+        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'core' }">
           <p class="card-title">The Core</p>
           <p class="card-copy">
             The foundation of the system. It establishes shared geometry, attachment logic, and
@@ -36,7 +66,7 @@
           <p class="card-tag">BASE INTERFACE</p>
         </article>
 
-        <article class="system-card">
+        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'module' }">
           <p class="card-title">Modules</p>
           <p class="card-copy">
             Interchangeable components that connect through consistent interfaces, allowing parts
@@ -45,7 +75,7 @@
           <p class="card-tag">ATTACH / SWAP</p>
         </article>
 
-        <article class="system-card">
+        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'extension' }">
           <p class="card-title">Configurations</p>
           <p class="card-copy">
             Adaptable setups created by combining compatible elements, enabling structural variety
@@ -68,7 +98,18 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import '../../src/styles/kyn-tokens.css';
+
+const activeSection = ref('');
+
+const setActiveSection = (section) => {
+  activeSection.value = section;
+};
+
+const clearActiveSection = () => {
+  activeSection.value = '';
+};
 </script>
 
 <style scoped>
@@ -224,6 +265,7 @@ h1 {
 }
 
 .schematic-block {
+  position: relative;
   border: 1px solid rgba(201, 197, 190, 0.34);
   background: rgba(16, 17, 19, 0.72);
   min-height: clamp(3.2rem, 6vw, 4.1rem);
@@ -233,6 +275,28 @@ h1 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(232, 226, 216, 0.88);
+  transition: border-color 220ms ease;
+}
+
+.schematic-block::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  margin: 0 auto;
+  background: #b89b5e;
+  transition: width 200ms ease;
+}
+
+.schematic-block.is-active {
+  border-color: rgba(184, 155, 94, 0.68);
+}
+
+.schematic-block.is-active::after {
+  width: 100%;
 }
 
 .schematic-link {
@@ -253,7 +317,7 @@ h1 {
   padding: 1.2rem 1.12rem 1.08rem;
   display: grid;
   gap: 0.85rem;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: transform 220ms ease, border-color 220ms ease, filter 220ms ease;
 }
 
 .system-card::before {
@@ -269,6 +333,10 @@ h1 {
 .system-card:focus-within {
   transform: translateY(-3px);
   border-color: rgba(201, 197, 190, 0.42);
+}
+
+.system-card.is-highlighted {
+  filter: brightness(1.04);
 }
 
 .card-title {
@@ -379,6 +447,8 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .schematic-block,
+  .schematic-block::after,
   .system-card,
   .btn {
     transition: none;
