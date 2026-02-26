@@ -16,10 +16,12 @@
         </div>
 
         <article class="architectural-panel" aria-label="Architectural system schematic">
-          <div class="schematic-row">
+          <div class="schematic-row" role="list" aria-label="System schematic blocks">
             <span
               class="schematic-block"
               :class="schematicStateClass('core')"
+              role="button"
+              aria-label="Highlight core section"
               tabindex="0"
               @mouseenter="setActiveSection('core')"
               @focus="setActiveSection('core')"
@@ -32,6 +34,8 @@
             <span
               class="schematic-block"
               :class="schematicStateClass('modules')"
+              role="button"
+              aria-label="Highlight modules section"
               tabindex="0"
               @mouseenter="setActiveSection('modules')"
               @focus="setActiveSection('modules')"
@@ -44,6 +48,8 @@
             <span
               class="schematic-block"
               :class="schematicStateClass('configurations')"
+              role="button"
+              aria-label="Highlight configurations section"
               tabindex="0"
               @mouseenter="setActiveSection('configurations')"
               @focus="setActiveSection('configurations')"
@@ -60,6 +66,8 @@
         <article
           class="system-card"
           :class="cardStateClass('core')"
+          role="button"
+          aria-label="Highlight core card and schematic block"
           tabindex="0"
           @mouseenter="setActiveSection('core')"
           @focus="setActiveSection('core')"
@@ -77,6 +85,8 @@
         <article
           class="system-card"
           :class="cardStateClass('modules')"
+          role="button"
+          aria-label="Highlight modules card and schematic block"
           tabindex="0"
           @mouseenter="setActiveSection('modules')"
           @focus="setActiveSection('modules')"
@@ -94,6 +104,8 @@
         <article
           class="system-card"
           :class="cardStateClass('configurations')"
+          role="button"
+          aria-label="Highlight configurations card and extension block"
           tabindex="0"
           @mouseenter="setActiveSection('configurations')"
           @focus="setActiveSection('configurations')"
@@ -309,7 +321,7 @@ h1 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(232, 226, 216, 0.88);
-  transition: border-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+  transition: border-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease, filter 220ms ease;
 }
 
 .schematic-block::after {
@@ -326,8 +338,10 @@ h1 {
 }
 
 .schematic-block.is-active {
-  border-color: rgba(212, 183, 121, 0.78);
-  box-shadow: 0 0 0 1px rgba(184, 155, 94, 0.2), inset 0 0 0 1px rgba(184, 155, 94, 0.14);
+  border-color: rgba(232, 214, 179, 0.72);
+  box-shadow: 0 0 0 1px rgba(184, 155, 94, 0.2), inset 0 0 0 1px rgba(184, 155, 94, 0.14),
+    inset 0 0 16px rgba(184, 155, 94, 0.08);
+  filter: brightness(1.03);
 }
 
 .schematic-block.is-active::after {
@@ -335,7 +349,12 @@ h1 {
 }
 
 .schematic-block.is-inactive {
-  opacity: 0.72;
+  opacity: 0.78;
+}
+
+.schematic-block:focus-visible {
+  outline: 2px solid rgba(227, 197, 122, 0.76);
+  outline-offset: 2px;
 }
 
 .schematic-link {
@@ -377,12 +396,24 @@ h1 {
 
 .system-card.is-active {
   filter: brightness(1.04);
-  border-color: rgba(212, 183, 121, 0.62);
-  box-shadow: inset 0 0 0 1px rgba(184, 155, 94, 0.16);
+  border-color: rgba(232, 214, 179, 0.58);
+  box-shadow: inset 0 0 0 1px rgba(184, 155, 94, 0.18), inset 0 0 18px rgba(184, 155, 94, 0.06);
 }
 
 .system-card.is-inactive {
-  opacity: 0.72;
+  opacity: 0.78;
+}
+
+.system-card.is-active::before {
+  height: 2px;
+  width: 1.25rem;
+  background: var(--brass-2);
+  margin-bottom: 0.14rem;
+}
+
+.system-card:focus-visible {
+  outline: 2px solid rgba(227, 197, 122, 0.76);
+  outline-offset: 2px;
 }
 
 .card-title {
