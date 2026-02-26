@@ -467,7 +467,7 @@ dd {
 .measure-label {
   position: absolute;
   font-size: 0.63rem;
-  letter-spacing: 0.23em;
+  letter-spacing: 0.43em;
   color: #a9a293;
   text-transform: uppercase;
 }
