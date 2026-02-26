@@ -1,0 +1,21 @@
+:root {
+  --obsidian: #101113;
+  --ivory: #f4f0e8;
+  --graphite: #2b2d31;
+  --brass-1: #6c542b;
+  --brass-2: #b0893e;
+  --brass-3: #e3c57a;
+
+  --kyn-brass-gradient: linear-gradient(
+    90deg,
+    var(--brass-1),
+    var(--brass-2),
+    var(--brass-3),
+    var(--brass-2),
+    var(--brass-1)
+  );
+}
+
+.kyn-brass-gradient {
+  background-image: var(--kyn-brass-gradient);
+}
