@@ -5,26 +5,11 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 1080 220" role="img" focusable="false">
-          <title>KYN</title>
-          <defs>
-            <linearGradient id="brassGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#5f5030" />
-              <stop offset="16%" stop-color="#8a7242" />
-              <stop offset="34%" stop-color="#e2c98d" />
-              <stop offset="52%" stop-color="#6f5b34" />
-              <stop offset="74%" stop-color="#ddc286" />
-              <stop offset="100%" stop-color="#675533" />
-            </linearGradient>
-          </defs>
-
-          <text x="94" y="132" class="wordmark-letter">K</text>
-          <text x="470" y="132" class="wordmark-letter">Y</text>
-          <text x="835" y="132" class="wordmark-letter">N</text>
-
-          <path class="brass-signature" d="M100 168 C 272 158, 444 176, 615 161 S 862 158, 980 159" />
-          <path class="signature-tip" d="M980 159 L1018 157.4" />
-        </svg>
+        <img
+          class="brand-mark-image"
+          src="/proyectos/hero-kyn/assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png"
+          alt="KYN"
+        />
       </header>
 
       <div class="hero-grid">
@@ -83,7 +68,7 @@
 </template>
 
 <script setup>
-// Static presentation component.
+import './src/styles/kyn-tokens.css';
 </script>
 
 <style scoped>
@@ -112,30 +97,19 @@
 }
 
 .hero-kyn {
-  --obsidian: #101113;
-  --ivory: #f4f0e8;
-  --graphite: #2b2d31;
-  --stone: #c9c5be;
-  --bone: #e8e2d8;
-
-  --brass-dark: #5f5030;
-  --brass-mid: #967d4c;
-  --brass-light: #d0b678;
-  --brass-oxide: #74613a;
-
-  min-height: 90vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
   background:
     radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.028), transparent 44%),
-    linear-gradient(156deg, #121316 0%, #101114 63%, #15171a 100%);
+    linear-gradient(156deg, #121316 0%, var(--obsidian) 63%, #15171a 100%);
   color: rgba(244, 240, 232, 0.98);
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  padding: clamp(1.4rem, 3vw, 3rem);
+  padding: clamp(1.2rem, 2.5vw, 2.8rem) clamp(1.2rem, 3vw, 3.2rem);
 }
 
 .hero-shell {
-  width: min(1240px, 100%);
+  width: min(1440px, 100%);
   margin: 0 auto;
   position: relative;
 }
@@ -156,66 +130,43 @@
 
 .vertical-brass-axis {
   position: absolute;
-  top: 5.4rem;
+  top: 8.3rem;
   bottom: 2rem;
-  left: 64%;
+  left: 66%;
   width: 1px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(95, 80, 48, 0),
-      rgba(199, 173, 114, 0.6) 20%,
-      rgba(116, 97, 58, 0.52) 66%,
-      rgba(95, 80, 48, 0)
-    ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--brass-2) 18%,
+    var(--brass-1) 66%,
+    transparent
+  );
+  opacity: 0.6;
   z-index: 1;
 }
 
 .brand-mark {
-  margin-bottom: clamp(1.25rem, 2.4vw, 2.25rem);
+  margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
+  min-height: clamp(10rem, 19vw, 16rem);
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: flex-end;
 }
 
-.brand-mark svg {
-  width: 100%;
-  max-width: 920px;
+
+.brand-mark-image {
+  display: block;
+  width: min(94vw, 68rem);
+  max-width: 100%;
   height: auto;
-  overflow: visible;
-}
-
-.wordmark-letter {
-  fill: var(--ivory);
-  font-size: 8rem;
-  font-weight: 300;
-  letter-spacing: 0.14em;
-}
-
-.brass-signature,
-.signature-tip {
-  fill: none;
-  stroke: url(#brassGradient);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.brass-signature {
-  stroke-width: 2.28;
-  stroke-dasharray: 940;
-  stroke-dashoffset: 0;
-  animation: brass-glide 6.2s ease-in-out infinite alternate;
-}
-
-.signature-tip {
-  stroke-width: 1.2;
-  stroke-linecap: butt;
+  object-fit: contain;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(320px, 0.84fr);
-  gap: clamp(2rem, 5vw, 5.2rem);
+  grid-template-columns: minmax(320px, 1fr) minmax(330px, 0.78fr);
+  gap: clamp(2rem, 4.3vw, 4.8rem);
   align-items: start;
   position: relative;
   z-index: 2;
@@ -230,7 +181,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: #c9c5be;
   margin: 0 0 1.1rem;
 }
 
@@ -262,7 +213,7 @@ h1 {
 }
 
 .spec-list li {
-  color: var(--stone);
+  color: #c9c5be;
   font-size: 0.96rem;
   line-height: 1.45;
   padding-left: 1.2rem;
@@ -276,8 +227,7 @@ h1 {
   top: 0.58rem;
   width: 0.48rem;
   height: 1px;
-  background:
-    linear-gradient(90deg, rgba(95, 80, 48, 0.5), rgba(208, 182, 120, 0.9), rgba(95, 80, 48, 0.5));
+  background: linear-gradient(90deg, var(--brass-1), var(--brass-2), var(--brass-1));
 }
 
 .system-tag {
@@ -318,23 +268,23 @@ h1 {
 
 .btn-primary:hover {
   background: linear-gradient(120deg, rgba(244, 240, 232, 0.09), rgba(28, 30, 33, 0.95));
-  border-color: rgba(208, 182, 120, 0.78);
-  box-shadow: 0 0 0 1px rgba(208, 182, 120, 0.16);
+  border-color: var(--brass-2);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--brass-2) 30%, transparent);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
   border-color: rgba(201, 197, 190, 0.35);
-  color: var(--bone);
+  color: #e8e2d8;
 }
 
 .btn-secondary:hover {
   background: rgba(232, 226, 216, 0.08);
-  border-color: rgba(208, 182, 120, 0.8);
+  border-color: var(--brass-2);
 }
 
 .btn:focus-visible {
-  outline: 2px solid #d0b678;
+  outline: 2px solid var(--brass-3);
   outline-offset: 2px;
 }
 
@@ -357,7 +307,7 @@ h1 {
 .micro-title {
   margin: 0 0 0.78rem;
   font-weight: 500;
-  color: var(--stone);
+  color: #c9c5be;
   font-size: 0.71rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -402,7 +352,7 @@ dd {
 }
 
 .spec-display-wrap {
-  min-height: min(62vh, 560px);
+  min-height: min(63vh, 580px);
   display: flex;
   align-items: stretch;
 }
@@ -437,8 +387,8 @@ dd {
   left: 10%;
   right: 10%;
   height: 1px;
-  background:
-    linear-gradient(90deg, rgba(95, 80, 48, 0.15), rgba(208, 182, 120, 0.94), rgba(95, 80, 48, 0.15));
+  background: linear-gradient(90deg, var(--brass-1), var(--brass-2), var(--brass-3), var(--brass-2), var(--brass-1));
+  opacity: 0.85;
 }
 
 .display-tick {
@@ -496,19 +446,16 @@ dd {
   transform-origin: right top;
 }
 
-@keyframes brass-glide {
-  0% {
-    stroke-dashoffset: 0;
-    opacity: 0.95;
-  }
-
-  100% {
-    stroke-dashoffset: -26;
-    opacity: 1;
-  }
-}
-
 @media (max-width: 1024px) {
+  .brand-mark {
+    margin-bottom: clamp(2.2rem, 5vw, 3.4rem);
+    min-height: clamp(7.5rem, 15vw, 10.5rem);
+  }
+
+  .brand-mark-image {
+    width: min(92vw, 52rem);
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 1.8rem;
@@ -523,10 +470,6 @@ dd {
   .spec-display-wrap {
     min-height: 42vh;
   }
-
-  .wordmark-letter {
-    font-size: 6.2rem;
-  }
 }
 
 @media (max-width: 680px) {
@@ -534,8 +477,13 @@ dd {
     padding: 1.1rem;
   }
 
-  .wordmark-letter {
-    font-size: 4.8rem;
+  .brand-mark {
+    margin-bottom: 1.6rem;
+    min-height: 5.2rem;
+  }
+
+  .brand-mark-image {
+    width: min(94vw, 24rem);
   }
 
   .cta-group {
