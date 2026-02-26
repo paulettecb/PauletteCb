@@ -8,33 +8,33 @@
         <svg viewBox="0 0 900 240" class="kynLogo" role="img" aria-label="KYN">
           <defs>
             <linearGradient id="kynBrass" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#69532E" />
-              <stop offset="30%" stop-color="#AB8843" />
-              <stop offset="50%" stop-color="#DFC37E" />
-              <stop offset="70%" stop-color="#AB8843" />
-              <stop offset="100%" stop-color="#69532E" />
+              <stop offset="0%" stop-color="#6E5830" />
+              <stop offset="28%" stop-color="#B89353" />
+              <stop offset="52%" stop-color="#E3C987" />
+              <stop offset="74%" stop-color="#B89353" />
+              <stop offset="100%" stop-color="#6E5830" />
             </linearGradient>
           </defs>
 
-          <text x="450" y="105" text-anchor="middle">KYN</text>
+          <text x="450" y="95" text-anchor="middle">KYN</text>
 
           <path
-            d="M 412 140 C 470 145, 525 149, 578 147 C 612 145, 640 143, 668 142"
+            d="M 280 123 C 331 143, 418 136, 496 122 C 563 110, 635 107, 708 114 C 736 116, 759 120, 773 125"
             fill="none"
             stroke="url(#kynBrass)"
-            stroke-width="2.8"
+            stroke-width="2.95"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
 
           <path
-            d="M 418 144 C 476 149, 530 152, 580 150 C 614 148, 642 146, 664 145"
+            d="M 285 128 C 335 147, 421 140, 498 126 C 564 114, 636 111, 706 117 C 732 119, 754 123, 768 127"
             fill="none"
             stroke="url(#kynBrass)"
-            stroke-width="1.35"
+            stroke-width="1.2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            opacity="0.55"
+            opacity="0.72"
           />
         </svg>
       </header>
@@ -195,7 +195,7 @@ import './src/styles/kyn-tokens.css';
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
   font-size: 92px;
   font-weight: 300;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.21em;
   text-transform: uppercase;
   fill: #F4F0E8;
 }
@@ -467,7 +467,7 @@ dd {
 .measure-label {
   position: absolute;
   font-size: 0.63rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.21em;
   color: #a9a293;
   text-transform: uppercase;
 }
