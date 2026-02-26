@@ -69,6 +69,7 @@
 
 <script setup>
 import './src/styles/kyn-tokens.css';
+import KynLogo from './src/components/KynLogo.vue';
 </script>
 
 <style scoped>
@@ -146,6 +147,8 @@ import './src/styles/kyn-tokens.css';
 }
 
 .brand-mark {
+  --kyn-logo-width: min(94vw, 68rem);
+  --kyn-stroke-width: min(92vw, 66rem);
   margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
   min-height: clamp(10rem, 19vw, 16rem);
   position: relative;
@@ -448,12 +451,10 @@ dd {
 
 @media (max-width: 1024px) {
   .brand-mark {
+    --kyn-logo-width: min(92vw, 52rem);
+    --kyn-stroke-width: min(90vw, 50rem);
     margin-bottom: clamp(2.2rem, 5vw, 3.4rem);
     min-height: clamp(7.5rem, 15vw, 10.5rem);
-  }
-
-  .brand-mark-image {
-    width: min(92vw, 52rem);
   }
 
   .hero-grid {
@@ -478,12 +479,10 @@ dd {
   }
 
   .brand-mark {
+    --kyn-logo-width: min(94vw, 24rem);
+    --kyn-stroke-width: min(90vw, 22.5rem);
     margin-bottom: 1.6rem;
     min-height: 5.2rem;
-  }
-
-  .brand-mark-image {
-    width: min(94vw, 24rem);
   }
 
   .cta-group {
