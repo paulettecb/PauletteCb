@@ -12,6 +12,7 @@
         background: #101113;
       }
     </style>
+      <script src="../assets/kyn-localization.js"></script>
   </head>
   <body>
     <main id="app" aria-live="polite"></main>
@@ -44,6 +45,7 @@
           document.head.appendChild(styleTag);
 
           app.innerHTML = template;
+          window.kynLocalizeRenderedTemplate?.({ root: app });
 
           document.addEventListener('click', (event) => {
             const routeLink = event.target.closest('a[data-route]');
