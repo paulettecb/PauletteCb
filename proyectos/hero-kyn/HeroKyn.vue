@@ -150,7 +150,7 @@ import '../../src/styles/kyn-tokens.css';
   --kyn-logo-width: min(66vw, 47.6rem);
   --kyn-stroke-width: min(92vw, 66rem);
   margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
-  min-height: clamp(10rem, 19vw, 16rem);
+  min-height: clamp(10rem, 10vw, 16rem);
   position: relative;
   z-index: 2;
   display: flex;
