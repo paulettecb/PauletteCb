@@ -19,7 +19,7 @@
           <text x="450" y="95" text-anchor="middle">KYN</text>
 
           <path
-            d="M 280 123 C 331 143, 418 136, 496 122 C 563 110, 635 107, 708 114 C 736 116, 759 120, 773 125"
+            d="M 250 123 C 301 143, 388 136, 466 122 C 533 110, 605 107, 678 114 C 706 116, 729 120, 743 125"
             fill="none"
             stroke="url(#kynBrass)"
             stroke-width="2.95"
@@ -28,7 +28,7 @@
           />
 
           <path
-            d="M 285 128 C 335 147, 421 140, 498 126 C 564 114, 636 111, 706 117 C 732 119, 754 123, 768 127"
+            d="M 255 128 C 305 147, 391 140, 468 126 C 534 114, 606 111, 676 117 C 702 119, 724 123, 738 127"
             fill="none"
             stroke="url(#kynBrass)"
             stroke-width="1.2"
@@ -195,7 +195,7 @@ import './src/styles/kyn-tokens.css';
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
   font-size: 92px;
   font-weight: 300;
-  letter-spacing: 0.21em;
+  letter-spacing: 0.23em;
   text-transform: uppercase;
   fill: #F4F0E8;
 }
@@ -467,7 +467,7 @@ dd {
 .measure-label {
   position: absolute;
   font-size: 0.63rem;
-  letter-spacing: 0.21em;
+  letter-spacing: 0.43em;
   color: #a9a293;
   text-transform: uppercase;
 }
