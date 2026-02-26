@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/proyectos/hero-kyn/" />
         <title>KYN Preview</title>
     <style>
       html,
@@ -16,10 +15,14 @@
   <body>
     <main id="app" aria-live="polite"></main>
     <script>
-      const projectBasePath = '/proyectos/hero-kyn/';
+      const routePrefix = '/proyectos/hero-kyn/';
+      const repoBase = window.location.pathname.includes(routePrefix)
+        ? `${window.location.pathname.split(routePrefix)[0]}/`
+        : '/';
+
       const routes = {
-        '/': '../../HeroKyn.vue',
-        '/modularity': '../../Modularity.vue'
+        '/': `${repoBase}proyectos/hero-kyn/HeroKyn.vue`,
+        '/modularity': `${repoBase}proyectos/hero-kyn/Modularity.vue`
       };
 
       function getCurrentRoute() {
@@ -36,7 +39,7 @@
 
         try {
           const response = await fetch(routes[route]);
-          const source = await response.text();
+          const source = (await response.text()).split('/proyectos/hero-kyn/').join(`${repoBase}proyectos/hero-kyn/`);
           const templateMatch = source.match(/<template>[\s\S]*?<\/template>/);
           const styleMatch = source.match(/<style scoped>[\s\S]*?<\/style>/);
 
@@ -67,6 +70,7 @@
       function navigate(path) {
         if (!routes[path]) return;
 
+        const projectBasePath = `${repoBase}proyectos/hero-kyn/`;
         const targetPath = path === '/' ? projectBasePath : `${projectBasePath}modularity/`;
         history.pushState({}, '', targetPath);
         renderRoute();
