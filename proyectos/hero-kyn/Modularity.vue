@@ -5,7 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img src="assets/kyn-logo.svg" class="kynLogo" alt="KYN" />
+        <img src="../assets/images/kyn-logo.svg" class="kynLogo" alt="KYN" />
       </header>
 
       <section class="modularity-header">
