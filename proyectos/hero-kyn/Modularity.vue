@@ -5,7 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img src="assets/kyn-logo.svg" class="kynLogo" alt="KYN" />
+        <img src="../assets/images/kyn-logo.svg" class="kynLogo" alt="KYN" />
       </header>
 
       <section class="modularity-header">
@@ -71,7 +71,7 @@
       </section>
 
       <section class="cta-section" aria-label="Navigation actions">
-        <a href="/proyectos/hero-kyn/" class="btn btn-primary">Explore the system</a>
+        <a href="../" data-route="/" class="btn btn-primary">Explore the system</a>
         <button type="button" class="btn btn-secondary" data-back="true">Back</button>
       </section>
     </div>
