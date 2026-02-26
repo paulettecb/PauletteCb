@@ -43,10 +43,10 @@
             <span class="schematic-link"></span>
             <span
               class="schematic-block"
-              :class="schematicStateClass('configs')"
+              :class="schematicStateClass('configurations')"
               tabindex="0"
-              @mouseenter="setActiveSection('configs')"
-              @focus="setActiveSection('configs')"
+              @mouseenter="setActiveSection('configurations')"
+              @focus="setActiveSection('configurations')"
               @mouseleave="clearActiveSection"
               @blur="clearActiveSection"
             >
@@ -93,10 +93,10 @@
 
         <article
           class="system-card"
-          :class="cardStateClass('configs')"
+          :class="cardStateClass('configurations')"
           tabindex="0"
-          @mouseenter="setActiveSection('configs')"
-          @focus="setActiveSection('configs')"
+          @mouseenter="setActiveSection('configurations')"
+          @focus="setActiveSection('configurations')"
           @mouseleave="clearActiveSection"
           @blur="clearActiveSection"
         >
