@@ -24,7 +24,7 @@
 
           <p class="system-tag">SYSTEM 01</p>
           <div class="cta-group">
-            <a href="./" data-route="/" class="btn btn-primary">Explore the System</a>
+            <a href="./explore/" data-route="/explore" class="btn btn-primary">Explore the System</a>
             <a href="./modularity/" data-route="/modularity" class="btn btn-secondary">How Modularity Works</a>
           </div>
 
