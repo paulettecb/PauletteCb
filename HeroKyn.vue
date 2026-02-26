@@ -19,7 +19,7 @@
           <text x="450" y="105" text-anchor="middle">KYN</text>
 
           <path
-            d="M 120 145 C 310 154, 455 168, 585 158 C 705 149, 790 145, 850 149"
+            d="M 412 146 C 470 153, 525 160, 578 157 C 612 154, 640 151, 668 149"
             fill="none"
             stroke="url(#kynBrass)"
             stroke-width="2.5"
@@ -28,7 +28,7 @@
           />
 
           <path
-            d="M 128 149 C 320 158, 460 170, 585 162 C 705 154, 785 151, 836 154"
+            d="M 418 150 C 476 157, 530 163, 580 161 C 614 158, 642 155, 664 153"
             fill="none"
             stroke="url(#kynBrass)"
             stroke-width="1.2"
@@ -168,14 +168,14 @@ import './src/styles/kyn-tokens.css';
     var(--brass-1) 66%,
     transparent
   );
-  opacity: 0.6;
+  opacity: 0.53;
   z-index: 1;
 }
 
 .brand-mark {
   --kyn-logo-width: min(94vw, 68rem);
   --kyn-stroke-width: min(92vw, 66rem);
-  margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
+  margin: clamp(1rem, 2.8vw, 2rem) 0 clamp(3.5rem, 8vw, 6.2rem);
   min-height: clamp(10rem, 19vw, 16rem);
   position: relative;
   z-index: 2;
@@ -193,7 +193,7 @@ import './src/styles/kyn-tokens.css';
 
 .kynLogo text {
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
-  font-size: 84px;
+  font-size: 92px;
   font-weight: 300;
   letter-spacing: 0.14em;
   text-transform: uppercase;
