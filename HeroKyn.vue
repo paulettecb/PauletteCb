@@ -5,7 +5,38 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img class="brand-mark-image" src="assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png" alt="KYN" />
+        <svg viewBox="0 0 900 240" class="kynLogo" role="img" aria-label="KYN">
+          <defs>
+            <linearGradient id="kynBrass" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#6C542B" />
+              <stop offset="30%" stop-color="#B0893E" />
+              <stop offset="50%" stop-color="#E3C57A" />
+              <stop offset="70%" stop-color="#B0893E" />
+              <stop offset="100%" stop-color="#6C542B" />
+            </linearGradient>
+          </defs>
+
+          <text x="450" y="105" text-anchor="middle">KYN</text>
+
+          <path
+            d="M 120 145 C 310 154, 455 168, 585 158 C 705 149, 790 145, 850 149"
+            fill="none"
+            stroke="url(#kynBrass)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <path
+            d="M 128 149 C 320 158, 460 170, 585 162 C 705 154, 785 151, 836 154"
+            fill="none"
+            stroke="url(#kynBrass)"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            opacity="0.55"
+          />
+        </svg>
       </header>
 
       <div class="hero-grid">
@@ -65,13 +96,12 @@
 
 <script setup>
 import './src/styles/kyn-tokens.css';
-import KynLogo from './src/components/KynLogo.vue';
 </script>
 
 <style scoped>
 @font-face {
   font-family: 'Neue Haas Grotesk KYN';
-  src: url('/proyectos/hero-kyn/assets/fonts/neuehaasgrottext-45light-trial.otf') format('opentype');
+  src: url('/proyectos/hero-kyn/assets/fonts/neuehaasgrotdisp-45light-trial.otf') format('opentype');
   font-style: normal;
   font-weight: 300;
   font-display: swap;
@@ -154,13 +184,22 @@ import KynLogo from './src/components/KynLogo.vue';
 }
 
 
-.brand-mark-image {
+.kynLogo {
   display: block;
   width: min(94vw, 68rem);
   max-width: 100%;
   height: auto;
-  object-fit: contain;
 }
+
+.kynLogo text {
+  font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
+  font-size: 84px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: #F4F0E8;
+}
+
 
 .hero-grid {
   display: grid;

@@ -1,13 +1,13 @@
 <template>
   <svg
     class="kyn-logo-plain"
-    :class="[`is-${size}`, `is-${variant}`]"
-    viewBox="0 0 360 120"
+    :class="[`is-${size}`, `is-${mode}`]"
+    viewBox="0 0 900 240"
     role="img"
     aria-label="KYN"
     preserveAspectRatio="xMidYMid meet"
   >
-    <text x="180" y="82" text-anchor="middle">KYN</text>
+    <text x="450" y="105" text-anchor="middle">KYN</text>
   </svg>
 </template>
 
@@ -15,10 +15,10 @@
 defineProps({
   size: {
     type: String,
-    default: 'md',
+    default: 'lg',
     validator: (value) => ['sm', 'md', 'lg'].includes(value),
   },
-  variant: {
+  mode: {
     type: String,
     default: 'light',
     validator: (value) => ['light', 'dark'].includes(value),
@@ -29,26 +29,22 @@ defineProps({
 <style scoped>
 .kyn-logo-plain {
   display: block;
-  width: var(--kyn-logo-width, 18rem);
+  width: var(--kyn-logo-width, 26rem);
   height: auto;
 }
 
 .kyn-logo-plain text {
-  fill: var(--kyn-wordmark-color, var(--ivory));
-  font-family: Manrope, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 78px;
+  fill: #f4f0e8;
+  font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
+  font-size: 84px;
   font-weight: 300;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  dominant-baseline: alphabetic;
+  dominant-baseline: hanging;
 }
 
-.kyn-logo-plain.is-light {
-  --kyn-wordmark-color: var(--ivory);
-}
-
-.kyn-logo-plain.is-dark {
-  --kyn-wordmark-color: var(--obsidian);
+.kyn-logo-plain.is-dark text {
+  fill: #101113;
 }
 
 .kyn-logo-plain.is-sm {
