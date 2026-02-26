@@ -5,7 +5,11 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <KynLogo size="lg" variant="light" :withStroke="true" />
+        <img
+          class="brand-mark-image"
+          src="/proyectos/hero-kyn/assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png"
+          alt="KYN"
+        />
       </header>
 
       <div class="hero-grid">
@@ -153,9 +157,13 @@ import KynLogo from './src/components/KynLogo.vue';
   align-items: flex-end;
 }
 
-.brand-mark :deep(.kyn-logo) {
-  align-items: flex-start;
-  width: 100%;
+
+.brand-mark-image {
+  display: block;
+  width: min(94vw, 68rem);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .hero-grid {
