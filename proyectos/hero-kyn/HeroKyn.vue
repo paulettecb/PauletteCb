@@ -356,14 +356,14 @@ dd {
 }
 
 .spec-display-wrap {
-  min-height: min(63vh, 580px);
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .spec-display {
   position: relative;
   width: 100%;
+  aspect-ratio: 3 / 2;
   border: 1px solid rgba(201, 197, 190, 0.3);
   background:
     linear-gradient(170deg, rgba(33, 35, 39, 0.95), rgba(15, 16, 18, 0.97) 72%),
@@ -391,9 +391,8 @@ dd {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  opacity: 0.78;
-  filter: saturate(0.72) contrast(1.05) brightness(0.86);
+  object-fit: contain;
+  object-position: center;
 }
 .display-brass-divider {
   position: absolute;
@@ -479,9 +478,6 @@ dd {
     top: 4.6rem;
   }
 
-  .spec-display-wrap {
-    min-height: 42vh;
-  }
 }
 
 @media (max-width: 680px) {
