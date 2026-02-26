@@ -5,7 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img src="assets/kyn-logo.svg" class="kynLogo" alt="KYN" />
+        <img src="/proyectos/hero-kyn/assets/kyn-logo.svg" class="kynLogo" alt="KYN" />
       </header>
 
       <div class="hero-grid">
@@ -24,8 +24,8 @@
 
           <p class="system-tag">SYSTEM 01</p>
           <div class="cta-group">
-            <button type="button" class="btn btn-primary">Explore the System</button>
-            <button type="button" class="btn btn-secondary">How Modularity Works</button>
+            <a href="/" class="btn btn-primary">Explore the System</a>
+            <a href="/modularity" class="btn btn-secondary">How Modularity Works</a>
           </div>
 
           <aside class="micro-spec" aria-label="Product quick specs">
@@ -253,6 +253,7 @@ h1 {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease,
     transform 160ms ease;

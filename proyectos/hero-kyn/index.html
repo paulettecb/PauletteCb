@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KYN Hero Preview</title>
+    <title>KYN Preview</title>
     <style>
       html,
       body {
@@ -15,16 +15,27 @@
   <body>
     <main id="app" aria-live="polite"></main>
     <script>
-      (async function renderHero() {
+      const routes = {
+        '/': '../../HeroKyn.vue',
+        '/modularity': '../../Modularity.vue'
+      };
+
+      function getCurrentRoute() {
+        return window.location.pathname === '/modularity' ? '/modularity' : '/';
+      }
+
+      async function renderRoute() {
         const app = document.getElementById('app');
+        const route = getCurrentRoute();
+
         try {
-          const response = await fetch('../../HeroKyn.vue');
+          const response = await fetch(routes[route]);
           const source = await response.text();
           const templateMatch = source.match(/<template>[\s\S]*?<\/template>/);
           const styleMatch = source.match(/<style scoped>[\s\S]*?<\/style>/);
 
           if (!templateMatch || !styleMatch) {
-            throw new Error('Unable to parse HeroKyn.vue');
+            throw new Error('Unable to parse page component.');
           }
 
           const template = templateMatch[0]
@@ -33,17 +44,44 @@
             .trim();
           const styles = styleMatch[0].replace('<style scoped>', '').replace('</style>', '').trim();
 
+          document.querySelectorAll('[data-route-style]').forEach((node) => node.remove());
           const styleTag = document.createElement('style');
+          styleTag.setAttribute('data-route-style', route);
           styleTag.textContent = styles;
           document.head.appendChild(styleTag);
 
           app.innerHTML = template;
         } catch (error) {
           app.innerHTML =
-            '<p style="color:#F4F0E8;font-family:&#39;Neue Haas Grotesk KYN&#39;,&#39;Neue Haas Grotesk&#39;,sans-serif;padding:24px;">Unable to load HeroKyn.vue preview.</p>';
+            '<p style="color:#F4F0E8;font-family:&#39;Neue Haas Grotesk KYN&#39;,&#39;Neue Haas Grotesk&#39;,sans-serif;padding:24px;">Unable to load KYN page preview.</p>';
           console.error(error);
         }
-      })();
+      }
+
+      function navigate(path) {
+        if (!routes[path]) return;
+        history.pushState({}, '', path);
+        renderRoute();
+      }
+
+      document.addEventListener('click', (event) => {
+        const routeLink = event.target.closest('a[href="/"], a[href="/modularity"]');
+        if (routeLink) {
+          event.preventDefault();
+          navigate(routeLink.getAttribute('href'));
+          return;
+        }
+
+        const backButton = event.target.closest('[data-back="true"]');
+        if (backButton) {
+          event.preventDefault();
+          history.back();
+        }
+      });
+
+      window.addEventListener('popstate', renderRoute);
+
+      renderRoute();
     </script>
   </body>
 </html>
