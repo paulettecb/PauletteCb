@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/proyectos/hero-kyn/" />
+        <title>KYN — How Modularity Works</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #101113;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app" aria-live="polite"></main>
+    <script>
+      (async function renderModularity() {
+        const app = document.getElementById('app');
+        try {
+          const response = await fetch('/proyectos/hero-kyn/Modularity.vue');
+          const source = await response.text();
+          const templateMatch = source.match(/<template>[\s\S]*?<\/template>/);
+          const styleMatch = source.match(/<style scoped>[\s\S]*?<\/style>/);
+
+          if (!templateMatch || !styleMatch) {
+            throw new Error('Unable to parse Modularity.vue');
+          }
+
+          const template = templateMatch[0]
+            .replace('<template>', '')
+            .replace('</template>', '')
+            .trim();
+          const styles = styleMatch[0].replace('<style scoped>', '').replace('</style>', '').trim();
+
+          const styleTag = document.createElement('style');
+          styleTag.textContent = styles;
+          document.head.appendChild(styleTag);
+
+          app.innerHTML = template;
+
+          document.addEventListener('click', (event) => {
+            const routeLink = event.target.closest('a[href="/proyectos/hero-kyn/"], a[href="/proyectos/hero-kyn/modularity/"]');
+            if (!routeLink) return;
+            event.preventDefault();
+            window.location.href = routeLink.getAttribute('href');
+          });
+        } catch (error) {
+          app.innerHTML =
+            '<p style="color:#F4F0E8;font-family:&#39;Neue Haas Grotesk KYN&#39;,&#39;Neue Haas Grotesk&#39;,sans-serif;padding:24px;">Unable to load Modularity.vue preview.</p>';
+          console.error(error);
+        }
+      })();
+    </script>
+  </body>
+</html>

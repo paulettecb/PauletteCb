@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import './src/styles/kyn-tokens.css';
+import '../../src/styles/kyn-tokens.css';
 </script>
 
 <style scoped>
