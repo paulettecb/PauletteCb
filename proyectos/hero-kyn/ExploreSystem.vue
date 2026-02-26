@@ -19,7 +19,7 @@
           <div class="schematic-row">
             <span
               class="schematic-block"
-              :class="{ 'is-active': activeSection === 'core' }"
+              :class="schematicStateClass('core')"
               tabindex="0"
               @mouseenter="setActiveSection('core')"
               @focus="setActiveSection('core')"
@@ -31,10 +31,10 @@
             <span class="schematic-link"></span>
             <span
               class="schematic-block"
-              :class="{ 'is-active': activeSection === 'module' }"
+              :class="schematicStateClass('modules')"
               tabindex="0"
-              @mouseenter="setActiveSection('module')"
-              @focus="setActiveSection('module')"
+              @mouseenter="setActiveSection('modules')"
+              @focus="setActiveSection('modules')"
               @mouseleave="clearActiveSection"
               @blur="clearActiveSection"
             >
@@ -43,10 +43,10 @@
             <span class="schematic-link"></span>
             <span
               class="schematic-block"
-              :class="{ 'is-active': activeSection === 'extension' }"
+              :class="schematicStateClass('configurations')"
               tabindex="0"
-              @mouseenter="setActiveSection('extension')"
-              @focus="setActiveSection('extension')"
+              @mouseenter="setActiveSection('configurations')"
+              @focus="setActiveSection('configurations')"
               @mouseleave="clearActiveSection"
               @blur="clearActiveSection"
             >
@@ -57,7 +57,15 @@
       </section>
 
       <section class="system-blocks" aria-label="System components overview">
-        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'core' }">
+        <article
+          class="system-card"
+          :class="cardStateClass('core')"
+          tabindex="0"
+          @mouseenter="setActiveSection('core')"
+          @focus="setActiveSection('core')"
+          @mouseleave="clearActiveSection"
+          @blur="clearActiveSection"
+        >
           <p class="card-title">The Core</p>
           <p class="card-copy">
             The foundation of the system. It establishes shared geometry, attachment logic, and
@@ -66,7 +74,15 @@
           <p class="card-tag">BASE INTERFACE</p>
         </article>
 
-        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'module' }">
+        <article
+          class="system-card"
+          :class="cardStateClass('modules')"
+          tabindex="0"
+          @mouseenter="setActiveSection('modules')"
+          @focus="setActiveSection('modules')"
+          @mouseleave="clearActiveSection"
+          @blur="clearActiveSection"
+        >
           <p class="card-title">Modules</p>
           <p class="card-copy">
             Interchangeable components that connect through consistent interfaces, allowing parts
@@ -75,7 +91,15 @@
           <p class="card-tag">ATTACH / SWAP</p>
         </article>
 
-        <article class="system-card" :class="{ 'is-highlighted': activeSection === 'extension' }">
+        <article
+          class="system-card"
+          :class="cardStateClass('configurations')"
+          tabindex="0"
+          @mouseenter="setActiveSection('configurations')"
+          @focus="setActiveSection('configurations')"
+          @mouseleave="clearActiveSection"
+          @blur="clearActiveSection"
+        >
           <p class="card-title">Configurations</p>
           <p class="card-copy">
             Adaptable setups created by combining compatible elements, enabling structural variety
@@ -101,15 +125,25 @@
 import { ref } from 'vue';
 import '../../src/styles/kyn-tokens.css';
 
-const activeSection = ref('');
+const activeSection = ref(null);
 
 const setActiveSection = (section) => {
   activeSection.value = section;
 };
 
 const clearActiveSection = () => {
-  activeSection.value = '';
+  activeSection.value = null;
 };
+
+const cardStateClass = (section) => ({
+  'is-active': activeSection.value === section,
+  'is-inactive': activeSection.value !== null && activeSection.value !== section,
+});
+
+const schematicStateClass = (section) => ({
+  'is-active': activeSection.value === section,
+  'is-inactive': activeSection.value !== null && activeSection.value !== section,
+});
 </script>
 
 <style scoped>
@@ -275,7 +309,7 @@ h1 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(232, 226, 216, 0.88);
-  transition: border-color 220ms ease;
+  transition: border-color 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
 }
 
 .schematic-block::after {
@@ -292,11 +326,16 @@ h1 {
 }
 
 .schematic-block.is-active {
-  border-color: rgba(184, 155, 94, 0.68);
+  border-color: rgba(212, 183, 121, 0.78);
+  box-shadow: 0 0 0 1px rgba(184, 155, 94, 0.2), inset 0 0 0 1px rgba(184, 155, 94, 0.14);
 }
 
 .schematic-block.is-active::after {
   width: 100%;
+}
+
+.schematic-block.is-inactive {
+  opacity: 0.72;
 }
 
 .schematic-link {
@@ -317,7 +356,8 @@ h1 {
   padding: 1.2rem 1.12rem 1.08rem;
   display: grid;
   gap: 0.85rem;
-  transition: transform 220ms ease, border-color 220ms ease, filter 220ms ease;
+  transition: transform 220ms ease, border-color 220ms ease, filter 220ms ease, box-shadow 220ms ease,
+    opacity 220ms ease;
 }
 
 .system-card::before {
@@ -335,8 +375,14 @@ h1 {
   border-color: rgba(201, 197, 190, 0.42);
 }
 
-.system-card.is-highlighted {
+.system-card.is-active {
   filter: brightness(1.04);
+  border-color: rgba(212, 183, 121, 0.62);
+  box-shadow: inset 0 0 0 1px rgba(184, 155, 94, 0.16);
+}
+
+.system-card.is-inactive {
+  opacity: 0.72;
 }
 
 .card-title {
