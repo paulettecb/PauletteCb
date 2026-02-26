@@ -8,30 +8,30 @@
         <svg viewBox="0 0 900 240" class="kynLogo" role="img" aria-label="KYN">
           <defs>
             <linearGradient id="kynBrass" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#6C542B" />
-              <stop offset="30%" stop-color="#B0893E" />
-              <stop offset="50%" stop-color="#E3C57A" />
-              <stop offset="70%" stop-color="#B0893E" />
-              <stop offset="100%" stop-color="#6C542B" />
+              <stop offset="0%" stop-color="#69532E" />
+              <stop offset="30%" stop-color="#AB8843" />
+              <stop offset="50%" stop-color="#DFC37E" />
+              <stop offset="70%" stop-color="#AB8843" />
+              <stop offset="100%" stop-color="#69532E" />
             </linearGradient>
           </defs>
 
           <text x="450" y="105" text-anchor="middle">KYN</text>
 
           <path
-            d="M 120 145 C 310 154, 455 168, 585 158 C 705 149, 790 145, 850 149"
+            d="M 412 140 C 470 145, 525 149, 578 147 C 612 145, 640 143, 668 142"
             fill="none"
             stroke="url(#kynBrass)"
-            stroke-width="2.5"
+            stroke-width="2.8"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
 
           <path
-            d="M 128 149 C 320 158, 460 170, 585 162 C 705 154, 785 151, 836 154"
+            d="M 418 144 C 476 149, 530 152, 580 150 C 614 148, 642 146, 664 145"
             fill="none"
             stroke="url(#kynBrass)"
-            stroke-width="1.2"
+            stroke-width="1.35"
             stroke-linecap="round"
             stroke-linejoin="round"
             opacity="0.55"
@@ -168,14 +168,14 @@ import './src/styles/kyn-tokens.css';
     var(--brass-1) 66%,
     transparent
   );
-  opacity: 0.6;
+  opacity: 0.53;
   z-index: 1;
 }
 
 .brand-mark {
   --kyn-logo-width: min(94vw, 68rem);
   --kyn-stroke-width: min(92vw, 66rem);
-  margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
+  margin: clamp(1rem, 2.8vw, 2rem) 0 clamp(3.5rem, 8vw, 6.2rem);
   min-height: clamp(10rem, 19vw, 16rem);
   position: relative;
   z-index: 2;
@@ -193,7 +193,7 @@ import './src/styles/kyn-tokens.css';
 
 .kynLogo text {
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
-  font-size: 84px;
+  font-size: 92px;
   font-weight: 300;
   letter-spacing: 0.14em;
   text-transform: uppercase;
