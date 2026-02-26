@@ -87,6 +87,30 @@
 </script>
 
 <style scoped>
+@font-face {
+  font-family: 'Neue Haas Grotesk KYN';
+  src: url('/proyectos/hero-kyn/assets/fonts/neuehaasgrottext-45light-trial.otf') format('opentype');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk KYN';
+  src: url('/proyectos/hero-kyn/assets/fonts/neuehaasgrottext-55roman-trial.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk KYN';
+  src: url('/proyectos/hero-kyn/assets/fonts/neuehaasgrottext-65medium-trial.otf') format('opentype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
 .hero-kyn {
   --obsidian: #101113;
   --ivory: #f4f0e8;
@@ -106,7 +130,7 @@
     radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.028), transparent 44%),
     linear-gradient(156deg, #121316 0%, #101114 63%, #15171a 100%);
   color: rgba(244, 240, 232, 0.98);
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   padding: clamp(1.4rem, 3vw, 3rem);
 }
 
