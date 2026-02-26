@@ -71,7 +71,7 @@
       </section>
 
       <section class="cta-section" aria-label="Navigation actions">
-        <a href="/proyectos/hero-kyn/" class="btn btn-primary">Explore the system</a>
+        <a href="../" data-route="/" class="btn btn-primary">Explore the system</a>
         <button type="button" class="btn btn-secondary" data-back="true">Back</button>
       </section>
     </div>

@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/proyectos/hero-kyn/" />
         <title>KYN — How Modularity Works</title>
     <style>
       html,
@@ -19,8 +18,13 @@
       (async function renderModularity() {
         const app = document.getElementById('app');
         try {
-          const response = await fetch('/proyectos/hero-kyn/Modularity.vue');
-          const source = await response.text();
+          const routePrefix = '/proyectos/hero-kyn/';
+          const repoBase = window.location.pathname.includes(routePrefix)
+            ? `${window.location.pathname.split(routePrefix)[0]}/`
+            : '/';
+
+          const response = await fetch(`${repoBase}proyectos/hero-kyn/Modularity.vue`);
+          const source = (await response.text()).split('/proyectos/hero-kyn/').join(`${repoBase}proyectos/hero-kyn/`);
           const templateMatch = source.match(/<template>[\s\S]*?<\/template>/);
           const styleMatch = source.match(/<style scoped>[\s\S]*?<\/style>/);
 
@@ -41,10 +45,12 @@
           app.innerHTML = template;
 
           document.addEventListener('click', (event) => {
-            const routeLink = event.target.closest('a[href="/proyectos/hero-kyn/"], a[href="/proyectos/hero-kyn/modularity/"]');
+            const routeLink = event.target.closest('a[data-route]');
             if (!routeLink) return;
             event.preventDefault();
-            window.location.href = routeLink.getAttribute('href');
+            const route = routeLink.getAttribute('data-route');
+            const basePath = `${repoBase}proyectos/hero-kyn/`;
+            window.location.href = route === '/' ? basePath : `${basePath}modularity/`;
           });
         } catch (error) {
           app.innerHTML =
