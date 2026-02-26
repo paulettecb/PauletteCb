@@ -16,13 +16,18 @@
   <body>
     <main id="app" aria-live="polite"></main>
     <script>
+      const projectBasePath = '/proyectos/hero-kyn/';
       const routes = {
         '/': '../../HeroKyn.vue',
         '/modularity': '../../Modularity.vue'
       };
 
       function getCurrentRoute() {
-        return window.location.pathname === '/modularity' ? '/modularity' : '/';
+        const normalizedPath = window.location.pathname.endsWith('/')
+          ? window.location.pathname
+          : `${window.location.pathname}/`;
+
+        return normalizedPath.endsWith('/modularity/') ? '/modularity' : '/';
       }
 
       async function renderRoute() {
@@ -61,15 +66,17 @@
 
       function navigate(path) {
         if (!routes[path]) return;
-        history.pushState({}, '', path);
+
+        const targetPath = path === '/' ? projectBasePath : `${projectBasePath}modularity/`;
+        history.pushState({}, '', targetPath);
         renderRoute();
       }
 
       document.addEventListener('click', (event) => {
-        const routeLink = event.target.closest('a[href="/"], a[href="/modularity"]');
+        const routeLink = event.target.closest('a[data-route]');
         if (routeLink) {
           event.preventDefault();
-          navigate(routeLink.getAttribute('href'));
+          navigate(routeLink.getAttribute('data-route'));
           return;
         }
 

@@ -24,8 +24,8 @@
 
           <p class="system-tag">SYSTEM 01</p>
           <div class="cta-group">
-            <a href="/" class="btn btn-primary">Explore the System</a>
-            <a href="/modularity" class="btn btn-secondary">How Modularity Works</a>
+            <a href="/proyectos/hero-kyn/" data-route="/" class="btn btn-primary">Explore the System</a>
+            <a href="/proyectos/hero-kyn/modularity/" data-route="/modularity" class="btn btn-secondary">How Modularity Works</a>
           </div>
 
           <aside class="micro-spec" aria-label="Product quick specs">

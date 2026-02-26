@@ -41,10 +41,11 @@
           app.innerHTML = template;
 
           document.addEventListener('click', (event) => {
-            const routeLink = event.target.closest('a[href="/proyectos/hero-kyn/"], a[href="/proyectos/hero-kyn/modularity/"]');
+            const routeLink = event.target.closest('a[data-route]');
             if (!routeLink) return;
             event.preventDefault();
-            window.location.href = routeLink.getAttribute('href');
+            const route = routeLink.getAttribute('data-route');
+            window.location.href = route === '/' ? '/proyectos/hero-kyn/' : '/proyectos/hero-kyn/modularity/';
           });
         } catch (error) {
           app.innerHTML =
