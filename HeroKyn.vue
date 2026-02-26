@@ -160,6 +160,15 @@ import './src/styles/kyn-tokens.css';
   height: auto;
 }
 
+.kynLogo text {
+  font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
+  font-size: 92px;
+  font-weight: 300;
+  letter-spacing: 0.63em;
+  text-transform: uppercase;
+  fill: #F4F0E8;
+}
+
 
 .hero-grid {
   display: grid;
