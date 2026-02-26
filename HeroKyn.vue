@@ -5,38 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 900 240" class="kynLogo" role="img" aria-label="KYN">
-          <defs>
-            <linearGradient id="kynBrass" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#6E5830" />
-              <stop offset="28%" stop-color="#B89353" />
-              <stop offset="52%" stop-color="#E3C987" />
-              <stop offset="74%" stop-color="#B89353" />
-              <stop offset="100%" stop-color="#6E5830" />
-            </linearGradient>
-          </defs>
-
-          <text x="450" y="95" text-anchor="middle">KYN</text>
-
-          <path
-            d="M 150 123 C 401 143, 388 136, 466 122 C 533 110, 605 107, 678 114 C 606 116, 729 120, 843 125"
-            fill="none"
-            stroke="url(#kynBrass)"
-            stroke-width="2.95"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-
-          <path
-            d="M 255 128 C 305 147, 391 140, 468 126 C 534 114, 606 111, 676 117 C 702 119, 724 123, 738 127"
-            fill="none"
-            stroke="url(#kynBrass)"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            opacity="0.72"
-          />
-        </svg>
+        <img src="/src/assets/brand/kyn-logo.svg" class="kynLogo" alt="KYN" />
       </header>
 
       <div class="hero-grid">
