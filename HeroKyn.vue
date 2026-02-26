@@ -5,7 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img src="/src/assets/brand/kyn-logo.svg" class="kynLogo" alt="KYN" />
+        <img src="assets/kyn-logo.svg" class="kynLogo" alt="KYN" />
       </header>
 
       <div class="hero-grid">
@@ -158,15 +158,6 @@ import './src/styles/kyn-tokens.css';
   width: min(94vw, 68rem);
   max-width: 100%;
   height: auto;
-}
-
-.kynLogo text {
-  font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
-  font-size: 92px;
-  font-weight: 300;
-  letter-spacing: 0.63em;
-  text-transform: uppercase;
-  fill: #F4F0E8;
 }
 
 
