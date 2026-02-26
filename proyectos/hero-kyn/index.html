@@ -24,7 +24,8 @@
       const routes = {
         '/': `${repoBase}proyectos/hero-kyn/HeroKyn.vue`,
         '/explore': `${repoBase}proyectos/hero-kyn/ExploreSystem.vue`,
-        '/modularity': `${repoBase}proyectos/hero-kyn/Modularity.vue`
+        '/modularity': `${repoBase}proyectos/hero-kyn/Modularity.vue`,
+        '/material-intelligence': `${repoBase}proyectos/hero-kyn/MaterialIntelligence.vue`
       };
 
       function getCurrentRoute() {
@@ -34,6 +35,7 @@
 
         if (normalizedPath.endsWith('/modularity/')) return '/modularity';
         if (normalizedPath.endsWith('/explore/')) return '/explore';
+        if (normalizedPath.endsWith('/material-intelligence/')) return '/material-intelligence';
         return '/';
       }
 
@@ -79,7 +81,9 @@
           ? projectBasePath
           : path === '/explore'
             ? `${projectBasePath}explore/`
-            : `${projectBasePath}modularity/`;
+            : path === '/modularity'
+              ? `${projectBasePath}modularity/`
+              : `${projectBasePath}material-intelligence/`;
         history.pushState({}, '', targetPath);
         renderRoute();
       }

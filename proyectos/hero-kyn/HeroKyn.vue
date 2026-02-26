@@ -26,6 +26,7 @@
           <div class="cta-group">
             <a href="./explore/" data-route="/explore" class="btn btn-primary">Explore the System</a>
             <a href="./modularity/" data-route="/modularity" class="btn btn-secondary">How Modularity Works</a>
+            <a href="./material-intelligence/" data-route="/material-intelligence" class="btn btn-secondary">WHY BIOTHANE?</a>
           </div>
 
           <aside class="micro-spec" aria-label="Product quick specs">
