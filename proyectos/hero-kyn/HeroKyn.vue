@@ -49,6 +49,11 @@
 
         <div class="spec-display-wrap" aria-hidden="true">
           <div class="spec-display">
+            <img
+              class="hero-product-image"
+              src="/proyectos/hero-kyn/assets/images/186FB42A-7E5B-4F72-BCBA-5A6E8982BF63.png"
+              alt="KYN modular canine system"
+            />
             <span class="display-brass-divider"></span>
             <span class="display-tick tick-tl"></span>
             <span class="display-tick tick-tr"></span>
@@ -142,9 +147,9 @@ import '../../src/styles/kyn-tokens.css';
 }
 
 .brand-mark {
-  --kyn-logo-width: min(94vw, 68rem);
+  --kyn-logo-width: min(66vw, 47.6rem);
   --kyn-stroke-width: min(92vw, 66rem);
-  margin: clamp(1rem, 2.8vw, 2rem) 0 clamp(3.5rem, 8vw, 6.2rem);
+  margin: 0 0 clamp(3.5rem, 8vw, 6.2rem);
   min-height: clamp(10rem, 19vw, 16rem);
   position: relative;
   z-index: 2;
@@ -155,7 +160,7 @@ import '../../src/styles/kyn-tokens.css';
 
 .kynLogo {
   display: block;
-  width: min(94vw, 68rem);
+  width: var(--kyn-logo-width);
   max-width: 100%;
   height: auto;
 }
@@ -351,14 +356,14 @@ dd {
 }
 
 .spec-display-wrap {
-  min-height: min(63vh, 580px);
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .spec-display {
   position: relative;
   width: 100%;
+  aspect-ratio: 3 / 2;
   border: 1px solid rgba(201, 197, 190, 0.3);
   background:
     linear-gradient(170deg, rgba(33, 35, 39, 0.95), rgba(15, 16, 18, 0.97) 72%),
@@ -380,6 +385,15 @@ dd {
   );
 }
 
+
+.hero-product-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 .display-brass-divider {
   position: absolute;
   top: 13%;
@@ -447,7 +461,7 @@ dd {
 
 @media (max-width: 1024px) {
   .brand-mark {
-    --kyn-logo-width: min(92vw, 52rem);
+    --kyn-logo-width: min(64vw, 36.4rem);
     --kyn-stroke-width: min(90vw, 50rem);
     margin-bottom: clamp(2.2rem, 5vw, 3.4rem);
     min-height: clamp(7.5rem, 15vw, 10.5rem);
@@ -464,9 +478,6 @@ dd {
     top: 4.6rem;
   }
 
-  .spec-display-wrap {
-    min-height: 42vh;
-  }
 }
 
 @media (max-width: 680px) {
@@ -475,7 +486,7 @@ dd {
   }
 
   .brand-mark {
-    --kyn-logo-width: min(94vw, 24rem);
+    --kyn-logo-width: min(66vw, 16.8rem);
     --kyn-stroke-width: min(90vw, 22.5rem);
     margin-bottom: 1.6rem;
     min-height: 5.2rem;
