@@ -5,11 +5,7 @@
       <span class="vertical-brass-axis" aria-hidden="true"></span>
 
       <header class="brand-mark" aria-hidden="true">
-        <img
-          class="brand-mark-image"
-          src="/proyectos/hero-kyn/assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png"
-          alt="KYN"
-        />
+        <img class="brand-mark-image" src="assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png" alt="KYN" />
       </header>
 
       <div class="hero-grid">

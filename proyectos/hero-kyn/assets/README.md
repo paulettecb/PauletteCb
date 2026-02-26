@@ -16,5 +16,5 @@ If your uploaded files use different names, update the `@font-face` URLs in `Her
 
 ## Example usage in `proyectos/hero-kyn/index.html`
 ```html
-<img src="./assets/images/logo-kyn.svg" alt="KYN logo" />
+<img src="/proyectos/hero-kyn/assets/images/D33EC782-4BEA-4FFE-82D5-C5E013849DAE.png" alt="KYN logo" />
 ```
