@@ -22,6 +22,7 @@
 
       const routes = {
         '/': `${repoBase}proyectos/hero-kyn/HeroKyn.vue`,
+        '/explore': `${repoBase}proyectos/hero-kyn/ExploreSystem.vue`,
         '/modularity': `${repoBase}proyectos/hero-kyn/Modularity.vue`
       };
 
@@ -30,7 +31,9 @@
           ? window.location.pathname
           : `${window.location.pathname}/`;
 
-        return normalizedPath.endsWith('/modularity/') ? '/modularity' : '/';
+        if (normalizedPath.endsWith('/modularity/')) return '/modularity';
+        if (normalizedPath.endsWith('/explore/')) return '/explore';
+        return '/';
       }
 
       async function renderRoute() {
@@ -71,7 +74,11 @@
         if (!routes[path]) return;
 
         const projectBasePath = `${repoBase}proyectos/hero-kyn/`;
-        const targetPath = path === '/' ? projectBasePath : `${projectBasePath}modularity/`;
+        const targetPath = path === '/'
+          ? projectBasePath
+          : path === '/explore'
+            ? `${projectBasePath}explore/`
+            : `${projectBasePath}modularity/`;
         history.pushState({}, '', targetPath);
         renderRoute();
       }
