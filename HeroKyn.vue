@@ -195,7 +195,7 @@ import './src/styles/kyn-tokens.css';
   font-family: 'Neue Haas Grotesk KYN', 'Neue Haas Grotesk', sans-serif;
   font-size: 92px;
   font-weight: 300;
-  letter-spacing: 0.23em;
+  letter-spacing: 0.63em;
   text-transform: uppercase;
   fill: #F4F0E8;
 }
@@ -467,7 +467,7 @@ dd {
 .measure-label {
   position: absolute;
   font-size: 0.63rem;
-  letter-spacing: 0.43em;
+  letter-spacing: 0.63em;
   color: #a9a293;
   text-transform: uppercase;
 }
