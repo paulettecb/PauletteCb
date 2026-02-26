@@ -49,6 +49,11 @@
 
         <div class="spec-display-wrap" aria-hidden="true">
           <div class="spec-display">
+            <img
+              class="hero-product-image"
+              src="/proyectos/hero-kyn/assets/images/186FB42A-7E5B-4F72-BCBA-5A6E8982BF63.png"
+              alt="KYN modular canine system"
+            />
             <span class="display-brass-divider"></span>
             <span class="display-tick tick-tl"></span>
             <span class="display-tick tick-tr"></span>
@@ -351,14 +356,14 @@ dd {
 }
 
 .spec-display-wrap {
-  min-height: min(63vh, 580px);
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .spec-display {
   position: relative;
   width: 100%;
+  aspect-ratio: 3 / 2;
   border: 1px solid rgba(201, 197, 190, 0.3);
   background:
     linear-gradient(170deg, rgba(33, 35, 39, 0.95), rgba(15, 16, 18, 0.97) 72%),
@@ -380,6 +385,15 @@ dd {
   );
 }
 
+
+.hero-product-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 .display-brass-divider {
   position: absolute;
   top: 13%;
@@ -464,9 +478,6 @@ dd {
     top: 4.6rem;
   }
 
-  .spec-display-wrap {
-    min-height: 42vh;
-  }
 }
 
 @media (max-width: 680px) {
