@@ -35,6 +35,15 @@ body {
   overflow-x: clip;
 }
 
+/* Defensive fix for host wrappers that can expand layout when top banners appear */
+.section-content-wrapper.section-content-wrapper {
+  min-height: calc(var(--section-min-height, 100%) - var(--section-height-offset, 0px));
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Organic pattern inspired background */
 body::before {
   content: '';
