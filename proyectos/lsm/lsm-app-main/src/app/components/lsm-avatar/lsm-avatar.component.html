@@ -1,18 +1,70 @@
 <div class="container">
-    <div class="header">
-      <h1>Lengua de Señas Mexicana</h1>
-    </div>
-    <div class="content">
+  <div class="header">
+    <h1>Lengua de Señas Mexicana</h1>
+    <p>Practica señas con demostración del avatar, instrucciones y retroalimentación básica.</p>
+  </div>
+
+  <div class="content">
+    <section class="avatar-demo" aria-label="Demostración del avatar">
       <canvas #threeCanvas></canvas>
-      
+    </section>
+
+    <section class="practice-panel">
       <div class="controls">
         <h2>Selecciona una seña:</h2>
         <div class="buttons">
-          <button *ngFor="let sign of signs" (click)="loadSign(sign)">{{ sign.nombre }}</button>
-          <video #video autoplay playsinline></video>
+          <button
+            *ngFor="let sign of signs"
+            type="button"
+            [class.active]="selectedSign.nombre === sign.nombre"
+            (click)="loadSign(sign)">
+            {{ sign.nombre }}
+          </button>
         </div>
-        <canvas #handCanvas width="640" height="480" style="position: absolute; left: 0; top: 14rem; z-index: 10;"></canvas>
-        <canvas #poseCanvas ></canvas>
       </div>
-    </div>
+
+      <article class="sign-card">
+        <p class="eyebrow">Demostración del avatar</p>
+        <h2>{{ selectedSign.nombre }}</h2>
+        <p>{{ selectedSign.descripcion }}</p>
+        <button type="button" class="demo-button" (click)="loadSign(selectedSign)">
+          Repetir demostración
+        </button>
+      </article>
+
+      <article class="instructions">
+        <h3>Instrucciones paso a paso</h3>
+        <ol>
+          <li *ngFor="let step of selectedSign.pasosVisuales">{{ step }}</li>
+        </ol>
+      </article>
+
+      <article class="tips">
+        <h3>Tips de expresión y contexto</h3>
+        <ul>
+          <li *ngFor="let tip of selectedSign.tips">{{ tip }}</li>
+        </ul>
+      </article>
+
+      <article class="camera-practice">
+        <div>
+          <h3>Práctica con cámara</h3>
+          <p>Activa la práctica y realiza la seña frente a la cámara para recibir feedback básico.</p>
+        </div>
+        <button type="button" class="practice-button" (click)="startPractice()">
+          Practicar con cámara
+        </button>
+      </article>
+
+      <div class="feedback" [class.feedback--active]="practiceMode" aria-live="polite">
+        {{ feedbackMessage }}
+      </div>
+    </section>
+
+    <section class="camera-stage" [class.camera-stage--active]="practiceMode" aria-label="Vista de cámara para práctica">
+      <video #video autoplay playsinline muted></video>
+      <canvas #handCanvas width="640" height="480"></canvas>
+      <canvas #poseCanvas width="640" height="480"></canvas>
+    </section>
   </div>
+</div>
