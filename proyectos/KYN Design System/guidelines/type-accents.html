@@ -1,0 +1,41 @@
+<!-- @dsCard group="Type" viewport="700x320" name="Farmhouse accents in use" subtitle="Single beautiful letterforms as flourishes — drop-cap, monogram, marks" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><style>@font-face{font-family:'FarmhouseLocal';src:url('../assets/fonts/Farmhouse.otf') format('opentype');}</style>
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--oat);padding:26px 28px;color:var(--ink-900);}
+  .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;align-items:start;}
+
+  /* drop cap */
+  .article p{font-size:15px;line-height:1.6;color:var(--ink-700);margin:0;}
+  .dropcap{font-family:var(--font-display);font-weight:500;color:var(--periwinkle-500);
+    font-size:82px;line-height:0.7;float:left;margin:10px 14px 0 0;}
+  .h{font-size:11px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted);margin:0 0 10px;}
+
+  .side{display:flex;flex-direction:column;gap:18px;}
+  /* monogram */
+  .mono{width:78px;height:78px;border-radius:50%;background:var(--periwinkle-500);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'FarmhouseLocal','Georgia',serif;font-size:46px;box-shadow:var(--shadow-sm);}
+  /* marks */
+  .marks{display:flex;flex-wrap:wrap;gap:10px;}
+  .mark{font-family:'FarmhouseLocal','Georgia',serif;font-size:26px;color:var(--periwinkle-600);background:var(--white);border:1px solid var(--border-on-oat);border-radius:var(--radius-pill);padding:4px 16px;white-space:nowrap;line-height:1.15;}
+  .mark.pop{color:var(--pop-magenta);}
+</style></head><body>
+  <div class="grid">
+    <div class="article">
+      <p class="h">Drop-cap initial</p>
+      <p><span class="dropcap">E</span>very collar is cut, punched, and riveted by hand from original biothane and solid brass — a small-batch process that takes time because the result is meant to outlast every muddy trail, every rainy walk, and every dog who refuses to slow down.</p>
+    </div>
+    <div class="side">
+      <div>
+        <p class="h">Monogram</p>
+        <div class="mono">e</div>
+      </div>
+      <div>
+        <p class="h">Edition marks</p>
+        <div class="marks">
+          <span class="mark">Est. 2024</span>
+          <span class="mark">No. 01</span>
+          <span class="mark pop">New&nbsp;♥</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>

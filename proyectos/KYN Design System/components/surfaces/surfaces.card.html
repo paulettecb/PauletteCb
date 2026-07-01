@@ -1,0 +1,55 @@
+<!-- @dsCard group="Components" viewport="700x430" name="Cards & product tiles" subtitle="The signature commerce tile + generic surface" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--oat);padding:24px;color:var(--text-primary);}
+  .row{display:flex;gap:20px;align-items:stretch;}
+  .ph{width:100%;height:100%;background-image:repeating-linear-gradient(135deg,var(--periwinkle-50) 0 12px,var(--periwinkle-100) 12px 24px);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;}
+  .ph span{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--periwinkle-700);background:rgba(255,255,255,.75);padding:4px 9px;border-radius:var(--radius-pill);}
+  .note{font-family:var(--font-heading);font-weight:700;letter-spacing:-0.01em;font-size:20px;color:var(--ink-900);margin:0 0 6px;}
+  .notep{font-size:13px;color:var(--text-muted);line-height:1.5;margin:0;}
+</style></head><body>
+  <div class="row">
+    <article class="kyn-product kyn-product--interactive">
+      <div class="kyn-product__media">
+        <div class="ph"><span>product — collar</span></div>
+        <span class="kyn-badge kyn-badge--brand">Best Seller</span>
+        <button class="kyn-iconbtn kyn-iconbtn--sm kyn-product__fav" aria-label="Favorite"><i data-lucide="heart"></i></button>
+      </div>
+      <div class="kyn-product__body">
+        <h3 class="kyn-product__name">Waterproof Collar</h3>
+        <p class="kyn-product__desc">Original biothane + solid brass. Rinse &amp; go.</p>
+        <div class="kyn-product__row">
+          <span class="kyn-product__price">$25</span>
+          <span class="kyn-product__swatches"><i style="background:#8795D2"></i><i style="background:#CFE0F2"></i><i style="background:#F4F0E8"></i><i style="background:#CFE8DA"></i></span>
+        </div>
+      </div>
+    </article>
+
+    <article class="kyn-product kyn-product--interactive">
+      <div class="kyn-product__media">
+        <div class="ph"><span>product — leash set</span></div>
+        <span class="kyn-badge kyn-badge--pop">New ♥</span>
+        <button class="kyn-iconbtn kyn-iconbtn--sm kyn-product__fav" aria-label="Favorite"><i data-lucide="heart"></i></button>
+      </div>
+      <div class="kyn-product__body">
+        <h3 class="kyn-product__name">Leash + Collar Set</h3>
+        <p class="kyn-product__desc">The full walk, matched. Add a name charm.</p>
+        <div class="kyn-product__row">
+          <span class="kyn-product__price">$60</span>
+          <span class="kyn-product__swatches"><i style="background:#E2D6F0"></i><i style="background:#F8DCC9"></i><i style="background:#2A2933"></i></span>
+        </div>
+      </div>
+    </article>
+
+    <div class="kyn-card" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <h4 class="note">Generic card</h4>
+      <p class="notep">A soft surface for anything — features, reviews, content. Hairline border, low periwinkle shadow, 24px radius.</p>
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <button class="kyn-btn kyn-btn--primary kyn-btn--sm">Action</button>
+        <button class="kyn-btn kyn-btn--ghost kyn-btn--sm">Skip</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons({attrs:{'stroke-width':1.75}});</script>
+</body></html>

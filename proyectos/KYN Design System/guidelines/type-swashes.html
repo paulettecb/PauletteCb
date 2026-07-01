@@ -1,0 +1,33 @@
+<!-- @dsCard group="Type" viewport="700x480" name="Farmhouse swash library" subtitle="Alternate glyphs in the PUA — click-ready codepoints (alt1 = U+F001+, alt2 = U+F01B+)" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  @font-face{font-family:'FarmhouseLocal';src:url('../assets/fonts/Farmhouse.otf') format('opentype');}
+  body{margin:0;font-family:var(--font-sans);background:var(--paper);padding:22px 24px;color:var(--ink-900);}
+  h3{font-size:11px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted);margin:0 0 10px;}
+  h3 + h3{margin-top:22px;}
+  .grid{display:grid;grid-template-columns:repeat(13,1fr);gap:6px;}
+  .cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 6px;border:1px solid var(--border-subtle);border-radius:var(--radius-sm);background:var(--white);}
+  .gly{font-family:'FarmhouseLocal','Georgia',serif;font-size:34px;color:var(--periwinkle-700);line-height:1;height:40px;display:flex;align-items:center;}
+  .lt{font-size:11px;font-weight:700;color:var(--ink-900);}
+  .cp{font-family:ui-monospace,Menlo,monospace;font-size:8px;color:var(--text-muted);}
+</style></head><body>
+  <h3>Swash set · alt1</h3>
+  <div class="grid" id="alt1"></div>
+  <h3>Swash set · alt2</h3>
+  <div class="grid" id="alt2"></div>
+  <script>
+    function build(elId, base){
+      const el=document.getElementById(elId);
+      for(let i=1;i<=26;i++){
+        const cp=base+i, letter=String.fromCharCode(96+i);
+        const c=document.createElement('div'); c.className='cell';
+        c.innerHTML='<span class="gly">'+String.fromCharCode(cp)+'</span>'+
+          '<span class="lt">'+letter+'</span>'+
+          '<span class="cp">F'+cp.toString(16).slice(1).toUpperCase()+'</span>';
+        el.appendChild(c);
+      }
+    }
+    build('alt1', 0xF000);  // a=F001 … z=F01A
+    build('alt2', 0xF01A);  // a=F01B … z=F034
+  </script>
+</body></html>

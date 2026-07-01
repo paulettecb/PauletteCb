@@ -1,0 +1,73 @@
+<!-- @dsCard group="Brand" viewport="1280x720" name="Hero direction" subtitle="Premium-whimsy in a real marketing layout" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css"><style>@font-face{font-family:'FarmhouseLocal';src:url('../assets/fonts/Farmhouse.otf') format('opentype');}</style>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--font-sans);background:var(--paper);color:var(--text-primary);width:1280px;height:720px;overflow:hidden;position:relative;}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 56px;position:relative;z-index:2;}
+  nav .logo{height:34px;}
+  nav ul{display:flex;gap:34px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:500;color:var(--ink-700);}
+  nav .cart{font-size:13px;font-weight:600;color:#fff;background:var(--periwinkle-500);padding:10px 20px;border-radius:var(--radius-pill);}
+
+  /* layout */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;padding:18px 56px 0;height:600px;align-items:center;position:relative;z-index:2;}
+
+  .eyebrow{font-size:13px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--periwinkle-700);font-weight:600;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--periwinkle-400);border-radius:2px;}
+  h1{font-family:var(--font-heading);font-weight:800;font-size:70px;line-height:1.02;letter-spacing:-0.025em;margin:20px 0 0;color:var(--ink-900);}
+  h1 .spark{font-family:var(--font-display);color:var(--periwinkle-500);}
+  .lead{font-size:19px;line-height:var(--leading-relaxed);color:var(--ink-700);max-width:430px;margin:22px 0 0;}
+  .cta{display:flex;gap:14px;margin-top:30px;}
+  .btn-primary{background:var(--periwinkle-500);color:#fff;font-weight:600;font-size:15px;padding:15px 30px;border-radius:var(--radius-pill);box-shadow:var(--shadow-sm);}
+  .btn-ghost{background:transparent;color:var(--ink-900);font-weight:600;font-size:15px;padding:15px 26px;border-radius:var(--radius-pill);border:1.5px solid var(--ink-100);}
+  .trust{display:flex;gap:26px;margin-top:40px;font-size:13px;color:var(--text-muted);}
+  .trust b{color:var(--ink-900);display:block;font-size:17px;font-family:var(--font-heading);font-weight:700;}
+
+  /* product side */
+  .stage{position:relative;height:520px;display:flex;align-items:center;justify-content:center;}
+  .blob{position:absolute;width:430px;height:430px;border-radius:46% 54% 52% 48% / 50% 46% 54% 50%;background:var(--pastel-blush);right:0;top:30px;}
+  .blob2{position:absolute;width:130px;height:130px;border-radius:50%;background:var(--pastel-butter);left:8px;bottom:40px;}
+  .shot{position:relative;width:380px;height:460px;border-radius:var(--radius-lg);background-image:repeating-linear-gradient(135deg,var(--periwinkle-50) 0 14px,var(--periwinkle-100) 14px 28px);border:1px solid var(--periwinkle-200);box-shadow:var(--shadow-lg);display:flex;align-items:flex-end;justify-content:center;padding:18px;}
+  .shot span{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--periwinkle-700);background:rgba(255,255,255,.75);padding:6px 12px;border-radius:var(--radius-pill);}
+  .badge{position:absolute;top:24px;right:18px;background:var(--pop-magenta);color:#fff;font-family:'FarmhouseLocal','Georgia',serif;font-size:30px;line-height:1;padding:8px 20px;border-radius:var(--radius-pill);transform:rotate(4deg);box-shadow:var(--shadow-sm);z-index:3;display:flex;align-items:center;gap:7px;}
+</style></head><body>
+  <nav>
+    <img class="logo" src="../assets/logo/kyn-logo.png" alt="KYN">
+    <ul><li>Collars</li><li>Leashes</li><li>Sets</li><li>Charms</li><li>Our Story</li></ul>
+    <span class="cart">Cart · 0</span>
+  </nav>
+
+  <div class="hero">
+    <div class="copy">
+      <div class="eyebrow">Handmade · Biothane &amp; brass</div>
+      <h1>Gear up for the <span class="spark">good</span> walks.</h1>
+      <p class="lead">Strong, waterproof, and built by hand from original biothane and solid brass — for the dogs who go everywhere.</p>
+      <div class="cta">
+        <span class="btn-primary">Shop the collection</span>
+        <span class="btn-ghost">Build a set</span>
+      </div>
+      <div class="trust">
+        <div><b>Waterproof</b>Rinse &amp; go</div>
+        <div><b>Solid brass</b>Built to last</div>
+        <div><b>Small batch</b>Made by hand</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="blob"></div>
+      <div class="blob2"></div>
+      <div class="shot">
+        <span>product shot — collar + leash set</span>
+        <div class="badge"><span>&#xF00E;e&#xF031;</span> ♥</div>
+      </div>
+    </div>
+  </div>
+  <template id="__bundler_thumbnail" data-bg-color="#FBFAF7">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#FBFAF7"/>
+      <text x="600" y="430" font-family="Georgia, serif" font-size="240" font-weight="700" fill="#8795D2" text-anchor="middle">KYN</text>
+      <circle cx="845" cy="300" r="34" fill="#E85DA0"/>
+    </svg>
+  </template>
+</body></html>

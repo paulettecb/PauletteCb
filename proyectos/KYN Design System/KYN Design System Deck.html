@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYN — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Friendship';
+      src: url('assets/fonts/Friendship-Medium.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Farmhouse';
+      src: url('assets/fonts/Farmhouse.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; font-family: 'Hanken Grotesk', system-ui, sans-serif; }
+
+    :root {
+      --periwinkle-50:  #F0F2FB;
+      --periwinkle-100: #E2E6F5;
+      --periwinkle-200: #C9D0ED;
+      --periwinkle-300: #AEB8E2;
+      --periwinkle-400: #9BA6DA;
+      --periwinkle-500: #8795D2;
+      --periwinkle-600: #6B7AC1;
+      --periwinkle-700: #5562A4;
+      --periwinkle-800: #434D80;
+      --periwinkle-900: #2F3658;
+      --paper:  #FBFAF7;
+      --oat:    #F4F0E8;
+      --sand:   #E9E3D7;
+      --ink-900: #2A2933;
+      --ink-700: #4A4955;
+      --ink-500: #75737F;
+      --ink-300: #A8A6B0;
+      --ink-100: #E4E2E6;
+      --pop:      #E85DA0;
+      --pop-soft: #F7C9DE;
+      --pastel-blush:  #F6D2DD;
+      --pastel-peach:  #F8DCC9;
+      --pastel-butter: #F6EBC4;
+      --pastel-mint:   #CFE8DA;
+      --pastel-sky:    #CFE0F2;
+      --pastel-lilac:  #E2D6F0;
+
+      --px: 110px;
+      --py: 84px;
+    }
+
+    deck-stage section {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+  <script src="deck-stage.js"></script>
+
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="160" height="100" fill="#2F3658"/>
+      <text x="80" y="62" font-family="Georgia,serif" font-size="52" font-weight="800" fill="#8795D2" text-anchor="middle">KYN</text>
+      <circle cx="130" cy="22" r="8" fill="#E85DA0"/>
+    </svg>
+  </template>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- ─── 01 TITLE ─────────────────────────────────────── -->
+  <section data-label="01 · Title" style="background: var(--periwinkle-900); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; position: relative;">
+    <div style="position: absolute; top: 72px; right: 110px; width: 20px; height: 20px; border-radius: 50%; background: var(--pop);"></div>
+    <div style="position: absolute; bottom: 160px; left: 200px; width: 12px; height: 12px; border-radius: 50%; background: rgba(174,184,226,0.5);"></div>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 70% 30%, rgba(135,149,210,0.08) 0%, transparent 60%); pointer-events: none;"></div>
+
+    <img src="assets/logo/kyn-logo.png" alt="KYN" style="height: 110px; object-fit: contain; margin-bottom: 44px; filter: brightness(0) invert(1); opacity: 0.9;">
+    <div style="font-family: 'Friendship', cursive; font-size: 148px; color: var(--periwinkle-100); line-height: 0.88; text-align: center; letter-spacing: -0.01em;">Design System</div>
+    <div style="font-size: 26px; font-weight: 400; color: var(--periwinkle-400); letter-spacing: 0.20em; text-transform: uppercase; margin-top: 44px;">Brand guidelines &amp; component library</div>
+    <div style="position: absolute; bottom: 64px; left: var(--px); font-size: 20px; font-weight: 500; color: var(--periwinkle-700); letter-spacing: 0.06em;">KYN · 2026</div>
+  </section>
+
+
+  <!-- ─── 02 BRAND DNA ──────────────────────────────────── -->
+  <section data-label="02 · Brand DNA" style="background: var(--paper); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 52px;">
+    <div class="eyebrow" style="color: var(--periwinkle-500);">The Big Idea</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; flex: 1;">
+
+      <div>
+        <div style="font-family: 'Friendship', cursive; font-size: 168px; color: var(--periwinkle-500); line-height: 0.85; margin-bottom: 28px;">premium<br>whimsy</div>
+        <div style="font-size: 30px; color: var(--ink-500); line-height: 1.5; max-width: 440px;">The KYN brand balances two forces in careful tension — refined enough to trust, warm enough to love.</div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <div style="background: var(--periwinkle-900); border-radius: 24px; padding: 44px 52px;">
+          <div style="font-size: 84px; font-weight: 800; color: white; letter-spacing: -0.04em; line-height: 1;">90%</div>
+          <div style="font-size: 27px; font-weight: 600; color: var(--periwinkle-300); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; margin-bottom: 14px;">Premium backbone</div>
+          <div style="font-size: 26px; color: var(--periwinkle-200); line-height: 1.5;">Hanken Grotesk · warm neutrals · generous white space · restrained periwinkle · soft periwinkle-tinted shadows</div>
+        </div>
+        <div style="background: var(--pop-soft); border-radius: 24px; padding: 44px 52px; border: 2px solid var(--pop);">
+          <div style="font-size: 84px; font-weight: 800; color: var(--pop); letter-spacing: -0.04em; line-height: 1;">10%</div>
+          <div style="font-size: 27px; font-weight: 600; color: var(--pop); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; margin-bottom: 14px;">Whimsy spark</div>
+          <div style="font-size: 26px; color: var(--ink-700); line-height: 1.5;">One Friendship word · a pastel fill · the hand-drawn heart · a charm. Delight, not noise.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 03 COLORS ────────────────────────────────────── -->
+  <section data-label="03 · Colors" style="background: var(--ink-900); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 48px;">
+    <div class="eyebrow" style="color: var(--periwinkle-400);">Color System</div>
+
+    <!-- Periwinkle scale -->
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="font-size: 22px; font-weight: 600; color: var(--periwinkle-400); text-transform: uppercase; letter-spacing: 0.1em;">Periwinkle — Brand Primary</div>
+      <div style="display: flex; gap: 10px; height: 88px;">
+        <div style="flex: 1; background: #F0F2FB; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: #8795D2;">50</span></div>
+        <div style="flex: 1; background: #E2E6F5; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: #5562A4;">100</span></div>
+        <div style="flex: 1; background: #C9D0ED; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: #434D80;">200</span></div>
+        <div style="flex: 1; background: #AEB8E2; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: #2F3658;">300</span></div>
+        <div style="flex: 1; background: #9BA6DA; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: #2F3658;">400</span></div>
+        <div style="flex: 1.6; background: #8795D2; border-radius: 12px; display: flex; align-items: flex-end; justify-content: space-between; padding: 10px 14px;"><span style="font-size: 18px; font-weight: 700; color: white;">500 ★ Brand</span></div>
+        <div style="flex: 1; background: #6B7AC1; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">600</span></div>
+        <div style="flex: 1; background: #5562A4; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">700</span></div>
+        <div style="flex: 1; background: #434D80; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">800</span></div>
+        <div style="flex: 1; background: #2F3658; border-radius: 12px; display: flex; align-items: flex-end; padding: 10px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">900</span></div>
+      </div>
+    </div>
+
+    <!-- Neutrals + Pastels + Pop -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-size: 22px; font-weight: 600; color: var(--periwinkle-400); text-transform: uppercase; letter-spacing: 0.1em;">Warm Neutrals</div>
+        <div style="display: flex; gap: 10px; height: 76px;">
+          <div style="flex: 1; background: #FBFAF7; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.08);"><span style="font-size: 18px; font-weight: 600; color: #75737F;">Paper</span></div>
+          <div style="flex: 1; background: #F4F0E8; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 18px; font-weight: 600; color: #75737F;">Oat</span></div>
+          <div style="flex: 1; background: #E9E3D7; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 18px; font-weight: 600; color: #75737F;">Sand</span></div>
+          <div style="flex: 1; background: #75737F; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">Ink 500</span></div>
+          <div style="flex: 1; background: #4A4955; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">Ink 700</span></div>
+          <div style="flex: 1; background: #2A2933; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 18px; font-weight: 600; color: white;">Ink 900</span></div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="font-size: 22px; font-weight: 600; color: var(--periwinkle-400); text-transform: uppercase; letter-spacing: 0.1em;">Pastels &amp; The Pop</div>
+        <div style="display: flex; gap: 10px; height: 76px;">
+          <div style="flex: 1; background: #F6D2DD; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Blush</span></div>
+          <div style="flex: 1; background: #F8DCC9; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Peach</span></div>
+          <div style="flex: 1; background: #F6EBC4; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Butter</span></div>
+          <div style="flex: 1; background: #CFE8DA; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Mint</span></div>
+          <div style="flex: 1; background: #CFE0F2; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Sky</span></div>
+          <div style="flex: 1; background: #E2D6F0; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 600; color: #75737F;">Lilac</span></div>
+          <div style="flex: 1.2; background: #E85DA0; border-radius: 12px; display: flex; align-items: flex-end; padding: 8px 12px;"><span style="font-size: 17px; font-weight: 700; color: white;">Pop ♥</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage rule -->
+    <div style="padding: 28px 36px; background: rgba(135,149,210,0.1); border-radius: 14px; border: 1px solid rgba(135,149,210,0.2); display: flex; align-items: center; gap: 24px;">
+      <div style="font-size: 22px; color: var(--periwinkle-300); line-height: 1.5;">
+        <strong style="color: white;">Rule:</strong> Periwinkle 500 leads every interaction. Neutrals carry all surfaces. Pastels appear once per view as a whimsy fill — never dominant. The pop magenta is used at most once — a badge, a heart, a tag.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 04 TYPOGRAPHY ────────────────────────────────── -->
+  <section data-label="04 · Typography" style="background: var(--paper); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 44px;">
+    <div class="eyebrow" style="color: var(--periwinkle-500);">Typography</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 52px; flex: 1; align-items: start;">
+
+      <!-- Hanken Grotesk -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 20px; font-weight: 600; color: var(--ink-500); text-transform: uppercase; letter-spacing: 0.12em;">Hanken Grotesk</div>
+        <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 96px; font-weight: 800; color: var(--ink-900); letter-spacing: -0.04em; line-height: 0.9;">Aa</div>
+        <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--ink-900); line-height: 1.15; letter-spacing: -0.01em;">Made by hand,<br>built to last.</div>
+        <div style="font-family: 'Hanken Grotesk', sans-serif; font-size: 22px; color: var(--ink-500); line-height: 1.55;">Strong, waterproof, and made to look as good as it lasts. Biothane + solid brass.</div>
+        <div style="padding: 18px 22px; background: var(--periwinkle-50); border-radius: 12px;">
+          <div style="font-size: 20px; font-weight: 600; color: var(--periwinkle-700);">--font-sans / --font-heading</div>
+          <div style="font-size: 18px; color: var(--ink-500); margin-top: 4px;">Headlines · UI · Body · Prices</div>
+          <div style="font-size: 18px; color: var(--ink-500);">Weights 300–800 available</div>
+        </div>
+      </div>
+
+      <!-- Friendship -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 20px; font-weight: 600; color: var(--ink-500); text-transform: uppercase; letter-spacing: 0.12em;">Friendship</div>
+        <div style="font-family: 'Friendship', cursive; font-size: 96px; color: var(--periwinkle-500); line-height: 0.9;">Aa</div>
+        <div style="font-family: 'Friendship', cursive; font-size: 60px; color: var(--periwinkle-500); line-height: 1.05;">gear up</div>
+        <div style="font-size: 22px; color: var(--ink-500); line-height: 1.55;">Hand-drawn marker. One spark word per view maximum. Never body copy.</div>
+        <div style="padding: 18px 22px; background: var(--periwinkle-50); border-radius: 12px;">
+          <div style="font-size: 20px; font-weight: 600; color: var(--periwinkle-700);">--font-display</div>
+          <div style="font-size: 18px; color: var(--ink-500); margin-top: 4px;">Logo wordmark · one accent word</div>
+        </div>
+      </div>
+
+      <!-- Farmhouse -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="font-size: 20px; font-weight: 600; color: var(--ink-500); text-transform: uppercase; letter-spacing: 0.12em;">Farmhouse</div>
+        <div style="font-family: 'Farmhouse', serif; font-size: 96px; color: var(--ink-700); line-height: 0.9;">Aa</div>
+        <div style="font-family: 'Farmhouse', serif; font-size: 60px; color: var(--ink-700); line-height: 1.05;">since 2024</div>
+        <div style="font-size: 22px; color: var(--ink-500); line-height: 1.55;">Signature script. Monograms, edition marks, date flourishes. PUA swash alternates included.</div>
+        <div style="padding: 18px 22px; background: var(--periwinkle-50); border-radius: 12px;">
+          <div style="font-size: 20px; font-weight: 600; color: var(--periwinkle-700);">--font-accent / --font-serif</div>
+          <div style="font-size: 18px; color: var(--ink-500); margin-top: 4px;">Monograms · Edition marks only</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 05 TYPE SCALE ─────────────────────────────────── -->
+  <section data-label="05 · Type Scale" style="background: var(--oat); padding: var(--py) var(--px); display: flex; flex-direction: column;">
+    <div class="eyebrow" style="color: var(--periwinkle-600); margin-bottom: 36px;">Type Scale — Hanken Grotesk</div>
+    <div style="display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: center;">
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">5xl · 88px</div>
+        <div style="font-size: 88px; font-weight: 800; color: var(--ink-900); letter-spacing: -0.04em; line-height: 1;">Gear up.</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">4xl · 64px</div>
+        <div style="font-size: 64px; font-weight: 800; color: var(--ink-900); letter-spacing: -0.03em; line-height: 1;">Handmade, built to last.</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">3xl · 48px</div>
+        <div style="font-size: 48px; font-weight: 700; color: var(--ink-900); letter-spacing: -0.02em;">The walk collection</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">2xl · 36px</div>
+        <div style="font-size: 36px; font-weight: 600; color: var(--ink-700);">Biothane lead · classic brass fittings</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">xl · 28px</div>
+        <div style="font-size: 28px; font-weight: 400; color: var(--ink-700);">Strong, waterproof, and made to look as good as it lasts.</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0; border-bottom: 1px solid var(--sand);">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">lg · 22px</div>
+        <div style="font-size: 22px; font-weight: 400; color: var(--ink-500);">Body copy for descriptions, product details, and longer explanations. Comfortable at --leading-relaxed (1.65).</div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 28px; padding: 14px 0;">
+        <div style="width: 110px; font-size: 18px; font-weight: 500; color: var(--ink-500); flex-shrink: 0;">sm · 14px</div>
+        <div style="font-size: 14px; font-weight: 600; color: var(--ink-300); text-transform: uppercase; letter-spacing: 0.18em;">HANDMADE · BIOTHANE &amp; BRASS · EST 2024</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 06 EFFECTS ───────────────────────────────────── -->
+  <section data-label="06 · Effects" style="background: var(--paper); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 44px;">
+    <div class="eyebrow" style="color: var(--periwinkle-500);">Effects — Radius · Shadow · Motion</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 56px; flex: 1; align-items: start;">
+
+      <!-- Radius -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 28px; font-weight: 700; color: var(--ink-900);">Corner Radius</div>
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 62px; height: 62px; background: var(--periwinkle-200); border-radius: 6px; flex-shrink: 0;"></div>
+            <div><div style="font-size: 22px; font-weight: 600; color: var(--ink-900);">6px · xs</div><div style="font-size: 18px; color: var(--ink-500);">Chips, tags</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 62px; height: 62px; background: var(--periwinkle-300); border-radius: 10px; flex-shrink: 0;"></div>
+            <div><div style="font-size: 22px; font-weight: 600; color: var(--ink-900);">10px · sm</div><div style="font-size: 18px; color: var(--ink-500);">Inputs, small cards</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 62px; height: 62px; background: var(--periwinkle-400); border-radius: 16px; flex-shrink: 0;"></div>
+            <div><div style="font-size: 22px; font-weight: 600; color: var(--ink-900);">16px · md</div><div style="font-size: 18px; color: var(--ink-500);">Cards, modals</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 62px; height: 62px; background: var(--periwinkle-500); border-radius: 24px; flex-shrink: 0;"></div>
+            <div><div style="font-size: 22px; font-weight: 600; color: var(--ink-900);">24px · lg</div><div style="font-size: 18px; color: var(--ink-500);">Panels, hero sections</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="width: 120px; height: 48px; background: var(--periwinkle-600); border-radius: 999px; flex-shrink: 0;"></div>
+            <div><div style="font-size: 22px; font-weight: 600; color: var(--ink-900);">999px · pill</div><div style="font-size: 18px; color: var(--ink-500);">Buttons, badges</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shadows -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 28px; font-weight: 700; color: var(--ink-900);">Shadow</div>
+        <div style="font-size: 18px; color: var(--ink-500); margin-top: -12px;">Periwinkle-tinted, never harsh black</div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 1px 2px rgba(47,54,88,0.06);">
+            <div style="font-size: 20px; font-weight: 600; color: var(--ink-900);">shadow-xs</div>
+            <div style="font-size: 16px; color: var(--ink-500);">Subtle lift · hover states</div>
+          </div>
+          <div style="background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+            <div style="font-size: 20px; font-weight: 600; color: var(--ink-900);">shadow-sm</div>
+            <div style="font-size: 16px; color: var(--ink-500);">Default card shadow</div>
+          </div>
+          <div style="background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 8px 24px rgba(47,54,88,0.09);">
+            <div style="font-size: 20px; font-weight: 600; color: var(--ink-900);">shadow-md</div>
+            <div style="font-size: 16px; color: var(--ink-500);">Lifted cards, dropdowns</div>
+          </div>
+          <div style="background: white; border-radius: 16px; padding: 24px 28px; box-shadow: 0 18px 48px rgba(47,54,88,0.12);">
+            <div style="font-size: 20px; font-weight: 600; color: var(--ink-900);">shadow-lg</div>
+            <div style="font-size: 16px; color: var(--ink-500);">Modals, high elevation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Motion -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="font-size: 28px; font-weight: 700; color: var(--ink-900);">Motion</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="padding: 18px 22px; background: var(--periwinkle-50); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div><div style="font-size: 22px; font-weight: 700; color: var(--periwinkle-700);">140ms</div><div style="font-size: 17px; color: var(--ink-500);">fast — hover, badge</div></div>
+            <div style="width: 60px; height: 8px; background: var(--periwinkle-200); border-radius: 99px;"></div>
+          </div>
+          <div style="padding: 18px 22px; background: var(--periwinkle-100); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div><div style="font-size: 22px; font-weight: 700; color: var(--periwinkle-700);">220ms</div><div style="font-size: 17px; color: var(--ink-500);">base — most UI</div></div>
+            <div style="width: 90px; height: 8px; background: var(--periwinkle-300); border-radius: 99px;"></div>
+          </div>
+          <div style="padding: 18px 22px; background: var(--periwinkle-200); border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div><div style="font-size: 22px; font-weight: 700; color: var(--periwinkle-800);">360ms</div><div style="font-size: 17px; color: var(--ink-700);">slow — page entrances</div></div>
+            <div style="width: 130px; height: 8px; background: var(--periwinkle-400); border-radius: 99px;"></div>
+          </div>
+          <div style="padding: 22px; background: var(--ink-900); border-radius: 12px; margin-top: 4px;">
+            <div style="font-size: 19px; font-weight: 600; color: var(--periwinkle-300); margin-bottom: 8px;">Easing — ease-out</div>
+            <div style="font-size: 17px; color: var(--periwinkle-100); font-family: 'Courier New', monospace; line-height: 1.5;">cubic-bezier(0.22, 1, 0.36, 1)</div>
+          </div>
+          <div style="padding: 18px 22px; background: var(--oat); border-radius: 12px; border: 1px solid var(--sand);">
+            <div style="font-size: 18px; color: var(--ink-600);">No bouncy or loud animation. Gentle, restrained, trustworthy.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 07 COMPONENTS ─────────────────────────────────── -->
+  <section data-label="07 · Components" style="background: var(--periwinkle-50); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 44px;">
+    <div class="eyebrow" style="color: var(--periwinkle-600);">Component Library</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 28px; flex: 1;">
+
+      <!-- Buttons -->
+      <div style="background: white; border-radius: 22px; padding: 32px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 24px; font-weight: 700; color: var(--ink-900); margin-bottom: 4px;">Button</div>
+        <div style="background: var(--periwinkle-500); color: white; font-size: 20px; font-weight: 600; border-radius: 999px; padding: 14px 28px; text-align: center; font-family: 'Hanken Grotesk', sans-serif;">Shop now</div>
+        <div style="background: transparent; border: 1.5px solid var(--periwinkle-500); color: var(--periwinkle-600); font-size: 20px; font-weight: 600; border-radius: 999px; padding: 13px 28px; text-align: center; font-family: 'Hanken Grotesk', sans-serif;">Learn more</div>
+        <div style="color: var(--periwinkle-600); font-size: 20px; font-weight: 600; border-radius: 999px; padding: 14px 28px; text-align: center; font-family: 'Hanken Grotesk', sans-serif;">Browse</div>
+        <div style="background: var(--pop); color: white; font-size: 20px; font-weight: 600; border-radius: 999px; padding: 14px 28px; text-align: center; font-family: 'Hanken Grotesk', sans-serif;">♥ New arrivals</div>
+        <div style="background: var(--ink-100); color: var(--ink-300); font-size: 20px; font-weight: 600; border-radius: 999px; padding: 14px 28px; text-align: center; font-family: 'Hanken Grotesk', sans-serif;">Disabled</div>
+      </div>
+
+      <!-- Badges + Forms -->
+      <div style="background: white; border-radius: 22px; padding: 32px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); display: flex; flex-direction: column; gap: 28px;">
+        <div>
+          <div style="font-size: 24px; font-weight: 700; color: var(--ink-900); margin-bottom: 16px;">Badge</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div style="background: var(--pop); color: white; font-size: 17px; font-weight: 700; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">NEW</div>
+            <div style="background: var(--periwinkle-500); color: white; font-size: 17px; font-weight: 700; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">BRAND</div>
+            <div style="background: var(--periwinkle-50); color: var(--periwinkle-700); font-size: 17px; font-weight: 700; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">SOFT</div>
+            <div style="background: var(--pastel-mint); color: #2A5C40; font-size: 17px; font-weight: 600; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">IN STOCK</div>
+            <div style="background: var(--pastel-butter); color: #6B4A00; font-size: 17px; font-weight: 600; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">LIMITED</div>
+            <div style="background: var(--pastel-blush); color: #8B2550; font-size: 17px; font-weight: 600; border-radius: 999px; padding: 7px 16px; font-family: 'Hanken Grotesk', sans-serif;">SALE</div>
+          </div>
+        </div>
+        <div style="border-top: 1px solid var(--ink-100); padding-top: 24px;">
+          <div style="font-size: 24px; font-weight: 700; color: var(--ink-900); margin-bottom: 14px;">Forms</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--ink-700); margin-bottom: 5px;">Your email</div>
+              <div style="border: 1.5px solid var(--periwinkle-300); border-radius: 10px; padding: 12px 16px; font-size: 19px; color: var(--ink-500); font-family: 'Hanken Grotesk', sans-serif; box-shadow: 0 0 0 3px rgba(135,149,210,0.2);">hello@kyn.com</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div style="width: 24px; height: 24px; border-radius: 6px; background: var(--periwinkle-500); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-size: 19px; color: var(--ink-700); font-family: 'Hanken Grotesk', sans-serif;">Subscribe to updates</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card -->
+      <div style="background: white; border-radius: 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); overflow: hidden; display: flex; flex-direction: column;">
+        <div style="background: var(--pastel-lilac); height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+          <div style="font-family: 'Friendship', cursive; font-size: 52px; color: var(--periwinkle-500);">KYN</div>
+          <div style="position: absolute; top: 14px; left: 14px; background: var(--pop); color: white; font-size: 16px; font-weight: 700; border-radius: 999px; padding: 5px 13px; font-family: 'Hanken Grotesk', sans-serif;">NEW</div>
+        </div>
+        <div style="padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+          <div style="font-size: 24px; font-weight: 700; color: var(--ink-900); font-family: 'Hanken Grotesk', sans-serif;">Card</div>
+          <div style="font-size: 18px; color: var(--ink-500); font-family: 'Hanken Grotesk', sans-serif;">Flexible content container. Soft shadow, 16px rounding, white surface on paper.</div>
+        </div>
+      </div>
+
+      <!-- ProductCard -->
+      <div style="background: white; border-radius: 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); overflow: hidden; display: flex; flex-direction: column;">
+        <div style="background: var(--pastel-peach); height: 200px; display: flex; align-items: center; justify-content: center; position: relative;">
+          <div style="font-family: 'Friendship', cursive; font-size: 52px; color: var(--periwinkle-600);">leash</div>
+          <div style="position: absolute; top: 14px; left: 14px; background: var(--pop); color: white; font-size: 16px; font-weight: 700; border-radius: 999px; padding: 5px 13px; font-family: 'Hanken Grotesk', sans-serif;">LIMITED</div>
+        </div>
+        <div style="padding: 24px 28px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <div style="font-size: 24px; font-weight: 700; color: var(--ink-900); font-family: 'Hanken Grotesk', sans-serif;">Classic Lead</div>
+          <div style="font-size: 18px; color: var(--ink-500); font-family: 'Hanken Grotesk', sans-serif;">Biothane · Solid brass · 1.5m</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+            <div style="font-size: 28px; font-weight: 800; color: var(--periwinkle-600); font-family: 'Hanken Grotesk', sans-serif;">€ 38</div>
+            <div style="background: var(--periwinkle-500); color: white; font-size: 18px; font-weight: 600; border-radius: 999px; padding: 10px 22px; font-family: 'Hanken Grotesk', sans-serif;">Add to bag</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 08 VOICE & COPY ──────────────────────────────── -->
+  <section data-label="08 · Voice" style="background: var(--ink-900); padding: var(--py) var(--px); display: flex; flex-direction: column; gap: 44px;">
+    <div class="eyebrow" style="color: var(--periwinkle-400);">Voice &amp; Copy</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; flex: 1; align-items: start;">
+
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <div style="font-size: 58px; font-weight: 800; color: white; letter-spacing: -0.025em; line-height: 1.08;">Warm, confident,<br>a little playful.</div>
+        <div style="font-size: 28px; color: var(--periwinkle-200); line-height: 1.5;">Like a friend who happens to make beautiful, tough gear. Premium but never stiff.</div>
+        <div style="padding: 32px 36px; background: rgba(135,149,210,0.1); border-radius: 16px; border: 1px solid rgba(135,149,210,0.2);">
+          <div style="font-size: 20px; font-weight: 700; color: var(--periwinkle-400); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px;">Examples</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div><span style="font-size: 20px; color: var(--periwinkle-400); font-weight: 600;">Eyebrow: </span><span style="font-size: 20px; color: var(--ink-300);">HANDMADE · BIOTHANE &amp; BRASS</span></div>
+            <div><span style="font-size: 20px; color: var(--periwinkle-400); font-weight: 600;">Headline: </span><span style="font-size: 20px; color: white;">Made by hand, built to last.</span></div>
+            <div><span style="font-size: 20px; color: var(--periwinkle-400); font-weight: 600;">Body: </span><span style="font-size: 20px; color: var(--ink-300);">Strong, waterproof, made to look as good as it lasts.</span></div>
+            <div><span style="font-size: 20px; color: var(--periwinkle-400); font-weight: 600;">CTA: </span><span style="font-size: 20px; color: white;">Shop the collection · Build a set</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="font-size: 28px; font-weight: 700; color: white; margin-bottom: 6px;">Rules</div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+          <div style="width: 7px; height: 7px; background: var(--periwinkle-400); border-radius: 50%; margin-top: 11px; flex-shrink: 0;"></div>
+          <div style="font-size: 22px; color: var(--periwinkle-100);">Speak to <strong style="color: white;">"you"</strong> and <strong style="color: white;">"your dog."</strong> The brand is <strong style="color: white;">"we."</strong></div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+          <div style="width: 7px; height: 7px; background: var(--periwinkle-400); border-radius: 50%; margin-top: 11px; flex-shrink: 0;"></div>
+          <div style="font-size: 22px; color: var(--periwinkle-100);"><strong style="color: white;">Sentence case</strong> everywhere. ALL-CAPS only for eyebrow labels with wide tracking.</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+          <div style="width: 7px; height: 7px; background: var(--periwinkle-400); border-radius: 50%; margin-top: 11px; flex-shrink: 0;"></div>
+          <div style="font-size: 22px; color: var(--periwinkle-100);"><strong style="color: white;">Short, punchy</strong> headlines. Benefit-first product lines.</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+          <div style="width: 7px; height: 7px; background: var(--periwinkle-400); border-radius: 50%; margin-top: 11px; flex-shrink: 0;"></div>
+          <div style="font-size: 22px; color: var(--periwinkle-100);">No emoji in copy. The drawn <strong style="color: var(--pop);">♥</strong> is a brand mark — not an emoji — used sparingly.</div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+          <div style="width: 7px; height: 7px; background: var(--periwinkle-400); border-radius: 50%; margin-top: 11px; flex-shrink: 0;"></div>
+          <div style="font-size: 22px; color: var(--periwinkle-100);">Talk about: <strong style="color: white;">materials, craft, durability,</strong> and the dog-human bond.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 09 CLOSING ───────────────────────────────────── -->
+  <section data-label="09 · Closing" style="background: var(--periwinkle-500); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -100px; left: -100px; width: 480px; height: 480px; background: rgba(255,255,255,0.06); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -140px; right: -80px; width: 580px; height: 580px; background: rgba(47,54,88,0.14); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; top: 76px; right: 116px; width: 22px; height: 22px; background: var(--pop); border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: 96px; left: 150px; width: 13px; height: 13px; background: rgba(255,255,255,0.5); border-radius: 50%;"></div>
+
+    <img src="assets/logo/kyn-logo.png" alt="KYN" style="height: 96px; object-fit: contain; margin-bottom: 40px; position: relative; z-index: 1; filter: brightness(0) invert(1); opacity: 0.92;">
+    <div style="font-family: 'Friendship', cursive; font-size: 152px; color: white; line-height: 0.88; text-align: center; position: relative; z-index: 1;">build beautiful,<br>stay true.</div>
+    <div style="font-size: 26px; font-weight: 400; color: rgba(255,255,255,0.68); margin-top: 50px; letter-spacing: 0.08em; position: relative; z-index: 1;">KYN Design System · 2026</div>
+  </section>
+
+</deck-stage>
+</body>
+</html>

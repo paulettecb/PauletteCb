@@ -1,0 +1,31 @@
+<!-- @dsCard group="Components" viewport="700x250" name="Form fields" subtitle="Input, hint, error & checkbox" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--paper);padding:24px;color:var(--text-primary);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px;align-items:start;}
+  .checks{display:flex;flex-direction:column;gap:14px;margin-top:6px;}
+</style></head><body>
+  <div class="grid">
+    <div class="kyn-field">
+      <label class="kyn-field__label">Dog's name</label>
+      <input class="kyn-input" placeholder="Daisy">
+      <span class="kyn-field__hint">Goes on the charm — up to 8 letters.</span>
+    </div>
+    <div class="kyn-field">
+      <label class="kyn-field__label">Email</label>
+      <input class="kyn-input kyn-input--error" value="daisy@" >
+      <span class="kyn-field__hint" style="color:var(--danger)">Please enter a valid email.</span>
+    </div>
+    <div class="checks">
+      <label class="kyn-check"><input type="checkbox" checked><span class="kyn-check__box"><i data-lucide="check"></i></span><span>Add a name charm (+$6)</span></label>
+      <label class="kyn-check"><input type="checkbox"><span class="kyn-check__box"><i data-lucide="check"></i></span><span>Gift wrap this order</span></label>
+      <label class="kyn-check"><input type="checkbox" checked><span class="kyn-check__box"><i data-lucide="check"></i></span><span>Email me about new drops</span></label>
+    </div>
+    <div class="kyn-field">
+      <label class="kyn-field__label">Search</label>
+      <input class="kyn-input" placeholder="Search collars, leashes…">
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons({attrs:{'stroke-width':2.25}});</script>
+</body></html>

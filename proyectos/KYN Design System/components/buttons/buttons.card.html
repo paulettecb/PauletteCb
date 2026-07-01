@@ -1,0 +1,34 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Buttons" subtitle="Pill buttons + icon buttons · periwinkle is the action color" -->
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--paper);padding:24px;color:var(--text-primary);}
+  .grid{display:flex;flex-direction:column;gap:18px;}
+  .r{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .cap{font-size:10px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted);width:78px;flex:none;}
+</style></head><body>
+  <div class="grid">
+    <div class="r"><span class="cap">Variants</span>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--md">Shop the collection</button>
+      <button class="kyn-btn kyn-btn--secondary kyn-btn--md">Build a set</button>
+      <button class="kyn-btn kyn-btn--ghost kyn-btn--md">Learn more</button>
+      <button class="kyn-btn kyn-btn--pop kyn-btn--md">New drop</button>
+    </div>
+    <div class="r"><span class="cap">Sizes</span>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--sm">Small</button>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--md">Medium</button>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--lg">Large</button>
+    </div>
+    <div class="r"><span class="cap">With icon</span>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--md"><i data-lucide="shopping-bag"></i>Add to cart</button>
+      <button class="kyn-btn kyn-btn--secondary kyn-btn--md"><i data-lucide="heart"></i>Favorite</button>
+      <button class="kyn-btn kyn-btn--primary kyn-btn--md" disabled>Sold out</button>
+    </div>
+    <div class="r"><span class="cap">Icon btn</span>
+      <button class="kyn-iconbtn kyn-iconbtn--md" aria-label="Favorite"><i data-lucide="heart"></i></button>
+      <button class="kyn-iconbtn kyn-iconbtn--md" aria-label="Cart"><i data-lucide="shopping-bag"></i></button>
+      <button class="kyn-iconbtn kyn-iconbtn--sm" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons({attrs:{'stroke-width':1.75}});</script>
+</body></html>
