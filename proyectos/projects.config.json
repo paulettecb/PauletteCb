@@ -1,0 +1,17 @@
+{
+  "budget-planner-tdah": {
+    "title": "Budget Planner TDAH",
+    "description": "Planner de presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo rápido.",
+    "type": "Tool"
+  },
+  "hero-kyn": {
+    "title": "KYN Hero Module",
+    "description": "Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.",
+    "type": "Prototype"
+  },
+  "KYN Design System": {
+    "title": "KYN Design System",
+    "description": "Índice visual del sistema KYN: decks, guías de marca, tokens y componentes reutilizables.",
+    "type": "Design system"
+  }
+}

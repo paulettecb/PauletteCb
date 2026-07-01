@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -17,7 +17,7 @@
     <div class="playful-wiggles" aria-hidden="true"></div>
 
     <header class="topbar glass">
-      <h1 class="brand">Paulette C</h1>
+      <h1 class="brand">Paulette <span>C</span><small>Personal Page</small></h1>
       <div class="lang-controls">
         <label for="language-select" id="language-label">Language</label>
         <select id="language-select" aria-label="Language selector">
@@ -31,7 +31,7 @@
     </header>
 
     <main class="container">
-      <section class="hero glass card">
+      <section class="hero surface-card">
         <div class="hero-layout">
           <div>
             <p class="eyebrow" id="hero-eyebrow">Hello there ✨</p>
@@ -54,9 +54,9 @@
         </div>
       </section>
 
-      <div class="color-band" aria-hidden="true"></div>
+      <div class="system-ribbon" aria-label="Design system palette"><span></span><span></span><span></span><span></span><span></span></div>
       <section class="grid">
-        <article class="card glass" id="about">
+        <article class="card surface-card" id="about">
           <h3 id="about-title">About</h3>
           <p id="about-p1">
             I’m a Front-End Lead Developer and psychology student exploring the intersection of
@@ -78,7 +78,7 @@
           </p>
         </article>
 
-        <article class="card glass" id="experience">
+        <article class="card surface-card" id="experience">
           <h3 id="experience-title">Experience</h3>
           <ul>
             <li id="exp-1-title"><strong>Front-End Lead Developer</strong></li>
@@ -94,38 +94,18 @@
           </ul>
         </article>
 
-        <article class="card glass" id="projects">
+        <article class="card surface-card project-lab" id="projects">
           <div class="projects-head">
             <h3 id="projects-title">Projects</h3>
-            <span class="tiny-pill">Visual Lab</span>
+            <span class="tiny-pill" id="projects-pill">Visual Lab</span>
           </div>
           <div class="project-stickers" aria-hidden="true">
             <span class="sticker s1"></span><span class="sticker s2"></span><span class="sticker s3"></span>
           </div>
-          <div class="project-list">
-            <div class="project">
-              <h4 id="project-1-title">Budget Planner ADHD</h4>
-              <p id="project-1-desc">
-                Guided budget planner with ADHD-friendly workflows, visual reminders and quick mode.
-              </p>
-              <a id="project-1-link" class="link-pill" href="proyectos/budget-planner-tdah/index.html">Open project</a>
-              <div class="project-meter" aria-hidden="true"><span style="width: 86%"></span></div>
-            </div>
-            <div class="project">
-              <h4 id="project-2-title">KYN Hero Module</h4>
-              <p id="project-2-desc">
-                Premium modular canine systems hero module, accessible preview and integration-ready.
-              </p>
-              <a id="project-2-link" class="link-pill" href="proyectos/hero-kyn/index.html">Open project</a>
-              <div class="project-meter" aria-hidden="true"><span style="width: 68%"></span></div>
-            </div>
-            <div class="project">
-              <h4 id="project-3-title">KYN Design System</h4>
-              <p id="project-3-desc">
-                Visual index for the KYN design system: decks, brand guidelines, tokens, and component specimens.
-              </p>
-              <a id="project-3-link" class="link-pill" href="proyectos/KYN%20Design%20System/index.html">Open system</a>
-              <div class="project-meter" aria-hidden="true"><span style="width: 92%"></span></div>
+          <p class="project-note" id="projects-note">A playful internal lab, auto-filled from the projects folder.</p>
+          <div class="project-list" id="project-list" aria-live="polite">
+            <div class="project project-loading">
+              <p id="projects-loading">Loading project cards…</p>
             </div>
           </div>
 
@@ -145,7 +125,7 @@
           </div>
         </article>
 
-        <article class="card glass" id="contact">
+        <article class="card surface-card" id="contact">
           <h3 id="contact-title">Contact</h3>
           <p id="contact-copy">Want to connect? Say hi on Instagram:</p>
           <a class="link-pill" href="https://instagram.com/paulettecb" target="_blank" rel="noreferrer">
