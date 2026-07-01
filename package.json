@@ -1,0 +1,9 @@
+{
+  "name": "paulettecb-personal-page",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "projects:manifest": "node scripts/generate-projects-manifest.mjs",
+    "predeploy": "npm run projects:manifest"
+  }
+}

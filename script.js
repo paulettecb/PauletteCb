@@ -21,6 +21,9 @@ const content = {
     exp2Detail:
       'Studying cognition, emotion, and behavior to better understand how humans process information, make decisions, and adapt to complexity.',
     projectsTitle: 'Projects',
+    projectsPill: 'Auto index',
+    projectsLoading: 'Loading project cards…',
+    projectOpen: 'Open project',
     project1Title: 'Budget Planner ADHD',
     project1Desc: 'Guided budget planner with ADHD-friendly workflows, visual reminders, and 5-minute mode.',
     project1Link: 'Open project',
@@ -55,6 +58,9 @@ const content = {
     exp2Detail:
       'Estudiando cognición, emoción y conducta para comprender mejor cómo las personas procesan información, toman decisiones y se adaptan a la complejidad.',
     projectsTitle: 'Proyectos',
+    projectsPill: 'Índice auto',
+    projectsLoading: 'Cargando cards de proyectos…',
+    projectOpen: 'Abrir proyecto',
     project1Title: 'Budget Planner TDAH',
     project1Desc: 'Planner de presupuesto guiado con enfoque TDAH, recordatorios visuales y modo 5 minutos.',
     project1Link: 'Abrir proyecto',
@@ -89,6 +95,9 @@ const content = {
     exp2Detail:
       'Étude de la cognition, de l’émotion et du comportement pour mieux comprendre la prise de décision et l’adaptation à la complexité.',
     projectsTitle: 'Projets',
+    projectsPill: 'Index auto',
+    projectsLoading: 'Chargement des cartes projet…',
+    projectOpen: 'Ouvrir le projet',
     project1Title: 'Budget Planner TDAH',
     project1Desc: 'Planificateur de budget guidé, adapté au TDAH, avec rappels visuels et mode 5 minutes.',
     project1Link: 'Ouvrir le projet',
@@ -123,6 +132,9 @@ const content = {
     exp2Detail:
       'Estudando cognição, emoção e comportamento para entender melhor como pessoas processam informações e se adaptam à complexidade.',
     projectsTitle: 'Projetos',
+    projectsPill: 'Índice auto',
+    projectsLoading: 'Carregando cards de projetos…',
+    projectOpen: 'Abrir projeto',
     project1Title: 'Budget Planner TDAH',
     project1Desc: 'Planner de orçamento guiado com foco em TDAH, lembretes visuais e modo de 5 minutos.',
     project1Link: 'Abrir projeto',
@@ -157,6 +169,9 @@ const content = {
     exp2Detail:
       'Studium von Kognition, Emotion und Verhalten, um zu verstehen, wie Menschen Informationen verarbeiten und sich an Komplexität anpassen.',
     projectsTitle: 'Projekte',
+    projectsPill: 'Auto-Index',
+    projectsLoading: 'Projektkarten werden geladen…',
+    projectOpen: 'Projekt öffnen',
     project1Title: 'Budget Planner ADHS',
     project1Desc: 'Geführter Budget-Planer mit ADHS-freundlichem Ablauf, visuellen Erinnerungen und 5-Minuten-Modus.',
     project1Link: 'Projekt öffnen',
@@ -187,18 +202,85 @@ const keys = {
   exp2Title: 'exp-2-title',
   exp2Detail: 'exp-2-detail',
   projectsTitle: 'projects-title',
-  project1Title: 'project-1-title',
-  project1Desc: 'project-1-desc',
-  project1Link: 'project-1-link',
-  project2Title: 'project-2-title',
-  project2Desc: 'project-2-desc',
-  project3Title: 'project-3-title',
-  project3Desc: 'project-3-desc',
-  project3Link: 'project-3-link',
+  projectsPill: 'projects-pill',
+  projectsLoading: 'projects-loading',
   contactTitle: 'contact-title',
   contactCopy: 'contact-copy',
   contactNote: 'contact-note'
 };
+
+let currentProjects = [];
+
+function getSelectedContent() {
+  return content[document.documentElement.lang] || content.en;
+}
+
+function metricForProject(project, index) {
+  const seed = [...project.slug].reduce((total, char) => total + char.charCodeAt(0), 0);
+  return 58 + ((seed + index * 11) % 36);
+}
+
+function renderProjects(projects = currentProjects) {
+  currentProjects = projects;
+  const list = document.getElementById('project-list');
+  if (!list) return;
+
+  const selected = getSelectedContent();
+
+  if (!projects.length) {
+    list.innerHTML = `<div class="project project-loading"><p>${selected.projectsLoading}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = projects
+    .map((project, index) => `
+      <article class="project">
+        <div class="project-topline">
+          <span class="project-type">${project.type || 'Project'}</span>
+          <span class="project-number">${String(index + 1).padStart(2, '0')}</span>
+        </div>
+        <h4>${project.title}</h4>
+        <p>${project.description}</p>
+        <a class="link-pill" href="${project.url}">${selected.projectOpen}</a>
+        <div class="project-meter" aria-hidden="true"><span style="width: ${metricForProject(project, index)}%"></span></div>
+      </article>
+    `)
+    .join('');
+}
+
+async function loadProjects() {
+  try {
+    const response = await fetch('proyectos/projects.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Projects manifest failed: ${response.status}`);
+    const manifest = await response.json();
+    renderProjects(manifest.projects || []);
+  } catch (error) {
+    console.warn(error);
+    renderProjects([
+      {
+        slug: 'budget-planner-tdah',
+        title: 'Budget Planner TDAH',
+        description: 'Planner de presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo rápido.',
+        type: 'Tool',
+        url: 'proyectos/budget-planner-tdah/index.html',
+      },
+      {
+        slug: 'hero-kyn',
+        title: 'KYN Hero Module',
+        description: 'Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.',
+        type: 'Prototype',
+        url: 'proyectos/hero-kyn/index.html',
+      },
+      {
+        slug: 'KYN Design System',
+        title: 'KYN Design System',
+        description: 'Índice visual del sistema KYN: decks, guías de marca, tokens y componentes reutilizables.',
+        type: 'Design system',
+        url: 'proyectos/KYN%20Design%20System/index.html',
+      },
+    ]);
+  }
+}
 
 function applyLanguage(lang) {
   const selected = content[lang] || content.en;
@@ -216,6 +298,7 @@ function applyLanguage(lang) {
   });
 
   document.documentElement.lang = lang;
+  renderProjects();
 }
 
 function detectLanguage() {
@@ -227,6 +310,7 @@ const selector = document.getElementById('language-select');
 const initialLanguage = detectLanguage();
 selector.value = initialLanguage;
 applyLanguage(initialLanguage);
+loadProjects();
 
 selector.addEventListener('change', (event) => {
   applyLanguage(event.target.value);
