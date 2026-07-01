@@ -180,47 +180,17 @@ export class LsmAvatarComponent implements OnInit {
             const landmarks = predictions[0].landmarks;
             this.drawHandLandmarks(landmarks);  // Draw the detected hand
 
-            const handLandmarks = {
-              wrist: landmarks[0],
-              thumbBase: landmarks[1],
-              thumbMCP: landmarks[2],
-              thumbIP: landmarks[3],
-              thumbTip: landmarks[4],
-              indexBase: landmarks[5],
-              indexMiddle: landmarks[6],
-              indexKnuckle: landmarks[7],
-              indexTip: landmarks[8],
-              middleBase: landmarks[9],
-              middleMiddle: landmarks[10],
-              middleKnuckle: landmarks[11],
-              middleTip: landmarks[12],
-              ringBase: landmarks[13],
-              ringMiddle: landmarks[14],
-              ringKnuckle: landmarks[15],
-              ringTip: landmarks[16],
-              pinkyBase: landmarks[17],
-              pinkyMiddle: landmarks[18],
-              pinkyKnuckle: landmarks[19],
-              pinkyTip: landmarks[20]
-          };
+            const gesture = this.handGestureService.detectGesture(landmarks);
 
-            if (this.handGestureService.fistClosed(landmarks)) {
-                console.log("✊ Fist Detected! → Avatar Stops");
+            if (gesture.gestureName === 'fistClosed') {
+                console.log(`✊ Fist Detected (${gesture.confidence}) → Avatar Stops`);
                 this.avatarService.stopAvatar(this.avatar, this.skeleton);
-            } else if (this.handGestureService.palmOpen(landmarks)) {
-                console.log("🖐️ Open Palm Detected! → Avatar Waves");
-                const detectedSign = this.signPlaybackService.getSignByAnimation('wave');
-                if (detectedSign) {
-                  this.playDetectedSign(detectedSign);
-                  this.updatePracticeFeedback('wave');
-                }
-            } else if (this.handGestureService.thumbUp(landmarks)) {
-                console.log("👍 Thumb Up Detected! → Avatar Nods");
-                const detectedSign = this.signPlaybackService.getSignByAnimation('thank_you');
-                if (detectedSign) {
-                  this.playDetectedSign(detectedSign);
-                  this.updatePracticeFeedback('thank_you');
-                }
+            } else if (gesture.gestureName === 'palmOpen') {
+                console.log(`🖐️ Open Palm Detected (${gesture.confidence}) → Avatar Waves`);
+                this.loadSign({ nombre: 'Hola', animacion: 'wave' });
+            } else if (gesture.gestureName === 'thumbUp') {
+                console.log(`👍 Thumb Up Detected (${gesture.confidence}) → Avatar Nods`);
+                this.loadSign({ nombre: 'Gracias', animacion: 'thank_you' });
             }
         } if (poses.length > 0) {
 
