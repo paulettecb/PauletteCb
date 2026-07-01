@@ -164,6 +164,14 @@ body::after {
   line-height: inherit;
 }
 
+.brand small {
+  color: var(--pop-magenta);
+  font-family: 'Friendship', cursive;
+  font-size: .9rem;
+  font-weight: 500;
+  transform: rotate(-2deg);
+}
+
 .glass {
   background:
     linear-gradient(150deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.22)),

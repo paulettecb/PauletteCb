@@ -1,12 +1,12 @@
 # Paulette C — Systems Portfolio
 
-A modern, privacy-first personal page refreshed with the KYN-inspired design system:
+A modern, privacy-first personal page for internal use, refreshed with the KYN-inspired design system:
 - Warm paper/oat surfaces, restrained periwinkle, soft pastel accents, and a small whimsy spark.
 - Sections for About, Experience, Projects, and Contact.
 - Hero image path set to `assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png`.
 - Automatic language detection based on browser locale.
 - Manual language switcher for testing and overrides.
-- Project cards rendered from an auto-generated manifest at `proyectos/projects.json`.
+- A “Visual Lab” projects section rendered from an auto-generated manifest at `proyectos/projects.json`.
 
 ## Local preview
 
