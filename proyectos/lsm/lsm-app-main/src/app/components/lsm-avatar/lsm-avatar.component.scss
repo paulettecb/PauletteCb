@@ -151,3 +151,11 @@ video,
     flex-direction: column;
   }
 }
+
+.pose-overlay {
+  z-index: 1;
+}
+
+.hand-overlay {
+  z-index: 2;
+}

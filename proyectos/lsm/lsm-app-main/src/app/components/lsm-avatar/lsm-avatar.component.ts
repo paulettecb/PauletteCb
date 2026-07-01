@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as THREE from 'three';
 import '@tensorflow/tfjs-backend-webgl';
 import '@tensorflow/tfjs-backend-wasm';
@@ -8,23 +8,41 @@ import * as handpose from '@tensorflow-models/handpose';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { HandGesturesService } from '../../utils/hand-gestures.service';
 import { AvatarAnimationsService } from '../../utils/avatar-animations.service';
-import { LsmSign, SignPlaybackService } from './sign-playback.service';
+import { LsmSign, SignAnimation, SignPlaybackService } from './sign-playback.service';
 import * as posedetection from '@tensorflow-models/pose-detection';
-import '@tensorflow/tfjs-backend-webgl';
-import { PoseLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 
 @Component({
   selector: 'app-lsm-avatar',
   templateUrl: './lsm-avatar.component.html',
   styleUrls: ['./lsm-avatar.component.scss']
 })
-export class LsmAvatarComponent implements OnInit {
+export class LsmAvatarComponent implements OnInit, OnDestroy {
   @ViewChild('threeCanvas', { static: true }) canvasRef!: ElementRef;
   @ViewChild('video', { static: true }) videoRef!: ElementRef;
   @ViewChild('handCanvas', { static: true }) handCanvasRef!: ElementRef;  // New Canvas for Hand Visualization
   @ViewChild('poseCanvas', { static: true }) poseCanvasRef!: ElementRef;
 
-  private ctx!: CanvasRenderingContext2D | null;  // Canvas Context for Hand Drawing
+  private handCtx!: CanvasRenderingContext2D | null;  // Canvas Context for Hand Drawing
+  private poseCtx!: CanvasRenderingContext2D | null;
+  private detectionTimerId?: number;
+
+  private readonly handConnections = [
+    [0, 1], [1, 2], [2, 3], [3, 4],
+    [0, 5], [5, 6], [6, 7], [7, 8],
+    [0, 9], [9, 10], [10, 11], [11, 12],
+    [0, 13], [13, 14], [14, 15], [15, 16],
+    [0, 17], [17, 18], [18, 19], [19, 20]
+  ];
+
+  private readonly poseConnections = [
+    [5, 6],
+    [5, 7], [7, 9],
+    [6, 8], [8, 10],
+    [5, 11], [6, 12],
+    [11, 12],
+    [11, 13], [13, 15],
+    [12, 14], [14, 16]
+  ];
 
   constructor(
     private avatarService: AvatarAnimationsService,
@@ -49,11 +67,20 @@ export class LsmAvatarComponent implements OnInit {
     await tf.setBackend('webgl');
     await tf.ready();
     this.initThreeJS();
-    await this.initHandTracking();
+    this.handCtx = this.handCanvasRef.nativeElement.getContext('2d'); // Initialize Hand Canvas
+    this.poseCtx = this.poseCanvasRef.nativeElement.getContext('2d');
     await this.initPoseTracking();
+    await this.initHandTracking();
     await this.loadAvatar();
-    
-    this.ctx = this.handCanvasRef.nativeElement.getContext('2d'); // Initialize Hand Canvas
+  }
+
+  ngOnDestroy(): void {
+    if (this.detectionTimerId) {
+      window.clearInterval(this.detectionTimerId);
+    }
+
+    const stream = (this.videoRef.nativeElement as HTMLVideoElement).srcObject as MediaStream | null;
+    stream?.getTracks().forEach((track) => track.stop());
   }
 
   private initThreeJS() {
@@ -115,15 +142,18 @@ export class LsmAvatarComponent implements OnInit {
     this.feedbackMessage = `Cámara activa. Practica la seña "${this.selectedSign.nombre}" frente a la cámara.`;
   }
 
-  private updatePracticeFeedback(detectedAnimation: LsmSign['animacion']) {
-    if (!this.practiceMode) return;
+  private updatePracticeFeedback(detectedAnimation: SignAnimation | null) {
+    if (!this.practiceMode || !detectedAnimation) return;
 
     this.feedbackMessage = detectedAnimation === this.selectedSign.animacion
       ? `¡Bien! Detectamos un gesto compatible con "${this.selectedSign.nombre}".`
       : `Gesto detectado. Ajusta tu postura siguiendo los pasos de "${this.selectedSign.nombre}".`;
   }
 
-  private playDetectedSign(sign: LsmSign) {
+  private playDetectedAnimation(animation: SignAnimation) {
+    const sign = this.signPlaybackService.getSignByAnimation(animation);
+    if (!sign) return;
+
     if (this.practiceMode) {
       this.signPlaybackService.loadSign(sign, this.skeleton);
       return;
@@ -163,79 +193,66 @@ export class LsmAvatarComponent implements OnInit {
 }
 
   private async detectHands() {
-    const video = this.videoRef.nativeElement;
-    const canvas = this.poseCanvasRef.nativeElement;
-    const ctx = canvas.getContext("2d");
+    const video = this.videoRef.nativeElement as HTMLVideoElement;
 
-    if (!ctx) {
-      console.warn("⚠️ Pose canvas context not available.");
+    if (!this.handCtx || !this.poseCtx) {
+      console.warn("⚠️ Landmark canvas context not available.");
       return;
     }
 
-    setInterval(async () => {
-        const predictions = await this.handModel.estimateHands(video);
-        const poses = await this.poseModel.estimatePoses(video);
+    this.detectionTimerId = window.setInterval(async () => {
+      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
 
-        if (predictions.length > 0) {
-            const landmarks = predictions[0].landmarks;
-            this.drawHandLandmarks(landmarks);  // Draw the detected hand
+      this.syncOverlaySize(video);
+      const predictions = await this.handModel.estimateHands(video);
+      const poses = this.poseModel ? await this.poseModel.estimatePoses(video) : [];
 
-            const gesture = this.handGestureService.detectGesture(landmarks);
+      this.clearHandCanvas();
+      this.clearPoseCanvas();
 
-            if (gesture.gestureName === 'fistClosed') {
-                console.log(`✊ Fist Detected (${gesture.confidence}) → Avatar Stops`);
-                this.avatarService.stopAvatar(this.avatar, this.skeleton);
-            } else if (gesture.gestureName === 'palmOpen') {
-                console.log(`🖐️ Open Palm Detected (${gesture.confidence}) → Avatar Waves`);
-                this.loadSign({ nombre: 'Hola', animacion: 'wave' });
-            } else if (gesture.gestureName === 'thumbUp') {
-                console.log(`👍 Thumb Up Detected (${gesture.confidence}) → Avatar Nods`);
-                this.loadSign({ nombre: 'Gracias', animacion: 'thank_you' });
-            }
-        } if (poses.length > 0) {
+      if (predictions.length > 0) {
+        const landmarks = predictions[0].landmarks;
+        this.drawHandLandmarks(landmarks);
 
+        const gesture = this.handGestureService.detectGesture(landmarks);
+        const detectedAnimation = gesture.gestureName === 'palmOpen' ? 'wave' : gesture.gestureName === 'thumbUp' ? 'thank_you' : null;
+        this.updatePracticeFeedback(detectedAnimation);
 
-          const POSE_CONNECTIONS = [
-            [11, 12],  // Shoulders
-            [11, 13], [13, 15],  // Left arm
-            [12, 14], [14, 16],  // Right arm
-            [11, 23], [12, 24],  // Spine to hips
-            [23, 25], [25, 27],  // Left leg
-            [24, 26], [26, 28],  // Right leg
-          ];
-        
-          this.drawLandmarks(ctx, poses[0]?.landmarks, "blue");
-          this.drawConnections(ctx, poses[0]?.landmarks, POSE_CONNECTIONS, "green");
-      } else {
-            console.log("🚫 No hands detected");
-            this.clearHandCanvas();  // Clear the hand canvas when no hands are detected
+        if (gesture.gestureName === 'fistClosed') {
+          console.log(`✊ Fist Detected (${gesture.confidence}) → Avatar Stops`);
+          this.avatarService.stopAvatar(this.avatar, this.skeleton);
+        } else if (gesture.gestureName === 'palmOpen') {
+          console.log(`🖐️ Open Palm Detected (${gesture.confidence}) → Avatar Waves`);
+          this.playDetectedAnimation('wave');
+        } else if (gesture.gestureName === 'thumbUp') {
+          console.log(`👍 Thumb Up Detected (${gesture.confidence}) → Avatar Nods`);
+          this.playDetectedAnimation('thank_you');
         }
+      }
+
+      if (poses.length > 0 && this.poseCtx) {
+        const poseLandmarks = poses[0]?.keypoints ?? poses[0]?.landmarks ?? [];
+        const poseCtx = this.poseCtx;
+        this.drawConnections(poseCtx, poseLandmarks, this.poseConnections, 'rgba(135, 149, 210, .95)', 5);
+        this.drawLandmarks(poseCtx, poseLandmarks, 'rgba(246, 235, 196, .96)', 7);
+      }
     }, 100);
   }
 
   // ✅ Function to Draw Hand Landmarks
   private drawHandLandmarks(landmarks: number[][]): void {
-    if (!this.ctx || !landmarks) return;
+    if (!this.handCtx || !landmarks) return;
 
-    const ctx = this.ctx;
+    const ctx = this.handCtx;
     const canvas = this.handCanvasRef.nativeElement;
 
     // Clear previous drawings
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Hand structure (connecting fingers)
-    const connections = [
-        [0, 1], [1, 2], [2, 3], [3, 4],  // Thumb
-        [0, 5], [5, 6], [6, 7], [7, 8],  // Index
-        [0, 9], [9, 10], [10, 11], [11, 12],  // Middle
-        [0, 13], [13, 14], [14, 15], [15, 16],  // Ring
-        [0, 17], [17, 18], [18, 19], [19, 20]  // Pinky
-    ];
-
-    // Draw connections
-    ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 2;
-    connections.forEach(([start, end]) => {
+    // Draw connections imported from the original prototype.
+    ctx.strokeStyle = 'rgba(246, 235, 196, .92)';
+    ctx.lineWidth = 4;
+    this.handConnections.forEach(([start, end]) => {
         ctx.beginPath();
         ctx.moveTo(landmarks[start][0], landmarks[start][1]);
         ctx.lineTo(landmarks[end][0], landmarks[end][1]);
@@ -243,40 +260,65 @@ export class LsmAvatarComponent implements OnInit {
     });
 
     // Draw landmarks
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'rgba(232, 93, 160, .95)';
     landmarks.forEach(([x, y]) => {
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.arc(x, y, 6, 0, 2 * Math.PI);
         ctx.fill();
     });
   }
 
   // ✅ Clears the hand canvas when no hands are detected
   private clearHandCanvas(): void {
-    if (!this.ctx) return;
-    this.ctx.clearRect(0, 0, this.handCanvasRef.nativeElement.width, this.handCanvasRef.nativeElement.height);
+    if (!this.handCtx) return;
+    this.handCtx.clearRect(0, 0, this.handCanvasRef.nativeElement.width, this.handCanvasRef.nativeElement.height);
   }
 
-  private drawLandmarks(ctx: CanvasRenderingContext2D, landmarks: any[], color: string) {
-    ctx.fillStyle = color;
-    for (const point of landmarks) {
-        ctx.beginPath();
-        ctx.arc(point[0], point[1], 5, 0, 2 * Math.PI);
-        ctx.fill();
-    }
-}
+  private clearPoseCanvas(): void {
+    if (!this.poseCtx) return;
+    this.poseCtx.clearRect(0, 0, this.poseCanvasRef.nativeElement.width, this.poseCanvasRef.nativeElement.height);
+  }
 
-private drawConnections(ctx: CanvasRenderingContext2D, landmarks: any[], connections: number[][], color: string) {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    
-    for (const [start, end] of connections) {
-        if (landmarks[start] && landmarks[end]) {
-            ctx.beginPath();
-            ctx.moveTo(landmarks[start][0], landmarks[start][1]);
-            ctx.lineTo(landmarks[end][0], landmarks[end][1]);
-            ctx.stroke();
-        }
+  private syncOverlaySize(video: HTMLVideoElement): void {
+    const width = video.videoWidth || 640;
+    const height = video.videoHeight || 480;
+
+    [this.handCanvasRef.nativeElement, this.poseCanvasRef.nativeElement].forEach((canvas: HTMLCanvasElement) => {
+      if (canvas.width !== width) canvas.width = width;
+      if (canvas.height !== height) canvas.height = height;
+    });
+  }
+
+  private drawLandmarks(ctx: CanvasRenderingContext2D, landmarks: any[], color: string, radius = 5) {
+    ctx.fillStyle = color;
+    for (const landmark of landmarks ?? []) {
+      const point = this.toCanvasPoint(landmark);
+      if (!point) continue;
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, radius, 0, 2 * Math.PI);
+      ctx.fill();
     }
-}
+  }
+
+  private drawConnections(ctx: CanvasRenderingContext2D, landmarks: any[], connections: number[][], color: string, lineWidth = 2) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+
+    for (const [start, end] of connections) {
+      const from = this.toCanvasPoint(landmarks?.[start]);
+      const to = this.toCanvasPoint(landmarks?.[end]);
+      if (!from || !to) continue;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+    }
+  }
+
+  private toCanvasPoint(landmark: any): { x: number; y: number } | null {
+    if (!landmark) return null;
+    if (Array.isArray(landmark)) return { x: landmark[0], y: landmark[1] };
+    if (typeof landmark.x === 'number' && typeof landmark.y === 'number') return { x: landmark.x, y: landmark.y };
+    return null;
+  }
 }
