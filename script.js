@@ -1,7 +1,7 @@
 const content = {
   en: {
     languageLabel: 'Language',
-    heroEyebrow: 'Hello there ✨',
+    heroEyebrow: 'Hello there',
     headline: 'Front-End Lead Developer + Psychology Student of Human Systems',
     introLine: 'I build digital systems for a living and study human systems for fun.',
     aboutTitle: 'About',
@@ -39,7 +39,7 @@ const content = {
   },
   es: {
     languageLabel: 'Idioma',
-    heroEyebrow: 'Hola ✨',
+    heroEyebrow: 'Hola',
     headline: 'Líder Front-End y estudiante de Psicología enfocada en sistemas humanos',
     introLine: 'Construyo sistemas digitales para vivir y estudio sistemas humanos por pasión.',
     aboutTitle: 'Sobre mí',
@@ -77,7 +77,7 @@ const content = {
   },
   fr: {
     languageLabel: 'Langue',
-    heroEyebrow: 'Bonjour ✨',
+    heroEyebrow: 'Bonjour',
     headline: 'Lead Front-End et étudiante en psychologie des systèmes humains',
     introLine: 'Je construis des systèmes numériques et j’étudie les systèmes humains par passion.',
     aboutTitle: 'À propos',
@@ -115,7 +115,7 @@ const content = {
   },
   pt: {
     languageLabel: 'Idioma',
-    heroEyebrow: 'Olá ✨',
+    heroEyebrow: 'Olá',
     headline: 'Líder Front-End e estudante de Psicologia em sistemas humanos',
     introLine: 'Construo sistemas digitais para viver e estudo sistemas humanos por paixão.',
     aboutTitle: 'Sobre',
@@ -153,7 +153,7 @@ const content = {
   },
   de: {
     languageLabel: 'Sprache',
-    heroEyebrow: 'Hallo ✨',
+    heroEyebrow: 'Hallo',
     headline: 'Front-End Lead Developer & Psychologie-Studentin für menschliche Systeme',
     introLine: 'Ich baue digitale Systeme beruflich und studiere menschliche Systeme aus Interesse.',
     aboutTitle: 'Über mich',
