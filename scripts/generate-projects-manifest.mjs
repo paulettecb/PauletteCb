@@ -77,6 +77,8 @@ for (const entry of entries) {
   const htmlDescription = indexContents.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i)?.[1]?.trim();
 
   const override = projectConfig[entry.name] || {};
+  if (override.hidden) continue;
+
   const title = override.title || readmeMeta.title || htmlTitle || titleCase(packageName || entry.name);
   const description = override.description || packageDescription || htmlDescription || readmeMeta.description || `Interactive ${title} project.`;
 

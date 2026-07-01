@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Prototipo LSM para practicar vocabulario básico de Lengua de Señas Mexicana con una interfaz suave inspirada en KYN."
+    />
+    <title>LSM Practice Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../styles.css" />
+    <style>
+      body { background: var(--paper); }
+      .lsm-shell { width: min(1120px, 92vw); margin: 0 auto; padding: clamp(1rem, 3vw, 2rem) 0 3rem; }
+      .lsm-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(1rem, 4vw, 2rem); align-items: stretch; padding: clamp(1.4rem, 4vw, 2.8rem); overflow: hidden; }
+      .lsm-hero::after { content: 'LSM'; right: 1rem; bottom: -.6rem; font-size: clamp(4rem, 16vw, 10rem); opacity: .13; }
+      .lsm-kicker { color: var(--periwinkle-700); font-weight: 800; letter-spacing: .18em; text-transform: uppercase; font-size: .78rem; }
+      .lsm-hero h1 { margin: .35rem 0 .9rem; color: var(--ink-900); font-family: var(--font-heading); font-size: clamp(2.45rem, 7vw, 5.8rem); line-height: .92; letter-spacing: -.055em; }
+      .lsm-hero h1 span { color: var(--periwinkle-700); }
+      .lsm-copy { max-width: 58ch; color: var(--ink-700); font-size: 1.08rem; }
+      .lsm-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.3rem; }
+      .link-pill.secondary { color: var(--periwinkle-700); background: var(--periwinkle-50); box-shadow: none; border: 1px solid var(--periwinkle-200); }
+      .sign-card { position: relative; min-height: 360px; display: grid; place-items: center; border-radius: 28px; background: linear-gradient(150deg, rgba(255,255,255,.9), rgba(226,214,240,.5)); border: 1px solid rgba(255,255,255,.88); box-shadow: var(--shadow); }
+      .hand-frame { width: min(290px, 70%); aspect-ratio: 1; border-radius: 42% 58% 48% 52% / 56% 44% 54% 46%; background: var(--pastel-butter); display: grid; place-items: center; border: 12px solid rgba(255,255,255,.72); box-shadow: 0 18px 42px rgba(47,54,88,.13); }
+      .hand-frame svg { width: 62%; color: var(--periwinkle-700); }
+      .spark-word { position: absolute; right: 1.2rem; top: 1rem; color: var(--pop-magenta); font-family: var(--font-display); font-size: clamp(2rem, 6vw, 4rem); line-height: .8; transform: rotate(4deg); }
+      .lsm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+      .practice-card { min-height: 220px; padding: 1.15rem; display: flex; flex-direction: column; justify-content: space-between; }
+      .practice-card h2 { margin: .5rem 0; color: var(--ink-900); font-size: clamp(1.45rem, 3vw, 2rem); }
+      .practice-card p { margin: 0; color: var(--ink-700); }
+      .practice-card .badge { align-self: flex-start; }
+      .gesture { height: 72px; width: 72px; border-radius: 24px; display: grid; place-items: center; background: var(--pastel-lilac); color: var(--periwinkle-800); }
+      .gesture svg { width: 38px; }
+      .practice-card:nth-child(2) .gesture { background: var(--pastel-sky); }
+      .practice-card:nth-child(3) .gesture { background: var(--pastel-peach); }
+      .note-strip { margin-top: 1rem; padding: 1rem 1.2rem; border-radius: 22px; background: var(--oat); border: 1px solid var(--sand); color: var(--ink-700); }
+      @media (max-width: 820px) { .lsm-hero, .lsm-grid { grid-template-columns: 1fr; } .sign-card { min-height: 280px; } }
+    </style>
+  </head>
+  <body>
+    <div class="kyn-blobs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <main class="lsm-shell">
+      <a class="link-pill secondary" href="../../index.html">Volver al main</a>
+      <section class="hero surface-card lsm-hero">
+        <div>
+          <p class="lsm-kicker">Lengua de Señas Mexicana · Practice lab</p>
+          <h1>Aprende con calma, <span>seña por seña.</span></h1>
+          <p class="lsm-copy">Un prototipo de microlecciones para practicar vocabulario cotidiano de LSM con tarjetas claras, progreso amable y una capa visual premium-whimsy inspirada en KYN.</p>
+          <div class="lsm-actions">
+            <a class="link-pill" href="#cards">Ver tarjetas</a>
+            <a class="link-pill secondary" href="../KYN%20Design%20System/index.html">Design system KYN</a>
+          </div>
+        </div>
+        <aside class="sign-card" aria-label="Ilustración abstracta de una mano haciendo una seña">
+          <span class="spark-word">hola</span>
+          <div class="hand-frame">
+            <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
+              <path d="M39 66V27a9 9 0 0 1 18 0v35" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+              <path d="M57 62V18a9 9 0 0 1 18 0v45" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+              <path d="M75 64V29a8 8 0 0 1 16 0v44" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+              <path d="M39 70 27 58a8 8 0 0 0-12 10l22 30c7 9 17 14 29 14h10c18 0 31-13 31-31V52a8 8 0 0 0-16 0v21" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </aside>
+      </section>
+      <section class="lsm-grid" id="cards" aria-label="Tarjetas de práctica LSM">
+        <article class="practice-card surface-card"><span class="badge">Nivel 01</span><div><div class="gesture"><svg viewBox="0 0 24 24" fill="none"><path d="M7 11V5a2 2 0 1 1 4 0v6m0-5a2 2 0 1 1 4 0v5m0-3a2 2 0 1 1 4 0v5c0 4-3 7-7 7h-1c-3 0-5-1-7-4l-1-2a2 2 0 1 1 4-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h2>Saludos</h2><p>Hola, gracias, por favor y nos vemos con ritmo corto de práctica.</p></div></article>
+        <article class="practice-card surface-card"><span class="badge">Nivel 02</span><div><div class="gesture"><svg viewBox="0 0 24 24" fill="none"><path d="M4 8h16M7 4v16M17 4v16M4 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h2>Contexto</h2><p>Aprende cuándo usar cada seña y qué expresiones faciales acompañan el mensaje.</p></div></article>
+        <article class="practice-card surface-card"><span class="badge">Nivel 03</span><div><div class="gesture"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7Zm0 0V3m0 18v-2m7-7h2M3 12h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h2>Memoria visual</h2><p>Tarjetas espaciadas para regresar a lo que cuesta sin saturarte.</p></div></article>
+      </section>
+      <p class="note-strip">Nota: este lab es una base visual; los contenidos lingüísticos finales deben revisarse con una persona instructora o comunidad usuaria de LSM.</p>
+    </main>
+  </body>
+</html>
