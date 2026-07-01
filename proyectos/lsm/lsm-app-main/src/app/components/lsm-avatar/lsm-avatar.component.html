@@ -61,7 +61,7 @@
       </div>
     </section>
 
-    <section class="camera-stage" [class.camera-stage--active]="practiceMode" aria-label="Vista de cámara para práctica">
+    <section #cameraStage class="camera-stage" [class.camera-stage--active]="practiceMode" aria-label="Vista de cámara para práctica">
       <video #video autoplay playsinline muted></video>
       <canvas #poseCanvas class="pose-overlay" width="640" height="480"></canvas>
       <canvas #handCanvas class="hand-overlay" width="640" height="480"></canvas>

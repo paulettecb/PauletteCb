@@ -131,10 +131,13 @@ video,
 .camera-stage canvas {
   position: absolute;
   inset: 0;
-  width: 640px;
-  max-width: 100%;
-  height: 480px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+video {
+  z-index: 0;
 }
 
 .camera-stage canvas {

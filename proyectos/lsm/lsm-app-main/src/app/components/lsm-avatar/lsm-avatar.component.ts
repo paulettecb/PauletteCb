@@ -21,6 +21,7 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
   @ViewChild('video', { static: true }) videoRef!: ElementRef;
   @ViewChild('handCanvas', { static: true }) handCanvasRef!: ElementRef;  // New Canvas for Hand Visualization
   @ViewChild('poseCanvas', { static: true }) poseCanvasRef!: ElementRef;
+  @ViewChild('cameraStage', { static: true }) cameraStageRef!: ElementRef;
 
   private handCtx!: CanvasRenderingContext2D | null;  // Canvas Context for Hand Drawing
   private poseCtx!: CanvasRenderingContext2D | null;
@@ -253,17 +254,22 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
     ctx.strokeStyle = 'rgba(246, 235, 196, .92)';
     ctx.lineWidth = 4;
     this.handConnections.forEach(([start, end]) => {
+        const from = this.toCanvasPoint(landmarks[start], canvas);
+        const to = this.toCanvasPoint(landmarks[end], canvas);
+        if (!from || !to) return;
         ctx.beginPath();
-        ctx.moveTo(landmarks[start][0], landmarks[start][1]);
-        ctx.lineTo(landmarks[end][0], landmarks[end][1]);
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
         ctx.stroke();
     });
 
     // Draw landmarks
     ctx.fillStyle = 'rgba(232, 93, 160, .95)';
-    landmarks.forEach(([x, y]) => {
+    landmarks.forEach((landmark) => {
+        const point = this.toCanvasPoint(landmark, canvas);
+        if (!point) return;
         ctx.beginPath();
-        ctx.arc(x, y, 6, 0, 2 * Math.PI);
+        ctx.arc(point.x, point.y, 6, 0, 2 * Math.PI);
         ctx.fill();
     });
   }
@@ -280,8 +286,9 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
   }
 
   private syncOverlaySize(video: HTMLVideoElement): void {
-    const width = video.videoWidth || 640;
-    const height = video.videoHeight || 480;
+    const stage = this.cameraStageRef.nativeElement as HTMLElement;
+    const width = Math.round(stage.clientWidth || video.clientWidth || video.videoWidth || 640);
+    const height = Math.round(stage.clientHeight || video.clientHeight || video.videoHeight || 480);
 
     [this.handCanvasRef.nativeElement, this.poseCanvasRef.nativeElement].forEach((canvas: HTMLCanvasElement) => {
       if (canvas.width !== width) canvas.width = width;
@@ -315,10 +322,28 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
     }
   }
 
-  private toCanvasPoint(landmark: any): { x: number; y: number } | null {
+  private toCanvasPoint(landmark: any, canvas: HTMLCanvasElement = this.poseCanvasRef.nativeElement): { x: number; y: number } | null {
     if (!landmark) return null;
-    if (Array.isArray(landmark)) return { x: landmark[0], y: landmark[1] };
-    if (typeof landmark.x === 'number' && typeof landmark.y === 'number') return { x: landmark.x, y: landmark.y };
-    return null;
+    const rawPoint = Array.isArray(landmark)
+      ? { x: landmark[0], y: landmark[1] }
+      : typeof landmark.x === 'number' && typeof landmark.y === 'number'
+        ? { x: landmark.x, y: landmark.y }
+        : null;
+
+    if (!rawPoint) return null;
+
+    const video = this.videoRef.nativeElement as HTMLVideoElement;
+    const sourceWidth = video.videoWidth || canvas.width || 640;
+    const sourceHeight = video.videoHeight || canvas.height || 480;
+    const sourceX = rawPoint.x <= 1 ? rawPoint.x * sourceWidth : rawPoint.x;
+    const sourceY = rawPoint.y <= 1 ? rawPoint.y * sourceHeight : rawPoint.y;
+    const scale = Math.max(canvas.width / sourceWidth, canvas.height / sourceHeight);
+    const offsetX = (canvas.width - sourceWidth * scale) / 2;
+    const offsetY = (canvas.height - sourceHeight * scale) / 2;
+
+    return {
+      x: sourceX * scale + offsetX,
+      y: sourceY * scale + offsetY
+    };
   }
 }
