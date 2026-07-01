@@ -54,24 +54,65 @@
           <div class="sign-list" id="signList"></div>
         </article>
 
-        <article class="surface-card panel camera-panel">
+        <article class="surface-card panel vision-lab-panel" aria-labelledby="visionLabTitle">
           <div class="panel-heading">
             <div>
-              <p class="eyebrow">Cámara opcional</p>
-              <h2>Overlay de práctica</h2>
+              <p class="eyebrow">Vision lab estable</p>
+              <h2 id="visionLabTitle">Cámara + landmarks</h2>
             </div>
             <button class="link-pill camera-toggle" id="cameraButton" type="button">Activar cámara</button>
           </div>
-          <div class="camera-frame">
-            <video id="practiceVideo" autoplay muted playsinline></video>
-            <canvas id="landmarkCanvas" width="640" height="420" aria-label="Landmarks simulados de mano"></canvas>
-            <div class="camera-placeholder" id="cameraPlaceholder">
-              <strong>Modo demo sin cámara</strong>
-              <span>Se dibujan landmarks de ejemplo para explicar la arquitectura.</span>
-            </div>
+          <div class="vision-lab" aria-label="Paneles de visión LSM">
+            <section class="vision-tile camera-tile" aria-labelledby="cameraTitle">
+              <div class="tile-heading">
+                <span class="tile-kicker">01</span>
+                <h3 id="cameraTitle">Cámara en vivo</h3>
+              </div>
+              <div class="camera-frame">
+                <video id="practiceVideo" autoplay muted playsinline></video>
+                <div class="camera-placeholder" id="cameraPlaceholder">
+                  <strong>Modo demo sin cámara</strong>
+                  <span>Se dibujan landmarks de ejemplo para explicar la arquitectura.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="vision-tile canvas-tile" aria-labelledby="handCanvasTitle">
+              <div class="tile-heading">
+                <span class="tile-kicker">02</span>
+                <h3 id="handCanvasTitle">Landmarks de mano</h3>
+              </div>
+              <canvas id="handLandmarkCanvas" width="640" height="420" aria-label="Canvas con landmarks simulados de mano"></canvas>
+            </section>
+
+            <section class="vision-tile canvas-tile" aria-labelledby="bodyCanvasTitle">
+              <div class="tile-heading">
+                <span class="tile-kicker">03</span>
+                <h3 id="bodyCanvasTitle">Landmarks corporales</h3>
+              </div>
+              <canvas id="bodyLandmarkCanvas" width="640" height="420" aria-label="Canvas con landmarks simulados corporales"></canvas>
+            </section>
+
+            <section class="vision-tile detection-tile" aria-labelledby="gestureStatusTitle">
+              <div class="tile-heading">
+                <span class="tile-kicker">04</span>
+                <h3 id="gestureStatusTitle">Gesto detectado</h3>
+              </div>
+              <p class="gesture-name" id="detectedGesture">Hola</p>
+              <p class="gesture-confidence" id="detectedConfidence">Confianza demo: 92%</p>
+              <p class="helper-copy">Estado listo para reemplazarse por Handpose/MoveNet cuando los modelos reales estén conectados en Angular.</p>
+            </section>
+
+            <section class="vision-tile history-tile" aria-labelledby="historyTitle">
+              <div class="tile-heading">
+                <span class="tile-kicker">05</span>
+                <h3 id="historyTitle">Historial de detecciones</h3>
+              </div>
+              <ol class="detection-history" id="detectionHistory" aria-live="polite"></ol>
+            </section>
           </div>
           <p class="helper-copy">
-            En producción, este espacio se conecta con Handpose/MoveNet para dibujar landmarks reales y disparar animaciones del avatar.
+            Este vision-lab conserva el prototipo visual de rescate y deja contratos de UI claros para reconectar cámara, manos, cuerpo, estado e historial con la app Angular.
           </p>
         </article>
       </section>
