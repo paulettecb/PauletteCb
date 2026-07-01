@@ -8,6 +8,7 @@ import * as handpose from '@tensorflow-models/handpose';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { HandGesturesService } from '../../utils/hand-gestures.service';
 import { AvatarAnimationsService } from '../../utils/avatar-animations.service';
+import { LsmSign, SignPlaybackService } from './sign-playback.service';
 import * as posedetection from '@tensorflow-models/pose-detection';
 import '@tensorflow/tfjs-backend-webgl';
 import { PoseLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
@@ -27,7 +28,8 @@ export class LsmAvatarComponent implements OnInit {
 
   constructor(
     private avatarService: AvatarAnimationsService,
-    private handGestureService: HandGesturesService
+    private handGestureService: HandGesturesService,
+    private signPlaybackService: SignPlaybackService
   ) {}
 
   private scene!: THREE.Scene;
@@ -38,10 +40,10 @@ export class LsmAvatarComponent implements OnInit {
   private skeleton!: THREE.Skeleton;
   private poseModel!: any; // Declare it
 
-  signs = [
-    { nombre: 'Hola', animacion: 'wave' },
-    { nombre: 'Gracias', animacion: 'thank_you' }
-  ];
+  signs: LsmSign[] = this.signPlaybackService.signs;
+  selectedSign: LsmSign = this.signs[0];
+  practiceMode = false;
+  feedbackMessage = 'Observa la demostración y activa la cámara para practicar.';
 
   async ngOnInit() {
     await tf.setBackend('webgl');
@@ -100,23 +102,34 @@ export class LsmAvatarComponent implements OnInit {
     }
   }
 
-  loadSign(sign: { nombre: string, animacion: string }) {
-    console.log("🎬 Trying to animate:", sign.animacion);
-  
-    if (this.skeleton) {
-      switch (sign.animacion) {
-        case 'wave':
-          this.avatarService.waveAvatar(this.skeleton);
-          break;
-        case 'thank_you':
-          this.avatarService.nodAvatar(this.skeleton);
-          break;
-        default:
-          console.warn("❌ Animation not found:", sign.animacion);
-      }
-    } else {
-      console.warn("⚠️ Skeleton not loaded yet.");
+  loadSign(sign: LsmSign) {
+    this.selectedSign = sign;
+    const animationStarted = this.signPlaybackService.loadSign(sign, this.skeleton);
+    this.feedbackMessage = animationStarted
+      ? `Demostrando: ${sign.nombre}. Revisa los pasos y practica cuando estés listo.`
+      : 'El avatar aún está cargando. Intenta de nuevo en unos segundos.';
+  }
+
+  startPractice() {
+    this.practiceMode = true;
+    this.feedbackMessage = `Cámara activa. Practica la seña "${this.selectedSign.nombre}" frente a la cámara.`;
+  }
+
+  private updatePracticeFeedback(detectedAnimation: LsmSign['animacion']) {
+    if (!this.practiceMode) return;
+
+    this.feedbackMessage = detectedAnimation === this.selectedSign.animacion
+      ? `¡Bien! Detectamos un gesto compatible con "${this.selectedSign.nombre}".`
+      : `Gesto detectado. Ajusta tu postura siguiendo los pasos de "${this.selectedSign.nombre}".`;
+  }
+
+  private playDetectedSign(sign: LsmSign) {
+    if (this.practiceMode) {
+      this.signPlaybackService.loadSign(sign, this.skeleton);
+      return;
     }
+
+    this.loadSign(sign);
   }
 
   private async initHandTracking() {
@@ -153,6 +166,11 @@ export class LsmAvatarComponent implements OnInit {
     const video = this.videoRef.nativeElement;
     const canvas = this.poseCanvasRef.nativeElement;
     const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+      console.warn("⚠️ Pose canvas context not available.");
+      return;
+    }
 
     setInterval(async () => {
         const predictions = await this.handModel.estimateHands(video);
