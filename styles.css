@@ -135,6 +135,10 @@ body::after {
 
 .brand {
   margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: .35rem;
+  flex-wrap: wrap;
   font-family: 'Hanken Grotesk', sans-serif;
   font-size: 1.22rem;
   letter-spacing: 0.01em;
@@ -145,6 +149,14 @@ body::after {
   font-family: 'Friendship', cursive;
   font-size: 1.45em;
   line-height: 0;
+}
+
+.brand small {
+  color: var(--pop-magenta);
+  font-family: 'Friendship', cursive;
+  font-size: .9rem;
+  font-weight: 500;
+  transform: rotate(-2deg);
 }
 
 .glass {
@@ -281,11 +293,20 @@ h2 {
 
 .tiny-pill {
   border-radius: 999px;
-  padding: .35rem .75rem;
-  font-size: .78rem;
-  font-weight: 700;
+  padding: .35rem .8rem;
+  font-family: 'Friendship', cursive;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--white);
-  background: linear-gradient(90deg, var(--accent-rose), var(--accent-indigo));
+  background: linear-gradient(90deg, var(--pop-magenta), var(--accent-indigo));
+  box-shadow: 0 8px 18px rgba(232, 93, 160, .2);
+}
+
+.project-note {
+  max-width: 56ch;
+  margin: -.25rem 0 1rem;
+  color: var(--ink-700);
+  font-size: .95rem;
 }
 
 h3 {

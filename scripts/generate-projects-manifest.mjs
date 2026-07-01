@@ -93,7 +93,7 @@ projects.sort((a, b) => a.title.localeCompare(b.title));
 
 await writeFile(
   manifestPath,
-  `${JSON.stringify({ generatedAt: new Date().toISOString(), projects }, null, 2)}\n`,
+  `${JSON.stringify({ projects }, null, 2)}\n`,
 );
 
 console.log(`Generated ${path.relative(root, manifestPath)} with ${projects.length} projects.`);

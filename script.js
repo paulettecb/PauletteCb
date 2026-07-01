@@ -21,7 +21,8 @@ const content = {
     exp2Detail:
       'Studying cognition, emotion, and behavior to better understand how humans process information, make decisions, and adapt to complexity.',
     projectsTitle: 'Projects',
-    projectsPill: 'Auto index',
+    projectsPill: 'Visual Lab',
+    projectsNote: 'A playful internal lab, auto-filled from the projects folder.',
     projectsLoading: 'Loading project cards…',
     projectOpen: 'Open project',
     project1Title: 'Budget Planner ADHD',
@@ -58,7 +59,8 @@ const content = {
     exp2Detail:
       'Estudiando cognición, emoción y conducta para comprender mejor cómo las personas procesan información, toman decisiones y se adaptan a la complejidad.',
     projectsTitle: 'Proyectos',
-    projectsPill: 'Índice auto',
+    projectsPill: 'Visual Lab',
+    projectsNote: 'Un laboratorio interno y juguetón, llenado automáticamente desde la carpeta de proyectos.',
     projectsLoading: 'Cargando cards de proyectos…',
     projectOpen: 'Abrir proyecto',
     project1Title: 'Budget Planner TDAH',
@@ -95,7 +97,8 @@ const content = {
     exp2Detail:
       'Étude de la cognition, de l’émotion et du comportement pour mieux comprendre la prise de décision et l’adaptation à la complexité.',
     projectsTitle: 'Projets',
-    projectsPill: 'Index auto',
+    projectsPill: 'Visual Lab',
+    projectsNote: 'Un laboratoire interne et ludique, rempli automatiquement depuis le dossier projets.',
     projectsLoading: 'Chargement des cartes projet…',
     projectOpen: 'Ouvrir le projet',
     project1Title: 'Budget Planner TDAH',
@@ -132,7 +135,8 @@ const content = {
     exp2Detail:
       'Estudando cognição, emoção e comportamento para entender melhor como pessoas processam informações e se adaptam à complexidade.',
     projectsTitle: 'Projetos',
-    projectsPill: 'Índice auto',
+    projectsPill: 'Visual Lab',
+    projectsNote: 'Um laboratório interno e lúdico, preenchido automaticamente pela pasta de projetos.',
     projectsLoading: 'Carregando cards de projetos…',
     projectOpen: 'Abrir projeto',
     project1Title: 'Budget Planner TDAH',
@@ -169,7 +173,8 @@ const content = {
     exp2Detail:
       'Studium von Kognition, Emotion und Verhalten, um zu verstehen, wie Menschen Informationen verarbeiten und sich an Komplexität anpassen.',
     projectsTitle: 'Projekte',
-    projectsPill: 'Auto-Index',
+    projectsPill: 'Visual Lab',
+    projectsNote: 'Ein verspieltes internes Lab, automatisch aus dem Projektordner befüllt.',
     projectsLoading: 'Projektkarten werden geladen…',
     projectOpen: 'Projekt öffnen',
     project1Title: 'Budget Planner ADHS',
@@ -203,6 +208,7 @@ const keys = {
   exp2Detail: 'exp-2-detail',
   projectsTitle: 'projects-title',
   projectsPill: 'projects-pill',
+  projectsNote: 'projects-note',
   projectsLoading: 'projects-loading',
   contactTitle: 'contact-title',
   contactCopy: 'contact-copy',
