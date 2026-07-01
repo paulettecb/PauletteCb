@@ -1,4 +1,4 @@
-# Paulette C — Personal Page
+# Paulette C — Systems Portfolio
 
 A modern, privacy-first personal page for internal use, refreshed with the KYN-inspired design system:
 - Warm paper/oat surfaces, restrained periwinkle, soft pastel accents, and a small whimsy spark.
