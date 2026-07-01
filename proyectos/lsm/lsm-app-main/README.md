@@ -25,3 +25,26 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Reusable hand gesture engine
+
+`HandGesturesService` centralizes hand landmark interpretation so it can be reused by any portfolio section that receives MediaPipe or TensorFlow Handpose landmarks, not only by the LSM avatar.
+
+The public `detectGesture(landmarks)` method returns a `GestureResult` with:
+
+- `gestureName`: the most probable `GestureName` (`thumbUp`, `palmOpen`, `fistClosed`, or `unknown`).
+- `confidence`: normalized score from `0` to `1`.
+- `detectedAt`: timestamp for analytics, debouncing, or UI feedback.
+- `landmarks`: normalized landmarks used by the engine.
+
+Example usage from another portfolio component or service:
+
+```ts
+const result = this.handGesturesService.detectGesture(predictions[0].landmarks);
+
+if (result.gestureName === 'thumbUp' && result.confidence >= 0.7) {
+  this.showPositiveFeedback();
+}
+```
+
+The legacy helpers `thumbUp(landmarks)`, `palmOpen(landmarks)`, and `fistClosed(landmarks)` remain available as boolean wrappers over the same engine, so existing LSM flows can migrate incrementally while other projects consume the richer result object.
