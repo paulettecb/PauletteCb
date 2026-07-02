@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../../styles.css" />
     <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.1.0/dist/handpose.min.js" defer></script>
   </head>
   <body>
     <div class="kyn-blobs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
@@ -101,7 +103,7 @@
               </div>
               <p class="gesture-name" id="detectedGesture">Hola</p>
               <p class="gesture-confidence" id="detectedConfidence">Confianza demo: 92%</p>
-              <p class="helper-copy">Estado listo para reemplazarse por Handpose/MoveNet cuando los modelos reales estén conectados en Angular.</p>
+              <p class="helper-copy">Handpose se activa con la cámara; si el modelo aún carga, mantenemos el demo como respaldo visual.</p>
             </section>
 
             <section class="vision-tile history-tile" aria-labelledby="historyTitle">
@@ -113,7 +115,7 @@
             </section>
           </div>
           <p class="helper-copy">
-            Este vision-lab conserva el prototipo visual de rescate y deja contratos de UI claros para reconectar cámara, manos, cuerpo, estado e historial con la app Angular.
+            Este vision-lab conserva el prototipo visual de rescate y deja contratos de UI claros para reconectar cámara, manos, cuerpo, estado e historial con la app Angular; la mano ya usa Handpose real cuando el modelo carga.
           </p>
         </article>
       </section>
