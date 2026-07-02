@@ -19,5 +19,10 @@
     "title": "LSM Practice Cards",
     "description": "Microlecciones visuales para practicar Lengua de Señas Mexicana con una interfaz amable inspirada en KYN.",
     "type": "Learning lab"
+  },
+  "mediapipe-lab": {
+    "title": "MediaPipe Lab",
+    "description": "Real-time computer vision experiments with pose detection, hand tracking, and body analysis.",
+    "type": "Experimental Lab"
   }
 }
