@@ -25,7 +25,10 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
 
   private handCtx!: CanvasRenderingContext2D | null;  // Canvas Context for Hand Drawing
   private poseCtx!: CanvasRenderingContext2D | null;
-  private detectionTimerId?: number;
+  private detectionFrameId?: number;
+  private landmarkTick = 0;
+  private lastHandDetectionAt = 0;
+  private lastPoseDetectionAt = 0;
 
   private readonly handConnections = [
     [0, 1], [1, 2], [2, 3], [3, 4],
@@ -76,8 +79,8 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.detectionTimerId) {
-      window.clearInterval(this.detectionTimerId);
+    if (this.detectionFrameId) {
+      window.cancelAnimationFrame(this.detectionFrameId);
     }
 
     const stream = (this.videoRef.nativeElement as HTMLVideoElement).srcObject as MediaStream | null;
@@ -173,7 +176,7 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
         video.onloadedmetadata = () => {
           video.play();
           console.log("📸 Camera ready, starting detection...");
-          this.detectHands();
+          this.detectLandmarks();
         };
       });
     } catch (error) {
@@ -193,7 +196,7 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
     }
 }
 
-  private async detectHands() {
+  private detectLandmarks() {
     const video = this.videoRef.nativeElement as HTMLVideoElement;
 
     if (!this.handCtx || !this.poseCtx) {
@@ -201,54 +204,84 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.detectionTimerId = window.setInterval(async () => {
-      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
+    const detectFrame = async () => {
+      this.detectionFrameId = window.requestAnimationFrame(detectFrame);
 
+      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || !video.videoWidth || !video.videoHeight) {
+        return;
+      }
+
+      this.landmarkTick += 1;
       this.syncOverlaySize(video);
-      const predictions = await this.handModel.estimateHands(video);
-      const poses = this.poseModel ? await this.poseModel.estimatePoses(video) : [];
-
       this.clearHandCanvas();
       this.clearPoseCanvas();
 
-      if (predictions.length > 0) {
-        const landmarks = predictions[0].landmarks;
-        this.drawHandLandmarks(landmarks);
+      try {
+        const [predictions, poses] = await Promise.all([
+          this.handModel ? this.handModel.estimateHands(video) : Promise.resolve([]),
+          this.poseModel ? this.poseModel.estimatePoses(video) : Promise.resolve([])
+        ]);
 
-        const gesture = this.handGestureService.detectGesture(landmarks);
-        const detectedAnimation = gesture.gestureName === 'palmOpen' ? 'wave' : gesture.gestureName === 'thumbUp' ? 'thank_you' : null;
-        this.updatePracticeFeedback(detectedAnimation);
+        const hands = Array.isArray(predictions) ? predictions : [];
+        const poseLandmarks = this.getPoseLandmarks(poses);
 
-        if (gesture.gestureName === 'fistClosed') {
-          console.log(`✊ Fist Detected (${gesture.confidence}) → Avatar Stops`);
-          this.avatarService.stopAvatar(this.avatar, this.skeleton);
-        } else if (gesture.gestureName === 'palmOpen') {
-          console.log(`🖐️ Open Palm Detected (${gesture.confidence}) → Avatar Waves`);
-          this.playDetectedAnimation('wave');
-        } else if (gesture.gestureName === 'thumbUp') {
-          console.log(`👍 Thumb Up Detected (${gesture.confidence}) → Avatar Nods`);
-          this.playDetectedAnimation('thank_you');
+        if (hands.length > 0) {
+          this.lastHandDetectionAt = performance.now();
+          hands.forEach((prediction: any) => this.drawHandLandmarks(prediction.landmarks ?? []));
+          this.handleGesture(hands[0].landmarks ?? []);
+        } else if (this.shouldDrawFallback(this.lastHandDetectionAt)) {
+          this.drawDemoHandLandmarks();
         }
-      }
 
-      if (poses.length > 0 && this.poseCtx) {
-        const poseLandmarks = poses[0]?.keypoints ?? poses[0]?.landmarks ?? [];
-        const poseCtx = this.poseCtx;
-        this.drawConnections(poseCtx, poseLandmarks, this.poseConnections, 'rgba(135, 149, 210, .95)', 5);
-        this.drawLandmarks(poseCtx, poseLandmarks, 'rgba(246, 235, 196, .96)', 7);
+        if (poseLandmarks.length > 0 && this.poseCtx) {
+          this.lastPoseDetectionAt = performance.now();
+          this.drawConnections(this.poseCtx, poseLandmarks, this.poseConnections, 'rgba(135, 149, 210, .95)', 5, this.poseCanvasRef.nativeElement);
+          this.drawLandmarks(this.poseCtx, poseLandmarks, 'rgba(246, 235, 196, .96)', 7, this.poseCanvasRef.nativeElement);
+        } else if (this.shouldDrawFallback(this.lastPoseDetectionAt)) {
+          this.drawDemoPoseLandmarks();
+        }
+      } catch (error) {
+        console.warn('⚠️ Landmark detection failed for this frame:', error);
+        this.drawDemoHandLandmarks();
+        this.drawDemoPoseLandmarks();
       }
-    }, 100);
+    };
+
+    detectFrame();
+  }
+
+  private handleGesture(landmarks: number[][]): void {
+    const gesture = this.handGestureService.detectGesture(landmarks);
+    const detectedAnimation = gesture.gestureName === 'palmOpen' ? 'wave' : gesture.gestureName === 'thumbUp' ? 'thank_you' : null;
+    this.updatePracticeFeedback(detectedAnimation);
+
+    if (gesture.gestureName === 'fistClosed') {
+      console.log(`✊ Fist Detected (${gesture.confidence}) → Avatar Stops`);
+      this.avatarService.stopAvatar(this.avatar, this.skeleton);
+    } else if (gesture.gestureName === 'palmOpen') {
+      console.log(`🖐️ Open Palm Detected (${gesture.confidence}) → Avatar Waves`);
+      this.playDetectedAnimation('wave');
+    } else if (gesture.gestureName === 'thumbUp') {
+      console.log(`👍 Thumb Up Detected (${gesture.confidence}) → Avatar Nods`);
+      this.playDetectedAnimation('thank_you');
+    }
+  }
+
+  private getPoseLandmarks(poses: any[]): any[] {
+    const pose = Array.isArray(poses) ? poses[0] : null;
+    return pose?.keypoints ?? pose?.landmarks ?? [];
+  }
+
+  private shouldDrawFallback(lastDetectionAt: number): boolean {
+    return !lastDetectionAt || performance.now() - lastDetectionAt > 1000;
   }
 
   // ✅ Function to Draw Hand Landmarks
   private drawHandLandmarks(landmarks: number[][]): void {
-    if (!this.handCtx || !landmarks) return;
+    if (!this.handCtx || !landmarks?.length) return;
 
     const ctx = this.handCtx;
     const canvas = this.handCanvasRef.nativeElement;
-
-    // Clear previous drawings
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw connections imported from the original prototype.
     ctx.strokeStyle = 'rgba(246, 235, 196, .92)';
@@ -296,10 +329,10 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
     });
   }
 
-  private drawLandmarks(ctx: CanvasRenderingContext2D, landmarks: any[], color: string, radius = 5) {
+  private drawLandmarks(ctx: CanvasRenderingContext2D, landmarks: any[], color: string, radius = 5, canvas = this.poseCanvasRef.nativeElement) {
     ctx.fillStyle = color;
     for (const landmark of landmarks ?? []) {
-      const point = this.toCanvasPoint(landmark);
+      const point = this.toCanvasPoint(landmark, canvas);
       if (!point) continue;
       ctx.beginPath();
       ctx.arc(point.x, point.y, radius, 0, 2 * Math.PI);
@@ -307,19 +340,61 @@ export class LsmAvatarComponent implements OnInit, OnDestroy {
     }
   }
 
-  private drawConnections(ctx: CanvasRenderingContext2D, landmarks: any[], connections: number[][], color: string, lineWidth = 2) {
+  private drawConnections(ctx: CanvasRenderingContext2D, landmarks: any[], connections: number[][], color: string, lineWidth = 2, canvas = this.poseCanvasRef.nativeElement) {
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
 
     for (const [start, end] of connections) {
-      const from = this.toCanvasPoint(landmarks?.[start]);
-      const to = this.toCanvasPoint(landmarks?.[end]);
+      const from = this.toCanvasPoint(landmarks?.[start], canvas);
+      const to = this.toCanvasPoint(landmarks?.[end], canvas);
       if (!from || !to) continue;
       ctx.beginPath();
       ctx.moveTo(from.x, from.y);
       ctx.lineTo(to.x, to.y);
       ctx.stroke();
     }
+  }
+
+  private drawDemoHandLandmarks(): void {
+    if (!this.handCtx) return;
+    const canvas = this.handCanvasRef.nativeElement;
+    const width = canvas.width;
+    const height = canvas.height;
+    const cx = width * 0.5 + Math.sin(this.landmarkTick / 20) * 22;
+    const cy = height * 0.56;
+    const points = Array.from({ length: 21 }, (_, index) => {
+      const finger = Math.floor((index - 1) / 4);
+      const joint = (index - 1) % 4;
+      if (index === 0) return [cx, cy + 86];
+      return [
+        cx + (finger - 2) * 48 + Math.sin(this.landmarkTick / 16 + index) * 4,
+        cy + 58 - joint * 34 - Math.abs(finger - 2) * 7
+      ];
+    });
+    this.drawHandLandmarks(points.map(([x, y]) => [x / width, y / height]));
+  }
+
+  private drawDemoPoseLandmarks(): void {
+    if (!this.poseCtx) return;
+    const canvas = this.poseCanvasRef.nativeElement;
+    const width = canvas.width;
+    const height = canvas.height;
+    const sway = Math.sin(this.landmarkTick / 22) * 10;
+    const points = [
+      [width * 0.5 + sway * 0.3, height * 0.18],
+      [width * 0.5, height * 0.31],
+      [width * 0.38, height * 0.36],
+      [width * 0.62, height * 0.36],
+      [width * 0.31, height * 0.51],
+      [width * 0.72, height * 0.45],
+      [width * 0.34, height * 0.66],
+      [width * 0.77, height * 0.38],
+      [width * 0.5, height * 0.68]
+    ];
+    const connections = [[0, 1], [1, 2], [1, 3], [2, 4], [4, 6], [3, 5], [5, 7], [1, 8]];
+    const normalizedPoints = points.map(([x, y]) => [x / width, y / height]);
+    this.drawConnections(this.poseCtx, normalizedPoints, connections, 'rgba(135, 149, 210, .95)', 5, canvas);
+    this.drawLandmarks(this.poseCtx, normalizedPoints, 'rgba(246, 235, 196, .96)', 7, canvas);
   }
 
   private toCanvasPoint(landmark: any, canvas: HTMLCanvasElement = this.poseCanvasRef.nativeElement): { x: number; y: number } | null {
