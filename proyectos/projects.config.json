@@ -23,6 +23,12 @@
   "mediapipe-lab": {
     "title": "MediaPipe Lab",
     "description": "Real-time computer vision experiments with pose detection, hand tracking, and body analysis.",
+    "type": "Experimental Lab",
+    "hidden": true
+  },
+  "mediapipe-codex": {
+    "title": "MediaPipe Codex",
+    "description": "Standalone static rescue lab for MediaPipe flows; opens directly from the projects folder without a framework dev server.",
     "type": "Experimental Lab"
   }
 }
