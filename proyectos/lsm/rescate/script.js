@@ -1,7 +1,9 @@
 const signs = [
-  { name: 'Hola', state: 'wave', cue: 'Palma abierta + movimiento suave', note: 'Dispara una animación de saludo del avatar.', confidence: 92 },
+  { name: 'Hola', state: 'wave', cue: 'Palma abierta + movimiento lateral', note: 'Dispara una animación de saludo del avatar.', confidence: 92 },
   { name: 'Gracias', state: 'thank', cue: 'Pulgar arriba / gesto positivo', note: 'Reutiliza el gesto como confirmación o celebración.', confidence: 88 },
-  { name: 'Pausa', state: 'stop', cue: 'Puño cerrado', note: 'Detiene animaciones y sirve como comando de control.', confidence: 84 }
+  { name: 'Pausa', state: 'stop', cue: 'Puño cerrado', note: 'Detiene animaciones y sirve como comando de control.', confidence: 84 },
+  { name: 'Adiós', state: 'wave', cue: 'Palma abierta oscilando para despedirse', note: 'Seña visual de despedida; reutiliza la animación de saludo.', confidence: 82 },
+  { name: 'Te amo', state: 'thank', cue: 'Pulgar, índice y meñique extendidos', note: 'Reconoce la configuración ILY de la mano para expresar cariño.', confidence: 80 }
 ];
 
 const avatar = document.querySelector('.avatar');
@@ -29,6 +31,8 @@ let handModelStatus = 'idle';
 let lastHandDetectedAt = 0;
 let detectionInFlight = false;
 let lastGestureName = signs[0].name;
+const handMotionHistory = [];
+const handMotionHistoryLimit = 12;
 const handConnections = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20]];
 
 function normalizeLandmark(landmark) {
@@ -40,18 +44,46 @@ function average(values) {
   return values.reduce((total, value) => total + value, 0) / values.length;
 }
 
+function updateHandMotionHistory(normalized) {
+  handMotionHistory.push({
+    x: normalized[0].x,
+    y: normalized[0].y,
+    at: performance.now()
+  });
+  while (handMotionHistory.length > handMotionHistoryLimit) handMotionHistory.shift();
+}
+
+function scoreWaveMotion() {
+  if (handMotionHistory.length < 6) return 0;
+  const xs = handMotionHistory.map((point) => point.x);
+  const ys = handMotionHistory.map((point) => point.y);
+  const xRange = Math.max(...xs) - Math.min(...xs);
+  const yRange = Math.max(...ys) - Math.min(...ys);
+  const directionChanges = xs.slice(2).reduce((changes, x, index) => {
+    const previousDelta = xs[index + 1] - xs[index];
+    const currentDelta = x - xs[index + 1];
+    return changes + (Math.abs(previousDelta) > 0.01 && Math.abs(currentDelta) > 0.01 && Math.sign(previousDelta) !== Math.sign(currentDelta) ? 1 : 0);
+  }, 0);
+
+  return average([xRange > 0.12 ? 1 : xRange / 0.12, yRange < 0.18 ? 1 : 0, Math.min(directionChanges / 2, 1)]);
+}
+
 function scoreGesture(landmarks) {
   const normalized = landmarks.map(normalizeLandmark);
   if (normalized.length < 21) return { gestureName: 'unknown', confidence: 0 };
+  updateHandMotionHistory(normalized);
   const isAbove = (a, b) => (normalized[a].y < normalized[b].y ? 1 : 0);
   const isBelow = (a, b) => (normalized[a].y > normalized[b].y ? 1 : 0);
   const horizontalGap = (a, b) => Math.abs(normalized[a].x - normalized[b].x);
   const extendedFingers = average([isAbove(8, 6), isAbove(12, 10), isAbove(16, 14), isAbove(20, 18)]);
   const foldedFingers = average([isBelow(8, 6), isBelow(12, 10), isBelow(16, 14), isBelow(20, 18)]);
+  const ilyHand = average([isAbove(4, 2), isAbove(8, 6), isBelow(12, 10), isBelow(16, 14), isAbove(20, 18), horizontalGap(4, 20) > 0.18 ? 1 : 0]);
   const scores = [
+    { gestureName: 'waveGreeting', confidence: average([extendedFingers, scoreWaveMotion()]) },
     { gestureName: 'palmOpen', confidence: average([extendedFingers, horizontalGap(4, 2) > 0.08 ? 1 : 0, average([8, 12, 16, 20].map((tip) => isAbove(tip, 0)))]) },
     { gestureName: 'thumbUp', confidence: average([isAbove(4, 5), isAbove(4, 0), horizontalGap(4, 2) > 0.08 ? 1 : 0, foldedFingers]) },
-    { gestureName: 'fistClosed', confidence: average([foldedFingers, horizontalGap(4, 9) < 0.18 ? 1 : 0]) }
+    { gestureName: 'fistClosed', confidence: average([foldedFingers, horizontalGap(4, 9) < 0.18 ? 1 : 0]) },
+    { gestureName: 'ilyHand', confidence: ilyHand }
   ].sort((a, b) => b.confidence - a.confidence);
   return scores[0].confidence >= 0.7 ? { ...scores[0], confidence: Number(scores[0].confidence.toFixed(2)) } : { gestureName: 'unknown', confidence: Number(scores[0].confidence.toFixed(2)) };
 }
@@ -59,9 +91,11 @@ function scoreGesture(landmarks) {
 function updateGestureFromLandmarks(landmarks) {
   const gesture = scoreGesture(landmarks.map((point) => [point[0] / (video.videoWidth || 1), point[1] / (video.videoHeight || 1), point[2] || 0]));
   const signByGesture = {
-    palmOpen: signs[0],
+    waveGreeting: signs[0],
+    palmOpen: signs[3],
     thumbUp: signs[1],
-    fistClosed: signs[2]
+    fistClosed: signs[2],
+    ilyHand: signs[4]
   }[gesture.gestureName];
 
   if (!signByGesture) {
