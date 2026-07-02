@@ -22,11 +22,11 @@
       "url": "proyectos/lsm/index.html"
     },
     {
-      "slug": "mediapipe-lab",
-      "title": "MediaPipe Lab",
-      "description": "Real-time computer vision experiments with pose detection, hand tracking, and body analysis.",
+      "slug": "mediapipe-codex",
+      "title": "MediaPipe Codex",
+      "description": "Standalone static rescue lab for MediaPipe flows; opens directly from the projects folder without a framework dev server.",
       "type": "Experimental Lab",
-      "url": "proyectos/mediapipe-lab/index.html"
+      "url": "proyectos/mediapipe-codex/index.html"
     }
   ]
 }
