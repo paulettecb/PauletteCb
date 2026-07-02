@@ -16,12 +16,14 @@ MediaPipe Lab is an experimental playground for building and testing computer vi
 ### Installation
 
 ```bash
+# Run from the repository root
 npm install
 ```
 
 ### Development
 
 ```bash
+# Run from the repository root
 npm run dev
 ```
 
@@ -30,6 +32,7 @@ Opens at `http://localhost:5174`
 ### Build
 
 ```bash
+# Run from the repository root
 npm run build
 ```
 
