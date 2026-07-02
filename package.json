@@ -5,9 +5,9 @@
   "scripts": {
     "projects:manifest": "node scripts/generate-projects-manifest.mjs",
     "predeploy": "npm run projects:manifest",
-    "dev": "cd proyectos/mediapipe-lab && vite",
-    "build": "cd proyectos/mediapipe-lab && vite build",
-    "preview": "cd proyectos/mediapipe-lab && vite preview",
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
     "lab": "npm run dev"
   },
   "dependencies": {
