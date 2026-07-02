@@ -134,27 +134,99 @@ function resizeCameraOverlay() {
   if (cameraOverlay.height !== height) cameraOverlay.height = height;
 }
 
+function getVideoCoverMetrics() {
+  const width = cameraOverlay.width;
+  const height = cameraOverlay.height;
+  const sourceWidth = video.videoWidth || width;
+  const sourceHeight = video.videoHeight || height;
+  const scale = Math.max(width / sourceWidth, height / sourceHeight);
+  const renderedWidth = sourceWidth * scale;
+  const renderedHeight = sourceHeight * scale;
+
+  return {
+    width,
+    height,
+    renderedWidth,
+    renderedHeight,
+    offsetX: (width - renderedWidth) / 2,
+    offsetY: (height - renderedHeight) / 2
+  };
+}
+
+function projectBodyPoint(point, bodyBox, metrics) {
+  return [
+    metrics.offsetX + bodyBox.x + point[0] * bodyBox.width,
+    metrics.offsetY + bodyBox.y + point[1] * bodyBox.height
+  ];
+}
+
+function buildCameraBody(mode, metrics) {
+  const sway = Math.sin(tick / 22) * metrics.renderedWidth * 0.012;
+  const lift = mode === 'wave' ? 0.2 + Math.sin(tick / 10) * 0.035 : mode === 'thank' ? 0.08 : -0.02;
+  const tuck = mode === 'stop' ? 0.04 : 0;
+  const bodyBox = {
+    x: metrics.renderedWidth * 0.25,
+    y: metrics.renderedHeight * 0.08,
+    width: metrics.renderedWidth * 0.5,
+    height: metrics.renderedHeight * 0.86
+  };
+
+  return {
+    head: projectBodyPoint([0.5 + sway / bodyBox.width, 0.13], bodyBox, metrics),
+    neck: projectBodyPoint([0.5, 0.28], bodyBox, metrics),
+    leftShoulder: projectBodyPoint([0.28, 0.36], bodyBox, metrics),
+    rightShoulder: projectBodyPoint([0.72, 0.36], bodyBox, metrics),
+    leftElbow: projectBodyPoint([0.18 + tuck, 0.56], bodyBox, metrics),
+    rightElbow: projectBodyPoint([0.82, 0.54 - lift * 0.45], bodyBox, metrics),
+    leftWrist: projectBodyPoint([0.24 + tuck, 0.75], bodyBox, metrics),
+    rightWrist: projectBodyPoint([0.88, 0.75 - lift], bodyBox, metrics),
+    hip: projectBodyPoint([0.5, 0.78], bodyBox, metrics)
+  };
+}
+
+function buildCameraHand(mode, wrist, metrics) {
+  const palmSize = Math.min(metrics.width, metrics.height) * (mode === 'stop' ? 0.045 : mode === 'thank' ? 0.055 : 0.07);
+  const spread = mode === 'stop' ? palmSize * 0.42 : mode === 'thank' ? palmSize * 0.62 : palmSize * 0.82;
+  const curl = mode === 'stop' ? 0.44 : 1;
+  const palm = [wrist[0] - palmSize * 0.05, wrist[1] - palmSize * 0.15];
+
+  return Array.from({ length: 21 }, (_, index) => {
+    if (index === 0) return wrist;
+    const finger = Math.floor((index - 1) / 4);
+    const joint = (index - 1) % 4;
+    const fingerOffset = finger - 2;
+    const thumbBias = finger === 0 ? -palmSize * 0.55 : 0;
+    return [
+      palm[0] + fingerOffset * spread + thumbBias + Math.sin(tick / 16 + index) * 2.5,
+      palm[1] - (joint + 1) * palmSize * 0.52 * curl - Math.abs(fingerOffset) * palmSize * 0.1
+    ];
+  });
+}
+
 function drawCameraLandmarks(mode = 'wave') {
   resizeCameraOverlay();
   cameraCtx.clearRect(0, 0, cameraOverlay.width, cameraOverlay.height);
 
-  // Esta página de rescate no carga modelos reales; por eso proyectamos los
-  // mismos landmarks demo encima del video para que la cámara explique la capa
-  // visual igual que los paneles laterales.
-  const width = cameraOverlay.width;
-  const height = cameraOverlay.height;
-  const cx = width * 0.52 + Math.sin(tick / 20) * 16;
-  const cy = height * 0.56;
-  const spread = mode === 'stop' ? 18 : mode === 'thank' ? 28 : 38;
-  const points = Array.from({ length: 21 }, (_, index) => {
-    const finger = Math.floor((index - 1) / 4);
-    const joint = (index - 1) % 4;
-    if (index === 0) return [cx, cy + height * 0.2];
-    return [
-      cx + (finger - 2) * spread + Math.sin(tick / 16 + index) * 3,
-      cy + height * 0.14 - joint * (mode === 'stop' ? 12 : 30) - Math.abs(finger - 2) * 6
-    ];
-  });
+  // La app Angular original proyecta cada punto al canvas usando la escala
+  // tipo object-fit: cover del video. Repetimos esa idea aquí para que el
+  // overlay demo no flote: primero construimos un cuerpo dentro del encuadre
+  // visible y después anclamos la mano exactamente a su muñeca derecha.
+  const metrics = getVideoCoverMetrics();
+  const bodyPoints = buildCameraBody(mode, metrics);
+  const handPoints = buildCameraHand(mode, bodyPoints.rightWrist, metrics);
+
+  cameraCtx.save();
+  cameraCtx.shadowBlur = 14;
+  cameraCtx.shadowColor = 'rgba(0, 0, 0, .35)';
+  cameraCtx.lineCap = 'round';
+  cameraCtx.lineJoin = 'round';
+  cameraCtx.lineWidth = 4;
+  cameraCtx.strokeStyle = 'rgba(135, 149, 210, .95)';
+  cameraCtx.fillStyle = 'rgba(246, 235, 196, .96)';
+  [['head','neck'],['neck','leftShoulder'],['neck','rightShoulder'],['leftShoulder','leftElbow'],['leftElbow','leftWrist'],['rightShoulder','rightElbow'],['rightElbow','rightWrist'],['neck','hip']]
+    .forEach(([a, b]) => drawSegment(cameraCtx, bodyPoints[a], bodyPoints[b]));
+  Object.values(bodyPoints).forEach((point) => drawPoint(cameraCtx, point, 5.5));
+  cameraCtx.restore();
 
   cameraCtx.save();
   cameraCtx.shadowBlur = 14;
@@ -164,28 +236,8 @@ function drawCameraLandmarks(mode = 'wave') {
   cameraCtx.lineWidth = 5;
   cameraCtx.strokeStyle = 'rgba(246, 235, 196, .96)';
   cameraCtx.fillStyle = 'rgba(232, 93, 160, .98)';
-  handConnections.forEach(([a, b]) => drawSegment(cameraCtx, points[a], points[b]));
-  points.forEach((point) => drawPoint(cameraCtx, point, 7));
-  cameraCtx.restore();
-
-  cameraCtx.save();
-  cameraCtx.globalAlpha = 0.8;
-  cameraCtx.lineWidth = 4;
-  cameraCtx.strokeStyle = 'rgba(135, 149, 210, .95)';
-  cameraCtx.fillStyle = 'rgba(246, 235, 196, .96)';
-  const shoulderY = height * 0.54;
-  const bodyPoints = {
-    neck: [width * 0.5, height * 0.46],
-    leftShoulder: [width * 0.37, shoulderY],
-    rightShoulder: [width * 0.63, shoulderY],
-    leftElbow: [width * 0.31, height * 0.67],
-    rightElbow: [width * 0.7, height * 0.62],
-    leftWrist: [width * 0.34, height * 0.82],
-    rightWrist: [width * 0.74, height * 0.72]
-  };
-  [['neck','leftShoulder'],['neck','rightShoulder'],['leftShoulder','leftElbow'],['leftElbow','leftWrist'],['rightShoulder','rightElbow'],['rightElbow','rightWrist']]
-    .forEach(([a, b]) => drawSegment(cameraCtx, bodyPoints[a], bodyPoints[b]));
-  Object.values(bodyPoints).forEach((point) => drawPoint(cameraCtx, point, 5));
+  handConnections.forEach(([a, b]) => drawSegment(cameraCtx, handPoints[a], handPoints[b]));
+  handPoints.forEach((point) => drawPoint(cameraCtx, point, 7));
   cameraCtx.restore();
 }
 
