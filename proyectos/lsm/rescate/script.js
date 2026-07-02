@@ -24,7 +24,81 @@ let activeSign = signs[0];
 let stream = null;
 let tick = 0;
 let historyCounter = 0;
+let handModel = null;
+let handModelStatus = 'idle';
+let lastHandDetectedAt = 0;
+let detectionInFlight = false;
+let lastGestureName = signs[0].name;
 const handConnections = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20]];
+
+function normalizeLandmark(landmark) {
+  if (Array.isArray(landmark)) return { x: landmark[0] || 0, y: landmark[1] || 0, z: landmark[2] || 0 };
+  return { x: landmark?.x || 0, y: landmark?.y || 0, z: landmark?.z || 0 };
+}
+
+function average(values) {
+  return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+function scoreGesture(landmarks) {
+  const normalized = landmarks.map(normalizeLandmark);
+  if (normalized.length < 21) return { gestureName: 'unknown', confidence: 0 };
+  const isAbove = (a, b) => (normalized[a].y < normalized[b].y ? 1 : 0);
+  const isBelow = (a, b) => (normalized[a].y > normalized[b].y ? 1 : 0);
+  const horizontalGap = (a, b) => Math.abs(normalized[a].x - normalized[b].x);
+  const extendedFingers = average([isAbove(8, 6), isAbove(12, 10), isAbove(16, 14), isAbove(20, 18)]);
+  const foldedFingers = average([isBelow(8, 6), isBelow(12, 10), isBelow(16, 14), isBelow(20, 18)]);
+  const scores = [
+    { gestureName: 'palmOpen', confidence: average([extendedFingers, horizontalGap(4, 2) > 0.08 ? 1 : 0, average([8, 12, 16, 20].map((tip) => isAbove(tip, 0)))]) },
+    { gestureName: 'thumbUp', confidence: average([isAbove(4, 5), isAbove(4, 0), horizontalGap(4, 2) > 0.08 ? 1 : 0, foldedFingers]) },
+    { gestureName: 'fistClosed', confidence: average([foldedFingers, horizontalGap(4, 9) < 0.18 ? 1 : 0]) }
+  ].sort((a, b) => b.confidence - a.confidence);
+  return scores[0].confidence >= 0.7 ? { ...scores[0], confidence: Number(scores[0].confidence.toFixed(2)) } : { gestureName: 'unknown', confidence: Number(scores[0].confidence.toFixed(2)) };
+}
+
+function updateGestureFromLandmarks(landmarks) {
+  const gesture = scoreGesture(landmarks.map((point) => [point[0] / (video.videoWidth || 1), point[1] / (video.videoHeight || 1), point[2] || 0]));
+  const signByGesture = {
+    palmOpen: signs[0],
+    thumbUp: signs[1],
+    fistClosed: signs[2]
+  }[gesture.gestureName];
+
+  if (!signByGesture) {
+    detectedConfidence.textContent = `Confianza real: ${Math.round(gesture.confidence * 100)}% · ajusta la mano frente a cámara`;
+    return;
+  }
+
+  avatar.dataset.state = signByGesture.state;
+  status.textContent = `${signByGesture.name}: gesto detectado por Handpose.`;
+  detectedGesture.textContent = signByGesture.name;
+  detectedConfidence.textContent = `Confianza real: ${Math.round(gesture.confidence * 100)}%`;
+  if (lastGestureName !== signByGesture.name) {
+    lastGestureName = signByGesture.name;
+    addDetection({ ...signByGesture, confidence: Math.round(gesture.confidence * 100) });
+  }
+}
+
+async function loadHandModel() {
+  if (handModel || handModelStatus === 'loading') return handModel;
+  if (!window.handpose) {
+    handModelStatus = 'missing';
+    return null;
+  }
+  handModelStatus = 'loading';
+  detectedConfidence.textContent = 'Cargando Handpose…';
+  try {
+    handModel = await window.handpose.load();
+    handModelStatus = 'ready';
+    detectedConfidence.textContent = 'Handpose listo: muestra tu mano a la cámara.';
+    return handModel;
+  } catch (error) {
+    handModelStatus = 'error';
+    console.warn('No se pudo cargar Handpose:', error);
+    detectedConfidence.textContent = 'No se pudo cargar Handpose; seguimos con demo.';
+    return null;
+  }
+}
 
 function setSign(sign, button) {
   activeSign = sign;
@@ -203,6 +277,65 @@ function buildCameraHand(mode, wrist, metrics) {
   });
 }
 
+function toCameraPoint(landmark, metrics) {
+  const x = Array.isArray(landmark) ? landmark[0] : landmark?.x;
+  const y = Array.isArray(landmark) ? landmark[1] : landmark?.y;
+  if (typeof x !== 'number' || typeof y !== 'number') return null;
+  const sourceWidth = video.videoWidth || metrics.width;
+  const sourceHeight = video.videoHeight || metrics.height;
+  const sourceX = x <= 1 ? x * sourceWidth : x;
+  const sourceY = y <= 1 ? y * sourceHeight : y;
+  return [metrics.offsetX + sourceX * (metrics.renderedWidth / sourceWidth), metrics.offsetY + sourceY * (metrics.renderedHeight / sourceHeight)];
+}
+
+function drawRealHandLandmarks(landmarks) {
+  resizeCameraOverlay();
+  cameraCtx.clearRect(0, 0, cameraOverlay.width, cameraOverlay.height);
+  const metrics = getVideoCoverMetrics();
+  const points = landmarks.map((landmark) => toCameraPoint(landmark, metrics));
+
+  cameraCtx.save();
+  cameraCtx.shadowBlur = 14;
+  cameraCtx.shadowColor = 'rgba(0, 0, 0, .35)';
+  cameraCtx.lineCap = 'round';
+  cameraCtx.lineJoin = 'round';
+  cameraCtx.lineWidth = 5;
+  cameraCtx.strokeStyle = 'rgba(246, 235, 196, .96)';
+  cameraCtx.fillStyle = 'rgba(232, 93, 160, .98)';
+  handConnections.forEach(([a, b]) => points[a] && points[b] && drawSegment(cameraCtx, points[a], points[b]));
+  points.forEach((point) => point && drawPoint(cameraCtx, point, 7));
+  cameraCtx.restore();
+
+  clearCanvas(handCtx, handCanvas);
+  const sx = handCanvas.width / (video.videoWidth || metrics.width);
+  const sy = handCanvas.height / (video.videoHeight || metrics.height);
+  const panelPoints = landmarks.map((point) => [point[0] * sx, point[1] * sy]);
+  handCtx.lineWidth = 4;
+  handCtx.strokeStyle = 'rgba(246, 235, 196, .92)';
+  handCtx.fillStyle = 'rgba(232, 93, 160, .95)';
+  handConnections.forEach(([a, b]) => panelPoints[a] && panelPoints[b] && drawSegment(handCtx, panelPoints[a], panelPoints[b]));
+  panelPoints.forEach((point) => drawPoint(handCtx, point, 6));
+}
+
+async function detectRealHandFrame() {
+  if (detectionInFlight || !stream || !handModel || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return false;
+  detectionInFlight = true;
+  try {
+    const predictions = await handModel.estimateHands(video);
+    const landmarks = predictions?.[0]?.landmarks;
+    if (!landmarks?.length) return false;
+    lastHandDetectedAt = performance.now();
+    drawRealHandLandmarks(landmarks);
+    updateGestureFromLandmarks(landmarks);
+    return true;
+  } catch (error) {
+    console.warn('No se pudieron estimar landmarks en este frame:', error);
+    return false;
+  } finally {
+    detectionInFlight = false;
+  }
+}
+
 function drawCameraLandmarks(mode = 'wave') {
   resizeCameraOverlay();
   cameraCtx.clearRect(0, 0, cameraOverlay.width, cameraOverlay.height);
@@ -270,6 +403,7 @@ async function toggleCamera() {
     video.srcObject = stream;
     placeholder.hidden = true;
     cameraButton.textContent = 'Apagar cámara';
+    await loadHandModel();
   } catch (error) {
     placeholder.hidden = false;
     placeholder.innerHTML = '<strong>No se pudo activar la cámara</strong><span>Revisa permisos del navegador; el demo sigue funcionando con landmarks simulados.</span>';
@@ -279,7 +413,15 @@ async function toggleCamera() {
 function loop() {
   tick += 1;
   drawDemoLandmarks(activeSign.state);
-  if (stream) drawCameraLandmarks(activeSign.state);
+  if (stream) {
+    if (handModelStatus === 'ready') {
+      detectRealHandFrame().then((detected) => {
+        if (!detected && performance.now() - lastHandDetectedAt > 1000) drawCameraLandmarks(activeSign.state);
+      });
+    } else {
+      drawCameraLandmarks(activeSign.state);
+    }
+  }
   requestAnimationFrame(loop);
 }
 
