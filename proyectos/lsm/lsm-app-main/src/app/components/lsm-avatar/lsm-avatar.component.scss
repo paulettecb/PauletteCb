@@ -138,10 +138,12 @@ video,
 
 video {
   z-index: 0;
+  transform: scaleX(-1);
 }
 
 .camera-stage canvas {
   pointer-events: none;
+  transform: scaleX(-1);
 }
 
 @media (max-width: 900px) {
