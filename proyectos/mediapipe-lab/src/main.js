@@ -74,7 +74,7 @@ const renderLab = (slug) => {
   return `
     <div class="experiment-page">
       <header class="experiment-header"><a href="#/" class="back-btn">← Back</a><h1>${lab.icon} ${lab.title}</h1><p class="subtitle">${lab.subtitle}</p></header>
-      <main class="experiment-main"><section class="info-section"><h2>Welcome to ${slug.toUpperCase()} Lab</h2><p>${lab.intro}</p><div class="features-grid">${lab.features.map(([icon, title, text]) => `<div class="feature"><span class="feature-icon">${icon}</span><h3>${title}</h3><p>${text}</p></div>`).join('')}</div><button class="btn btn-primary" id="camera-toggle">🎥 Start Camera</button><div class="camera-section"><video id="camera-preview" class="camera-preview" autoplay playsinline muted hidden></video><div id="camera-status"></div></div></section></main>
+      <main class="experiment-main"><section class="info-section"><h2>Welcome to ${slug.toUpperCase()} Lab</h2><p>${lab.intro}</p><div class="features-grid">${lab.features.map(([icon, title, text]) => `<div class="feature"><span class="feature-icon">${icon}</span><h3>${title}</h3><p>${text}</p></div>`).join('')}</div><button class="btn btn-primary" id="camera-toggle">🎥 Start Camera</button><div class="camera-section"><div id="camera-stage" class="camera-stage is-inactive"><video id="camera-preview" class="camera-preview" autoplay playsinline muted></video><canvas id="landmarks-canvas" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas></div><div id="camera-status"></div></div></section></main>
     </div>`
 }
 
@@ -86,6 +86,7 @@ const setCameraStatus = (message) => {
 
 const startCamera = async () => {
   const video = document.querySelector('#camera-preview')
+  const stage = document.querySelector('#camera-stage')
 
   if (!navigator.mediaDevices?.getUserMedia) {
     setCameraStatus('Navegador sin soporte para cámara.')
@@ -96,10 +97,12 @@ const startCamera = async () => {
     activeStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     video.srcObject = activeStream
     await video.play()
-    video.hidden = false
+    stage?.classList.add('is-active')
+    stage?.classList.remove('is-inactive')
     setCameraStatus('Cámara encendida.')
   } catch (error) {
-    video.hidden = true
+    stage?.classList.remove('is-active')
+    stage?.classList.add('is-inactive')
 
     if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
       setCameraStatus('Permiso denegado para acceder a la cámara.')
@@ -112,6 +115,9 @@ const startCamera = async () => {
 const stopCamera = () => {
   activeStream?.getTracks().forEach((track) => track.stop())
   activeStream = null
+  const stage = document.querySelector('#camera-stage')
+  stage?.classList.remove('is-active')
+  stage?.classList.add('is-inactive')
 }
 
 const render = () => {
