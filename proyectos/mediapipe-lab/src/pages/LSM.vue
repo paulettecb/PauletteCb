@@ -39,7 +39,7 @@
         </button>
 
         <div class="camera-section">
-          <video ref="videoRef" autoplay playsinline muted v-show="cameraActive"></video>
+          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="cameraActive"></video>
           <p v-if="cameraStatus" class="status">{{ cameraStatus }}</p>
         </div>
       </section>

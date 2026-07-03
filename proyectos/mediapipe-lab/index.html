@@ -84,20 +84,56 @@
         return `
           <div class="experiment-page">
             <header class="experiment-header"><a href="#/" class="back-btn">← Back</a><h1>${lab.icon} ${lab.title}</h1><p class="subtitle">${lab.subtitle}</p></header>
-            <main class="experiment-main"><section class="info-section"><h2>Welcome to ${slug.toUpperCase()} Lab</h2><p>${lab.intro}</p><div class="features-grid">${lab.features.map(([icon, title, text]) => `<div class="feature"><span class="feature-icon">${icon}</span><h3>${title}</h3><p>${text}</p></div>`).join('')}</div><button class="btn btn-primary" id="camera-toggle">🎥 Start Camera</button><div id="camera-status"></div></section></main>
+            <main class="experiment-main"><section class="info-section"><h2>Welcome to ${slug.toUpperCase()} Lab</h2><p>${lab.intro}</p><div class="features-grid">${lab.features.map(([icon, title, text]) => `<div class="feature"><span class="feature-icon">${icon}</span><h3>${title}</h3><p>${text}</p></div>`).join('')}</div><button class="btn btn-primary" id="camera-toggle">🎥 Start Camera</button><div class="camera-section"><video id="camera-preview" class="camera-preview" autoplay playsinline muted hidden></video><div id="camera-status"></div></div></section></main>
           </div>`
       }
 
+      let activeStream = null
+
+      const setCameraStatus = (message) => {
+        document.querySelector('#camera-status').innerHTML = `<p class="status">${message}</p>`
+      }
+
+      const startCamera = async () => {
+        const video = document.querySelector('#camera-preview')
+
+        if (!navigator.mediaDevices?.getUserMedia) {
+          setCameraStatus('Navegador sin soporte para cámara.')
+          return
+        }
+
+        try {
+          activeStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+          video.srcObject = activeStream
+          await video.play()
+          video.hidden = false
+          setCameraStatus('Cámara encendida.')
+        } catch (error) {
+          video.hidden = true
+
+          if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
+            setCameraStatus('Permiso denegado para acceder a la cámara.')
+          } else {
+            setCameraStatus('No se pudo encender la cámara.')
+          }
+        }
+      }
+
+      const stopCamera = () => {
+        activeStream?.getTracks().forEach((track) => track.stop())
+        activeStream = null
+      }
+
       const render = () => {
+        stopCamera()
         const app = document.querySelector('#app')
         const slug = window.location.hash.replace('#/', '')
         app.innerHTML = slug && labs[slug] ? renderLab(slug) : renderHome()
-        document.querySelector('#camera-toggle')?.addEventListener('click', () => {
-          document.querySelector('#camera-status').innerHTML = '<p class="status">Camera is ready. MediaPipe integration coming soon...</p>'
-        })
+        document.querySelector('#camera-toggle')?.addEventListener('click', startCamera)
       }
 
       window.addEventListener('hashchange', render)
+      window.addEventListener('beforeunload', stopCamera)
       render()
     </script>
   </body>
