@@ -1,6 +1,7 @@
 import { computed, onUnmounted, ref } from 'vue'
 import { createHandLandmarker } from '../services/mediapipeHands'
 import { startCamera, stopCamera } from '../utils/camera'
+import { drawLandmarks } from '../utils/drawLandmarks'
 
 export const useHandDetectionCamera = () => {
   const cameraActive = ref(false)
@@ -9,6 +10,7 @@ export const useHandDetectionCamera = () => {
   const handLandmarker = ref(null)
   const handResults = ref(null)
   const videoRef = ref(null)
+  const canvasRef = ref(null)
   let animationFrameId = null
 
   const detectedHandsCount = computed(() => handResults.value?.landmarks?.length || 0)
@@ -34,6 +36,7 @@ export const useHandDetectionCamera = () => {
     }
 
     handResults.value = handLandmarker.value.detectForVideo(videoRef.value, performance.now())
+    drawLandmarks(canvasRef.value, videoRef.value, handResults.value)
     animationFrameId = requestAnimationFrame(detectHands)
   }
 
@@ -44,6 +47,11 @@ export const useHandDetectionCamera = () => {
     }
 
     handResults.value = null
+
+    if (canvasRef.value) {
+      const context = canvasRef.value.getContext('2d')
+      context?.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height)
+    }
   }
 
   const stop = () => {
@@ -97,6 +105,7 @@ export const useHandDetectionCamera = () => {
     handResults,
     start,
     stop,
+    canvasRef,
     videoRef,
   }
 }
