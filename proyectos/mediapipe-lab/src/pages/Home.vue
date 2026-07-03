@@ -14,7 +14,7 @@
           <h2>LSM</h2>
           <p>Lengua de Señas Mexicana</p>
           <p class="description">Practice Mexican Sign Language with pose detection and visual feedback.</p>
-          <router-link to="/lsm" class="btn btn-primary">Enter Lab</router-link>
+          <a href="#/lsm" class="btn btn-primary">Enter Lab</a>
         </div>
 
         <div class="lab-card agility-card">
@@ -22,7 +22,7 @@
           <h2>AGILITY</h2>
           <p>Canine Movement Analysis</p>
           <p class="description">Analyze dog movements, jumps, and agility exercises in real-time.</p>
-          <router-link to="/agility" class="btn btn-primary">Enter Lab</router-link>
+          <a href="#/agility" class="btn btn-primary">Enter Lab</a>
         </div>
 
         <div class="lab-card exercise-card">
@@ -30,7 +30,7 @@
           <h2>EXERCISE</h2>
           <p>Human Posture & Movement</p>
           <p class="description">Track human exercise form, posture, and movement patterns with precision.</p>
-          <router-link to="/exercise" class="btn btn-primary">Enter Lab</router-link>
+          <a href="#/exercise" class="btn btn-primary">Enter Lab</a>
         </div>
 
         <div class="lab-card experiments-card">
@@ -38,7 +38,7 @@
           <h2>EXPERIMENTS</h2>
           <p>Experimental Playground</p>
           <p class="description">Test new MediaPipe features, models, and creative applications.</p>
-          <router-link to="/experiments" class="btn btn-primary">Enter Lab</router-link>
+          <a href="#/experiments" class="btn btn-primary">Enter Lab</a>
         </div>
       </section>
 
