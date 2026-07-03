@@ -38,8 +38,9 @@
           🧪 Launch Experiment
         </button>
 
-        <div v-if="experimentRunning" class="experiment-section">
-          <p class="status">Experimental mode activated. Ready for innovation...</p>
+        <div class="experiment-section">
+          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="experimentRunning"></video>
+          <p v-if="experimentStatus" class="status">{{ experimentStatus }}</p>
         </div>
       </section>
     </main>
@@ -47,11 +48,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
+import { startCamera, stopCamera } from '../utils/camera'
 
 const experimentRunning = ref(false)
+const experimentStatus = ref('')
+const experimentStream = ref(null)
+const videoRef = ref(null)
 
-const launchExperiment = () => {
-  experimentRunning.value = !experimentRunning.value
+const launchExperiment = async () => {
+  if (!navigator.mediaDevices?.getUserMedia) {
+    experimentStatus.value = 'Navegador sin soporte para cámara.'
+    return
+  }
+
+  try {
+    experimentStream.value = await startCamera(videoRef.value)
+    experimentRunning.value = true
+    experimentStatus.value = 'Cámara encendida.'
+  } catch (error) {
+    experimentRunning.value = false
+
+    if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
+      experimentStatus.value = 'Permiso denegado para acceder a la cámara.'
+    } else {
+      experimentStatus.value = 'No se pudo encender la cámara.'
+    }
+  }
 }
+
+onUnmounted(() => {
+  if (experimentStream.value) {
+    stopCamera(experimentStream.value)
+  }
+})
 </script>
