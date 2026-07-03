@@ -1,7 +1,7 @@
 <template>
   <div class="experiment-page">
     <header class="experiment-header">
-      <router-link to="/" class="back-btn">← Back</router-link>
+      <a href="#/" class="back-btn">← Back</a>
       <h1>⚗️ EXPERIMENTS - Playground</h1>
       <p class="subtitle">Test New Features & Creative Ideas</p>
     </header>
