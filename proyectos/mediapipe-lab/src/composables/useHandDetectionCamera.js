@@ -9,9 +9,11 @@ export const useHandDetectionCamera = () => {
   const cameraStream = ref(null)
   const handLandmarker = ref(null)
   const handResults = ref(null)
+  const approximateFps = ref(0)
   const videoRef = ref(null)
   const canvasRef = ref(null)
   let animationFrameId = null
+  let lastFrameTime = 0
 
   const detectedHandsCount = computed(() => handResults.value?.landmarks?.length || 0)
   const handDetectionStatus = computed(() => {
@@ -35,7 +37,15 @@ export const useHandDetectionCamera = () => {
       return
     }
 
-    handResults.value = handLandmarker.value.detectForVideo(videoRef.value, performance.now())
+    const now = performance.now()
+
+    if (lastFrameTime) {
+      const instantFps = 1000 / (now - lastFrameTime)
+      approximateFps.value = Math.round(approximateFps.value ? (approximateFps.value * 0.85) + (instantFps * 0.15) : instantFps)
+    }
+
+    lastFrameTime = now
+    handResults.value = handLandmarker.value.detectForVideo(videoRef.value, now)
     drawLandmarks(canvasRef.value, videoRef.value, handResults.value)
     animationFrameId = requestAnimationFrame(detectHands)
   }
@@ -47,6 +57,8 @@ export const useHandDetectionCamera = () => {
     }
 
     handResults.value = null
+    approximateFps.value = 0
+    lastFrameTime = 0
 
     if (canvasRef.value) {
       const context = canvasRef.value.getContext('2d')
@@ -98,6 +110,7 @@ export const useHandDetectionCamera = () => {
   })
 
   return {
+    approximateFps,
     cameraActive,
     cameraStatus,
     detectedHandsCount,
