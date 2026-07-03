@@ -38,8 +38,10 @@
           🎥 Start Tracking
         </button>
 
-        <div v-if="trackingActive" class="tracking-section">
-          <p class="status">Agility tracking initialized. MediaPipe integration in progress...</p>
+        <div class="tracking-section">
+          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="trackingActive"></video>
+          <p v-if="trackingStatus" class="status">{{ trackingStatus }}</p>
+          <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
       </section>
     </main>
@@ -47,11 +49,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
 
-const trackingActive = ref(false)
+const {
+  cameraActive: trackingActive,
+  cameraStatus: trackingStatus,
+  handDetectionStatus,
+  start: startHandDetection,
+  videoRef,
+} = useHandDetectionCamera()
 
 const startTracking = () => {
-  trackingActive.value = !trackingActive.value
+  startHandDetection('Agility tracking con detección de manos activo.')
 }
 </script>

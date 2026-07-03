@@ -41,6 +41,7 @@
         <div class="camera-section">
           <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="cameraActive"></video>
           <p v-if="cameraStatus" class="status">{{ cameraStatus }}</p>
+          <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
       </section>
     </main>
@@ -48,38 +49,13 @@
 </template>
 
 <script setup>
-import { onUnmounted, ref } from 'vue'
-import { startCamera as startCameraStream, stopCamera } from '../utils/camera'
+import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
 
-const cameraActive = ref(false)
-const cameraStatus = ref('')
-const cameraStream = ref(null)
-const videoRef = ref(null)
-
-const startCamera = async () => {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    cameraStatus.value = 'Navegador sin soporte para cámara.'
-    return
-  }
-
-  try {
-    cameraStream.value = await startCameraStream(videoRef.value)
-    cameraActive.value = true
-    cameraStatus.value = 'Cámara encendida.'
-  } catch (error) {
-    cameraActive.value = false
-
-    if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
-      cameraStatus.value = 'Permiso denegado para acceder a la cámara.'
-    } else {
-      cameraStatus.value = 'No se pudo encender la cámara.'
-    }
-  }
-}
-
-onUnmounted(() => {
-  if (cameraStream.value) {
-    stopCamera(cameraStream.value)
-  }
-})
+const {
+  cameraActive,
+  cameraStatus,
+  handDetectionStatus,
+  start: startCamera,
+  videoRef,
+} = useHandDetectionCamera()
 </script>
