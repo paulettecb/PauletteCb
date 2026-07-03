@@ -45,6 +45,24 @@
           </div>
           <p v-if="cameraStatus" class="status">{{ cameraStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
+
+          <aside class="gesture-panel" aria-label="Hand detection summary">
+            <h3>Detection Panel</h3>
+            <dl>
+              <div>
+                <dt>Hands</dt>
+                <dd>{{ detectedHandsCount }}</dd>
+              </div>
+              <div>
+                <dt>Gesture</dt>
+                <dd>{{ detectedGesture }}</dd>
+              </div>
+              <div>
+                <dt>FPS</dt>
+                <dd>{{ approximateFps || '—' }}</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </section>
     </main>
@@ -52,14 +70,64 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
+import { detectBasicGesture } from '../services/gestureRules'
 
 const {
+  approximateFps,
   cameraActive,
   cameraStatus,
+  detectedHandsCount,
   handDetectionStatus,
+  handResults,
   start: startCamera,
   canvasRef,
   videoRef,
 } = useHandDetectionCamera()
+
+const detectedGesture = computed(() => (
+  detectBasicGesture(handResults.value?.landmarks?.[0])
+))
 </script>
+
+<style scoped>
+.gesture-panel {
+  max-width: 360px;
+  margin: var(--space-5) auto 0;
+  padding: var(--space-4);
+  text-align: left;
+  background: var(--surface-brand-soft);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.gesture-panel h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--text-accent);
+}
+
+.gesture-panel dl {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.gesture-panel div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.gesture-panel dt {
+  color: var(--text-muted);
+  font-weight: var(--weight-semibold);
+}
+
+.gesture-panel dd {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+</style>
