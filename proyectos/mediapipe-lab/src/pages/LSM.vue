@@ -41,10 +41,11 @@
         <div class="camera-section">
           <div class="camera-stage" :class="{ 'is-active': cameraActive, 'is-inactive': !cameraActive }">
             <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
-            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Body and hand landmarks overlay"></canvas>
           </div>
           <p v-if="cameraStatus" class="status">{{ cameraStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
+          <p class="status">{{ poseDetected ? 'Cuerpo detectado para referencia de señas.' : 'Alinea tu cuerpo frente a la cámara para ver pose.' }}</p>
 
           <aside class="gesture-panel" aria-label="Hand detection summary">
             <h3>Detection Panel</h3>
@@ -80,6 +81,7 @@ const {
   cameraStatus,
   detectedHandsCount,
   handDetectionStatus,
+  poseDetected,
   handResults,
   start: startCamera,
   canvasRef,
