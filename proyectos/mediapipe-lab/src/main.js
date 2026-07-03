@@ -1,6 +1,108 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+const labs = {
+  lsm: {
+    icon: '🤟',
+    title: 'LSM - Mexican Sign Language',
+    subtitle: 'Lengua de Señas Mexicana Practice',
+    intro: 'Practice Mexican Sign Language with pose detection and real-time visual feedback.',
+    features: [
+      ['📹', 'Real-time Detection', 'Pose detection powered by MediaPipe'],
+      ['✋', 'Hand Tracking', 'Finger and palm tracking'],
+      ['🎯', 'Feedback', 'Visual feedback and guidance'],
+      ['📊', 'Analytics', 'Track your progress']
+    ]
+  },
+  agility: {
+    icon: '🐕',
+    title: 'AGILITY - Canine Movement Analysis',
+    subtitle: 'Dog movement tracking lab',
+    intro: 'Analyze dog movements, jumps, and agility exercises in real-time.',
+    features: [
+      ['🏁', 'Course Tracking', 'Follow paths and turns'],
+      ['🦴', 'Jump Analysis', 'Measure timing and form'],
+      ['📈', 'Movement Data', 'Capture useful motion signals'],
+      ['🎥', 'Camera Ready', 'Prepare for live analysis']
+    ]
+  },
+  exercise: {
+    icon: '🏃',
+    title: 'EXERCISE - Human Posture & Movement',
+    subtitle: 'Exercise form analysis',
+    intro: 'Track human exercise form, posture, and movement patterns with precision.',
+    features: [
+      ['🧍', 'Pose Landmarks', 'Map body keypoints'],
+      ['💪', 'Form Checks', 'Spot alignment patterns'],
+      ['⏱️', 'Repetition Flow', 'Prototype timing feedback'],
+      ['📊', 'Progress Signals', 'Prepare metrics for sessions']
+    ]
+  },
+  experiments: {
+    icon: '⚗️',
+    title: 'EXPERIMENTS - Experimental Playground',
+    subtitle: 'Prototype new MediaPipe ideas',
+    intro: 'Test new MediaPipe features, models, and creative applications.',
+    features: [
+      ['🧪', 'Rapid Tests', 'Try concepts quickly'],
+      ['🧠', 'Model Notes', 'Compare task ideas'],
+      ['🎛️', 'Controls', 'Prepare adjustable experiments'],
+      ['🚀', 'Launch Pad', 'Move prototypes into labs']
+    ]
+  }
+}
 
-createApp(App).mount('#app')
+const injectStyles = () => {
+  const style = document.createElement('style')
+  style.textContent = `
+    .lab-container,.experiment-page{min-height:100vh;background:linear-gradient(135deg,#faf7f2 0%,#f5f0eb 100%)}
+    .lab-header,.experiment-header{background:linear-gradient(135deg,#8e1d48 0%,#a53a61 100%);color:white;padding:3rem 2rem;text-align:center}.experiment-header{text-align:left;position:relative}
+    .header-content h1,.experiment-header h1{font-size:clamp(2rem,5vw,2.8rem);margin-bottom:.5rem;font-weight:700}.subtitle{font-size:1.1rem;opacity:.95;font-weight:300}
+    .lab-main,.experiment-main{padding:3rem 2rem;max-width:1200px;margin:0 auto;width:100%}.lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-bottom:4rem}
+    .lab-card,.info-section,.tech-stack{background:white;border-radius:16px;padding:2rem;border:1px solid #e0dbd5}.lab-card{display:flex;flex-direction:column;align-items:center;text-align:center;transition:all .3s ease}.lab-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(142,29,72,.1);border-color:#8e1d48}
+    .card-icon{font-size:3rem;margin-bottom:1rem}.lab-card h2,.tech-stack h3,.info-section h2{color:#8e1d48}.lab-card h2{font-size:1.5rem;margin-bottom:.5rem}.lab-card p,.info-section p{color:#666;margin-bottom:.75rem}.description{font-size:.9rem;opacity:.8;margin-bottom:1.5rem}
+    .btn,.back-btn{padding:.75rem 1.5rem;border:0;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s ease;text-decoration:none;display:inline-block}.btn-primary{background:linear-gradient(135deg,#8e1d48 0%,#a53a61 100%);color:white;margin-top:auto}.btn-primary:hover,.back-btn:hover{transform:scale(1.03);box-shadow:0 6px 12px rgba(142,29,72,.25)}.back-btn{color:white;background:rgba(255,255,255,.12);margin-bottom:1rem}
+    .tech-badges{display:flex;flex-wrap:wrap;gap:.75rem}.badge{background:#f5e6ec;color:#8e1d48;padding:.5rem 1rem;border-radius:20px;font-size:.9rem;font-weight:600}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin:2rem 0}.feature{text-align:center;padding:1.5rem;background:#f8f6f2;border-radius:12px;border:1px solid #e0dbd5}.feature-icon{font-size:2rem;display:block;margin-bottom:.75rem}.status{margin-top:1.5rem;padding:1rem;background:#f5e6ec;border-radius:8px;color:#8e1d48!important}.lab-footer{background:#2a2a2a;color:#aaa;text-align:center;padding:2rem;font-size:.9rem}
+  `
+  document.head.append(style)
+}
+
+const card = ([slug, lab]) => `
+  <div class="lab-card ${slug}-card">
+    <div class="card-icon">${lab.icon}</div>
+    <h2>${slug.toUpperCase()}</h2>
+    <p>${lab.subtitle}</p>
+    <p class="description">${lab.intro}</p>
+    <a href="#/${slug}" class="btn btn-primary">Enter Lab</a>
+  </div>`
+
+const renderHome = () => `
+  <div class="lab-container">
+    <header class="lab-header"><div class="header-content"><h1>📡 MediaPipe Lab</h1><p class="subtitle">Real-Time Computer Vision Experiments</p></div></header>
+    <main class="lab-main">
+      <section class="lab-grid">${Object.entries(labs).map(card).join('')}</section>
+      <section class="tech-stack"><h3>Tech Stack</h3><div class="tech-badges"><span class="badge">MediaPipe</span><span class="badge">Vite-ready</span><span class="badge">Vanilla JS</span><span class="badge">Web API</span></div></section>
+    </main>
+    <footer class="lab-footer"><p>MediaPipe Lab v0.1.0 | Powered by Google MediaPipe</p></footer>
+  </div>`
+
+const renderLab = (slug) => {
+  const lab = labs[slug] || labs.lsm
+  return `
+    <div class="experiment-page">
+      <header class="experiment-header"><a href="#/" class="back-btn">← Back</a><h1>${lab.icon} ${lab.title}</h1><p class="subtitle">${lab.subtitle}</p></header>
+      <main class="experiment-main"><section class="info-section"><h2>Welcome to ${slug.toUpperCase()} Lab</h2><p>${lab.intro}</p><div class="features-grid">${lab.features.map(([icon, title, text]) => `<div class="feature"><span class="feature-icon">${icon}</span><h3>${title}</h3><p>${text}</p></div>`).join('')}</div><button class="btn btn-primary" id="camera-toggle">🎥 Start Camera</button><div id="camera-status"></div></section></main>
+    </div>`
+}
+
+const render = () => {
+  const app = document.querySelector('#app')
+  const slug = window.location.hash.replace('#/', '')
+  app.innerHTML = slug && labs[slug] ? renderLab(slug) : renderHome()
+  document.querySelector('#camera-toggle')?.addEventListener('click', () => {
+    document.querySelector('#camera-status').innerHTML = '<p class="status">Camera is ready. MediaPipe integration coming soon...</p>'
+  })
+}
+
+injectStyles()
+window.addEventListener('hashchange', render)
+render()
 
 console.log('✅ MediaPipe Lab initialized successfully')
