@@ -49,97 +49,13 @@
 </template>
 
 <script setup>
-import { computed, onUnmounted, ref } from 'vue'
-import { createHandLandmarker } from '../services/mediapipeHands'
-import { startCamera as startCameraStream, stopCamera } from '../utils/camera'
+import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
 
-const cameraActive = ref(false)
-const cameraStatus = ref('')
-const cameraStream = ref(null)
-const handLandmarker = ref(null)
-const handResults = ref(null)
-const videoRef = ref(null)
-let animationFrameId = null
-
-const detectedHandsCount = computed(() => handResults.value?.landmarks?.length || 0)
-const handDetectionStatus = computed(() => {
-  if (!cameraActive.value) {
-    return ''
-  }
-
-  if (!handResults.value) {
-    return 'Detectando manos...'
-  }
-
-  if (detectedHandsCount.value === 0) {
-    return 'No se detectan manos'
-  }
-
-  return `${detectedHandsCount.value} ${detectedHandsCount.value === 1 ? 'mano detectada' : 'manos detectadas'}`
-})
-
-const detectHands = () => {
-  if (!cameraActive.value || !handLandmarker.value || !videoRef.value) {
-    return
-  }
-
-  handResults.value = handLandmarker.value.detectForVideo(videoRef.value, performance.now())
-  animationFrameId = requestAnimationFrame(detectHands)
-}
-
-const stopHandDetection = () => {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId)
-    animationFrameId = null
-  }
-
-  handResults.value = null
-}
-
-const startCamera = async () => {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    cameraStatus.value = 'Navegador sin soporte para cámara.'
-    return
-  }
-
-  stopHandDetection()
-
-  try {
-    if (cameraStream.value) {
-      stopCamera(cameraStream.value)
-    }
-
-    cameraStream.value = await startCameraStream(videoRef.value)
-    cameraActive.value = true
-    cameraStatus.value = 'Cámara encendida.'
-    handLandmarker.value ||= await createHandLandmarker()
-    detectHands()
-  } catch (error) {
-    stopHandDetection()
-    cameraActive.value = false
-
-    if (cameraStream.value) {
-      stopCamera(cameraStream.value)
-      cameraStream.value = null
-    }
-
-    if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
-      cameraStatus.value = 'Permiso denegado para acceder a la cámara.'
-    } else {
-      cameraStatus.value = 'No se pudo encender la cámara.'
-    }
-  }
-}
-
-onUnmounted(() => {
-  stopHandDetection()
-
-  if (handLandmarker.value) {
-    handLandmarker.value.close()
-  }
-
-  if (cameraStream.value) {
-    stopCamera(cameraStream.value)
-  }
-})
+const {
+  cameraActive,
+  cameraStatus,
+  handDetectionStatus,
+  start: startCamera,
+  videoRef,
+} = useHandDetectionCamera()
 </script>

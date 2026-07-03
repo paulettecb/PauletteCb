@@ -38,8 +38,10 @@
           🎥 Start Analysis
         </button>
 
-        <div v-if="analysisActive" class="analysis-section">
-          <p class="status">Exercise analysis active. Real-time feedback coming soon...</p>
+        <div class="analysis-section">
+          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="analysisActive"></video>
+          <p v-if="analysisStatus" class="status">{{ analysisStatus }}</p>
+          <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
       </section>
     </main>
@@ -47,11 +49,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
 
-const analysisActive = ref(false)
+const {
+  cameraActive: analysisActive,
+  cameraStatus: analysisStatus,
+  handDetectionStatus,
+  start: startHandDetection,
+  videoRef,
+} = useHandDetectionCamera()
 
 const startAnalysis = () => {
-  analysisActive.value = !analysisActive.value
+  startHandDetection('Exercise analysis con detección de manos activo.')
 }
 </script>

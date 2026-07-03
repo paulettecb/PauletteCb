@@ -41,6 +41,7 @@
         <div class="experiment-section">
           <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="experimentRunning"></video>
           <p v-if="experimentStatus" class="status">{{ experimentStatus }}</p>
+          <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
       </section>
     </main>
@@ -48,38 +49,17 @@
 </template>
 
 <script setup>
-import { onUnmounted, ref } from 'vue'
-import { startCamera, stopCamera } from '../utils/camera'
+import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
 
-const experimentRunning = ref(false)
-const experimentStatus = ref('')
-const experimentStream = ref(null)
-const videoRef = ref(null)
+const {
+  cameraActive: experimentRunning,
+  cameraStatus: experimentStatus,
+  handDetectionStatus,
+  start: startHandDetection,
+  videoRef,
+} = useHandDetectionCamera()
 
-const launchExperiment = async () => {
-  if (!navigator.mediaDevices?.getUserMedia) {
-    experimentStatus.value = 'Navegador sin soporte para cámara.'
-    return
-  }
-
-  try {
-    experimentStream.value = await startCamera(videoRef.value)
-    experimentRunning.value = true
-    experimentStatus.value = 'Cámara encendida.'
-  } catch (error) {
-    experimentRunning.value = false
-
-    if (error?.name === 'NotAllowedError' || error?.name === 'PermissionDeniedError') {
-      experimentStatus.value = 'Permiso denegado para acceder a la cámara.'
-    } else {
-      experimentStatus.value = 'No se pudo encender la cámara.'
-    }
-  }
+const launchExperiment = () => {
+  startHandDetection('Experimento con detección de manos activo.')
 }
-
-onUnmounted(() => {
-  if (experimentStream.value) {
-    stopCamera(experimentStream.value)
-  }
-})
 </script>
