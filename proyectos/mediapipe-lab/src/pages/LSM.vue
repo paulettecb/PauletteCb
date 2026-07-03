@@ -39,7 +39,10 @@
         </button>
 
         <div class="camera-section">
-          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="cameraActive"></video>
+          <div class="camera-stage" :class="{ 'is-active': cameraActive, 'is-inactive': !cameraActive }">
+            <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+          </div>
           <p v-if="cameraStatus" class="status">{{ cameraStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
@@ -56,6 +59,7 @@ const {
   cameraStatus,
   handDetectionStatus,
   start: startCamera,
+  canvasRef,
   videoRef,
 } = useHandDetectionCamera()
 </script>

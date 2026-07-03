@@ -39,7 +39,10 @@
         </button>
 
         <div class="experiment-section">
-          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="experimentRunning"></video>
+          <div class="camera-stage" :class="{ 'is-active': experimentRunning, 'is-inactive': !experimentRunning }">
+            <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+          </div>
           <p v-if="experimentStatus" class="status">{{ experimentStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
@@ -56,6 +59,7 @@ const {
   cameraStatus: experimentStatus,
   handDetectionStatus,
   start: startHandDetection,
+  canvasRef,
   videoRef,
 } = useHandDetectionCamera()
 

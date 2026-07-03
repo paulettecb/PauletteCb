@@ -39,7 +39,10 @@
         </button>
 
         <div class="tracking-section">
-          <video ref="videoRef" class="camera-preview" autoplay playsinline muted v-show="trackingActive"></video>
+          <div class="camera-stage" :class="{ 'is-active': trackingActive, 'is-inactive': !trackingActive }">
+            <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+          </div>
           <p v-if="trackingStatus" class="status">{{ trackingStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
         </div>
@@ -56,6 +59,7 @@ const {
   cameraStatus: trackingStatus,
   handDetectionStatus,
   start: startHandDetection,
+  canvasRef,
   videoRef,
 } = useHandDetectionCamera()
 

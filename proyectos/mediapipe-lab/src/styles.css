@@ -305,14 +305,64 @@ a { font: inherit; }
 }
 
 .status { margin-bottom: 0; }
-.camera-preview {
-  display: block;
+.camera-stage {
+  position: relative;
   width: min(100%, 720px);
+  aspect-ratio: 16 / 9;
   margin: 0 auto var(--space-4);
+  overflow: hidden;
+  border: var(--border-width-strong) solid var(--border-strong);
   border-radius: var(--radius-md);
-  background: var(--surface-strong);
+  background: linear-gradient(135deg, var(--ink-900), var(--periwinkle-900));
   box-shadow: var(--shadow-md);
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
 }
-.camera-preview[style*="display: none"] { margin-bottom: 0; }
+
+.camera-stage::before {
+  content: 'Cámara inactiva';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.camera-stage.is-active {
+  border-color: var(--success);
+  box-shadow: var(--shadow-md), 0 0 0 4px rgba(79, 164, 122, 0.16);
+}
+
+.camera-stage.is-active::before { opacity: 0; }
+
+.camera-stage.is-inactive {
+  opacity: 0.82;
+  border-color: var(--ink-300);
+}
+
+.camera-preview,
+.landmarks-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.camera-preview {
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.landmarks-canvas {
+  z-index: 2;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
 
 .lab-footer { width: min(var(--container-max), calc(100% - (var(--container-pad) * 2))); margin: 0 auto var(--space-5); color: var(--text-muted); text-align: center; font-size: var(--text-sm); }
