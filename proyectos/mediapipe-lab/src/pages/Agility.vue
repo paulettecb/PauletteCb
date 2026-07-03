@@ -41,7 +41,7 @@
         <div class="tracking-section">
           <div class="camera-stage" :class="{ 'is-active': trackingActive, 'is-inactive': !trackingActive }">
             <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
-            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Body and hand landmarks overlay"></canvas>
           </div>
           <p v-if="trackingStatus" class="status">{{ trackingStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
@@ -64,6 +64,6 @@ const {
 } = useHandDetectionCamera()
 
 const startTracking = () => {
-  startHandDetection('Agility tracking con detección de manos activo.')
+  startHandDetection('Agility tracking con landmarks de cuerpo y manos activos.')
 }
 </script>

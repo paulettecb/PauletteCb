@@ -41,7 +41,7 @@
         <div class="experiment-section">
           <div class="camera-stage" :class="{ 'is-active': experimentRunning, 'is-inactive': !experimentRunning }">
             <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
-            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Hand landmarks overlay"></canvas>
+            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Body and hand landmarks overlay"></canvas>
           </div>
           <p v-if="experimentStatus" class="status">{{ experimentStatus }}</p>
           <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
@@ -64,6 +64,6 @@ const {
 } = useHandDetectionCamera()
 
 const launchExperiment = () => {
-  startHandDetection('Experimento con detección de manos activo.')
+  startHandDetection('Experimento con landmarks de cuerpo y manos activos.')
 }
 </script>
