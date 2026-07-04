@@ -1,0 +1,41 @@
+name: Deploy to Netlify
+
+# Deploy activo del sitio personal (paulettecb.com) en Netlify.
+# Requiere UN secret en este repo (Settings → Secrets and variables →
+# Actions → New repository secret):
+#   NETLIFY_AUTH_TOKEN — el mismo personal access token de Netlify que
+#                        usas en el repo de Motion Lab (User settings →
+#                        Applications → New access token)
+#
+# Ajusta "npm run build" y "publish-dir" si este repo usa otro
+# framework/comando o carpeta de salida distinta a dist/.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Build + deploy (paulettecb)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy a Netlify
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: 'Deploy ${{ github.sha }}'
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: a42cd294-6282-42f5-a2b1-5d8d20227bac
+        timeout-minutes: 5
