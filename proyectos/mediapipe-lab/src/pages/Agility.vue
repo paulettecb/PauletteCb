@@ -9,6 +9,12 @@
       <p class="subtitle">
         Diseña pistas, estudia el reglamento FCI/FCM y entrena tus señales de guía con la cámara.
       </p>
+      <a
+        class="libro-link"
+        href="./libro-agility.html"
+        target="_blank"
+        rel="noopener"
+      >📕 Mini libro de agility — todo el deporte en un solo archivo</a>
     </header>
 
     <main class="experiment-main">
@@ -72,7 +78,7 @@ const MODES = [
     id: 'maniobras',
     icono: '🎓',
     titulo: 'Maniobras',
-    descripcion: '11 maniobras con perro virtual, voz y articulaciones en vivo',
+    descripcion: '11 maniobras entrenables + glosario de 26 paso a paso',
   },
 ]
 
@@ -80,6 +86,21 @@ const activeMode = ref('pistas')
 </script>
 
 <style scoped>
+.libro-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-brand-soft);
+  color: var(--text-accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+  transition: box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.libro-link:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
 .mode-tabs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
