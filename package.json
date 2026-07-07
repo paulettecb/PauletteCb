@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "projects:manifest": "node scripts/generate-projects-manifest.mjs",
-    "predeploy": "npm run projects:manifest",
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "node scripts/build-all.mjs",
+    "build:vite": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "lab": "npm run dev"
   },
