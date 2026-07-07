@@ -26,6 +26,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Verificar que el secret de Netlify esté configurado
+        run: |
+          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "::error::Falta el secret NETLIFY_AUTH_TOKEN (Settings → Secrets and variables → Actions). Sin él, el deploy se salta en silencio y este repo parece desplegado aunque no lo esté."
+            exit 1
+          fi
       - name: Deploy a Netlify
         uses: nwtgck/actions-netlify@v3
         with:
@@ -37,5 +43,5 @@ jobs:
           enable-commit-comment: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: a42cd294-6282-42f5-a2b1-5d8d20227bac
+          NETLIFY_SITE_ID: 51518b92-b712-4ade-8340-d38b29689ffb
         timeout-minutes: 5
