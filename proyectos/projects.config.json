@@ -22,7 +22,7 @@
   },
   "mediapipe-lab": {
     "title": "MediaPipe Lab",
-    "description": "Real-time computer vision experiments with pose detection, hand tracking, and body analysis.",
+    "description": "Laboratorio de visión por computadora en tiempo real: entrenador de agility FCI/FCM (pistas, teoría y coach de manejo), LSM, análisis de ejercicio y un jardín whimsy controlado con las manos.",
     "type": "Experimental Lab"
   }
 }

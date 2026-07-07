@@ -4,12 +4,21 @@ Real-time computer vision experiments lab powered by Google MediaPipe and Vue 3.
 
 ## Overview
 
-MediaPipe Lab is an experimental playground for building and testing computer vision applications using MediaPipe tasks. Organized into four main sections:
+MediaPipe Lab is an experimental playground for building and testing computer vision applications using MediaPipe tasks. Organized into five main sections:
 
 - **LSM** - Lengua de Señas Mexicana (Mexican Sign Language)
-- **AGILITY** - Canine movement analysis and tracking
+- **AGILITY** - MotionLab Agility Trainer: FCI/FCM course designer, theory micro-lessons with quizzes, and a camera-based handler coach that checks your handling cues (signal arm, front cross rotation, weave entry stance, deceleration) with pose landmarks
 - **EXERCISE** - Human posture and exercise form analysis
+- **WHIMSY** - Jardín de Manos: a hand-gesture garden (pinch to plant flowers, open palm for wind, fist for butterflies, index finger for sparkle trails)
 - **EXPERIMENTS** - Open playground for new features and ideas
+
+### AGILITY · MotionLab Agility Trainer
+
+Built around the FCI Agility Regulations as applied in Mexico by the Federación Canófila Mexicana (FCM):
+
+- **Diseñador de pistas**: drag & drop SVG course editor with the full FCI obstacle set, sequence numbering, dog-path preview, course length + TRS/TRM calculation, and live validation against regulation constraints (obstacle counts, jump minimums, weave rules, spacing, straight approaches). Courses persist to localStorage and export as JSON/SVG.
+- **Teoría en lecciones**: Spanish micro-lessons covering size categories, grades, obstacle specs, contact zones, the weave entry rule, faults/refusals/eliminations and course times — each with a quiz and tracked progress.
+- **Coach de manejo**: MediaPipe Pose drills for the handler's body language — signal-arm extension by dog side, weave-entry stance, full front-cross rotation counting, and deceleration (knee flexion) reps with real-time ✓/✗ criteria.
 
 ## Quick Start
 

@@ -11,13 +11,15 @@ import LSM from './pages/LSM.vue'
 import Agility from './pages/Agility.vue'
 import Exercise from './pages/Exercise.vue'
 import Experiments from './pages/Experiments.vue'
+import Whimsy from './pages/Whimsy.vue'
 
 const routes = {
   '/': Home,
   '/lsm': LSM,
   '/agility': Agility,
   '/exercise': Exercise,
-  '/experiments': Experiments
+  '/experiments': Experiments,
+  '/whimsy': Whimsy
 }
 
 const route = ref(window.location.hash.slice(1) || '/')
