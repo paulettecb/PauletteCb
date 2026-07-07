@@ -6,22 +6,35 @@
       perro virtual. Colócate a 2–3 metros para que se vea tu cuerpo completo.
     </p>
 
-    <div class="maneuver-grid">
-      <button
-        v-for="m in MANEUVERS"
-        :key="m.id"
-        type="button"
-        class="maneuver-card"
-        :class="{ active: m.id === selectedId }"
-        @click="selectManeuver(m.id)"
-      >
-        <span class="maneuver-icon">{{ m.icono }}</span>
-        <span class="maneuver-names">
-          <strong>{{ m.nombreEN }}</strong>
-          <span>{{ m.nombreES }}</span>
-        </span>
-        <span class="maneuver-resumen">{{ m.resumen }}</span>
-      </button>
+    <div
+      v-for="group in MANEUVER_GROUPS"
+      :key="group.id"
+      class="maneuver-group"
+    >
+      <h4 class="group-title">
+        {{ group.titulo }} <small>{{ group.descripcion }}</small>
+      </h4>
+      <div class="maneuver-grid">
+        <button
+          v-for="m in maneuversIn(group.id)"
+          :key="m.id"
+          type="button"
+          class="maneuver-card"
+          :class="{ active: m.id === selectedId }"
+          @click="selectManeuver(m.id)"
+        >
+          <span class="maneuver-icon">{{ m.icono }}</span>
+          <span class="maneuver-names">
+            <strong>{{ m.nombreEN }}</strong>
+            <span>{{ m.nombreES }}</span>
+          </span>
+          <span class="maneuver-resumen">{{ m.resumen }}</span>
+          <span
+            v-if="m.virtualDog"
+            class="virtual-badge"
+          >🐕 perro virtual</span>
+        </button>
+      </div>
     </div>
 
     <div class="coach-layout">
@@ -90,6 +103,11 @@
             ref="canvasRef"
             class="landmarks-canvas"
             aria-label="Landmarks del cuerpo del guía"
+          />
+          <canvas
+            ref="metricsCanvasRef"
+            class="metrics-canvas"
+            aria-label="Métricas en vivo: rotación de hombros, brazos y cadera"
           />
           <div
             v-if="cameraActive"
@@ -218,7 +236,7 @@
           <template v-else>
             <p class="virtual-help">
               Presiona <strong>Lanzar perro</strong>: a la cuenta de tres, el perro corre hacia el
-              salto. {{ maneuver.id === 'false-turn'
+              salto — el mismo escenario exacto cada vez, para estudiar tu timing. {{ maneuver.virtualKind === 'reversal'
                 ? 'Camina hacia el salto y ejecuta tu reversa JUSTO antes del despegue.'
                 : 'Completa tu giro hacia el perro ANTES de que despegue.' }}
             </p>
@@ -269,7 +287,8 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 import { useMediaPipeTrackingCamera } from '../../composables/useMediaPipeTrackingCamera'
-import { GLOSSARY, MANEUVERS, MANEUVERS_BY_ID } from '../../data/agilityManeuvers'
+import { GLOSSARY, MANEUVER_GROUPS, MANEUVERS, MANEUVERS_BY_ID } from '../../data/agilityManeuvers'
+import { POSE } from '../../services/agilityHandlingRules'
 import {
   createDirectionalTurnTracker,
   createDogRun,
@@ -305,10 +324,13 @@ const attempts = ref([])
 const streak = ref(0)
 
 const dogCanvasRef = ref(null)
+const metricsCanvasRef = ref(null)
+const hipTrail = []
 
 const maneuver = computed(() => MANEUVERS_BY_ID[selectedId.value])
 const dogSign = computed(() => (dogSide.value === 'left' ? 1 : -1))
 const perfectCount = computed(() => attempts.value.filter((a) => a.result === 'perfecto').length)
+const maneuversIn = (groupId) => MANEUVERS.filter((m) => m.grupo === groupId)
 
 const {
   cameraActive,
@@ -402,12 +424,129 @@ watch(poseResults, (results) => {
   }
   current.reversalDetector.update(tracker)
 
+  drawMetricsOverlay(landmarks, current, now)
+
   if (mode.value === 'aprender') {
     updateLearnMode(current, now)
   } else if (runState.value === 'running') {
     updateVirtualMode(current, now)
   }
 })
+
+// --- Overlay de articulaciones en vivo ---------------------------------------
+// Se dibuja sin espejear el canvas (las x se invierten en JS) para que los
+// textos no salgan volteados sobre la vista selfie.
+const usable = (lm) => Boolean(lm && (lm.visibility ?? 1) >= 0.5)
+
+const drawMetricsOverlay = (landmarks, current, now) => {
+  const canvas = metricsCanvasRef.value
+  const video = videoRef.value
+  if (!canvas || !video) return
+  const width = video.videoWidth || 0
+  const height = video.videoHeight || 0
+  if (!width || !height) return
+  if (canvas.width !== width) canvas.width = width
+  if (canvas.height !== height) canvas.height = height
+
+  const context = canvas.getContext('2d')
+  context.clearRect(0, 0, width, height)
+  if (!landmarks) { hipTrail.length = 0; return }
+
+  const px = (lm) => ({ x: width - lm.x * width, y: lm.y * height })
+  const metrics = tracker.latest
+
+  // Línea de hombros + rotación (yaw)
+  const ls = landmarks[POSE.leftShoulder]
+  const rs = landmarks[POSE.rightShoulder]
+  if (usable(ls) && usable(rs)) {
+    const a = px(ls)
+    const b = px(rs)
+    context.strokeStyle = '#5562A4'
+    context.lineWidth = 5
+    context.lineCap = 'round'
+    context.beginPath()
+    context.moveTo(a.x, a.y)
+    context.lineTo(b.x, b.y)
+    context.stroke()
+
+    if (metrics?.yaw !== null && metrics?.yaw !== undefined) {
+      const midX = (a.x + b.x) / 2
+      const topY = Math.min(a.y, b.y) - 26
+      const turning = current.turnTracker.state.stage === 'turning' || current.turnTracker.state.stage === 'back'
+      context.font = 'bold 17px sans-serif'
+      context.textAlign = 'center'
+      context.fillStyle = turning ? '#E85DA0' : '#434D80'
+      const dirLabel = current.turnTracker.state.directionLabel
+      context.fillText(
+        `hombros ${Math.round(metrics.yaw)}°${turning && dirLabel ? ` · girando a la ${dirLabel}` : ''}`,
+        midX,
+        topY,
+      )
+    }
+  }
+
+  // Brazos: hombro→codo→muñeca, verdes cuando la señal está extendida
+  const drawArm = (side) => {
+    const ids = side === 'left'
+      ? [POSE.leftShoulder, POSE.leftElbow, POSE.leftWrist]
+      : [POSE.rightShoulder, POSE.rightElbow, POSE.rightWrist]
+    if (!ids.every((i) => usable(landmarks[i]))) return
+    const arm = side === 'left' ? metrics?.leftArm : metrics?.rightArm
+    const color = arm?.extended ? '#4FA47A' : 'rgba(117, 115, 127, 0.55)'
+    context.strokeStyle = color
+    context.lineWidth = arm?.extended ? 6 : 3
+    context.beginPath()
+    const points = ids.map((i) => px(landmarks[i]))
+    context.moveTo(points[0].x, points[0].y)
+    context.lineTo(points[1].x, points[1].y)
+    context.lineTo(points[2].x, points[2].y)
+    context.stroke()
+    context.fillStyle = color
+    context.beginPath()
+    context.arc(points[2].x, points[2].y, arm?.extended ? 9 : 6, 0, Math.PI * 2)
+    context.fill()
+    if (arm?.raised) {
+      context.font = '15px sans-serif'
+      context.fillText('⬆', points[2].x + 14, points[2].y)
+    }
+  }
+  drawArm('left')
+  drawArm('right')
+
+  // Cadera: rastro reciente + flecha de velocidad lateral
+  const lh = landmarks[POSE.leftHip]
+  const rh = landmarks[POSE.rightHip]
+  if (usable(lh) && usable(rh)) {
+    const hip = px({ x: (lh.x + rh.x) / 2, y: (lh.y + rh.y) / 2 })
+    hipTrail.push({ ...hip, t: now })
+    while (hipTrail.length && now - hipTrail[0].t > 1400) hipTrail.shift()
+
+    context.strokeStyle = 'rgba(232, 93, 160, 0.6)'
+    context.lineWidth = 3
+    context.beginPath()
+    hipTrail.forEach((p, i) => (i === 0 ? context.moveTo(p.x, p.y) : context.lineTo(p.x, p.y)))
+    context.stroke()
+
+    const vel = tracker.hipVelocity()
+    if (vel !== null && Math.abs(vel) > 0.05) {
+      // vel > 0 = hacia la izquierda del guía = izquierda de la pantalla selfie.
+      const arrow = Math.min(70, Math.abs(vel) * 220) * (vel > 0 ? -1 : 1)
+      context.strokeStyle = '#E85DA0'
+      context.lineWidth = 5
+      context.beginPath()
+      context.moveTo(hip.x, hip.y)
+      context.lineTo(hip.x + arrow, hip.y)
+      context.stroke()
+      context.beginPath()
+      context.moveTo(hip.x + arrow, hip.y)
+      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10, hip.y - 7)
+      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10, hip.y + 7)
+      context.closePath()
+      context.fillStyle = '#E85DA0'
+      context.fill()
+    }
+  }
+}
 
 const updateLearnMode = (current, now) => {
   if (attemptCompleted.value) return
@@ -462,7 +601,7 @@ const startDogRun = () => {
   setTimeout(() => {
     runStartT = performance.now()
     runState.value = 'running'
-    runMessage.value = maneuver.value.id === 'false-turn'
+    runMessage.value = maneuver.value.virtualKind === 'reversal'
       ? '¡Avanza hacia el salto y regresa justo antes del despegue!'
       : '¡Completa tu giro antes del despegue!'
     animateDog()
@@ -473,7 +612,7 @@ const updateVirtualMode = (current, now) => {
   if (actionT !== null || !dogRun || runStartT === null) return
   const elapsed = now - runStartT
 
-  if (maneuver.value.id === 'false-turn') {
+  if (maneuver.value.virtualKind === 'reversal') {
     const state = current.reversalDetector.state
     if (state.stage === 'reversed' && state.reversalT !== null) {
       actionT = state.reversalT - runStartT
@@ -639,6 +778,9 @@ const stopSession = () => {
   stop()
   stopDogRun()
   voice.stop()
+  hipTrail.length = 0
+  const canvas = metricsCanvasRef.value
+  canvas?.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height)
 }
 
 buildAttempt()
@@ -654,7 +796,11 @@ onBeforeUnmount(() => {
 .maneuvers { display: grid; gap: var(--space-4); }
 .maneuvers-intro { margin: 0; max-width: 780px; color: var(--text-secondary); line-height: var(--leading-relaxed); }
 
+.maneuver-group { display: grid; gap: var(--space-2); }
+.group-title { margin: 0; font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.08em; color: var(--periwinkle-800); }
+.group-title small { text-transform: none; letter-spacing: 0; color: var(--text-muted); font-weight: var(--weight-regular); margin-left: var(--space-2); }
 .maneuver-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr)); gap: var(--space-3); }
+.virtual-badge { justify-self: start; padding: 2px 9px; border-radius: var(--radius-pill); background: var(--pastel-mint); color: var(--ink-900); font-size: var(--text-xs); font-weight: var(--weight-semibold); }
 .maneuver-card {
   display: grid;
   gap: var(--space-2);
@@ -686,11 +832,21 @@ onBeforeUnmount(() => {
 .btn.mini:disabled { opacity: 0.4; cursor: default; }
 .voice-toggle { margin-left: auto; }
 
+.metrics-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 .rep-counter {
   position: absolute;
   top: 12px;
   right: 12px;
-  z-index: 3;
+  z-index: 4;
   display: grid;
   justify-items: center;
   min-width: 72px;
