@@ -1,3 +1,7 @@
 node_modules/
 .DS_Store
 dist/
+
+# Material de estudio CENEVAL: solo local, nunca se publica (peso + derechos de autor)
+proyectos/ceneval/material/*
+!proyectos/ceneval/material/.gitkeep
