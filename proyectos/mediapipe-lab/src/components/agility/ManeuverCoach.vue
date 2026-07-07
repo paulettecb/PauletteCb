@@ -268,17 +268,73 @@
     </div>
 
     <details class="glossary">
-      <summary>📖 Glosario de manejo — los nombres reales</summary>
+      <summary>📖 Glosario de manejo — TODAS las maniobras, paso a paso</summary>
+      <p class="glossary-intro">
+        Las que traen 🎥 se practican con la cámara. Las demás vienen con la descripción completa
+        (pasos, claves y errores) para que puedas ejecutarlas solo leyendo. Toca cualquier término
+        para abrirlo.
+      </p>
       <div class="glossary-grid">
-        <div
+        <details
           v-for="term in GLOSSARY"
           :key="term.en"
           class="glossary-term"
         >
-          <strong>{{ term.en }}</strong>
-          <em>{{ term.es }}</em>
-          <span>{{ term.desc }}</span>
-        </div>
+          <summary>
+            <span class="term-head">
+              <strong>{{ term.en }}</strong>
+              <em>{{ term.es }}</em>
+              <span
+                class="term-badge"
+                :class="{ trainable: term.entrenable }"
+              >{{ term.entrenable ? '🎥 entrenable' : '📖 lectura' }}</span>
+            </span>
+            <span class="term-desc">{{ term.desc }}</span>
+          </summary>
+          <div class="term-body">
+            <p class="term-quees">
+              {{ term.queEs }}
+            </p>
+            <h5>Cómo se hace</h5>
+            <ol>
+              <li
+                v-for="(paso, i) in term.comoSeHace"
+                :key="i"
+              >
+                {{ paso }}
+              </li>
+            </ol>
+            <p class="term-cuando">
+              <strong>Cuándo usarla:</strong> {{ term.cuandoUsar }}
+            </p>
+            <h5>Claves</h5>
+            <ul>
+              <li
+                v-for="(clave, i) in term.claves"
+                :key="i"
+              >
+                {{ clave }}
+              </li>
+            </ul>
+            <h5>Errores comunes</h5>
+            <ul class="term-errores">
+              <li
+                v-for="(error, i) in term.errores"
+                :key="i"
+              >
+                {{ error }}
+              </li>
+            </ul>
+            <button
+              v-if="term.entrenable"
+              type="button"
+              class="btn mini term-practice"
+              @click="practiceFromGlossary(term.entrenable)"
+            >
+              🎥 Practicar esta con la cámara
+            </button>
+          </div>
+        </details>
       </div>
     </details>
   </section>
@@ -397,6 +453,11 @@ const selectManeuver = (id) => {
 const setMode = (value) => {
   mode.value = value
   restartAttempt()
+}
+
+const practiceFromGlossary = (id) => {
+  selectManeuver(id)
+  document.querySelector('.maneuvers')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 watch(dogSide, () => restartAttempt())
@@ -909,12 +970,27 @@ onBeforeUnmount(() => {
 .errores ul { margin: 0; padding-left: 18px; display: grid; gap: var(--space-2); color: var(--text-secondary); font-size: var(--text-sm); }
 
 .glossary { border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-md); background: var(--surface-card); padding: var(--space-3) var(--space-4); }
-.glossary summary { cursor: pointer; font-weight: var(--weight-semibold); color: var(--text-primary); }
+.glossary > summary { cursor: pointer; font-weight: var(--weight-semibold); color: var(--text-primary); }
+.glossary-intro { margin: var(--space-3) 0 0; color: var(--text-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
 .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: var(--space-3); margin-top: var(--space-3); }
-.glossary-term { display: grid; gap: 2px; padding: var(--space-3); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+.glossary-term { padding: var(--space-3); border: var(--border-width) solid var(--border-subtle); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+.glossary-term[open] { grid-column: 1 / -1; border-color: var(--border-strong); background: var(--surface-brand-soft); }
+.glossary-term summary { display: grid; gap: 2px; cursor: pointer; list-style: none; }
+.glossary-term summary::-webkit-details-marker { display: none; }
+.term-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); }
 .glossary-term strong { color: var(--periwinkle-800); }
 .glossary-term em { color: var(--text-accent); font-style: normal; font-size: var(--text-xs); font-weight: var(--weight-semibold); }
-.glossary-term span { color: var(--text-muted); }
+.term-badge { margin-left: auto; padding: 1px var(--space-2); border-radius: var(--radius-pill); background: var(--surface-section); color: var(--text-muted); font-size: var(--text-xs); font-weight: var(--weight-semibold); white-space: nowrap; }
+.term-badge.trainable { background: var(--pop-magenta-soft); color: var(--periwinkle-900); }
+.term-desc { color: var(--text-muted); }
+.term-body { display: grid; gap: var(--space-2); margin-top: var(--space-3); padding-top: var(--space-3); border-top: var(--border-width) solid var(--border-strong); }
+.term-body h5 { margin: var(--space-1) 0 0; color: var(--text-accent); font-size: var(--text-xs); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); }
+.term-body p { margin: 0; color: var(--text-secondary); line-height: var(--leading-relaxed); }
+.term-body ol, .term-body ul { margin: 0; padding-left: 20px; display: grid; gap: var(--space-1); color: var(--text-secondary); line-height: var(--leading-normal); }
+.term-quees { font-size: var(--text-base); }
+.term-errores li { color: var(--danger); }
+.term-errores li::marker { content: '✗ '; }
+.term-practice { justify-self: start; margin-top: var(--space-2); }
 
 @media (max-width: 980px) {
   .coach-layout { grid-template-columns: 1fr; }

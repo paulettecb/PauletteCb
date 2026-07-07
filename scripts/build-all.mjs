@@ -33,7 +33,8 @@ console.log('▶ Build de budget-planner-tdah (Vite propio, base relativa)');
 const budgetOut = path.join(dist, 'proyectos', 'budget-planner-tdah');
 run(`npx vite build proyectos/budget-planner-tdah --base ./ --outDir "${budgetOut}" --emptyOutDir`);
 
-console.log('▶ Copiando sub-proyectos estáticos (lsm, KYN Design System) y projects.json');
+console.log('▶ Copiando sub-proyectos estáticos (lsm, KYN Design System, libro de agility) y projects.json');
+copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(dist, 'proyectos/mediapipe-lab/libro-agility.html'));
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
 copy(path.join(root, 'proyectos/lsm/rescate'), path.join(dist, 'proyectos/lsm/rescate'));
 copy(path.join(root, 'proyectos/KYN Design System'), path.join(dist, 'proyectos/KYN Design System'));

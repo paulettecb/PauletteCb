@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agility · investigación de campo — para Paulette & Kenna</title>
+<meta name="description" content="Mini libro de agility: historia, reglamento FCI/FCM, aparatos, maniobras y cómo empezar a competir en México.">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-500: #8795D2; --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4; --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --oat: #F4F0E8; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-700: #4A4955; --ink-500: #75737F; --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-butter: #F6EBC4; --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2;
+  --pastel-blush: #F6D2DD; --pastel-peach: #F8DCC9; --pastel-lilac: #E2D6F0;
+  --font-display: 'Friendship', cursive;
+  --font-accent: 'Farmhouse', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink-900);
+  font-family: var(--font-sans); line-height: 1.65; font-size: 1.0625rem;
+}
+.pagina { max-width: 820px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+/* Portada */
+.portada { padding: 4.5rem 0 3rem; text-align: center; }
+.portada .sello {
+  display: inline-block; padding: 0.3rem 1rem; border-radius: var(--radius-pill);
+  background: var(--pop-magenta-soft); color: var(--periwinkle-900);
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.portada h1 {
+  margin: 1.2rem 0 0.4rem; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(3rem, 9vw, 5rem); line-height: 1.05; color: var(--periwinkle-700);
+}
+.portada .subtitulo { margin: 0; font-family: var(--font-accent); font-size: 1.4rem; color: var(--ink-700); }
+.portada .dedicatoria { margin: 1.6rem auto 0; max-width: 460px; color: var(--ink-500); font-size: 0.95rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.6rem; }
+.chip { padding: 0.3rem 0.9rem; border-radius: var(--radius-pill); font-size: 0.85rem; font-weight: 600; color: var(--ink-700); }
+.chip:nth-child(6n+1) { background: var(--pastel-sky); }
+.chip:nth-child(6n+2) { background: var(--pastel-butter); }
+.chip:nth-child(6n+3) { background: var(--pastel-mint); }
+.chip:nth-child(6n+4) { background: var(--pastel-blush); }
+.chip:nth-child(6n+5) { background: var(--pastel-lilac); }
+.chip:nth-child(6n+6) { background: var(--pastel-peach); }
+
+/* Índice */
+.indice { margin: 2rem 0 3rem; padding: 1.5rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.indice h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: 2rem; color: var(--periwinkle-800); }
+.indice-grid { display: grid; gap: 0.5rem; }
+.indice-item {
+  display: flex; gap: 0.8rem; align-items: center; padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm); text-decoration: none; color: inherit;
+  transition: background 140ms ease;
+}
+.indice-item:hover { background: var(--periwinkle-50); }
+.indice-emoji { font-size: 1.4rem; }
+.indice-text { display: grid; }
+.indice-text strong { color: var(--periwinkle-800); font-size: 0.98rem; }
+.indice-text span { color: var(--ink-500); font-size: 0.85rem; }
+
+/* Capítulos */
+.capitulo { margin: 0 0 3.5rem; padding-top: 1rem; border-top: 1.5px solid var(--sand); }
+.eyebrow {
+  margin: 1.2rem 0 0.2rem; font-family: var(--font-accent); font-size: 1.05rem;
+  color: var(--pop-magenta); letter-spacing: 0.06em;
+}
+.capitulo h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; color: var(--periwinkle-700); }
+.capitulo h3 { margin: 1.8rem 0 0.5rem; font-size: 1.2rem; color: var(--periwinkle-900); }
+.capitulo p { margin: 0.6rem 0; color: var(--ink-700); }
+.capitulo ul, .capitulo ol { margin: 0.6rem 0; padding-left: 1.4rem; color: var(--ink-700); }
+.capitulo li { margin: 0.25rem 0; }
+.capitulo strong { color: var(--ink-900); }
+
+.nota-campo {
+  margin: 1.2rem 0; padding: 0.9rem 1.1rem; border-left: 4px solid var(--pop-magenta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0; background: var(--pastel-butter);
+  color: var(--ink-700); font-size: 0.98rem;
+}
+.nota-campo::before { content: '📝 Nota de campo'; display: block; margin-bottom: 0.2rem; font-family: var(--font-accent); font-size: 1rem; color: var(--periwinkle-800); }
+.nota-campo p { margin: 0.2rem 0; }
+.esencial {
+  margin: 1.6rem 0 0.4rem; padding: 1rem 1.2rem; border: 1.5px solid var(--periwinkle-300);
+  border-radius: var(--radius-md); background: var(--periwinkle-50); color: var(--periwinkle-900);
+}
+.esencial::before { content: '⭐ Lo esencial'; display: block; margin-bottom: 0.3rem; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--periwinkle-700); }
+.esencial p { margin: 0.3rem 0; color: var(--periwinkle-900); }
+.esencial ul, .esencial ol { color: var(--periwinkle-900); }
+.dato {
+  margin: 1.2rem 0; padding: 0.8rem 1.1rem; border-radius: var(--radius-md);
+  background: var(--pastel-mint); color: var(--ink-700); font-size: 0.98rem;
+}
+.dato::before { content: '💡 Dato'; display: block; margin-bottom: 0.15rem; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--periwinkle-800); }
+.dato p { margin: 0.2rem 0; }
+
+.tabla-scroll { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--sand); border-radius: var(--radius-md); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--white); }
+th, td { padding: 0.55rem 0.8rem; text-align: left; border-bottom: 1px solid var(--ink-100); }
+th { background: var(--periwinkle-100); color: var(--periwinkle-900); font-weight: 600; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+
+.callout-app { margin-top: 1.4rem; padding: 0.8rem 1.1rem; border-radius: var(--radius-md); background: var(--pastel-sky); font-size: 0.98rem; }
+.callout-app a { color: var(--periwinkle-700); font-weight: 600; }
+
+/* Glosario rápido */
+.glosario { margin-top: 3rem; padding-top: 1rem; border-top: 1.5px solid var(--sand); }
+.glosario h2 { margin: 1.2rem 0 0.4rem; font-family: var(--font-display); font-weight: 500; font-size: 2.4rem; color: var(--periwinkle-700); }
+.glosario > p { color: var(--ink-700); }
+.glos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 0.7rem; margin-top: 1.2rem; }
+.glos-item { display: grid; gap: 2px; padding: 0.8rem; background: var(--white); border: 1px solid var(--ink-100); border-radius: var(--radius-sm); font-size: 0.9rem; }
+.glos-item strong { color: var(--periwinkle-800); }
+.glos-item em { color: var(--periwinkle-600); font-style: normal; font-size: 0.8rem; font-weight: 600; }
+.glos-item span { color: var(--ink-500); }
+.glos-cam { font-size: 0.85rem; }
+
+footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1.5px solid var(--sand); text-align: center; color: var(--ink-500); font-size: 0.9rem; }
+footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--periwinkle-600); }
+
+.subir {
+  position: fixed; right: 1rem; bottom: 1rem; padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill); background: var(--periwinkle-600); color: var(--white);
+  font-size: 0.85rem; font-weight: 600; text-decoration: none; box-shadow: var(--shadow-md);
+}
+.subir:hover { background: var(--periwinkle-700); }
+
+@media print {
+  .subir { display: none; }
+  .capitulo { break-inside: avoid-page; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="portada">
+      <span class="sello">Investigación de campo</span>
+      <h1>Agility</h1>
+      <p class="subtitulo">todo el deporte, en un solo archivo</p>
+      <p class="dedicatoria">Para Paulette &amp; Kenna 🐕 — historia, reglamento FCI/FCM, aparatos, maniobras y el plan para pisar tu primera pista.</p>
+      <div class="chips">
+        <span class="chip">FCI · FCM</span>
+        <span class="chip">11 capítulos</span>
+        <span class="chip">26 maniobras</span>
+        <span class="chip">Border Collie approved</span>
+      </div>
+    </header>
+
+    <nav class="indice" aria-label="Índice">
+      <h2>Índice</h2>
+      <div class="indice-grid">
+        <a class="indice-item" href="#que-es">
+          <span class="indice-emoji">🐕</span>
+          <span class="indice-text">
+            <strong>01 · Qué es el agility</strong>
+            <span>La esencia del deporte: tú, Kenna y una pista numerada contra el reloj, sin correa ni contacto.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#historia">
+          <span class="indice-emoji">📜</span>
+          <span class="indice-text">
+            <strong>02 · De Crufts a la FCM</strong>
+            <span>Cómo un relleno de 1978 se volvió el deporte mundial que Kenna correrá bajo reglas FCI.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#organizaciones">
+          <span class="indice-emoji">🏛️</span>
+          <span class="indice-text">
+            <strong>03 · Organizaciones y categorías</strong>
+            <span>FCI, FCM, las cuatro tallas, la medición oficial y los grados G0-G2</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#aparatos">
+          <span class="indice-emoji">🚧</span>
+          <span class="indice-text">
+            <strong>04 · Los aparatos, uno por uno</strong>
+            <span>Saltos, túnel, slalom y contactos: medidas FCI y qué mira el juez en cada uno</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#reglamento">
+          <span class="indice-emoji">📋</span>
+          <span class="indice-text">
+            <strong>05 · El reglamento como mapa</strong>
+            <span>Pista, TRS/TRM, faltas, rehúses y calificaciones: lo que mide el juez, sin sustos.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#maniobras">
+          <span class="indice-emoji">🔀</span>
+          <span class="indice-text">
+            <strong>06 · Maniobras de manejo</strong>
+            <span>El catálogo de handling en seis familias: cruces, giros, envueltas, líneas, distancia y contactos.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#sistemas">
+          <span class="indice-emoji">🧭</span>
+          <span class="indice-text">
+            <strong>07 · Sistemas de handling</strong>
+            <span>Los grandes sistemas de handling y la jerarquía de señales que tu perro realmente lee.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#entrenar-perro">
+          <span class="indice-emoji">🎾</span>
+          <span class="indice-text">
+            <strong>08 · Entrenar al perro desde cero</strong>
+            <span>Juego, shaping, sesiones cortas y fundamentos: así se construye un perro de agility.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#guia-atleta">
+          <span class="indice-emoji">🏃‍♀️</span>
+          <span class="indice-text">
+            <strong>09 · Tú también eres atleta</strong>
+            <span>Walkthrough, memorización TDAH-friendly, timing y tu físico: tu mitad del equipo.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#bienestar">
+          <span class="indice-emoji">🐾</span>
+          <span class="indice-text">
+            <strong>10 · El atleta antes que el cronómetro</strong>
+            <span>Placas de crecimiento, calentamiento, señales de dolor y la regla de oro: divertirse.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#mexico">
+          <span class="indice-emoji">🇲🇽</span>
+          <span class="indice-text">
+            <strong>11 · Competir en México con la FCM</strong>
+            <span>Registro, medición oficial, tu primer G0 y un plan realista de 6 meses con Kenna</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#glosario">
+          <span class="indice-emoji">📖</span>
+          <span class="indice-text">
+            <strong>12 · Glosario rápido</strong>
+            <span>Las 26 maniobras en una línea cada una</span>
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="capitulo" id="que-es">
+      <p class="eyebrow">Capítulo 1 🐕</p>
+      <h2>Qué es el agility</h2>
+<p>Imagínate esto: una cancha de pasto, una pista de obstáculos numerados que Kenna nunca ha visto, y tú corriendo a su lado sin correa, sin tocarla y sin premios en la mano. Solo tu cuerpo, tu voz y lo que entrenaron juntas. Eso es agility.</p>
+
+<p>El juez diseña una pista nueva para cada prueba: entre 15 y 22 obstáculos sobre 100 a 220 metros de recorrido. Tú la memorizas en la caminata previa (sin perro); Kenna la conoce hasta que suena la salida. Tu trabajo es traducírsela en tiempo real, obstáculo por obstáculo, contra el reloj.</p>
+
+<h3>Las reglas del juego, en una probada</h3>
+
+<div class="tabla-scroll"><table>
+<thead><tr><th>Concepto</th><th>Qué significa</th></tr></thead>
+<tbody>
+<tr><td>TRS</td><td>Tiempo de recorrido estándar; lo fija el juez según la pista. Pasarte suma puntos de penalización.</td></tr>
+<tr><td>TRM</td><td>Tiempo máximo (1.5 a 2 veces el TRS). Superarlo = eliminación.</td></tr>
+<tr><td>Falta</td><td>5 puntos: barra derribada o zona de contacto no pisada.</td></tr>
+<tr><td>Rehúse</td><td>5 puntos: el perro se frena o se pasa de largo. Al tercero, eliminación.</td></tr>
+</tbody>
+</table></div>
+
+<p>Gana quien acumule menos penalización total (faltas + tiempo). Menos de 6 puntos es calificación de Excelente. Cero puntos dentro del TRS es la joya: un recorrido limpio.</p>
+
+<h3>Cómo se ve un recorrido limpio</h3>
+
+<p>Desde la orilla se ve casi aburrido de tan fluido. Nada de drama, nada de frenones:</p>
+
+<ul>
+<li>Todas las barras se quedan arriba.</li>
+<li>El perro pisa las zonas de contacto pintadas de la empalizada, la pasarela y el balancín.</li>
+<li>Entra al slalom por el lado correcto (primer poste a su hombro izquierdo) y teje los 12 postes sin saltarse ninguno.</li>
+<li>No duda: cada giro ya venía anunciado por el cuerpo de su guía una fracción de segundo antes.</li>
+</ul>
+
+<p>Ese último punto es el secreto del deporte. El perro casi no mira los obstáculos: te lee a ti. Tu hombro adelantado, hacia dónde apuntan tus pies, cuándo aceleras. El agility se corre con las piernas, pero se gana con la comunicación.</p>
+
+<blockquote class="nota-campo">En competencia, un recorrido dura alrededor de un minuto o menos, pero los equipos pasan un buen rato caminando la pista sin perro: brazos al aire, giros en cámara lenta, cara de concentración total. Nadie se ríe de nadie. Todos saben que ahí se decide la carrera.</blockquote>
+
+<h3>Por qué engancha tanto</h3>
+
+<p><strong>Para el perro</strong> es el combo perfecto: sprint a máxima velocidad, un acertijo nuevo cada vez y trabajo en equipo con su persona favorita. Para una perra con motor como Kenna, es de los pocos deportes donde puede usar todo lo que trae de fábrica.</p>
+
+<p><strong>Para ti</strong> es un problema de diseño que se corre. Memorizas una secuencia, eliges por dónde manejarla, la ejecutas bajo presión y recibes feedback inmediato y brutalmente honesto: la barra cayó o no cayó. Si te gusta debuggear en producción, esto te va a sonar familiar.</p>
+
+<p>Y hay un bonus para un cerebro con TDAH: sesiones cortas, reglas claras, adrenalina con propósito y un hiperfoco de un minuto que se siente como superpoder. En la pista no hay espacio para pensar en pendientes; solo existe el siguiente obstáculo.</p>
+
+<h3>Por qué las Border Collies mandan aquí</h3>
+
+<p>No es casualidad que en las finales grandes se vean tantas caras blanquinegras. La Border Collie fue criada durante generaciones para pastorear leyendo el cuerpo humano a distancia: un silbido, una postura, un paso lateral. Es exactamente la habilidad que el agility premia.</p>
+
+<ul>
+<li><strong>Lectura fina:</strong> detecta micro-movimientos tuyos antes de que tú notes que los hiciste.</li>
+<li><strong>Motor físico:</strong> aceleración, giros cerrados y resistencia de jornada completa.</li>
+<li><strong>Hambre de trabajo:</strong> para ella, correr la pista contigo <em>es</em> el premio.</li>
+</ul>
+
+<p>Kenna competirá casi seguro en la categoría Large (perros de 48 cm o más a la cruz), saltando barras de 55 a 60 cm; su medición oficial se hace antes de su primera competencia. Ojo con la letra chiquita de la raza: como lee todo, también lee tus errores. Un hombro girado de más y ya está tomando el túnel equivocado, convencidísima de que eso pediste.</p>
+
+<div class="dato">El agility nació como espectáculo de medio tiempo en Crufts 1978, ideado por John Varley con pista de Peter Meanwell. Para 1980 The Kennel Club ya lo reconocía como deporte oficial, y el primer Campeonato Mundial FCI se corrió en 1996.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial:</strong></p>
+<ul>
+<li>Agility = guía + perro corriendo una pista numerada contra el TRS, sin tocar al perro ni a los obstáculos: solo cuerpo y voz.</li>
+<li>Recorrido limpio: cero faltas, cero rehúses, dentro del TRS. Falta o rehúse = 5 puntos; 3 rehúses o pasarte del TRM = eliminación.</li>
+<li>El perro te lee a ti, no a los obstáculos: el deporte es comunicación en movimiento.</li>
+<li>Las Border Collies dominan porque el pastoreo las hizo expertas en leer cuerpos humanos, y eso corta ambos lados: Kenna también leerá tus errores.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="historia">
+      <p class="eyebrow">Capítulo 2 📜</p>
+      <h2>De Crufts a la FCM</h2>
+<p>El agility no nació en un laboratorio de deportes caninos. Nació porque a alguien le sobraban minutos en el programa de una exposición canina. En serio.</p>
+
+<h3>Crufts 1978: el hueco en el programa</h3>
+<p>Crufts es la exposición canina más famosa de Inglaterra, y en 1978 John Varley, miembro del comité, tenía un problema muy concreto: entretener al público entre eventos del ring principal. Le pidió a Peter Meanwell, adiestrador con experiencia, que diseñara algo que se pudiera ver desde las gradas.</p>
+<p>Meanwell armó una pista inspirada en el salto ecuestre: obstáculos, ritmo, un perro y su guía corriendo contra el reloj. La demostración se robó el show. El público no quería más pausas; quería ver perros volar.</p>
+
+<blockquote class="nota-campo">En cualquier recorrido moderno todavía se nota el ADN ecuestre: barras que caen, combinaciones, trazados con curvas. Lo que cambió es que aquí el "jinete" corre a un lado del caballo.</blockquote>
+
+<h3>1980: The Kennel Club lo hace oficial</h3>
+<p>Dos años después, The Kennel Club (piensa en el equivalente británico de la FCM) lo reconoció como deporte oficial. Eso lo sacó del terreno del espectáculo de medio tiempo y lo convirtió en algo con reglas, jueces y calendario.</p>
+<p>Durante los ochenta y noventa el deporte explotó: cruzó a Europa continental, a Estados Unidos y a decenas de países más, cada uno con sus propias organizaciones y circuitos.</p>
+
+<h3>La FCI entra al juego</h3>
+<p>La FCI —la federación internacional a la que pertenece la FCM— publicó su primer reglamento de agility a inicios de los noventa, y en 1996 organizó su primer Campeonato Mundial.</p>
+<p>Esto te importa por una razón práctica: el reglamento con el que vas a competir en México desciende directo de esa línea. Cuando la FCI cambia algo, la FCM lo aplica.</p>
+
+<h3>Un reglamento vivo</h3>
+<p>El agility no es pieza de museo; sus reglas siguen cambiando, casi siempre por seguridad y equidad:</p>
+<ul>
+<li>En 2018 la FCI eliminó la mesa del reglamento; el túnel plano (colapsable) también salió.</li>
+<li>El neumático hoy es obligatoriamente tipo "breakaway": se abre al impacto en vez de atrapar al perro.</li>
+<li>El reglamento vigente desde el 1 de enero de 2023 agregó una cuarta talla, Intermediate (43 a menos de 48 cm), para que los perros medianos-grandes no saltaran alturas de Large.</li>
+</ul>
+
+<div class="tabla-scroll">
+<table>
+<thead>
+<tr><th>Año</th><th>Qué pasó</th></tr>
+</thead>
+<tbody>
+<tr><td>1978</td><td>Demostración en Crufts: idea de John Varley, pista de Peter Meanwell</td></tr>
+<tr><td>1980</td><td>The Kennel Club lo reconoce como deporte oficial</td></tr>
+<tr><td>Inicios de los 90</td><td>La FCI publica su primer reglamento de agility</td></tr>
+<tr><td>1996</td><td>Primer Campeonato Mundial FCI de Agility</td></tr>
+<tr><td>2018</td><td>Sale la mesa del reglamento FCI (y también el túnel plano)</td></tr>
+<tr><td>2023</td><td>Entra la categoría Intermediate con el reglamento nuevo</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>El deporte hoy (y en México)</h3>
+<p>El calendario grande gira alrededor del Mundial FCI y del European Open, más los circuitos nacionales de decenas de países. México compite en esa liga vía la FCM que, como miembro FCI, aplica el reglamento 2023 tal cual.</p>
+<p>En cancha local eso se traduce en los grados G0, G1 y G2, y en las cuatro tallas FCI. Kenna, como Border Collie típica, apunta a Large (48 cm o más a la cruz), aunque la medición oficial se hace antes de su primera competencia; hasta entonces, nada está firmado.</p>
+
+<div class="dato">De Crufts 1978 al primer Mundial FCI pasaron apenas 18 años. Muy pocos deportes saltan de "relleno entre eventos" a campeonato mundial tan rápido.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>1978: demostración en Crufts (Varley + Meanwell), inspirada en el salto ecuestre.</li>
+<li>1980: The Kennel Club lo oficializa como deporte.</li>
+<li>Inicios de los 90: primer reglamento FCI; 1996: primer Mundial FCI.</li>
+<li>El reglamento sigue vivo: la mesa salió en 2018 y la talla Intermediate entró en 2023.</li>
+<li>Tú compites bajo esa misma línea: FCM = miembro FCI, reglamento 2023, grados G0, G1 y G2.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="organizaciones">
+      <p class="eyebrow">Capítulo 3 🏛️</p>
+      <h2>Organizaciones y categorías</h2>
+<p>Antes de tu primera competencia te vas a topar con una sopa de siglas: FCI, FCM, G0, Large. Parece burocracia, pero en realidad son cuatro ideas simples. Este capítulo las desenreda para que llegues a inscribirte sabiendo exactamente dónde entra Kenna.</p>
+
+<h3>¿Quién pone las reglas? FCI y FCM</h3>
+<p>La <strong>FCI</strong> (Federación Cinológica Internacional) es el organismo mundial que publica el reglamento de agility. El que está en vigor entró el 1 de enero de 2023 y es el que se usa hoy (edición 2025).</p>
+<p>La <strong>FCM</strong> (Federación Canófila Mexicana) es miembro de la FCI, así que en México se compite con ese mismo reglamento. Traducción práctica: lo que entrenes bajo reglas FCM te sirve tal cual en cualquier país FCI. No hay una "versión mexicana" que luego tengas que desaprender.</p>
+
+<h3>Las cuatro tallas</h3>
+<p>La talla no depende de la raza ni del peso, sino de la <strong>altura a la cruz</strong> (la parte más alta de los hombros, justo arriba de las patas delanteras). Desde el reglamento 2023 son cuatro categorías; la nueva es Intermediate, creada para los perros que quedaban justo abajo del corte de Large.</p>
+<div class="tabla-scroll">
+<table>
+<thead>
+<tr><th>Talla</th><th>Altura a la cruz</th><th>Altura de salto</th></tr>
+</thead>
+<tbody>
+<tr><td>Small (S)</td><td>menos de 35 cm</td><td>25–30 cm</td></tr>
+<tr><td>Medium (M)</td><td>35 a menos de 43 cm</td><td>35–40 cm</td></tr>
+<tr><td>Intermediate (I)</td><td>43 a menos de 48 cm</td><td>45–50 cm</td></tr>
+<tr><td>Large (L)</td><td>48 cm o más</td><td>55–60 cm</td></tr>
+</tbody>
+</table>
+</div>
+<p>Un Border Collie típico mide 48 cm o más, así que Kenna casi seguro compite en <strong>Large</strong>: barras a 55–60 cm. Vale la pena entrenar desde ahora con esas alturas en mente, subiendo de forma gradual.</p>
+
+<h3>La medición oficial</h3>
+<p>Antes de la primera competencia, un juez mide oficialmente a tu perro y esa medida queda registrada: es la que define su categoría. No es negociable ni se decide "a ojo" el día del evento.</p>
+<p>Lo que sí puedes preparar: que Kenna tolere que una persona desconocida la toque y le apoye un medidor sobre la cruz mientras se queda parada y quieta. Practícalo en casa como un truco más, con premios. Es un trámite de unos minutos, pero para un perro sensible puede ser lo más estresante del día.</p>
+
+<blockquote class="nota-campo">En una medición vi a un pastor que llevaba meses de entrenamiento impecable ponerse a bailar de nervios sobre la mesa del juez. La dueña me dijo después: "entrené el slalom, no entrené que lo midieran". Anótalo.</blockquote>
+
+<h3>Los grados en México: G0, G1, G2</h3>
+<p>La FCM organiza la competencia por grados de avance:</p>
+<ul>
+<li><strong>G0</strong>: el grado inicial. Aquí empiezan todos los binomios nuevos, con pistas más fluidas y menos trampas técnicas.</li>
+<li><strong>G1</strong>: el siguiente escalón, con trazados más exigentes.</li>
+<li><strong>G2</strong>: el grado más alto, con las pistas más técnicas.</li>
+</ul>
+<p>¿Cómo se sube? Acumulando buenos resultados: en la práctica, recorridos con calificación <strong>Excelente</strong> y sin faltas son los que te abren la puerta al siguiente grado. El número exacto de resultados que pide la FCM confírmalo en la convocatoria vigente o con tu club; es el tipo de detalle que puede ajustarse de un año a otro.</p>
+<p>El grado es del <em>binomio</em>, no solo del perro: se evalúa cómo corren juntos tú y Kenna. Empezar en G0 no es un castigo, es la fase donde construyes la base sin la presión de trazados endiablados.</p>
+
+<h3>Otras siglas que verás en internet</h3>
+<p>Cuando busques videos vas a encontrar <strong>AKC</strong> (Estados Unidos), <strong>USDAA</strong> y <strong>UKI</strong>, entre otras. Son federaciones con reglamentos propios: alturas, obstáculos y clases distintas a las de la FCI. Sus videos sirven muchísimo para inspirarte y estudiar manejo, pero cuando dudes de una regla concreta, la fuente que te importa es el reglamento FCI que aplica la FCM.</p>
+
+<div class="dato">El agility nació como demostración de medio tiempo en Crufts 1978, idea de John Varley con pista diseñada por Peter Meanwell. The Kennel Club lo reconoció como deporte oficial en 1980, la FCI publicó su primer reglamento a inicios de los 90 y el primer Campeonato Mundial FCI se corrió en 1996.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial:</strong></p>
+<ul>
+<li>La FCM aplica el reglamento FCI (en vigor desde 2023): lo que entrenes aquí vale en todo el mundo FCI.</li>
+<li>Cuatro tallas por altura a la cruz: S, M, I, L. Kenna casi seguro es Large, con barras a 55–60 cm.</li>
+<li>La medición oficial es antes de la primera competencia: practica desde ya que la toquen y la midan.</li>
+<li>Empiezas en G0 y subes a G1 y G2 con recorridos Excelentes sin falta (confirma el requisito exacto con la FCM).</li>
+<li>AKC, USDAA y UKI son otras ligas con reglas propias: úsalas para inspirarte, no para estudiar reglamento.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="aparatos">
+      <p class="eyebrow">Capítulo 4 🚧</p>
+      <h2>Los aparatos, uno por uno</h2>
+<p>Una pista de agility se arma con 15 a 22 obstáculos, y mínimo 7 son saltos. Antes de aprender a guiar a Kenna entre ellos, conviene saber qué es cada cosa y qué mide. Aquí van, uno por uno, con las medidas del reglamento FCI que aplica la FCM.</p>
+
+<h3>Saltos de barra</h3>
+<p>El obstáculo más común: dos soportes y una barra que cae si el perro la toca. Barra derribada = falta de 5 puntos. La altura depende de la talla: Kenna, como Border Collie de categoría Large, salta 55-60 cm.</p>
+
+<h3>Muro (o viaducto)</h3>
+<p>Parece pared sólida, pero lleva elementos sueltos encima que caen al contacto, igual que una barra. Solo puede aparecer una vez por pista. Para el perro es un salto "ciego": no ve qué hay del otro lado, y eso a algunos les impone.</p>
+
+<h3>Neumático breakaway</h3>
+<p>Un aro suspendido con apertura interior de 50-60 cm. La altura al centro varía: 55 cm para Small y Medium, 70 cm para Intermediate, 80 cm para Large. Desde el reglamento vigente es obligatorio que sea tipo <em>breakaway</em>: si el perro lo golpea, el aro se abre en vez de atraparlo.</p>
+
+<blockquote class="nota-campo">En una competencia vi un aro abrirse en pleno salto: el perro pasó de largo, sacudió la cabeza y siguió corriendo como si nada. Con los aros rígidos de antes, esa historia terminaba distinto.</blockquote>
+
+<h3>Salto de longitud</h3>
+<p>Varios módulos bajos en fila que el perro debe librar a lo largo, no pisar. Su reto no es la altura sino la extensión, y que el perro no "recorte" saliéndose por un costado.</p>
+
+<h3>Túnel rígido</h3>
+<p>Tubo de 60 cm de diámetro y de 3 a 6 m de largo. Puede ir recto o curvo y, a diferencia del slalom, el muro y el neumático, puede repetirse en una misma pista. A la mayoría de los perros les encanta; el problema suele ser sacarlos de la obsesión por meterse a cada túnel que ven.</p>
+
+<h3>Slalom</h3>
+<p>Doce postes en línea, separados 60 cm, de aprox. 1 a 1.20 m de alto. La regla que lo define todo: el perro <strong>siempre</strong> entra con el primer poste a su hombro izquierdo, sin importar de dónde venga. Es el aparato que más horas de entrenamiento pide y, como el muro y el neumático, aparece máximo una vez por pista.</p>
+
+<h3>Los tres de contacto</h3>
+<p>Empalizada (A-frame), pasarela (dog walk) y balancín (seesaw) comparten una regla: tienen zonas pintadas en los extremos que el perro debe pisar al subir y al bajar. Brincarse una zona = falta de 5 puntos.</p>
+
+<ul>
+<li><strong>Empalizada:</strong> dos rampas en "A" con el vértice a aprox. 1.70 m. El perro sube, cruza y baja.</li>
+<li><strong>Pasarela:</strong> una tabla elevada con rampa de subida y de bajada. Larga y angosta: premia el equilibrio a velocidad.</li>
+<li><strong>Balancín:</strong> una tabla que pivota con el peso del perro. Es el único aparato que se mueve, y por eso el que más trabajo de confianza necesita.</li>
+</ul>
+
+<blockquote class="nota-campo">En los contactos se nota quién entrenó con calma: los perros apurados vuelan la zona de bajada y el juez levanta la mano sin dudarlo.</blockquote>
+
+<h3>Las medidas, en una tabla</h3>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Aparato</th><th>Medidas clave (FCI)</th><th>Para Kenna (Large)</th></tr></thead>
+<tbody>
+<tr><td>Salto de barra</td><td>S 25-30 / M 35-40 / I 45-50 / L 55-60 cm</td><td>55-60 cm</td></tr>
+<tr><td>Neumático breakaway</td><td>Apertura 50-60 cm; centro a 55 (S/M), 70 (I) u 80 cm (L)</td><td>Centro a 80 cm</td></tr>
+<tr><td>Túnel rígido</td><td>60 cm de diámetro, 3-6 m de largo</td><td>Igual para todas las tallas</td></tr>
+<tr><td>Slalom</td><td>12 postes, separación 60 cm, aprox. 1-1.20 m de alto</td><td>Entrada: poste 1 al hombro izquierdo</td></tr>
+<tr><td>Empalizada</td><td>Vértice a aprox. 1.70 m, zonas de contacto pintadas</td><td>Pisar zonas al subir y bajar</td></tr>
+<tr><td>Pasarela y balancín</td><td>Zonas de contacto pintadas en los extremos</td><td>Pisar zonas al subir y bajar</td></tr>
+</tbody>
+</table></div>
+
+<h3>Los que ya no verás</h3>
+<p>Si ves videos viejos de agility, notarás dos aparatos que ya no existen en FCI. La <strong>mesa</strong> —donde el perro debía frenar en seco y quedarse quieto unos segundos— salió del reglamento en 2018. El <strong>túnel plano</strong> (colapsable, de tela) también fue retirado: la tela podía enredarse y frenar al perro a media salida, con sustos de por medio.</p>
+
+<p>El patrón detrás de ambos retiros es el mismo que hizo obligatorio el neumático breakaway: el reglamento ha ido eliminando todo lo que castiga el cuerpo del perro. El agility moderno quiere velocidad, sí, pero nunca a costa de la fisioterapia.</p>
+
+<div class="dato">Antes de los aros breakaway, el neumático rígido tenía fama de atrapar perros a media pasada. Por eso la FCI acabó exigiendo que el aro se abra al impacto en toda competencia oficial.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial:</strong></p>
+<ul>
+<li>Kenna compite en Large: barras a 55-60 cm y neumático con centro a 80 cm.</li>
+<li>Slalom: 12 postes a 60 cm; la entrada siempre deja el poste 1 al hombro izquierdo del perro.</li>
+<li>Empalizada, pasarela y balancín tienen zonas pintadas obligatorias; no pisarlas cuesta 5 puntos, igual que tirar una barra.</li>
+<li>Slalom, muro y neumático aparecen máximo una vez por pista; los túneles pueden repetirse.</li>
+<li>Mesa y túnel plano ya no existen en FCI: el bienestar del perro manda.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="reglamento">
+      <p class="eyebrow">Capítulo 5 📋</p>
+      <h2>El reglamento como mapa</h2>
+<p>Piensa en el reglamento como el mapa del terreno, no como la lista de formas de reprobar. Cuando sabes exactamente qué mide el juez, dejas de correr con miedo y empiezas a correr con plan.</p>
+<p>Todo lo de este capítulo sale del reglamento FCI vigente desde 2023, el mismo que aplica la FCM. Son pocas reglas y todas tienen lógica.</p>
+
+<h3>La pista, en números</h3>
+<ul>
+<li><strong>Longitud:</strong> de 100 a 220 m.</li>
+<li><strong>Obstáculos:</strong> entre 15 y 22, con mínimo 7 saltos.</li>
+<li><strong>Distancia entre obstáculos:</strong> alrededor de 5 a 7 m, medidos sobre la trayectoria del perro, no en línea recta. Por eso el mismo tramo puede ser corto para ti y largo para Kenna.</li>
+</ul>
+
+<h3>El reloj: TRS y TRM</h3>
+<p>El juez fija el <strong>TRS</strong> (tiempo de recorrido estándar) según la pista del día. No es un número fijo del deporte: cambia en cada competencia.</p>
+<p>El <strong>TRM</strong> (tiempo máximo) es 1.5 a 2 veces el TRS. Pasarte del TRS te cuesta puntos; pasarte del TRM te elimina. El TRS es la meta, el TRM es la frontera.</p>
+
+<h3>Faltas: 5 puntos cada una</h3>
+<ul>
+<li>Tirar la barra de un salto.</li>
+<li>No pisar una zona de contacto (empalizada, pasarela o balancín).</li>
+</ul>
+<p>La falta no se corrige: sigues corriendo y los 5 puntos se quedan en tu cuenta.</p>
+
+<h3>Rehúses: 5 puntos, y se acumulan</h3>
+<p>Rehúse es cuando el perro llega al obstáculo y no lo toma: se frena, se desvía o pasa de largo. También cuesta 5 puntos, pero con dos diferencias importantes.</p>
+<ul>
+<li>Sí se corrige: tienes que regresar y hacer que tome el obstáculo antes de seguir.</li>
+<li>Al tercer rehúse en la misma pista, quedan eliminados.</li>
+</ul>
+
+<h3>Eliminación: qué la causa</h3>
+<ul>
+<li>Superar el TRM.</li>
+<li>Tomar un obstáculo equivocado o fuera de orden.</li>
+<li>Que el perro abandone la pista o deje de trabajar contigo.</li>
+<li>Acumular 3 rehúses.</li>
+</ul>
+<p>Y aquí el tono importa: la eliminación no es un drama, es la moneda de cambio del aprendizaje. En Grado 0 prácticamente todo el mundo colecciona varias antes de su primer recorrido limpio.</p>
+
+<blockquote class="nota-campo">Apunte de un domingo de pista: los perros rápidos casi nunca se eliminan por tiempo. Se eliminan porque toman el túnel equivocado a toda velocidad. El TRM rara vez es el problema; leer bien el orden del recorrido, sí.</blockquote>
+
+<h3>Cómo se arma tu calificación</h3>
+<p>Tu penalización total es una sola suma: <strong>puntos de faltas y rehúses + puntos de tiempo</strong>. Los puntos de tiempo son los segundos (con decimales) que te pases del TRS, contados tal cual.</p>
+<p>Ejemplo hipotético: una barra tirada (5 puntos) más llegar 0.8 segundos arriba del TRS da 5.8 de penalización total. Todavía alcanza para Excelente.</p>
+
+<div class="tabla-scroll"><table>
+<thead><tr><th>Calificación</th><th>Penalización total</th></tr></thead>
+<tbody>
+<tr><td>Excelente</td><td>menos de 6</td></tr>
+<tr><td>Muy Bueno</td><td>de 6 a menos de 16</td></tr>
+<tr><td>Bueno</td><td>de 16 a menos de 26</td></tr>
+<tr><td>No clasificado</td><td>26 o más</td></tr>
+</tbody>
+</table></div>
+
+<p>El recorrido perfecto es cero penalización: sin faltas, sin rehúses, dentro del TRS. En pista lo vas a oír como <em>clean run</em> o simplemente "cero".</p>
+
+<div class="dato">Fíjate en el diseño de los números: una falta vale 5 y Excelente es todo lo que quede debajo de 6. Traducción: puedes tirar una barra y aun así salir con Excelente, si tu tiempo te respalda.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>Pista: 100-220 m, 15-22 obstáculos, mínimo 7 saltos, aprox. 5-7 m entre obstáculos sobre la trayectoria del perro.</li>
+<li>El TRS lo fija el juez; el TRM es 1.5-2 veces el TRS. Pasar el TRS suma puntos; pasar el TRM elimina.</li>
+<li>Falta = 5 puntos (barra tirada o contacto no pisado). No se corrige.</li>
+<li>Rehúse = 5 puntos y se corrige repitiendo el obstáculo; 3 rehúses = eliminación.</li>
+<li>Otras eliminaciones: obstáculo equivocado o fuera de orden, perro que abandona la pista.</li>
+<li>Penalización total = faltas + rehúses + segundos sobre el TRS. Excelente es menos de 6; Muy Bueno de 6 a menos de 16; Bueno de 16 a menos de 26.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="maniobras">
+      <p class="eyebrow">Capítulo 6 🔀</p>
+      <h2>Maniobras de manejo</h2>
+<p>Hasta aquí hemos hablado de lo que hace el perro. Este capítulo es de lo que haces <em>tú</em>. En agility la información viaja de tu cuerpo al de Kenna: hombros, mano, mirada, dirección de carrera. Las maniobras de manejo son tu vocabulario.</p>
+
+<p>No necesitas dominarlas todas para debutar en G0; necesitas el mapa: qué existe y qué resuelve cada familia.</p>
+
+<div class="tabla-scroll">
+<table>
+<thead>
+<tr><th>Familia</th><th>Qué resuelve</th></tr>
+</thead>
+<tbody>
+<tr><td>Cruces</td><td>Cambiar de lado sin frenar al perro</td></tr>
+<tr><td>Giros sin cambio de lado</td><td>Redirigir quedándote donde estás</td></tr>
+<tr><td>Envueltas</td><td>Giros de 180° apretados sobre el salto</td></tr>
+<tr><td>Líneas técnicas</td><td>Entradas con trampa que ponen los jueces</td></tr>
+<tr><td>Distancia y salidas</td><td>Manejar lejos y ganar posición</td></tr>
+<tr><td>Criterios de contacto</td><td>Cómo termina el perro los obstáculos de zona</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>1. Cruces: cambiar de lado</h3>
+<p>La pista zigzaguea y tú debes quedar del lado correcto para la siguiente curva, sin romperle el ritmo al perro.</p>
+<ul>
+<li><strong>Front cross:</strong> giras de frente al perro y cambias de lado por delante de él; máxima información, pero exige llegar antes que él.</li>
+<li><strong>Rear cross:</strong> cruzas por detrás mientras el perro se compromete con el obstáculo; te ahorra piernas, pide un perro que va adelante con confianza.</li>
+<li><strong>Blind cross:</strong> cambias de lado dándole la espalda un instante; el más veloz, pero el perro debe buscar tu mano nueva sin dudar.</li>
+<li><strong>Tandem turn:</strong> cruce por detrás justo en la curva, cuando el perro gira alejándose de ti.</li>
+</ul>
+
+<blockquote class="nota-campo">En pista, los binomios que limpian casi nunca son los más rápidos: son los que decidieron su cruce dos o tres obstáculos antes. La duda del handler se le nota al perro al instante.</blockquote>
+
+<h3>2. Giros sin cambio de lado</h3>
+<ul>
+<li><strong>Post turn / shoulder pull:</strong> el perro gira a tu alrededor como alrededor de un poste, siguiendo tu hombro.</li>
+<li><strong>False turn:</strong> finges un giro para que el perro acorte zancada y cierre la curva, y luego retomas la línea real.</li>
+<li><strong>Reverse spin:</strong> giras una vuelta completa sobre tu eje: jala al perro hacia ti y aprieta el giro.</li>
+</ul>
+
+<h3>3. Envueltas: 180° pegados al salto</h3>
+<p>Girar apretado sobre el ala del salto y regresar. A la velocidad de una border collie, cada envuelta bien cerrada son metros que Kenna se ahorra.</p>
+<ul>
+<li><strong>Wrap:</strong> la básica: el perro envuelve el ala y vuelve por donde vino.</li>
+<li><strong>Ketschker:</strong> un front cross que se funde en blind sobre el salto; vistoso y rapidísimo cuando sale limpio.</li>
+<li><strong>Jaakko:</strong> envuelta por la cara trasera del salto en la que el perro gira alejándose de ti.</li>
+<li><strong>Whisky:</strong> variante de la envuelta trasera; cambia el brazo y la rotación con que la señalas.</li>
+<li><strong>Lap turn:</strong> el perro viene de frente hacia ti y lo giras con la mano, casi pegado a tus piernas, para mandarlo en otra dirección.</li>
+</ul>
+
+<h3>4. Líneas técnicas</h3>
+<p>Trazos que aparecen más conforme subes de grado; aquí se separa la velocidad de la precisión.</p>
+<ul>
+<li><strong>Serpentine:</strong> una línea de saltos que el perro teje en zigzag mientras tú corres casi recto.</li>
+<li><strong>Threadle:</strong> el perro pasa entre dos obstáculos y vuelve a entrar por el mismo lado; cirugía fina.</li>
+<li><strong>Backside / push:</strong> mandas al perro a saltar por la cara trasera del obstáculo, no por la que ve de frente.</li>
+<li><strong>Slice:</strong> el perro corta el salto en diagonal, sin frenar, para conservar la línea.</li>
+</ul>
+
+<h3>5. Distancia y salidas</h3>
+<p>El perro casi siempre corre más que tú. Estas herramientas te dejan manejar sin pisar cada metro de la pista.</p>
+<ul>
+<li><strong>Lead-out:</strong> dejas al perro en la salida y te adelantas en la pista; exige un quieto sólido.</li>
+<li><strong>Lead-out pivot:</strong> lead-out más un giro tuyo mientras el perro toma los primeros saltos, para redirigirlo desde el arranque.</li>
+<li><strong>Send:</strong> mandas al perro a un obstáculo lejano mientras tú recortas hacia el siguiente tramo.</li>
+<li><strong>Layering:</strong> manejas con obstáculos de por medio: el perro trabaja su línea y tú corres la tuya en paralelo.</li>
+</ul>
+
+<h3>6. Criterios de contacto</h3>
+<p>Empalizada, pasarela y balancín tienen zonas pintadas que el perro debe pisar; no pisarlas es falta de 5 puntos. El criterio es la regla que entrenas para terminarlos.</p>
+<ul>
+<li><strong>2-on-2-off:</strong> el perro frena con dos patas en el suelo y dos en la rampa; seguro y fácil de mantener, a cambio de tiempo.</li>
+<li><strong>Running contact:</strong> el perro cruza la zona corriendo, sin detenerse; más rápido y bastante más difícil de entrenar bien.</li>
+</ul>
+
+<div class="dato">Varias maniobras llevan el nombre del handler que las popularizó —el jaakko viene de un competidor finlandés— y el catálogo sigue creciendo.</div>
+
+<p>Este capítulo es el mapa, no la clase. El paso a paso de cada maniobra —pies, brazo, timing— vive en el glosario del coach de maniobras de MotionLab, y 11 de ellas las puedes practicar tú sola frente a la cámara, sin Kenna, hasta que el movimiento te salga sin pensarlo.</p>
+
+<div class="esencial">
+<p><strong>Lo esencial:</strong> seis familias: cruces, giros sin cambio de lado, envueltas, líneas técnicas, distancia y criterios de contacto. Para arrancar en G0 te bastan front cross, rear cross, post turn, wrap y un criterio de contacto claro. El paso a paso vive en el glosario de MotionLab; 11 maniobras se practican con la cámara.</p>
+</div>
+      <p class="callout-app">🎥 Once de estas maniobras se practican con la cámara en <a href="./index.html#/agility">MotionLab · Agility → Maniobras</a>, y el glosario completo paso a paso vive ahí mismo.</p>
+    </section>
+
+    <section class="capitulo" id="sistemas">
+      <p class="eyebrow">Capítulo 7 🧭</p>
+      <h2>Sistemas de handling</h2>
+<p>En tu primer fin de semana viendo agility de verdad vas a notar algo raro: dos guías corren la misma pista con movimientos completamente distintos y los dos clasifican. Uno gira con el brazo extendido, la otra apenas rota los hombros. No es improvisación: cada quien habla un idioma distinto con su perro.</p>
+
+<p>Ese idioma se llama <strong>sistema de handling</strong>, y elegir el tuyo es de las decisiones más importantes de tu primer año.</p>
+
+<h3>Un sistema es un lenguaje, no un truco</h3>
+
+<p>Un sistema es un conjunto de señales con significado fijo: este giro siempre quiere decir "curva cerrada hacia mí", este brazo siempre quiere decir "sigue de largo". Lo importante no es cuál señal usas, sino que siempre signifique lo mismo.</p>
+
+<p>Tú trabajas con design systems, así que esto te va a sonar: no importa tanto si el botón es azul o morado; importa que el mismo componente se comporte igual en toda la app. Aquí la usuaria es Kenna, corre a toda velocidad y no puede leer documentación. La consistencia <em>es</em> la interfaz.</p>
+
+<h3>Los cuatro grandes</h3>
+
+<p>Casi todo lo que vas a ver en pistas, seminarios y cursos en línea desciende de alguna de estas escuelas:</p>
+
+<div class="tabla-scroll">
+<table>
+<thead>
+<tr><th>Sistema</th><th>Origen</th><th>Idea central</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>OneMind Dogs</strong></td><td>Finlandia</td><td>Parte de cómo el perro lee al humano por naturaleza. Técnicas con nombre propio que eliges según la línea que corre el perro.</td></tr>
+<tr><td><strong>Greg Derrett (GD)</strong></td><td>Reino Unido</td><td>Reglas estrictas y cerradas: cada señal tiene un significado único y jamás se contradice. Consistencia por encima de todo.</td></tr>
+<tr><td><strong>Linda Mecklenburg (Awesome Paws)</strong></td><td>EUA</td><td>La posición en pista y la orientación de los hombros como señal principal: el perro va hacia donde apunta tu cuerpo.</td></tr>
+<tr><td><strong>Estilo europeo de correr (Silvia Trkman)</strong></td><td>Eslovenia</td><td>Menos reglas, más carrera: corre de verdad con tu perro, entrena obstáculos independientes y celebra la velocidad.</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Ninguno es "el bueno". Con los cuatro se ha ganado al más alto nivel. Lo que sí falla, siempre, es hablar los cuatro a la vez.</p>
+
+<h3>La jerarquía: qué lee el perro primero</h3>
+
+<p>Esto es lo más útil del capítulo. El perro no le da el mismo peso a todas tus señales; las lee en un orden de prioridad bastante estable:</p>
+
+<ol>
+<li><strong>Movimiento</strong> — hacia dónde y qué tan rápido te mueves. La señal más fuerte de todas.</li>
+<li><strong>Posición en pista</strong> — dónde estás parada respecto al obstáculo.</li>
+<li><strong>Conexión</strong> — tu mirada: a qué le estás poniendo atención tú.</li>
+<li><strong>Pecho y hombros</strong> — hacia dónde apunta tu torso.</li>
+<li><strong>Pies</strong> — anuncian tu siguiente paso antes de que lo des.</li>
+<li><strong>Manos</strong> — útiles, pero mucho más abajo de lo que creemos.</li>
+<li><strong>Voz</strong> — la última de la lista, aunque es la que más usamos los humanos.</li>
+</ol>
+
+<p>La trampa: operamos al revés. Confiamos en la voz y las manos, justo las señales más débiles. Cuando tu boca dice "túnel" pero tu movimiento dice "salto", Kenna le va a creer a tu movimiento. Y va a tener razón.</p>
+
+<blockquote class="nota-campo">Guía gritando "¡túnel, túnel, túnel!" con los hombros clavados hacia el salto de al lado. El perro tomó el salto, obvio. Nadie le avisó que la voz va al final de la fila.</blockquote>
+
+<h3>¿Cuál elijo?</h3>
+
+<p>Respuesta corta: el que enseñe tu escuela o instructor más cercano. Un sistema que practicas con retroalimentación cada semana vale más que el sistema "perfecto" aprendido a pedazos en videos.</p>
+
+<p>Respuesta larga: dale una temporada completa antes de mezclar. Cada sistema es coherente por dentro; los pedazos sueltos de varios se contradicen entre sí, y quien paga la confusión es el perro.</p>
+
+<p>Y un bonus para tu cerebro: un sistema reduce decisiones en pista. Con TDAH eso es oro puro. Decides todo en el reconocimiento —dónde pararte, qué giro usar— y en el recorrido solo ejecutas. Menos improvisación bajo presión, menos carga cognitiva, más velocidad.</p>
+
+<blockquote class="nota-campo">En los entrenamientos se distingue rápido a quien mezcló tres cursos en línea: su perro duda una fracción de segundo antes de cada curva, esperando a ver cuál idioma toca hoy.</blockquote>
+
+<div class="dato">OneMind Dogs nació cuando Tekno, el border collie de la entrenadora finlandesa Janita Leinonen, se quedó sordo. Sin voz disponible, ella tuvo que descifrar qué señales físicas entendía el perro de forma natural, y ese diccionario se convirtió en el sistema.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>Un sistema de handling es un lenguaje: cada señal significa una sola cosa, siempre.</li>
+<li>Kenna te lee en este orden: movimiento &gt; posición &gt; mirada &gt; hombros &gt; pies &gt; manos &gt; voz.</li>
+<li>Si la voz dice una cosa y el cuerpo otra, gana el cuerpo.</li>
+<li>Elige un sistema (idealmente el de tu escuela) y dale una temporada completa antes de mezclar.</li>
+<li>La coherencia mediocre le gana a la técnica brillante pero inconsistente. El perro agradece lo predecible.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="entrenar-perro">
+      <p class="eyebrow">Capítulo 8 🎾</p>
+      <h2>Entrenar al perro desde cero</h2>
+<p>Antes de que Kenna toque un solo obstáculo hay meses de trabajo que no se parecen en nada a una pista de agility. Se parecen a jugar en el parque. Esa es exactamente la idea.</p>
+
+<h3>El juego es el sueldo</h3>
+<p>En pista no hay correa ni premios, así que tu única moneda real es la motivación. La mayoría de los perros de competencia trabajan por un juguete —una mordedera, una pelota— porque jalar y perseguir encienden justo la intensidad que quieres en pista.</p>
+<p>La comida sirve, sobre todo para precisión y calma. Pero si Kenna enloquece por un juguete, cuídalo como oro: es herramienta de trabajo, no algo que vive tirado en la sala.</p>
+
+<h3>Refuerzo positivo y shaping</h3>
+<p>Todo el agility moderno se entrena con refuerzo positivo: marcas el acierto (clicker o un "¡sí!") y pagas. Los errores no se castigan; simplemente no se pagan y se reintenta.</p>
+<p>El shaping es la ingeniería fina de esto: partes la conducta en criterios diminutos y refuerzas aproximaciones. ¿Quieres que suba a una plataforma? Pagas por mirarla, luego por un paso, luego por una pata arriba. Un criterio a la vez; si subes dos, la información se vuelve ruido.</p>
+
+<h3>Sesiones de minutos, no de horas</h3>
+<p>Una buena sesión dura aprox. de tres a cinco minutos y termina cuando el perro todavía quiere más. Un perro cansado o frustrado deja de aprender mucho antes de dejar de moverse.</p>
+<p>Varias mini-sesiones al día le ganan por goleada a una maratónica. (Sí: dopamina en dosis cortas y frecuentes también le conviene a tu cabeza.)</p>
+
+<h3>El "quieto" de salida</h3>
+<p>El start-line stay es la conducta más aburrida y más valiosa del deporte: el perro espera en la línea mientras tú caminas a tu posición. Sin él, sales pegada a tu perro y regalas toda tu ventaja de manejo.</p>
+<p>Se entrena por criterios —duración, distancia, distracción— pagando muchísimo el quedarse. La trampa clásica: perdonarle romper el quieto "solo por hoy" en competencia. En una sola repetición el perro aprende que la línea de salida es negociable.</p>
+
+<h3>Fundamentos antes que fierros</h3>
+<p>Los obstáculos son la parte fácil; lo difícil es la comunicación. Antes de saltar nada, un perro de agility aprende en el piso:</p>
+<ul>
+<li><strong>Giros planos:</strong> girar cerrado hacia ambos lados siguiendo tu cuerpo, sin obstáculo de por medio.</li>
+<li><strong>Seguir la mano:</strong> tu mano y tu hombro dibujan la línea; el perro aprende a leerlos en movimiento.</li>
+<li><strong>Enviar hacia adelante:</strong> comprometerse con algo lejano sin voltear a verte.</li>
+</ul>
+
+<h3>Contactos: la decisión grande</h3>
+<p>Empalizada, pasarela y balancín tienen zonas de contacto que el perro debe pisar; no pisarlas es falta de 5 puntos. Hay dos escuelas:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Método</th><th>Qué hace el perro</th><th>Trade-off</th></tr></thead>
+<tbody>
+<tr><td><strong>2-on-2-off</strong></td><td>Se detiene con las patas traseras en la rampa y las delanteras en el piso</td><td>Criterio blanco o negro, fácil de mantener; cuesta algo de tiempo</td></tr>
+<tr><td><strong>Contacto corrido</strong></td><td>Baja corriendo y pisa la zona a toda velocidad</td><td>Más rápido; mucho más difícil de entrenar y sostener</td></tr>
+</tbody>
+</table></div>
+<p>Para empezar, 2-on-2-off es la opción sensata: el criterio le queda claro a Kenna desde la primera sesión.</p>
+
+<h3>Slalom: canal o 2x2</h3>
+<p>El slalom de competencia son 12 postes separados a 60 cm, y el perro siempre entra con el primer poste a su hombro izquierdo. Nadie lo aprende "caminándolo"; se entrena para que el perro entienda entrada y ritmo por sí solo.</p>
+<ul>
+<li><strong>Canal:</strong> los postes se abren en dos filas formando un pasillo que el perro cruza corriendo; se cierran poco a poco hasta quedar en línea.</li>
+<li><strong>2x2:</strong> se enseña la entrada correcta con solo dos postes y se van sumando pares. Shaping puro; entradas muy sólidas.</li>
+</ul>
+
+<div class="dato">El slalom suele ser lo que más tarda en consolidarse: quizá el movimiento más artificial del deporte. Nada en el repertorio natural de un perro se parece a serpentear entre postes.</div>
+
+<h3>Colección y extensión</h3>
+<p>Extensión es galope largo y plano para las rectas; colección es acortar la zancada para girar cerrado. Un perro que solo conoce la extensión tira barras y abre los giros; uno que solo colecta es lento. Kenna necesita ambas, y necesita que tú avises a tiempo cuál toca.</p>
+
+<h3>El perro nunca tiene la culpa</h3>
+<blockquote class="nota-campo">En un seminario, la instructora repetía lo mismo tras cada error: "¿qué le dijiste, y cuándo?". Nunca preguntó qué hizo el perro.</blockquote>
+<p>Grábatelo: si Kenna se va al obstáculo equivocado, la información llegó tarde, confusa o nunca llegó. El perro solo lee lo que tu cuerpo dice. Cada error es dato sobre tu manejo, no sobre su obediencia.</p>
+
+<div class="esencial">
+<ul>
+<li>El juguete es el sueldo: motivación primero, obstáculos después.</li>
+<li>Refuerzo positivo y shaping: un criterio a la vez.</li>
+<li>Sesiones de minutos; termina cuando el perro quiere más.</li>
+<li>Start-line stay innegociable, también en competencia.</li>
+<li>Contactos: empieza con 2-on-2-off. Slalom: canal o 2x2.</li>
+<li>Enséñale colección y extensión; avísale a tiempo cuál va.</li>
+<li>El error siempre es información tuya que llegó mal.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="guia-atleta">
+      <p class="eyebrow">Capítulo 9 🏃‍♀️</p>
+      <h2>Tú también eres atleta</h2>
+<p>En agility corren dos atletas. Kenna pone la velocidad y los reflejos; tú pones el plan, la memoria y el timing. Este capítulo es sobre tu mitad del trabajo.</p>
+
+<h3>La caminata de reconocimiento</h3>
+<p>Antes de cada manga, el juez abre la pista y los guías entran sin perro. Tienes unos minutos para aprenderte un trazado de 15 a 22 obstáculos que viste por primera vez ese día.</p>
+<p>No la camines como turista: camínala por la línea que tú vas a pisar, que no es la del perro. Decide de qué lado llevas a Kenna en cada tramo y en qué punto exacto cambias de lado.</p>
+<p>Y nombra cada maniobra al pasar: "aquí cruce por atrás, aquí la mando al túnel, aquí freno antes del slalom". Si una maniobra no tiene nombre en tu cabeza, bajo presión no existe.</p>
+
+<blockquote class="nota-campo">En el walkthrough se distingue rápido quién va en serio: son los que caminan haciendo señales con las manos a un perro invisible. Se ve rarísimo. Funciona.</blockquote>
+
+<h3>Memorizar con un cerebro con TDAH</h3>
+<p>Una lista de veinte obstáculos es veneno para la memoria de trabajo. La salida es la misma que usas en código: no memorices obstáculos, memoriza bloques.</p>
+<ul>
+<li><strong>Chunking:</strong> parte la pista en 4 o 5 secuencias con sentido ("la apertura", "la trampa del túnel", "el cierre"). Memorizas 4 cosas, no 20.</li>
+<li><strong>Ancla visual por sector:</strong> amarra cada bloque a algo fijo del lugar: la carpa del juez, la lona azul, un poste. En plena carrera, ver el ancla te dispara el bloque completo.</li>
+<li><strong>En voz alta:</strong> recita la secuencia mientras caminas, murmurando si te da pena. Decirla recluta más memoria que pensarla, y te delata al instante el hueco donde dudas.</li>
+</ul>
+<p>Último paso, ya fuera de la pista: cierra los ojos. Corre el recorrido mental completo, con tus giros y tus señales, a velocidad real. Donde la película se corta, exactamente ahí está el tramo que no sabes: repásalo desde la orilla antes de tu turno.</p>
+
+<h3>Tu calidad de movimiento</h3>
+<p>Kenna no lee primero tu voz: lee tu cuerpo. Los hombros son el volante; hacia donde apuntan, hacia allá se va el perro. Un hombro que se abre "nada más tantito" hacia el obstáculo equivocado puede costarte un rehúse: 5 puntos.</p>
+<p>Arranques y frenadas limpias valen más que velocidad pura. Acelerar dice "sigue derecho"; desacelerar dice "viene giro". Si frenas tarde y aventado, le estás mintiendo.</p>
+<p>Y la regla de oro del timing: <strong>la señal se da antes del despegue, no durante</strong>. Los obstáculos quedan a alrededor de 5-7 m entre sí sobre la trayectoria del perro; cuando Kenna ya va en el aire, esa decisión ya se tomó. Tu información útil es la que llega un obstáculo antes.</p>
+
+<h3>Condición física básica</h3>
+<p>No necesitas ser corredora de fondo. Necesitas sprints cortos, cambios de dirección y frenadas que no te desarmen. Tres cosas rinden mucho:</p>
+<ul>
+<li>Sprints cortos con arranque desde parado, aprox. dos veces por semana.</li>
+<li>Fuerza básica de piernas y core: sentadillas, desplantes, algo de pliometría suave.</li>
+<li>Calentar antes de correr: trote, movilidad de tobillos y cadera. El guía que corre en frío es el que se lesiona.</li>
+</ul>
+
+<h3>MotionLab: ensayar sin gastar a Kenna</h3>
+<p>El timing se pule con repeticiones, y las articulaciones de Kenna no son infinitas. Para eso está MotionLab: un perro virtual en pantalla y la cámara leyendo tu cuerpo real. Corres secuencias, das tus señales, y el sistema te marca si el hombro giró tarde o si la orden llegó cuando el perro ya iba en el aire.</p>
+<p>Úsalo para lo caro en repeticiones: cruces, arranques y timing de señal. Guarda las sesiones con Kenna para lo que sí exige perra de verdad: conexión, motivación y pista real.</p>
+
+<div class="dato">Una pista FCI mide entre 100 y 220 m… pero para el perro. Tú, si planeaste bien tus líneas y tus cruces, corres bastante menos. Memorizar bien es, literalmente, correr menos.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>Camina la pista por tu línea y ponle nombre a cada maniobra.</li>
+<li>Memoriza en 4-5 bloques, con un ancla visual por sector, recitando en voz alta.</li>
+<li>Corre la pista mental con ojos cerrados; donde se corta, ahí falta estudio.</li>
+<li>Hombros = volante. La señal va antes del despegue, nunca durante.</li>
+<li>Ensaya el timing en MotionLab; las repeticiones de Kenna son para lo que exige perra real.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="bienestar">
+      <p class="eyebrow">Capítulo 10 🐾</p>
+      <h2>El atleta antes que el cronómetro</h2>
+<p>El agility se ve como un deporte de velocidad, pero por debajo es un deporte de articulaciones, músculos y confianza. Si cuidas esas tres cosas, Kenna puede correr durante años. Si no, la carrera se acorta y se acorta mal.</p>
+
+<h3>Saltos en serio: no antes de tiempo</h3>
+<p>Los huesos de un perro joven tienen placas de crecimiento que siguen abiertas hasta aprox. los 12 a 18 meses. Varía por perro: confírmalo con tu veterinario, idealmente con radiografía, antes de subir barras a altura real.</p>
+<p>Ponlo en contexto: Kenna va a competir en Large, con saltos de 55-60 cm y una empalizada cuyo vértice queda a aprox. 1.70 m. Ese impacto repetido no es para un cuerpo en construcción.</p>
+<p>Mientras tanto sí puedes entrenar muchísimo: manejo en plano, giros, envíos, barras sobre el piso, propiocepción. Todo eso vale más que un salto prematuro.</p>
+
+<h3>Calentar y enfriar, cada sesión</h3>
+<ul>
+<li><strong>Antes:</strong> unos minutos de trote suave, cambios de dirección, giros hacia ambos lados y estiramientos activos (que ella se estire siguiendo tu mano; tú no la estiras).</li>
+<li><strong>Después:</strong> caminata tranquila hasta que baje el jadeo, agua en tragos cortos y una revisada rápida de almohadillas.</li>
+</ul>
+<p>Tú no entrarías a un día de piernas sin calentar. Ella tampoco debería, y no puede decírtelo.</p>
+
+<h3>Superficie, peso, uñas</h3>
+<ul>
+<li><strong>Superficie:</strong> pasto o césped, parejo y sin hoyos. Nunca concreto, y ojo con los pisos lisos de casa: nada de trucos con derrapes en loseta.</li>
+<li><strong>Peso:</strong> costillas palpables sin excavar y cintura visible desde arriba. Cada gramo de más cae sobre las articulaciones en cada aterrizaje.</li>
+<li><strong>Uñas:</strong> cortas siempre. Una uña larga cambia el apoyo de toda la pata y pasa factura en los giros.</li>
+</ul>
+
+<h3>Tu ojo clínico: estrés y dolor</h3>
+<p>Aquí tu formación en psicología es ventaja real, porque esto es observación conductual pura: conoce la línea base de Kenna y vigila las desviaciones.</p>
+<div class="tabla-scroll">
+<table>
+<thead>
+<tr><th>Señales de estrés</th><th>Señales de dolor</th></tr>
+</thead>
+<tbody>
+<tr><td>Bostezos fuera de contexto, lamerse el hocico</td><td>Cojera sutil, sobre todo al levantarse</td></tr>
+<tr><td>Sacudirse como si estuviera mojada, olfatear el piso de repente</td><td>Rehusar un obstáculo que ya dominaba</td></tr>
+<tr><td>Cola baja, evitar la mirada, alejarse de ti</td><td>Tirar barras de pronto, cambiar cómo entra al slalom</td></tr>
+<tr><td>Se &quot;apaga&quot;: corre lento, deja de ofrecer conductas</td><td>Lamerse una articulación, irritabilidad nueva</td></tr>
+</tbody>
+</table>
+</div>
+<p>Regla práctica: el estrés se maneja bajando la exigencia; el dolor se descarta con el veterinario. Un cambio brusco de rendimiento nunca es &quot;anda de floja&quot;: es un dato.</p>
+
+<blockquote class="nota-campo">Vi a una perra tirar tres barras seguidas y a su guía regañarla al salir de pista. Semanas después llegó el diagnóstico: dolor lumbar. Las barras eran el síntoma, no la falta.</blockquote>
+
+<h3>Día de competencia: agua, sombra, pausas</h3>
+<p>Las competencias son largas y el sol mexicano no perdona. Lleva agua propia y ofrécela en tragos pequeños y frecuentes, no un tanque de golpe justo antes de correr.</p>
+<p>Entre mangas: sombra, tapete y descanso de verdad, lejos del ruido si Kenna lo necesita. Nunca la dejes en el coche. Y aprende las señales de golpe de calor: jadeo desesperado, encías muy rojas, tambaleo. Eso es sombra, agua y veterinario de inmediato.</p>
+
+<blockquote class="nota-campo">Se distingue rápido quién ya lleva temporadas: llegan con hielera, sombrilla y tapete propio. Los demás andan buscando sombra a media tarde con el perro jadeando.</blockquote>
+
+<div class="dato">El propio reglamento piensa en esto: el neumático de la pista debe ser tipo &quot;breakaway&quot;, es decir, se abre si el perro lo golpea en vez de atraparlo.</div>
+
+<h3>La regla de oro</h3>
+<p>El agility existe para que el perro gane confianza y se divierta. Un perro presionado se apaga: duda antes de cada obstáculo, corre por obligación y termina odiando la pista.</p>
+<p>Si Kenna se equivoca, la falla es del plan de entrenamiento o de tu manejo, nunca de ella. Fiesta al cruzar la meta, siempre, con o sin barras en el piso.</p>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>Nada de saltos a altura de competencia antes del cierre de placas (aprox. 12-18 meses; confírmalo con tu veterinario).</li>
+<li>Calentamiento antes y enfriamiento después, en cada sesión, sin excepción.</li>
+<li>Pasto sí; concreto y pisos lisos, nunca. Peso en forma y uñas cortas.</li>
+<li>Cambio brusco de conducta o rendimiento = dato. ¿Estrés? Baja la exigencia. ¿Sospecha de dolor? Veterinario.</li>
+<li>En competencia: agua en tragos cortos, sombra entre mangas, cero coche.</li>
+<li>Si Kenna no se está divirtiendo, eso ya no es agility.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="capitulo" id="mexico">
+      <p class="eyebrow">Capítulo 11 🇲🇽</p>
+      <h2>Competir en México con la FCM</h2>
+<p>Para competir en agility en México, el camino oficial es la Federación Canófila Mexicana (FCM). La FCM es miembro de la FCI y aplica su reglamento, así que todo lo que Kenna aprenda aquí vale tal cual en cualquier pista FCI del mundo.</p>
+
+<h3>Los tres trámites antes de pisar tu primer ring</h3>
+<ol>
+<li><strong>Registro ante la FCM.</strong> Kenna necesita estar registrada. Con pedigrí es directo; sin papeles también hay vías de registro para competir; tu club o la propia FCM te dicen cuál aplica. Es trámite, no filtro.</li>
+<li><strong>Medición oficial.</strong> Se hace antes de la primera competencia y define su talla de una vez. Un Border Collie casi siempre queda en Large (48 cm o más a la cruz), o sea saltos de 55 a 60 cm.</li>
+<li><strong>Inscribirte en G0.</strong> Los grados en México son G0, G1 y G2. G0 es el inicial: ahí empiezan todos, y ahí vas tú.</li>
+</ol>
+
+<blockquote class="nota-campo">Fila de medición, temprano en la mañana: la guía muerta de nervios, su perra tranquilísima. Todo duró menos de un minuto. La medición asusta mucho más a los humanos que a los perros.</blockquote>
+
+<h3>Cómo encontrar escuela y club</h3>
+<ul>
+<li>Pregunta en la FCM por los clubes de agility afiliados en tu ciudad. El calendario de competencias también te dice dónde hay movimiento.</li>
+<li>Ve de espectadora a una competencia <em>antes</em> de inscribirte a nada. En vivo se nota qué escuelas entrenan bonito: perros que corren contentos.</li>
+<li>Señales de buena escuela: refuerzo positivo, saltos bajos para perros que empiezan, grupos chicos y un entrenador que pregunta por tu perra, no solo por tus tiempos.</li>
+</ul>
+
+<h3>Cómo se ve un día real de competencia</h3>
+<div class="tabla-scroll">
+<table>
+<thead><tr><th>Momento</th><th>Qué pasa</th></tr></thead>
+<tbody>
+<tr><td>Llegada temprano</td><td>Confirmas inscripción, buscas sombra y dejas que Kenna se aclimate sin prisa.</td></tr>
+<tr><td>Revisión</td><td>Papeles en regla y, si es tu debut, la medición oficial.</td></tr>
+<tr><td>Caminata de pista</td><td>Los guías entran <strong>sin perro</strong> a memorizar el recorrido y planear su manejo. El juez da su briefing.</td></tr>
+<tr><td>Orden de salida</td><td>Se corre por tallas; espera tu bloque de Large sin perder de vista el ring.</td></tr>
+<tr><td>Manga de agility</td><td>Pista con zonas de contacto: empalizada, pasarela, balancín.</td></tr>
+<tr><td>Manga de jumping</td><td>Pista sin zonas de contacto, más fluida y veloz.</td></tr>
+<tr><td>Resultados</td><td>Penalización total = faltas + tiempo. Excelente es menos de 6 puntos.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Qué llevar</h3>
+<ul>
+<li>Agua para las dos y plato para Kenna.</li>
+<li>Sombra propia: carpa o lona, y un tapete donde ella descanse.</li>
+<li>Premios de alto valor (para usar <strong>fuera</strong> de pista) y su juguete favorito.</li>
+<li>Correa y collar sencillos, bolsitas para heces.</li>
+<li>Silla, comida y gorra para ti. Y paciencia: entre mangas hay esperas largas; llévate algo que hacer, tu cerebro te lo va a agradecer.</li>
+</ul>
+
+<h3>Etiqueta: lo que se hace y lo que no</h3>
+<ul>
+<li>Dentro de pista no entran premios ni juguetes, ni en la mano ni en la bolsa. Se premia afuera, en grande.</li>
+<li>No te estaciones con Kenna pegada al ring mientras corre otro binomio; los Border Collies miran fijo y eso estresa al que compite.</li>
+<li>Correa puesta en todo el evento, salvo dentro de pista.</li>
+<li>Recoge heces siempre, sin excepción.</li>
+<li>Aplaude a todos. En G0, todos los del ring fueron primerizos alguna vez.</li>
+</ul>
+
+<h3>Plan realista: tus primeros 6 meses con Kenna</h3>
+<div class="tabla-scroll">
+<table>
+<thead><tr><th>Meses</th><th>Enfoque</th></tr></thead>
+<tbody>
+<tr><td>1-2</td><td>Fundamentos sin obstáculos: llamada a prueba de todo, atención con distracciones, juego en equipo, conciencia corporal.</td></tr>
+<tr><td>3-4</td><td>Clase semanal en escuela: túnel, saltos bajos, primeros contactos. En casa, sesiones cortas de pocos minutos; con TDAH, corto y frecuente le gana a largo y perfecto.</td></tr>
+<tr><td>5</td><td>Secuencias cortas de varios obstáculos y fogueo: lleva a Kenna de visita a una competencia, sin competir, solo a existir en ese ambiente.</td></tr>
+<tr><td>6</td><td>Tu primer G0. Meta única: entrar conectadas y salir contentas.</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Un eliminado en tu debut no es fracaso: es de lo más común en G0. La medalla real del primer fin de semana es que Kenna quiera volver a entrar.</p>
+
+<blockquote class="nota-campo">El binomio más aplaudido de un G0 no fue el más rápido: fue una perra que se distrajo, volvió con su guía a media pista y terminaron el recorrido festejando como si fuera final de mundial.</blockquote>
+
+<div class="dato">La FCM aplica el mismo reglamento FCI con el que se corre el Campeonato Mundial de Agility (el primero fue en 1996). Tu primer G0 y una final mundialista se rigen por las mismas reglas.</div>
+
+<div class="esencial">
+<p><strong>Lo esencial</strong></p>
+<ul>
+<li>Registra a Kenna en la FCM y haz su medición oficial antes del debut; como Border Collie, casi seguro Large (saltos de 55-60 cm).</li>
+<li>Empiezas en G0. Elige escuela viendo competencias: perros contentos = buena escuela.</li>
+<li>Día de competencia: llega temprano, camina la pista sin perro, dos mangas (agility y jumping), premios solo fuera del ring.</li>
+<li>Plan de 6 meses: fundamentos, clase semanal, secuencias y un primer G0 sin expectativas de podio.</li>
+</ul>
+</div>
+
+    </section>
+
+    <section class="glosario" id="glosario">
+      <p class="eyebrow">Capítulo 12 📖</p>
+      <h2>Glosario rápido</h2>
+      <p>La chuleta: cada maniobra en una línea. El paso a paso completo de las 26 vive en <strong>MotionLab · Agility → Maniobras → Glosario</strong>; las marcadas con 🎥 además se practican con la cámara.</p>
+      <div class="glos-grid">
+        <div class="glos-item">
+          <strong>Front Cross <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Cruce frontal</em>
+          <span>Cambio de lado por delante del perro: giras de frente a él, sin perderlo de vista ni un segundo.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Rear Cross <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Cruce trasero</em>
+          <span>Cambio de lado por detrás: el perro va adelante comprometido y tú cruzas su línea a sus espaldas.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Blind Cross <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Cruce ciego</em>
+          <span>Cambio de lado por delante dándole la espalda al perro un instante; lo recibes con el otro brazo.</span>
+        </div>
+        <div class="glos-item">
+          <strong>False Turn <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Giro falso</em>
+          <span>Amago de front cross para colectar al perro o cerrar su línea hacia ti, sin cambiar de lado.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Post Turn / Shoulder Pull <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Giro de poste</em>
+          <span>Giro sin cambio de lado: el perro rodea tu cuerpo como si fueras un poste, siguiendo tus hombros.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Tandem Turn <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Giro tándem</em>
+          <span>Cambio de lado por detrás en el aterrizaje o en plano: el perro gira alejándose de ti tras el obstáculo.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Lead Change</strong>
+          <em>Cambio de mano</em>
+          <span>El cambio de pata líder del galope del perro al cambiar de dirección; es concepto, no maniobra tuya.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Lead-Out</strong>
+          <em>Salida adelantada</em>
+          <span>Dejas al perro en quieto en la línea de salida, te adelantas dentro de la pista y luego lo liberas.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Wrap <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Envuelta</em>
+          <span>Giro cerrado de 180° alrededor del ala del salto, con el perro recogido en vez de extendido.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Ketschker <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Ketschker</em>
+          <span>Envuelta con cambio de lado: inicias como front cross y rematas con blind cross mientras el perro salta.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Lap Turn</strong>
+          <em>Lap turn</em>
+          <span>El perro viene de frente y tu mano baja gira su nariz 180° frente a tu cuerpo; tú sigues avanzando.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Double Lap Turn</strong>
+          <em>Doble lap turn</em>
+          <span>Lap turn + front cross encadenados: el perro dibuja un giro de 360° alrededor del ala, aun a distancia.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Reverse Spin</strong>
+          <em>Giro invertido</em>
+          <span>Vuelta completa del guía girando hacia el perro, opuesta al giro de él: cierra la curva sin cambiar de mano.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Jaakko Turn</strong>
+          <em>Jaakko</em>
+          <span>Envuelta sin cambio de lado: amagas front cross pegado al ala y sales en blind cuando el perro despega.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Whisky Turn</strong>
+          <em>Whisky</em>
+          <span>Rear cross en ángulo cerradísimo: cruzas por detrás cuando el perro entra al salto de lado o por atrás.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Flick</strong>
+          <em>Flick</em>
+          <span>Señal de mano que manda al perro a envolver el ala girando lejos de ti; da 270-360° y vuelve a tu lado.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Slice</strong>
+          <em>Slice (salto sesgado)</em>
+          <span>Tomar el salto en diagonal y en extensión, cruzando la barra sesgado para no perder velocidad ni línea.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Serpentine <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Serpentina</em>
+          <span>Tres saltos en línea que el perro zigzaguea mientras tú corres casi recto por un solo lado.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Threadle <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Threadle</em>
+          <span>Meter al perro por el hueco entre dos saltos para tomar ambos del mismo lado, contra el flujo natural.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Lead-Out Pivot <span class="glos-cam" title="entrenable con cámara">🎥</span></strong>
+          <em>Pivote de salida</em>
+          <span>Te adelantas más allá del salto 1 con el perro quieto y giras en tu lugar para marcar el cambio hacia el 2.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Backside / Push</strong>
+          <em>Backside (por atrás del salto)</em>
+          <span>Enviar al perro a rodear el ala y saltar por la cara trasera del salto, en vez de tomarlo de frente.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Layering</strong>
+          <em>Layering (capas)</em>
+          <span>Manejar a distancia dejando un obstáculo entre tú y la línea del perro, sin que él lo tome.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Send</strong>
+          <em>Envío a distancia</em>
+          <span>Mandar al perro solo a un obstáculo mientras tú te quedas atrás o te desvías a tu siguiente posición.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Start-line Stay</strong>
+          <em>Quieto en la salida</em>
+          <span>El perro espera quieto antes del salto 1 mientras tú te colocas en la pista y lo liberas con tu voz.</span>
+        </div>
+        <div class="glos-item">
+          <strong>2-on-2-off</strong>
+          <em>Dos abajo</em>
+          <span>Criterio de contacto: frena con las traseras en la rampa y las delanteras en el piso hasta tu liberación.</span>
+        </div>
+        <div class="glos-item">
+          <strong>Running Contact</strong>
+          <em>Contacto corrido</em>
+          <span>Criterio de contacto: el perro pisa la zona amarilla corriendo a toda velocidad, sin frenar ni brincar.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="paws">fin — ahora, a la pista</p>
+      <p>Hecho a la medida con el design system de KYN · MotionLab · 12 capítulos</p>
+    </footer>
+  </div>
+  <a class="subir" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ índice</a>
+</body>
+</html>
