@@ -1,4 +1,4 @@
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, shallowRef } from 'vue'
 import { createHandLandmarker } from '../services/mediapipeHands'
 import { createPoseLandmarker } from '../services/mediapipePose'
 import { startCamera, stopCamera } from '../utils/camera'
@@ -7,11 +7,14 @@ import { drawLandmarks } from '../utils/drawLandmarks'
 export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) => {
   const cameraActive = ref(false)
   const cameraStatus = ref('')
-  const cameraStream = ref(null)
-  const handLandmarker = ref(null)
-  const poseLandmarker = ref(null)
-  const handResults = ref(null)
-  const poseResults = ref(null)
+  const cameraStream = shallowRef(null)
+  // shallowRef obligatorio: un ref() normal envuelve el landmarker en un Proxy
+  // reactivo profundo que rompe el estado interno de MediaPipe — detectForVideo
+  // falla con "Task is not initialized with video mode".
+  const handLandmarker = shallowRef(null)
+  const poseLandmarker = shallowRef(null)
+  const handResults = shallowRef(null)
+  const poseResults = shallowRef(null)
   const approximateFps = ref(0)
   const videoRef = ref(null)
   const canvasRef = ref(null)
