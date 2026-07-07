@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área 1 · Diagnóstico psicológico — guía EGEL Plus PSI para Paulette</title>
+<meta name="description" content="Mini libro de estudio para el EGEL Plus PSI (CENEVAL Psicología), Área 1: bases biológicas, neuroanatomía, psicometría, metodología, pruebas proyectivas, inteligencia, trastornos neurocognitivos, personalidad y CONOCER.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-500: #8795D2; --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4; --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --oat: #F4F0E8; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-700: #4A4955; --ink-500: #75737F; --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-butter: #F6EBC4; --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2;
+  --pastel-blush: #F6D2DD; --pastel-peach: #F8DCC9; --pastel-lilac: #E2D6F0;
+  --font-display: 'Friendship', cursive;
+  --font-accent: 'Farmhouse', serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink-900);
+  font-family: var(--font-sans); line-height: 1.65; font-size: 1.0625rem;
+}
+.pagina { max-width: 820px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+/* Portada */
+.portada { padding: 4.5rem 0 3rem; text-align: center; }
+.portada .sello {
+  display: inline-block; padding: 0.3rem 1rem; border-radius: var(--radius-pill);
+  background: var(--pop-magenta-soft); color: var(--periwinkle-900);
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.portada h1 {
+  margin: 1.2rem 0 0.4rem; font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(3rem, 9vw, 5rem); line-height: 1.05; color: var(--periwinkle-700);
+}
+.portada .subtitulo { margin: 0; font-family: var(--font-accent); font-size: 1.4rem; color: var(--ink-700); }
+.portada .dedicatoria { margin: 1.6rem auto 0; max-width: 480px; color: var(--ink-500); font-size: 0.95rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.6rem; }
+.chip { padding: 0.3rem 0.9rem; border-radius: var(--radius-pill); font-size: 0.85rem; font-weight: 600; color: var(--ink-700); }
+.chip:nth-child(6n+1) { background: var(--pastel-sky); }
+.chip:nth-child(6n+2) { background: var(--pastel-butter); }
+.chip:nth-child(6n+3) { background: var(--pastel-mint); }
+.chip:nth-child(6n+4) { background: var(--pastel-blush); }
+.chip:nth-child(6n+5) { background: var(--pastel-lilac); }
+.chip:nth-child(6n+6) { background: var(--pastel-peach); }
+
+/* Índice */
+.indice { margin: 2rem 0 3rem; padding: 1.5rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.indice h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: 2rem; color: var(--periwinkle-800); }
+.indice-grid { display: grid; gap: 0.5rem; }
+.indice-item {
+  display: flex; gap: 0.8rem; align-items: center; padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm); text-decoration: none; color: inherit;
+  transition: background 140ms ease;
+}
+.indice-item:hover { background: var(--periwinkle-50); }
+.indice-emoji { font-size: 1.4rem; }
+.indice-text { display: grid; }
+.indice-text strong { color: var(--periwinkle-800); font-size: 0.98rem; }
+.indice-text span { color: var(--ink-500); font-size: 0.85rem; }
+
+/* Capítulos */
+.capitulo { margin: 0 0 3.5rem; padding-top: 1rem; border-top: 1.5px solid var(--sand); }
+.eyebrow {
+  margin: 1.2rem 0 0.2rem; font-family: var(--font-accent); font-size: 1.05rem;
+  color: var(--pop-magenta); letter-spacing: 0.06em;
+}
+.capitulo h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; color: var(--periwinkle-700); }
+.capitulo h3 {
+  margin: 1.8rem 0 0.5rem; font-size: 1.02rem; color: var(--periwinkle-900);
+  font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.capitulo p { margin: 0.6rem 0; color: var(--ink-700); }
+.capitulo ul, .capitulo ol { margin: 0.6rem 0; padding-left: 1.4rem; color: var(--ink-700); }
+.capitulo li { margin: 0.25rem 0; }
+.capitulo strong { color: var(--ink-900); }
+
+.nota-campo {
+  margin: 1.2rem 0; padding: 0.9rem 1.1rem; border-left: 4px solid var(--pop-magenta);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0; background: var(--pastel-butter);
+  color: var(--ink-700); font-size: 0.98rem;
+}
+.nota-campo::before { content: '📝 Nota de campo'; display: block; margin-bottom: 0.2rem; font-family: var(--font-accent); font-size: 1rem; color: var(--periwinkle-800); }
+.nota-campo p { margin: 0.2rem 0; }
+.esencial {
+  margin: 1.6rem 0 0.4rem; padding: 1rem 1.2rem; border: 1.5px solid var(--periwinkle-300);
+  border-radius: var(--radius-md); background: var(--periwinkle-50); color: var(--periwinkle-900);
+}
+.esencial::before { content: '⭐ Lo esencial'; display: block; margin-bottom: 0.3rem; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--periwinkle-700); }
+.esencial p { margin: 0.3rem 0; color: var(--periwinkle-900); }
+.esencial ul, .esencial ol { color: var(--periwinkle-900); }
+.dato {
+  margin: 1.2rem 0; padding: 0.8rem 1.1rem; border-radius: var(--radius-md);
+  background: var(--pastel-mint); color: var(--ink-700); font-size: 0.98rem;
+}
+.dato::before { content: '💡 Dato'; display: block; margin-bottom: 0.15rem; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--periwinkle-800); }
+.dato p { margin: 0.2rem 0; }
+
+.tabla-scroll { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--sand); border-radius: var(--radius-md); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--white); }
+th, td { padding: 0.55rem 0.8rem; text-align: left; border-bottom: 1px solid var(--ink-100); vertical-align: top; }
+th { background: var(--periwinkle-100); color: var(--periwinkle-900); font-weight: 600; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Glosario rápido */
+.glosario { margin-top: 3rem; padding-top: 1rem; border-top: 1.5px solid var(--sand); }
+.glosario h2 { margin: 1.2rem 0 0.4rem; font-family: var(--font-display); font-weight: 500; font-size: 2.4rem; color: var(--periwinkle-700); }
+.glosario > p { color: var(--ink-700); }
+.glos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 0.7rem; margin-top: 1.2rem; }
+.glos-item { display: grid; gap: 2px; padding: 0.8rem; background: var(--white); border: 1px solid var(--ink-100); border-radius: var(--radius-sm); font-size: 0.9rem; }
+.glos-item strong { color: var(--periwinkle-800); }
+.glos-item em { color: var(--periwinkle-600); font-style: normal; font-size: 0.8rem; font-weight: 600; }
+.glos-item span { color: var(--ink-500); }
+
+footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1.5px solid var(--sand); text-align: center; color: var(--ink-500); font-size: 0.9rem; }
+footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--periwinkle-600); }
+
+.subir {
+  position: fixed; right: 1rem; bottom: 1rem; padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill); background: var(--periwinkle-600); color: var(--white);
+  font-size: 0.85rem; font-weight: 600; text-decoration: none; box-shadow: var(--shadow-md);
+}
+.subir:hover { background: var(--periwinkle-700); }
+
+/* ===== Lectura por capítulo: solo se ve el capítulo activo ===== */
+.capitulo, .glosario { display: none; }
+.capitulo.activo, .glosario.activo { display: block; }
+.cap-nav {
+  display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1.5px dashed var(--sand);
+}
+.cap-nav button {
+  padding: 0.45rem 1rem; border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-pill);
+  background: var(--white); color: var(--periwinkle-700); font: inherit; font-size: 0.9rem;
+  font-weight: 600; cursor: pointer; max-width: 46%; text-align: center;
+}
+.cap-nav button:hover { background: var(--periwinkle-50); border-color: var(--periwinkle-300); }
+.cap-nav .nav-indice { color: var(--ink-500); border-color: var(--ink-100); max-width: none; }
+.cap-nav .hueco { flex: 1; }
+
+/* ===== LECTOR KYN: lectura biónica + regla + tamaño (TDAH / dislexia) ===== */
+.lector-bar {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 50;
+  display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; max-width: calc(100vw - 2rem);
+  padding: 0.4rem 0.7rem; background: var(--white); border: 1.5px solid var(--periwinkle-200);
+  border-radius: var(--radius-pill); box-shadow: var(--shadow-md); font-size: 0.82rem;
+}
+.lector-bar .lector-titulo { font-family: var(--font-accent); font-size: 1rem; color: var(--periwinkle-700); padding-right: 0.2rem; }
+.lector-bar button {
+  padding: 0.28rem 0.7rem; border: 1px solid var(--ink-100); border-radius: var(--radius-pill);
+  background: var(--paper); color: var(--ink-700); font: inherit; font-weight: 600; cursor: pointer;
+}
+.lector-bar button:hover { border-color: var(--periwinkle-300); }
+.lector-bar button[aria-pressed="true"] { background: var(--periwinkle-600); border-color: var(--periwinkle-600); color: var(--white); }
+.lector-bar .niveles { display: none; gap: 0.2rem; }
+body.bio-on .lector-bar .niveles { display: flex; }
+.lector-bar .niveles button { padding: 0.28rem 0.5rem; font-size: 0.75rem; }
+
+b.bio { font-weight: inherit; }
+body.bio-on b.bio { font-weight: 700; color: var(--ink-900); }
+body.bio-on .esencial b.bio, body.bio-on .nota-campo b.bio, body.bio-on .dato b.bio { color: inherit; }
+
+.regla { position: fixed; left: 0; right: 0; top: 40vh; height: 3.2em; display: none; pointer-events: none; z-index: 40;
+  background: rgba(135, 149, 210, 0.14); border-top: 1px solid rgba(135, 149, 210, 0.35); border-bottom: 1px solid rgba(135, 149, 210, 0.35); }
+body.regla-on .regla { display: block; }
+
+/* Modo mini: la barra se encoge a un botoncito flotante cuando no la usas */
+.lector-bar.mini { padding: 0; gap: 0; }
+.lector-bar.mini > :not(.lector-mini) { display: none; }
+.lector-mini {
+  display: none; width: 2.7rem; height: 2.7rem; border: none; border-radius: 50%;
+  background: transparent; font-size: 1.25rem; cursor: pointer; line-height: 1;
+}
+.lector-bar.mini .lector-mini { display: grid; place-items: center; }
+
+@media (max-width: 640px) { .lector-bar { font-size: 0.75rem; } .lector-bar .lector-titulo { display: none; } }
+
+@media print {
+  .subir, .lector-bar, .regla, .cap-nav { display: none; }
+  .capitulo, .glosario { display: block; break-inside: avoid-page; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="portada">
+      <span class="sello">Guía de estudio</span>
+      <h1>Diagnóstico</h1>
+      <p class="subtitulo">el cerebro, las pruebas y la mente</p>
+      <p class="dedicatoria">Área 1 del EGEL Plus PSI (CENEVAL Psicología). Todo lo que cae en Diagnóstico psicológico, desmenuzado para tu cerebro y en un solo archivo. Tú puedes con esto, Paulette 💪 (Kenna supervisa el repaso).</p>
+      <div class="chips">
+        <span class="chip">EGEL Plus PSI</span>
+        <span class="chip">Área 1 · 49 reactivos</span>
+        <span class="chip">11 capítulos</span>
+        <span class="chip">⚡ lector biónico</span>
+        <span class="chip">testimonio sobresaliente</span>
+      </div>
+    </header>
+
+    <nav class="indice" aria-label="Índice">
+      <h2>Índice</h2>
+      <div class="indice-grid">
+        <a class="indice-item" href="#biologia-historia">
+          <span class="indice-emoji">🧠</span>
+          <span class="indice-text">
+            <strong>01 · Bases biológicas: la historia</strong>
+            <span>De los "tubos huecos" a la sinapsis: Bell, Müller, Flourens, Sherrington, Darwin y Wundt.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#neurona">
+          <span class="indice-emoji">⚡</span>
+          <span class="indice-text">
+            <strong>02 · Neurona, sinapsis y neurotransmisores</strong>
+            <span>La célula que piensa, la glía que la cuida y las siete sustancias que mueven tu conducta.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#neuroanatomia">
+          <span class="indice-emoji">🗺️</span>
+          <span class="indice-text">
+            <strong>03 · Neuroanatomía: el cerebro por dentro</strong>
+            <span>Tallo, cerebelo, diencéfalo, ganglios basales, sistema límbico, los cuatro lóbulos y el sueño.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#psicometria-historia">
+          <span class="indice-emoji">📏</span>
+          <span class="indice-text">
+            <strong>04 · Psicometría: historia de la medición</strong>
+            <span>De la China imperial a Galton y Binet: cómo la mente se volvió medible.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#tct">
+          <span class="indice-emoji">🎯</span>
+          <span class="indice-text">
+            <strong>05 · Confiabilidad, validez y normas</strong>
+            <span>La Teoría Clásica de los Tests: X = V + e, Alfa de Cronbach y los puntajes de la curva normal.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#metodologia">
+          <span class="indice-emoji">🔬</span>
+          <span class="indice-text">
+            <strong>06 · Metodología de la investigación</strong>
+            <span>Cuanti vs. cuali, Kerlinger, los marcos interpretativos y las técnicas de recolección.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#proyectivas">
+          <span class="indice-emoji">🖍️</span>
+          <span class="indice-text">
+            <strong>07 · Psicodiagnóstico infantil y proyectivas</strong>
+            <span>CAT, Figura Humana (Koppitz/Machover), Dibujo de la Familia y H-T-P, con su interpretación.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#inteligencia">
+          <span class="indice-emoji">🧩</span>
+          <span class="indice-text">
+            <strong>08 · Inteligencia y neuropsicología</strong>
+            <span>Teoría CHC, WISC-IV y WPPSI-III, Bender y Frostig, y las baterías mexicanas BANETA y ENI-2.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#neurocognitivos">
+          <span class="indice-emoji">🧓</span>
+          <span class="indice-text">
+            <strong>09 · Trastornos neurocognitivos (DSM-5)</strong>
+            <span>DCL vs. demencia, Alzheimer, frontotemporal, vascular, Parkinson y la reserva cognitiva.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#personalidad">
+          <span class="indice-emoji">🎭</span>
+          <span class="indice-text">
+            <strong>10 · Trastornos de la personalidad</strong>
+            <span>Los tres clusters del DSM (A, B y C) y sus diez perfiles, sin confundirlos.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#conocer">
+          <span class="indice-emoji">📐</span>
+          <span class="indice-text">
+            <strong>11 · CONOCER: estándares de competencia</strong>
+            <span>El EC, los comités (CGC/GTES/GTEFI), SCIAN y los cinco criterios de evaluación.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#glosario">
+          <span class="indice-emoji">📖</span>
+          <span class="indice-text">
+            <strong>12 · Glosario-chuleta</strong>
+            <span>Los términos que más caen, en una línea cada uno, para el repaso final.</span>
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="capitulo" id="biologia-historia">
+      <p class="eyebrow">Capítulo 1 🧠</p>
+      <h2>Bases biológicas: la historia</h2>
+<p>Antes de que la psicología midiera nada, alguien tuvo que entender que la conducta sale del sistema nervioso y no del alma. Este capítulo es la línea del tiempo de cómo pasamos de creer que los nervios eran "tubos huecos" llenos de espíritus a saber que la conducta es electricidad, química y anatomía. En el examen estos autores aparecen como "¿quién descubrió qué?", así que vale la pena tener el mapa.</p>
+
+<h3>De los tubos huecos a la electricidad</h3>
+<ul>
+<li><strong>Charles Bell y François Magendie</strong>: separaron los nervios en <strong>motores y sensitivos</strong>. Descartaron que fueran tubos huecos: conducen señales en direcciones específicas.</li>
+<li><strong>Johannes Müller</strong>: ley de las energías nerviosas específicas. Son los <strong>nervios</strong> —no los objetos en sí— los que le informan al cerebro sobre el entorno; el nervio es el intermediario entre el mundo y la mente.</li>
+<li><strong>Emil du Bois-Reymond</strong>: acabó con la idea de los "espíritus animales" al demostrar que la conducción nerviosa es <strong>actividad eléctrica</strong>.</li>
+</ul>
+
+<h3>Localizar la mente en el cerebro</h3>
+<ul>
+<li><strong>Franz Joseph Gall y J. G. Spurzheim — Frenología</strong>: doctrina <em>pseudocientífica</em> que decía que las facultades mentales (hasta unas 37 zonas) se ubicaban en áreas del cerebro y se podían "leer" en las protuberancias del cráneo. Falsa, pero sembró la idea de la <strong>localización de funciones</strong>.</li>
+<li><strong>Pierre Flourens</strong>: desmintió la frenología estudiando el cerebro desde adentro (ablaciones). Identificó seis áreas funcionales: hemisferios (voluntad, juicio, visión, audición), cerebelo (control motor), bulbo (mediador sensoriomotor), tubérculos cuadrigéminos (visión), médula (conducción) y nervios (excitación).</li>
+<li><strong>Charles S. Sherrington</strong>: acuñó términos clave —<strong>sinapsis</strong>, nociceptivo, propioceptivo— y demostró la dinámica de <strong>excitación e inhibición</strong> ("arcos reflejos") como base biológica de la conducta.</li>
+</ul>
+
+<h3>La psicología se vuelve ciencia</h3>
+<ul>
+<li><strong>Jan Purkinje</strong> (psicofísica): ligó la experiencia subjetiva con los órganos perceptivos.</li>
+<li><strong>Charles Darwin</strong>: con <em>El origen de las especies</em> tira el paradigma teocentrista y pone las <strong>bases evolutivas</strong> de la adaptación.</li>
+<li><strong>Wilhelm Wundt</strong>: funda la psicología experimental y fisiológica; busca la estructura de la mente vía <strong>introspección</strong>. <strong>Franz Brentano</strong> aporta una psicología <strong>empírica</strong>, inseparable del entorno y la consciencia.</li>
+<li><strong>Edward Thorndike</strong> (ley del ejercicio: recompensa/castigo) y <strong>John B. Watson</strong> (conductismo: estudiar estímulo, respuesta y conducta observable por encima de la fisiología interna).</li>
+</ul>
+
+<div class="dato"><p>La frenología era falsa, pero su corazonada —que <strong>distintas funciones viven en distintas zonas</strong>— resultó cierta. Hoy sabemos que Broca está en el frontal y Wernicke en el temporal. La idea buena sobrevivió; el método (medir chipotes del cráneo) no.</p></div>
+
+<div class="esencial">
+<p><strong>Ruta mental:</strong> Bell/Magendie separan nervios → Müller dice que el nervio es el mensajero → du Bois-Reymond prueba que es electricidad → Gall se equivoca de método pero acierta con la localización → Flourens lo corrige → Sherrington nombra la sinapsis.</p>
+<p><strong>Para el examen:</strong> asocia cada nombre con <em>una</em> palabra clave: Sherrington = sinapsis; Darwin = evolución; Wundt = laboratorio/introspección; Watson = conductismo.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="neurona">
+      <p class="eyebrow">Capítulo 2 ⚡</p>
+      <h2>Neurona, sinapsis y neurotransmisores</h2>
+<p>Aquí bajamos al nivel de la célula. Si el capítulo 1 fue "quién descubrió el cerebro", este es "de qué está hecho y cómo se habla consigo mismo". Es puro cimiento: los neurotransmisores de aquí regresan en los capítulos de trastornos neurocognitivos y personalidad.</p>
+
+<h3>Cómo se forma (y se reforma) el sistema nervioso</h3>
+<p>El sistema nervioso deriva del <strong>ectoblasto</strong> (capa superficial del embrión). Se forma un <strong>surco neural</strong> que se cierra en un <strong>tubo neural</strong>; su parte de arriba se engrosa en tres divisiones que darán el encéfalo (<strong>prosencéfalo, mesencéfalo y rombencéfalo</strong>) y la de abajo forma la médula espinal.</p>
+<p><strong>Neuroplasticidad (Donald Hebb, 1949):</strong> la capacidad del cerebro de <strong>formar, reforzar o eliminar</strong> conexiones (sinapsis). Va por dos vías: crear/ampliar redes ante aprendizajes nuevos, y <strong>podar</strong> las poco usadas para depurar el sistema. Es la base del aprendizaje y de la recuperación tras un daño. "Las neuronas que se disparan juntas, se conectan juntas."</p>
+
+<h3>Anatomía de una neurona</h3>
+<ul>
+<li><strong>Soma</strong> (cuerpo): centro metabólico; tiene núcleo, aparato de Golgi y sustancia de Nissl. Sintetiza proteínas y neurotransmisores.</li>
+<li><strong>Dendritas</strong>: reciben señales; sus "espinas" (gémulas) amplían el área de recepción.</li>
+<li><strong>Axón</strong>: prolongación única, envuelta en <strong>mielina</strong> interrumpida por los <strong>nodos de Ranvier</strong> (que aceleran el impulso: conducción saltatoria). Por sus microtúbulos ocurre el transporte <strong>anterógrado</strong> (soma → terminal) y <strong>retrógrado</strong> (terminal → soma).</li>
+</ul>
+
+<h3>Tipos de neurona por estructura</h3>
+<ul>
+<li><strong>Unipolares</strong>: un solo axón que envía y recibe (p. ej. receptor olfativo).</li>
+<li><strong>Bipolares</strong>: dos prolongaciones opuestas; información sensorial específica (retina, oído interno vestibular).</li>
+<li><strong>Multipolares</strong>: muchas dendritas y un axón largo; integran mucha información. Incluyen las <strong>piramidales</strong> (Golgi tipo I) y las <strong>estrelladas</strong> (Golgi tipo II).</li>
+</ul>
+
+<h3>La sinapsis</h3>
+<p>Es el punto de contacto donde una neurona le pasa información a otra. Puede ser <strong>eléctrica</strong> (rapidísima, iones que pasan en ambos sentidos) o <strong>química</strong> (la más común): en la <strong>hendidura sináptica</strong>, las vesículas liberan neurotransmisores por <strong>exocitosis</strong> —disparada por la entrada de <strong>calcio (Ca²⁺)</strong>— hacia los receptores de la neurona postsináptica.</p>
+
+<h3>La glía: el equipo de soporte</h3>
+<ul>
+<li><strong>Oligodendrocitos</strong> (SNC) y <strong>células de Schwann</strong> (SNP): fabrican la vaina de <strong>mielina</strong>.</li>
+<li><strong>Astrocitos</strong> (solo SNC): soporte estructural, regulan el ambiente iónico y <strong>recogen el exceso de neurotransmisores</strong> de la hendidura para reciclarlos.</li>
+<li><strong>Microglía</strong>: las células inmunes del SNC; hacen <strong>fagocitosis</strong> (limpieza) tras lesión o inflamación.</li>
+</ul>
+
+<h3>Los siete neurotransmisores que caen</h3>
+<p>Un neurotransmisor <strong>excita</strong> a la neurona vecina <strong>despolarizándola</strong> (la acerca al umbral de disparo) o la <strong>inhibe hiperpolarizándola</strong> (la aleja del umbral). Ojo con esto, que es pregunta trampa: despolarizar = excitar; hiperpolarizar = inhibir.</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Sustancia</th><th>Rol</th><th>Cuando falla…</th></tr></thead>
+<tbody>
+<tr><td><strong>Glutamato</strong></td><td>Excitador principal ("caballo de batalla"); memoria vía receptores NMDA y AMPA.</td><td>Exceso tóxico = <em>excitotoxicidad</em> (muerte celular); ligado a demencias y esquizofrenia.</td></tr>
+<tr><td><strong>GABA</strong></td><td>Inhibidor principal del cerebro; frena la sobreexcitación. Receptores GABA<sub>A</sub> actúan muy rápido.</td><td>Poco GABA = ansiedad, sobreexcitación.</td></tr>
+<tr><td><strong>Glicina</strong></td><td>Inhibidor en médula ventral; en el cerebro es <em>co-agonista</em> que potencia al glutamato en NMDA.</td><td>—</td></tr>
+<tr><td><strong>Serotonina (5-HT)</strong></td><td>Ánimo, agresión, ciclo sueño/vigilia (núcleos del rafe), apetito.</td><td>Déficit = depresión, bulimia, ansiedad.</td></tr>
+<tr><td><strong>Dopamina (DA)</strong></td><td>Sustancia negra y área tegmental ventral. Cuatro vías: nigroestriada (motor), mesolímbica (recompensa), mesocortical (cognición), tuberoinfundibular (hormonal).</td><td>Exceso mesolímbico = psicosis; falta en sustancia negra = Parkinson.</td></tr>
+<tr><td><strong>Acetilcolina (ACh)</strong></td><td>Contracción muscular; en el cerebro (núcleo basal de Meynert) modula cognición, atención, sueño y memoria.</td><td>Pérdida = Alzheimer.</td></tr>
+<tr><td><strong>Noradrenalina (NA)</strong></td><td>Locus coeruleus; foco atencional ante amenazas (alerta, estrés).</td><td>Déficit = depresión, TDAH; exceso = insomnio, pánico somático.</td></tr>
+</tbody>
+</table></div>
+
+<div class="nota-campo"><p>Truco para no invertir la regla: <strong>des</strong>polarizar suena a "<strong>des</strong>atar", encender. Hiperpolarizar es "hiper-cerrar", apagar. Encender = excitar; apagar = inhibir.</p></div>
+
+<div class="esencial">
+<p><strong>El circuito, en una frase:</strong> el impulso viaja por el axón (mielina + nodos de Ranvier), el calcio abre las vesículas, el neurotransmisor cruza la hendidura y <strong>excita (despolariza)</strong> o <strong>inhibe (hiperpolariza)</strong> a la siguiente neurona; los astrocitos limpian el sobrante.</p>
+<p><strong>Pares que caen:</strong> dopamina↔Parkinson/psicosis, acetilcolina↔Alzheimer, serotonina↔depresión, GABA↔ansiedad, glutamato↔excitotoxicidad.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="neuroanatomia">
+      <p class="eyebrow">Capítulo 3 🗺️</p>
+      <h2>Neuroanatomía: el cerebro por dentro</h2>
+<p>El tour por las estructuras. La estrategia TDAH-friendly aquí es de "afuera del sistema" (el autónomo) hacia "adentro del cráneo" (tallo → diencéfalo → límbico → corteza). No memorices todo de un jalón: asocia cada estructura con su <em>trabajo</em>.</p>
+
+<h3>Sistema nervioso autónomo y arcos reflejos</h3>
+<p>El <strong>SNA</strong> controla músculo liso, cardiaco y glándulas; es el rey de la homeostasis involuntaria, gobernado desde el hipotálamo.</p>
+<ul>
+<li><strong>Simpático</strong>: "lucha o huida". Dilata pupilas, sube la frecuencia cardiaca, abre bronquios, frena la digestión, aumenta el sudor.</li>
+<li><strong>Parasimpático</strong>: el antagonista; restaura el reposo (digerir, bajar ritmos cardiaco y respiratorio).</li>
+<li><strong>Arcos reflejos</strong>: respuestas protectoras rapidísimas a nivel bulbar (tragar, toser) o espinal (vaciar la vejiga, retirar la mano del dolor) sin esperar al procesamiento cognitivo.</li>
+</ul>
+
+<h3>Tallo cerebral y cerebelo</h3>
+<p>El <strong>tronco encefálico</strong> = bulbo (médula oblonga) + puente de Varolio + mesencéfalo; conecta cerebro y médula. El mesencéfalo aloja los <strong>colículos superiores</strong> (reflejo visual) e <strong>inferiores</strong> (auditivo) en el tectum, y la <strong>formación reticular / SAAR</strong>, que regula alerta y vigilia.</p>
+<p>El <strong>cerebelo</strong> ocupa ~10% del cerebro pero concentra la mayoría de sus neuronas. Tres partes: <strong>arquicerebelo</strong> (floculonodular: equilibrio/vestibular), <strong>espinocerebelo</strong> (vermis: marcha) y <strong>neocerebelo</strong> (hemisferios: coordinación fina ojo-mano y, sorprendentemente, procesos cognitivos y empatía).</p>
+
+<h3>Diencéfalo: el corazón del relevo</h3>
+<ul>
+<li><strong>Tálamo</strong>: estación de relevo de casi todas las vías sensoriales hacia la corteza (excepto el olfato). Destacan el cuerpo geniculado <strong>lateral</strong> (visión) y <strong>medial</strong> (audición), y los núcleos intralaminares (dolor).</li>
+<li><strong>Hipotálamo</strong>: coordinador maestro de la supervivencia (hambre, sed, temperatura, miedo, huida, sexo). Manda sobre la hipófisis (eje endocrino) y lleva los ritmos circadianos con el <strong>núcleo supraquiasmático</strong> (el reloj biológico).</li>
+<li><strong>Epitálamo</strong>: la glándula <strong>pineal</strong> (melatonina en la oscuridad → sueño) y la habénula.</li>
+</ul>
+
+<h3>Ganglios basales</h3>
+<p>Circuito de control del movimiento (elige y afina programas motores por "desinhibición"). Lo forman <strong>caudado, putamen</strong> (neoestriado), <strong>globo pálido, sustancia negra</strong> y <strong>núcleo subtalámico</strong>. La degeneración de la sustancia negra causa la rigidez y bradicinesia del <strong>Parkinson</strong>.</p>
+
+<h3>Sistema límbico</h3>
+<ul>
+<li><strong>Amígdala</strong>: el corazón emocional; condicionamiento del <strong>miedo</strong>, evaluación de amenazas y marcaje emocional de recuerdos.</li>
+<li><strong>Hipocampo</strong>: convierte memoria de corto plazo en memoria de largo plazo <strong>explícita/declarativa</strong> (hechos, mapas). Una de las pocas zonas con <strong>neurogénesis</strong> en el adulto.</li>
+<li><strong>Corteza cingulada</strong>: integra afecto con acción; su parte anterior detecta conflictos/errores y su zona subgenual se activa en depresión grave.</li>
+<li><strong>Núcleo accumbens</strong>: centro de <strong>recompensa y placer</strong>; protagonista en todas las adicciones (sobredosis dopaminérgica).</li>
+</ul>
+
+<h3>Los cuatro lóbulos</h3>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Lóbulo</th><th>Zonas y funciones clave</th></tr></thead>
+<tbody>
+<tr><td><strong>Frontal</strong> (motor/ejecutor)</td><td>Corteza motora (AB 4, homúnculo cruzado) y premotora; <strong>área de Broca</strong> (AB 44-45, articular el habla). <strong>Prefrontal</strong>: dorsolateral (razonamiento, memoria de trabajo), orbitofrontal/ventromedial (moralidad, riesgo, freno de impulsos; "marcador somático" de Damasio). Neuronas espejo (empatía).</td></tr>
+<tr><td><strong>Parietal</strong> (sensorial/espacial)</td><td>Corteza somatosensorial (giro postcentral: tacto, dolor, temperatura). Parietal superior e inferior: imagen corporal en el espacio, atención, lectura/escritura (<strong>giro angular</strong>). Daño → <strong>heminegligencia</strong>.</td></tr>
+<tr><td><strong>Occipital</strong> (visión)</td><td>Corteza visual primaria (V1 / estriada, AB 17). Dos rutas: <strong>corriente dorsal</strong> ("dónde", al parietal) y <strong>corriente ventral</strong> ("qué", al temporal).</td></tr>
+<tr><td><strong>Temporal</strong> (audición/lenguaje)</td><td>Corteza auditiva primaria (giro de Heschl, AB 41). <strong>Área de Wernicke</strong> (posterior izquierda: comprensión/semántica). <strong>Giro fusiforme</strong> (reconocer rostros y letras). Polo temporal: cerebro social y teoría de la mente.</td></tr>
+</tbody>
+</table></div>
+<p>Los dos hemisferios se separan por la fisura longitudinal y se comunican por el <strong>cuerpo calloso</strong>.</p>
+
+<h3>Sueño y vigilia</h3>
+<p>La <strong>vigilia</strong> la sostienen las neuronas noradrenérgicas y serotoninérgicas del tallo (sistema reticular) y del hipotálamo. El <strong>ciclo del sueño</strong>:</p>
+<ul>
+<li><strong>Fases I-II</strong>: ondas theta y husos de sueño; baja el tono muscular.</li>
+<li><strong>Fases III-IV</strong>: sueño profundo delta; predomina el parasimpático; reparación tisular y hormona del crecimiento.</li>
+<li><strong>Fase MOR/REM</strong> (sueño paradójico): actividad cerebral como en vigilia, sueños vívidos y <strong>parálisis muscular</strong> para no actuarlos. Clave para que el hipocampo <strong>consolide</strong> la memoria del día.</li>
+</ul>
+
+<div class="esencial">
+<p><strong>Chuleta de asociaciones:</strong> tálamo = relevo sensorial; hipotálamo = supervivencia + hormonas + reloj; amígdala = miedo; hipocampo = memoria nueva; accumbens = placer/adicción; sustancia negra = Parkinson; Broca = producir habla; Wernicke = entender habla.</p>
+<p><strong>Regla de rutas visuales:</strong> dorsal = <em>dónde</em>; ventral = <em>qué</em>.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="psicometria-historia">
+      <p class="eyebrow">Capítulo 4 📏</p>
+      <h2>Psicometría: historia de la medición</h2>
+<p>Cambiamos de bloque: de la biología pasamos a <em>cómo se mide</em> la mente. Este capítulo es la línea del tiempo de la evaluación psicológica; el siguiente (cap. 5) es la maquinaria estadística. En el examen, esperar preguntas de "¿quién hizo la primera prueba de inteligencia?" o "¿de dónde viene el concepto de CI?".</p>
+
+<h3>Antecedentes precientíficos</h3>
+<ul>
+<li><strong>China antigua</strong> (~2200 a. C., dinastía Han): exámenes de aptitudes para funcionarios imperiales (equitación, música, aritmética, escritura, leyes).</li>
+<li><strong>Platón</strong>: en <em>La República</em>, los hombres difieren en aptitudes naturales. <strong>Aristóteles</strong>: fisiognomía (signos corporales ↔ facultades), ligada a las doctrinas humorales de <strong>Hipócrates</strong> y Empédocles (sangre/sanguíneo, bilis amarilla/colérico, bilis negra/melancólico, flema/flemático).</li>
+<li><strong>Descartes</strong>: separa cuerpo (máquina) y alma; influye en lo fenomenológico y las proyectivas. <strong>Locke y Bacon</strong> (empirismo inglés): el conocimiento válido viene de la experiencia sensible (antecedente del positivismo y el conductismo).</li>
+</ul>
+
+<h3>Antecedentes científicos (s. XVIII-XIX)</h3>
+<ul>
+<li><strong>Friedrich Bessel</strong>: la <strong>ecuación personal</strong> —cada observador mide con un margen de error—; germen de la <strong>confiabilidad</strong>.</li>
+<li><strong>Adolphe Quetelet</strong>: aplica la <strong>curva normal</strong> de Gauss a la conducta; su "hombre promedio".</li>
+<li><strong>Psicofísica</strong>: <strong>Weber</strong> (umbrales diferenciales, ley de Weber) y <strong>Fechner</strong>, padre de la psicofísica (<em>Elementos de Psicofísica</em>, 1860): relación cuantitativa entre estímulo físico y sensación.</li>
+<li><strong>Wundt</strong> (1879): primer laboratorio de psicología experimental en Leipzig; estandariza la medición.</li>
+<li><strong>Darwin</strong>: gracias a la evolución, las diferencias individuales dejan de ser "errores" y pasan a ser adaptativas.</li>
+<li><strong>Francis Galton</strong>: padre de la <strong>psicología diferencial</strong>; laboratorio antropométrico (1884); primero en usar estadística (distribución bivariada), lo que llevó a <strong>Pearson</strong> al coeficiente de correlación.</li>
+<li><strong>James McKeen Cattell</strong>: acuña "<strong>test mental</strong>" (1890). Su alumno <strong>Wissler</strong> (1901) mostró que esas pruebas sensoriales casi no correlacionaban con el éxito académico → se abandona medir inteligencia con pruebas motoras/sensoriales.</li>
+</ul>
+
+<h3>La época moderna: la inteligencia (s. XX)</h3>
+<ul>
+<li><strong>Alfred Binet</strong> (con Simon, 1905): <strong>primera prueba de inteligencia</strong> real, enfocada en procesos superiores (razonamiento, juicio). En 1908 introduce la <strong>edad mental</strong>.</li>
+<li><strong>Stern</strong> (1912) propone dividir edad mental entre edad cronológica; <strong>Terman</strong> (1916) revisa la escala (Stanford-Binet) y la multiplica por 100 → nace el término <strong>CI (coeficiente intelectual)</strong>.</li>
+<li><strong>Guerras mundiales</strong>: pruebas <em>colectivas</em> con <strong>Yerkes</strong> (Army Alpha verbal / Army Beta no verbal); <strong>Woodworth</strong> crea el primer cuestionario de ajuste emocional (Personal Data Sheet); <strong>Rorschach</strong> publica sus manchas de tinta (1921). La Segunda Guerra empuja las baterías de aptitudes específicas.</li>
+<li><strong>Thurstone</strong>: funda la Sociedad Psicométrica (1935) y desarrolla el <strong>análisis factorial múltiple</strong>.</li>
+</ul>
+
+<div class="dato"><p>El primer "examen estandarizado" de la historia no fue de inteligencia sino de <strong>servicio civil en China</strong>, hace más de 4000 años. La idea de medir a la gente para decidir quién entra a un puesto es viejísima.</p></div>
+
+<div class="esencial">
+<p><strong>La cadena del CI:</strong> Binet (edad mental) → Stern (divide edades) → Terman (×100 = CI, y crea la Stanford-Binet).</p>
+<p><strong>No confundir:</strong> Galton = diferencias individuales/antropometría; Cattell = "test mental" (pero Wissler lo refuta); Wundt = laboratorio; Fechner = psicofísica; Thurstone = análisis factorial.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="tct">
+      <p class="eyebrow">Capítulo 5 🎯</p>
+      <h2>Confiabilidad, validez y normas</h2>
+<p>Este es el capítulo más "de fórmula" y el que más pesa en la subárea 1.1 (Propiedades de instrumentos). Aquí vive la <strong>Teoría Clásica de los Tests</strong> y las dos palabras que el CENEVAL repite hasta el cansancio: <strong>confiabilidad y validez</strong>. Domina esto y tienes ganada media Área 1.</p>
+
+<h3>Escalas de medición (Stevens, 1946)</h3>
+<p>Medir es asignar números con <em>isomorfismo</em> entre el sistema numérico y el empírico. Cuatro niveles, de menos a más información:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Escala</th><th>Qué permite</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td><strong>Nominal</strong></td><td>Solo clasifica.</td><td>1 = hombre, 2 = mujer.</td></tr>
+<tr><td><strong>Ordinal</strong></td><td>Ordena por magnitud, pero no cuantifica la distancia.</td><td>Percentiles, lugares de una carrera.</td></tr>
+<tr><td><strong>Intervalo</strong></td><td>Distancias iguales, pero <em>sin cero absoluto</em>. Aquí caen casi todas las pruebas psicológicas.</td><td>CI (un 0 no es "cero inteligencia"); temperatura.</td></tr>
+<tr><td><strong>Razón</strong></td><td>Tiene cero absoluto (ausencia total).</td><td>Peso, estatura, tiempo de reacción.</td></tr>
+</tbody>
+</table></div>
+
+<h3>Tres palabras que no son lo mismo</h3>
+<ul>
+<li><strong>Testing</strong>: aplicar mecánicamente una prueba y sacar un número.</li>
+<li><strong>Psicodiagnóstico</strong>: término médico-psiquiátrico, centrado en patología y síntomas (uso original de Rorschach).</li>
+<li><strong>Evaluación psicológica</strong>: proceso amplio de toma de decisiones (entrevista, observación, intervención). No es "medir por medir".</li>
+</ul>
+
+<h3>Teoría Clásica de los Tests (Spearman, 1904)</h3>
+<p>Modelo lineal: <strong>X = V + e</strong> — el puntaje observado (X) es el puntaje verdadero (V) más el <strong>error</strong> de medición (e). Supuestos: V = esperanza matemática de X; el error no correlaciona con V ni con el error de otra prueba (es aleatorio e insesgado).</p>
+<ul>
+<li><strong>Error aleatorio</strong>: adivinar, distracción, cansancio; al sumar muchos, tiende a cero.</li>
+<li><strong>Error sistemático / sesgo</strong>: un instrumento mal calibrado o una pregunta mal redactada; este sí <strong>arruina</strong> la medición.</li>
+</ul>
+
+<h3>Confiabilidad (precisión y estabilidad)</h3>
+<ul>
+<li><strong>Test-retest</strong> (estabilidad): aplicar dos veces; si es estable, la <em>r</em> de Pearson se acerca a 1.</li>
+<li><strong>Consistencia interna</strong> (una sola aplicación): división por mitades (pares vs. nones, con Spearman-Brown o Kuder-Richardson) y el <strong>Alfa de Cronbach</strong> (promedio de todas las mitades posibles; detecta reactivos inconsistentes).</li>
+</ul>
+
+<h3>Validez (que mida lo que dice medir)</h3>
+<p>La confiabilidad es <strong>necesaria pero no suficiente</strong> para la validez (puedes medir consistentemente… lo equivocado).</p>
+<ul>
+<li><strong>De constructo</strong>: valida el rasgo teórico (inteligencia, ansiedad) y su teoría.</li>
+<li><strong>De criterio</strong>: capacidad predictiva/diagnóstica; correlaciona con un criterio externo (p. ej. notas futuras).</li>
+<li><strong>De contenido</strong>: los reactivos son muestra representativa del dominio; se valida por <strong>jueceo de expertos</strong>, no por estadística.</li>
+</ul>
+
+<h3>La validez que nombra la guía CENEVAL: convergente, divergente y de facies</h3>
+<div class="dato"><p>Estos tres términos aparecen <strong>textualmente</strong> en la guía oficial como conceptos del nivel <em>sobresaliente</em> de Área 1. Vienen de la validez de constructo:</p></div>
+<ul>
+<li><strong>Validez convergente</strong>: la prueba correlaciona <em>alto</em> con otras medidas del <strong>mismo</strong> constructo (dos tests de ansiedad deben parecerse).</li>
+<li><strong>Validez divergente (discriminante)</strong>: correlaciona <em>bajo</em> con medidas de constructos <strong>distintos</strong> (tu test de ansiedad no debería medir inteligencia).</li>
+<li><strong>Validez de facies (aparente/facial)</strong>: qué tanto la prueba <em>parece</em> medir lo que dice, a ojos del examinado o de un lego. Es la más débil: no es evidencia estadística, es apariencia.</li>
+</ul>
+
+<h3>Normas de puntuación</h3>
+<p>Referidas a la <strong>norma</strong> (comparar con un grupo normativo) o al <strong>criterio</strong> (contra un estándar fijo, p. ej. 70% para aprobar). Puntajes derivados de la curva normal:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Puntaje</th><th>Media</th><th>DE</th></tr></thead>
+<tbody>
+<tr><td><strong>Z</strong> (típica)</td><td>0</td><td>1</td></tr>
+<tr><td><strong>CI</strong> (desviación)</td><td>100</td><td>15</td></tr>
+<tr><td><strong>T</strong></td><td>50</td><td>10</td></tr>
+<tr><td><strong>Decatipos</strong> (estenes)</td><td>5.5</td><td>2</td></tr>
+<tr><td><strong>Eneatipos</strong> (estaninas)</td><td>5</td><td>2</td></tr>
+</tbody>
+</table></div>
+<p>Los <strong>percentiles</strong> (escala ordinal de 100 partes) indican el % de la población que el sujeto supera (percentil 85 = mejor que el 85%). La <strong>edad mental/escalar</strong> indica la edad en que la mayoría logra esa ejecución. Recuerda: a <strong>±1 DE</strong> está el 68.26% de la población.</p>
+
+<div class="esencial">
+<p><strong>El mapa mental:</strong> mides con una escala (nominal→razón) → todo puntaje trae error (X = V + e) → la <strong>confiabilidad</strong> pregunta "¿mido consistente?" y la <strong>validez</strong> pregunta "¿mido lo correcto?".</p>
+<p><strong>Tipos de validez, en pares:</strong> constructo (teoría), criterio (predice), contenido (expertos); y para sobresaliente: convergente (se parece a lo igual), divergente (se distingue de lo distinto), facies (solo parece).</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="metodologia">
+      <p class="eyebrow">Capítulo 6 🔬</p>
+      <h2>Metodología de la investigación</h2>
+<p>Aunque en el examen la investigación es su propia área, aquí se cruza con el diagnóstico: los mismos conceptos de validez, muestreo y enfoques cuali/cuanti sostienen cómo se construyen y se leen los instrumentos. Este capítulo es denso; léelo por bloques (paradigmas → cuanti → cuali → técnicas).</p>
+
+<h3>Los dos paradigmas</h3>
+<ul>
+<li><strong>Cuantitativo (positivismo)</strong>: hay una realidad objetiva medible; busca explicar, predecir y controlar reduciendo todo a variables numéricas.</li>
+<li><strong>Cualitativo (constructivismo/interpretativismo)</strong>: la realidad es subjetiva y construida socialmente; busca <strong>comprender</strong> significados y experiencias. Asume que el investigador afecta lo que estudia.</li>
+</ul>
+
+<h3>Metodología cuantitativa (Kerlinger)</h3>
+<ul>
+<li><strong>Problema</strong>: enunciado interrogativo que relaciona dos o más variables y se puede probar empíricamente. <strong>Hipótesis</strong>: enunciado declarativo conjetural que predice esa relación.</li>
+<li><strong>Variables</strong>: independiente (causa que se manipula) vs. dependiente (efecto); <strong>activas</strong> (manipuladas) vs. <strong>atributivas</strong> (ya las trae el sujeto: sexo, edad, inteligencia); continuas vs. categóricas; <strong>latentes</strong> (constructos no observables, como la hostilidad) vs. observables.</li>
+</ul>
+
+<h3>Fundamentos de lo cualitativo</h3>
+<ul>
+<li><strong>Saturación teórica</strong>: dejar de muestrear cuando ya no surgen datos nuevos.</li>
+<li><strong>Autenticidad</strong>: la "validez" cualitativa es captar la situación real de las personas.</li>
+<li><strong>Triangulación (Denzin)</strong>: usar múltiples fuentes/métodos para dar rigor. Tipos: de datos, de investigadores, de teorías, metodológica (y la interdisciplinaria de <strong>Janesick</strong>).</li>
+</ul>
+
+<h3>Marcos constructivistas (Álvarez-Gayou)</h3>
+<ul>
+<li><strong>Teoría crítica</strong> (Escuela de Frankfurt, Horkheimer): critica la dominación y busca emancipar.</li>
+<li><strong>Constructivismo radical</strong> (von Glasersfeld) y <strong>social</strong> (Gergen: el significado se crea en el intercambio social mediado por el lenguaje).</li>
+<li><strong>Feminismo y estudios de género</strong>: cómo se construye el género y el poder.</li>
+<li><strong>Constructos personales</strong> (George Kelly): vemos el mundo con "constructos" dicotómicos; para medirlos inventó la <strong>Técnica de la Rejilla</strong>.</li>
+</ul>
+
+<h3>Marcos interpretativos</h3>
+<ul>
+<li><strong>Interaccionismo simbólico</strong> (Blumer, Mead, Cooley): actuamos según los significados, que nacen y se modifican en la interacción. <strong>Goffman</strong>: enfoque dramatúrgico (somos "actores" que presentan un yo).</li>
+<li><strong>Etnometodología</strong> (Garfinkel): cómo la gente resuelve la vida diaria; <em>indexicalidad</em> (el significado depende del contexto) y reflexividad.</li>
+<li><strong>Fenomenología</strong> (Husserl, Heidegger): la experiencia vivida; el investigador suspende sus creencias. <strong>Fenomenografía</strong> (Marton): no la esencia, sino las <em>variaciones</em> en cómo distintos sujetos viven un fenómeno.</li>
+<li><strong>Teoría fundamentada</strong> (Glaser y Strauss): la teoría <strong>emerge</strong> de los datos. Codificación abierta → axial (Strauss y Corbin) → saturación.</li>
+<li><strong>Etnografía</strong>: describe una cultura; perspectiva <strong>émica</strong> (desde adentro) vs. <strong>ética</strong> (desde afuera). <strong>Hermenéutica</strong> (Dilthey, Gadamer): interpretar textos por el "círculo hermenéutico" (partes ↔ todo).</li>
+</ul>
+
+<h3>Técnicas de recolección</h3>
+<ul>
+<li><strong>Observación — tipología de Gold</strong>: observador completo (oculto), observador-como-participante, participante-como-observador, y participante completo ("volverse nativo").</li>
+<li><strong>Entrevista</strong>: abierta/en profundidad o semiestructurada.</li>
+<li><strong>Fotobiografía</strong> (Fina Sanz): el sujeto narra su vida con fotos, movilizando recuerdos.</li>
+<li><strong>Historias de vida</strong> (un individuo) e <strong>historia oral</strong> (un suceso y sus testimonios).</li>
+<li><strong>Grupos focales</strong> (Krueger, Mucchielli): entrevista grupal con moderador y guía de ≤10 preguntas abiertas.</li>
+<li><strong>Investigación endógena</strong> (Maruyama): la propia comunidad investiga. <strong>Investigación-acción</strong> (Lewin): ciclo planear→actuar→observar→reflexionar para resolver problemas reales. <strong>Análisis de contenido</strong>: codificar patrones (con ATLAS.ti o NVivo).</li>
+</ul>
+
+<div class="esencial">
+<p><strong>Ancla cada autor a su idea:</strong> Kerlinger = variables/hipótesis; Denzin = triangulación; Blumer = interaccionismo simbólico; Garfinkel = etnometodología; Husserl = fenomenología; Glaser y Strauss = teoría fundamentada; Gold = roles del observador; Lewin = investigación-acción; Kelly = rejilla/constructos personales.</p>
+<p><strong>Émica vs. ética:</strong> émica = la mirada del nativo; ética = la mirada del analista externo (nada que ver con la ética moral).</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="proyectivas">
+      <p class="eyebrow">Capítulo 7 🖍️</p>
+      <h2>Psicodiagnóstico infantil y proyectivas</h2>
+<p>Regresamos al terreno clínico y al plato fuerte del diagnóstico infantil. Aquí caen muchísimos reactivos de "¿qué mide/quién creó/cómo se interpreta tal prueba?". La estrategia: por cada test, ten claros autor, para qué edad, qué mide y su sistema de calificación.</p>
+
+<h3>Evaluar a un niño no es evaluar a un adulto chiquito</h3>
+<ul>
+<li>Los niños casi nunca piden la consulta: los <strong>derivan</strong> padres o maestros al leer una conducta como "síntoma".</li>
+<li><strong>Triangulación edípica</strong>: el niño se estructura en el triángulo papá-mamá-hijo; sus síntomas suelen reflejar conflictos <em>entre</em> los padres. No se evalúa sin ver el contexto familiar.</li>
+<li><strong>Transferencia y contratransferencia</strong>: el niño proyecta sus sentimientos <em>y</em> los de sus padres. La contratransferencia (reacción inconsciente del psicólogo) es un riesgo: querer "reparar" la propia infancia, volverse cómplice o juez de los padres.</li>
+</ul>
+
+<h3>Bases del desarrollo emocional</h3>
+<ul>
+<li><strong>Psicoanálisis</strong>: Freud (etapas oral, anal, fálica, latencia) y <strong>Anna Freud</strong> (mecanismos de defensa del Yo: represión, proyección, negación, regresión…).</li>
+<li><strong>Mahler</strong>: separación-individuación (fase autista → simbiótica → diferenciación, ejercitación, acercamiento, consolidación).</li>
+<li><strong>Apego</strong>: Bowlby y <strong>Ainsworth</strong> (seguro, ansioso-resistente, ansioso-elusivo); <strong>Main</strong> añade el desorganizado.</li>
+<li><strong>Mentalización</strong> (Fonagy y Target): entender los estados mentales propios y ajenos gracias al <em>espejeo</em> del cuidador.</li>
+</ul>
+
+<h3>Juego y dibujo como técnicas</h3>
+<p>El <strong>juego</strong> (Erikson, Dolto) permite dominar lo desagradable y expresar el deseo. El <strong>dibujo</strong> tiene "estructura de sueño" (Morgenstern): es una vía muda hacia el inconsciente donde el niño plasma sus conflictos.</p>
+
+<h3>CAT — Prueba de Apercepción Temática infantil</h3>
+<p>Antecedente: el <strong>TAT</strong> de Morgan y Murray (1935) para adultos. El <strong>CAT</strong> lo creó <strong>Leopold Bellak</strong> (1949): los niños proyectan más fácil sobre <em>animales</em>. Versiones: <strong>CAT-A</strong> (animales, 10 láminas), <strong>CAT-H</strong> (humanos, para niños mayores con CI alto) y <strong>CAT-S</strong> (suplementario: situaciones específicas). Bellak sistematizó la interpretación en <strong>diez variables</strong> (tema principal, héroe, necesidades, concepción del ambiente, conflictos, ansiedades, defensas, adecuación del superyó, integración del Yo…).</p>
+
+<h3>Dibujo de la Figura Humana (DFH)</h3>
+<ul>
+<li>Dos enfoques: <strong>clínico-proyectivo</strong> (Karen <strong>Machover</strong>: emociones, autoconcepto) y <strong>de desarrollo/cognitivo</strong> (Goodenough y Harris: madurez mental).</li>
+<li><strong>DAP:SPED</strong> (Naglieri, 1991): 55 indicadores cuantitativos para detectar problemas emocionales (dibujo de hombre, mujer y de sí mismo).</li>
+<li><strong>Sistema de Koppitz</strong> (5-12 años): integra ambos. 30 <strong>indicadores del desarrollo</strong> (esperados, comunes, excepcionales) y 30 <strong>indicadores emocionales</strong> (figura pequeña = timidez; trazo débil = inseguridad; dientes = agresión; omitir ojos = aislamiento).</li>
+</ul>
+
+<h3>Dibujo de la Familia</h3>
+<ul>
+<li><strong>Louis Corman</strong>: consigna "dibuja una familia que tú imagines" para saltar la represión. Interpreta en cuatro planos: gráfico, estructural, del contenido y psicoanalítico.</li>
+<li><strong>Lluis Font</strong>: lectura sistémica (tamaño, distancia = comunicación; el dibujado primero = el más valorado; suprimir a alguien = máxima desvalorización).</li>
+<li><strong>Dibujo Kinético (KFD, Burns y Kaufman)</strong>: pide dibujar a todos "haciendo algo"; analiza acciones, compartimentos (aislamiento) y rivalidad fraterna.</li>
+</ul>
+
+<h3>H-T-P (Casa-Árbol-Persona)</h3>
+<p>De <strong>Buck y Warren</strong>. Se pide primero la <strong>casa</strong> (hoja horizontal), luego <strong>árbol</strong> y <strong>persona</strong> (verticales) a lápiz, y después una segunda ronda a color (evoca lo afectivo). Se mide el <strong>tiempo de latencia</strong> y se anotan borraduras y comentarios. Interpretación por zonas: izquierda = pasado/impulsividad; derecha = futuro; casa = techo (fantasía), muros (fuerza del Yo), puerta/ventanas (contacto social); árbol = raíces (realidad), tronco (fuerza), copa. Termina con un <strong>interrogatorio</strong> estándar ("¿es una casa feliz?", "¿qué piensa esa persona?").</p>
+
+<h3>El informe psicológico</h3>
+<p>Estructura: 1) ficha de identificación, 2) motivo de consulta, 3) antecedentes y observaciones, 4) pruebas aplicadas, 5) resultados psicométricos, 6) resultados proyectivos, 7) impresión diagnóstica y 8) sugerencias. Ética <strong>APA</strong>: confidencialidad, no etiquetar ("desempeño por debajo de la norma", no "niño anormal") y dar retroalimentación a padres y niño.</p>
+
+<div class="esencial">
+<p><strong>Tabla mínima que debes poder recitar:</strong> CAT → Bellak (animales); Figura Humana → Machover (proyectivo) / Koppitz (calificación); Familia → Corman / KFD Burns y Kaufman; H-T-P → Buck y Warren; TAT → Murray.</p>
+<p><strong>Constante:</strong> las proyectivas se leen por indicadores (trazo, tamaño, omisiones, ubicación), nunca un signo aislado = un diagnóstico.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="inteligencia">
+      <p class="eyebrow">Capítulo 8 🧩</p>
+      <h2>Inteligencia y neuropsicología</h2>
+<p>Del dibujo pasamos a las escalas duras. Este capítulo cubre la teoría CHC (el "sistema operativo" de casi toda prueba de inteligencia moderna), las escalas Wechsler, las visomotoras y las baterías mexicanas. Muy examinable: índices, subpruebas y rangos de edad.</p>
+
+<h3>Teoría CHC (Cattell-Horn-Carroll)</h3>
+<p>Es el fundamento actual de la inteligencia; integra el factor <strong>g</strong> de Spearman con habilidades múltiples. Dominios amplios:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Sigla</th><th>Habilidad</th></tr></thead>
+<tbody>
+<tr><td><strong>Gc</strong></td><td>Inteligencia cristalizada (conocimiento adquirido: vocabulario, cultura).</td></tr>
+<tr><td><strong>Gf</strong></td><td>Razonamiento fluido (resolver lo nuevo y abstracto).</td></tr>
+<tr><td><strong>Gsm</strong></td><td>Memoria de corto plazo / de trabajo.</td></tr>
+<tr><td><strong>Gv</strong></td><td>Procesamiento visual.</td></tr>
+<tr><td><strong>Gs</strong></td><td>Velocidad de procesamiento.</td></tr>
+<tr><td><strong>Gq / Glr</strong></td><td>Conocimiento cuantitativo / almacenamiento y recuperación a largo plazo.</td></tr>
+</tbody>
+</table></div>
+
+<h3>Escalas Wechsler</h3>
+<p>Creadas por <strong>David Wechsler</strong>. El <strong>WISC-IV</strong> (6:0 a 16:11 años) eliminó el CI verbal y de ejecución y los cambió por un <strong>CI Total</strong> derivado de 4 índices (alineados a CHC):</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Índice</th><th>Mide</th><th>Subpruebas esenciales</th></tr></thead>
+<tbody>
+<tr><td><strong>ICV</strong> — Comprensión Verbal</td><td>Gc</td><td>Semejanzas, Vocabulario, Comprensión.</td></tr>
+<tr><td><strong>IRP</strong> — Razonamiento Perceptual</td><td>Gf y Gv</td><td>Diseño con cubos, Conceptos con dibujos, Matrices.</td></tr>
+<tr><td><strong>IMT</strong> — Memoria de Trabajo</td><td>Gsm</td><td>Retención de dígitos, Sucesión de números y letras.</td></tr>
+<tr><td><strong>IVP</strong> — Velocidad de Procesamiento</td><td>Gs</td><td>Claves, Búsqueda de símbolos.</td></tr>
+</tbody>
+</table></div>
+<p>Reglas de interpretación (Flanagan y Kaufman): el <strong>ICG</strong> (Índice de Capacidad General = ICV + IRP) se usa cuando el CI Total no es interpretable por demasiada dispersión entre índices (útil en superdotación, TDAH o daño cerebral, donde IMT e IVP caen). El <strong>ICC</strong> (Competencia Cognitiva = IMT + IVP) refleja la eficiencia. El <strong>WPPSI-III</strong> cubre preescolar y primaria (2:6 a 7:3 años).</p>
+
+<h3>Pruebas visomotoras</h3>
+<ul>
+<li><strong>Bender</strong> (Lauretta Bender, 1938; usa 9 patrones de <strong>Wertheimer</strong>/Gestalt): copia figuras para evaluar maduración visomotriz, daño neurológico y estado emocional. Sistema de <strong>Koppitz</strong> (5 a 11:11): suma 4 tipos de error —distorsión, rotación, integración, perseveración— más indicadores emocionales. La <strong>Bender-Gestalt II</strong> (Brannigan y Decker) amplía el rango a 4-85 años.</li>
+<li><strong>Frostig — DTVP-2</strong> (revisión de Hammill, Pearson y Voress; 4 a 10:11 años): percepción visual previa a leer/escribir. 8 subpruebas y 3 cocientes: <strong>PVG</strong> (general), <strong>PMR</strong> (respuesta motriz reducida: solo señalar) e <strong>IVM</strong> (integración visomotora). Si PMR es normal pero IVM está bajo, el problema es motor/dispraxia, no perceptual.</li>
+</ul>
+
+<h3>Baterías neuropsicológicas mexicanas</h3>
+<ul>
+<li><strong>BANETA</strong> (Yáñez y Prieto; 7 a 11:11 años): perfil de las funciones que sostienen lectura, escritura y cálculo; explora procesamiento fonológico, estereognosia, grafestesia, y los <strong>signos neurológicos blandos</strong>.</li>
+<li><strong>ENI-2</strong> (Matute, Rosselli, Ardila y Ostrosky; 5 a 16 años): perfil neuropsicológico completo en 11 procesos (atención, memoria, lenguaje, lectura, escritura, cálculo, visoespacial, funciones ejecutivas…) para TDAH, autismo, disfasias.</li>
+</ul>
+
+<div class="esencial">
+<p><strong>Rangos de edad que caen:</strong> WPPSI-III 2:6-7:3 · WISC-IV 6:0-16:11 · Bender-Koppitz 5-11:11 · DTVP-2 4-10:11 · BANETA 7-11:11 · ENI-2 5-16.</p>
+<p><strong>Índices WISC-IV en orden:</strong> ICV, IRP, IMT, IVP → CI Total. Cuando hay demasiada dispersión, se reporta el <strong>ICG</strong>.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="neurocognitivos">
+      <p class="eyebrow">Capítulo 9 🧓</p>
+      <h2>Trastornos neurocognitivos (DSM-5)</h2>
+<p>Regresamos a la clínica, ahora con el adulto mayor y el DSM-5. La clave de este capítulo es el <strong>diagnóstico diferencial</strong>: qué distingue a un Alzheimer de una frontotemporal, de una vascular o de un Parkinson. El examen ama las preguntas de "el paciente presenta X, ¿qué demencia es?".</p>
+
+<h3>La reclasificación del DSM-5</h3>
+<p>El DSM-5 cambió "demencia" por <strong>Trastorno Neurocognitivo (TNC) Mayor</strong> para bajar el estigma y subrayar la base orgánica. Tres niveles:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Cuadro</th><th>Declive</th><th>Autonomía</th></tr></thead>
+<tbody>
+<tr><td><strong>TNC menor</strong> (deterioro cognitivo leve, DCL)</td><td>Moderado (1-2 DE)</td><td><strong>No</strong> interfiere con la independencia (aunque cueste más).</td></tr>
+<tr><td><strong>TNC mayor</strong> (demencia)</td><td>Significativo (≥ 2 DE)</td><td><strong>Sí</strong> interfiere: pierde autonomía.</td></tr>
+<tr><td><strong>Delirium</strong></td><td>Fluctuante y agudo</td><td>Altera conciencia y atención; no se diagnostica TNC si solo ocurre en delirium.</td></tr>
+</tbody>
+</table></div>
+<p>Los subtipos de <strong>Petersen</strong> del DCL: amnésico / no amnésico, y de dominio único / multidominio.</p>
+
+<h3>Los cuatro perfiles que hay que diferenciar</h3>
+<ul>
+<li><strong>Alzheimer</strong> (50-80% de las demencias): placas de <strong>β-amiloide</strong> y ovillos de <strong>Tau</strong>. Debuta con <strong>amnesia anterógrada</strong> (no guarda información nueva) y <em>no</em> mejora con claves de recuperación. Progresa a anomia, apraxia, desorientación y <strong>anosognosia</strong>. Variantes atípicas: posterior, logopénica y frontal.</li>
+<li><strong>Frontotemporal (DFT)</strong>: más temprana (45-65 años) y rápida; empieza por <strong>conducta o lenguaje</strong>, no por memoria. Variantes: <strong>conductual</strong> (desinhibición, pérdida de empatía, hiperoralidad), <strong>semántica</strong> (pierde el significado de palabras/objetos) y <strong>agramática/no fluente</strong> (habla lenta, con errores sintácticos).</li>
+<li><strong>Vascular</strong> (2ª causa): por ictus; ligada a hipertensión y diabetes. No debuta con memoria sino con <strong>disfunción ejecutiva</strong>, apatía y labilidad; curso <strong>escalonado</strong> (empeora tras cada ictus).</li>
+<li><strong>Parkinson</strong>: demencia <em>subcortical</em>, cuerpos de <strong>Lewy</strong>. <strong>Bradipsiquia</strong> (lentitud), fallas ejecutivas y visoespaciales; la memoria <strong>sí mejora con claves</strong> (falla la evocación, no el almacenamiento) → justo lo contrario del Alzheimer. Alta prevalencia de alucinaciones visuales.</li>
+</ul>
+
+<div class="nota-campo"><p>El diferencial estrella: dale al paciente una pista de recuperación. Si <strong>no</strong> mejora → Alzheimer (falló el almacenamiento). Si <strong>sí</strong> mejora → Parkinson o subcortical (solo falló la evocación).</p></div>
+
+<h3>Rehabilitación y reserva cognitiva</h3>
+<ul>
+<li><strong>Estimulación cognitiva</strong>: actividades grupales para demencia moderada.</li>
+<li><strong>Entrenamiento cognitivo</strong>: práctica repetida y específica; ideal en envejecimiento sano o DCL.</li>
+<li><strong>Rehabilitación neuropsicológica</strong>: individualizada y ecológica; no "cura" la memoria, enseña estrategias compensatorias (agendas, alarmas).</li>
+<li><strong>Reserva cognitiva</strong>: redes alternativas que compensan el daño (escolaridad, lectura, bilingüismo). Retrasa la aparición de síntomas… pero cuando aparecen, el declive es más rápido (el daño ya estaba muy avanzado).</li>
+</ul>
+
+<div class="esencial">
+<p><strong>Diferencial en una línea:</strong> Alzheimer = memoria que no mejora con claves; DFT = cambia la personalidad/el lenguaje antes que la memoria; vascular = ejecutivo y escalonado; Parkinson = lento, mejora con claves, alucina.</p>
+<p><strong>DCL vs. demencia:</strong> la línea que los separa es la <strong>autonomía</strong> en las actividades diarias.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="personalidad">
+      <p class="eyebrow">Capítulo 10 🎭</p>
+      <h2>Trastornos de la personalidad</h2>
+<p>Cerramos la parte clínica con los diez trastornos de personalidad del DSM, agrupados en tres clusters. El truco para no revolverlos: memoriza el <strong>apodo</strong> de cada cluster (raros / dramáticos / ansiosos) y una palabra por trastorno.</p>
+<p>Son patrones <strong>duraderos, inflexibles y desadaptativos</strong> de percibir, relacionarse y pensar, que causan malestar o deterioro.</p>
+
+<h3>Grupo A — raros o excéntricos</h3>
+<ul>
+<li><strong>Paranoide</strong>: desconfianza generalizada; interpreta a los demás como malévolos; rencoroso.</li>
+<li><strong>Esquizoide</strong>: desapego total; <em>no desea</em> relaciones; afecto plano, prefiere la soledad.</li>
+<li><strong>Esquizotípico</strong>: aislamiento + rarezas cognitivas/perceptuales (pensamiento mágico, ideas de referencia). Fuerte vínculo genético con la esquizofrenia.</li>
+</ul>
+
+<h3>Grupo B — dramáticos, emocionales o erráticos</h3>
+<ul>
+<li><strong>Antisocial</strong>: viola derechos y normas; inicia como trastorno de conducta antes de los 15; sin empatía ni remordimiento. La <strong>psicopatía</strong> (Cleckley, Hare): encanto superficial, grandiosidad, y la hipótesis de <strong>subexcitación</strong> cortical (busca riesgo para "sentir").</li>
+<li><strong>Límite (borderline)</strong>: inestabilidad extrema en ánimo, autoimagen y relaciones (idealización↔devaluación); terror al abandono, vacío crónico, autolesiones. Tratamiento de elección: <strong>Terapia Conductual Dialéctica (Marsha Linehan)</strong>.</li>
+<li><strong>Histriónico</strong>: búsqueda dramática de atención; emociones exageradas y superficiales; incómodo si no es el centro.</li>
+<li><strong>Narcisista</strong>: grandiosidad, necesidad de admiración, explota a otros; sin empatía pero muy sensible a la crítica (se deprime si no cumple sus expectativas).</li>
+</ul>
+
+<h3>Grupo C — ansiosos o temerosos</h3>
+<ul>
+<li><strong>Por evitación</strong>: hipersensible al rechazo; <em>sí</em> desea relaciones (a diferencia del esquizoide) pero las evita por miedo a la crítica.</li>
+<li><strong>Dependiente</strong>: necesidad excesiva de ser cuidado; sumisión, pánico a la separación, no decide solo.</li>
+<li><strong>Obsesivo-compulsivo de la personalidad</strong>: perfeccionismo y control rígidos que impiden terminar tareas. <em>No</em> es el TOC del Eje I: aquí la persona ve su perfeccionismo como algo bueno (es egosintónico).</li>
+</ul>
+
+<div class="nota-campo"><p>Evitativo vs. esquizoide: los dos se aíslan, pero el <strong>evitativo quiere</strong> compañía y no se anima; el <strong>esquizoide no la quiere</strong>. Esa diferencia de <em>deseo</em> es pregunta clásica.</p></div>
+
+<div class="esencial">
+<p><strong>Los clusters:</strong> A = raros (paranoide, esquizoide, esquizotípico) · B = dramáticos (antisocial, límite, histriónico, narcisista) · C = ansiosos (evitativo, dependiente, obsesivo-compulsivo).</p>
+<p><strong>Tratamientos estrella:</strong> límite → TCD de Linehan. <strong>Distinción clave:</strong> TOC de personalidad (egosintónico) ≠ TOC de ansiedad (egodistónico, con obsesiones/compulsiones reales).</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="conocer">
+      <p class="eyebrow">Capítulo 11 📐</p>
+      <h2>CONOCER: estándares de competencia</h2>
+<p>El capítulo más "raro" del Área 1: normatividad mexicana de certificación de competencias. Cae porque la evaluación psicológica también se estandariza con esta lógica. No te asustes: es puro vocabulario y estructura. Memoriza siglas y para qué sirve cada comité.</p>
+
+<h3>El glosario base</h3>
+<ul>
+<li><strong>Estándar de Competencia (EC)</strong>: documento oficial (aplicable en toda la República) que sirve de referente para <strong>evaluar y certificar</strong> competencias; describe conocimientos, habilidades, destrezas y actitudes en términos de <em>resultados</em>.</li>
+<li><strong>Función individual</strong>: conjunto de actividades con principio y fin que forman parte significativa de una ocupación.</li>
+<li><strong>Elemento de competencia</strong>: la función <em>elemental</em> del mapa funcional; su ausencia impide obtener el resultado.</li>
+<li><strong>Mecanismos de consecuencias (MC)</strong>: incentivos por certificarse (o repercusiones por no hacerlo).</li>
+</ul>
+
+<h3>Los comités (memoriza las siglas)</h3>
+<ul>
+<li><strong>CGC — Comité de Gestión por Competencias</strong>: la instancia máxima que representa a un sector y promueve el modelo.</li>
+<li><strong>GTES — Grupo Técnico de Expertos en el Sector</strong>: conoce el sector y define las <em>funciones individuales</em> a estandarizar.</li>
+<li><strong>GTEFI — Grupo Técnico de Expertos en la Función Individual</strong>: determina las funciones elementales, redacta el EC y diseña el <strong>Instrumento de Evaluación de Competencia (IEC)</strong>.</li>
+</ul>
+
+<h3>Los catálogos de referencia</h3>
+<p>Todo EC se ancla al <strong>SCIAN</strong> (Sistema de Clasificación Industrial de América del Norte: sector → subsector → rama → subrama → clase) y al <strong>Catálogo Nacional de Ocupaciones</strong> (con la leyenda "ocupaciones no contenidas" si el sector usa otro nombre).</p>
+
+<h3>Los cinco criterios de evaluación</h3>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Criterio</th><th>Qué evalúa</th></tr></thead>
+<tbody>
+<tr><td><strong>Desempeños</strong></td><td>Lo <em>observable</em> mientras ejecuta (verbo principal + objeto).</td></tr>
+<tr><td><strong>Productos</strong></td><td>Los entregables/resultados (artículo + objeto + verbo).</td></tr>
+<tr><td><strong>Conocimientos</strong></td><td>La teoría; se clasifica con la <strong>taxonomía de Bloom</strong> (conocimiento, comprensión, aplicación, análisis, síntesis, evaluación).</td></tr>
+<tr><td><strong>Actitudes/Hábitos/Valores (AHV)</strong></td><td>El comportamiento esperado durante la ejecución.</td></tr>
+<tr><td><strong>Situaciones emergentes</strong></td><td>Contingencias de riesgo y las respuestas esperadas ante ellas.</td></tr>
+</tbody>
+</table></div>
+<p>Parte del formato del EC <strong>no se publica en el DOF</strong>: nombres de los integrantes de CGC/GTES/GTEFI, el nivel de competencia, los mecanismos de consecuencias, la estimación de certificados y el <strong>IEC</strong> con sus indicadores.</p>
+
+<div class="dato"><p>¿Por qué un examen de psicología pregunta esto? Porque un psicólogo puede diseñar o evaluar instrumentos bajo estas reglas: la lógica de "definir la competencia → redactar criterios observables → construir un instrumento" es prima hermana de construir una prueba psicométrica.</p></div>
+
+<div class="esencial">
+<p><strong>Cadena de siglas:</strong> el <strong>CGC</strong> representa al sector → el <strong>GTES</strong> define funciones → el <strong>GTEFI</strong> redacta el EC y su <strong>IEC</strong>.</p>
+<p><strong>Los 5 criterios:</strong> Desempeños, Productos, Conocimientos (Bloom), AHV, Situaciones emergentes. El EC se ancla al <strong>SCIAN</strong>.</p>
+</div>
+    </section>
+
+    <section class="glosario" id="glosario">
+      <p class="eyebrow">Chuleta 📖</p>
+      <h2>Glosario-chuleta</h2>
+      <p>Los términos que más caen en Área 1, en una línea cada uno. Perfecto para el repaso de los últimos días (imprímelo y ráyalo).</p>
+      <div class="glos-grid">
+        <div class="glos-item"><strong>Sinapsis</strong><em>Cap. 1-2</em><span>Punto de contacto donde una neurona pasa información a otra (Sherrington).</span></div>
+        <div class="glos-item"><strong>Neuroplasticidad</strong><em>Hebb, 1949</em><span>Formar, reforzar o podar sinapsis; base del aprendizaje y la recuperación.</span></div>
+        <div class="glos-item"><strong>Despolarizar</strong><em>Cap. 2</em><span>Excitar la neurona (acercarla al umbral). Hiperpolarizar = inhibir.</span></div>
+        <div class="glos-item"><strong>Dopamina</strong><em>Cap. 2</em><span>Recompensa y motor; exceso→psicosis, falta en sustancia negra→Parkinson.</span></div>
+        <div class="glos-item"><strong>Hipocampo</strong><em>Cap. 3</em><span>Convierte memoria corta en larga; tiene neurogénesis adulta.</span></div>
+        <div class="glos-item"><strong>Amígdala</strong><em>Cap. 3</em><span>Centro del miedo y el marcaje emocional de recuerdos.</span></div>
+        <div class="glos-item"><strong>Broca / Wernicke</strong><em>Cap. 3</em><span>Producir habla (frontal) / comprender habla (temporal).</span></div>
+        <div class="glos-item"><strong>Corriente dorsal/ventral</strong><em>Cap. 3</em><span>Dónde (al parietal) / qué (al temporal).</span></div>
+        <div class="glos-item"><strong>Edad mental → CI</strong><em>Binet-Terman</em><span>Binet la crea; Stern divide; Terman ×100 = CI.</span></div>
+        <div class="glos-item"><strong>X = V + e</strong><em>Spearman, TCT</em><span>Puntaje observado = verdadero + error de medición.</span></div>
+        <div class="glos-item"><strong>Alfa de Cronbach</strong><em>Cap. 5</em><span>Índice de consistencia interna (confiabilidad) de una prueba.</span></div>
+        <div class="glos-item"><strong>Validez de contenido</strong><em>Cap. 5</em><span>Los reactivos representan el dominio; se valida por jueceo de expertos.</span></div>
+        <div class="glos-item"><strong>Convergente / divergente</strong><em>Cap. 5</em><span>Correlaciona alto con lo igual / bajo con lo distinto.</span></div>
+        <div class="glos-item"><strong>Validez de facies</strong><em>Cap. 5</em><span>Que la prueba "parezca" medir lo que dice; la más débil.</span></div>
+        <div class="glos-item"><strong>Escalas de medición</strong><em>Stevens</em><span>Nominal, ordinal, intervalo, razón (de menos a más info).</span></div>
+        <div class="glos-item"><strong>Triangulación</strong><em>Denzin</em><span>Múltiples fuentes/métodos para dar rigor cualitativo.</span></div>
+        <div class="glos-item"><strong>Émica / ética</strong><em>Etnografía</em><span>Mirada del nativo / mirada del analista externo.</span></div>
+        <div class="glos-item"><strong>Teoría fundamentada</strong><em>Glaser-Strauss</em><span>La teoría emerge de los datos; codificación abierta→axial.</span></div>
+        <div class="glos-item"><strong>CAT</strong><em>Bellak, 1949</em><span>Apercepción temática infantil con animales (deriva del TAT de Murray).</span></div>
+        <div class="glos-item"><strong>Koppitz</strong><em>DFH / Bender</em><span>Sistema de calificación: indicadores de desarrollo + emocionales.</span></div>
+        <div class="glos-item"><strong>H-T-P</strong><em>Buck y Warren</em><span>Casa-Árbol-Persona; proyectiva de personalidad.</span></div>
+        <div class="glos-item"><strong>CHC</strong><em>Cap. 8</em><span>Teoría de inteligencia (Gc, Gf, Gsm, Gv, Gs…) base del WISC-IV.</span></div>
+        <div class="glos-item"><strong>WISC-IV</strong><em>6:0-16:11</em><span>4 índices: ICV, IRP, IMT, IVP → CI Total (ICG si hay dispersión).</span></div>
+        <div class="glos-item"><strong>BANETA / ENI-2</strong><em>Cap. 8</em><span>Baterías neuropsicológicas mexicanas (aprendizaje / perfil integral).</span></div>
+        <div class="glos-item"><strong>DCL vs. demencia</strong><em>DSM-5</em><span>La frontera es la autonomía en la vida diaria.</span></div>
+        <div class="glos-item"><strong>Clave de recuperación</strong><em>Cap. 9</em><span>No mejora→Alzheimer; sí mejora→Parkinson/subcortical.</span></div>
+        <div class="glos-item"><strong>Reserva cognitiva</strong><em>Cap. 9</em><span>Redes alternativas que retrasan los síntomas de demencia.</span></div>
+        <div class="glos-item"><strong>Clusters A/B/C</strong><em>Personalidad</em><span>Raros / dramáticos / ansiosos.</span></div>
+        <div class="glos-item"><strong>TCD (Linehan)</strong><em>Cap. 10</em><span>Terapia dialéctica conductual; elección para el trastorno límite.</span></div>
+        <div class="glos-item"><strong>EC / IEC</strong><em>CONOCER</em><span>Estándar de Competencia / Instrumento de Evaluación de Competencia.</span></div>
+        <div class="glos-item"><strong>CGC / GTES / GTEFI</strong><em>CONOCER</em><span>Comité del sector / define funciones / redacta el EC.</span></div>
+        <div class="glos-item"><strong>Taxonomía de Bloom</strong><em>CONOCER</em><span>Conocimiento→comprensión→aplicación→análisis→síntesis→evaluación.</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="paws">fin del Área 1 — vas con todo, Paulette</p>
+      <p>Hecho a la medida con el design system de KYN · Base de estudio CENEVAL · 11 capítulos + chuleta</p>
+    </footer>
+  </div>
+  <a class="subir" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ índice</a>
+
+  <!-- ===== LECTOR KYN ===== accesibilidad de lectura para TDAH y dislexia:
+       lectura biónica (negritas de fijación), regla que sigue al cursor y
+       tamaño de letra. Autocontenido: copia este bloque + su CSS a cualquier
+       otro mini libro. -->
+  <div class="regla" aria-hidden="true"></div>
+  <div class="lector-bar" role="toolbar" aria-label="Lector KYN: opciones de lectura">
+    <button type="button" class="lector-mini" aria-label="Abrir opciones de lectura" title="Lector KYN">⚡</button>
+    <span class="lector-titulo">lector</span>
+    <button type="button" id="bio-btn" aria-pressed="false" title="Lectura biónica: engrosa el inicio de cada palabra para anclar la vista">⚡ Biónica</button>
+    <span class="niveles" role="group" aria-label="Intensidad de fijación">
+      <button type="button" data-nivel="1" title="Fijación suave">▁</button>
+      <button type="button" data-nivel="2" aria-pressed="true" title="Fijación media">▃</button>
+      <button type="button" data-nivel="3" title="Fijación fuerte">▅</button>
+    </span>
+    <button type="button" id="regla-btn" aria-pressed="false" title="Regla de lectura: una banda que sigue tu cursor para no perder el renglón">📏 Regla</button>
+    <button type="button" id="fuente-menos" title="Letra más chica">A−</button>
+    <button type="button" id="fuente-mas" title="Letra más grande">A+</button>
+  </div>
+
+  <script>
+  (() => {
+    const RATIOS = { 1: 0.32, 2: 0.45, 3: 0.6 }
+    const KEY = 'lector-kyn'
+    const state = Object.assign(
+      { bio: false, nivel: 2, regla: false, fuente: 1 },
+      JSON.parse(localStorage.getItem(KEY) || '{}'),
+    )
+    const save = () => localStorage.setItem(KEY, JSON.stringify(state))
+
+    // Los contenedores de texto corrido; títulos y nombres quedan fuera a
+    // propósito (la fijación parcial en display grande se ve rota).
+    const SELECTOR = [
+      '.capitulo p:not(.eyebrow)', '.capitulo li', '.capitulo td', '.capitulo blockquote',
+      '.glosario > p', '.glos-item span', '.portada .dedicatoria', '.indice-text span',
+    ].join(', ')
+    const originales = new Map()
+
+    const bionizar = (ratio) => {
+      document.querySelectorAll(SELECTOR).forEach((el) => {
+        if (!originales.has(el)) originales.set(el, el.innerHTML)
+        else el.innerHTML = originales.get(el)
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+        const nodos = []
+        while (walker.nextNode()) nodos.push(walker.currentNode)
+        nodos.forEach((nodo) => {
+          if (!nodo.nodeValue.trim()) return
+          const frag = document.createDocumentFragment()
+          nodo.nodeValue.split(/(\s+)/).forEach((parte) => {
+            if (!parte.trim() || !/[a-zA-ZáéíóúñüÁÉÍÓÚÑÜ]/.test(parte)) {
+              frag.appendChild(document.createTextNode(parte))
+              return
+            }
+            const corte = Math.max(1, Math.round(parte.length * ratio))
+            const b = document.createElement('b')
+            b.className = 'bio'
+            b.textContent = parte.slice(0, corte)
+            frag.appendChild(b)
+            frag.appendChild(document.createTextNode(parte.slice(corte)))
+          })
+          nodo.parentNode.replaceChild(frag, nodo)
+        })
+      })
+    }
+
+    const desbionizar = () => {
+      originales.forEach((html, el) => { el.innerHTML = html })
+      originales.clear()
+    }
+
+    const bioBtn = document.getElementById('bio-btn')
+    const niveles = document.querySelectorAll('.niveles button')
+    const reglaBtn = document.getElementById('regla-btn')
+    const regla = document.querySelector('.regla')
+    const TAMANOS = ['100%', '112%', '125%']
+
+    const aplicar = () => {
+      document.body.classList.toggle('bio-on', state.bio)
+      document.body.classList.toggle('regla-on', state.regla)
+      document.documentElement.style.fontSize = TAMANOS[state.fuente]
+      bioBtn.setAttribute('aria-pressed', String(state.bio))
+      reglaBtn.setAttribute('aria-pressed', String(state.regla))
+      niveles.forEach((btn) => btn.setAttribute('aria-pressed', String(Number(btn.dataset.nivel) === state.nivel)))
+      if (state.bio) bionizar(RATIOS[state.nivel])
+      else desbionizar()
+    }
+
+    bioBtn.addEventListener('click', () => { state.bio = !state.bio; save(); aplicar() })
+    niveles.forEach((btn) => btn.addEventListener('click', () => {
+      state.nivel = Number(btn.dataset.nivel); save(); aplicar()
+    }))
+    reglaBtn.addEventListener('click', () => { state.regla = !state.regla; save(); aplicar() })
+    document.getElementById('fuente-menos').addEventListener('click', () => {
+      state.fuente = Math.max(0, state.fuente - 1); save(); aplicar()
+    })
+    document.getElementById('fuente-mas').addEventListener('click', () => {
+      state.fuente = Math.min(TAMANOS.length - 1, state.fuente + 1); save(); aplicar()
+    })
+
+    let raf = null
+    document.addEventListener('pointermove', (e) => {
+      if (!state.regla || raf) return
+      raf = requestAnimationFrame(() => {
+        regla.style.top = `${e.clientY - regla.offsetHeight / 2}px`
+        raf = null
+      })
+    })
+
+    // Modo mini: unos segundos después de tu último ajuste, la barra se
+    // encoge a un botoncito ⚡; tócalo para volver a abrirla.
+    const bar = document.querySelector('.lector-bar')
+    let miniTimer = null
+    const armarMini = () => {
+      clearTimeout(miniTimer)
+      miniTimer = setTimeout(() => bar.classList.add('mini'), 4000)
+    }
+    bar.addEventListener('click', () => {
+      bar.classList.remove('mini')
+      armarMini()
+    })
+    armarMini()
+
+    aplicar()
+  })()
+  </script>
+
+  <script>
+  // ===== Lectura por capítulo: solo se muestra el capítulo activo; el
+  // siguiente y el anterior aparecen únicamente cuando tú los pides. =====
+  (() => {
+    const secciones = [...document.querySelectorAll('.capitulo, .glosario')]
+    const ids = secciones.map((s) => s.id)
+    const tituloDe = (sec) => sec.querySelector('h2').textContent.trim()
+
+    secciones.forEach((sec, i) => {
+      const nav = document.createElement('div')
+      nav.className = 'cap-nav'
+      const irA = (id) => {
+        location.hash = `#${id}`
+      }
+      if (i > 0) {
+        const prev = document.createElement('button')
+        prev.type = 'button'
+        prev.textContent = `← ${tituloDe(secciones[i - 1])}`
+        prev.addEventListener('click', () => irA(ids[i - 1]))
+        nav.appendChild(prev)
+      } else {
+        nav.insertAdjacentHTML('beforeend', '<span class="hueco"></span>')
+      }
+      const indice = document.createElement('button')
+      indice.type = 'button'
+      indice.className = 'nav-indice'
+      indice.textContent = '📑 Índice'
+      indice.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+      nav.appendChild(indice)
+      if (i < secciones.length - 1) {
+        const next = document.createElement('button')
+        next.type = 'button'
+        next.textContent = `${tituloDe(secciones[i + 1])} →`
+        next.addEventListener('click', () => irA(ids[i + 1]))
+        nav.appendChild(next)
+      } else {
+        nav.insertAdjacentHTML('beforeend', '<span class="hueco"></span>')
+      }
+      sec.appendChild(nav)
+    })
+
+    const activar = (id, scroll) => {
+      const objetivo = ids.includes(id) ? id : ids[0]
+      secciones.forEach((sec) => sec.classList.toggle('activo', sec.id === objetivo))
+      if (scroll) {
+        const sec = secciones[ids.indexOf(objetivo)]
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    window.addEventListener('hashchange', () => activar(location.hash.slice(1), true))
+    activar(location.hash.slice(1), false)
+  })()
+  </script>
+</body>
+</html>

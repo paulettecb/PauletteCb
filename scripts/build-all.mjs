@@ -35,6 +35,11 @@ run(`npx vite build proyectos/budget-planner-tdah --base ./ --outDir "${budgetOu
 
 console.log('▶ Copiando sub-proyectos estáticos (lsm, KYN Design System, libro de agility) y projects.json');
 copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(dist, 'proyectos/mediapipe-lab/libro-agility.html'));
+
+// CENEVAL: solo los HTML (hub + mini libros por área). NUNCA copiar material/
+// (guía, libros con derechos y exámenes) — es local y gitignored.
+copy(path.join(root, 'proyectos/ceneval/index.html'), path.join(dist, 'proyectos/ceneval/index.html'));
+copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.join(dist, 'proyectos/ceneval/libro-area1-diagnostico.html'));
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
 copy(path.join(root, 'proyectos/lsm/rescate'), path.join(dist, 'proyectos/lsm/rescate'));
 copy(path.join(root, 'proyectos/KYN Design System'), path.join(dist, 'proyectos/KYN Design System'));

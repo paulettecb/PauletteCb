@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Base de estudio CENEVAL — EGEL Plus PSI · para Paulette</title>
+<meta name="description" content="Hub de estudio para el EGEL Plus PSI (CENEVAL Psicología): mini libros KYN por área disciplinar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-600: #6B7AC1; --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-700: #4A4955; --ink-500: #75737F; --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-butter: #F6EBC4; --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2;
+  --pastel-blush: #F6D2DD; --pastel-lilac: #E2D6F0;
+  --font-display: 'Friendship', cursive; --font-accent: 'Farmhouse', serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07); --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink-900); font-family: var(--font-sans); line-height: 1.6; }
+.pagina { max-width: 780px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+.portada { padding: 4rem 0 2rem; text-align: center; }
+.sello { display: inline-block; padding: 0.3rem 1rem; border-radius: var(--radius-pill); background: var(--pop-magenta-soft); color: var(--periwinkle-900); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+h1 { margin: 1.1rem 0 0.3rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.8rem, 8vw, 4.4rem); line-height: 1.05; color: var(--periwinkle-700); }
+.subtitulo { margin: 0; font-family: var(--font-accent); font-size: 1.3rem; color: var(--ink-700); }
+.meta { margin: 1.4rem auto 0; max-width: 520px; color: var(--ink-500); font-size: 0.95rem; }
+.meta strong { color: var(--periwinkle-800); }
+h2.seccion { font-family: var(--font-accent); color: var(--pop-magenta); font-size: 1.15rem; letter-spacing: 0.05em; margin: 2.5rem 0 0.8rem; }
+.areas { display: grid; gap: 1rem; }
+.area { display: block; text-decoration: none; color: inherit; padding: 1.2rem 1.3rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 140ms ease, box-shadow 140ms ease; }
+a.area:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--periwinkle-300); }
+.area .fila { display: flex; align-items: center; gap: 0.9rem; }
+.area .emoji { font-size: 1.8rem; }
+.area h3 { margin: 0; font-size: 1.15rem; font-weight: 800; color: var(--periwinkle-900); }
+.area p { margin: 0.5rem 0 0; color: var(--ink-700); font-size: 0.95rem; }
+.estado { margin-left: auto; padding: 0.25rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+.estado.listo { background: var(--pastel-mint); color: var(--periwinkle-800); }
+.estado.pronto { background: var(--sand); color: var(--ink-500); }
+.area.disabled { opacity: 0.72; cursor: default; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+.chip { padding: 0.2rem 0.7rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 600; color: var(--ink-700); }
+.chip:nth-child(5n+1) { background: var(--pastel-sky); }
+.chip:nth-child(5n+2) { background: var(--pastel-butter); }
+.chip:nth-child(5n+3) { background: var(--pastel-blush); }
+.chip:nth-child(5n+4) { background: var(--pastel-lilac); }
+.chip:nth-child(5n+5) { background: var(--pastel-mint); }
+.nota { margin-top: 2.5rem; padding: 1rem 1.2rem; background: var(--periwinkle-50); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-md); font-size: 0.92rem; color: var(--periwinkle-900); }
+.nota strong { color: var(--periwinkle-700); }
+footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1.5px solid var(--sand); text-align: center; color: var(--ink-500); font-size: 0.88rem; }
+footer .paws { font-family: var(--font-accent); font-size: 1.1rem; color: var(--periwinkle-600); }
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="portada">
+      <span class="sello">Base de estudio</span>
+      <h1>CENEVAL</h1>
+      <p class="subtitulo">EGEL Plus PSI · Psicología</p>
+      <p class="meta">Meta: <strong>testimonio sobresaliente</strong> → premio CENEVAL de desempeño. La sección disciplinar tiene <strong>3 áreas y 140 reactivos</strong>; aquí vive un mini libro KYN por área, hecho para tu cerebro.</p>
+    </header>
+
+    <h2 class="seccion">Sección disciplinar</h2>
+    <div class="areas">
+      <a class="area" href="libro-area1-diagnostico.html">
+        <div class="fila">
+          <span class="emoji">🧠</span>
+          <h3>Área 1 · Diagnóstico psicológico</h3>
+          <span class="estado listo">Listo</span>
+        </div>
+        <p>Bases biológicas, neuroanatomía, psicometría, metodología, pruebas proyectivas, inteligencia, trastornos neurocognitivos, personalidad y CONOCER. 49 reactivos.</p>
+        <div class="chips">
+          <span class="chip">11 capítulos</span>
+          <span class="chip">⚡ lector biónico</span>
+          <span class="chip">chuleta final</span>
+        </div>
+      </a>
+
+      <div class="area disabled">
+        <div class="fila">
+          <span class="emoji">🛠️</span>
+          <h3>Área 2 · Intervención psicológica</h3>
+          <span class="estado pronto">Próximamente</span>
+        </div>
+        <p>Enfoques y modelos, técnicas de intervención y su propósito. 50 reactivos.</p>
+      </div>
+
+      <div class="area disabled">
+        <div class="fila">
+          <span class="emoji">🔬</span>
+          <h3>Área 3 · Investigación psicológica</h3>
+          <span class="estado pronto">Próximamente</span>
+        </div>
+        <p>Características de la investigación científica, cuali/cuanti/mixto y evaluación de resultados. 41 reactivos.</p>
+      </div>
+    </div>
+
+    <div class="nota">
+      <p><strong>Sección transversal</strong> (Lenguaje y Comunicación, 60 reactivos): comprensión lectora y redacción indirecta. Es de habilidad, no de contenido memorizable, así que se repasa distinto — la trabajamos con simulacros más adelante.</p>
+    </div>
+
+    <footer>
+      <p class="paws">un área a la vez · se puede</p>
+      <p>Design system de KYN · base de estudio personal</p>
+    </footer>
+  </div>
+</body>
+</html>
