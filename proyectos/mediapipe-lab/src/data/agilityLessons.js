@@ -346,7 +346,7 @@ export const LESSONS = [
         'FALSE TURN (giro falso): amagas el regreso justo en la ventana de despegue; el perro colecta en el aire y aterriza girando hacia ti en vez de salir disparado largo.',
       ] },
       { tipo: 'dato', texto: 'La regla del front cross que a todos cuesta: se gira HACIA el perro. Girar alejándote "se siente" natural… y te convierte el cruce en un blind accidental donde lo pierdes de vista.' },
-      { tipo: 'p', texto: 'Otros nombres que verás por ahí: wrap (envolver el ala del salto en giro cerrado), serpentine (línea de saltos alternando lados), threadle (el perro pasa entre dos obstáculos hacia ti), post turn (giras sobre tu eje sin cambiar de lado), lead-out pivot (front cross estático desde la salida) y ketschker (front cross que termina en ciego).' },
+      { tipo: 'p', texto: 'Otros nombres que verás por ahí: wrap (envolver el ala del salto en giro cerrado), serpentine (línea de saltos alternando lados), threadle (el perro pasa entre dos obstáculos hacia ti), post turn (giras sobre tu eje sin cambiar de lado), lead-out pivot (front cross estático desde la salida), ketschker (front cross que termina en ciego) y tandem turn (cruce por detrás en el giro). Los sistemas como OneMind Dogs suman aún más: jaakko, whisky, lap turn, reverse spin, flick… todos están en el glosario del coach de maniobras.' },
       { tipo: 'dato', texto: 'El timing manda: en el false turn, la reversa va en las décimas de segundo ANTES del despegue. Pronto = rehúse; tarde = aterrizaje largo. Justo eso es lo que practica el modo Perro Virtual del coach.' },
     ],
     quiz: [

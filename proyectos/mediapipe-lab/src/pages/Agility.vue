@@ -72,7 +72,7 @@ const MODES = [
     id: 'maniobras',
     icono: '🎓',
     titulo: 'Maniobras',
-    descripcion: 'Front, rear, blind y false turn con perro virtual y voz',
+    descripcion: '11 maniobras con perro virtual, voz y articulaciones en vivo',
   },
 ]
 
