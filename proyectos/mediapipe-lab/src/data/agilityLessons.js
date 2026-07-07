@@ -332,6 +332,50 @@ export const LESSONS = [
       },
     ],
   },
+  {
+    id: 'maniobras',
+    icono: '🎓',
+    titulo: 'Maniobras y sus nombres',
+    resumen: 'Front cross, rear cross, blind cross, false turn: el vocabulario real del manejo.',
+    contenido: [
+      { tipo: 'p', texto: 'Todas las jugadas de manejo tienen nombre propio — casi siempre en inglés, porque así se enseñan en los sistemas de handling internacionales. Conocerlos te abre la puerta a videos, seminarios y análisis de recorridos.' },
+      { tipo: 'lista', items: [
+        'FRONT CROSS (cruce frontal): cambias al perro de lado girando DE FRENTE a él, sin perderlo de vista. Pide colección; exige llegar antes que el perro al punto de cruce.',
+        'REAR CROSS (cruce trasero): cambias de lado cruzando POR DETRÁS mientras el perro va comprometido adelante. Para cuando el perro te gana la carrera.',
+        'BLIND CROSS (cruce ciego): cambias de lado dándole la espalda un instante, sin frenar. Solo en líneas abiertas y rápidas.',
+        'FALSE TURN (giro falso): amagas el regreso justo en la ventana de despegue; el perro colecta en el aire y aterriza girando hacia ti en vez de salir disparado largo.',
+      ] },
+      { tipo: 'dato', texto: 'La regla del front cross que a todos cuesta: se gira HACIA el perro. Girar alejándote "se siente" natural… y te convierte el cruce en un blind accidental donde lo pierdes de vista.' },
+      { tipo: 'p', texto: 'Otros nombres que verás por ahí: wrap (envolver el ala del salto en giro cerrado), serpentine (línea de saltos alternando lados), threadle (el perro pasa entre dos obstáculos hacia ti), post turn (giras sobre tu eje sin cambiar de lado), lead-out pivot (front cross estático desde la salida) y ketschker (front cross que termina en ciego).' },
+      { tipo: 'dato', texto: 'El timing manda: en el false turn, la reversa va en las décimas de segundo ANTES del despegue. Pronto = rehúse; tarde = aterrizaje largo. Justo eso es lo que practica el modo Perro Virtual del coach.' },
+    ],
+    quiz: [
+      {
+        pregunta: 'En un front cross, ¿hacia dónde giras?',
+        opciones: ['Hacia el perro, sin perderlo de vista', 'Alejándote del perro, es más rápido', 'Da igual, lo que importa es cruzar'],
+        correcta: 0,
+        explicacion: 'Siempre HACIA el perro: girar al lado contrario es el error clásico y te sale un blind accidental.',
+      },
+      {
+        pregunta: '¿Cuándo conviene un blind cross?',
+        opciones: ['Antes de un giro muy cerrado', 'En líneas abiertas y rápidas donde no necesitas colección', 'Cuando el perro va detrás de ti'],
+        correcta: 1,
+        explicacion: 'El ciego mantiene tu velocidad pero no pide colección: en giros cerrados produce saltos largos.',
+      },
+      {
+        pregunta: 'En el false turn, ¿cuándo va la reversa?',
+        opciones: ['En cuanto el perro ve el salto', 'En la ventana justo antes del despegue', 'Cuando el perro ya aterrizó'],
+        correcta: 1,
+        explicacion: 'Pronto provoca rehúse, tarde deja el aterrizaje largo: la ventana es justo antes de despegar.',
+      },
+      {
+        pregunta: '¿Qué es un "wrap"?',
+        opciones: ['El perro envuelve el ala del salto en un giro muy cerrado', 'Un tipo de túnel curvo', 'La cinta que marca la salida'],
+        correcta: 0,
+        explicacion: 'Wrap = envolver el ala del salto girando lo más pegado posible.',
+      },
+    ],
+  },
 ]
 
 export const STORAGE_KEY = 'motionlab-agility-lessons'
