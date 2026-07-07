@@ -1,5 +1,6 @@
-// Reglamento de Agility FCI (edición vigente desde 2023) aplicado en México por la
-// Federación Canófila Mexicana (FCM, miembro de la FCI). Fuente: FCI Agility Regulations.
+// Reglamento de Agility FCI: reglas de fondo vigentes desde el 1.1.2023
+// (edición documental reestructurada en 2025), aplicado en México por la
+// Federación Canófila Mexicana (FCM, miembro de la FCI).
 // Todas las medidas en centímetros salvo indicación contraria.
 
 export const SIZE_CATEGORIES = [
@@ -314,6 +315,8 @@ export const validateCourse = (obstacles, grado, geometry = null) => {
 
   if (slaloms.length > 1) {
     push('error', 'El slalom solo puede aparecer una vez en el recorrido.')
+  } else if (slaloms.length === 0 && total >= rules.obstaculos.min) {
+    push('aviso', 'El reglamento pide usar el slalom en todo recorrido (una sola vez).')
   }
 
   const onceOnly = { neumatico: 'El neumático', muro: 'El muro' }
