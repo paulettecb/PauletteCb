@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agility · investigación de campo — para Paulette & Kenna</title>
 <meta name="description" content="Mini libro de agility: historia, reglamento FCI/FCM, aparatos, maniobras y cómo empezar a competir en México.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Friendship';
@@ -29,7 +32,7 @@
   --pastel-blush: #F6D2DD; --pastel-peach: #F8DCC9; --pastel-lilac: #E2D6F0;
   --font-display: 'Friendship', cursive;
   --font-accent: 'Farmhouse', serif;
-  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
   --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
   --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
@@ -86,7 +89,10 @@ body {
   color: var(--pop-magenta); letter-spacing: 0.06em;
 }
 .capitulo h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; color: var(--periwinkle-700); }
-.capitulo h3 { margin: 1.8rem 0 0.5rem; font-size: 1.2rem; color: var(--periwinkle-900); }
+.capitulo h3 {
+  margin: 1.8rem 0 0.5rem; font-size: 1.02rem; color: var(--periwinkle-900);
+  font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;
+}
 .capitulo p { margin: 0.6rem 0; color: var(--ink-700); }
 .capitulo ul, .capitulo ol { margin: 0.6rem 0; padding-left: 1.4rem; color: var(--ink-700); }
 .capitulo li { margin: 0.25rem 0; }
@@ -143,6 +149,22 @@ footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--
 }
 .subir:hover { background: var(--periwinkle-700); }
 
+/* ===== Lectura por capítulo: solo se ve el capítulo activo ===== */
+.capitulo, .glosario { display: none; }
+.capitulo.activo, .glosario.activo { display: block; }
+.cap-nav {
+  display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1.5px dashed var(--sand);
+}
+.cap-nav button {
+  padding: 0.45rem 1rem; border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-pill);
+  background: var(--white); color: var(--periwinkle-700); font: inherit; font-size: 0.9rem;
+  font-weight: 600; cursor: pointer; max-width: 46%; text-align: center;
+}
+.cap-nav button:hover { background: var(--periwinkle-50); border-color: var(--periwinkle-300); }
+.cap-nav .nav-indice { color: var(--ink-500); border-color: var(--ink-100); max-width: none; }
+.cap-nav .hueco { flex: 1; }
+
 /* ===== LECTOR KYN: lectura biónica + regla + tamaño (TDAH / dislexia) ===== */
 .lector-bar {
   position: fixed; left: 1rem; bottom: 1rem; z-index: 50;
@@ -169,11 +191,20 @@ body.bio-on .esencial b.bio, body.bio-on .nota-campo b.bio, body.bio-on .dato b.
   background: rgba(135, 149, 210, 0.14); border-top: 1px solid rgba(135, 149, 210, 0.35); border-bottom: 1px solid rgba(135, 149, 210, 0.35); }
 body.regla-on .regla { display: block; }
 
+/* Modo mini: la barra se encoge a un botoncito flotante cuando no la usas */
+.lector-bar.mini { padding: 0; gap: 0; }
+.lector-bar.mini > :not(.lector-mini) { display: none; }
+.lector-mini {
+  display: none; width: 2.7rem; height: 2.7rem; border: none; border-radius: 50%;
+  background: transparent; font-size: 1.25rem; cursor: pointer; line-height: 1;
+}
+.lector-bar.mini .lector-mini { display: grid; place-items: center; }
+
 @media (max-width: 640px) { .lector-bar { font-size: 0.75rem; } .lector-bar .lector-titulo { display: none; } }
 
 @media print {
-  .subir, .lector-bar, .regla { display: none; }
-  .capitulo { break-inside: avoid-page; }
+  .subir, .lector-bar, .regla, .cap-nav { display: none; }
+  .capitulo, .glosario { display: block; break-inside: avoid-page; }
   body { font-size: 11pt; }
 }
 </style>
@@ -1210,6 +1241,7 @@ body.regla-on .regla { display: block; }
        otro mini libro. -->
   <div class="regla" aria-hidden="true"></div>
   <div class="lector-bar" role="toolbar" aria-label="Lector KYN: opciones de lectura">
+    <button type="button" class="lector-mini" aria-label="Abrir opciones de lectura" title="Lector KYN">⚡</button>
     <span class="lector-titulo">lector</span>
     <button type="button" id="bio-btn" aria-pressed="false" title="Lectura biónica: engrosa el inicio de cada palabra para anclar la vista">⚡ Biónica</button>
     <span class="niveles" role="group" aria-label="Intensidad de fijación">
@@ -1310,7 +1342,76 @@ body.regla-on .regla { display: block; }
       })
     })
 
+    // Modo mini: unos segundos después de tu último ajuste, la barra se
+    // encoge a un botoncito ⚡; tócalo para volver a abrirla.
+    const bar = document.querySelector('.lector-bar')
+    let miniTimer = null
+    const armarMini = () => {
+      clearTimeout(miniTimer)
+      miniTimer = setTimeout(() => bar.classList.add('mini'), 4000)
+    }
+    bar.addEventListener('click', () => {
+      bar.classList.remove('mini')
+      armarMini()
+    })
+    armarMini()
+
     aplicar()
+  })()
+  </script>
+
+  <script>
+  // ===== Lectura por capítulo: solo se muestra el capítulo activo; el
+  // siguiente y el anterior aparecen únicamente cuando tú los pides. =====
+  (() => {
+    const secciones = [...document.querySelectorAll('.capitulo, .glosario')]
+    const ids = secciones.map((s) => s.id)
+    const tituloDe = (sec) => sec.querySelector('h2').textContent.trim()
+
+    secciones.forEach((sec, i) => {
+      const nav = document.createElement('div')
+      nav.className = 'cap-nav'
+      const irA = (id) => {
+        location.hash = `#${id}`
+      }
+      if (i > 0) {
+        const prev = document.createElement('button')
+        prev.type = 'button'
+        prev.textContent = `← ${tituloDe(secciones[i - 1])}`
+        prev.addEventListener('click', () => irA(ids[i - 1]))
+        nav.appendChild(prev)
+      } else {
+        nav.insertAdjacentHTML('beforeend', '<span class="hueco"></span>')
+      }
+      const indice = document.createElement('button')
+      indice.type = 'button'
+      indice.className = 'nav-indice'
+      indice.textContent = '📑 Índice'
+      indice.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+      nav.appendChild(indice)
+      if (i < secciones.length - 1) {
+        const next = document.createElement('button')
+        next.type = 'button'
+        next.textContent = `${tituloDe(secciones[i + 1])} →`
+        next.addEventListener('click', () => irA(ids[i + 1]))
+        nav.appendChild(next)
+      } else {
+        nav.insertAdjacentHTML('beforeend', '<span class="hueco"></span>')
+      }
+      sec.appendChild(nav)
+    })
+
+    const activar = (id, scroll) => {
+      const objetivo = ids.includes(id) ? id : ids[0]
+      secciones.forEach((sec) => sec.classList.toggle('activo', sec.id === objetivo))
+      if (scroll) {
+        const sec = secciones[ids.indexOf(objetivo)]
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    window.addEventListener('hashchange', () => activar(location.hash.slice(1), true))
+    activar(location.hash.slice(1), false)
   })()
   </script>
 </body>
