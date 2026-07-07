@@ -186,6 +186,7 @@ const DRILLS = [
       'El brazo señala la LÍNEA que quieres que tome el perro, no al obstáculo.',
       'Señalar con el brazo contrario confunde al perro y provoca rehúses.',
       'Practica cambiando de lado: el perro debe trabajar por tu izquierda y por tu derecha.',
+      'Menos es más: mover los brazos de más (aspavientos) distrae; la señal debe ser quieta y clara.',
     ],
   },
   {

@@ -85,12 +85,13 @@ export const LESSONS = [
     contenido: [
       { tipo: 'p', texto: 'La progresión deportiva se organiza en tres grados. Se asciende acumulando recorridos excelentes sin falta (cero penalizaciones).' },
       { tipo: 'lista', items: [
-        'Grado 1: nivel inicial, recorridos fluidos de 15 a 20 obstáculos.',
-        'Grado 2: nivel intermedio, hasta 22 obstáculos y líneas más técnicas.',
+        'Grado 1: nivel inicial, recorridos fluidos y sin saltos dobles.',
+        'Grado 2: nivel intermedio, líneas más técnicas y hasta 4 contactos.',
         'Grado 3: nivel de campeonato, máxima dificultad y velocidad.',
       ] },
-      { tipo: 'p', texto: 'Además del grado hay dos modalidades de prueba: Agility (incluye obstáculos de contacto y mesa) y Jumping (solo saltos, túneles y slalom, sin contactos). Los recorridos miden entre 100 y 220 m.' },
-      { tipo: 'dato', texto: 'Para subir de grado necesitas constancia: tres recorridos con Excelente y cero faltas, con al menos dos jueces distintos, es la referencia habitual.' },
+      { tipo: 'p', texto: 'Además del grado hay dos modalidades de prueba: Agility (incluye obstáculos de contacto) y Jumping (solo saltos, túneles y slalom, sin contactos). Todo recorrido tiene de 15 a 22 obstáculos y mide entre 100 y 220 m; lo que cambia entre grados es la dificultad del trazado y la velocidad que fija el juez.' },
+      { tipo: 'dato', texto: 'El Certificado de Agility FCI —la llave del Grado 2— se obtiene con tres Excelentes sin falta (clear rounds) en Grado 1, bajo al menos dos jueces distintos.' },
+      { tipo: 'dato', texto: 'En México, la FCM publica sus rankings de agility por grados G0, G1 y G2: el G0 es un grado de iniciación local previo al Grado 1.' },
     ],
     quiz: [
       {
@@ -123,8 +124,8 @@ export const LESSONS = [
       { tipo: 'lista', items: [
         'Valla: 1.20–1.30 m de ancho, barra desplazable. Derribar la barra = 5 faltas.',
         'Muro/viaducto: mismo alto que la valla, con elementos superiores que caen si se tocan.',
-        'Neumático: aro de 45–60 cm de diámetro interior, tipo separable (breakaway) por seguridad. Requiere aproximación recta.',
-        'Ría (salto de longitud): 2 a 4 elementos según categoría; para L mide 1.20–1.50 m de largo. Pisar un elemento = falta.',
+        'Neumático: aro de 50–60 cm de diámetro interior, tipo separable (breakaway) que se abre al impacto. Requiere aproximación recta y solo aparece una vez.',
+        'Ría (salto de longitud): 2 a 4 elementos según categoría (S 2 · M 3 · I 3–4 · L 4); para L mide 1.20–1.50 m. Pisar un elemento = falta.',
       ] },
       { tipo: 'dato', texto: 'El neumático y la ría siempre se colocan con llegada recta: saltar en ángulo es riesgoso para hombros y columna del perro.' },
     ],
@@ -161,7 +162,7 @@ export const LESSONS = [
         'Pasarela (dog walk): tres tablones de 3.60–3.80 m a 1.20–1.30 m de altura. Zonas de 90 cm.',
         'Balancín (see-saw): tablón que bascula sobre un eje; el perro debe esperar a que toque el suelo antes de bajar. Zonas de 90 cm.',
       ] },
-      { tipo: 'p', texto: 'No pisar la zona de bajada cuesta 5 faltas. En el balancín, saltar antes de que el tablón toque el suelo también es falta.' },
+      { tipo: 'p', texto: 'No pisar la zona de bajada cuesta 5 faltas. En el balancín, saltar antes de que el tablón toque el suelo también es falta. Desde 2023 las zonas de subida de la pasarela y la empalizada ya no se juzgan (las zonas siguen pintadas); la subida solo exige que el perro toque la rampa.' },
       { tipo: 'dato', texto: 'En entrenamiento, el criterio "2 on 2 off" (dos patas en el suelo, dos en la rampa) enseña una bajada consistente. La alternativa avanzada son los contactos corridos (running contacts).' },
     ],
     quiz: [
@@ -194,8 +195,9 @@ export const LESSONS = [
       { tipo: 'p', texto: 'El slalom son 12 postes separados 60 cm que el perro zigzaguea a máxima velocidad. Es el obstáculo que más entrenamiento requiere y solo aparece una vez por recorrido.' },
       { tipo: 'dato', texto: 'LA REGLA DE ORO: el perro siempre entra dejando el primer poste a su hombro IZQUIERDO (pasa entre el poste 1 y el 2 desde la derecha). No importa desde qué lado llegue ni dónde esté el guía: la entrada es siempre la misma.' },
       { tipo: 'lista', items: [
-        'Entrada incorrecta = rehúse (5 puntos y hay que reintentar).',
-        'Saltarse un poste a medio slalom = falta; se corrige retomando donde ocurrió el error (en Grado 3, se repite completo).',
+        'Entrada incorrecta = rehúse (5 puntos y hay que reintentar); cada mala entrada se penaliza.',
+        'Saltarse una puerta a medio slalom = falta (se penaliza una sola vez por pasada) y debe corregirse antes de continuar.',
+        'Retroceder tejiendo más de 2 puertas en reversa = eliminación.',
         'El slalom debe completarse correctamente antes de seguir al siguiente obstáculo; si no, es eliminación.',
       ] },
       { tipo: 'p', texto: 'Por eso se entrena la entrada desde todos los ángulos posibles: el perro debe encontrarla solo, con el guía a la izquierda, a la derecha, adelante o atrás.' },
@@ -266,7 +268,7 @@ export const LESSONS = [
       { tipo: 'p', texto: 'El juez determina el Tiempo de Recorrido Estándar (TRS) dividiendo la longitud de la pista entre la velocidad elegida en metros por segundo. Cada segundo (o fracción) por encima del TRS suma penalización de tiempo.' },
       { tipo: 'lista', items: [
         'Ejemplo: pista de 160 m a 4 m/s → TRS = 40 segundos.',
-        'El Tiempo de Recorrido Máximo (TRM) suele ser 1.5 veces el TRS; superarlo es eliminación.',
+        'El Tiempo de Recorrido Máximo (TRM) queda entre 1.5 y 2 veces el TRS; superarlo es eliminación.',
         'A mayor grado, mayor velocidad exigida: un Grado 3 de Jumping puede juzgarse a 4 m/s o más.',
       ] },
       { tipo: 'dato', texto: 'La velocidad la fija el juez según el grado, la modalidad, el tamaño del ring y la dificultad del trazado — por eso dos pistas del mismo largo pueden tener TRS distintos.' },
@@ -306,6 +308,7 @@ export const LESSONS = [
         'Deceleración: frenar y flexionar las rodillas le indica al perro que viene un giro cerrado o colección antes de un salto.',
       ] },
       { tipo: 'dato', texto: 'Regla práctica: brazo y hombros SIEMPRE coherentes con la línea. Señalar con el brazo contrario o girar los hombros tarde produce rehúses y barras derribadas.' },
+      { tipo: 'dato', texto: 'Para el perro, el orden de importancia de tus señales es: movimiento, posición, conexión visual, dirección del pecho, pies, manos y — al final de todo — la voz.' },
       { tipo: 'p', texto: 'El módulo Coach de Manejo de este lab usa la cámara para verificar estas señales: brazo extendido del lado correcto, rotación completa en el cruce frontal y flexión en la deceleración.' },
     ],
     quiz: [

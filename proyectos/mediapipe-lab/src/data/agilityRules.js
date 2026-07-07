@@ -24,11 +24,11 @@ export const SIZE_CATEGORIES = [
   {
     id: 'I',
     nombre: 'Intermediate',
-    cruz: 'de 43 cm a menos de 48 cm',
+    cruz: 'de 43 cm a menos de 48 cm (categoría nueva desde 2023)',
     alturaValla: { min: 45, max: 50 },
-    alturaNeumatico: 80,
-    riaElementos: 4,
-    riaLongitud: { min: 100, max: 120 },
+    alturaNeumatico: 70,
+    riaElementos: 3,
+    riaLongitud: { min: 90, max: 110 },
   },
   {
     id: 'L',
@@ -41,11 +41,14 @@ export const SIZE_CATEGORIES = [
   },
 ]
 
+// La FCI no fija rangos de obstáculos distintos por grado: todo recorrido tiene
+// de 15 a 22. La diferencia entre grados es longitud, dificultad y la velocidad
+// elegida por el juez para el TRS (las velocidades aquí son sugerencias editables).
 export const GRADOS = {
   1: {
     nombre: 'Grado 1',
-    descripcion: 'Nivel inicial. Recorridos fluidos, sin trampas complejas.',
-    obstaculos: { min: 15, max: 20 },
+    descripcion: 'Nivel inicial. Recorridos fluidos, sin dobles ni trampas complejas.',
+    obstaculos: { min: 15, max: 22 },
     contactosMax: 3,
     velocidadAgility: 2.5,
     velocidadJumping: 3.0,
@@ -53,7 +56,7 @@ export const GRADOS = {
   2: {
     nombre: 'Grado 2',
     descripcion: 'Nivel intermedio. Cambios de mano y líneas más exigentes.',
-    obstaculos: { min: 18, max: 22 },
+    obstaculos: { min: 15, max: 22 },
     contactosMax: 4,
     velocidadAgility: 3.0,
     velocidadJumping: 3.5,
@@ -61,7 +64,7 @@ export const GRADOS = {
   3: {
     nombre: 'Grado 3',
     descripcion: 'Nivel avanzado. Recorridos técnicos de campeonato.',
-    obstaculos: { min: 18, max: 22 },
+    obstaculos: { min: 15, max: 22 },
     contactosMax: 4,
     velocidadAgility: 3.5,
     velocidadJumping: 4.0,
@@ -71,8 +74,12 @@ export const GRADOS = {
 export const COURSE_RULES = {
   longitud: { min: 100, max: 220 },
   saltosMinimos: 7,
+  // Mínimo 5 m sobre la trayectoria del perro; máximo 7 m en línea recta
+  // (hasta 9 m sobre la trayectoria).
   distanciaEntreObstaculos: { min: 5, max: 7 },
+  // El TRM debe quedar entre 1.5 y 2 veces el TRS; se usa 1.5 como referencia.
   factorTRM: 1.5,
+  tunelPasesMax: 5,
   ring: { ancho: 20, largo: 40 },
 }
 
@@ -130,10 +137,11 @@ export const OBSTACLE_TYPES = [
     aproximacionRecta: true,
     huella: { w: 1.4, d: 0.6 },
     specs: [
-      'Diámetro interior: 45 a 60 cm',
-      'Altura al centro: S/M 55 cm · I/L 80 cm',
-      'Debe ser de tipo separable (breakaway) por seguridad',
-      'Requiere aproximación recta',
+      'Diámetro interior: 50 a 60 cm',
+      'Altura al centro: S/M 55 · I 70 · L 80 cm',
+      'Obligatorio tipo separable (breakaway): se abre en 2 a 4 partes al impacto',
+      'Desde 2023 solo se fija con dos montantes laterales (sin marco colgante)',
+      'Requiere aproximación recta · solo aparece una vez por recorrido',
     ],
   },
   {
@@ -146,8 +154,9 @@ export const OBSTACLE_TYPES = [
     aproximacionRecta: true,
     huella: { w: 1.5, d: 1.5 },
     specs: [
-      'Elementos según categoría: S 2 · M 3 · I/L 4',
-      'Longitud total: S 40–50 · M 70–90 · I 100–120 · L 120–150 cm',
+      'Elementos según categoría: S 2 · M 3 · I 3–4 · L 4',
+      'Longitud total: S 40–50 · M 70–90 · I 90–110 · L 120–150 cm',
+      'Elementos ascendentes de 15 a 28 cm de alto',
       'Cuatro postes de esquina; requiere aproximación recta',
     ],
   },
@@ -163,8 +172,8 @@ export const OBSTACLE_TYPES = [
     specs: [
       'Diámetro: 60 cm',
       'Longitud: 3 a 6 m',
-      'Puede colocarse recto o en curva',
-      'El túnel de tela (chute) ya no está aprobado por la FCI',
+      'Puede colocarse recto o en curva · máximo 5 pasadas de túnel por recorrido',
+      'El túnel de tela (chute) fue eliminado del reglamento FCI en 2023',
     ],
   },
   {
@@ -236,16 +245,17 @@ export const OBSTACLE_TYPES = [
   },
   {
     id: 'mesa',
-    nombre: 'Mesa',
+    nombre: 'Mesa (histórica)',
     icono: '🟦',
     grupo: 'otro',
     esSalto: false,
     esContacto: false,
+    historico: true,
     huella: { w: 0.9, d: 0.9 },
     specs: [
-      'Superficie: 90 × 90 cm, antiderrapante',
-      'Altura: S/M 45 cm · I/L 60 cm',
-      'El perro permanece 5 segundos contados por el juez',
+      'Retirada del reglamento FCI desde 2018: ya no se usa en pruebas oficiales',
+      'Puede aparecer en reglamentos locales antiguos y en entrenamiento',
+      'Superficie: 90 × 90 cm antiderrapante · pausa clásica de 5 segundos',
     ],
   },
 ]
@@ -304,6 +314,22 @@ export const validateCourse = (obstacles, grado, geometry = null) => {
 
   if (slaloms.length > 1) {
     push('error', 'El slalom solo puede aparecer una vez en el recorrido.')
+  }
+
+  const onceOnly = { neumatico: 'El neumático', muro: 'El muro' }
+  Object.entries(onceOnly).forEach(([type, label]) => {
+    if (obstacles.filter((o) => o.type === type).length > 1) {
+      push('error', `${label} solo puede aparecer una vez en el recorrido.`)
+    }
+  })
+
+  const tunnelPasses = obstacles.filter((o) => o.type === 'tunel').length
+  if (tunnelPasses > COURSE_RULES.tunelPasesMax) {
+    push('error', `Máximo ${COURSE_RULES.tunelPasesMax} pasadas de túnel por recorrido (hay ${tunnelPasses}).`)
+  }
+
+  if (obstacles.some((o) => OBSTACLES_BY_ID[o.type]?.historico)) {
+    push('aviso', 'La mesa fue retirada del reglamento FCI en 2018; úsala solo para entrenar o en reglamentos locales antiguos.')
   }
 
   if (total >= 2) {

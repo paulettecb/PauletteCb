@@ -756,7 +756,7 @@ const EXAMPLE_COURSE = {
     { type: 'valla', x: 29.4, y: 16, rot: 60 },
     { type: 'neumatico', x: 35.2, y: 12.5, rot: 33 },
     { type: 'valla', x: 38.3, y: 7, rot: 335 },
-    { type: 'mesa', x: 33.1, y: 3.5, rot: 0 },
+    { type: 'valla', x: 33.1, y: 3.5, rot: 100 },
     { type: 'valla', x: 26.3, y: 3, rot: 95 },
     { type: 'slalom', x: 17.9, y: 4, rot: 100 },
     { type: 'valla', x: 8.9, y: 5.5, rot: 55 },
