@@ -1,69 +1,109 @@
 <template>
   <div class="experiment-page">
     <header class="experiment-header">
-      <a href="#/" class="back-btn">← Back</a>
-      <h1>🐕 AGILITY - Canine Movement Analysis</h1>
-      <p class="subtitle">Real-time Dog Movement Tracking</p>
+      <a
+        href="#/"
+        class="back-btn"
+      >← Back</a>
+      <h1>🐕 AGILITY · MotionLab Trainer</h1>
+      <p class="subtitle">
+        Diseña pistas, estudia el reglamento FCI/FCM y entrena tus señales de guía con la cámara.
+      </p>
     </header>
 
     <main class="experiment-main">
-      <section class="info-section">
-        <h2>Canine Agility Tracker</h2>
-        <p>Analyze dog movements, jumps, and agility exercises with real-time pose detection.</p>
-
-        <div class="features-grid">
-          <div class="feature">
-            <span class="feature-icon">📍</span>
-            <h3>Pose Tracking</h3>
-            <p>Follow all body joints</p>
-          </div>
-          <div class="feature">
-            <span class="feature-icon">🏃</span>
-            <h3>Movement Analysis</h3>
-            <p>Detect running, jumping, turning</p>
-          </div>
-          <div class="feature">
-            <span class="feature-icon">📈</span>
-            <h3>Performance Metrics</h3>
-            <p>Measure agility performance</p>
-          </div>
-          <div class="feature">
-            <span class="feature-icon">🎓</span>
-            <h3>Training Mode</h3>
-            <p>Improve dog training techniques</p>
-          </div>
-        </div>
-
-        <button class="btn btn-primary" @click="startTracking">
-          🎥 Start Tracking
+      <nav
+        class="mode-tabs"
+        aria-label="Modos del entrenador"
+      >
+        <button
+          v-for="mode in MODES"
+          :key="mode.id"
+          type="button"
+          class="mode-tab"
+          :class="{ active: mode.id === activeMode }"
+          @click="activeMode = mode.id"
+        >
+          <span class="mode-icon">{{ mode.icono }}</span>
+          <span class="mode-text">
+            <strong>{{ mode.titulo }}</strong>
+            <span>{{ mode.descripcion }}</span>
+          </span>
         </button>
+      </nav>
 
-        <div class="tracking-section">
-          <div class="camera-stage" :class="{ 'is-active': trackingActive, 'is-inactive': !trackingActive }">
-            <video ref="videoRef" class="camera-preview" autoplay playsinline muted></video>
-            <canvas ref="canvasRef" class="landmarks-canvas" aria-label="Body and hand landmarks overlay"></canvas>
-          </div>
-          <p v-if="trackingStatus" class="status">{{ trackingStatus }}</p>
-          <p v-if="handDetectionStatus" class="status">{{ handDetectionStatus }}</p>
-        </div>
+      <section class="info-section mode-panel">
+        <CourseDesigner v-if="activeMode === 'pistas'" />
+        <TheoryLessons v-else-if="activeMode === 'teoria'" />
+        <HandlerCoach v-else />
       </section>
     </main>
   </div>
 </template>
 
 <script setup>
-import { useHandDetectionCamera } from '../composables/useHandDetectionCamera'
+import { ref } from 'vue'
+import CourseDesigner from '../components/agility/CourseDesigner.vue'
+import TheoryLessons from '../components/agility/TheoryLessons.vue'
+import HandlerCoach from '../components/agility/HandlerCoach.vue'
 
-const {
-  cameraActive: trackingActive,
-  cameraStatus: trackingStatus,
-  handDetectionStatus,
-  start: startHandDetection,
-  canvasRef,
-  videoRef,
-} = useHandDetectionCamera()
+const MODES = [
+  {
+    id: 'pistas',
+    icono: '📋',
+    titulo: 'Diseñador de pistas',
+    descripcion: 'Arma recorridos válidos según el reglamento',
+  },
+  {
+    id: 'teoria',
+    icono: '📚',
+    titulo: 'Teoría en lecciones',
+    descripcion: 'Microlecciones con quiz del reglamento FCI/FCM',
+  },
+  {
+    id: 'coach',
+    icono: '🎥',
+    titulo: 'Coach de manejo',
+    descripcion: 'Tu técnica de guía, corregida con MediaPipe',
+  },
+]
 
-const startTracking = () => {
-  startHandDetection('Agility tracking con landmarks de cuerpo y manos activos.')
-}
+const activeMode = ref('pistas')
 </script>
+
+<style scoped>
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.mode-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width-strong) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+
+.mode-tab:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.mode-tab.active {
+  border-color: var(--periwinkle-600);
+  background: var(--surface-brand-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-icon { font-size: var(--text-xl); }
+.mode-text { display: grid; gap: 2px; }
+.mode-text strong { color: var(--text-primary); }
+.mode-text span:last-child { color: var(--text-muted); font-size: var(--text-sm); }
+
+.mode-panel { min-height: 400px; }
+</style>
