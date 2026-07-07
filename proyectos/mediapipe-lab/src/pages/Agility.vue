@@ -35,6 +35,7 @@
       <section class="info-section mode-panel">
         <CourseDesigner v-if="activeMode === 'pistas'" />
         <TheoryLessons v-else-if="activeMode === 'teoria'" />
+        <ManeuverCoach v-else-if="activeMode === 'maniobras'" />
         <HandlerCoach v-else />
       </section>
     </main>
@@ -46,6 +47,7 @@ import { ref } from 'vue'
 import CourseDesigner from '../components/agility/CourseDesigner.vue'
 import TheoryLessons from '../components/agility/TheoryLessons.vue'
 import HandlerCoach from '../components/agility/HandlerCoach.vue'
+import ManeuverCoach from '../components/agility/ManeuverCoach.vue'
 
 const MODES = [
   {
@@ -65,6 +67,12 @@ const MODES = [
     icono: '🎥',
     titulo: 'Coach de manejo',
     descripcion: 'Tu técnica de guía, corregida con MediaPipe',
+  },
+  {
+    id: 'maniobras',
+    icono: '🎓',
+    titulo: 'Maniobras',
+    descripcion: 'Front, rear, blind y false turn con perro virtual y voz',
   },
 ]
 
