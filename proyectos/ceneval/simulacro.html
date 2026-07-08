@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulacro CENEVAL — EGEL Plus PSI · para Paulette</title>
+<meta name="description" content="Simulacro interactivo KYN para el EGEL Plus PSI: rondas por área, examen completo, transversal y repaso de errores. Las preguntas viven solo en tu compu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-600: #6B7AC1; --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-700: #4A4955; --ink-500: #75737F; --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-butter: #F6EBC4; --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2;
+  --pastel-blush: #F6D2DD; --pastel-lilac: #E2D6F0;
+  --ok: #2E7D57; --ok-soft: #CFE8DA; --bad: #C0392B; --bad-soft: #F6D2DD;
+  --font-display: 'Friendship', cursive; --font-accent: 'Farmhouse', serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07); --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink-900); font-family: var(--font-sans); line-height: 1.55; }
+.pagina { max-width: 760px; margin: 0 auto; padding: 0 1.2rem 4rem; }
+
+/* ---- barra superior ---- */
+.topbar { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 0 0.6rem; }
+.topbar a.volver { text-decoration: none; color: var(--periwinkle-700); font-weight: 700; font-size: 0.9rem; padding: 0.3rem 0.8rem; border-radius: var(--radius-pill); background: var(--periwinkle-100); }
+.topbar a.volver:hover { background: var(--periwinkle-200); }
+.topbar .marca { font-family: var(--font-accent); color: var(--pop-magenta); font-size: 1.05rem; }
+.topbar .reloj { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 800; color: var(--periwinkle-800); background: var(--pastel-butter); padding: 0.25rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.9rem; display: none; }
+.topbar .reloj.activo { display: inline-block; }
+
+/* ---- portada / inicio ---- */
+.portada { text-align: center; padding: 1.6rem 0 1rem; }
+.sello { display: inline-block; padding: 0.3rem 1rem; border-radius: var(--radius-pill); background: var(--pop-magenta-soft); color: var(--periwinkle-900); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+h1 { margin: 0.9rem 0 0.2rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.6rem, 7vw, 3.8rem); line-height: 1.05; color: var(--periwinkle-700); }
+.subtitulo { margin: 0; font-family: var(--font-accent); font-size: 1.25rem; color: var(--ink-700); }
+.meta-pool { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-top: 1rem; }
+.chip { padding: 0.22rem 0.75rem; border-radius: var(--radius-pill); font-size: 0.78rem; font-weight: 600; color: var(--ink-700); }
+.chip.c1 { background: var(--pastel-sky); } .chip.c2 { background: var(--pastel-butter); }
+.chip.c3 { background: var(--pastel-blush); } .chip.c4 { background: var(--pastel-lilac); }
+.chip.c5 { background: var(--pastel-mint); }
+
+h2.seccion { font-family: var(--font-accent); color: var(--pop-magenta); font-size: 1.1rem; letter-spacing: 0.05em; margin: 1.8rem 0 0.7rem; }
+.tarjetas { display: grid; gap: 0.8rem; }
+.tarjeta { display: block; width: 100%; text-align: left; font-family: inherit; cursor: pointer; padding: 1rem 1.2rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); transition: transform 140ms ease, box-shadow 140ms ease; }
+.tarjeta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--periwinkle-300); }
+.tarjeta .fila { display: flex; align-items: center; gap: 0.7rem; }
+.tarjeta .emoji { font-size: 1.5rem; }
+.tarjeta h3 { margin: 0; font-size: 0.98rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.03em; color: var(--periwinkle-900); }
+.tarjeta p { margin: 0.35rem 0 0; color: var(--ink-700); font-size: 0.88rem; }
+.tarjeta .cuenta { margin-left: auto; font-size: 0.78rem; font-weight: 700; color: var(--periwinkle-700); background: var(--periwinkle-100); border-radius: var(--radius-pill); padding: 0.2rem 0.7rem; white-space: nowrap; }
+.tamanos { display: flex; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; }
+.tamanos button { font-family: inherit; font-weight: 800; font-size: 0.82rem; cursor: pointer; border: 1.5px solid var(--periwinkle-300); background: var(--periwinkle-50); color: var(--periwinkle-800); padding: 0.35rem 0.9rem; border-radius: var(--radius-pill); }
+.tamanos button:hover { background: var(--periwinkle-200); }
+
+.nota { margin-top: 1.6rem; padding: 0.9rem 1.1rem; background: var(--periwinkle-50); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-md); font-size: 0.88rem; color: var(--periwinkle-900); }
+.nota strong { color: var(--periwinkle-700); }
+
+/* ---- pantalla sin datos ---- */
+.dropzone { margin-top: 1.4rem; border: 2.5px dashed var(--periwinkle-300); border-radius: var(--radius-lg); background: var(--white); padding: 2.2rem 1.4rem; text-align: center; color: var(--ink-700); cursor: pointer; }
+.dropzone.encima { background: var(--periwinkle-50); border-color: var(--pop-magenta); }
+.dropzone .grande { font-size: 2.2rem; }
+.dropzone strong { color: var(--periwinkle-800); }
+
+/* ---- ronda ---- */
+.progreso { margin: 0.8rem 0 1rem; }
+.progreso .texto { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: var(--ink-500); margin-bottom: 0.3rem; }
+.progreso .barra { height: 10px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
+.progreso .barra > div { height: 100%; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--periwinkle-600), var(--pop-magenta)); transition: width 250ms ease; }
+
+.contexto { background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-md); margin-bottom: 0.9rem; }
+.contexto summary { cursor: pointer; padding: 0.7rem 1rem; font-weight: 900; text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.04em; color: var(--periwinkle-800); }
+.contexto .cuerpo { max-height: 45vh; overflow-y: auto; padding: 0 1.1rem 1rem; font-size: 0.92rem; color: var(--ink-700); white-space: pre-line; }
+
+.pregunta-caja { background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.2rem 1.3rem; }
+.pregunta-caja .etiquetas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.7rem; }
+.stem { font-size: 1.02rem; }
+.stem p { margin: 0 0 0.6rem; }
+.stem ul { margin: 0 0 0.6rem 1.1rem; padding: 0; }
+.stem li { margin-bottom: 0.15rem; }
+.stem table { border-collapse: collapse; margin: 0.3rem 0 0.7rem; font-size: 0.92rem; }
+.stem td { border: 1px solid var(--periwinkle-200); padding: 0.25rem 0.6rem; }
+.opciones { display: grid; gap: 0.6rem; margin-top: 1rem; }
+.opcion { display: flex; gap: 0.7rem; align-items: flex-start; text-align: left; font-family: inherit; font-size: 0.96rem; line-height: 1.45; cursor: pointer; padding: 0.75rem 0.9rem; border: 1.5px solid var(--periwinkle-200); background: var(--periwinkle-50); border-radius: var(--radius-md); transition: background 120ms ease, border-color 120ms ease; color: var(--ink-900); white-space: pre-line; }
+.opcion:hover:not(:disabled) { background: var(--periwinkle-100); border-color: var(--periwinkle-300); }
+.opcion:disabled { cursor: default; opacity: 0.85; }
+.opcion .letra { flex-shrink: 0; font-weight: 900; width: 1.6rem; height: 1.6rem; display: grid; place-items: center; border-radius: 50%; background: var(--periwinkle-200); color: var(--periwinkle-900); font-size: 0.82rem; }
+.opcion.correcta { background: var(--ok-soft); border-color: var(--ok); }
+.opcion.correcta .letra { background: var(--ok); color: var(--white); }
+.opcion.incorrecta { background: var(--bad-soft); border-color: var(--bad); }
+.opcion.incorrecta .letra { background: var(--bad); color: var(--white); }
+
+.veredicto { margin-top: 1rem; padding: 0.9rem 1.1rem; border-radius: var(--radius-md); font-size: 0.94rem; display: none; }
+.veredicto.ok { display: block; background: var(--ok-soft); border: 1.5px solid var(--ok); }
+.veredicto.bad { display: block; background: var(--bad-soft); border: 1.5px solid var(--bad); }
+.veredicto .titulo-v { font-weight: 900; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.04em; }
+.veredicto .expl { margin-top: 0.4rem; color: var(--ink-700); }
+.acciones { display: flex; gap: 0.6rem; margin-top: 1rem; justify-content: flex-end; }
+.boton { font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; border: none; background: var(--periwinkle-700); color: var(--white); padding: 0.6rem 1.4rem; border-radius: var(--radius-pill); box-shadow: var(--shadow-sm); }
+.boton:hover { background: var(--periwinkle-800); }
+.boton.suave { background: var(--periwinkle-100); color: var(--periwinkle-800); }
+.boton.suave:hover { background: var(--periwinkle-200); }
+.atajo { font-size: 0.78rem; color: var(--ink-500); text-align: center; margin-top: 0.8rem; }
+
+/* ---- resultados ---- */
+.score-hero { text-align: center; padding: 1.4rem 0 0.4rem; }
+.score-hero .numero { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 4.6rem); color: var(--periwinkle-700); line-height: 1; }
+.score-hero .detalle { color: var(--ink-500); font-weight: 600; }
+.barras-area { display: grid; gap: 0.55rem; margin: 1.1rem 0; }
+.barra-area .fila-b { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
+.barra-area .pista { height: 12px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
+.barra-area .pista > div { height: 100%; border-radius: var(--radius-pill); }
+.fallo { background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-md); margin-bottom: 0.7rem; }
+.fallo summary { cursor: pointer; padding: 0.7rem 1rem; font-size: 0.9rem; font-weight: 600; color: var(--ink-900); }
+.fallo .cuerpo-f { padding: 0 1.1rem 0.9rem; font-size: 0.9rem; color: var(--ink-700); }
+.fallo .cuerpo-f .bien { color: var(--ok); font-weight: 700; }
+.fallo .cuerpo-f .mal { color: var(--bad); font-weight: 700; }
+.historial { font-size: 0.88rem; color: var(--ink-700); }
+.historial li { margin-bottom: 0.2rem; }
+footer { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1.5px solid var(--sand); text-align: center; color: var(--ink-500); font-size: 0.85rem; }
+footer .paws { font-family: var(--font-accent); font-size: 1.05rem; color: var(--periwinkle-600); }
+@media (max-width: 540px) { .acciones { justify-content: stretch; } .acciones .boton { flex: 1; } }
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="topbar">
+      <a class="volver" href="index.html">← Base CENEVAL</a>
+      <span class="marca">simulacro KYN</span>
+      <span class="reloj" id="reloj">00:00</span>
+    </header>
+    <main id="app" aria-live="polite"></main>
+    <footer>
+      <p class="paws">una pregunta a la vez · se puede</p>
+      <p>Design system de KYN · las preguntas viven solo en tu compu 🔒</p>
+    </footer>
+  </div>
+
+<script>
+'use strict';
+/* ============================================================
+   Simulacro CENEVAL KYN — app sin contenido: carga
+   material/preguntas.json (local, gitignored). En el sitio
+   publicado ese archivo no existe: se pide arrastrarlo.
+   ============================================================ */
+const $app = document.getElementById('app');
+const $reloj = document.getElementById('reloj');
+const AREAS = { 1: 'Área 1 · Diagnóstico', 2: 'Área 2 · Intervención', 3: 'Área 3 · Investigación' };
+const LS_KEY = 'simulacro-kyn-v1';
+
+const state = { data: null, ctx: {}, ronda: null, timerId: null };
+
+function store() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || { errores: {}, historial: [] }; }
+  catch (e) { return { errores: {}, historial: [] }; }
+}
+function saveStore(s) { localStorage.setItem(LS_KEY, JSON.stringify(s)); }
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function fmt(seg) {
+  const m = Math.floor(seg / 60), s = seg % 60;
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+/* ---------- carga de datos ---------- */
+async function boot() {
+  try {
+    const r = await fetch('material/preguntas.json', { cache: 'no-store' });
+    if (!r.ok) throw new Error('sin archivo');
+    adoptarDatos(await r.json());
+  } catch (e) {
+    renderSinDatos();
+  }
+}
+function adoptarDatos(json) {
+  if (!json || !Array.isArray(json.preguntas) || !json.preguntas.length) {
+    renderSinDatos('Ese archivo no parece un preguntas.json válido 🤔');
+    return;
+  }
+  state.data = json;
+  state.ctx = {};
+  (json.contextos || []).forEach(c => { state.ctx[c.id] = c; });
+  renderInicio();
+}
+function renderSinDatos(msjExtra) {
+  detenerReloj();
+  $app.innerHTML = `
+    <div class="portada">
+      <span class="sello">Simulacro · EGEL Plus PSI</span>
+      <h1>Simulacro</h1>
+      <p class="subtitulo">preguntas reales, feedback inmediato</p>
+    </div>
+    ${msjExtra ? `<div class="nota"><strong>${esc(msjExtra)}</strong></div>` : ''}
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Cargar preguntas.json">
+      <div class="grande">🔒📄</div>
+      <p><strong>Las preguntas no viven en la web</strong> (son confidenciales, solo están en tu compu).</p>
+      <p>Arrastra aquí tu <strong>material/preguntas.json</strong> o haz clic para elegirlo.</p>
+      <p style="font-size:0.8rem; color:var(--ink-500)">Tip: si abres el sitio servido desde tu clon del repo, se carga solito.</p>
+    </div>
+    <input type="file" id="filein" accept=".json,application/json" style="display:none">`;
+  const dz = document.getElementById('dropzone');
+  const fi = document.getElementById('filein');
+  const leer = (file) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      try { adoptarDatos(JSON.parse(fr.result)); }
+      catch (e) { renderSinDatos('No pude leer ese JSON 😿'); }
+    };
+    fr.readAsText(file);
+  };
+  dz.addEventListener('click', () => fi.click());
+  dz.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') fi.click(); });
+  fi.addEventListener('change', () => { if (fi.files[0]) leer(fi.files[0]); });
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('encima'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('encima'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('encima');
+    if (e.dataTransfer.files[0]) leer(e.dataTransfer.files[0]);
+  });
+}
+
+/* ---------- inicio ---------- */
+function poolConClave() { return state.data.preguntas.filter(q => q.correcta !== null && q.correcta !== undefined); }
+
+function renderInicio() {
+  detenerReloj();
+  const pool = poolConClave();
+  const disc = pool.filter(q => q.seccion === 'disciplinar');
+  const porArea = { 1: 0, 2: 0, 3: 0 };
+  disc.forEach(q => { porArea[q.area] = (porArea[q.area] || 0) + 1; });
+  const trans = pool.filter(q => q.seccion === 'transversal');
+  const s = store();
+  const numErrores = Object.keys(s.errores).length;
+  const conExpl = pool.filter(q => q.explicacion).length;
+
+  const historialHtml = s.historial.slice(-5).reverse().map(h =>
+    `<li><strong>${esc(h.modo)}</strong> — ${h.aciertos}/${h.total} (${Math.round(h.aciertos / h.total * 100)} %) · ${esc(h.fecha)} · ${fmt(h.seg)}</li>`
+  ).join('');
+
+  $app.innerHTML = `
+    <div class="portada">
+      <span class="sello">Simulacro · EGEL Plus PSI</span>
+      <h1>Simulacro</h1>
+      <p class="subtitulo">preguntas reales, feedback inmediato</p>
+      <div class="meta-pool">
+        <span class="chip c1">🧠 Área 1 · ${porArea[1]}</span>
+        <span class="chip c2">🛠️ Área 2 · ${porArea[2]}</span>
+        <span class="chip c3">🔬 Área 3 · ${porArea[3]}</span>
+        <span class="chip c4">📖 Transversal · ${trans.length}</span>
+        <span class="chip c5">💡 ${conExpl} con explicación</span>
+      </div>
+    </div>
+
+    <h2 class="seccion">Rondas por área</h2>
+    <div class="tarjetas">
+      ${[1, 2, 3].map(a => `
+        <div class="tarjeta" role="group" aria-label="${AREAS[a]}">
+          <div class="fila"><span class="emoji">${a === 1 ? '🧠' : a === 2 ? '🛠️' : '🔬'}</span><h3>${AREAS[a]}</h3><span class="cuenta">${porArea[a]} disponibles</span></div>
+          <div class="tamanos">
+            <button data-modo="area" data-area="${a}" data-n="15">Ronda de 15</button>
+            <button data-modo="area" data-area="${a}" data-n="30">Ronda de 30</button>
+            <button data-modo="area" data-area="${a}" data-n="0">Todas</button>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <h2 class="seccion">Modo examen</h2>
+    <div class="tarjetas">
+      <div class="tarjeta">
+        <div class="fila"><span class="emoji">🎓</span><h3>Examen completo tipo CENEVAL</h3><span class="cuenta">140 reactivos</span></div>
+        <p>49 de diagnóstico + 50 de intervención + 41 de investigación, en bloques como el examen real. Con cronómetro.</p>
+        <div class="tamanos"><button data-modo="examen">Empezar examen</button></div>
+      </div>
+      <div class="tarjeta">
+        <div class="fila"><span class="emoji">🎲</span><h3>Mezcla disciplinar</h3><span class="cuenta">${disc.length} disponibles</span></div>
+        <p>Las 3 áreas revueltas, para calentar sin ceremonia.</p>
+        <div class="tamanos">
+          <button data-modo="mixto" data-n="15">Ronda de 15</button>
+          <button data-modo="mixto" data-n="30">Ronda de 30</button>
+        </div>
+      </div>
+      <div class="tarjeta">
+        <div class="fila"><span class="emoji">📖</span><h3>Sección transversal</h3><span class="cuenta">${trans.length} disponibles</span></div>
+        <p>Comprensión lectora (con sus textos) y redacción indirecta. Va por examen para respetar los textos.</p>
+        <div class="tamanos">
+          <button data-modo="trans" data-examen="psi-trans">PSI completa</button>
+          <button data-modo="trans" data-examen="med-trans">MED completa</button>
+          <button data-modo="redaccion" data-n="20">Solo redacción (20)</button>
+        </div>
+      </div>
+      <div class="tarjeta">
+        <div class="fila"><span class="emoji">🔁</span><h3>Repaso de errores</h3><span class="cuenta">${numErrores} pendientes</span></div>
+        <p>Las que has fallado en cualquier ronda. Si la aciertas, sale de la lista.</p>
+        <div class="tamanos"><button data-modo="errores" ${numErrores ? '' : 'disabled'}>Repasar</button></div>
+      </div>
+    </div>
+
+    ${historialHtml ? `<h2 class="seccion">Últimas rondas</h2><ul class="historial">${historialHtml}</ul>` : ''}
+    <div class="nota"><strong>Cómo se estudia esto:</strong> contesta, lee el porqué, y sigue. Los errores se guardan solos para repasarlos después — así el simulacro alimenta tus flashcards. 🐾</div>`;
+
+  $app.querySelectorAll('button[data-modo]').forEach(b => b.addEventListener('click', () => {
+    const d = b.dataset;
+    if (d.modo === 'area') iniciarRonda({ tipo: 'area', area: +d.area, n: +d.n });
+    else if (d.modo === 'examen') iniciarRonda({ tipo: 'examen' });
+    else if (d.modo === 'mixto') iniciarRonda({ tipo: 'mixto', n: +d.n });
+    else if (d.modo === 'trans') iniciarRonda({ tipo: 'trans', examen: d.examen });
+    else if (d.modo === 'redaccion') iniciarRonda({ tipo: 'redaccion', n: +d.n });
+    else if (d.modo === 'errores') iniciarRonda({ tipo: 'errores' });
+  }));
+}
+
+/* ---------- armado de rondas ---------- */
+function iniciarRonda(cfg) {
+  const pool = poolConClave();
+  let items = [], nombre = '';
+  if (cfg.tipo === 'area') {
+    const de = shuffle(pool.filter(q => q.seccion === 'disciplinar' && q.area === cfg.area));
+    items = cfg.n ? de.slice(0, cfg.n) : de;
+    nombre = AREAS[cfg.area] + (cfg.n ? ` (${items.length})` : ' (todas)');
+  } else if (cfg.tipo === 'mixto') {
+    items = shuffle(pool.filter(q => q.seccion === 'disciplinar')).slice(0, cfg.n);
+    nombre = `Mezcla disciplinar (${items.length})`;
+  } else if (cfg.tipo === 'examen') {
+    const cuota = { 1: 49, 2: 50, 3: 41 };
+    [1, 2, 3].forEach(a => {
+      items = items.concat(shuffle(pool.filter(q => q.seccion === 'disciplinar' && q.area === a)).slice(0, cuota[a]));
+    });
+    nombre = 'Examen completo (140)';
+  } else if (cfg.tipo === 'trans') {
+    const del = pool.filter(q => q.seccion === 'transversal' && q.examen === cfg.examen);
+    const grupos = {};
+    del.filter(q => q.contexto).forEach(q => { (grupos[q.contexto] = grupos[q.contexto] || []).push(q); });
+    shuffle(Object.keys(grupos)).forEach(cid => { items = items.concat(grupos[cid]); });
+    items = items.concat(shuffle(del.filter(q => !q.contexto)));
+    nombre = `Transversal ${cfg.examen === 'psi-trans' ? 'PSI' : 'MED'} (${items.length})`;
+  } else if (cfg.tipo === 'redaccion') {
+    items = shuffle(pool.filter(q => q.seccion === 'transversal' && !q.contexto)).slice(0, cfg.n);
+    nombre = `Redacción indirecta (${items.length})`;
+  } else if (cfg.tipo === 'errores') {
+    const err = store().errores;
+    items = shuffle(pool.filter(q => err[q.id]));
+    nombre = `Repaso de errores (${items.length})`;
+  }
+  if (!items.length) { renderInicio(); return; }
+  state.ronda = {
+    nombre, cfg, items,
+    perm: items.map(q => shuffle(q.opciones.map((_, i) => i))),
+    idx: 0, aciertos: 0, fallos: [], t0: Date.now(),
+    porArea: {},
+  };
+  arrancarReloj();
+  renderPregunta();
+}
+
+/* ---------- reloj ---------- */
+function arrancarReloj() {
+  detenerReloj();
+  $reloj.classList.add('activo');
+  state.timerId = setInterval(() => {
+    if (!state.ronda) return;
+    $reloj.textContent = fmt(Math.floor((Date.now() - state.ronda.t0) / 1000));
+  }, 500);
+}
+function detenerReloj() {
+  if (state.timerId) clearInterval(state.timerId);
+  state.timerId = null;
+  $reloj.classList.remove('activo');
+}
+
+/* ---------- render de pregunta ---------- */
+function stemHtml(texto) {
+  const lineas = texto.split('\n');
+  let html = '', enLista = false, enTabla = false;
+  const cerrar = () => {
+    if (enLista) { html += '</ul>'; enLista = false; }
+    if (enTabla) { html += '</table>'; enTabla = false; }
+  };
+  lineas.forEach(l => {
+    const t = l.trim();
+    if (!t) return;
+    if (t.startsWith('• ')) {
+      if (!enLista) { if (enTabla) { html += '</table>'; enTabla = false; } html += '<ul>'; enLista = true; }
+      html += `<li>${esc(t.slice(2))}</li>`;
+    } else if (t.includes(' | ')) {
+      if (!enTabla) { if (enLista) { html += '</ul>'; enLista = false; } html += '<table>'; enTabla = true; }
+      html += '<tr>' + t.split(' | ').map(c => `<td>${esc(c)}</td>`).join('') + '</tr>';
+    } else {
+      cerrar();
+      html += `<p>${esc(t)}</p>`;
+    }
+  });
+  cerrar();
+  return html;
+}
+
+function renderPregunta() {
+  const r = state.ronda;
+  const q = r.items[r.idx];
+  const perm = r.perm[r.idx];
+  const ctx = q.contexto ? state.ctx[q.contexto] : null;
+  const mismoCtx = r.idx > 0 && r.items[r.idx - 1].contexto === q.contexto;
+  const fuente = (state.data.examenes || {})[q.examen] || q.examen;
+  const areaChip = q.area ? `<span class="chip ${q.area === 1 ? 'c1' : q.area === 2 ? 'c2' : 'c3'}">${AREAS[q.area]}</span>` : '<span class="chip c4">📖 Transversal</span>';
+
+  $app.innerHTML = `
+    <div class="progreso">
+      <div class="texto"><span>${esc(r.nombre)}</span><span>${r.idx + 1} / ${r.items.length}</span></div>
+      <div class="barra"><div style="width:${(r.idx) / r.items.length * 100}%"></div></div>
+    </div>
+    ${ctx ? `
+      <details class="contexto" ${mismoCtx ? '' : 'open'}>
+        <summary>📖 ${esc(ctx.titulo)} ${mismoCtx ? '(mismo texto)' : ''}</summary>
+        <div class="cuerpo">${esc(ctx.texto.startsWith(ctx.titulo) ? ctx.texto.slice(ctx.titulo.length).replace(/^\n+/, '') : ctx.texto)}</div>
+      </details>` : ''}
+    <div class="pregunta-caja">
+      <div class="etiquetas">${areaChip}<span class="chip c5">${esc(fuente)}</span></div>
+      <div class="stem">${stemHtml(q.pregunta)}</div>
+      <div class="opciones" id="opciones">
+        ${perm.map((oi, pos) => `
+          <button class="opcion" data-oi="${oi}" data-pos="${pos}">
+            <span class="letra">${'abcd'[pos] || '?'}</span>
+            <span>${esc(q.opciones[oi])}</span>
+          </button>`).join('')}
+      </div>
+      <div class="veredicto" id="veredicto"></div>
+      <div class="acciones" id="acciones" style="display:none">
+        <button class="boton" id="btn-sig">Siguiente →</button>
+      </div>
+    </div>
+    <p class="atajo">atajos: 1/2/3 para responder · Enter para seguir</p>`;
+
+  document.querySelectorAll('#opciones .opcion').forEach(b =>
+    b.addEventListener('click', () => responder(+b.dataset.oi, b)));
+}
+
+function responder(oi, btn) {
+  const r = state.ronda;
+  const q = r.items[r.idx];
+  if (r.contestada) return;
+  r.contestada = true;
+  const ok = oi === q.correcta;
+  const s = store();
+  if (ok) {
+    r.aciertos++;
+    if (s.errores[q.id]) { delete s.errores[q.id]; saveStore(s); }
+  } else {
+    r.fallos.push({ q, elegida: oi });
+    s.errores[q.id] = (s.errores[q.id] || 0) + 1;
+    saveStore(s);
+  }
+  const claveArea = q.area ? q.area : 'T';
+  r.porArea[claveArea] = r.porArea[claveArea] || { ok: 0, total: 0 };
+  r.porArea[claveArea].total++;
+  if (ok) r.porArea[claveArea].ok++;
+
+  document.querySelectorAll('#opciones .opcion').forEach(b => {
+    b.disabled = true;
+    if (+b.dataset.oi === q.correcta) b.classList.add('correcta');
+  });
+  if (!ok) btn.classList.add('incorrecta');
+
+  const v = document.getElementById('veredicto');
+  v.className = 'veredicto ' + (ok ? 'ok' : 'bad');
+  v.innerHTML = `
+    <div class="titulo-v">${ok ? '✔ ¡Esa es!' : '✘ Casi — la buena está en verde'}</div>
+    ${q.explicacion ? `<div class="expl">💡 ${esc(q.explicacion)}</div>` : ''}`;
+  const acc = document.getElementById('acciones');
+  acc.style.display = 'flex';
+  const btnSig = document.getElementById('btn-sig');
+  if (r.idx + 1 >= r.items.length) btnSig.textContent = 'Ver resultados 🎯';
+  btnSig.addEventListener('click', siguiente);
+  btnSig.focus();
+}
+
+function siguiente() {
+  const r = state.ronda;
+  r.contestada = false;
+  r.idx++;
+  if (r.idx >= r.items.length) renderFin();
+  else renderPregunta();
+}
+
+/* atajos de teclado */
+document.addEventListener('keydown', e => {
+  if (!state.ronda || !document.getElementById('opciones')) return;
+  if (['1', '2', '3', '4'].includes(e.key) && !state.ronda.contestada) {
+    const b = document.querySelector(`#opciones .opcion[data-pos="${+e.key - 1}"]`);
+    if (b) b.click();
+  } else if (e.key === 'Enter' && state.ronda.contestada) {
+    const b = document.getElementById('btn-sig');
+    if (b && document.activeElement !== b) { e.preventDefault(); siguiente(); }
+  }
+});
+
+/* ---------- fin de ronda ---------- */
+function renderFin() {
+  const r = state.ronda;
+  detenerReloj();
+  const seg = Math.floor((Date.now() - r.t0) / 1000);
+  const pct = Math.round(r.aciertos / r.items.length * 100);
+  const s = store();
+  s.historial.push({ fecha: new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'short' }), modo: r.nombre, total: r.items.length, aciertos: r.aciertos, seg });
+  if (s.historial.length > 30) s.historial = s.historial.slice(-30);
+  saveStore(s);
+
+  const nombresArea = { 1: '🧠 Diagnóstico', 2: '🛠️ Intervención', 3: '🔬 Investigación', T: '📖 Transversal' };
+  const colores = { 1: 'var(--pastel-sky)', 2: 'var(--pastel-butter)', 3: 'var(--pastel-blush)', T: 'var(--pastel-lilac)' };
+  const barras = Object.keys(r.porArea).map(a => {
+    const d = r.porArea[a];
+    const p = Math.round(d.ok / d.total * 100);
+    return `<div class="barra-area">
+      <div class="fila-b"><span>${nombresArea[a]}</span><span>${d.ok}/${d.total} · ${p} %</span></div>
+      <div class="pista"><div style="width:${p}%; background:${colores[a]}; border:1px solid var(--periwinkle-300);"></div></div>
+    </div>`;
+  }).join('');
+
+  const fallosHtml = r.fallos.map(f => {
+    const q = f.q;
+    return `<details class="fallo">
+      <summary>✘ ${esc(q.pregunta.split('\n')[0].slice(0, 110))}…</summary>
+      <div class="cuerpo-f">
+        ${stemHtml(q.pregunta)}
+        <p><span class="mal">Tu respuesta:</span> ${esc(q.opciones[f.elegida])}</p>
+        <p><span class="bien">La buena:</span> ${esc(q.opciones[q.correcta])}</p>
+        ${q.explicacion ? `<p>💡 ${esc(q.explicacion)}</p>` : ''}
+      </div>
+    </details>`;
+  }).join('');
+
+  const animo = pct >= 90 ? '¡Nivel testimonio sobresaliente! 🏆' : pct >= 75 ? '¡Muy bien! Vas sólida 💪' : pct >= 60 ? 'Buen avance — los errores de hoy son puntos de mañana 🌱' : 'Respira: cada error ya quedó guardado para repasarlo 🐾';
+
+  $app.innerHTML = `
+    <div class="score-hero">
+      <span class="sello">${esc(r.nombre)}</span>
+      <div class="numero">${pct} %</div>
+      <div class="detalle">${r.aciertos} de ${r.items.length} · ${fmt(seg)} total · ${fmt(Math.round(seg / r.items.length))} por pregunta</div>
+      <p>${animo}</p>
+    </div>
+    <div class="barras-area">${barras}</div>
+    <div class="acciones" style="justify-content:center; flex-wrap:wrap;">
+      ${r.fallos.length ? `<button class="boton" id="btn-rep">🔁 Repetir mis ${r.fallos.length} errores</button>
+      <button class="boton suave" id="btn-csv">⬇ Errores a CSV (Anki)</button>` : ''}
+      <button class="boton suave" id="btn-home">🏠 Inicio</button>
+    </div>
+    ${r.fallos.length ? `<h2 class="seccion">Para revisar (${r.fallos.length})</h2>${fallosHtml}` : '<div class="nota"><strong>Ronda perfecta.</strong> Nada que revisar — Kenna estaría orgullosa. 🐕</div>'}`;
+
+  document.getElementById('btn-home').addEventListener('click', renderInicio);
+  const rep = document.getElementById('btn-rep');
+  if (rep) rep.addEventListener('click', () => {
+    const ids = new Set(r.fallos.map(f => f.q.id));
+    const items = shuffle(state.data.preguntas.filter(q => ids.has(q.id)));
+    state.ronda = { nombre: 'Repetir errores (' + items.length + ')', cfg: { tipo: 'errores' }, items, perm: items.map(q => shuffle(q.opciones.map((_, i) => i))), idx: 0, aciertos: 0, fallos: [], t0: Date.now(), porArea: {} };
+    arrancarReloj();
+    renderPregunta();
+  });
+  const csv = document.getElementById('btn-csv');
+  if (csv) csv.addEventListener('click', () => exportarCSV(r.fallos));
+}
+
+function exportarCSV(fallos) {
+  const limpio = t => '"' + String(t).replace(/"/g, '""').replace(/\n/g, ' — ') + '"';
+  const filas = fallos.map(f => {
+    const q = f.q;
+    const ctx = q.contexto && state.ctx[q.contexto] ? `[${state.ctx[q.contexto].titulo}] ` : '';
+    const frente = ctx + q.pregunta + ' — Opciones: ' + q.opciones.map((o, i) => 'abcd'[i] + ') ' + o).join(' · ');
+    const atras = 'Respuesta: ' + q.opciones[q.correcta] + (q.explicacion ? ' — ' + q.explicacion : '');
+    return limpio(frente) + ';' + limpio(atras);
+  });
+  const blob = new Blob(['﻿' + filas.join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'errores-simulacro-anki.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+boot();
+</script>
+</body>
+</html>

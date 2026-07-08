@@ -27,8 +27,8 @@ Regla: si la guía y un libro se contradicen, **gana la guía** (el examen se ca
 
 ## Herramientas del proyecto (además del libro)
 
-- [ ] **Mini libro guía CENEVAL** — con `/mini-libro`, capítulos = temario oficial, lector KYN incluido.
-- [ ] **Simulacro interactivo KYN** — los exámenes convertidos a `material/preguntas.json` (local, gitignored) + una app HTML que baraja preguntas, cronometra, da feedback inmediato con explicación y score por área. El código de la app sí se commitea; las preguntas no.
+- [x] **Mini libros por área** — `libro-area1-diagnostico.html`, `libro-area2-intervencion.html`, `libro-area3-investigacion.html` + hub `index.html`, con lector KYN.
+- [x] **Simulacro interactivo KYN** — `simulacro.html` + `material/preguntas.json` (local, gitignored: 489 reactivos de los 5 exámenes de `guías/`, 224 con justificación; método en `material/extraccion-examenes/NOTAS.md`). Rondas por área, examen completo 140, transversal con textos, repaso de errores, export CSV para Anki. El código de la app sí se commitea; las preguntas no.
 - [ ] **Flashcards con repetición espaciada** — generar un mazo importable a Anki (CSV) desde las hojas de hechos: los errores de cada simulacro se vuelven tarjetas.
 - [ ] **Chuletas por área** — 1 página imprimible por área con tokens KYN, para el repaso de los últimos días.
 
