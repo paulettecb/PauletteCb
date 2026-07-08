@@ -44,6 +44,7 @@ copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.jo
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
 copy(path.join(root, 'proyectos/ceneval/simulacro.html'), path.join(dist, 'proyectos/ceneval/simulacro.html'));
 copy(path.join(root, 'proyectos/ceneval/flashcards.html'), path.join(dist, 'proyectos/ceneval/flashcards.html'));
+copy(path.join(root, 'proyectos/ceneval/chuletas.html'), path.join(dist, 'proyectos/ceneval/chuletas.html'));
 // Los CSV de flashcards SÍ se publican: son contenido propio destilado de los libros KYN.
 copy(path.join(root, 'proyectos/ceneval/flashcards'), path.join(dist, 'proyectos/ceneval/flashcards'));
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
