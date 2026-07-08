@@ -241,5 +241,9 @@ Marcar `[x]` = ya está en `material/`. **Actualizado 2026-07-07 (descargas hech
 
 1. ~~Paso 2: cruce de archivos vs checklist~~ ✅ hecho (ver checkboxes).
 2. ~~Mapa de capítulos de Área 2 y Área 3~~ ✅ hecho 2026-07-07 (ver desgloses arriba; regla de granularidad aplicada).
-3. **Fase 1 (investigación), siguiente:** armar la hoja de hechos verificados por área — `material/FUENTE-area2.md` y `material/FUENTE-area3.md` — extrayendo de los PDF locales (📗) e investigando en fuentes abiertas confiables los capítulos 🔍; de paso, buscar versiones legales/abiertas de la bibliografía faltante (solo descargas legales).
-4. **Fase 2 (desarrollo):** escribir los mini libros KYN capítulo por capítulo contra su hoja de hechos + fact-check independiente (patrón de CLAUDE.md). La sección transversal se decide después — es de habilidad, no de contenido memorizable.
+3. ~~**Fase 1 (investigación)**: hojas de hechos verificados `material/FUENTE-area2.md` y `material/FUENTE-area3.md`~~ ✅ **COMPLETA 2026-07-07**. Los 28 caps de Área 2 y los 26 de Área 3 tienen hoja de hechos con fuente citada (PDF local 📗 + investigación web de los 🔍, solo fuentes abiertas legales). Las marcas ⚠️ dentro de cada FUENTE señalan datos a re-verificar contra fuente primaria al escribir.
+4. **Fase 2 (desarrollo), EN CURSO:**
+   - ✅ **Área 2 LISTA (2026-07-07):** `proyectos/ceneval/libro-area2-intervencion.html` — 28 capítulos + glosario-chuleta, escrito contra `material/FUENTE-area2.md`, patrón mini libro KYN (lector biónico, Hanken Black MAYÚSCULAS, lectura por capítulo). Integrado a `build-all.mjs`, enlazado desde el hub (tarjeta Área 2 = "Listo"), build OK y verificado en navegador. Falta commitear/PR junto con este avance.
+   - **SIGUIENTE: Área 3** → `libro-area3.html` (Investigación, 26 caps) contra `material/FUENTE-area3.md`, mismo patrón.
+   - La sección transversal se decide después — es de habilidad, no de contenido memorizable.
+5. Pendientes menores de Fase 1 que se pueden resolver sobre la marcha en Fase 2: mirrors legales de CONOCER y Grañeras (URLs caídas), y los ⚠️ puntuales de cada FUENTE.

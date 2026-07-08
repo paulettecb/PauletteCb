@@ -8,6 +8,13 @@
       "url": "proyectos/budget-planner-tdah/index.html"
     },
     {
+      "slug": "ceneval",
+      "title": "CENEVAL — base de estudio 🎓",
+      "description": "Hub de estudio para el EGEL Plus PSI (CENEVAL Psicología): mini libros KYN por área disciplinar.",
+      "type": "Project",
+      "url": "proyectos/ceneval/index.html"
+    },
+    {
       "slug": "KYN Design System",
       "title": "KYN Design System",
       "description": "Índice visual del sistema KYN: decks, guías de marca, tokens y componentes reutilizables.",
