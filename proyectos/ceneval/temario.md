@@ -3,6 +3,8 @@
 > Columna vertebral del proyecto de libros de estudio. Extraído de la **Guía para el sustentante EGEL Plus PSI (octubre 2025)**, texto completo en `material/guia-extraida.txt` (local, fuera de git).
 >
 > ⚠️ Dato clave de la propia guía: CENEVAL **no publica los temas por subárea** de la sección disciplinar ("no es posible dar mayor información respecto a los temas que se evalúan"). El desglose granular tema → subtema → concepto se construye en fase 1 a partir de: definiciones de área + descriptores de desempeño + bibliografía sugerida + material de práctica.
+>
+> 📏 **Regla de granularidad (Paulette, 2026-07-07):** a más reactivos/importancia, MÁS capítulos, no menos. Nunca fusionar capítulos para acortar un libro; si un tema vale veinte temas, son veinte capítulos. Leyenda de fuentes en los desgloses: 📗 = PDF ya en `material/` · 🔍 = falta fuente, se resuelve en Fase 1 (investigación).
 
 ## Estructura general del examen
 
@@ -43,6 +45,49 @@
 - Satisfactorio: enfoques **psicoanalítico/psicodinámico, conductual, cognitivo-conductual, humanista, sistémico y contemporáneos**; niveles de intervención (individual, familiar, grupal, comunitario); contextos (clínico, educativo, organizacional, social, comunitario, **intervención en crisis**); técnicas: **entrevista, observación, grupo focal, narrativas**; análisis de resultados e implicaciones éticas.
 - Sobresaliente: efectividad de técnicas y eficacia de planes de intervención; **intervenciones basadas en evidencia**: dialéctica conductual, psicoterapia focalizada en las transferencias, terapia cognitiva analítica, mindfulness, entre otras.
 
+**Desglose en capítulos — libro Área 2 (28 caps + chuleta):**
+
+*Bloque A · El mapa de la intervención (base de 2.3):*
+1. Qué es intervenir: propósitos (prevención, psicoeducación, acompañamiento, habilitación) y niveles (individual, familiar, grupal, comunitario) 🔍
+2. Contextos de intervención: clínico, educativo, organizacional, social/comunitario y crisis — panorama 🔍 + 📗 CERMI
+
+*Bloque B · Enfoque psicoanalítico/psicodinámico (2.1):*
+3. Freud I: aparato psíquico (las dos tópicas), pulsiones, desarrollo psicosexual 🔍 + 📗 Cameron
+4. Mecanismos de defensa 📗 Cameron
+5. Desarrollo de la personalidad y psicopatología dinámica 📗 Cameron
+6. Las 12 funciones del Yo y su evaluación (EFY) 📗 Bellak
+7. Técnica psicoanalítica: encuadre, transferencia, contratransferencia, resistencia, interpretación 🔍 Etchegoyen/Greenson
+
+*Bloque C · Enfoques conductual y cognitivo-conductual (2.1):*
+8. Condicionamiento clásico y operante: principios (Pavlov, Watson, Skinner) 🔍
+9. Técnicas de modificación de conducta: reforzamiento, extinción, moldeamiento, encadenamiento, economía de fichas, contratos conductuales 🔍 Martin y Pear
+10. Modelos cognitivos: terapia cognitiva de Beck y TREC de Ellis; esquemas y distorsiones cognitivas 🔍
+11. Técnicas cognitivo-conductuales: reestructuración, exposición, desensibilización sistemática, inoculación de estrés, entrenamiento en habilidades 🔍 Ruiz/Díaz/Villalobos
+
+*Bloque D · Humanista, sistémico y contemporáneos (2.1):*
+12. Enfoque humanista: Rogers (centrada en la persona), Maslow, Gestalt (Perls), logoterapia (Frankl) 🔍
+13. Sistémico I: teoría general de sistemas, cibernética, axiomas de la comunicación (Watzlawick) 🔍
+14. Sistémico II: escuelas y terapia familiar — estructural (Minuchin), estratégica (Haley), Milán, breve/MRI 🔍 Moreno/Cano
+15. Contemporáneas basadas en evidencia (textuales del nivel Sobresaliente): dialéctica conductual (DBT), focalizada en las transferencias (TFP), cognitiva analítica, mindfulness y tercera ola 🔍
+
+*Bloque E · Técnicas y herramientas (2.2):*
+16. Entrevista I: concepto, tipos, fases y encuadre 📗 Acevedo
+17. Entrevista II: manejo clínico — rapport, escucha, resistencias, entrevistados difíciles 📗 Morrison · 🔍 Perpiñá
+18. Observación como herramienta de intervención 🔍 (apoyo: 📗 Angrosino, Área 1)
+19. Narrativas y técnicas expresivas 🔍
+20. Grupo focal: diseño, conducción y análisis 📗 Hamui-Sutton
+21. Pruebas psicológicas dentro del plan de intervención (uso e interpretación al servicio del plan; Machover) 🔍 Portuondo
+
+*Bloque F · Propósito, contextos y ética (2.3):*
+22. Diseño de proyectos de intervención: diagnóstico de necesidades, objetivos, metas, actividades, recursos, cronograma 📗 Ander-Egg
+23. Evaluación de la intervención: eficacia vs. efectividad vs. eficiencia, indicadores, seguimiento 🔍
+24. Intervención en crisis y primeros auxilios psicológicos 🔍
+25. Intervención educativa y psicopedagógica 📗 Bassedas · 📗 CERMI · 🔍 Grañeras
+26. Intervención social, familiar y comunitaria 🔍 Estévez/Musito
+27. Intervención organizacional y del deporte 🔍 Weinberg y Gould
+28. Ética de la intervención y el psicólogo en México: código SMP, consentimiento informado, límites de competencia 📗 Zanatta · 🔍 Código SMP
+29. Glosario-chuleta
+
 ### Área 3. Investigación psicológica — 41 reactivos
 
 **Definición:** interpretación de una investigación psicológica a partir de la comprensión, síntesis, evaluación e interpretación de sus resultados con base en características, etapas, criterios, análisis y estrategias.
@@ -56,6 +101,43 @@
 **Conceptos que nombran los descriptores:**
 - Satisfactorio: características de la investigación científica (**relevancia, replicabilidad, objetividad, sustento teórico, ética**); enfoques **cualitativo, cuantitativo, mixto**; componentes (objetivo, teoría, método, diseño, hipótesis, resultados, conclusiones); comunicación, difusión y divulgación de resultados.
 - Sobresaliente: marcos epistemológicos (**positivismo, pragmatismo, hermenéutica, fenomenología**); fuentes primarias/secundarias; estadística de **diferencia, asociación y predicción**; pruebas **paramétricas y no paramétricas**; análisis cualitativo (**categorial, del discurso, psicología social discursiva, análisis crítico del discurso**); diseños mixtos (**convergente, secuencial**); **validez interna** (historia, maduración…) y **externa** (interacción de la selección, administración de pruebas…); lineamientos **APA**.
+
+**Desglose en capítulos — libro Área 3 (26 caps + chuleta):**
+
+*Bloque A · Fundamentos de la ciencia (3.1):*
+1. Qué hace científica a una investigación: relevancia, replicabilidad, objetividad, sustento teórico, ética 📗 Sampieri
+2. Ética de la investigación: consentimiento informado, confidencialidad, lineamientos APA/bioética 🔍
+3. Epistemología I: positivismo, postpositivismo y pragmatismo 📗 Morales · 📗 Sampieri
+4. Epistemología II: fenomenología y hermenéutica 📗 Morales
+5. Componentes del proceso de investigación: objetivo, teoría, método, diseño, hipótesis, resultados, conclusiones (panorama de las rutas) 📗 Sampieri
+6. Fuentes primarias y secundarias; revisión de la literatura y marco teórico 📗 Sampieri
+
+*Bloque B · La ruta cuantitativa (3.2):*
+7. Planteamiento cuantitativo: problema, preguntas, justificación y alcances (exploratorio, descriptivo, correlacional, explicativo) 📗 Sampieri
+8. Hipótesis y variables: tipos de hipótesis, operacionalización 📗 Sampieri
+9. Diseños experimentales: preexperimentos, cuasiexperimentos y experimentos puros; grupos control y aleatorización 📗 Sampieri · 🔍 McGuigan/Kantowitz
+10. Diseños no experimentales: transversales, longitudinales, ex post facto 📗 Sampieri
+11. Validez interna y externa: las fuentes de invalidez una por una (historia, maduración, selección, mortalidad… interacción de la selección, administración de pruebas…) 📗 Sampieri · 📗 Kerlinger (Área 1)
+12. Muestreo: probabilístico y no probabilístico, tamaño de muestra 📗 Sampieri
+13. Estadística descriptiva: niveles de medición, tendencia central, dispersión, curva normal, puntuaciones z 🔍 González/Montero/Zavala
+14. Estadística inferencial I: lógica de la prueba de hipótesis, significancia, error tipo I y II 🔍 + 📗 Sampieri
+15. Estadística inferencial II: pruebas de diferencia (t, ANOVA), asociación (Pearson, χ²) y predicción (regresión) 🔍 + 📗 Sampieri
+16. Paramétricas vs. no paramétricas: supuestos y equivalencias (Mann-Whitney, Wilcoxon, Kruskal-Wallis, Spearman) 🔍
+17. La investigación aplicada por contexto: clínica, educativa, organizacional y áreas emergentes de la psicología 🔍 Gordillo/McMillan/Zepeda
+
+*Bloque C · La ruta cualitativa y mixta (3.2):*
+18. El proceso cualitativo: inmersión, muestreo cualitativo, saturación 📗 Sampieri · 📗 Álvarez-Gayou (Área 1)
+19. Diseños cualitativos: teoría fundamentada, etnografía, narrativo, fenomenológico, investigación-acción 📗 Sampieri
+20. Análisis cualitativo: categorial/codificación, análisis del discurso, psicología social discursiva, análisis crítico del discurso; criterios de rigor 🔍 Izcara/Taylor-Bogdan
+21. Métodos mixtos: diseños convergente y secuencial (explicativo/exploratorio) 📗 Sampieri
+
+*Bloque D · Evaluar y comunicar resultados (3.3):*
+22. Práctica basada en evidencia: jerarquía de evidencia, eficacia vs. efectividad 📗 Vera-Villarroel
+23. Lectura crítica de un artículo empírico (caso práctico: Cartagena, autoeficacia y rendimiento) 📗 Cartagena
+24. El artículo científico: estructura IMRyD y redacción 📗 López
+25. Normas APA: citación, referencias, formato 🔍 Manual APA
+26. Comunicación, difusión y divulgación de resultados (la tríada) 📗 Rueda
+27. Glosario-chuleta
 
 ---
 
@@ -84,7 +166,7 @@
 
 ## Bibliografía sugerida (checklist de fase 1)
 
-Marcar `[x]` = ya está en `material/`. **Actualizado 2026-07-07 (descargas hechas)** · Área 1: **15/20** · Área 2: **8/22** · Área 3: **6/19** · Pendientes con link: CONOCER y Grañeras (URLs caídas, buscar mirror en fase 1).
+Marcar `[x]` = ya está en `material/`. **Actualizado 2026-07-07 (descargas hechas; Morrison ya estaba en la carpeta y no estaba marcado)** · Área 1: **15/20** · Área 2: **9/22** · Área 3: **6/19** · Pendientes con link: CONOCER y Grañeras (URLs caídas, buscar mirror en fase 1).
 
 ### Área 1. Diagnóstico psicológico
 - [x] Álvarez-Gayou (2014). *Cómo hacer investigación cualitativa*. Paidós.
@@ -123,7 +205,7 @@ Marcar `[x]` = ya está en `material/`. **Actualizado 2026-07-07 (descargas hech
 - [x] Hamui-Sutton y Varela-Ruiz (2013). La técnica de grupos focales. [artículo en línea] 🔗 URL en la guía (descarga legal directa)
 - [ ] Martin y Pear (2008). *Modificación de conducta, qué es y cómo aplicarla* (8ª ed.). Pearson.
 - [ ] Moreno (2014). *Manual de terapia sistémica*. Desclée de Brouwer.
-- [ ] Morrison (2015). *La entrevista psicológica*. Manual Moderno.
+- [x] Morrison (2015). *La entrevista psicológica*. Manual Moderno.
 - [ ] Olivares et al. (2013). *Intervención psicológica: estrategias, técnicas y tratamientos*. Pirámide.
 - [ ] Perpiñá (2019). *Manual de la entrevista psicológica* (2ª ed.). Pirámide.
 - [ ] Portuondo (2007). *La figura humana. Test proyectivo de Karen Machover*. Biblioteca Nueva.
@@ -158,5 +240,6 @@ Marcar `[x]` = ya está en `material/`. **Actualizado 2026-07-07 (descargas hech
 ## Próximos pasos
 
 1. ~~Paso 2: cruce de archivos vs checklist~~ ✅ hecho (ver checkboxes).
-2. **Fase 1 (investigación):** buscar versiones legales/abiertas de los faltantes + investigar por tema lo que no aparezca.
-3. **Fase 2:** desglose granular subárea → tema → subtema → concepto (un mini libro KYN por área disciplinar; la sección transversal se decide después — es de habilidad, no de contenido memorizable).
+2. ~~Mapa de capítulos de Área 2 y Área 3~~ ✅ hecho 2026-07-07 (ver desgloses arriba; regla de granularidad aplicada).
+3. **Fase 1 (investigación), siguiente:** armar la hoja de hechos verificados por área — `material/FUENTE-area2.md` y `material/FUENTE-area3.md` — extrayendo de los PDF locales (📗) e investigando en fuentes abiertas confiables los capítulos 🔍; de paso, buscar versiones legales/abiertas de la bibliografía faltante (solo descargas legales).
+4. **Fase 2 (desarrollo):** escribir los mini libros KYN capítulo por capítulo contra su hoja de hechos + fact-check independiente (patrón de CLAUDE.md). La sección transversal se decide después — es de habilidad, no de contenido memorizable.
