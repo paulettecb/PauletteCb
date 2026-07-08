@@ -1,42 +1,42 @@
 #separator:Semicolon
 #html:false
 #tags column:3
-Sinapsis (Cap. 1-2);Punto de contacto donde una neurona pasa información a otra (Sherrington).;CENEVAL::Area1-Diagnostico
-Neuroplasticidad (Hebb, 1949);"Formar, reforzar o podar sinapsis; base del aprendizaje y la recuperación.";CENEVAL::Area1-Diagnostico
-Despolarizar (Cap. 2);Excitar la neurona (acercarla al umbral). Hiperpolarizar = inhibir.;CENEVAL::Area1-Diagnostico
-Dopamina (Cap. 2);"Recompensa y motor; exceso→psicosis, falta en sustancia negra→Parkinson.";CENEVAL::Area1-Diagnostico
-Hipocampo (Cap. 3);"Convierte memoria corta en larga; tiene neurogénesis adulta.";CENEVAL::Area1-Diagnostico
-Amígdala (Cap. 3);Centro del miedo y el marcaje emocional de recuerdos.;CENEVAL::Area1-Diagnostico
-Broca / Wernicke (Cap. 3);Producir habla (frontal) / comprender habla (temporal).;CENEVAL::Area1-Diagnostico
-Corriente dorsal/ventral (Cap. 3);Dónde (al parietal) / qué (al temporal).;CENEVAL::Area1-Diagnostico
-Edad mental → CI (Binet-Terman);"Binet la crea; Stern divide; Terman ×100 = CI.";CENEVAL::Area1-Diagnostico
-X = V + e (Spearman, TCT);Puntaje observado = verdadero + error de medición.;CENEVAL::Area1-Diagnostico
-Alfa de Cronbach (Cap. 5);Índice de consistencia interna (confiabilidad) de una prueba.;CENEVAL::Area1-Diagnostico
-Validez de contenido (Cap. 5);"Los reactivos representan el dominio; se valida por jueceo de expertos.";CENEVAL::Area1-Diagnostico
-Convergente / divergente (Cap. 5);Correlaciona alto con lo igual / bajo con lo distinto.;CENEVAL::Area1-Diagnostico
-Validez de facies (Cap. 5);"Que la prueba ""parezca"" medir lo que dice; la más débil.";CENEVAL::Area1-Diagnostico
-Escalas de medición (Stevens);Nominal, ordinal, intervalo, razón (de menos a más info).;CENEVAL::Area1-Diagnostico
-Triangulación (Denzin);Múltiples fuentes/métodos para dar rigor cualitativo.;CENEVAL::Area1-Diagnostico
-Émica / ética (Etnografía);Mirada del nativo / mirada del analista externo.;CENEVAL::Area1-Diagnostico
-Teoría fundamentada (Glaser-Strauss);"La teoría emerge de los datos; codificación abierta→axial.";CENEVAL::Area1-Diagnostico
-CAT (Bellak, 1949);Apercepción temática infantil con animales (deriva del TAT de Murray).;CENEVAL::Area1-Diagnostico
-Koppitz (DFH / Bender);Sistema de calificación: indicadores de desarrollo + emocionales.;CENEVAL::Area1-Diagnostico
-H-T-P (Buck y Warren);"Casa-Árbol-Persona; proyectiva de personalidad.";CENEVAL::Area1-Diagnostico
-CHC (Cap. 8);Teoría de inteligencia (Gc, Gf, Gsm, Gv, Gs…) base del WISC-IV.;CENEVAL::Area1-Diagnostico
-WISC-IV (6:0-16:11);4 índices: ICV, IRP, IMT, IVP → CI Total (ICG si hay dispersión).;CENEVAL::Area1-Diagnostico
-BANETA / ENI-2 (Cap. 8);Baterías neuropsicológicas mexicanas (aprendizaje / perfil integral).;CENEVAL::Area1-Diagnostico
-DCL vs. demencia (DSM-5);La frontera es la autonomía en la vida diaria.;CENEVAL::Area1-Diagnostico
-Clave de recuperación (Cap. 9);"No mejora→Alzheimer; sí mejora→Parkinson/subcortical.";CENEVAL::Area1-Diagnostico
-Reserva cognitiva (Cap. 9);Redes alternativas que retrasan los síntomas de demencia.;CENEVAL::Area1-Diagnostico
-Clusters A/B/C (Personalidad);Raros / dramáticos / ansiosos.;CENEVAL::Area1-Diagnostico
-TCD (Linehan) (Cap. 10);"Terapia dialéctica conductual; elección para el trastorno límite.";CENEVAL::Area1-Diagnostico
-EC / IEC (CONOCER);Estándar de Competencia / Instrumento de Evaluación de Competencia.;CENEVAL::Area1-Diagnostico
-CGC / GTES / GTEFI (CONOCER);Comité del sector / define funciones / redacta el EC.;CENEVAL::Area1-Diagnostico
-Taxonomía de Bloom (CONOCER);Conocimiento→comprensión→aplicación→análisis→síntesis→evaluación.;CENEVAL::Area1-Diagnostico
-Escala Likert (Cap. 12);"Grados de acuerdo (5 pts); sumativa. Thurstone = jueces; Guttman = acumulativa.";CENEVAL::Area1-Diagnostico
-CVR de Lawshe (Cap. 5);"Razón de validez de contenido: (n esencial − N/2)/(N/2); de −1 a +1.";CENEVAL::Area1-Diagnostico
-Entrevista (Cap. 12);"Estructurada / semi / abierta; directiva o no directiva. La herramienta más usada.";CENEVAL::Area1-Diagnostico
-Diferencial vs. psicosocial (Cap. 12);Descartar cuadros parecidos / integrar persona con su entorno.;CENEVAL::Area1-Diagnostico
-Etapas (Papalia) (Cap. 13);Prenatal → lactancia → niñez temprana/intermedia → adolescencia → 3 adulteces.;CENEVAL::Area1-Diagnostico
-Erikson / Piaget (Cap. 13);8 crisis psicosociales / 4 estadios cognitivos (sensoriomotor→formal).;CENEVAL::Area1-Diagnostico
-Apego (Ainsworth) (Cap. 13);Seguro, evitativo, ambivalente y desorganizado (Situación extraña).;CENEVAL::Area1-Diagnostico
+¿Qué es una sinapsis y quién acuñó el término?;"Es el punto de contacto donde una neurona pasa información a otra; el término lo acuñó Sherrington.";CENEVAL::Area1-Diagnostico
+Según Hebb (1949), ¿qué es la neuroplasticidad y por qué importa?;"Es la capacidad de formar, reforzar o podar sinapsis; es la base tanto del aprendizaje como de la recuperación funcional.";CENEVAL::Area1-Diagnostico
+¿Qué significa que una neurona se despolarice, y qué es lo contrario?;"Despolarizar es excitar la neurona, acercándola al umbral de disparo; lo contrario es hiperpolarizar, que la inhibe.";CENEVAL::Area1-Diagnostico
+¿Qué función cumple la dopamina y qué pasa si hay exceso o falta?;"Es el neurotransmisor de la recompensa y el motor de la conducta; en exceso se asocia a psicosis, y su falta en la sustancia negra causa Parkinson.";CENEVAL::Area1-Diagnostico
+¿Qué hace el hipocampo y qué tiene de especial en el adulto?;Convierte la memoria de corto plazo en memoria de largo plazo, y es una de las pocas zonas con neurogénesis en la edad adulta.;CENEVAL::Area1-Diagnostico
+¿Qué papel juega la amígdala en la memoria?;Es el centro del miedo y del marcaje emocional de los recuerdos.;CENEVAL::Area1-Diagnostico
+¿Qué diferencia hay entre el área de Broca y la de Wernicke?;"Broca (frontal) produce el habla; Wernicke (temporal) comprende el habla.";CENEVAL::Area1-Diagnostico
+¿Qué procesa cada vía visual, la dorsal y la ventral?;"La corriente dorsal procesa el 'dónde' (va al parietal); la ventral procesa el 'qué' (va al temporal).";CENEVAL::Area1-Diagnostico
+¿Cómo se llegó del concepto de edad mental al CI que conocemos hoy?;"Binet creó el concepto de edad mental; Stern propuso dividirla entre la edad cronológica; Terman multiplicó ese cociente ×100 para obtener el CI.";CENEVAL::Area1-Diagnostico
+En la Teoría Clásica de los Tests de Spearman, ¿qué representa la fórmula X = V + e?;El puntaje observado (X) es igual al puntaje verdadero (V) más el error de medición (e).;CENEVAL::Area1-Diagnostico
+¿Qué mide el Alfa de Cronbach?;Es el índice de consistencia interna, es decir, la confiabilidad de una prueba.;CENEVAL::Area1-Diagnostico
+¿Qué es la validez de contenido y cómo se valida?;"Es que los reactivos representen bien el dominio que se quiere medir; se valida mediante jueceo de expertos.";CENEVAL::Area1-Diagnostico
+¿Qué diferencia hay entre validez convergente y divergente?;"La convergente correlaciona alto con medidas del mismo constructo; la divergente correlaciona bajo con medidas de constructos distintos.";CENEVAL::Area1-Diagnostico
+¿Qué es la validez de facies (aparente) y por qué es la más débil?;"Es que la prueba 'parezca' medir lo que dice medir, a simple vista; es la evidencia de validez más débil de todas.";CENEVAL::Area1-Diagnostico
+¿Cuáles son las 4 escalas de medición de Stevens, de menos a más información?;Nominal, ordinal, de intervalo y de razón, en orden creciente de información.;CENEVAL::Area1-Diagnostico
+¿Qué es la triangulación de Denzin y para qué sirve?;Es usar múltiples fuentes o métodos para dar rigor a una investigación cualitativa.;CENEVAL::Area1-Diagnostico
+En etnografía, ¿qué diferencia hay entre la mirada émica y la ética?;"La émica es la mirada del nativo, desde dentro; la ética es la mirada del analista externo, desde fuera.";CENEVAL::Area1-Diagnostico
+¿Qué propone la teoría fundamentada de Glaser y Strauss?;Que la teoría emerge de los datos mismos, mediante codificación abierta que después se vuelve axial.;CENEVAL::Area1-Diagnostico
+¿Qué es el CAT de Bellak (1949)?;"Es una prueba de apercepción temática infantil que usa animales en vez de personas; deriva del TAT de Murray.";CENEVAL::Area1-Diagnostico
+¿Qué es el sistema Koppitz y en qué pruebas se usa?;"Es un sistema de calificación que combina indicadores de desarrollo e indicadores emocionales; se aplica al Dibujo de la Figura Humana (DFH) y al test de Bender.";CENEVAL::Area1-Diagnostico
+¿Qué es el H-T-P de Buck y Warren?;Es la prueba proyectiva de personalidad Casa-Árbol-Persona.;CENEVAL::Area1-Diagnostico
+¿Qué es el modelo CHC y qué prueba se basa en él?;"Es una teoría de la inteligencia con factores como Gc, Gf, Gsm, Gv y Gs, entre otros; es la base teórica del WISC-IV.";CENEVAL::Area1-Diagnostico
+¿Cómo se estructura el WISC-IV?;En 4 índices (ICV, IRP, IMT, IVP) que dan el CI Total, o el ICG cuando hay mucha dispersión entre índices.;CENEVAL::Area1-Diagnostico
+¿Qué son la BANETA y el ENI-2?;Son baterías neuropsicológicas mexicanas: la BANETA evalúa aprendizaje, y el ENI-2 da un perfil neuropsicológico integral.;CENEVAL::Area1-Diagnostico
+Según el DSM-5, ¿cuál es la frontera entre Deterioro Cognitivo Leve (DCL) y demencia?;La frontera es la autonomía en la vida diaria: en el DCL se conserva, en la demencia se pierde.;CENEVAL::Area1-Diagnostico
+¿Cómo ayuda la 'clave de recuperación' a diferenciar Alzheimer de un cuadro subcortical como Parkinson?;"Si dar una clave (pista) no mejora el recuerdo, apunta a Alzheimer; si sí mejora, apunta a Parkinson u otro cuadro subcortical.";CENEVAL::Area1-Diagnostico
+¿Qué es la reserva cognitiva?;Son redes neuronales alternativas que retrasan la aparición de los síntomas de demencia.;CENEVAL::Area1-Diagnostico
+¿Cómo se agrupan los trastornos de personalidad en clusters A, B y C?;Cluster A = raros o excéntricos, Cluster B = dramáticos o erráticos, Cluster C = ansiosos o temerosos.;CENEVAL::Area1-Diagnostico
+¿Qué es la TCD de Linehan y para qué trastorno es tratamiento de elección?;"Es la Terapia Dialéctica Conductual; es el tratamiento de elección para el trastorno límite de la personalidad.";CENEVAL::Area1-Diagnostico
+En el modelo CONOCER, ¿qué son el EC y el IEC?;El EC es el Estándar de Competencia, y el IEC es el Instrumento de Evaluación de esa Competencia.;CENEVAL::Area1-Diagnostico
+¿Qué papel juegan el CGC, el GTES y el GTEFI en CONOCER?;"El CGC es el comité del sector; el GTES define las funciones; el GTEFI redacta el EC.";CENEVAL::Area1-Diagnostico
+¿Cuáles son los 6 niveles de la Taxonomía de Bloom, usada en CONOCER?;Conocimiento → comprensión → aplicación → análisis → síntesis → evaluación.;CENEVAL::Area1-Diagnostico
+¿Cómo es la escala Likert, y en qué se diferencia de Thurstone y Guttman?;"Likert mide grados de acuerdo (5 puntos) de forma sumativa; Thurstone se construye por jueceo de expertos; Guttman es acumulativa.";CENEVAL::Area1-Diagnostico
+¿Qué es la Razón de Validez de Contenido (CVR) de Lawshe y qué rango tiene?;Se calcula como (n esencial − N/2) / (N/2), y va de −1 a +1.;CENEVAL::Area1-Diagnostico
+¿Qué tipos de entrevista existen (por estructura y por directividad), y por qué es la herramienta más usada?;Se clasifica por estructura (estructurada, semiestructurada, abierta) y por estilo (directiva o no directiva). Es la herramienta de evaluación más usada en psicología.;CENEVAL::Area1-Diagnostico
+¿Qué diferencia hay entre un diagnóstico diferencial y uno psicosocial?;"El diferencial busca descartar cuadros parecidos; el psicosocial integra a la persona con su entorno.";CENEVAL::Area1-Diagnostico
+¿Cuáles son las etapas del ciclo vital según Papalia?;Prenatal → lactancia → niñez temprana/intermedia → adolescencia → las 3 adultez (temprana, media y tardía).;CENEVAL::Area1-Diagnostico
+¿Cómo se comparan las etapas de Erikson y Piaget?;"Erikson propone 8 crisis psicosociales a lo largo de la vida; Piaget propone 4 estadios cognitivos, del sensoriomotor al formal.";CENEVAL::Area1-Diagnostico
+Según el experimento de la Situación Extraña de Ainsworth, ¿cuáles son los 4 tipos de apego?;Seguro, evitativo, ambivalente y desorganizado.;CENEVAL::Area1-Diagnostico

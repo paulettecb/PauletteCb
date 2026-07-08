@@ -1,58 +1,58 @@
 #separator:Semicolon
 #html:false
 #tags column:3
-Investigación (Cap. 1);Procesos sistemáticos, críticos y empíricos aplicados a un fenómeno.;CENEVAL::Area3-Investigacion
-Cuanti vs. cuali (Cap. 1);Secuencial-deductivo-medición (Comte/Durkheim) vs. circular-inductivo-significados (Weber, verstehen).;CENEVAL::Area3-Investigacion
-5 estrategias (Grinnell) (Cap. 1);Observar, suponer, demostrar, revisar, proponer nuevas observaciones — comunes a ambos enfoques.;CENEVAL::Area3-Investigacion
-Belmont (Cap. 2);Respeto (→consentimiento), beneficencia (→riesgos/beneficios), justicia (→selección justa).;CENEVAL::Area3-Investigacion
-Consentimiento informado (Cap. 2);Información + comprensión + voluntariedad.;CENEVAL::Area3-Investigacion
-Núremberg / Helsinki (Cap. 2);1947 / 1964 — los antecedentes de la ética de investigación.;CENEVAL::Area3-Investigacion
-Positivismo (Cap. 3);"Comte/Durkheim: todo es medible; método de las ciencias naturales; verificación.";CENEVAL::Area3-Investigacion
-Postpositivismo (Cap. 3);Popper: realismo crítico, conocimiento imperfecto y probabilístico, falsación.;CENEVAL::Area3-Investigacion
-Pragmatismo (Cap. 3);"Base filosófica de los métodos mixtos; manda la pregunta.";CENEVAL::Area3-Investigacion
-Epojé (Cap. 4);Husserl: suspensión del juicio. Reducciones: filosófica, fenomenológica, eidética.;CENEVAL::Area3-Investigacion
-Fusión de horizontes (Cap. 4);"Gadamer: el horizonte del intérprete se funde con el de lo interpretado. ""No existe un método hermenéutico"".";CENEVAL::Area3-Investigacion
-10 vs. 9 fases (Cap. 5);Ruta cuanti (secuencial) vs. cuali (con inmersión inicial en el campo).;CENEVAL::Area3-Investigacion
-Fuente primaria (Cap. 6);"Datos de primera mano (artículos, tesis); secundaria reprocesa; terciaria compila secundarias.";CENEVAL::Area3-Investigacion
-Marco teórico (Cap. 6);"Proceso y producto; 7 funciones; se arma por mapeo o índices.";CENEVAL::Area3-Investigacion
-Criterios de Kerlinger (Cap. 7);Relación entre variables + pregunta clara + prueba empírica.;CENEVAL::Area3-Investigacion
-4 alcances (Cap. 7);Exploratorio (nuevo), descriptivo (características), correlacional (asociación), explicativo (causas).;CENEVAL::Area3-Investigacion
-Correlación espuria (Cap. 7);Dos variables se mueven juntas sin causarse (las mueve una tercera).;CENEVAL::Area3-Investigacion
-Hi / Ho / Ha (Cap. 8);"Investigación / nula (la niega; Fisher) / alternativa (otra posibilidad).";CENEVAL::Area3-Investigacion
-Definición operacional (Cap. 8);Las operaciones para MEDIR la variable (vs. conceptual, de diccionario).;CENEVAL::Area3-Investigacion
-R G X 0 (Cap. 9);"Azar, grupo, tratamiento, medición; — = grupo control.";CENEVAL::Area3-Investigacion
-Pre / puro / cuasi (Cap. 9);Control mínimo / azar + equivalencia / grupos intactos sin azar.;CENEVAL::Area3-Investigacion
-Ex post facto (Cap. 10);No experimental: las variables ya ocurrieron (autoselección).;CENEVAL::Area3-Investigacion
-Tendencia / cohorte / panel (Cap. 10);Poblaciones / subpoblaciones vinculadas / los mismos participantes.;CENEVAL::Area3-Investigacion
-Validez interna (Cap. 11);"Calidad del experimento; 12 amenazas (historia, maduración, selección, mortalidad…).";CENEVAL::Area3-Investigacion
-Validez externa (Cap. 11);"Generalizar; 8 amenazas (Hawthorne, selección-tratamiento, historia/lugar…).";CENEVAL::Area3-Investigacion
-Efecto Hawthorne (Cap. 11);La artificialidad del experimento cambia la conducta (se saben observados).;CENEVAL::Area3-Investigacion
-Muestra probabilística (Cap. 12);Misma posibilidad para todos + selección aleatoria (simple, estratificada, racimos).;CENEVAL::Area3-Investigacion
-NOIR (Cap. 13);Nominal, ordinal, intervalos (cero arbitrario), razón (cero real).;CENEVAL::Area3-Investigacion
-68-95-99.7 (Cap. 13);% de casos a ±1, ±2 y ±3 DE de la media en la curva normal.;CENEVAL::Area3-Investigacion
-Puntuación z (Cap. 13);Dirección y grado de alejamiento de la media, en unidades de DE.;CENEVAL::Area3-Investigacion
-α = 0.05 / 0.01 (Cap. 14);Significancia a priori: estándar en sociales / riesgos vitales.;CENEVAL::Area3-Investigacion
-Error I vs. II (Cap. 14);Falso positivo (α, rechazar Ho verdadera) vs. falso negativo (β). Potencia = 1−β.;CENEVAL::Area3-Investigacion
-t / ANOVA (Cap. 15);Diferencia de medias: 2 grupos / 3+ grupos (valor F, inter vs. intra).;CENEVAL::Area3-Investigacion
-Pearson r y r² (Cap. 15);"Asociación lineal (intervalo/razón), sin causalidad; r² = determinación.";CENEVAL::Area3-Investigacion
-3 supuestos paramétricos (Cap. 16);Normalidad + intervalos/razón + homogeneidad de varianzas.;CENEVAL::Area3-Investigacion
-χ² (chi cuadrada) (Cap. 16);"Relación entre dos variables categóricas; tabla de contingencia.";CENEVAL::Area3-Investigacion
-Equivalencias no paramétricas (Cap. 16);"Mann-Whitney↔t indep.; Wilcoxon↔t pareada; Kruskal-Wallis↔ANOVA; Spearman↔Pearson.";CENEVAL::Area3-Investigacion
-Básica vs. aplicada (Cap. 17);"Ampliar conocimiento vs. resolver problemas concretos; complementarias.";CENEVAL::Area3-Investigacion
-Saturación de categorías (Cap. 18);"Cuando los casos nuevos ya no aportan; ahí termina la muestra cualitativa.";CENEVAL::Area3-Investigacion
-Bola de nieve (Cap. 18);Muestreo en cadena: un participante te lleva al siguiente.;CENEVAL::Area3-Investigacion
-Teoría fundamentada (Cap. 19);"La teoría surge de los datos; codificación abierta → axial → selectiva.";CENEVAL::Area3-Investigacion
-Investigación-acción (Cap. 19);"Resolver y mejorar prácticas con los participantes; espiral reflexión-acción.";CENEVAL::Area3-Investigacion
-ACD (Van Dijk) (Cap. 20);Discurso-cognición-sociedad: poder, desigualdad y discriminación en el lenguaje.;CENEVAL::Area3-Investigacion
-Repertorios interpretativos (Cap. 20);Potter y Wetherell: recursos lingüísticos con que se construyen versiones de la realidad.;CENEVAL::Area3-Investigacion
-Metainferencias (Cap. 21);Las conclusiones integradas CUAN+CUAL de un estudio mixto.;CENEVAL::Area3-Investigacion
-DITRIAC / DEXPLIS / DEXPLOS (Cap. 21);Convergente (paralelo) / CUAN→CUAL explica / CUAL→CUAN explora.;CENEVAL::Area3-Investigacion
-TAEs (Cap. 22);"Tratamientos con apoyo empírico; listas dinámicas, predominio cognitivo-conductual.";CENEVAL::Area3-Investigacion
-Chambless y Hollon (Cap. 22);Eficaz / probablemente eficaz (sin réplica) / eficaz y específico (vs. placebo).;CENEVAL::Area3-Investigacion
-Alfa de Cronbach (Cap. 23);Confiabilidad del instrumento — no confundir con α de significancia.;CENEVAL::Area3-Investigacion
-IMRyD (Cap. 24);Introducción, Metodología, Resultados y Discusión.;CENEVAL::Area3-Investigacion
-CECISyP (Cap. 24);Título: Corto, Específico, Claro, Informativo, Sencillo y Preciso (<15 palabras).;CENEVAL::Area3-Investigacion
-Regla de las 40 palabras (Cap. 25);"Textual corta entre comillas / ≥40 en bloque con sangría; siempre con página.";CENEVAL::Area3-Investigacion
-et al. (Cap. 25);APA 7ª: con 3+ autores, desde la PRIMERA cita.;CENEVAL::Area3-Investigacion
-Difusión vs. divulgación (Cap. 26);Pares y lenguaje técnico vs. público general y lenguaje sencillo.;CENEVAL::Area3-Investigacion
-Triángulo virtuoso (Cap. 26);Rueda: lectores, autores y dictaminadores sostienen una revista académica.;CENEVAL::Area3-Investigacion
+¿Qué es la investigación científica?;Son procesos sistemáticos, críticos y empíricos aplicados a un fenómeno.;CENEVAL::Area3-Investigacion
+¿Qué distingue al enfoque cuantitativo del cualitativo?;"El cuantitativo es secuencial, deductivo y busca medición (Comte/Durkheim); el cualitativo es circular, inductivo y busca significados, el verstehen de Weber.";CENEVAL::Area3-Investigacion
+¿Cuáles son las 5 estrategias comunes a ambos enfoques según Grinnell?;Observar, suponer, demostrar, revisar y proponer nuevas observaciones.;CENEVAL::Area3-Investigacion
+¿Cuáles son los 3 principios del Informe Belmont y a qué llevan cada uno?;Respeto (lleva al consentimiento informado), beneficencia (lleva a sopesar riesgos y beneficios) y justicia (lleva a una selección justa de participantes).;CENEVAL::Area3-Investigacion
+¿De qué 3 elementos se compone el consentimiento informado?;Información, comprensión y voluntariedad.;CENEVAL::Area3-Investigacion
+¿Qué son los códigos de Núremberg y Helsinki, y de qué años son?;Son los antecedentes históricos de la ética en investigación: Núremberg de 1947 y Helsinki de 1964.;CENEVAL::Area3-Investigacion
+¿Qué plantea el positivismo de Comte y Durkheim?;Que todo es medible, adoptando el método de las ciencias naturales y buscando la verificación.;CENEVAL::Area3-Investigacion
+¿Qué plantea el postpositivismo de Popper?;Un realismo crítico: el conocimiento es imperfecto y probabilístico, y se avanza por falsación, no por verificación.;CENEVAL::Area3-Investigacion
+¿Qué papel juega el pragmatismo en los métodos mixtos?;Es su base filosófica: en vez de partir de una postura fija, manda la pregunta de investigación.;CENEVAL::Area3-Investigacion
+Según Husserl, ¿qué es la epojé y qué reducciones incluye?;"Es la suspensión del juicio; incluye las reducciones filosófica, fenomenológica y eidética.";CENEVAL::Area3-Investigacion
+Según Gadamer, ¿qué es la 'fusión de horizontes'?;"Es cuando el horizonte del intérprete se funde con el de lo interpretado; para Gadamer, 'no existe un método hermenéutico' fijo.";CENEVAL::Area3-Investigacion
+¿Cómo se diferencian las fases de la ruta cuantitativa y la cualitativa?;"La ruta cuantitativa tiene 10 fases secuenciales; la cualitativa tiene 9, con una inmersión inicial en el campo.";CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre fuente primaria, secundaria y terciaria?;"La primaria son datos de primera mano (artículos, tesis); la secundaria reprocesa esas fuentes; la terciaria compila fuentes secundarias.";CENEVAL::Area3-Investigacion
+¿Qué es el marco teórico y cómo se construye?;"Es tanto un proceso como un producto, con 7 funciones; se puede armar por mapeo o por índices.";CENEVAL::Area3-Investigacion
+¿Qué 3 criterios propone Kerlinger para una buena investigación?;Que exista una relación entre variables, una pregunta clara, y que se pueda someter a prueba empírica.;CENEVAL::Area3-Investigacion
+¿Cuáles son los 4 alcances de la investigación?;Exploratorio (tema nuevo), descriptivo (características), correlacional (asociación entre variables) y explicativo (causas).;CENEVAL::Area3-Investigacion
+¿Qué es una correlación espuria?;Es cuando dos variables se mueven juntas sin causarse entre sí, porque en realidad las mueve una tercera variable.;CENEVAL::Area3-Investigacion
+¿Qué representan Hi, Ho y Ha en una hipótesis?;Hi es la hipótesis de investigación, Ho es la nula (la niega, propuesta por Fisher), y Ha es la alternativa (otra posibilidad distinta a ambas).;CENEVAL::Area3-Investigacion
+¿Qué es una definición operacional, a diferencia de una conceptual?;Son las operaciones concretas para MEDIR la variable, a diferencia de la definición conceptual, que es de diccionario.;CENEVAL::Area3-Investigacion
+¿Qué representa la notación R G X 0 de los diseños experimentales?;"R = asignación al azar, G = grupo, X = tratamiento, 0 = medición; un guion (—) indica el grupo control.";CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre un diseño preexperimental, uno puro y uno cuasiexperimental?;"El preexperimental tiene control mínimo; el puro tiene azar y grupos equivalentes; el cuasiexperimental usa grupos ya intactos, sin asignación al azar.";CENEVAL::Area3-Investigacion
+¿Qué es un diseño ex post facto?;Es un diseño no experimental donde las variables ya ocurrieron antes del estudio (autoselección de los participantes).;CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre los diseños de tendencia, cohorte y panel?;"Tendencia estudia poblaciones generales; cohorte estudia subpoblaciones vinculadas por una característica; panel sigue a los mismos participantes en el tiempo.";CENEVAL::Area3-Investigacion
+¿Qué es la validez interna de un experimento?;"Es la calidad del experimento en sí; existen 12 amenazas posibles, como historia, maduración, selección o mortalidad experimental.";CENEVAL::Area3-Investigacion
+¿Qué es la validez externa de un experimento?;"Es la posibilidad de generalizar los resultados; existen 8 amenazas posibles, como el efecto Hawthorne o la interacción selección-tratamiento.";CENEVAL::Area3-Investigacion
+¿Qué es el efecto Hawthorne?;Es que la propia artificialidad del experimento cambia la conducta de los participantes, porque saben que están siendo observados.;CENEVAL::Area3-Investigacion
+¿Qué caracteriza a una muestra probabilística?;Que todos los elementos tengan la misma posibilidad de ser elegidos, mediante selección aleatoria (simple, estratificada o por racimos).;CENEVAL::Area3-Investigacion
+¿Qué son las escalas NOIR?;Nominal, ordinal, de intervalos (con cero arbitrario) y de razón (con cero real).;CENEVAL::Area3-Investigacion
+En la curva normal, ¿qué representa la regla 68-95-99.7?;El porcentaje de casos que caen a ±1, ±2 y ±3 desviaciones estándar de la media.;CENEVAL::Area3-Investigacion
+¿Qué indica una puntuación z?;La dirección y el grado de alejamiento de un dato respecto a la media, medido en unidades de desviación estándar.;CENEVAL::Area3-Investigacion
+¿Qué representan los niveles de significancia 0.05 y 0.01?;Es la significancia fijada a priori: 0.05 es el estándar en ciencias sociales, y 0.01 se usa cuando hay riesgos vitales de por medio.;CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre el error tipo I y el tipo II?;El error tipo I (α) es un falso positivo: rechazar una Ho que era verdadera. El error tipo II (β) es un falso negativo. La potencia estadística es 1−β.;CENEVAL::Area3-Investigacion
+¿Cuándo se usa la prueba t y cuándo el ANOVA?;"La prueba t compara diferencia de medias entre 2 grupos; el ANOVA se usa con 3 o más grupos, y se basa en el valor F (varianza entre grupos vs. dentro de grupos).";CENEVAL::Area3-Investigacion
+¿Qué mide la r de Pearson, y qué agrega la r²?;"La r de Pearson mide asociación lineal entre variables de intervalo o razón, sin implicar causalidad; la r² es el coeficiente de determinación.";CENEVAL::Area3-Investigacion
+¿Cuáles son los 3 supuestos para usar una prueba paramétrica?;Normalidad de los datos, que sean de escala de intervalo o razón, y homogeneidad de varianzas.;CENEVAL::Area3-Investigacion
+¿Para qué se usa la chi cuadrada (χ²)?;Para medir la relación entre dos variables categóricas, usando una tabla de contingencia.;CENEVAL::Area3-Investigacion
+¿Cuáles son los equivalentes no paramétricos de t independiente, t pareada, ANOVA y Pearson?;"Mann-Whitney equivale a t independiente; Wilcoxon a t pareada; Kruskal-Wallis a ANOVA; y Spearman a Pearson.";CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre investigación básica y aplicada?;"La básica busca ampliar el conocimiento; la aplicada busca resolver problemas concretos. Son complementarias.";CENEVAL::Area3-Investigacion
+¿Qué es la saturación de categorías en investigación cualitativa?;"Es el punto en que los casos nuevos ya no aportan información distinta; ahí termina de crecer la muestra cualitativa.";CENEVAL::Area3-Investigacion
+¿En qué consiste el muestreo de bola de nieve?;Es un muestreo en cadena: cada participante te lleva al siguiente.;CENEVAL::Area3-Investigacion
+¿Cómo se codifica en la teoría fundamentada?;La teoría surge de los datos mismos, mediante codificación abierta → axial → selectiva.;CENEVAL::Area3-Investigacion
+¿Qué busca la investigación-acción?;Resolver y mejorar prácticas junto con los participantes, en una espiral de reflexión y acción.;CENEVAL::Area3-Investigacion
+¿Qué analiza el Análisis Crítico del Discurso (ACD) de Van Dijk?;La relación discurso-cognición-sociedad: cómo el lenguaje refleja poder, desigualdad y discriminación.;CENEVAL::Area3-Investigacion
+Según Potter y Wetherell, ¿qué son los repertorios interpretativos?;Son los recursos lingüísticos con los que las personas construyen versiones de la realidad.;CENEVAL::Area3-Investigacion
+¿Qué son las metainferencias en un estudio mixto?;Son las conclusiones integradas que combinan los resultados cuantitativos y cualitativos de un mismo estudio.;CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre los diseños DITRIAC, DEXPLIS y DEXPLOS en métodos mixtos?;"DITRIAC es convergente (ambos en paralelo); DEXPLIS va de CUAN a CUAL, para explicar; DEXPLOS va de CUAL a CUAN, para explorar.";CENEVAL::Area3-Investigacion
+¿Qué son los Tratamientos con Apoyo Empírico (TAEs)?;Son tratamientos psicológicos validados por evidencia, organizados en listas dinámicas donde predomina el enfoque cognitivo-conductual.;CENEVAL::Area3-Investigacion
+¿Qué niveles de evidencia proponen Chambless y Hollon para un tratamiento?;"Eficaz; probablemente eficaz (sin réplica todavía); y eficaz y específico (superior a un placebo).";CENEVAL::Area3-Investigacion
+En el contexto de reportar resultados, ¿qué es el Alfa de Cronbach y con qué no debe confundirse?;"Es la confiabilidad del instrumento usado; no debe confundirse con el alfa (α) de significancia estadística.";CENEVAL::Area3-Investigacion
+¿Qué significa la estructura IMRyD de un artículo científico?;Introducción, Metodología, Resultados y Discusión.;CENEVAL::Area3-Investigacion
+¿Qué características debe tener el título de un artículo, según la regla CECISyP?;Corto, Específico, Claro, Informativo, Sencillo y Preciso, en menos de 15 palabras.;CENEVAL::Area3-Investigacion
+¿Cuál es la regla de las 40 palabras para citas textuales en APA?;"Si la cita textual tiene menos de 40 palabras va corrida entre comillas; si tiene 40 o más va en bloque con sangría; siempre con el número de página.";CENEVAL::Area3-Investigacion
+Según APA 7ª edición, ¿cuándo se usa 'et al.'?;Con 3 o más autores, se usa desde la primera cita en el texto.;CENEVAL::Area3-Investigacion
+¿Qué diferencia hay entre difusión y divulgación científica?;"La difusión es para pares, con lenguaje técnico; la divulgación es para el público general, con lenguaje sencillo.";CENEVAL::Area3-Investigacion
+¿Qué es el 'triángulo virtuoso' de una revista académica?;Es la rueda que sostiene a una revista: lectores, autores y dictaminadores, cada uno alimentando a los otros.;CENEVAL::Area3-Investigacion
