@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chuletas CENEVAL — EGEL Plus PSI · para Paulette</title>
+<meta name="description" content="Chuletas imprimibles KYN para el EGEL Plus PSI: 1 página por área con los términos que más caen, para el repaso de los últimos días.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-600: #6B7AC1; --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-700: #4A4955; --ink-500: #75737F;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-butter: #F6EBC4; --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2;
+  --pastel-blush: #F6D2DD; --pastel-lilac: #E2D6F0;
+  --font-display: 'Friendship', cursive; --font-accent: 'Farmhouse', serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --radius-md: 16px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink-900); font-family: var(--font-sans); line-height: 1.5; }
+.pagina { max-width: 900px; margin: 0 auto; padding: 0 1.2rem 4rem; }
+
+/* ---- barra superior (solo pantalla) ---- */
+.topbar { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 0 0.6rem; flex-wrap: wrap; }
+.topbar a.volver { text-decoration: none; color: var(--periwinkle-700); font-weight: 700; font-size: 0.9rem; padding: 0.3rem 0.8rem; border-radius: var(--radius-pill); background: var(--periwinkle-100); }
+.topbar a.volver:hover { background: var(--periwinkle-200); }
+.topbar .marca { font-family: var(--font-accent); color: var(--pop-magenta); font-size: 1.05rem; }
+.topbar .imprimir { margin-left: auto; font-family: inherit; font-weight: 800; font-size: 0.88rem; cursor: pointer; border: none; background: var(--periwinkle-700); color: var(--white); padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); }
+.topbar .imprimir:hover { background: var(--periwinkle-800); }
+
+.portada { text-align: center; padding: 1rem 0 0.6rem; }
+.sello { display: inline-block; padding: 0.3rem 1rem; border-radius: var(--radius-pill); background: var(--pop-magenta-soft); color: var(--periwinkle-900); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+h1.titulo-app { margin: 0.9rem 0 0.2rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2.6rem, 7vw, 3.8rem); line-height: 1.05; color: var(--periwinkle-700); }
+.subtitulo { margin: 0; font-family: var(--font-accent); font-size: 1.2rem; color: var(--ink-700); }
+
+.tabs { display: flex; gap: 0.5rem; justify-content: center; margin: 1.4rem 0 0.4rem; flex-wrap: wrap; }
+.tabs button { font-family: inherit; font-weight: 800; font-size: 0.85rem; cursor: pointer; border: 1.5px solid var(--periwinkle-300); background: var(--white); color: var(--periwinkle-800); padding: 0.4rem 1rem; border-radius: var(--radius-pill); }
+.tabs button.activa { background: var(--periwinkle-700); border-color: var(--periwinkle-700); color: var(--white); }
+.tabs button:hover:not(.activa) { background: var(--periwinkle-100); }
+
+.como { max-width: 640px; margin: 1.2rem auto 0; padding: 0.8rem 1.1rem; background: var(--periwinkle-50); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-md); font-size: 0.88rem; color: var(--periwinkle-900); text-align: center; }
+
+/* ---- página de chuleta ---- */
+.hoja { display: none; margin-top: 1.4rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.6rem 1.8rem; }
+.hoja.activa { display: block; }
+.hoja .cabeza { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.2rem; flex-wrap: wrap; }
+.hoja .emoji-area { font-size: 1.6rem; }
+.hoja h2 { margin: 0; font-size: 1.15rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.03em; color: var(--periwinkle-900); }
+.hoja .chip-cant { margin-left: auto; font-size: 0.75rem; font-weight: 700; color: var(--periwinkle-700); background: var(--periwinkle-100); border-radius: var(--radius-pill); padding: 0.2rem 0.7rem; }
+.hoja .eyebrow { font-family: var(--font-accent); color: var(--pop-magenta); font-size: 0.95rem; margin: 0.1rem 0 0.9rem; }
+.hoja .franja { height: 4px; border-radius: 4px; margin-bottom: 1rem; }
+.franja.c1 { background: linear-gradient(90deg, var(--pastel-sky), var(--periwinkle-300)); }
+.franja.c2 { background: linear-gradient(90deg, var(--pastel-butter), var(--pop-magenta-soft)); }
+.franja.c3 { background: linear-gradient(90deg, var(--pastel-blush), var(--pastel-lilac)); }
+
+.chuleta-lista { columns: 2; column-gap: 1.6rem; margin: 0; padding: 0; list-style: none; font-size: 0.82rem; line-height: 1.4; }
+.chuleta-lista li { break-inside: avoid; margin-bottom: 0.55rem; padding-bottom: 0.45rem; border-bottom: 1px dashed var(--periwinkle-100); }
+.chuleta-lista strong { color: var(--periwinkle-800); }
+.chuleta-lista em { color: var(--ink-500); font-style: normal; font-size: 0.9em; }
+
+footer { margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1.5px solid var(--sand); text-align: center; color: var(--ink-500); font-size: 0.85rem; }
+footer .paws { font-family: var(--font-accent); font-size: 1.05rem; color: var(--periwinkle-600); }
+
+@media (min-width: 720px) { .chuleta-lista { columns: 3; } }
+
+/* ---- impresión: 1 página por área, sin UI de pantalla ---- */
+@media print {
+  .topbar, .tabs, .como, footer { display: none; }
+  body { background: var(--white); font-size: 10.5pt; }
+  .pagina { max-width: none; padding: 0; }
+  .portada { padding: 0 0 0.4rem; }
+  .hoja { display: block !important; border: none; box-shadow: none; border-radius: 0; padding: 0.3in 0.35in; break-after: page; }
+  .hoja:last-of-type { break-after: auto; }
+  .chuleta-lista { columns: 3; font-size: 7.6pt; line-height: 1.28; }
+  .chuleta-lista li { margin-bottom: 0.35rem; padding-bottom: 0.3rem; }
+  .hoja .chip-cant { display: none; }
+}
+</style>
+</head>
+<body>
+  <div class="pagina">
+    <header class="topbar">
+      <a class="volver" href="index.html">← Base CENEVAL</a>
+      <span class="marca">chuletas KYN</span>
+      <button class="imprimir" id="btn-imprimir">🖨️ Imprimir las 3</button>
+    </header>
+
+    <div class="portada">
+      <span class="sello">Chuletas · EGEL Plus PSI</span>
+      <h1 class="titulo-app">Chuletas</h1>
+      <p class="subtitulo">lo que más cae, en una hoja</p>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button data-area="area1" class="activa">🧠 Área 1</button>
+      <button data-area="area2">🛠️ Área 2</button>
+      <button data-area="area3">🔬 Área 3</button>
+    </nav>
+
+    <p class="como">Cada pestaña es <strong>1 hoja imprimible</strong>: los términos que más caen de ese libro, en una línea cada uno. Dale a <strong>Imprimir las 3</strong> para sacarlas todas de un jalón (o Ctrl/Cmd+P). En pantalla ves una a la vez; al imprimir salen las 3, una por página.</p>
+
+    <section class="hoja activa" id="hoja-area1">
+      <div class="cabeza">
+        <span class="emoji-area">🧠</span>
+        <h2>Área 1 · Diagnóstico psicológico</h2>
+        <span class="chip-cant">39 términos</span>
+      </div>
+      <p class="eyebrow">chuleta final</p>
+      <div class="franja c1"></div>
+      <ul class="chuleta-lista">
+        <li><strong>Sinapsis</strong> <em>(Cap. 1-2)</em> — Punto de contacto donde una neurona pasa información a otra (Sherrington).</li>
+        <li><strong>Neuroplasticidad</strong> <em>(Hebb, 1949)</em> — Formar, reforzar o podar sinapsis; base del aprendizaje y la recuperación.</li>
+        <li><strong>Despolarizar</strong> <em>(Cap. 2)</em> — Excitar la neurona (acercarla al umbral). Hiperpolarizar = inhibir.</li>
+        <li><strong>Dopamina</strong> <em>(Cap. 2)</em> — Recompensa y motor; exceso→psicosis, falta en sustancia negra→Parkinson.</li>
+        <li><strong>Hipocampo</strong> <em>(Cap. 3)</em> — Convierte memoria corta en larga; tiene neurogénesis adulta.</li>
+        <li><strong>Amígdala</strong> <em>(Cap. 3)</em> — Centro del miedo y el marcaje emocional de recuerdos.</li>
+        <li><strong>Broca / Wernicke</strong> <em>(Cap. 3)</em> — Producir habla (frontal) / comprender habla (temporal).</li>
+        <li><strong>Corriente dorsal/ventral</strong> <em>(Cap. 3)</em> — Dónde (al parietal) / qué (al temporal).</li>
+        <li><strong>Edad mental → CI</strong> <em>(Binet-Terman)</em> — Binet la crea; Stern divide; Terman ×100 = CI.</li>
+        <li><strong>X = V + e</strong> <em>(Spearman, TCT)</em> — Puntaje observado = verdadero + error de medición.</li>
+        <li><strong>Alfa de Cronbach</strong> <em>(Cap. 5)</em> — Índice de consistencia interna (confiabilidad) de una prueba.</li>
+        <li><strong>Validez de contenido</strong> <em>(Cap. 5)</em> — Los reactivos representan el dominio; se valida por jueceo de expertos.</li>
+        <li><strong>Convergente / divergente</strong> <em>(Cap. 5)</em> — Correlaciona alto con lo igual / bajo con lo distinto.</li>
+        <li><strong>Validez de facies</strong> <em>(Cap. 5)</em> — Que la prueba "parezca" medir lo que dice; la más débil.</li>
+        <li><strong>Escalas de medición</strong> <em>(Stevens)</em> — Nominal, ordinal, intervalo, razón (de menos a más info).</li>
+        <li><strong>Triangulación</strong> <em>(Denzin)</em> — Múltiples fuentes/métodos para dar rigor cualitativo.</li>
+        <li><strong>Émica / ética</strong> <em>(Etnografía)</em> — Mirada del nativo / mirada del analista externo.</li>
+        <li><strong>Teoría fundamentada</strong> <em>(Glaser-Strauss)</em> — La teoría emerge de los datos; codificación abierta→axial.</li>
+        <li><strong>CAT</strong> <em>(Bellak, 1949)</em> — Apercepción temática infantil con animales (deriva del TAT de Murray).</li>
+        <li><strong>Koppitz</strong> <em>(DFH / Bender)</em> — Sistema de calificación: indicadores de desarrollo + emocionales.</li>
+        <li><strong>H-T-P</strong> <em>(Buck y Warren)</em> — Casa-Árbol-Persona; proyectiva de personalidad.</li>
+        <li><strong>CHC</strong> <em>(Cap. 8)</em> — Teoría de inteligencia (Gc, Gf, Gsm, Gv, Gs…) base del WISC-IV.</li>
+        <li><strong>WISC-IV</strong> <em>(6:0-16:11)</em> — 4 índices: ICV, IRP, IMT, IVP → CI Total (ICG si hay dispersión).</li>
+        <li><strong>BANETA / ENI-2</strong> <em>(Cap. 8)</em> — Baterías neuropsicológicas mexicanas (aprendizaje / perfil integral).</li>
+        <li><strong>DCL vs. demencia</strong> <em>(DSM-5)</em> — La frontera es la autonomía en la vida diaria.</li>
+        <li><strong>Clave de recuperación</strong> <em>(Cap. 9)</em> — No mejora→Alzheimer; sí mejora→Parkinson/subcortical.</li>
+        <li><strong>Reserva cognitiva</strong> <em>(Cap. 9)</em> — Redes alternativas que retrasan los síntomas de demencia.</li>
+        <li><strong>Clusters A/B/C</strong> <em>(Personalidad)</em> — Raros / dramáticos / ansiosos.</li>
+        <li><strong>TCD (Linehan)</strong> <em>(Cap. 10)</em> — Terapia dialéctica conductual; elección para el trastorno límite.</li>
+        <li><strong>EC / IEC</strong> <em>(CONOCER)</em> — Estándar de Competencia / Instrumento de Evaluación de Competencia.</li>
+        <li><strong>CGC / GTES / GTEFI</strong> <em>(CONOCER)</em> — Comité del sector / define funciones / redacta el EC.</li>
+        <li><strong>Taxonomía de Bloom</strong> <em>(CONOCER)</em> — Conocimiento→comprensión→aplicación→análisis→síntesis→evaluación.</li>
+        <li><strong>Escala Likert</strong> <em>(Cap. 12)</em> — Grados de acuerdo (5 pts); sumativa. Thurstone = jueces; Guttman = acumulativa.</li>
+        <li><strong>CVR de Lawshe</strong> <em>(Cap. 5)</em> — Razón de validez de contenido: (n esencial − N/2)/(N/2); de −1 a +1.</li>
+        <li><strong>Entrevista</strong> <em>(Cap. 12)</em> — Estructurada / semi / abierta; directiva o no directiva. La herramienta más usada.</li>
+        <li><strong>Diferencial vs. psicosocial</strong> <em>(Cap. 12)</em> — Descartar cuadros parecidos / integrar persona con su entorno.</li>
+        <li><strong>Etapas (Papalia)</strong> <em>(Cap. 13)</em> — Prenatal → lactancia → niñez temprana/intermedia → adolescencia → 3 adulteces.</li>
+        <li><strong>Erikson / Piaget</strong> <em>(Cap. 13)</em> — 8 crisis psicosociales / 4 estadios cognitivos (sensoriomotor→formal).</li>
+        <li><strong>Apego (Ainsworth)</strong> <em>(Cap. 13)</em> — Seguro, evitativo, ambivalente y desorganizado (Situación extraña).</li>
+      </ul>
+    </section>
+
+    <section class="hoja" id="hoja-area2">
+      <div class="cabeza">
+        <span class="emoji-area">🛠️</span>
+        <h2>Área 2 · Intervención psicológica</h2>
+        <span class="chip-cant">48 términos</span>
+      </div>
+      <p class="eyebrow">chuleta final</p>
+      <div class="franja c2"></div>
+      <ul class="chuleta-lista">
+        <li><strong>Prevención (Caplan)</strong> <em>(Cap. 1)</em> — Primaria (antes, incidencia), secundaria (detección temprana, prevalencia), terciaria (rehabilitación).</li>
+        <li><strong>Habilitar vs. rehabilitar</strong> <em>(Cap. 1)</em> — Desarrollar una capacidad nueva / recuperar una perdida.</li>
+        <li><strong>Niveles de atención</strong> <em>(Cap. 2)</em> — Primero (primaria), segundo (especializada), tercero (hospitalaria). ≠ prevención.</li>
+        <li><strong>Id / Ego / Superego</strong> <em>(Freud)</em> — Placer / realidad / moral (ideal del ego).</li>
+        <li><strong>Eros / Tánatos</strong> <em>(Cap. 3)</em> — Pulsión de vida / de muerte; se fusionan.</li>
+        <li><strong>Represión</strong> <em>(Cap. 4)</em> — La "piedra fundamental" de las defensas; silenciosa e inconsciente.</li>
+        <li><strong>Sublimación</strong> <em>(Cap. 4)</em> — La defensa más madura: canalizar la energía en creación o altruismo.</li>
+        <li><strong>Proyección vs. introyección</strong> <em>(Cap. 4)</em> — Lo mío lo veo en ti / lo tuyo lo meto en mí.</li>
+        <li><strong>Ganancia 1ª / 2ª</strong> <em>(Cap. 5)</em> — Alivio interno de ansiedad / beneficio externo del síntoma.</li>
+        <li><strong>Síntoma = autocuración</strong> <em>(Cameron)</em> — Delirios y alucinaciones como intento de recuperar la realidad.</li>
+        <li><strong>EFY (Bellak)</strong> <em>(Cap. 6)</em> — 12 funciones del Yo; puente psicodinámico–descriptivo. La 1ª: prueba de realidad.</li>
+        <li><strong>4 reglas técnicas</strong> <em>(Cap. 7)</em> — Asociación libre, atención flotante, neutralidad, abstinencia.</li>
+        <li><strong>Transferencia</strong> <em>(Cap. 7)</em> — Proyectar sobre el terapeuta figuras del pasado. Contra = del terapeuta al paciente.</li>
+        <li><strong>Alianza (Bordin)</strong> <em>(Cap. 7)</em> — Vínculo + tareas + metas.</li>
+        <li><strong>EC / EI / RC / RI</strong> <em>(Pavlov)</em> — Clásico: asocia estímulos (antes, respuesta refleja).</li>
+        <li><strong>Reforzador vs. castigo</strong> <em>(Skinner)</em> — Operante: consecuencias. Refuerzo sube; castigo baja.</li>
+        <li><strong>Refuerzo negativo</strong> <em>(Cap. 9)</em> — Quitar algo aversivo para SUBIR la conducta. No es castigo.</li>
+        <li><strong>Moldeamiento</strong> <em>(Cap. 9)</em> — Reforzar aproximaciones sucesivas (shaping).</li>
+        <li><strong>Economía de fichas</strong> <em>(Cap. 9)</em> — Fichas por conductas deseadas, canjeables por privilegios.</li>
+        <li><strong>Tríada cognitiva (Beck)</strong> <em>(Cap. 10)</em> — Visión negativa de sí mismo, del mundo y del futuro.</li>
+        <li><strong>ABC (Ellis)</strong> <em>(Cap. 10)</em> — Acontecimiento–Beliefs–Consecuencia; la clave está en B.</li>
+        <li><strong>Reestructuración</strong> <em>(Cap. 11)</em> — Evaluar si el pensamiento es realista/útil (no "pensar bonito").</li>
+        <li><strong>Exposición</strong> <em>(Cap. 11)</em> — La reina de la ansiedad; gradual (desensibilización) o inundación.</li>
+        <li><strong>3 condiciones (Rogers)</strong> <em>(Cap. 12)</em> — Congruencia, aceptación incondicional, empatía. No directivo.</li>
+        <li><strong>Pirámide de Maslow</strong> <em>(Cap. 12)</em> — Fisiológicas→seguridad→afiliación→estima→autorrealización.</li>
+        <li><strong>5 axiomas (Watzlawick)</strong> <em>(Cap. 13)</em> — Imposible no comunicar; contenido/relación; puntuación; digital/analógico; simétrico/complementario.</li>
+        <li><strong>Paciente identificado</strong> <em>(Cap. 14)</em> — El síntoma es del sistema familiar, no del individuo.</li>
+        <li><strong>Minuchin / Haley</strong> <em>(Cap. 14)</em> — Estructural (límites) / estratégica (directivas, breve).</li>
+        <li><strong>DBT / TFP</strong> <em>(Cap. 15)</em> — Linehan (conductual) y Kernberg (psicoanalítica), ambas para el TLP.</li>
+        <li><strong>ACT (Hayes)</strong> <em>(Cap. 15)</em> — Aceptación + compromiso con valores; flexibilidad psicológica.</li>
+        <li><strong>Mutua ilustración</strong> <em>(Acevedo)</em> — El fin de la entrevista; la separa de conversación e interrogatorio.</li>
+        <li><strong>Motivo de consulta</strong> <em>(Morrison)</em> — Razón por la que se pide ayuda; primer enunciado completo.</li>
+        <li><strong>Resistencia clásica</strong> <em>(Cap. 17)</em> — La tardanza. Ante silencio: esperar 10-15 s y reformular.</li>
+        <li><strong>Observación participante</strong> <em>(Cap. 18)</em> — Se involucra (profundidad) vs. no participante (objetividad).</li>
+        <li><strong>Externalización</strong> <em>(White-Epston)</em> — "La persona no es el problema". Separar identidad y problema.</li>
+        <li><strong>Grupo focal</strong> <em>(Hamui)</em> — Entrevista grupal de actitudes; 6-8 participantes; el moderador no opina.</li>
+        <li><strong>Machover</strong> <em>(Cap. 21)</em> — Test proyectivo de la Figura Humana (interpretación: Portuondo).</li>
+        <li><strong>Finalidad vs. objetivo</strong> <em>(Ander-Egg)</em> — Impacto / efecto. Meta = cuánto, cuándo, dónde.</li>
+        <li><strong>Diagrama de Gantt</strong> <em>(Cap. 22)</em> — Cronograma más simple; complejo = PERT/CPM.</li>
+        <li><strong>Eficacia/efectividad/eficiencia</strong> <em>(Cap. 23)</em> — Laboratorio / mundo real / costo-beneficio.</li>
+        <li><strong>PAP (Slaikeu)</strong> <em>(Cap. 24)</em> — Primera ayuda (minutos/horas) ≠ terapia de crisis (segunda ayuda).</li>
+        <li><strong>Crisis: tipos</strong> <em>(Cap. 24)</em> — Circunstanciales (inesperadas) vs. evolutivas (normativas).</li>
+        <li><strong>Diagnóstico = proceso</strong> <em>(Bassedas)</em> — Psicopedagogo + maestro, en el marco de la escuela.</li>
+        <li><strong>SPC (McMillan)</strong> <em>(Cap. 26)</em> — Sentido psicológico de comunidad: pertenencia y compromiso.</li>
+        <li><strong>Empoderamiento</strong> <em>(Cap. 26)</em> — Control y dominio sobre la propia vida y recursos.</li>
+        <li><strong>PST (Weinberg-Gould)</strong> <em>(Cap. 27)</em> — Metas, imaginería, activación, self-talk, autoconfianza, concentración.</li>
+        <li><strong>Confidencialidad</strong> <em>(Código SMP)</em> — Se rompe solo ante grave riesgo a la persona o a terceros.</li>
+        <li><strong>Consentimiento informado</strong> <em>(Código SMP)</em> — En menores lo da el tutor; no aplica en emergencia evidente.</li>
+      </ul>
+    </section>
+
+    <section class="hoja" id="hoja-area3">
+      <div class="cabeza">
+        <span class="emoji-area">🔬</span>
+        <h2>Área 3 · Investigación psicológica</h2>
+        <span class="chip-cant">55 términos</span>
+      </div>
+      <p class="eyebrow">chuleta final</p>
+      <div class="franja c3"></div>
+      <ul class="chuleta-lista">
+        <li><strong>Investigación</strong> <em>(Cap. 1)</em> — Procesos sistemáticos, críticos y empíricos aplicados a un fenómeno.</li>
+        <li><strong>Cuanti vs. cuali</strong> <em>(Cap. 1)</em> — Secuencial-deductivo-medición (Comte/Durkheim) vs. circular-inductivo-significados (Weber, verstehen).</li>
+        <li><strong>5 estrategias (Grinnell)</strong> <em>(Cap. 1)</em> — Observar, suponer, demostrar, revisar, proponer nuevas observaciones — comunes a ambos enfoques.</li>
+        <li><strong>Belmont</strong> <em>(Cap. 2)</em> — Respeto (→consentimiento), beneficencia (→riesgos/beneficios), justicia (→selección justa).</li>
+        <li><strong>Consentimiento informado</strong> <em>(Cap. 2)</em> — Información + comprensión + voluntariedad.</li>
+        <li><strong>Núremberg / Helsinki</strong> <em>(Cap. 2)</em> — 1947 / 1964 — los antecedentes de la ética de investigación.</li>
+        <li><strong>Positivismo</strong> <em>(Cap. 3)</em> — Comte/Durkheim: todo es medible; método de las ciencias naturales; verificación.</li>
+        <li><strong>Postpositivismo</strong> <em>(Cap. 3)</em> — Popper: realismo crítico, conocimiento imperfecto y probabilístico, falsación.</li>
+        <li><strong>Pragmatismo</strong> <em>(Cap. 3)</em> — Base filosófica de los métodos mixtos; manda la pregunta.</li>
+        <li><strong>Epojé</strong> <em>(Cap. 4)</em> — Husserl: suspensión del juicio. Reducciones: filosófica, fenomenológica, eidética.</li>
+        <li><strong>Fusión de horizontes</strong> <em>(Cap. 4)</em> — Gadamer: el horizonte del intérprete se funde con el de lo interpretado. "No existe un método hermenéutico".</li>
+        <li><strong>10 vs. 9 fases</strong> <em>(Cap. 5)</em> — Ruta cuanti (secuencial) vs. cuali (con inmersión inicial en el campo).</li>
+        <li><strong>Fuente primaria</strong> <em>(Cap. 6)</em> — Datos de primera mano (artículos, tesis); secundaria reprocesa; terciaria compila secundarias.</li>
+        <li><strong>Marco teórico</strong> <em>(Cap. 6)</em> — Proceso y producto; 7 funciones; se arma por mapeo o índices.</li>
+        <li><strong>Criterios de Kerlinger</strong> <em>(Cap. 7)</em> — Relación entre variables + pregunta clara + prueba empírica.</li>
+        <li><strong>4 alcances</strong> <em>(Cap. 7)</em> — Exploratorio (nuevo), descriptivo (características), correlacional (asociación), explicativo (causas).</li>
+        <li><strong>Correlación espuria</strong> <em>(Cap. 7)</em> — Dos variables se mueven juntas sin causarse (las mueve una tercera).</li>
+        <li><strong>Hi / Ho / Ha</strong> <em>(Cap. 8)</em> — Investigación / nula (la niega; Fisher) / alternativa (otra posibilidad).</li>
+        <li><strong>Definición operacional</strong> <em>(Cap. 8)</em> — Las operaciones para MEDIR la variable (vs. conceptual, de diccionario).</li>
+        <li><strong>R G X 0</strong> <em>(Cap. 9)</em> — Azar, grupo, tratamiento, medición; — = grupo control.</li>
+        <li><strong>Pre / puro / cuasi</strong> <em>(Cap. 9)</em> — Control mínimo / azar + equivalencia / grupos intactos sin azar.</li>
+        <li><strong>Ex post facto</strong> <em>(Cap. 10)</em> — No experimental: las variables ya ocurrieron (autoselección).</li>
+        <li><strong>Tendencia / cohorte / panel</strong> <em>(Cap. 10)</em> — Poblaciones / subpoblaciones vinculadas / los mismos participantes.</li>
+        <li><strong>Validez interna</strong> <em>(Cap. 11)</em> — Calidad del experimento; 12 amenazas (historia, maduración, selección, mortalidad…).</li>
+        <li><strong>Validez externa</strong> <em>(Cap. 11)</em> — Generalizar; 8 amenazas (Hawthorne, selección-tratamiento, historia/lugar…).</li>
+        <li><strong>Efecto Hawthorne</strong> <em>(Cap. 11)</em> — La artificialidad del experimento cambia la conducta (se saben observados).</li>
+        <li><strong>Muestra probabilística</strong> <em>(Cap. 12)</em> — Misma posibilidad para todos + selección aleatoria (simple, estratificada, racimos).</li>
+        <li><strong>NOIR</strong> <em>(Cap. 13)</em> — Nominal, ordinal, intervalos (cero arbitrario), razón (cero real).</li>
+        <li><strong>68-95-99.7</strong> <em>(Cap. 13)</em> — % de casos a ±1, ±2 y ±3 DE de la media en la curva normal.</li>
+        <li><strong>Puntuación z</strong> <em>(Cap. 13)</em> — Dirección y grado de alejamiento de la media, en unidades de DE.</li>
+        <li><strong>α = 0.05 / 0.01</strong> <em>(Cap. 14)</em> — Significancia a priori: estándar en sociales / riesgos vitales.</li>
+        <li><strong>Error I vs. II</strong> <em>(Cap. 14)</em> — Falso positivo (α, rechazar Ho verdadera) vs. falso negativo (β). Potencia = 1−β.</li>
+        <li><strong>t / ANOVA</strong> <em>(Cap. 15)</em> — Diferencia de medias: 2 grupos / 3+ grupos (valor F, inter vs. intra).</li>
+        <li><strong>Pearson r y r²</strong> <em>(Cap. 15)</em> — Asociación lineal (intervalo/razón), sin causalidad; r² = determinación.</li>
+        <li><strong>3 supuestos paramétricos</strong> <em>(Cap. 16)</em> — Normalidad + intervalos/razón + homogeneidad de varianzas.</li>
+        <li><strong>χ² (chi cuadrada)</strong> <em>(Cap. 16)</em> — Relación entre dos variables categóricas; tabla de contingencia.</li>
+        <li><strong>Equivalencias no paramétricas</strong> <em>(Cap. 16)</em> — Mann-Whitney↔t indep.; Wilcoxon↔t pareada; Kruskal-Wallis↔ANOVA; Spearman↔Pearson.</li>
+        <li><strong>Básica vs. aplicada</strong> <em>(Cap. 17)</em> — Ampliar conocimiento vs. resolver problemas concretos; complementarias.</li>
+        <li><strong>Saturación de categorías</strong> <em>(Cap. 18)</em> — Cuando los casos nuevos ya no aportan; ahí termina la muestra cualitativa.</li>
+        <li><strong>Bola de nieve</strong> <em>(Cap. 18)</em> — Muestreo en cadena: un participante te lleva al siguiente.</li>
+        <li><strong>Teoría fundamentada</strong> <em>(Cap. 19)</em> — La teoría surge de los datos; codificación abierta → axial → selectiva.</li>
+        <li><strong>Investigación-acción</strong> <em>(Cap. 19)</em> — Resolver y mejorar prácticas con los participantes; espiral reflexión-acción.</li>
+        <li><strong>ACD (Van Dijk)</strong> <em>(Cap. 20)</em> — Discurso-cognición-sociedad: poder, desigualdad y discriminación en el lenguaje.</li>
+        <li><strong>Repertorios interpretativos</strong> <em>(Cap. 20)</em> — Potter y Wetherell: recursos lingüísticos con que se construyen versiones de la realidad.</li>
+        <li><strong>Metainferencias</strong> <em>(Cap. 21)</em> — Las conclusiones integradas CUAN+CUAL de un estudio mixto.</li>
+        <li><strong>DITRIAC / DEXPLIS / DEXPLOS</strong> <em>(Cap. 21)</em> — Convergente (paralelo) / CUAN→CUAL explica / CUAL→CUAN explora.</li>
+        <li><strong>TAEs</strong> <em>(Cap. 22)</em> — Tratamientos con apoyo empírico; listas dinámicas, predominio cognitivo-conductual.</li>
+        <li><strong>Chambless y Hollon</strong> <em>(Cap. 22)</em> — Eficaz / probablemente eficaz (sin réplica) / eficaz y específico (vs. placebo).</li>
+        <li><strong>Alfa de Cronbach</strong> <em>(Cap. 23)</em> — Confiabilidad del instrumento — no confundir con α de significancia.</li>
+        <li><strong>IMRyD</strong> <em>(Cap. 24)</em> — Introducción, Metodología, Resultados y Discusión.</li>
+        <li><strong>CECISyP</strong> <em>(Cap. 24)</em> — Título: Corto, Específico, Claro, Informativo, Sencillo y Preciso (&lt;15 palabras).</li>
+        <li><strong>Regla de las 40 palabras</strong> <em>(Cap. 25)</em> — Textual corta entre comillas / ≥40 en bloque con sangría; siempre con página.</li>
+        <li><strong>et al.</strong> <em>(Cap. 25)</em> — APA 7ª: con 3+ autores, desde la PRIMERA cita.</li>
+        <li><strong>Difusión vs. divulgación</strong> <em>(Cap. 26)</em> — Pares y lenguaje técnico vs. público general y lenguaje sencillo.</li>
+        <li><strong>Triángulo virtuoso</strong> <em>(Cap. 26)</em> — Rueda: lectores, autores y dictaminadores sostienen una revista académica.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p class="paws">una hoja, los últimos días</p>
+      <p>Design system de KYN · destiladas de los mini libros</p>
+    </footer>
+  </div>
+
+<script>
+'use strict';
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-area]');
+  if (!btn) return;
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('activa', b === btn));
+  document.querySelectorAll('.hoja').forEach(h => h.classList.toggle('activa', h.id === 'hoja-' + btn.dataset.area));
+});
+document.getElementById('btn-imprimir').addEventListener('click', () => window.print());
+</script>
+</body>
+</html>
