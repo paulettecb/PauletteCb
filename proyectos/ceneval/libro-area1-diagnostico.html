@@ -7,7 +7,7 @@
 <meta name="description" content="Mini libro de estudio para el EGEL Plus PSI (CENEVAL Psicología), Área 1: bases biológicas, neuroanatomía, psicometría, metodología, pruebas proyectivas, inteligencia, trastornos neurocognitivos, personalidad y CONOCER.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 @font-face {
   font-family: 'Friendship';
@@ -66,6 +66,12 @@ body {
 .chip:nth-child(6n+4) { background: var(--pastel-blush); }
 .chip:nth-child(6n+5) { background: var(--pastel-lilac); }
 .chip:nth-child(6n+6) { background: var(--pastel-peach); }
+.bionic-tip {
+  margin: 1.4rem auto 0; max-width: 460px; padding: 0.55rem 1rem;
+  background: var(--periwinkle-50); border: 1px solid var(--periwinkle-200);
+  border-radius: var(--radius-md); font-size: 0.82rem; line-height: 1.5; color: var(--periwinkle-800);
+}
+.bionic-tip strong { color: var(--periwinkle-900); font-weight: 800; }
 
 /* Índice */
 .indice { margin: 2rem 0 3rem; padding: 1.5rem; background: var(--white); border: 1.5px solid var(--periwinkle-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
@@ -91,7 +97,7 @@ body {
 .capitulo h2 { margin: 0 0 1rem; font-family: var(--font-display); font-weight: 500; font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; color: var(--periwinkle-700); }
 .capitulo h3 {
   margin: 1.8rem 0 0.5rem; font-size: 1.02rem; color: var(--periwinkle-900);
-  font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;
+  font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em;
 }
 .capitulo p { margin: 0.6rem 0; color: var(--ink-700); }
 .capitulo ul, .capitulo ol { margin: 0.6rem 0; padding-left: 1.4rem; color: var(--ink-700); }
@@ -215,10 +221,11 @@ body.regla-on .regla { display: block; }
       <div class="chips">
         <span class="chip">EGEL Plus PSI</span>
         <span class="chip">Área 1 · 49 reactivos</span>
-        <span class="chip">11 capítulos</span>
+        <span class="chip">13 capítulos</span>
         <span class="chip">⚡ lector biónico</span>
         <span class="chip">testimonio sobresaliente</span>
       </div>
+      <p class="bionic-tip">⚡ <strong>Lector biónico:</strong> engrosa el arranque de cada palabra para que tu vista se ancle sola y leas con menos esfuerzo. Enciéndelo en la barra de abajo a la izquierda (con 3 niveles de intensidad).</p>
     </header>
 
     <nav class="indice" aria-label="Índice">
@@ -301,10 +308,24 @@ body.regla-on .regla { display: block; }
             <span>El EC, los comités (CGC/GTES/GTEFI), SCIAN y los cinco criterios de evaluación.</span>
           </span>
         </a>
+        <a class="indice-item" href="#herramientas">
+          <span class="indice-emoji">🧰</span>
+          <span class="indice-text">
+            <strong>12 · Herramientas de evaluación psicológica</strong>
+            <span>Entrevista, observación, escalas de actitud (Likert, Thurstone, Guttman) y el proceso diagnóstico.</span>
+          </span>
+        </a>
+        <a class="indice-item" href="#ciclo-vital">
+          <span class="indice-emoji">🌱</span>
+          <span class="indice-text">
+            <strong>13 · Desarrollo y ciclo vital</strong>
+            <span>Las etapas de Papalia y los estadios de Piaget, Erikson, Freud, Kohlberg y el apego.</span>
+          </span>
+        </a>
         <a class="indice-item" href="#glosario">
           <span class="indice-emoji">📖</span>
           <span class="indice-text">
-            <strong>12 · Glosario-chuleta</strong>
+            <strong>14 · Glosario-chuleta</strong>
             <span>Los términos que más caen, en una línea cada uno, para el repaso final.</span>
           </span>
         </a>
@@ -554,6 +575,15 @@ body.regla-on .regla { display: block; }
 <li><strong>Validez divergente (discriminante)</strong>: correlaciona <em>bajo</em> con medidas de constructos <strong>distintos</strong> (tu test de ansiedad no debería medir inteligencia).</li>
 <li><strong>Validez de facies (aparente/facial)</strong>: qué tanto la prueba <em>parece</em> medir lo que dice, a ojos del examinado o de un lego. Es la más débil: no es evidencia estadística, es apariencia.</li>
 </ul>
+
+<h3>Ponerle número al jueceo de expertos</h3>
+<p>Decir "lo validaron expertos" se queda corto: el acuerdo entre jueces se puede <strong>cuantificar</strong>. Los coeficientes que caen:</p>
+<ul>
+<li><strong>CVR — Razón de Validez de Contenido (Lawshe, 1975)</strong>: cada juez marca el reactivo como <em>esencial</em>, <em>útil pero prescindible</em> o <em>innecesario</em>. Fórmula: <strong>CVR = (n<sub>e</sub> − N/2) / (N/2)</strong>, donde n<sub>e</sub> = jueces que lo marcan "esencial" y N = total de jueces. Va de −1 a +1: si todos dicen "esencial" → CVR = 1; si la mitad → CVR = 0. Los ítems que no llegan al mínimo se eliminan.</li>
+<li><strong>IVC — Índice de Validez de Contenido (Lynn, 1986)</strong>: proporción de jueces que consideran el ítem relevante; promediado da el índice de todo el test.</li>
+<li><strong>V de Aiken (1980)</strong>: otro coeficiente de acuerdo entre jueces, de 0 a 1.</li>
+</ul>
+<div class="dato"><p>La validez de contenido <strong>empieza</strong> en el juicio de expertos, pero se puede <strong>estimar con estadística</strong> (CVR, IVC, V de Aiken). Combinar lo cualitativo (qué opinan) con lo cuantitativo (cuánto coinciden) es lo más robusto.</p></div>
 
 <h3>Normas de puntuación</h3>
 <p>Referidas a la <strong>norma</strong> (comparar con un grupo normativo) o al <strong>criterio</strong> (contra un estándar fijo, p. ej. 70% para aprobar). Puntajes derivados de la curva normal:</p>
@@ -855,6 +885,97 @@ body.regla-on .regla { display: block; }
 </div>
     </section>
 
+    <section class="capitulo" id="herramientas">
+      <p class="eyebrow">Capítulo 12 🧰</p>
+      <h2>Herramientas de evaluación psicológica</h2>
+<p>Este capítulo es oro: cubre la subárea <strong>1.4 (Evaluación psicológica, 16 reactivos, la más pesada del Área 1)</strong> y parte de la 1.2 y 1.3. La trampa mental es creer que "evaluar" = "aplicar un test". No: la <strong>entrevista, la observación, las escalas y los cuestionarios</strong> también son instrumentos, y el CENEVAL los trata como herramientas de diagnóstico.</p>
+
+<h3>La entrevista</h3>
+<p>La herramienta más usada: una conversación <em>con propósito</em>. Se clasifica por dos ejes:</p>
+<ul>
+<li><strong>Por estructura</strong>: <strong>estructurada</strong> (guion fijo, replicable, comparable), <strong>semiestructurada</strong> (guía flexible, se puede profundizar) y <strong>abierta/libre</strong> (sin guion, exploratoria).</li>
+<li><strong>Por dirección</strong>: <strong>directiva</strong> (el evaluador lleva las riendas) y <strong>no directiva</strong> (el sujeto marca el rumbo, estilo rogeriano).</li>
+</ul>
+<p>Momentos típicos: la <strong>inicial</strong> (rapport, encuadre y motivo de consulta) y la de <strong>devolución</strong>. Ventaja: flexible y permite observar en vivo. Desventaja: <strong>subjetividad</strong> y sesgos del entrevistador.</p>
+
+<h3>La observación</h3>
+<p>Registrar la conducta en su contexto. Se cruza en varios ejes: <strong>sistemática</strong> (con categorías y registro) vs. asistemática; <strong>participante</strong> vs. no participante; <strong>natural</strong> (en el ambiente real) vs. análoga (situación de laboratorio).</p>
+<ul>
+<li><strong>Instrumentos de registro</strong>: registro anecdótico, listas de cotejo, escalas de estimación y muestreo de tiempos/eventos.</li>
+<li><strong>Sesgos a cuidar</strong>: la <strong>reactividad</strong> (el observado cambia porque se sabe observado) y la <strong>expectativa del observador</strong> (ve lo que espera ver).</li>
+</ul>
+
+<h3>Escalas de actitud (medir lo que no se ve)</h3>
+<p>Las actitudes no se miden directo; se infieren con escalas. Las cuatro clásicas:</p>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Escala</th><th>Autor</th><th>Cómo funciona</th></tr></thead>
+<tbody>
+<tr><td><strong>Likert</strong></td><td>Likert, 1932</td><td>Afirmaciones con grados de acuerdo (de "totalmente de acuerdo" a "totalmente en desacuerdo", casi siempre 5 puntos). Es <strong>sumativa</strong>: se suman los ítems. La más usada.</td></tr>
+<tr><td><strong>Thurstone</strong></td><td>Thurstone, 1928</td><td>"Intervalos aparentemente iguales": un panel de jueces asigna un valor a cada frase; el sujeto marca con cuáles concuerda.</td></tr>
+<tr><td><strong>Guttman</strong></td><td>Guttman, 1944</td><td>Escalograma <strong>acumulativo y unidimensional</strong>: si aceptas el ítem "fuerte", se asume que aceptas los más débiles.</td></tr>
+<tr><td><strong>Diferencial semántico</strong></td><td>Osgood</td><td>Pares de adjetivos opuestos (bueno–malo, fuerte–débil) en un continuo de 7 puntos; mide el <em>significado</em> connotativo.</td></tr>
+</tbody>
+</table></div>
+
+<h3>Cuestionarios, inventarios y encuestas</h3>
+<ul>
+<li><strong>Cuestionario</strong>: conjunto de preguntas (abiertas o cerradas), normalmente autoaplicable.</li>
+<li><strong>Inventario</strong>: cuestionario <em>estandarizado</em> de personalidad o síntomas (p. ej. MMPI, Inventario de Depresión de Beck).</li>
+<li><strong>Encuesta</strong>: aplicación a una muestra para describir a una población; su fin es descriptivo, no clínico-individual.</li>
+</ul>
+
+<h3>El proceso de evaluación (de la queja al informe)</h3>
+<p>La evaluación es un proceso de <strong>toma de decisiones</strong>, no una aplicación suelta de pruebas:</p>
+<ul>
+<li><strong>1. Motivo de consulta y encuadre</strong> → <strong>2. Formular hipótesis</strong> (qué quiero responder) → <strong>3. Elegir y aplicar una <em>batería</em></strong> (varios instrumentos que se complementan) → <strong>4. Integrar</strong> (buscar convergencia entre pruebas) → <strong>5. Diagnóstico</strong> → <strong>6. Pronóstico, recomendaciones y conclusiones</strong> → <strong>7. Devolución</strong>.</li>
+<li><strong>Diagnóstico diferencial</strong>: descartar los cuadros que se parecen para quedarte con el correcto.</li>
+<li><strong>Diagnóstico psicosocial</strong>: integra a la persona <em>con</em> su entorno (familia, contexto social, condiciones de vida), no solo el síntoma.</li>
+<li><strong>Pronóstico</strong>: estimación de cómo evolucionará el caso con o sin intervención.</li>
+</ul>
+<div class="nota-campo"><p>El nivel <strong>Sobresaliente</strong> del descriptor oficial pide justo esto: analizar los indicadores de una <strong>batería</strong> de pruebas psicométricas y proyectivas para dar un <strong>diagnóstico psicosocial y diferencial</strong>, más pronóstico, recomendaciones y conclusiones. Si dominas este proceso, apuntas al premio.</p></div>
+
+<div class="esencial">
+<p><strong>No todo es un test:</strong> entrevista (estructurada/semi/abierta · directiva/no directiva), observación (sistemática, participante, natural/análoga), escalas de actitud (Likert sumativa · Thurstone jueces · Guttman acumulativa · Osgood diferencial semántico) y cuestionarios/inventarios/encuestas.</p>
+<p><strong>El proceso:</strong> motivo → hipótesis → batería → integrar → diagnóstico (diferencial + psicosocial) → pronóstico y conclusiones.</p>
+</div>
+    </section>
+
+    <section class="capitulo" id="ciclo-vital">
+      <p class="eyebrow">Capítulo 13 🌱</p>
+      <h2>Desarrollo y ciclo vital</h2>
+<p>El descriptor oficial del Área 1 pide, textual, reconocer las características psicológicas "en las diferentes <strong>etapas del ciclo vital</strong>". Traducción: para diagnosticar bien tienes que saber qué es <em>esperable</em> a cada edad (lo normativo), porque solo así distingues lo patológico de lo propio de la etapa.</p>
+
+<h3>Las etapas del desarrollo (Papalia)</h3>
+<div class="tabla-scroll"><table>
+<thead><tr><th>Etapa</th><th>Edad aprox.</th><th>Lo que marca la etapa</th></tr></thead>
+<tbody>
+<tr><td><strong>Prenatal</strong></td><td>concepción–nacimiento</td><td>Formación de órganos y sistema nervioso; influencia de teratógenos.</td></tr>
+<tr><td><strong>Lactancia y primeros pasos</strong></td><td>0–3</td><td>Apego, desarrollo sensoriomotor y primeras palabras.</td></tr>
+<tr><td><strong>Niñez temprana</strong></td><td>3–6</td><td>Juego, lenguaje, autonomía e imaginación.</td></tr>
+<tr><td><strong>Niñez intermedia</strong></td><td>6–11</td><td>Escuela, pensamiento lógico concreto, autoestima y pares.</td></tr>
+<tr><td><strong>Adolescencia</strong></td><td>11–20</td><td>Pubertad, identidad y pensamiento abstracto.</td></tr>
+<tr><td><strong>Adultez temprana</strong></td><td>20–40</td><td>Intimidad, proyecto de vida y trabajo.</td></tr>
+<tr><td><strong>Adultez intermedia</strong></td><td>40–65</td><td>Generatividad, climaterio y balance de vida.</td></tr>
+<tr><td><strong>Adultez tardía</strong></td><td>65+</td><td>Integridad, duelos y cambios cognitivos normales (≠ demencia).</td></tr>
+</tbody>
+</table></div>
+<div class="dato"><p>Las edades son <strong>aproximadas</strong> y varían entre autores: sirven de mapa, no de frontera exacta. Lo examinable es el <em>orden</em> y el hito de cada etapa.</p></div>
+
+<h3>Las teorías del desarrollo (los estadios que caen)</h3>
+<ul>
+<li><strong>Piaget — cognitivo</strong>: sensoriomotor (0–2), preoperacional (2–7, egocentrismo), operaciones concretas (7–11, reversibilidad) y operaciones formales (11+, pensamiento abstracto).</li>
+<li><strong>Erikson — psicosocial (8 crisis)</strong>: confianza vs. desconfianza → autonomía vs. vergüenza → iniciativa vs. culpa → laboriosidad vs. inferioridad → <strong>identidad vs. confusión de roles</strong> (adolescencia) → intimidad vs. aislamiento → generatividad vs. estancamiento → integridad vs. desesperación (vejez).</li>
+<li><strong>Freud — psicosexual</strong>: oral, anal, fálica (complejo de Edipo), latencia y genital.</li>
+<li><strong>Kohlberg — moral</strong>: preconvencional (castigo/premio), convencional (normas y aprobación) y posconvencional (principios éticos propios).</li>
+<li><strong>Apego (Bowlby / Ainsworth)</strong>: en la "Situación extraña", Ainsworth describe apego <strong>seguro</strong>, <strong>inseguro-evitativo</strong> e <strong>inseguro-ambivalente/resistente</strong>; Main añade el <strong>desorganizado</strong>.</li>
+</ul>
+
+<div class="esencial">
+<p><strong>Ancla mental:</strong> Piaget = cómo <em>piensa</em>; Erikson = qué <em>crisis social</em> resuelve; Freud = dónde está la <em>libido</em>; Kohlberg = cómo <em>razona el bien</em>; apego = cómo se <em>vincula</em>.</p>
+<p><strong>Para el diagnóstico:</strong> lo normativo de cada etapa es tu línea base. Un mismo síntoma pesa distinto a los 4, a los 15 o a los 70 años.</p>
+</div>
+    </section>
+
     <section class="glosario" id="glosario">
       <p class="eyebrow">Chuleta 📖</p>
       <h2>Glosario-chuleta</h2>
@@ -892,12 +1013,19 @@ body.regla-on .regla { display: block; }
         <div class="glos-item"><strong>EC / IEC</strong><em>CONOCER</em><span>Estándar de Competencia / Instrumento de Evaluación de Competencia.</span></div>
         <div class="glos-item"><strong>CGC / GTES / GTEFI</strong><em>CONOCER</em><span>Comité del sector / define funciones / redacta el EC.</span></div>
         <div class="glos-item"><strong>Taxonomía de Bloom</strong><em>CONOCER</em><span>Conocimiento→comprensión→aplicación→análisis→síntesis→evaluación.</span></div>
+        <div class="glos-item"><strong>Escala Likert</strong><em>Cap. 12</em><span>Grados de acuerdo (5 pts); sumativa. Thurstone = jueces; Guttman = acumulativa.</span></div>
+        <div class="glos-item"><strong>CVR de Lawshe</strong><em>Cap. 5</em><span>Razón de validez de contenido: (n esencial − N/2)/(N/2); de −1 a +1.</span></div>
+        <div class="glos-item"><strong>Entrevista</strong><em>Cap. 12</em><span>Estructurada / semi / abierta; directiva o no directiva. La herramienta más usada.</span></div>
+        <div class="glos-item"><strong>Diferencial vs. psicosocial</strong><em>Cap. 12</em><span>Descartar cuadros parecidos / integrar persona con su entorno.</span></div>
+        <div class="glos-item"><strong>Etapas (Papalia)</strong><em>Cap. 13</em><span>Prenatal → lactancia → niñez temprana/intermedia → adolescencia → 3 adulteces.</span></div>
+        <div class="glos-item"><strong>Erikson / Piaget</strong><em>Cap. 13</em><span>8 crisis psicosociales / 4 estadios cognitivos (sensoriomotor→formal).</span></div>
+        <div class="glos-item"><strong>Apego (Ainsworth)</strong><em>Cap. 13</em><span>Seguro, evitativo, ambivalente y desorganizado (Situación extraña).</span></div>
       </div>
     </section>
 
     <footer>
       <p class="paws">fin del Área 1 — vas con todo, Paulette</p>
-      <p>Hecho a la medida con el design system de KYN · Base de estudio CENEVAL · 11 capítulos + chuleta</p>
+      <p>Hecho a la medida con el design system de KYN · Base de estudio CENEVAL · 13 capítulos + chuleta</p>
     </footer>
   </div>
   <a class="subir" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ índice</a>
