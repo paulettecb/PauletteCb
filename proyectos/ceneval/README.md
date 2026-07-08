@@ -29,7 +29,7 @@ Regla: si la guía y un libro se contradicen, **gana la guía** (el examen se ca
 
 - [x] **Mini libros por área** — `libro-area1-diagnostico.html`, `libro-area2-intervencion.html`, `libro-area3-investigacion.html` + hub `index.html`, con lector KYN.
 - [x] **Simulacro interactivo KYN** — `simulacro.html` + `material/preguntas.json` (local, gitignored: 489 reactivos de los 5 exámenes de `guías/`, 224 con justificación; método en `material/extraccion-examenes/NOTAS.md`). Rondas por área, examen completo 140, transversal con textos, repaso de errores, export CSV para Anki. El código de la app sí se commitea; las preguntas no.
-- [ ] **Flashcards con repetición espaciada** — generar un mazo importable a Anki (CSV) desde las hojas de hechos: los errores de cada simulacro se vuelven tarjetas.
+- [x] **Flashcards con repetición espaciada** — `flashcards.html` + `flashcards/area{1,2,3}-*.csv` (142 tarjetas destiladas de los glosarios de los libros; se commitean, son contenido propio). Estudio en el navegador o descarga a Anki. Además, los errores de cada simulacro exportan a CSV desde el propio simulacro.
 - [ ] **Chuletas por área** — 1 página imprimible por área con tokens KYN, para el repaso de los últimos días.
 
 ## El plan

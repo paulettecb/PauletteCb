@@ -1,0 +1,58 @@
+#separator:Semicolon
+#html:false
+#tags column:3
+Investigación (Cap. 1);Procesos sistemáticos, críticos y empíricos aplicados a un fenómeno.;CENEVAL::Area3-Investigacion
+Cuanti vs. cuali (Cap. 1);Secuencial-deductivo-medición (Comte/Durkheim) vs. circular-inductivo-significados (Weber, verstehen).;CENEVAL::Area3-Investigacion
+5 estrategias (Grinnell) (Cap. 1);Observar, suponer, demostrar, revisar, proponer nuevas observaciones — comunes a ambos enfoques.;CENEVAL::Area3-Investigacion
+Belmont (Cap. 2);Respeto (→consentimiento), beneficencia (→riesgos/beneficios), justicia (→selección justa).;CENEVAL::Area3-Investigacion
+Consentimiento informado (Cap. 2);Información + comprensión + voluntariedad.;CENEVAL::Area3-Investigacion
+Núremberg / Helsinki (Cap. 2);1947 / 1964 — los antecedentes de la ética de investigación.;CENEVAL::Area3-Investigacion
+Positivismo (Cap. 3);"Comte/Durkheim: todo es medible; método de las ciencias naturales; verificación.";CENEVAL::Area3-Investigacion
+Postpositivismo (Cap. 3);Popper: realismo crítico, conocimiento imperfecto y probabilístico, falsación.;CENEVAL::Area3-Investigacion
+Pragmatismo (Cap. 3);"Base filosófica de los métodos mixtos; manda la pregunta.";CENEVAL::Area3-Investigacion
+Epojé (Cap. 4);Husserl: suspensión del juicio. Reducciones: filosófica, fenomenológica, eidética.;CENEVAL::Area3-Investigacion
+Fusión de horizontes (Cap. 4);"Gadamer: el horizonte del intérprete se funde con el de lo interpretado. ""No existe un método hermenéutico"".";CENEVAL::Area3-Investigacion
+10 vs. 9 fases (Cap. 5);Ruta cuanti (secuencial) vs. cuali (con inmersión inicial en el campo).;CENEVAL::Area3-Investigacion
+Fuente primaria (Cap. 6);"Datos de primera mano (artículos, tesis); secundaria reprocesa; terciaria compila secundarias.";CENEVAL::Area3-Investigacion
+Marco teórico (Cap. 6);"Proceso y producto; 7 funciones; se arma por mapeo o índices.";CENEVAL::Area3-Investigacion
+Criterios de Kerlinger (Cap. 7);Relación entre variables + pregunta clara + prueba empírica.;CENEVAL::Area3-Investigacion
+4 alcances (Cap. 7);Exploratorio (nuevo), descriptivo (características), correlacional (asociación), explicativo (causas).;CENEVAL::Area3-Investigacion
+Correlación espuria (Cap. 7);Dos variables se mueven juntas sin causarse (las mueve una tercera).;CENEVAL::Area3-Investigacion
+Hi / Ho / Ha (Cap. 8);"Investigación / nula (la niega; Fisher) / alternativa (otra posibilidad).";CENEVAL::Area3-Investigacion
+Definición operacional (Cap. 8);Las operaciones para MEDIR la variable (vs. conceptual, de diccionario).;CENEVAL::Area3-Investigacion
+R G X 0 (Cap. 9);"Azar, grupo, tratamiento, medición; — = grupo control.";CENEVAL::Area3-Investigacion
+Pre / puro / cuasi (Cap. 9);Control mínimo / azar + equivalencia / grupos intactos sin azar.;CENEVAL::Area3-Investigacion
+Ex post facto (Cap. 10);No experimental: las variables ya ocurrieron (autoselección).;CENEVAL::Area3-Investigacion
+Tendencia / cohorte / panel (Cap. 10);Poblaciones / subpoblaciones vinculadas / los mismos participantes.;CENEVAL::Area3-Investigacion
+Validez interna (Cap. 11);"Calidad del experimento; 12 amenazas (historia, maduración, selección, mortalidad…).";CENEVAL::Area3-Investigacion
+Validez externa (Cap. 11);"Generalizar; 8 amenazas (Hawthorne, selección-tratamiento, historia/lugar…).";CENEVAL::Area3-Investigacion
+Efecto Hawthorne (Cap. 11);La artificialidad del experimento cambia la conducta (se saben observados).;CENEVAL::Area3-Investigacion
+Muestra probabilística (Cap. 12);Misma posibilidad para todos + selección aleatoria (simple, estratificada, racimos).;CENEVAL::Area3-Investigacion
+NOIR (Cap. 13);Nominal, ordinal, intervalos (cero arbitrario), razón (cero real).;CENEVAL::Area3-Investigacion
+68-95-99.7 (Cap. 13);% de casos a ±1, ±2 y ±3 DE de la media en la curva normal.;CENEVAL::Area3-Investigacion
+Puntuación z (Cap. 13);Dirección y grado de alejamiento de la media, en unidades de DE.;CENEVAL::Area3-Investigacion
+α = 0.05 / 0.01 (Cap. 14);Significancia a priori: estándar en sociales / riesgos vitales.;CENEVAL::Area3-Investigacion
+Error I vs. II (Cap. 14);Falso positivo (α, rechazar Ho verdadera) vs. falso negativo (β). Potencia = 1−β.;CENEVAL::Area3-Investigacion
+t / ANOVA (Cap. 15);Diferencia de medias: 2 grupos / 3+ grupos (valor F, inter vs. intra).;CENEVAL::Area3-Investigacion
+Pearson r y r² (Cap. 15);"Asociación lineal (intervalo/razón), sin causalidad; r² = determinación.";CENEVAL::Area3-Investigacion
+3 supuestos paramétricos (Cap. 16);Normalidad + intervalos/razón + homogeneidad de varianzas.;CENEVAL::Area3-Investigacion
+χ² (chi cuadrada) (Cap. 16);"Relación entre dos variables categóricas; tabla de contingencia.";CENEVAL::Area3-Investigacion
+Equivalencias no paramétricas (Cap. 16);"Mann-Whitney↔t indep.; Wilcoxon↔t pareada; Kruskal-Wallis↔ANOVA; Spearman↔Pearson.";CENEVAL::Area3-Investigacion
+Básica vs. aplicada (Cap. 17);"Ampliar conocimiento vs. resolver problemas concretos; complementarias.";CENEVAL::Area3-Investigacion
+Saturación de categorías (Cap. 18);"Cuando los casos nuevos ya no aportan; ahí termina la muestra cualitativa.";CENEVAL::Area3-Investigacion
+Bola de nieve (Cap. 18);Muestreo en cadena: un participante te lleva al siguiente.;CENEVAL::Area3-Investigacion
+Teoría fundamentada (Cap. 19);"La teoría surge de los datos; codificación abierta → axial → selectiva.";CENEVAL::Area3-Investigacion
+Investigación-acción (Cap. 19);"Resolver y mejorar prácticas con los participantes; espiral reflexión-acción.";CENEVAL::Area3-Investigacion
+ACD (Van Dijk) (Cap. 20);Discurso-cognición-sociedad: poder, desigualdad y discriminación en el lenguaje.;CENEVAL::Area3-Investigacion
+Repertorios interpretativos (Cap. 20);Potter y Wetherell: recursos lingüísticos con que se construyen versiones de la realidad.;CENEVAL::Area3-Investigacion
+Metainferencias (Cap. 21);Las conclusiones integradas CUAN+CUAL de un estudio mixto.;CENEVAL::Area3-Investigacion
+DITRIAC / DEXPLIS / DEXPLOS (Cap. 21);Convergente (paralelo) / CUAN→CUAL explica / CUAL→CUAN explora.;CENEVAL::Area3-Investigacion
+TAEs (Cap. 22);"Tratamientos con apoyo empírico; listas dinámicas, predominio cognitivo-conductual.";CENEVAL::Area3-Investigacion
+Chambless y Hollon (Cap. 22);Eficaz / probablemente eficaz (sin réplica) / eficaz y específico (vs. placebo).;CENEVAL::Area3-Investigacion
+Alfa de Cronbach (Cap. 23);Confiabilidad del instrumento — no confundir con α de significancia.;CENEVAL::Area3-Investigacion
+IMRyD (Cap. 24);Introducción, Metodología, Resultados y Discusión.;CENEVAL::Area3-Investigacion
+CECISyP (Cap. 24);Título: Corto, Específico, Claro, Informativo, Sencillo y Preciso (<15 palabras).;CENEVAL::Area3-Investigacion
+Regla de las 40 palabras (Cap. 25);"Textual corta entre comillas / ≥40 en bloque con sangría; siempre con página.";CENEVAL::Area3-Investigacion
+et al. (Cap. 25);APA 7ª: con 3+ autores, desde la PRIMERA cita.;CENEVAL::Area3-Investigacion
+Difusión vs. divulgación (Cap. 26);Pares y lenguaje técnico vs. público general y lenguaje sencillo.;CENEVAL::Area3-Investigacion
+Triángulo virtuoso (Cap. 26);Rueda: lectores, autores y dictaminadores sostienen una revista académica.;CENEVAL::Area3-Investigacion
