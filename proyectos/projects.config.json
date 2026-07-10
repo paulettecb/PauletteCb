@@ -1,28 +1,69 @@
 {
   "budget-planner-tdah": {
     "title": "Budget Planner TDAH",
-    "description": "Planner de presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo rápido.",
+    "description": {
+      "en": "Guided budgeting with ADHD-friendly flows, visual reminders and a 5-minute mode.",
+      "es": "Presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo 5 minutos.",
+      "fr": "Budget guidé adapté au TDAH, rappels visuels et mode 5 minutes.",
+      "pt": "Orçamento guiado com fluxos TDAH-friendly, lembretes visuais e modo 5 minutos.",
+      "de": "Geführtes Budget mit ADHS-freundlichen Abläufen, visuellen Erinnerungen und 5-Minuten-Modus."
+    },
     "type": "Tool"
+  },
+  "ceneval": {
+    "title": "CENEVAL — EGEL Plus PSI",
+    "description": {
+      "en": "Study hub for the EGEL Plus PSI: KYN mini-books per discipline area.",
+      "es": "Hub de estudio para el EGEL Plus PSI: mini libros KYN por área disciplinar.",
+      "fr": "Hub d’étude pour l’EGEL Plus PSI : mini-livres KYN par domaine.",
+      "pt": "Hub de estudo para o EGEL Plus PSI: mini-livros KYN por área.",
+      "de": "Lern-Hub für das EGEL Plus PSI: KYN-Minibücher pro Fachbereich."
+    },
+    "type": "Study hub"
   },
   "hero-kyn": {
     "title": "KYN Hero Module",
-    "description": "Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.",
+    "description": {
+      "en": "Premium hero module for modular canine systems, accessible preview and integration-ready.",
+      "es": "Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.",
+      "fr": "Module hero premium pour systèmes canins modulaires, aperçu accessible et prêt à intégrer.",
+      "pt": "Módulo hero premium para sistemas caninos modulares, preview acessível e pronto para integração.",
+      "de": "Premium-Hero-Modul für modulare Hundesysteme, barrierearme Vorschau und integrationsbereit."
+    },
     "type": "Prototype",
     "hidden": true
   },
   "KYN Design System": {
     "title": "KYN Design System",
-    "description": "Índice visual del sistema KYN: decks, guías de marca, tokens y componentes reutilizables.",
+    "description": {
+      "en": "Visual index of the KYN system: decks, brand guides, tokens and components.",
+      "es": "Índice visual del sistema KYN: decks, guías de marca, tokens y componentes.",
+      "fr": "Index visuel du système KYN : decks, guides de marque, tokens et composants.",
+      "pt": "Índice visual do sistema KYN: decks, guias de marca, tokens e componentes.",
+      "de": "Visueller Index des KYN-Systems: Decks, Brand-Guides, Tokens und Komponenten."
+    },
     "type": "Design system"
   },
   "lsm": {
     "title": "LSM Practice Cards",
-    "description": "Microlecciones visuales para practicar Lengua de Señas Mexicana con una interfaz amable inspirada en KYN.",
+    "description": {
+      "en": "Visual micro-lessons to practice Mexican Sign Language, KYN-flavored.",
+      "es": "Microlecciones visuales para practicar Lengua de Señas Mexicana, con sabor KYN.",
+      "fr": "Micro-leçons visuelles pour pratiquer la langue des signes mexicaine.",
+      "pt": "Microlições visuais para praticar a Língua de Sinais Mexicana.",
+      "de": "Visuelle Mikro-Lektionen zum Üben der mexikanischen Gebärdensprache."
+    },
     "type": "Learning lab"
   },
   "mediapipe-lab": {
     "title": "MediaPipe Lab",
-    "description": "Laboratorio de visión por computadora en tiempo real: entrenador de agility FCI/FCM (pistas, teoría y coach de manejo), LSM, análisis de ejercicio y un jardín whimsy controlado con las manos.",
-    "type": "Experimental Lab"
+    "description": {
+      "en": "Real-time computer vision: FCI/FCM agility trainer, LSM, exercise analysis and a hand-controlled whimsy garden.",
+      "es": "Visión por computadora en tiempo real: entrenador de agility FCI/FCM, LSM, análisis de ejercicio y un jardín whimsy controlado con las manos.",
+      "fr": "Vision par ordinateur en temps réel : agility FCI/FCM, LSM, analyse d’exercice et un jardin whimsy contrôlé à la main.",
+      "pt": "Visão computacional em tempo real: agility FCI/FCM, LSM, análise de exercício e um jardim whimsy controlado pelas mãos.",
+      "de": "Echtzeit-Computer-Vision: FCI/FCM-Agility-Trainer, LSM, Übungsanalyse und ein handgesteuerter Whimsy-Garten."
+    },
+    "type": "Experimental lab"
   }
 }

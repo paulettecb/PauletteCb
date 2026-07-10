@@ -1,11 +1,10 @@
 # Paulette C — Systems Portfolio
 
-A modern, privacy-first personal page for internal use, refreshed with the KYN-inspired design system:
+A modern, privacy-first personal page for internal use, built on the KYN design system as an editorial one-page layout:
 - Warm paper/oat surfaces, restrained periwinkle, soft pastel accents, and a small whimsy spark.
-- Sections for About, Experience, Projects, and Contact.
-- Hero image path set to `assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png`.
-- Automatic language detection based on browser locale.
-- Manual language switcher for testing and overrides.
+- Sections for Hero, About, Skills, Projects, Now, and Contact — with scroll reveals, a scroll-synced typewriter effect on the About copy, and an infinite marquee.
+- Hero image path set to `assets/paulette.png`.
+- Automatic language detection based on browser locale, with a manual switcher (persisted in `localStorage`) across 5 languages (EN/ES/FR/PT/DE).
 - A “Visual Lab” projects section rendered from an auto-generated manifest at `proyectos/projects.json`.
 
 ## Local preview
@@ -37,7 +36,7 @@ Use `proyectos/projects.config.json` only when you want polished titles, descrip
 
 ## Hero image notes
 
-- Put your image at: `assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png`.
+- Put your image at: `assets/paulette.png`.
 - If the file is missing, the page automatically falls back to a placeholder image.
 
 ## Customize content

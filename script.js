@@ -1,262 +1,342 @@
+const STORAGE_KEY = 'pau-lang';
+
+const skills = [
+  { key: 'build', items: ['JavaScript · TypeScript', 'Vue', 'React', 'Vite', 'CSS architecture'] },
+  { key: 'systems', items: ['Design systems', 'Performance', 'Accessibility', 'Component strategy'] },
+  { key: 'humans', items: ['Cognition', 'Behavior', 'ADHD-friendly UX', 'Learning design'] },
+  { key: 'lab', items: ['MediaPipe', 'Computer vision', 'Prototyping', 'Whimsy engineering'] },
+];
+
+const pastels = ['var(--pastel-blush)', 'var(--pastel-sky)', 'var(--pastel-butter)', 'var(--pastel-mint)', 'var(--pastel-lilac)'];
+
 const content = {
   en: {
-    languageLabel: 'Language',
-    heroEyebrow: 'Hello there',
-    headline: 'Front-End Lead Developer + Psychology Student of Human Systems',
-    introLine: 'I build digital systems for a living and study human systems for fun.',
+    nav: { about: 'About', skills: 'Skills', projects: 'Projects', now: 'Now', contact: 'Contact' },
+    heroEyebrow: 'I like understanding people. Design is my excuse.',
+    heroSpark: 'hello!',
+    headlineA: 'Between the pixel',
+    headlineB: 'and the person',
+    intro: 'nd the occasional do',
+    ctaProjects: 'See the lab',
+    ctaContact: 'Say hi',
+    marquee: ['Front-end architecture', 'Design systems', 'Human behavior', 'Computer vision', 'ADHD-friendly design', 'Pattern recognition'],
     aboutTitle: 'About',
-    about1:
-      'I’m a Front-End Lead Developer and psychology student exploring the intersection of technology and human behavior. I work at the edge where logic meets emotion.',
-    about2:
-      'By day, I lead front-end development projects focused on performance and architecture. By night, I study psychology to understand how minds (including my own) navigate complexity.',
-    about3:
-      'My curious ADHD brain thrives on abstraction, pattern recognition, and interdisciplinary thinking. I don’t see chaos; I see systems waiting to be understood.',
-    about4:
-      'When I’m not building or studying systems, I’m training my life companions, Kenna (my Border Collie), and negotiating creative boundaries with Rodolfo (my cat), daily reminders that intelligence comes in many forms.',
-    experienceTitle: 'Experience',
-    exp1Title: 'Front-End Lead Developer',
-    exp1Detail:
-      'Leading development of high-performance web experiences with scalable architecture, design system alignment, and maintainable component strategy.',
-    exp2Title: 'Psychology Student',
-    exp2Detail:
-      'Studying cognition, emotion, and behavior to better understand how humans process information, make decisions, and adapt to complexity.',
+    aboutSpark: 'systems',
+    about1: 'Front-End Lead Developer and psychology student, exploring where technology and human behavior overlap.',
+    about2: 'By day I lead front-end projects focused on performance and architecture. By night I study how minds — including mine — navigate complexity.',
+    about3: 'My curious ADHD brain runs on abstraction and pattern recognition. I don’t see chaos; I see systems waiting to be understood.',
+    about4: 'Off-screen I train Kenna (Border Collie) and negotiate creative boundaries with Rodolfo (cat) — daily proof that intelligence takes many forms.',
+    expTitle: 'Experience',
+    exp: [
+      { role: 'Front-End Lead Developer', detail: 'High-performance web experiences: scalable architecture, design-system alignment, maintainable components.' },
+      { role: 'Psychology Student', detail: 'Cognition, emotion and behavior — how humans process information, decide, and adapt to complexity.' },
+    ],
+    skillsTitle: 'Skills & stack',
+    skillGroups: { build: 'I build with', systems: 'I think in', humans: 'I study', lab: 'I play with' },
     projectsTitle: 'Projects',
     projectsPill: 'Visual Lab',
-    projectsNote: 'A playful internal lab, auto-filled from the projects folder.',
-    projectsLoading: 'Loading project cards…',
-    projectOpen: 'Open project',
-    mediapipeRoute: 'Open MediaPipe Lab',
-    project1Title: 'Budget Planner ADHD',
-    project1Desc: 'Guided budget planner with ADHD-friendly workflows, visual reminders, and 5-minute mode.',
-    project1Link: 'Open project',
-    project2Title: 'KYN Hero Module',
-    project2Desc: 'Premium modular canine systems hero module, accessible preview and integration-ready.',
-    project3Title: 'KYN Design System',
-    project3Desc: 'Visual index for the KYN design system: decks, brand guidelines, tokens, and component specimens.',
-    project3Link: 'Open system',
-    contactTitle: 'Contact',
-    contactCopy: 'Want to connect? Say hi on Instagram:',
-    contactNote: "Public Instagram only. No phone or work contact shared."
+    projectsNote: 'A playful internal lab — every card is a real, living experiment.',
+    projectOpen: 'Open',
+    nowTitle: 'Now',
+    nowNote: 'What I’m actually up to, right now.',
+    now: [
+      { k: 'Studying', v: 'EGEL Plus PSI (CENEVAL)' },
+      { k: 'Training', v: 'Agility with Kenna' },
+      { k: 'Building', v: 'MediaPipe Lab' },
+      { k: 'Polishing', v: 'KYN Design System' },
+    ],
+    contactTitle: 'Let’s connect',
+    contactCopy: 'Want to talk systems, dogs or design? Say hi on Instagram.',
+    contactNote: 'Public Instagram only. No phone or work contact shared.',
+    footer: 'Made by hand, with a spark of whimsy.',
   },
   es: {
-    languageLabel: 'Idioma',
-    heroEyebrow: 'Hola',
-    headline: 'Líder Front-End y estudiante de Psicología enfocada en sistemas humanos',
-    introLine: 'Construyo sistemas digitales para vivir y estudio sistemas humanos por pasión.',
+    nav: { about: 'Sobre mí', skills: 'Skills', projects: 'Proyectos', now: 'Ahora', contact: 'Contacto' },
+    heroEyebrow: 'Me gusta entender a la gente. Diseñar es mi excusa.',
+    heroSpark: '¡hola!',
+    headlineA: 'Entre el pixel',
+    headlineB: 'y la persona',
+    intro: ' uno que otro perr',
+    ctaProjects: 'Ver el lab',
+    ctaContact: 'Saluda',
+    marquee: ['Arquitectura front-end', 'Design systems', 'Comportamiento humano', 'Visión por computadora', 'Diseño TDAH-friendly', 'Reconocimiento de patrones'],
     aboutTitle: 'Sobre mí',
-    about1:
-      'Soy Front-End Lead Developer y estudiante de psicología, explorando la intersección entre tecnología y comportamiento humano. Trabajo en el punto donde la lógica se encuentra con la emoción.',
-    about2:
-      'De día lidero proyectos front-end enfocados en rendimiento y arquitectura. De noche estudio psicología para entender cómo las mentes (incluida la mía) navegan la complejidad.',
-    about3:
-      'Mi cerebro curioso con TDAH prospera con la abstracción, el reconocimiento de patrones y el pensamiento interdisciplinario. No veo caos; veo sistemas esperando ser comprendidos.',
-    about4:
-      'Cuando no estoy construyendo o estudiando sistemas, entreno a mis compañeros de vida, Kenna (mi Border Collie), y negocio límites creativos con Rodolfo (mi gato): recordatorios diarios de que la inteligencia existe en muchas formas.',
-    experienceTitle: 'Experiencia',
-    exp1Title: 'Front-End Lead Developer',
-    exp1Detail:
-      'Liderando el desarrollo de experiencias web de alto rendimiento con arquitectura escalable, alineación con design systems y estrategia de componentes mantenible.',
-    exp2Title: 'Estudiante de Psicología',
-    exp2Detail:
-      'Estudiando cognición, emoción y conducta para comprender mejor cómo las personas procesan información, toman decisiones y se adaptan a la complejidad.',
+    aboutSpark: 'sistemas',
+    about1: 'Front-End Lead Developer y estudiante de psicología, explorando donde se cruzan la tecnología y el comportamiento humano.',
+    about2: 'De día lidero proyectos front-end enfocados en rendimiento y arquitectura. De noche estudio cómo las mentes — incluida la mía — navegan la complejidad.',
+    about3: 'Mi cerebro curioso con TDAH funciona con abstracción y reconocimiento de patrones. No veo caos; veo sistemas esperando ser comprendidos.',
+    about4: 'Fuera de pantalla entreno a Kenna (Border Collie) y negocio límites creativos con Rodolfo (gato): prueba diaria de que la inteligencia tiene muchas formas.',
+    expTitle: 'Experiencia',
+    exp: [
+      { role: 'Front-End Lead Developer', detail: 'Experiencias web de alto rendimiento: arquitectura escalable, alineación con design systems, componentes mantenibles.' },
+      { role: 'Estudiante de Psicología', detail: 'Cognición, emoción y conducta — cómo procesamos información, decidimos y nos adaptamos a la complejidad.' },
+    ],
+    skillsTitle: 'Skills y stack',
+    skillGroups: { build: 'Construyo con', systems: 'Pienso en', humans: 'Estudio', lab: 'Juego con' },
     projectsTitle: 'Proyectos',
     projectsPill: 'Visual Lab',
-    projectsNote: 'Un laboratorio interno y juguetón, llenado automáticamente desde la carpeta de proyectos.',
-    projectsLoading: 'Cargando cards de proyectos…',
-    projectOpen: 'Abrir proyecto',
-    mediapipeRoute: 'Abrir MediaPipe Lab',
-    project1Title: 'Budget Planner TDAH',
-    project1Desc: 'Planner de presupuesto guiado con enfoque TDAH, recordatorios visuales y modo 5 minutos.',
-    project1Link: 'Abrir proyecto',
-    project2Title: 'Módulo Hero KYN',
-    project2Desc: 'Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.',
-    project3Title: 'KYN Design System',
-    project3Desc: 'Índice visual para el design system KYN: decks, guías de marca, tokens y componentes.',
-    project3Link: 'Abrir sistema',
-    contactTitle: 'Contacto',
-    contactCopy: '¿Quieres conectar? Salúdame en Instagram:',
-    contactNote: 'Solo Instagram público. Sin teléfono ni contacto laboral.'
+    projectsNote: 'Un laboratorio interno y juguetón — cada card es un experimento real y vivo.',
+    projectOpen: 'Abrir',
+    nowTitle: 'Ahora',
+    nowNote: 'En lo que ando justo ahora.',
+    now: [
+      { k: 'Estudiando', v: 'EGEL Plus PSI (CENEVAL)' },
+      { k: 'Entrenando', v: 'Agility con Kenna' },
+      { k: 'Construyendo', v: 'MediaPipe Lab' },
+      { k: 'Puliendo', v: 'KYN Design System' },
+    ],
+    contactTitle: 'Conectemos',
+    contactCopy: '¿Hablamos de sistemas, perros o diseño? Salúdame en Instagram.',
+    contactNote: 'Solo Instagram público. Sin teléfono ni contacto laboral.',
+    footer: 'Hecho a mano, con una chispa de whimsy.',
   },
   fr: {
-    languageLabel: 'Langue',
-    heroEyebrow: 'Bonjour',
-    headline: 'Lead Front-End et étudiante en psychologie des systèmes humains',
-    introLine: 'Je construis des systèmes numériques et j’étudie les systèmes humains par passion.',
+    nav: { about: 'À propos', skills: 'Skills', projects: 'Projets', now: 'Maintenant', contact: 'Contact' },
+    heroEyebrow: 'J’aime comprendre les gens. Le design est mon excuse.',
+    heroSpark: 'salut !',
+    headlineA: 'Entre le pixel',
+    headlineB: 'et la personne',
+    intro: 't un chien de temps en temp',
+    ctaProjects: 'Voir le lab',
+    ctaContact: 'Dire bonjour',
+    marquee: ['Architecture front-end', 'Design systems', 'Comportement humain', 'Vision par ordinateur', 'Design TDAH-friendly', 'Reconnaissance de motifs'],
     aboutTitle: 'À propos',
-    about1:
-      'Je suis Lead Front-End Developer et étudiante en psychologie, à l’intersection de la technologie et du comportement humain. Je travaille là où la logique rencontre l’émotion.',
-    about2:
-      'Le jour, je dirige des projets front-end axés sur la performance et l’architecture. La nuit, j’étudie la psychologie pour comprendre comment les esprits (y compris le mien) naviguent dans la complexité.',
-    about3:
-      'Mon esprit curieux avec TDAH adore l’abstraction, la reconnaissance de motifs et la pensée interdisciplinaire. Je ne vois pas du chaos ; je vois des systèmes à comprendre.',
-    about4:
-      'Quand je ne construis ni n’étudie des systèmes, j’entraîne Kenna (mon Border Collie) et je négocie les limites créatives avec Rodolfo (mon chat), rappels quotidiens que l’intelligence prend de nombreuses formes.',
-    experienceTitle: 'Expérience',
-    exp1Title: 'Front-End Lead Developer',
-    exp1Detail:
-      'Direction du développement d’expériences web performantes avec architecture évolutive, alignement design system et stratégie de composants maintenable.',
-    exp2Title: 'Étudiante en psychologie',
-    exp2Detail:
-      'Étude de la cognition, de l’émotion et du comportement pour mieux comprendre la prise de décision et l’adaptation à la complexité.',
+    aboutSpark: 'systèmes',
+    about1: 'Lead Front-End Developer et étudiante en psychologie, à l’intersection de la technologie et du comportement humain.',
+    about2: 'Le jour, je dirige des projets front-end axés performance et architecture. La nuit, j’étudie comment les esprits — y compris le mien — naviguent la complexité.',
+    about3: 'Mon esprit curieux avec TDAH carbure à l’abstraction et à la reconnaissance de motifs. Je ne vois pas du chaos ; je vois des systèmes à comprendre.',
+    about4: 'Hors écran, j’entraîne Kenna (Border Collie) et je négocie avec Rodolfo (chat) — preuve quotidienne que l’intelligence a plusieurs formes.',
+    expTitle: 'Expérience',
+    exp: [
+      { role: 'Front-End Lead Developer', detail: 'Expériences web performantes : architecture évolutive, alignement design system, composants maintenables.' },
+      { role: 'Étudiante en psychologie', detail: 'Cognition, émotion et comportement — comment nous traitons l’information et nous adaptons à la complexité.' },
+    ],
+    skillsTitle: 'Skills & stack',
+    skillGroups: { build: 'Je construis avec', systems: 'Je pense en', humans: 'J’étudie', lab: 'Je joue avec' },
     projectsTitle: 'Projets',
     projectsPill: 'Visual Lab',
-    projectsNote: 'Un laboratoire interne et ludique, rempli automatiquement depuis le dossier projets.',
-    projectsLoading: 'Chargement des cartes projet…',
-    projectOpen: 'Ouvrir le projet',
-    mediapipeRoute: 'Ouvrir MediaPipe Lab',
-    project1Title: 'Budget Planner TDAH',
-    project1Desc: 'Planificateur de budget guidé, adapté au TDAH, avec rappels visuels et mode 5 minutes.',
-    project1Link: 'Ouvrir le projet',
-    project2Title: 'Module Hero KYN',
-    project2Desc: 'Module hero premium pour systèmes canins modulaires, aperçu accessible et prêt à intégrer.',
-    project3Title: 'KYN Design System',
-    project3Desc: 'Index visuel du design system KYN : decks, directives de marque, tokens et composants.',
-    project3Link: 'Ouvrir le système',
-    contactTitle: 'Contact',
-    contactCopy: 'Envie d’échanger ? Dites bonjour sur Instagram :',
-    contactNote: 'Instagram public uniquement. Pas de téléphone ni contact pro.'
+    projectsNote: 'Un laboratoire interne et ludique — chaque carte est une vraie expérimentation vivante.',
+    projectOpen: 'Ouvrir',
+    nowTitle: 'Maintenant',
+    nowNote: 'Ce que je fais, là, maintenant.',
+    now: [
+      { k: 'J’étudie', v: 'EGEL Plus PSI (CENEVAL)' },
+      { k: 'J’entraîne', v: 'Agility avec Kenna' },
+      { k: 'Je construis', v: 'MediaPipe Lab' },
+      { k: 'Je peaufine', v: 'KYN Design System' },
+    ],
+    contactTitle: 'Connectons-nous',
+    contactCopy: 'Envie de parler systèmes, chiens ou design ? Dites bonjour sur Instagram.',
+    contactNote: 'Instagram public uniquement. Pas de téléphone ni contact pro.',
+    footer: 'Fait main, avec une étincelle de whimsy.',
   },
   pt: {
-    languageLabel: 'Idioma',
-    heroEyebrow: 'Olá',
-    headline: 'Líder Front-End e estudante de Psicologia em sistemas humanos',
-    introLine: 'Construo sistemas digitais para viver e estudo sistemas humanos por paixão.',
+    nav: { about: 'Sobre', skills: 'Skills', projects: 'Projetos', now: 'Agora', contact: 'Contato' },
+    heroEyebrow: 'Gosto de entender as pessoas. Design é minha desculpa.',
+    heroSpark: 'olá!',
+    headlineA: 'Entre o pixel',
+    headlineB: 'e a pessoa',
+    intro: ' um ou outro cachorr',
+    ctaProjects: 'Ver o lab',
+    ctaContact: 'Diga oi',
+    marquee: ['Arquitetura front-end', 'Design systems', 'Comportamento humano', 'Visão computacional', 'Design TDAH-friendly', 'Reconhecimento de padrões'],
     aboutTitle: 'Sobre',
-    about1:
-      'Sou Front-End Lead Developer e estudante de psicologia, explorando a interseção entre tecnologia e comportamento humano. Trabalho na fronteira onde lógica encontra emoção.',
-    about2:
-      'De dia, lidero projetos front-end focados em performance e arquitetura. À noite, estudo psicologia para entender como mentes (inclusive a minha) navegam a complexidade.',
-    about3:
-      'Meu cérebro curioso com TDAH prospera em abstração, reconhecimento de padrões e pensamento interdisciplinar. Não vejo caos; vejo sistemas esperando para serem compreendidos.',
-    about4:
-      'Quando não estou construindo ou estudando sistemas, treino Kenna (minha Border Collie) e negocio limites criativos com Rodolfo (meu gato), lembretes diários de que inteligência existe em muitas formas.',
-    experienceTitle: 'Experiência',
-    exp1Title: 'Front-End Lead Developer',
-    exp1Detail:
-      'Liderando o desenvolvimento de experiências web de alta performance com arquitetura escalável, alinhamento com design system e estratégia de componentes sustentável.',
-    exp2Title: 'Estudante de Psicologia',
-    exp2Detail:
-      'Estudando cognição, emoção e comportamento para entender melhor como pessoas processam informações e se adaptam à complexidade.',
+    aboutSpark: 'sistemas',
+    about1: 'Front-End Lead Developer e estudante de psicologia, explorando onde tecnologia e comportamento humano se cruzam.',
+    about2: 'De dia lidero projetos front-end focados em performance e arquitetura. À noite estudo como mentes — inclusive a minha — navegam a complexidade.',
+    about3: 'Meu cérebro curioso com TDAH funciona à base de abstração e reconhecimento de padrões. Não vejo caos; vejo sistemas esperando serem compreendidos.',
+    about4: 'Fora da tela treino a Kenna (Border Collie) e negocio limites criativos com o Rodolfo (gato) — prova diária de que a inteligência tem muitas formas.',
+    expTitle: 'Experiência',
+    exp: [
+      { role: 'Front-End Lead Developer', detail: 'Experiências web de alta performance: arquitetura escalável, alinhamento com design systems, componentes sustentáveis.' },
+      { role: 'Estudante de Psicologia', detail: 'Cognição, emoção e comportamento — como processamos informação, decidimos e nos adaptamos à complexidade.' },
+    ],
+    skillsTitle: 'Skills & stack',
+    skillGroups: { build: 'Construo com', systems: 'Penso em', humans: 'Estudo', lab: 'Brinco com' },
     projectsTitle: 'Projetos',
     projectsPill: 'Visual Lab',
-    projectsNote: 'Um laboratório interno e lúdico, preenchido automaticamente pela pasta de projetos.',
-    projectsLoading: 'Carregando cards de projetos…',
-    projectOpen: 'Abrir projeto',
-    mediapipeRoute: 'Abrir MediaPipe Lab',
-    project1Title: 'Budget Planner TDAH',
-    project1Desc: 'Planner de orçamento guiado com foco em TDAH, lembretes visuais e modo de 5 minutos.',
-    project1Link: 'Abrir projeto',
-    project2Title: 'Módulo Hero KYN',
-    project2Desc: 'Módulo hero premium para sistemas caninos modulares, preview acessível e pronto para integração.',
-    project3Title: 'KYN Design System',
-    project3Desc: 'Índice visual do design system KYN: decks, guias de marca, tokens e componentes.',
-    project3Link: 'Abrir sistema',
-    contactTitle: 'Contato',
-    contactCopy: 'Quer se conectar? Me chama no Instagram:',
-    contactNote: 'Apenas Instagram público. Sem telefone ou contato de trabalho.'
+    projectsNote: 'Um laboratório interno e lúdico — cada card é um experimento real e vivo.',
+    projectOpen: 'Abrir',
+    nowTitle: 'Agora',
+    nowNote: 'No que estou agora mesmo.',
+    now: [
+      { k: 'Estudando', v: 'EGEL Plus PSI (CENEVAL)' },
+      { k: 'Treinando', v: 'Agility com a Kenna' },
+      { k: 'Construindo', v: 'MediaPipe Lab' },
+      { k: 'Polindo', v: 'KYN Design System' },
+    ],
+    contactTitle: 'Vamos conectar',
+    contactCopy: 'Quer falar de sistemas, cachorros ou design? Me chama no Instagram.',
+    contactNote: 'Apenas Instagram público. Sem telefone ou contato de trabalho.',
+    footer: 'Feito à mão, com uma faísca de whimsy.',
   },
   de: {
-    languageLabel: 'Sprache',
-    heroEyebrow: 'Hallo',
-    headline: 'Front-End Lead Developer & Psychologie-Studentin für menschliche Systeme',
-    introLine: 'Ich baue digitale Systeme beruflich und studiere menschliche Systeme aus Interesse.',
+    nav: { about: 'Über mich', skills: 'Skills', projects: 'Projekte', now: 'Jetzt', contact: 'Kontakt' },
+    heroEyebrow: 'Ich verstehe gern Menschen. Design ist meine Ausrede.',
+    heroSpark: 'hallo!',
+    headlineA: 'Zwischen Pixel',
+    headlineB: 'und Mensch',
+    intro: 'nd der eine oder andere Hun',
+    ctaProjects: 'Zum Lab',
+    ctaContact: 'Sag hi',
+    marquee: ['Front-End-Architektur', 'Design Systems', 'Menschliches Verhalten', 'Computer Vision', 'ADHS-freundliches Design', 'Mustererkennung'],
     aboutTitle: 'Über mich',
-    about1:
-      'Ich bin Front-End Lead Developer und Psychologie-Studentin und erforsche die Schnittstelle zwischen Technologie und menschlichem Verhalten. Ich arbeite dort, wo Logik auf Emotion trifft.',
-    about2:
-      'Tagsüber leite ich Front-End-Projekte mit Fokus auf Performance und Architektur. Nachts studiere ich Psychologie, um besser zu verstehen, wie Köpfe (einschließlich meines eigenen) mit Komplexität umgehen.',
-    about3:
-      'Mein neugieriges ADHS-Gehirn liebt Abstraktion, Mustererkennung und interdisziplinäres Denken. Ich sehe kein Chaos; ich sehe Systeme, die verstanden werden wollen.',
-    about4:
-      'Wenn ich nicht baue oder lerne, trainiere ich Kenna (meinen Border Collie) und verhandle kreative Grenzen mit Rodolfo (meiner Katze) – tägliche Erinnerungen daran, dass Intelligenz viele Formen hat.',
-    experienceTitle: 'Erfahrung',
-    exp1Title: 'Front-End Lead Developer',
-    exp1Detail:
-      'Leitung der Entwicklung leistungsstarker Web-Erlebnisse mit skalierbarer Architektur, Design-System-Ausrichtung und wartbarer Komponentenstrategie.',
-    exp2Title: 'Psychologie-Studentin',
-    exp2Detail:
-      'Studium von Kognition, Emotion und Verhalten, um zu verstehen, wie Menschen Informationen verarbeiten und sich an Komplexität anpassen.',
+    aboutSpark: 'systeme',
+    about1: 'Front-End Lead Developer und Psychologie-Studentin, an der Schnittstelle von Technologie und menschlichem Verhalten.',
+    about2: 'Tagsüber leite ich Front-End-Projekte mit Fokus auf Performance und Architektur. Nachts studiere ich, wie Köpfe — auch meiner — mit Komplexität umgehen.',
+    about3: 'Mein neugieriges ADHS-Gehirn läuft auf Abstraktion und Mustererkennung. Ich sehe kein Chaos; ich sehe Systeme, die verstanden werden wollen.',
+    about4: 'Abseits des Bildschirms trainiere ich Kenna (Border Collie) und verhandle mit Rodolfo (Katze) — täglicher Beweis, dass Intelligenz viele Formen hat.',
+    expTitle: 'Erfahrung',
+    exp: [
+      { role: 'Front-End Lead Developer', detail: 'Leistungsstarke Web-Erlebnisse: skalierbare Architektur, Design-System-Ausrichtung, wartbare Komponenten.' },
+      { role: 'Psychologie-Studentin', detail: 'Kognition, Emotion und Verhalten — wie Menschen Informationen verarbeiten, entscheiden und sich anpassen.' },
+    ],
+    skillsTitle: 'Skills & Stack',
+    skillGroups: { build: 'Ich baue mit', systems: 'Ich denke in', humans: 'Ich studiere', lab: 'Ich spiele mit' },
     projectsTitle: 'Projekte',
     projectsPill: 'Visual Lab',
-    projectsNote: 'Ein verspieltes internes Lab, automatisch aus dem Projektordner befüllt.',
-    projectsLoading: 'Projektkarten werden geladen…',
-    projectOpen: 'Projekt öffnen',
-    mediapipeRoute: 'MediaPipe Lab öffnen',
-    project1Title: 'Budget Planner ADHS',
-    project1Desc: 'Geführter Budget-Planer mit ADHS-freundlichem Ablauf, visuellen Erinnerungen und 5-Minuten-Modus.',
-    project1Link: 'Projekt öffnen',
-    project2Title: 'KYN Hero Modul',
-    project2Desc: 'Premium-Hero-Modul für modulare Hundesysteme, barrierearme Vorschau und integrationsbereit.',
-    project3Title: 'KYN Design System',
-    project3Desc: 'Visueller Index für das KYN Design System: Decks, Brand Guidelines, Tokens und Komponenten.',
-    project3Link: 'System öffnen',
-    contactTitle: 'Kontakt',
-    contactCopy: 'Lust auf Austausch? Sag hi auf Instagram:',
-    contactNote: 'Nur öffentliches Instagram. Keine Telefonnummer oder Arbeitskontakte.'
-  }
+    projectsNote: 'Ein verspieltes internes Lab — jede Karte ist ein echtes, lebendiges Experiment.',
+    projectOpen: 'Öffnen',
+    nowTitle: 'Jetzt',
+    nowNote: 'Woran ich gerade wirklich arbeite.',
+    now: [
+      { k: 'Lernen', v: 'EGEL Plus PSI (CENEVAL)' },
+      { k: 'Training', v: 'Agility mit Kenna' },
+      { k: 'Bauen', v: 'MediaPipe Lab' },
+      { k: 'Polieren', v: 'KYN Design System' },
+    ],
+    contactTitle: 'Lass uns connecten',
+    contactCopy: 'Lust auf Systeme, Hunde oder Design? Sag hi auf Instagram.',
+    contactNote: 'Nur öffentliches Instagram. Keine Telefonnummer oder Arbeitskontakte.',
+    footer: 'Handgemacht, mit einem Funken Whimsy.',
+  },
 };
 
-const keys = {
-  languageLabel: 'language-label',
-  heroEyebrow: 'hero-eyebrow',
-  headline: 'headline',
-  introLine: 'intro-line',
-  aboutTitle: 'about-title',
-  about1: 'about-p1',
-  about2: 'about-p2',
-  about3: 'about-p3',
-  about4: 'about-p4',
-  experienceTitle: 'experience-title',
-  exp1Title: 'exp-1-title',
-  exp1Detail: 'exp-1-detail',
-  exp2Title: 'exp-2-title',
-  exp2Detail: 'exp-2-detail',
-  projectsTitle: 'projects-title',
-  projectsPill: 'projects-pill',
-  projectsNote: 'projects-note',
-  projectsLoading: 'projects-loading',
-  mediapipeRoute: 'mediapipe-route-link',
-  contactTitle: 'contact-title',
-  contactCopy: 'contact-copy',
-  contactNote: 'contact-note'
-};
-
+let currentLang = 'es';
 let currentProjects = [];
+let revealObserver = null;
+let twSpans = [];
+let twShown = -1;
 
-function getSelectedContent() {
-  return content[document.documentElement.lang] || content.en;
+function detectLanguage() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && content[saved]) return saved;
+  } catch (e) { /* localStorage unavailable */ }
+  const browserLang = (navigator.language || 'en').slice(0, 2);
+  return content[browserLang] ? browserLang : 'en';
 }
 
-function metricForProject(project, index) {
-  const seed = [...project.slug].reduce((total, char) => total + char.charCodeAt(0), 0);
-  return 58 + ((seed + index * 11) % 36);
+function saveLanguage(lang) {
+  try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* localStorage unavailable */ }
 }
 
-function renderProjects(projects = currentProjects) {
-  currentProjects = projects;
+function pickDescription(description, lang) {
+  if (typeof description === 'string') return description;
+  if (!description) return '';
+  return description[lang] || description.en || Object.values(description)[0] || '';
+}
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function renderAboutParagraph(id, text) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  text.split(' ').forEach((word, index, words) => {
+    const span = document.createElement('span');
+    span.className = 'tw-word';
+    span.textContent = word + (index < words.length - 1 ? ' ' : '');
+    el.appendChild(span);
+  });
+}
+
+function renderExpList(t) {
+  const list = document.getElementById('exp-list');
+  if (!list) return;
+  list.innerHTML = t.exp
+    .map(
+      (job) => `
+        <div class="exp-item">
+          <span class="exp-item__dot" aria-hidden="true"></span>
+          <div>
+            <p class="exp-item__role">${job.role}</p>
+            <p class="exp-item__detail">${job.detail}</p>
+          </div>
+        </div>`
+    )
+    .join('');
+}
+
+function renderSkills(t) {
+  const grid = document.getElementById('skills-grid');
+  if (!grid) return;
+  grid.innerHTML = skills
+    .map(
+      (group, index) => `
+        <div class="skill-card" data-reveal style="--skill-accent: ${pastels[index % pastels.length]}">
+          <div class="skill-card__swatch" aria-hidden="true"></div>
+          <p class="skill-card__title">${t.skillGroups[group.key] || ''}</p>
+          <div class="skill-card__chips">
+            ${group.items.map((chip) => `<span class="chip">${chip}</span>`).join('')}
+          </div>
+        </div>`
+    )
+    .join('');
+}
+
+function renderNow(t) {
+  const grid = document.getElementById('now-grid');
+  if (!grid) return;
+  grid.innerHTML = t.now
+    .map(
+      (item) => `
+        <div class="now-tile">
+          <p class="now-tile__key">${item.k}</p>
+          <p class="now-tile__value">${item.v}</p>
+        </div>`
+    )
+    .join('');
+  setText('now-year', '· ' + new Date().getFullYear());
+}
+
+function renderMarquee(t) {
+  const track = document.getElementById('marquee-track');
+  if (!track) return;
+  const words = t.marquee || [];
+  const looped = words.length ? [...words, ...words, ...words] : [];
+  track.innerHTML = looped
+    .map(
+      (word) => `
+        <span class="marquee__word">${word}<svg viewBox="0 0 32 28" width="13" height="11" aria-hidden="true"><path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="none" stroke="#8795D2" stroke-width="3" /></svg></span>`
+    )
+    .join('');
+}
+
+function renderProjects(t) {
   const list = document.getElementById('project-list');
   if (!list) return;
-
-  const selected = getSelectedContent();
-
-  if (!projects.length) {
-    list.innerHTML = `<div class="project project-loading"><p>${selected.projectsLoading}</p></div>`;
+  if (!currentProjects.length) {
+    list.innerHTML = '';
     return;
   }
-
-  list.innerHTML = projects
-    .map((project, index) => `
-      <article class="project">
-        <div class="project-topline">
-          <span class="project-type">${project.type || 'Project'}</span>
-          <span class="project-number">${String(index + 1).padStart(2, '0')}</span>
-        </div>
-        <h4>${project.title}</h4>
-        <p>${project.description}</p>
-        <a class="link-pill" href="${project.url}">${selected.projectOpen}</a>
-        <div class="project-meter" aria-hidden="true"><span style="width: ${metricForProject(project, index)}%"></span></div>
-      </article>
-    `)
+  list.innerHTML = currentProjects
+    .map(
+      (project, index) => `
+        <a class="project-card" data-reveal href="${project.url}" style="--project-accent: ${pastels[index % pastels.length]}">
+          <span class="project-card__bar" aria-hidden="true"></span>
+          <span class="project-card__top">
+            <span class="project-card__type">${project.type || 'Project'}</span>
+            <span class="project-card__index">${String(index + 1).padStart(2, '0')}</span>
+          </span>
+          <span class="project-card__title">${project.title}</span>
+          <span class="project-card__desc">${pickDescription(project.description, currentLang)}</span>
+          <span class="project-card__open">${t.projectOpen} <span aria-hidden="true">→</span></span>
+        </a>`
+    )
     .join('');
 }
 
@@ -265,65 +345,132 @@ async function loadProjects() {
     const response = await fetch('proyectos/projects.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`Projects manifest failed: ${response.status}`);
     const manifest = await response.json();
-    renderProjects(manifest.projects || []);
+    currentProjects = manifest.projects || [];
   } catch (error) {
     console.warn(error);
-    renderProjects([
-      {
-        slug: 'budget-planner-tdah',
-        title: 'Budget Planner TDAH',
-        description: 'Planner de presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo rápido.',
-        type: 'Tool',
-        url: 'proyectos/budget-planner-tdah/index.html',
-      },
-      {
-        slug: 'hero-kyn',
-        title: 'KYN Hero Module',
-        description: 'Módulo hero premium para sistemas caninos modulares, con preview accesible y listo para integrar.',
-        type: 'Prototype',
-        url: 'proyectos/hero-kyn/index.html',
-      },
-      {
-        slug: 'KYN Design System',
-        title: 'KYN Design System',
-        description: 'Índice visual del sistema KYN: decks, guías de marca, tokens y componentes reutilizables.',
-        type: 'Design system',
-        url: 'proyectos/KYN%20Design%20System/index.html',
-      },
-    ]);
+    currentProjects = [];
   }
 }
 
-function applyLanguage(lang) {
-  const selected = content[lang] || content.en;
-
-  Object.entries(keys).forEach(([dictionaryKey, elementId]) => {
-    const el = document.getElementById(elementId);
-    if (!el) return;
-
-    if (elementId === 'exp-1-title' || elementId === 'exp-2-title') {
-      el.innerHTML = `<strong>${selected[dictionaryKey]}</strong>`;
-      return;
+function setupReveals() {
+  if (revealObserver) revealObserver.disconnect();
+  const els = document.querySelectorAll('[data-reveal]');
+  els.forEach((el) => {
+    el.style.transition = 'opacity 750ms cubic-bezier(0.22,1,0.36,1), transform 750ms cubic-bezier(0.22,1,0.36,1)';
+    const r = el.getBoundingClientRect();
+    if (r.top > window.innerHeight * 0.9) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
     }
-
-    el.textContent = selected[dictionaryKey];
   });
-
-  document.documentElement.lang = lang;
-  renderProjects();
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'none';
+        } else {
+          const r = entry.boundingClientRect;
+          if (r.top >= window.innerHeight) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(26px)';
+          } else if (r.bottom <= 0) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(-26px)';
+          }
+        }
+      });
+    },
+    { threshold: 0.06 }
+  );
+  els.forEach((el) => revealObserver.observe(el));
 }
 
-function detectLanguage() {
-  const browserLang = (navigator.language || 'en').slice(0, 2);
-  return Object.keys(content).includes(browserLang) ? browserLang : 'en';
+function syncTypewriter() {
+  twSpans = Array.from(document.querySelectorAll('.tw-word'));
+  twShown = -1;
+  updateTypewriter();
+}
+
+function updateTypewriter() {
+  if (!twSpans.length) return;
+  const sec = document.getElementById('about');
+  if (!sec) return;
+  const r = sec.getBoundingClientRect();
+  const vh = window.innerHeight;
+  const progress = Math.max(0, Math.min(1, (vh * 0.86 - r.top) / (r.height * 0.85)));
+  const n = Math.round(progress * twSpans.length);
+  if (n === twShown) return;
+  twSpans.forEach((s, i) => {
+    s.style.opacity = i < n ? '1' : '0.13';
+  });
+  twShown = n;
+}
+
+function applyLanguage(lang) {
+  const t = content[lang] || content.en;
+  currentLang = content[lang] ? lang : 'en';
+
+  setText('nav-about', t.nav.about);
+  setText('nav-skills', t.nav.skills);
+  setText('nav-projects', t.nav.projects);
+  setText('nav-now', t.nav.now);
+  setText('nav-contact', t.nav.contact);
+
+  setText('hero-eyebrow', t.heroEyebrow);
+  setText('headline-a', t.headlineA);
+  setText('headline-b', t.headlineB);
+  setText('hero-intro', t.intro);
+  setText('cta-projects', t.ctaProjects);
+  setText('cta-contact', t.ctaContact);
+  setText('hero-spark', t.heroSpark);
+
+  renderMarquee(t);
+
+  setText('about-title', t.aboutTitle);
+  setText('about-spark', t.aboutSpark);
+  renderAboutParagraph('about-p1', t.about1);
+  renderAboutParagraph('about-p2', t.about2);
+  renderAboutParagraph('about-p3', t.about3);
+  renderAboutParagraph('about-p4', t.about4);
+  setText('exp-title', t.expTitle);
+  renderExpList(t);
+
+  setText('skills-title', t.skillsTitle);
+  renderSkills(t);
+
+  setText('projects-title', t.projectsTitle);
+  setText('projects-pill', t.projectsPill);
+  setText('projects-note', t.projectsNote);
+  renderProjects(t);
+
+  setText('now-title', t.nowTitle);
+  setText('now-note', t.nowNote);
+  renderNow(t);
+
+  setText('contact-title', t.contactTitle);
+  setText('contact-copy', t.contactCopy);
+  setText('contact-note', t.contactNote);
+  setText('footer-note', t.footer);
+
+  document.documentElement.lang = currentLang;
+
+  requestAnimationFrame(() => {
+    setupReveals();
+    syncTypewriter();
+  });
 }
 
 const selector = document.getElementById('language-select');
 const initialLanguage = detectLanguage();
 selector.value = initialLanguage;
-applyLanguage(initialLanguage);
-loadProjects();
+
+loadProjects().then(() => applyLanguage(initialLanguage));
 
 selector.addEventListener('change', (event) => {
+  saveLanguage(event.target.value);
   applyLanguage(event.target.value);
 });
+
+window.addEventListener('scroll', updateTypewriter, { passive: true });
+window.addEventListener('resize', updateTypewriter, { passive: true });
