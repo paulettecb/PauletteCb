@@ -326,7 +326,7 @@ function renderProjects(t) {
   list.innerHTML = currentProjects
     .map((project, index) => {
       const isExternal = /^https?:\/\//i.test(project.url);
-      const linkAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+      const linkAttrs = isExternal ? ' target="_blank" rel="noopener"' : '';
       return `
         <a class="project-card" data-reveal href="${project.url}"${linkAttrs} style="--project-accent: ${pastels[index % pastels.length]}; transition-delay: ${index * 80}ms">
           <span class="project-card__bar" aria-hidden="true"></span>
