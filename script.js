@@ -37,6 +37,8 @@ const content = {
     projectsPill: 'Visual Lab',
     projectsNote: 'A playful internal lab — every card is a real, living experiment.',
     projectOpen: 'Open',
+    projectsLoading: 'Loading projects…',
+    projectsEmpty: 'Projects are taking a nap — check back soon.',
     nowTitle: 'Now',
     nowNote: 'What I’m actually up to, right now.',
     now: [
@@ -77,6 +79,8 @@ const content = {
     projectsPill: 'Visual Lab',
     projectsNote: 'Un laboratorio interno y juguetón — cada card es un experimento real y vivo.',
     projectOpen: 'Abrir',
+    projectsLoading: 'Cargando proyectos…',
+    projectsEmpty: 'Los proyectos están tomando una siesta — vuelve pronto.',
     nowTitle: 'Ahora',
     nowNote: 'En lo que ando justo ahora.',
     now: [
@@ -111,12 +115,14 @@ const content = {
       { role: 'Front-End Lead Developer', detail: 'Expériences web performantes : architecture évolutive, alignement design system, composants maintenables.' },
       { role: 'Étudiante en psychologie', detail: 'Cognition, émotion et comportement — comment nous traitons l’information et nous adaptons à la complexité.' },
     ],
-    skillsTitle: 'Skills & stack',
+    skillsTitle: 'Compétences & stack',
     skillGroups: { build: 'Je construis avec', systems: 'Je pense en', humans: 'J’étudie', lab: 'Je joue avec' },
     projectsTitle: 'Projets',
     projectsPill: 'Visual Lab',
     projectsNote: 'Un laboratoire interne et ludique — chaque carte est une vraie expérimentation vivante.',
     projectOpen: 'Ouvrir',
+    projectsLoading: 'Chargement des projets…',
+    projectsEmpty: 'Les projets font la sieste — revenez bientôt.',
     nowTitle: 'Maintenant',
     nowNote: 'Ce que je fais, là, maintenant.',
     now: [
@@ -151,12 +157,14 @@ const content = {
       { role: 'Front-End Lead Developer', detail: 'Experiências web de alta performance: arquitetura escalável, alinhamento com design systems, componentes sustentáveis.' },
       { role: 'Estudante de Psicologia', detail: 'Cognição, emoção e comportamento — como processamos informação, decidimos e nos adaptamos à complexidade.' },
     ],
-    skillsTitle: 'Skills & stack',
+    skillsTitle: 'Habilidades & stack',
     skillGroups: { build: 'Construo com', systems: 'Penso em', humans: 'Estudo', lab: 'Brinco com' },
     projectsTitle: 'Projetos',
     projectsPill: 'Visual Lab',
     projectsNote: 'Um laboratório interno e lúdico — cada card é um experimento real e vivo.',
     projectOpen: 'Abrir',
+    projectsLoading: 'Carregando projetos…',
+    projectsEmpty: 'Os projetos estão tirando uma soneca — volte em breve.',
     nowTitle: 'Agora',
     nowNote: 'No que estou agora mesmo.',
     now: [
@@ -197,6 +205,8 @@ const content = {
     projectsPill: 'Visual Lab',
     projectsNote: 'Ein verspieltes internes Lab — jede Karte ist ein echtes, lebendiges Experiment.',
     projectOpen: 'Öffnen',
+    projectsLoading: 'Projekte werden geladen…',
+    projectsEmpty: 'Die Projekte machen ein Nickerchen — schau bald wieder vorbei.',
     nowTitle: 'Jetzt',
     nowNote: 'Woran ich gerade wirklich arbeite.',
     now: [
@@ -215,7 +225,8 @@ const content = {
 let currentLang = 'es';
 let currentProjects = [];
 let revealObserver = null;
-let twSpans = [];
+let aboutTexts = [];
+let aboutEls = [];
 let twShown = -1;
 
 function detectLanguage() {
@@ -242,17 +253,6 @@ function setText(id, text) {
   if (el) el.textContent = text;
 }
 
-function renderAboutParagraph(id, text) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.innerHTML = '';
-  text.split(' ').forEach((word, index, words) => {
-    const span = document.createElement('span');
-    span.className = 'tw-word';
-    span.textContent = word + (index < words.length - 1 ? ' ' : '');
-    el.appendChild(span);
-  });
-}
 
 function renderExpList(t) {
   const list = document.getElementById('exp-list');
@@ -277,7 +277,7 @@ function renderSkills(t) {
   grid.innerHTML = skills
     .map(
       (group, index) => `
-        <div class="skill-card" data-reveal style="--skill-accent: ${pastels[index % pastels.length]}">
+        <div class="skill-card" data-reveal style="--skill-accent: ${pastels[index % pastels.length]}; transition-delay: ${index * 80}ms">
           <div class="skill-card__swatch" aria-hidden="true"></div>
           <p class="skill-card__title">${t.skillGroups[group.key] || ''}</p>
           <div class="skill-card__chips">
@@ -311,7 +311,7 @@ function renderMarquee(t) {
   track.innerHTML = looped
     .map(
       (word) => `
-        <span class="marquee__word">${word}<svg viewBox="0 0 32 28" width="13" height="11" aria-hidden="true"><path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="none" stroke="#8795D2" stroke-width="3" /></svg></span>`
+        <span class="marquee__word">${word}<svg viewBox="0 0 32 28" width="13" height="11" aria-hidden="true"><path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="none" stroke="#E85DA0" stroke-width="3" /></svg></span>`
     )
     .join('');
 }
@@ -320,13 +320,13 @@ function renderProjects(t) {
   const list = document.getElementById('project-list');
   if (!list) return;
   if (!currentProjects.length) {
-    list.innerHTML = '';
+    list.innerHTML = `<p class="projects-empty">${(projectsReady ? t.projectsEmpty : t.projectsLoading) || ''}</p>`;
     return;
   }
   list.innerHTML = currentProjects
     .map(
       (project, index) => `
-        <a class="project-card" data-reveal href="${project.url}" style="--project-accent: ${pastels[index % pastels.length]}">
+        <a class="project-card" data-reveal href="${project.url}" style="--project-accent: ${pastels[index % pastels.length]}; transition-delay: ${index * 80}ms">
           <span class="project-card__bar" aria-hidden="true"></span>
           <span class="project-card__top">
             <span class="project-card__type">${project.type || 'Project'}</span>
@@ -340,6 +340,8 @@ function renderProjects(t) {
     .join('');
 }
 
+let projectsReady = false;
+
 async function loadProjects() {
   try {
     const response = await fetch('proyectos/projects.json', { cache: 'no-store' });
@@ -349,34 +351,32 @@ async function loadProjects() {
   } catch (error) {
     console.warn(error);
     currentProjects = [];
+  } finally {
+    projectsReady = true;
   }
 }
 
 function setupReveals() {
   if (revealObserver) revealObserver.disconnect();
   const els = document.querySelectorAll('[data-reveal]');
-  els.forEach((el) => {
-    el.style.transition = 'opacity 750ms cubic-bezier(0.22,1,0.36,1), transform 750ms cubic-bezier(0.22,1,0.36,1)';
-    const r = el.getBoundingClientRect();
-    if (r.top > window.innerHeight * 0.9) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(26px)';
-    }
-  });
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.remove('reveal-out-down', 'reveal-out-up'));
+    return;
+  }
+  els.forEach((el) => el.classList.add('reveal-out-down'));
   revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'none';
+          entry.target.classList.remove('reveal-out-down', 'reveal-out-up');
         } else {
           const r = entry.boundingClientRect;
           if (r.top >= window.innerHeight) {
-            entry.target.style.opacity = '0';
-            entry.target.style.transform = 'translateY(26px)';
+            entry.target.classList.remove('reveal-out-up');
+            entry.target.classList.add('reveal-out-down');
           } else if (r.bottom <= 0) {
-            entry.target.style.opacity = '0';
-            entry.target.style.transform = 'translateY(-26px)';
+            entry.target.classList.remove('reveal-out-down');
+            entry.target.classList.add('reveal-out-up');
           }
         }
       });
@@ -387,24 +387,36 @@ function setupReveals() {
 }
 
 function syncTypewriter() {
-  twSpans = Array.from(document.querySelectorAll('.tw-word'));
+  aboutEls = ['about-p1', 'about-p2', 'about-p3', 'about-p4'].map((id) => document.getElementById(id));
   twShown = -1;
   updateTypewriter();
 }
 
 function updateTypewriter() {
-  if (!twSpans.length) return;
+  if (!aboutTexts.length) return;
   const sec = document.getElementById('about');
   if (!sec) return;
   const r = sec.getBoundingClientRect();
   const vh = window.innerHeight;
+  const totalChars = aboutTexts.reduce((sum, text) => sum + text.length, 0);
   const progress = Math.max(0, Math.min(1, (vh * 0.86 - r.top) / (r.height * 0.85)));
-  const n = Math.round(progress * twSpans.length);
+  const n = Math.round(progress * totalChars);
   if (n === twShown) return;
-  twSpans.forEach((s, i) => {
-    s.style.opacity = i < n ? '1' : '0.13';
-  });
   twShown = n;
+  let offset = 0;
+  aboutTexts.forEach((text, i) => {
+    const el = aboutEls[i];
+    offset += text.length;
+    if (!el) return;
+    const shown = Math.max(0, Math.min(text.length, n - (offset - text.length)));
+    el.textContent = text.slice(0, shown);
+    if (shown > 0 && shown < text.length) {
+      const cursor = document.createElement('span');
+      cursor.className = 'tw-cursor';
+      cursor.setAttribute('aria-hidden', 'true');
+      el.appendChild(cursor);
+    }
+  });
 }
 
 function applyLanguage(lang) {
@@ -429,10 +441,7 @@ function applyLanguage(lang) {
 
   setText('about-title', t.aboutTitle);
   setText('about-spark', t.aboutSpark);
-  renderAboutParagraph('about-p1', t.about1);
-  renderAboutParagraph('about-p2', t.about2);
-  renderAboutParagraph('about-p3', t.about3);
-  renderAboutParagraph('about-p4', t.about4);
+  aboutTexts = [t.about1, t.about2, t.about3, t.about4];
   setText('exp-title', t.expTitle);
   renderExpList(t);
 
@@ -465,7 +474,11 @@ const selector = document.getElementById('language-select');
 const initialLanguage = detectLanguage();
 selector.value = initialLanguage;
 
-loadProjects().then(() => applyLanguage(initialLanguage));
+applyLanguage(initialLanguage);
+loadProjects().then(() => {
+  renderProjects(content[currentLang] || content.en);
+  requestAnimationFrame(setupReveals);
+});
 
 selector.addEventListener('change', (event) => {
   saveLanguage(event.target.value);
