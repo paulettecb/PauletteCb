@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,142 +7,132 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="background-glow"></div>
-    <div class="kyn-blobs" aria-hidden="true">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
-
-    <header class="topbar glass">
-      <h1 class="brand">Paulette <span>C</span><small>Personal Page</small></h1>
+    <header class="site-header glass">
+      <a class="brand-mark" href="#hero">
+        <span class="brand-mark__text">Paulette C</span>
+        <svg class="brand-mark__icon" viewBox="0 0 32 28" width="17" height="15" aria-hidden="true">
+          <path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="none" stroke="#E85DA0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#about" id="nav-about"></a>
+        <a href="#skills" id="nav-skills"></a>
+        <a href="#projects" id="nav-projects"></a>
+        <a href="#now" id="nav-now"></a>
+        <a href="#contact" id="nav-contact"></a>
+      </nav>
       <div class="lang-controls">
-        <label for="language-select" id="language-label">Language</label>
-        <select id="language-select" aria-label="Language selector">
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="pt">Português</option>
-          <option value="de">Deutsch</option>
+        <label for="language-select" class="sr-only" id="language-label">Language</label>
+        <select id="language-select" class="lang-select" aria-label="Language selector">
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="fr">FR</option>
+          <option value="pt">PT</option>
+          <option value="de">DE</option>
         </select>
       </div>
     </header>
 
-    <main class="container">
-      <section class="hero surface-card">
-        <div class="hero-layout">
-          <div>
-            <p class="eyebrow" id="hero-eyebrow">Hello there</p>
-            <h2 id="headline">Front-End Lead Developer + Psychology Student of Human Systems</h2>
-            <p id="intro-line">
-              I build digital systems for a living and study human systems for fun.
-            </p>
-            <div class="hero-badges" aria-label="Highlights">
-              <span class="badge">Architecture</span>
-              <span class="badge">Human Behavior</span>
-              <span class="badge">Creative Systems</span>
-            </div>
-            <div class="hero-actions" aria-label="Featured routes">
-              <a class="link-pill hero-route" id="mediapipe-route-link" href="proyectos/mediapipe-lab/index.html">
-                Open MediaPipe Lab
-              </a>
-            </div>
+    <main>
+      <section id="hero" class="hero-section">
+        <div class="hero-text">
+          <p class="hero-eyebrow" id="hero-eyebrow"></p>
+          <h1 class="hero-headline">
+            <span class="hero-headline__a" id="headline-a"></span>
+            <span class="hero-headline__b" id="headline-b"></span>
+          </h1>
+          <p class="hero-intro" id="hero-intro"></p>
+          <div class="hero-ctas">
+            <a href="#projects" class="kyn-btn kyn-btn--primary kyn-btn--lg" id="cta-projects"></a>
+            <a href="#contact" class="kyn-btn kyn-btn--secondary kyn-btn--lg" id="cta-contact"></a>
           </div>
-          <img
-            class="profile-photo"
-            src="assets/copy_E9E783B8-E9C2-40E2-845B-64C268D5DD36.png"
-            alt="Paulette smiling with Kenna"
-            onerror="this.onerror=null;this.src='https://placehold.co/720x960/f8eef1/8e1d48?text=Photo+Coming+Soon';"
-          />
+        </div>
+        <div class="hero-photo">
+          <div class="hero-photo__blob" aria-hidden="true"></div>
+          <div class="hero-photo__frame">
+            <img src="assets/paulette.png" alt="Paulette con Kenna" onerror="this.onerror=null;this.src='https://placehold.co/720x960/f8eef1/8e1d48?text=Photo+Coming+Soon';" />
+          </div>
+          <span class="hero-photo__sticker" id="hero-spark"></span>
+          <span class="hero-photo__heart" aria-hidden="true">
+            <svg viewBox="0 0 32 28" width="34" height="30" aria-hidden="true"><path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="#E85DA0" opacity="0.9" /></svg>
+          </span>
         </div>
       </section>
 
-      <div class="system-ribbon" aria-label="Design system palette"><span></span><span></span><span></span><span></span><span></span></div>
-      <section class="grid">
-        <article class="card surface-card" id="about">
-          <h3 id="about-title">About</h3>
-          <p id="about-p1">
-            I’m a Front-End Lead Developer and psychology student exploring the intersection of
-            technology and human behavior. I work at the edge where logic meets emotion.
-          </p>
-          <p id="about-p2">
-            By day, I lead front-end development projects focused on performance and architecture.
-            By night, I study psychology to understand how minds (including my own) navigate
-            complexity.
-          </p>
-          <p id="about-p3">
-            My curious ADHD brain thrives on abstraction, pattern recognition, and interdisciplinary
-            thinking. I don’t see chaos; I see systems waiting to be understood.
-          </p>
-          <p id="about-p4">
-            When I’m not building or studying systems, I’m training my life companions, Kenna (my
-            Border Collie), and negotiating creative boundaries with Rodolfo (my cat), daily
-            reminders that intelligence comes in many forms.
-          </p>
-        </article>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track" id="marquee-track"></div>
+      </div>
 
-        <article class="card surface-card" id="experience">
-          <h3 id="experience-title">Experience</h3>
-          <ul>
-            <li id="exp-1-title"><strong>Front-End Lead Developer</strong></li>
-            <li id="exp-1-detail">
-              Leading development of high-performance web experiences with scalable architecture,
-              design system alignment, and maintainable component strategy.
-            </li>
-            <li id="exp-2-title"><strong>Psychology Student</strong></li>
-            <li id="exp-2-detail">
-              Studying cognition, emotion, and behavior to better understand how humans process
-              information, make decisions, and adapt to complexity.
-            </li>
-          </ul>
-        </article>
+      <section id="about" class="section-about">
+        <div class="about-copy" data-reveal>
+          <p class="section-kicker">01</p>
+          <h2 class="section-title" id="about-title-wrap">
+            <span id="about-title"></span> <span class="section-title__spark" id="about-spark"></span>
+          </h2>
+          <div class="about-paragraphs">
+            <p class="about-paragraphs__lead" id="about-p1"></p>
+            <p id="about-p2"></p>
+            <p id="about-p3"></p>
+            <p id="about-p4"></p>
+          </div>
+        </div>
+        <aside class="about-experience" data-reveal>
+          <h3 id="exp-title"></h3>
+          <div class="exp-list" id="exp-list"></div>
+        </aside>
+      </section>
 
-        <article class="card surface-card project-lab" id="projects">
-          <div class="projects-head">
-            <h3 id="projects-title">Projects</h3>
-            <span class="tiny-pill" id="projects-pill">Visual Lab</span>
+      <section id="skills" class="section-skills">
+        <div class="section-inner">
+          <div data-reveal>
+            <p class="section-kicker">02</p>
+            <h2 class="section-title" id="skills-title"></h2>
           </div>
-          <div class="project-stickers" aria-hidden="true">
-            <span class="sticker s1"></span><span class="sticker s2"></span><span class="sticker s3"></span>
-          </div>
-          <p class="project-note" id="projects-note">A playful internal lab, auto-filled from the projects folder.</p>
-          <div class="project-list" id="project-list" aria-live="polite">
-            <div class="project project-loading">
-              <p id="projects-loading">Loading project cards…</p>
-            </div>
-          </div>
+          <div class="skills-grid" id="skills-grid"></div>
+        </div>
+      </section>
 
-          <div class="insight-board" aria-label="Decorative visual board">
-            <div class="mini-chart card-like">
-              <p>Creative Flow</p>
-              <div class="bars">
-                <span style="height: 38%"></span><span style="height: 64%"></span><span style="height: 54%"></span>
-                <span style="height: 76%"></span><span style="height: 59%"></span><span style="height: 82%"></span>
-                <span style="height: 48%"></span>
-              </div>
-            </div>
-            <div class="ring-wrap card-like">
-              <p>Focus Balance</p>
-              <div class="ring"></div>
-            </div>
+      <section id="projects" class="section-projects">
+        <div class="projects-head" data-reveal>
+          <div>
+            <p class="section-kicker">03</p>
+            <h2 class="section-title" id="projects-title"></h2>
           </div>
-        </article>
+          <span class="kyn-badge kyn-badge--pop" id="projects-pill"></span>
+        </div>
+        <p class="projects-note" id="projects-note" data-reveal></p>
+        <div class="projects-grid" id="project-list" aria-live="polite"></div>
+      </section>
 
-        <article class="card surface-card" id="contact">
-          <h3 id="contact-title">Contact</h3>
-          <p id="contact-copy">Want to connect? Say hi on Instagram:</p>
-          <a class="link-pill" href="https://instagram.com/paulettecb" target="_blank" rel="noreferrer">
-            @paulettecb
-          </a>
-          <p class="small-note" id="contact-note">
-            Public Instagram only. No phone or work contact shared.
-          </p>
-        </article>
+      <section id="now" class="section-now">
+        <div class="now-card" data-reveal>
+          <div class="now-head">
+            <h2 id="now-title"></h2>
+            <span class="now-year" id="now-year"></span>
+          </div>
+          <p class="now-note" id="now-note"></p>
+          <div class="now-grid" id="now-grid"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="section-contact">
+        <div class="contact-inner" data-reveal>
+          <svg viewBox="0 0 32 28" width="30" height="26" aria-hidden="true"><path d="M16 25.5C9.4 20 3.4 15 2.7 9.8 2.1 5.4 5.2 2.6 8.6 3.1c3 .4 5.4 2.7 7.4 5.4 2-2.7 4.4-5 7.4-5.4 3.4-.5 6.5 2.3 5.9 6.7C28.6 15 22.6 20 16 25.5Z" fill="#E85DA0" /></svg>
+          <h2 id="contact-title"></h2>
+          <p id="contact-copy"></p>
+          <a class="kyn-btn kyn-btn--primary kyn-btn--lg" href="https://instagram.com/paulettecb" target="_blank" rel="noreferrer">@paulettecb</a>
+          <p class="small-note" id="contact-note"></p>
+        </div>
+        <footer class="site-footer">
+          <p class="site-footer__brand">Paulette</p>
+          <p id="footer-note"></p>
+        </footer>
       </section>
     </main>
 

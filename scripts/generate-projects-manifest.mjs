@@ -80,6 +80,7 @@ for (const entry of entries) {
   if (override.hidden) continue;
 
   const title = override.title || readmeMeta.title || htmlTitle || titleCase(packageName || entry.name);
+  // description is a string, or a { en, es, fr, pt, de } object when the config override provides per-language copy.
   const description = override.description || packageDescription || htmlDescription || readmeMeta.description || `Interactive ${title} project.`;
 
   projects.push({
