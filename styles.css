@@ -253,7 +253,7 @@ a:focus-visible {
 }
 .brand-mark:hover{ color: var(--ink-900); }
 .brand-mark:hover .brand-mark__icon{ animation: heartPop 480ms var(--ease-out); }
-.brand-mark__text{ font-family: var(--font-serif); text-transform: lowercase; font-size: 27px; line-height: 1; }
+.brand-mark__text{ font-family: var(--font-display); font-size: 24px; line-height: 1; }
 
 @keyframes heartPop {
   0% { transform: scale(1) rotate(0); }
@@ -346,6 +346,7 @@ a:focus-visible {
   animation: pauUp 700ms var(--ease-out) both 460ms;
 }
 .hero-ctas .kyn-btn{ font-family: var(--font-display); font-size: 20px; letter-spacing: 0.02em; }
+.contact-instagram{ font-family: var(--font-serif); font-weight: 400; font-size: 22px; }
 
 .hero-photo{
   position: relative;
@@ -785,5 +786,4 @@ ul { margin: 0; padding-left: var(--space-4); }
 .small-note{ margin: 0; font-size: 13.5px; color: var(--ink-700); }
 
 .site-footer{ border-top: 1px solid var(--sand); padding: 26px 0 34px; text-align: center; }
-.site-footer__brand{ margin: 0 0 4px; font-family: var(--font-serif); font-size: 34px; color: var(--ink-900); }
 .site-footer p:last-child{ margin: 0; color: var(--ink-700); font-size: 13px; }
