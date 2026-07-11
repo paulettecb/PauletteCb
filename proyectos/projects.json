@@ -1,19 +1,6 @@
 {
   "projects": [
     {
-      "slug": "budget-planner-tdah",
-      "title": "Budget Planner TDAH",
-      "description": {
-        "en": "Guided budgeting with ADHD-friendly flows, visual reminders and a 5-minute mode.",
-        "es": "Presupuesto guiado con flujos TDAH-friendly, recordatorios visuales y modo 5 minutos.",
-        "fr": "Budget guidé adapté au TDAH, rappels visuels et mode 5 minutes.",
-        "pt": "Orçamento guiado com fluxos TDAH-friendly, lembretes visuais e modo 5 minutos.",
-        "de": "Geführtes Budget mit ADHS-freundlichen Abläufen, visuellen Erinnerungen und 5-Minuten-Modus."
-      },
-      "type": "Tool",
-      "url": "proyectos/budget-planner-tdah/index.html"
-    },
-    {
       "slug": "ceneval",
       "title": "CENEVAL — EGEL Plus PSI",
       "description": {
@@ -40,17 +27,17 @@
       "url": "proyectos/KYN%20Design%20System/index.html"
     },
     {
-      "slug": "kyn-studio",
-      "title": "KYN Studio",
+      "slug": "budget-planner-tdah",
+      "title": "Lana · Tu dinero del mes",
       "description": {
-        "en": "KYN's home on the web — the studio behind the design system.",
-        "es": "La casa de KYN en la web — el estudio detrás del design system.",
-        "fr": "La maison de KYN sur le web — le studio derrière le design system.",
-        "pt": "A casa da KYN na web — o estúdio por trás do design system.",
-        "de": "KYNs Zuhause im Web — das Studio hinter dem Design System."
+        "en": "Monthly money control: expenses, budget and a debt-payoff plan (snowball/avalanche). Local-only data, ADHD-friendly.",
+        "es": "Control del dinero del mes: gastos, presupuesto y plan para salir de deudas (bola de nieve/avalancha). Datos solo en tu navegador, TDAH-friendly.",
+        "fr": "Contrôle de l'argent du mois : dépenses, budget et plan de sortie de dettes. Données 100 % locales, pensé TDAH.",
+        "pt": "Controle do dinheiro do mês: gastos, orçamento e plano para sair das dívidas. Dados só no navegador, TDAH-friendly.",
+        "de": "Monatliche Geldkontrolle: Ausgaben, Budget und Schuldenabbau-Plan. Daten nur lokal, ADHS-freundlich."
       },
-      "type": "Studio",
-      "url": "https://kynstudio.com.mx"
+      "type": "Tool",
+      "url": "proyectos/budget-planner-tdah/index.html"
     },
     {
       "slug": "lsm",

@@ -1,0 +1,15 @@
+{
+  "name": "Lana · Tu dinero del mes",
+  "short_name": "Lana",
+  "description": "Gastos, presupuesto y plan para salir de deudas. Tus datos viven solo en tu navegador.",
+  "lang": "es-MX",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBFAF7",
+  "theme_color": "#8795D2",
+  "icons": [
+    { "src": "./favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

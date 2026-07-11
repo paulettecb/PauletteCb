@@ -1,0 +1,129 @@
+/* deudas.css — estilos propios de la vista de deudas de Lana (prefijo .deu-).
+   Todo lo demás sale de las clases compartidas de styles.css. */
+
+.deu-lista {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+/* Encabezado de cada card de deuda */
+.deu-nombre-zona {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.deu-emoji {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.deu-nombre {
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deu-datos {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+.deu-progreso {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+}
+
+.deu-progreso-texto {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.deu-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+/* Resultado del plan: la fecha de libertad, protagonista */
+.deu-plan-fecha {
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--periwinkle-700);
+  text-transform: capitalize;
+}
+
+/* Orden de liquidación: 1., 2., 3. con bolita numerada */
+.deu-orden {
+  list-style: none;
+  counter-reset: deu-paso;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.deu-orden li {
+  counter-increment: deu-paso;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-brand-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+.deu-orden li::before {
+  content: counter(deu-paso);
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--periwinkle-500);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.deu-orden-nombre {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Cajita verde para presumir el ahorro del extra */
+.deu-ahorro {
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--success-soft);
+  color: var(--success);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Cajita ámbar cuando el plan no alcanza (sin regaños) */
+.deu-problema {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--warning-soft);
+  color: #7a5a1e;
+  font-size: 0.92rem;
+  display: grid;
+  gap: 0.35rem;
+}
