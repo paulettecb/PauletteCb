@@ -161,6 +161,7 @@
                 ref="videoEl"
                 class="ml-cam-video"
                 :class="{ 'is-mirror': mirror, 'is-hidden': camState !== 'listo' }"
+                aria-label="Vista previa en vivo de tu cámara"
                 autoplay
                 muted
                 playsinline
@@ -350,10 +351,10 @@ const NAV = [
 ]
 
 const MODULOS = [
-  { id: 'lsm', nombre: 'LSM', hash: '/lsm', pastel: 'var(--pastel-sky)', icon: GLYPH.hand, chips: ['manos'], desc: 'Explora la Lengua de Señas Mexicana.', largo: 'Explorador de señas con landmarks de manos, diccionario con fuentes citadas y práctica con feedback en vivo. Un tutor, no un traductor.', estado: 'listo', estadoColor: 'var(--success)', cta: 'Abrir LSM' },
-  { id: 'agility', nombre: 'Agility', hash: '/agility', pastel: 'var(--pastel-lilac)', icon: GLYPH.pose, chips: ['pose'], desc: 'Entrena las señales de agility con tu perro.', largo: 'Diseña pistas FCI, practica el timing de tus señales frente a la cámara y sigue tu progreso. Tu app de agility canino.', estado: 'listo', estadoColor: 'var(--success)', cta: 'Abrir Agility' },
-  { id: 'exercise', nombre: 'Exercise', hash: '/exercise', pastel: 'var(--pastel-mint)', icon: GLYPH.dumbbell, chips: ['pose'], desc: 'Cuenta reps y cuida tu forma.', largo: 'Cuenta repeticiones con una máquina de estados por ángulo y te da feedback geométrico en vivo. Sin promesas médicas.', estado: 'en curso', estadoColor: 'var(--periwinkle-600)', cta: 'Abrir Exercise' },
-  { id: 'experiments', nombre: 'Experiments', hash: '/experiments', pastel: 'var(--pastel-peach)', icon: GLYPH.spark, chips: ['manos', 'pose'], desc: 'Controla la pantalla con el cuerpo.', largo: 'Arte interactivo y control creativo de UI: dibuja con el dedo, mueve variables CSS con la mano, campos de partículas alrededor de tu esqueleto.', estado: 'próximo', estadoColor: 'var(--ink-300)', cta: 'Abrir Experiments' }
+  { id: 'lsm', nombre: 'LSM', hash: '/lsm', pastel: 'var(--pastel-sky)', icon: GLYPH.hand, chips: ['manos'], desc: 'Explora la Lengua de Señas Mexicana.', largo: 'Explorador de señas con landmarks de manos, diccionario con fuentes citadas y práctica con feedback en vivo. Un tutor, no un traductor.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir LSM' },
+  { id: 'agility', nombre: 'Agility', hash: '/agility', pastel: 'var(--pastel-lilac)', icon: GLYPH.pose, chips: ['pose'], desc: 'Entrena las señales de agility con tu perro.', largo: 'Diseña pistas FCI, practica el timing de tus señales frente a la cámara y sigue tu progreso. Tu app de agility canino.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir Agility' },
+  { id: 'exercise', nombre: 'Exercise', hash: '/exercise', pastel: 'var(--pastel-mint)', icon: GLYPH.dumbbell, chips: ['pose'], desc: 'Cuenta reps y cuida tu forma.', largo: 'Cuenta repeticiones con una máquina de estados por ángulo y te da feedback geométrico en vivo. Sin promesas médicas.', estado: 'en curso', estadoColor: 'var(--periwinkle-700)', cta: 'Abrir Exercise' },
+  { id: 'experiments', nombre: 'Experiments', hash: '/experiments', pastel: 'var(--pastel-peach)', icon: GLYPH.spark, chips: ['manos', 'pose'], desc: 'Controla la pantalla con el cuerpo.', largo: 'Arte interactivo y control creativo de UI: dibuja con el dedo, mueve variables CSS con la mano, campos de partículas alrededor de tu esqueleto.', estado: 'próximo', estadoColor: 'var(--ink-700)', cta: 'Abrir Experiments' }
 ]
 
 const PRIVACIDAD = [
@@ -470,18 +471,28 @@ let camStream = null
 let fpsRaf = null
 let fpsCount = 0
 let fpsLast = 0
+let camReq = 0 // generación: descarta streams de peticiones superadas
 
 async function startCam () {
+  // sin reentradas: un doble clic o un flujo en curso no debe abrir dos cámaras
+  if (camState.value === 'iniciando' || camState.value === 'listo') return
+  stopCam()
+  const req = ++camReq
   camState.value = 'iniciando'
   try {
-    camStream = await navigator.mediaDevices.getUserMedia({
+    const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
       audio: false
     })
     camGranted.value = true
+    // ¿nos superó otra petición o el usuario ya salió de la cámara? corta este stream.
+    if (req !== camReq || screen.value !== 'camara') {
+      stream.getTracks().forEach((t) => t.stop())
+      if (req === camReq) camState.value = camGranted.value ? 'apagada' : 'pidiendo'
+      return
+    }
+    camStream = stream
     await nextTick()
-    // el usuario pudo salir de la pantalla mientras se pedía el permiso
-    if (screen.value !== 'camara') { stopCam(); camState.value = 'apagada'; return }
     const v = videoEl.value
     if (v) { v.srcObject = camStream; try { await v.play() } catch (_) { /* autoplay */ } }
     const track = camStream.getVideoTracks()[0]
@@ -491,11 +502,12 @@ async function startCam () {
     camState.value = 'listo'
     startFps()
   } catch (_) {
-    camState.value = 'error'
+    if (req === camReq) camState.value = 'error'
   }
 }
 
 function stopCam () {
+  camReq += 1 // invalida cualquier getUserMedia en vuelo (evita fugas al salir/desmontar)
   if (camStream) { camStream.getTracks().forEach((t) => t.stop()); camStream = null }
   stopFps()
   if (videoEl.value) videoEl.value.srcObject = null
@@ -504,6 +516,7 @@ function stopCam () {
 function detener () { stopCam(); camState.value = 'apagada' }
 
 function startFps () {
+  stopFps() // nunca dejes un rAF anterior corriendo en paralelo
   fpsCount = 0
   fpsLast = 0
   const tick = (ts) => {
@@ -647,7 +660,7 @@ onBeforeUnmount(() => {
   background: var(--oat);
 }
 .ml-side-status strong { font-size: 12.5px; display: block; }
-.ml-side-status span { font-size: 11px; color: var(--ink-500); }
+.ml-side-status span { font-size: 11px; color: var(--ink-700); }
 
 .ml-dot { width: 9px; height: 9px; border-radius: 999px; flex: none; }
 .ml-dot--live { background: var(--success); box-shadow: 0 0 0 4px rgba(79, 164, 122, 0.16); }
@@ -738,7 +751,7 @@ onBeforeUnmount(() => {
 
 /* ── Módulos (detalle) ── */
 .ml-page-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.ml-page-sub { font-size: 13.5px; color: var(--ink-500); }
+.ml-page-sub { font-size: 13.5px; color: var(--ink-700); }
 .ml-mod-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .ml-mod-detail { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; padding: 22px; background: var(--paper); border: 1px solid var(--ink-100); border-radius: 20px; box-shadow: var(--shadow-sm); }
 .ml-mod-detail-body { display: grid; gap: 8px; min-width: 0; }
@@ -767,7 +780,7 @@ onBeforeUnmount(() => {
 .ml-scanline { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(135, 149, 210, 0.9), transparent); animation: ml-scan 3.2s var(--ease-out, ease) infinite; }
 .ml-cam-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.28) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.28) 1px, transparent 1px); background-size: 33.333% 33.333%; background-position: center; }
 .ml-live-pill { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; background: rgba(255, 255, 255, 0.92); font-size: 12.5px; font-weight: 700; color: var(--ink-900); }
-.ml-fps-pill { position: absolute; top: 14px; right: 14px; padding: 6px 13px; border-radius: 999px; background: rgba(79, 164, 122, 0.92); color: #fff; font-size: 12px; font-weight: 700; }
+.ml-fps-pill { position: absolute; top: 14px; right: 14px; padding: 6px 13px; border-radius: 999px; background: rgba(38, 102, 72, 0.95); color: #fff; font-size: 12px; font-weight: 700; }
 
 .ml-cam-overlay { position: absolute; inset: 0; display: grid; place-items: center; padding: 30px; text-align: center; }
 .ml-cam-ask { display: grid; justify-items: center; gap: 12px; max-width: 340px; }
@@ -779,7 +792,7 @@ onBeforeUnmount(() => {
 .ml-progress-bar { width: 40%; height: 100%; border-radius: 999px; background: var(--periwinkle-400); animation: ml-indeterminate 1.3s var(--ease-in-out, ease-in-out) infinite; }
 
 .ml-cam-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.ml-cam-hint { margin-left: auto; font-size: 12.5px; color: var(--ink-500); }
+.ml-cam-hint { margin-left: auto; font-size: 12.5px; color: var(--ink-700); }
 
 .ml-cam-panel { display: grid; gap: 12px; }
 .ml-panel-tech { display: grid; gap: 10px; padding: 18px; background: var(--ink-900); border-radius: 16px; color: #fff; }
@@ -794,6 +807,7 @@ onBeforeUnmount(() => {
 .ml-switch.is-on { background: var(--periwinkle-500); }
 .ml-knob { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); transition: left var(--dur-fast, 140ms) var(--ease-out); }
 .ml-switch.is-on .ml-knob { left: 16px; }
+.ml-toggle:has(.ml-sr:focus-visible) .ml-switch { box-shadow: var(--shadow-focus); }
 .ml-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ── Privacidad ── */
@@ -803,7 +817,7 @@ onBeforeUnmount(() => {
 .ml-priv-card { display: flex; gap: 12px; padding: 18px 20px; background: var(--paper); border: 1px solid var(--ink-100); border-radius: 16px; }
 .ml-priv-card strong { font-size: 14px; display: block; }
 .ml-priv-card span { font-size: 13px; line-height: 1.5; color: var(--ink-500); }
-.ml-priv-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 20px; background: var(--oat); border-radius: 16px; font-size: 12.5px; color: var(--ink-500); }
+.ml-priv-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 16px 20px; background: var(--oat); border-radius: 16px; font-size: 12.5px; color: var(--ink-700); }
 .ml-sep { width: 4px; height: 4px; border-radius: 999px; background: var(--ink-300); }
 .ml-priv-repo { margin-left: auto; }
 
@@ -850,10 +864,11 @@ onBeforeUnmount(() => {
   .ml-cam-col { height: 100%; gap: 0; }
   .ml-cam-stage { height: 100%; aspect-ratio: auto; border-radius: 0; }
   .ml-cam-controls {
-    position: absolute; left: 0; right: 0; bottom: 76px; z-index: 4;
+    position: fixed; left: 0; right: 0; bottom: 84px; z-index: 7;
     justify-content: center; padding: 0 16px;
   }
   .ml-cam-controls .ml-btn { backdrop-filter: blur(8px); }
+  .ml-cam-controls .ml-btn--ghost { background: rgba(20, 19, 27, 0.55); color: #fff; border-color: rgba(255, 255, 255, 0.28); }
   .ml-cam-hint { display: none; }
 
   .ml-bottomnav {
