@@ -1,6 +1,53 @@
 <template>
-  <section class="designer">
-    <div class="designer-toolbar">
+  <section
+    class="designer"
+    :class="{ 'mobile-preview': !mobileEditMode }"
+  >
+    <div class="pista-topbar">
+      <button
+        type="button"
+        class="mobile-back-link"
+        @click="mobileEditMode = false"
+      >
+        ‹ Vista previa
+      </button>
+      <h1 class="pista-title">
+        {{ courseName || 'Pista sin nombre' }}
+      </h1>
+      <span class="badge">Grado {{ grado }} · {{ categoria }} · {{ modalidad === 'jumping' ? 'Jumping' : 'Agility' }}</span>
+      <span
+        v-if="items.length"
+        class="badge badge-mint"
+        :class="{ 'badge-warn': validations.some((finding) => finding.nivel === 'error') }"
+      >{{ validations.some((finding) => finding.nivel === 'error') ? '⚠ revisar reglamento' : `✓ válida para Grado ${grado}` }}</span>
+
+      <div class="topbar-actions">
+        <label class="btn btn-ghost import-btn">
+          ⇧ Importar
+          <input
+            type="file"
+            accept="application/json"
+            @change="importJson"
+          >
+        </label>
+        <button
+          class="btn btn-secondary"
+          type="button"
+          @click="exportJson"
+        >
+          ⇩ Exportar
+        </button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          @click="saveCourse"
+        >
+          💾 Guardar
+        </button>
+      </div>
+    </div>
+
+    <div class="pista-settings">
       <label class="control">
         <span>Categoría</span>
         <select v-model="categoria">
@@ -56,9 +103,19 @@
       </label>
     </div>
 
+    <div class="mobile-preview-banner">
+      <span>La edición completa vive aquí mismo — toca «Editar pista» para abrir la paleta y el lienzo interactivo.</span>
+      <button
+        class="btn btn-primary"
+        type="button"
+        @click="mobileEditMode = true"
+      >
+        ✏️ Editar pista
+      </button>
+    </div>
+
     <div class="designer-layout">
       <aside class="palette">
-        <h3>Obstáculos</h3>
         <button
           v-for="tipo in OBSTACLE_TYPES"
           :key="tipo.id"
@@ -68,21 +125,24 @@
           @click="addObstacle(tipo.id)"
         >
           <span class="palette-icon">{{ tipo.icono }}</span>
-          <span>{{ tipo.nombre }}</span>
+          <span class="sr-only">{{ tipo.nombre }}</span>
         </button>
+        <div class="palette-divider" />
         <button
-          class="btn btn-primary palette-example"
+          class="palette-item"
           type="button"
+          title="Pista de ejemplo"
           @click="loadExample"
         >
-          🐾 Pista de ejemplo
+          🐾<span class="sr-only">Pista de ejemplo</span>
         </button>
         <button
-          class="btn palette-clear"
+          class="palette-item"
           type="button"
+          title="Vaciar pista"
           @click="clearCourse"
         >
-          🗑️ Vaciar pista
+          🗑️<span class="sr-only">Vaciar pista</span>
         </button>
       </aside>
 
@@ -309,7 +369,7 @@
         </div>
 
         <div class="panel-card">
-          <h3>Reglamento</h3>
+          <h3>Reglamento en vivo</h3>
           <ul class="validation-list">
             <li
               v-for="(finding, i) in validations"
@@ -383,14 +443,6 @@
             >
               ⇩ SVG
             </button>
-            <label class="btn mini import-btn">
-              ⇧ Importar
-              <input
-                type="file"
-                accept="application/json"
-                @change="importJson"
-              >
-            </label>
           </div>
         </div>
       </aside>
@@ -426,6 +478,7 @@ const selectedId = ref(null)
 const courseName = ref('')
 const savedCourses = ref(readSavedCourses())
 const svgRef = ref(null)
+const mobileEditMode = ref(false)
 let nextId = 1
 let drag = null
 let applyingCourse = false
@@ -774,17 +827,54 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
 <style scoped>
 .designer { display: grid; gap: var(--space-4); }
 
-.designer-toolbar {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Top bar ---------- */
+.pista-topbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.pista-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--periwinkle-600);
+}
+.badge-mint { color: #2E6B4C; background: rgba(79, 164, 122, 0.16); }
+.badge-mint.badge-warn { color: #8A5A12; background: rgba(217, 164, 65, 0.2); }
+.topbar-actions { margin-left: auto; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.mobile-back-link {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+  padding: 0;
+}
+
+/* ---------- Settings row ---------- */
+.pista-settings {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  background: var(--surface-brand-soft);
-  border: var(--border-width) solid var(--border-strong);
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius-md);
 }
-
 .control { display: grid; gap: var(--space-1); font-size: var(--text-sm); color: var(--text-secondary); font-weight: var(--weight-semibold); }
 .control select,
 .control input[type='number'],
@@ -793,54 +883,65 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
   padding: 6px 10px;
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-sm);
-  background: var(--surface-card);
+  background: var(--surface-page);
   font: inherit;
   color: var(--text-primary);
 }
 .control.checkbox { grid-auto-flow: column; align-items: center; gap: var(--space-2); padding-bottom: 8px; }
 
+.mobile-preview-banner { display: none; }
+
+/* ---------- Layout de 3 columnas ---------- */
 .designer-layout {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr) 300px;
+  grid-template-columns: 64px minmax(0, 1fr) 300px;
   gap: var(--space-4);
   align-items: start;
 }
 
-.palette { display: grid; gap: var(--space-2); align-content: start; }
-.palette h3 { margin: 0 0 var(--space-1); font-size: var(--text-md); }
-.palette-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 8px 12px;
-  border: var(--border-width) solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+.palette {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  justify-items: center;
+  padding: 10px 8px;
   background: var(--surface-card);
-  cursor: pointer;
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
-  text-align: left;
-  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: var(--space-4);
 }
-.palette-item:hover { border-color: var(--periwinkle-400); transform: translateX(2px); }
-.palette-icon { font-size: var(--text-md); }
-.palette-example,
-.palette-clear { justify-content: center; min-height: 38px; padding: 8px 12px; font-size: var(--text-sm); }
+.palette-item {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.palette-item:hover { background: var(--periwinkle-50); transform: translateY(-1px); }
+.palette-divider { width: 26px; height: 1px; background: var(--ink-100); margin: 2px 0; }
 
 .field-wrap { display: grid; gap: var(--space-3); min-width: 0; }
 .field {
   width: 100%;
   height: auto;
   touch-action: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--surface-card);
   border: var(--border-width) solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
 }
-.grass { fill: #eef4ea; }
-.grid line { stroke: rgba(79, 164, 122, 0.14); stroke-width: 1px; vector-effect: non-scaling-stroke; }
-.grid line.major { stroke: rgba(79, 164, 122, 0.3); }
-.fence { fill: none; stroke: var(--success); stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.mobile-preview .field { touch-action: auto; }
+.grass { fill: #EBF1EA; }
+.grid line { stroke: rgba(42, 41, 51, 0.05); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.grid line.major { stroke: rgba(42, 41, 51, 0.09); }
+.fence { fill: none; stroke: var(--periwinkle-200); stroke-width: 2px; vector-effect: non-scaling-stroke; }
 .field-label { font-size: 0.55px; fill: var(--text-muted); }
 
 .path-line { stroke: var(--periwinkle-500); stroke-width: 2px; stroke-dasharray: 6 4; vector-effect: non-scaling-stroke; opacity: 0.8; }
@@ -858,21 +959,22 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
   vector-effect: non-scaling-stroke;
 }
 
-.seq-badge circle { fill: var(--periwinkle-800); stroke: white; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.seq-badge circle { fill: #434D80; stroke: white; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
 .seq-badge text { font-size: 0.62px; fill: white; text-anchor: middle; font-weight: 700; }
 
-.stats-bar { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-.stat {
-  display: grid;
-  gap: 2px;
-  min-width: 84px;
-  padding: var(--space-2) var(--space-3);
+.stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 12px 20px;
   background: var(--surface-card);
   border: var(--border-width) solid var(--border-subtle);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
 }
-.stat-label { color: var(--text-muted); font-size: var(--text-xs); font-weight: var(--weight-semibold); text-transform: uppercase; letter-spacing: 0.05em; }
-.stat strong { color: var(--periwinkle-800); font-size: var(--text-md); }
+.stat { display: flex; align-items: baseline; gap: 6px; font-size: var(--text-sm); color: var(--text-secondary); }
+.stat-label { color: var(--text-muted); }
+.stat strong { color: var(--text-primary); }
 
 .side-panel { display: grid; gap: var(--space-3); align-content: start; }
 .panel-card {
@@ -880,6 +982,7 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
   background: var(--surface-card);
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
 .panel-card h3 { margin: 0 0 var(--space-3); font-size: var(--text-md); }
 .panel-card.muted p { margin: 0; color: var(--text-muted); font-size: var(--text-sm); }
@@ -894,7 +997,7 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
 
 .validation-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); font-size: var(--text-sm); }
 .validation-list li { display: flex; gap: var(--space-2); align-items: baseline; color: var(--text-secondary); }
-.validation-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; transform: translateY(-1px); }
+.validation-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; transform: translateY(-1px); background: var(--ink-300); }
 .validation-list li.ok .validation-dot { background: var(--success); }
 .validation-list li.aviso .validation-dot { background: var(--warning); }
 .validation-list li.error .validation-dot { background: var(--danger); }
@@ -912,7 +1015,35 @@ const loadExample = () => applyCourse(EXAMPLE_COURSE)
 
 @media (max-width: 1080px) {
   .designer-layout { grid-template-columns: 1fr; }
-  .palette { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-  .palette h3 { grid-column: 1 / -1; }
+  .palette {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .palette-divider { width: 1px; height: 26px; margin: 0 4px; }
+}
+
+/* ---------- Móvil: solo-lectura por default ---------- */
+@media (max-width: 880px) {
+  .designer.mobile-preview .pista-settings,
+  .designer.mobile-preview .topbar-actions,
+  .designer.mobile-preview .palette,
+  .designer.mobile-preview .side-panel {
+    display: none;
+  }
+  .designer.mobile-preview .mobile-preview-banner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--pastel-butter);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+  .designer.mobile-preview .field { pointer-events: none; }
+
+  .designer:not(.mobile-preview) .mobile-back-link { display: inline-flex; }
 }
 </style>
