@@ -1,12 +1,75 @@
 <template>
   <div class="lector-kyn">
     <div
-      v-show="state.regla"
+      v-show="state.regla || gazeRuling"
       ref="reglaRef"
       class="regla"
+      :class="{ 'regla-mirada': gazeRuling }"
       :style="{ top: `${reglaTop}px` }"
       aria-hidden="true"
     />
+
+    <!-- Panel de auto-vista + estado, visible solo con la mirada activa -->
+    <div
+      v-show="gazeOn"
+      class="gaze-panel"
+    >
+      <video
+        ref="gazeVideo"
+        class="gaze-video"
+        autoplay
+        playsinline
+        muted
+      />
+      <div class="gaze-panel-info">
+        <span
+          class="gaze-dot"
+          :class="{ on: gaze.facePresent.value }"
+        />
+        <span class="gaze-panel-text">{{ gazePanelText }}</span>
+        <button
+          v-if="gaze.calibrated.value && !calibrating"
+          type="button"
+          class="gaze-mini-btn"
+          @click="startCalibration"
+        >Recalibrar</button>
+      </div>
+    </div>
+
+    <!-- Overlay de calibración -->
+    <div
+      v-if="calibrating"
+      class="gaze-cal"
+      role="dialog"
+      aria-label="Calibración de mirada"
+    >
+      <div
+        class="gaze-cal-dot"
+        :style="{ top: `${CAL_POINTS[calStep].frac * 100}%` }"
+      />
+      <div class="gaze-cal-card">
+        <strong>Calibrando la mirada · paso {{ calStep + 1 }} de {{ CAL_POINTS.length }}</strong>
+        <p>Sin mover la cabeza, <b>mira el punto {{ CAL_POINTS[calStep].label }}</b> y presiona Espacio (o el botón).</p>
+        <p
+          v-if="!gaze.facePresent.value"
+          class="gaze-cal-warn"
+        >No te veo bien: acomódate frente a la cámara con buena luz.</p>
+        <div class="gaze-cal-actions">
+          <button
+            type="button"
+            class="btn btn-primary"
+            :disabled="!gaze.facePresent.value"
+            @click="captureCalibration"
+          >Capturar punto</button>
+          <button
+            type="button"
+            class="btn mini"
+            @click="cancelCalibration"
+          >Cancelar</button>
+        </div>
+      </div>
+    </div>
+
     <div
       class="lector-bar"
       :class="{ mini: isMini }"
@@ -50,6 +113,13 @@
       >📏 Regla</button>
       <button
         type="button"
+        class="gaze-toggle"
+        :aria-pressed="String(gazeOn)"
+        title="Regla con la mirada: la banda sigue tus ojos (usa la cámara, todo local)"
+        @click="toggleMirada"
+      >👁️ Mirada</button>
+      <button
+        type="button"
         title="Letra más chica"
         @click="changeFuente(-1)"
       >A−</button>
@@ -63,13 +133,14 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { useGazeReader } from '../composables/useGazeReader'
 
 // Lector KYN: lectura biónica (negritas de fijación), regla que sigue al
-// cursor y tamaño de letra. Mismo mecanismo que libro-agility.html, portado a
-// componente Vue para usarse dentro de la app (no solo en el mini libro
-// autocontenido). Comparte el localStorage `lector-kyn` con el mini libro:
-// es la misma persona leyendo, la preferencia debe viajar entre los dos.
+// cursor —o a la mirada— y tamaño de letra. Mismo mecanismo que
+// libro-agility.html, portado a componente Vue para usarse dentro de la app.
+// Comparte el localStorage `lector-kyn` con el mini libro: es la misma
+// persona leyendo, la preferencia debe viajar entre los dos.
 const props = defineProps({
   // Selector de los nodos de texto corrido a bionizar (títulos y nombres
   // quedan fuera a propósito: la fijación parcial en texto grande se ve rota).
@@ -86,6 +157,12 @@ const RATIOS = { 1: 0.32, 2: 0.45, 3: 0.6 }
 const TAMANOS = ['100%', '112%', '125%']
 const NIVEL_MARCAS = { 1: '▁', 2: '▃', 3: '▅' }
 const NIVEL_TITULOS = { 1: 'Fijación suave', 2: 'Fijación media', 3: 'Fijación fuerte' }
+// Puntos de calibración de mirada, de arriba a abajo del área de lectura.
+const CAL_POINTS = [
+  { label: 'de arriba', frac: 0.22 },
+  { label: 'del centro', frac: 0.5 },
+  { label: 'de abajo', frac: 0.78 },
+]
 
 const readState = () => {
   try {
@@ -99,6 +176,24 @@ const state = reactive(readState())
 const isMini = ref(false)
 const reglaRef = ref(null)
 const reglaTop = ref(window.innerHeight * 0.4)
+
+// La mirada NO se persiste: encender la cámara debe ser un gesto explícito
+// cada sesión, no algo que revive solo al abrir una lección.
+const gaze = useGazeReader()
+const gazeVideo = ref(null)
+const gazeOn = ref(false)
+const calibrating = ref(false)
+const calStep = ref(0)
+let calSamples = []
+
+const gazeRuling = computed(() => gazeOn.value && gaze.calibrated.value)
+const gazePanelText = computed(() => {
+  if (gaze.status.value) return gaze.status.value
+  if (calibrating.value) return 'Calibrando…'
+  if (!gaze.facePresent.value) return 'No te veo — acomódate frente a la cámara.'
+  if (gaze.calibrated.value) return 'Siguiendo tu mirada.'
+  return 'Listo para calibrar.'
+})
 
 let originales = new Map()
 let miniTimer = null
@@ -159,13 +254,70 @@ const changeFuente = (delta) => {
   aplicarFuente()
 }
 
+const setReglaAt = (clientY) => {
+  const alto = reglaRef.value?.offsetHeight || 0
+  reglaTop.value = clientY - alto / 2
+}
+
 const onPointerMove = (event) => {
-  if (!state.regla || raf) return
+  if (gazeRuling.value || !state.regla || raf) return
   raf = requestAnimationFrame(() => {
-    const alto = reglaRef.value?.offsetHeight || 0
-    reglaTop.value = event.clientY - alto / 2
+    setReglaAt(event.clientY)
     raf = null
   })
+}
+
+// La regla sigue la mirada cuando está calibrada.
+watch(() => gaze.gazeY.value, (y) => {
+  if (gazeRuling.value && y !== null) setReglaAt(y)
+})
+
+const toggleMirada = async () => {
+  if (gazeOn.value) {
+    gazeOn.value = false
+    calibrating.value = false
+    gaze.stop()
+    gaze.clearCalibration()
+    return
+  }
+  gazeOn.value = true
+  await gaze.start(gazeVideo.value)
+  if (gaze.active.value) startCalibration()
+  else gazeOn.value = false
+}
+
+const startCalibration = () => {
+  calSamples = []
+  calStep.value = 0
+  calibrating.value = true
+}
+
+const captureCalibration = () => {
+  const offset = gaze.currentOffset()
+  if (offset === null || !gaze.facePresent.value) return
+  calSamples.push({ offset, y: CAL_POINTS[calStep.value].frac * window.innerHeight })
+
+  if (calStep.value < CAL_POINTS.length - 1) {
+    calStep.value += 1
+    return
+  }
+  calibrating.value = false
+  if (!gaze.setCalibration(calSamples)) startCalibration() // calibración inválida, reintentar
+}
+
+const cancelCalibration = () => {
+  calibrating.value = false
+  if (!gaze.calibrated.value) {
+    gazeOn.value = false
+    gaze.stop()
+  }
+}
+
+const onKeydown = (event) => {
+  if (calibrating.value && (event.code === 'Space' || event.key === ' ')) {
+    event.preventDefault()
+    captureCalibration()
+  }
 }
 
 const wake = () => {
@@ -185,14 +337,17 @@ watch(() => props.contentKey, () => {
 
 onMounted(() => {
   document.addEventListener('pointermove', onPointerMove)
+  document.addEventListener('keydown', onKeydown)
   aplicar()
   armarMini()
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('pointermove', onPointerMove)
+  document.removeEventListener('keydown', onKeydown)
   clearTimeout(miniTimer)
   if (raf) cancelAnimationFrame(raf)
+  gaze.stop()
   desbionizar()
   const container = document.querySelector(props.containerSelector)
   if (container) container.style.fontSize = ''
@@ -244,6 +399,89 @@ onBeforeUnmount(() => {
   border-top: 1px solid rgba(135, 149, 210, 0.35);
   border-bottom: 1px solid rgba(135, 149, 210, 0.35);
 }
+/* La regla de mirada glisa por transición para tapar el jitter residual. */
+.regla-mirada {
+  background: rgba(232, 93, 160, 0.13);
+  border-top-color: rgba(232, 93, 160, 0.4);
+  border-bottom-color: rgba(232, 93, 160, 0.4);
+  transition: top 0.12s linear;
+}
+
+/* Auto-vista de mirada */
+.gaze-panel {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  background: var(--white);
+  border: 1.5px solid var(--periwinkle-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+.gaze-video {
+  width: 132px;
+  height: 74px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--ink-900);
+  transform: scaleX(-1);
+}
+.gaze-panel-info { display: flex; align-items: center; gap: 0.35rem; max-width: 132px; }
+.gaze-dot { width: 9px; height: 9px; flex: none; border-radius: 50%; background: var(--ink-300); }
+.gaze-dot.on { background: var(--success); }
+.gaze-panel-text { font-size: 0.68rem; line-height: 1.15; color: var(--ink-700); }
+.gaze-mini-btn {
+  margin-left: auto;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  font: inherit;
+  font-size: 0.64rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Overlay de calibración */
+.gaze-cal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(38, 42, 74, 0.55);
+  backdrop-filter: blur(1px);
+}
+.gaze-cal-dot {
+  position: absolute;
+  left: 30%;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: var(--pop-magenta);
+  box-shadow: 0 0 0 8px rgba(232, 93, 160, 0.28), 0 0 0 16px rgba(232, 93, 160, 0.14);
+  transition: top 0.35s var(--ease-out);
+}
+.gaze-cal-card {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  max-width: 320px;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+.gaze-cal-card strong { font-size: 0.9rem; color: var(--periwinkle-700); }
+.gaze-cal-card p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: var(--ink-700); }
+.gaze-cal-warn { color: var(--danger); font-weight: 600; }
+.gaze-cal-actions { display: flex; gap: 0.5rem; margin-top: 0.2rem; }
+.gaze-cal-actions .btn { min-height: 34px; }
+.btn.mini { padding: 0.28rem 0.7rem; font-size: 0.78rem; }
 
 .lector-bar.mini { padding: 0; gap: 0; }
 .lector-bar.mini > :not(.lector-mini) { display: none; }
@@ -263,10 +501,11 @@ onBeforeUnmount(() => {
 @media (max-width: 880px) {
   .lector-bar { font-size: 0.75rem; bottom: 76px; }
   .lector-titulo { display: none; }
+  .gaze-panel { bottom: 76px; }
 }
 
 @media print {
-  .lector-bar, .regla { display: none; }
+  .lector-bar, .regla, .gaze-panel, .gaze-cal { display: none; }
 }
 </style>
 
