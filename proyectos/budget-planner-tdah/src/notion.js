@@ -87,6 +87,7 @@ async function asegurarDatabases() {
       'Monto': { number: { format: 'mexican_peso' } },
       'Categoría': { rich_text: {} },
       'Deuda': { rich_text: {} },
+      'Origen': { select: { options: [{ name: 'KYN', color: 'purple' }] } },
       'ID': { rich_text: {} },
     },
   });
@@ -128,7 +129,7 @@ function infoMov(m) {
 }
 
 const hashMov = (m, info) =>
-  [m.fecha, m.tipo, m.monto, info.titulo, info.categoria, info.deuda].join('|');
+  [m.fecha, m.tipo, m.monto, info.titulo, info.categoria, info.deuda, m.origen || ''].join('|');
 
 const propsMov = (m, info) => ({
   'Nota': { title: texto(info.titulo) },
@@ -137,6 +138,7 @@ const propsMov = (m, info) => ({
   'Monto': { number: m.monto / 100 },
   'Categoría': { rich_text: info.categoria ? texto(info.categoria) : [] },
   'Deuda': { rich_text: info.deuda ? texto(info.deuda) : [] },
+  'Origen': m.origen === 'kyn' ? { select: { name: 'KYN' } } : { select: null },
   'ID': { rich_text: texto(m.id) },
 });
 

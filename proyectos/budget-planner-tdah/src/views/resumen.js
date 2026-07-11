@@ -71,8 +71,16 @@ function cardHero(r) {
       r.usaPlaneado ? 'entró · <a href="#/datos">según tu ingreso planeado</a>' : 'entró',
       `<span class="monto">${fmtMoney(r.ingresoBase)}</span>`,
     ),
-    filaStat('gastado', `<span class="monto">${fmtMoney(r.gastos)}</span>`),
   ];
+  // El pedacito motivador: cuánto de lo que entró lo puso KYN.
+  const origen = store.origenIngresos();
+  if (origen.kyn > 0) {
+    filas.push(filaStat(
+      '✨ de eso vino de KYN',
+      `<span class="monto">${fmtMoney(origen.kyn)}</span> <span class="pill pill-brand">${origen.pctKyn}%</span>`,
+    ));
+  }
+  filas.push(filaStat('gastado', `<span class="monto">${fmtMoney(r.gastos)}</span>`));
   if (r.comprometido > 0) {
     filas.push(filaStat(
       'de deudas te falta pagar',
@@ -258,6 +266,7 @@ function filaMov(m) {
 
   const detalle = [etiquetaRelativa(m.fecha)];
   if (!esIngreso) detalle.push(cat ? cat.nombre : 'Sin categoría');
+  if (esIngreso && m.origen === 'kyn') detalle.push('✨ KYN');
   if (m.deudaId) {
     const deuda = store.deudaDe(m.deudaId);
     if (deuda) detalle.push(deuda.nombre);
