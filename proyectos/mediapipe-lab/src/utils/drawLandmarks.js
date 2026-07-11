@@ -71,20 +71,22 @@ const getVideoSize = (video) => ({
 
 const isVisible = (landmark) => Boolean(landmark && (landmark.visibility ?? 1) >= REQUIRED_VISIBILITY)
 
-const drawPoint = (context, landmark, width, height, radius = 5) => {
-  if (!isVisible(landmark)) return
+const drawPoint = (context, landmark, width, height, radius = 5, requireVisibility = true) => {
+  if (!landmark) return
+  if (requireVisibility && !isVisible(landmark)) return
 
   context.beginPath()
   context.arc(landmark.x * width, landmark.y * height, radius, 0, Math.PI * 2)
   context.fill()
 }
 
-const drawConnection = (context, landmarks, connection, width, height) => {
+const drawConnection = (context, landmarks, connection, width, height, requireVisibility = true) => {
   const [fromIndex, toIndex] = connection
   const from = landmarks[fromIndex]
   const to = landmarks[toIndex]
 
-  if (!isVisible(from) || !isVisible(to)) return
+  if (!from || !to) return
+  if (requireVisibility && (!isVisible(from) || !isVisible(to))) return
 
   context.beginPath()
   context.moveTo(from.x * width, from.y * height)
@@ -149,15 +151,16 @@ const drawLandmarkGroup = (context, groups, connections, width, height, styles, 
   context.lineWidth = styles.lineWidth
   context.strokeStyle = styles.strokeStyle
   context.fillStyle = styles.fillStyle
+  const requireVisibility = styles.requireVisibility ?? true
 
   groups.forEach((landmarks) => {
-    connections.forEach((connection) => drawConnection(context, landmarks, connection, width, height))
+    connections.forEach((connection) => drawConnection(context, landmarks, connection, width, height, requireVisibility))
     if (pointRange) {
       for (let i = pointRange[0]; i <= pointRange[1]; i += 1) {
-        drawPoint(context, landmarks[i], width, height, styles.radius)
+        drawPoint(context, landmarks[i], width, height, styles.radius, requireVisibility)
       }
     } else {
-      landmarks.forEach((landmark) => drawPoint(context, landmark, width, height, styles.radius))
+      landmarks.forEach((landmark) => drawPoint(context, landmark, width, height, styles.radius, requireVisibility))
     }
   })
 
@@ -215,11 +218,16 @@ export const drawLandmarks = (canvas, video, results, display = DEFAULT_DISPLAY)
     drawLandmarkGroup(context, poses, group.connections, width, height, poseStyles, group.points)
   })
 
+  // OJO: el HandLandmarker NO calcula visibility — el campo llega SIEMPRE en
+  // 0. Con el filtro de visibilidad activo ni un solo punto de mano se
+  // pintaría (así estuvo roto durante meses: "2 manos" en el status y nada
+  // en pantalla). El cuerpo sí trae visibility real y conserva su filtro.
   drawLandmarkGroup(context, hands, HAND_CONNECTIONS, width, height, {
     lineWidth: 3 * scale,
     strokeStyle: '#E85DA0',
     fillStyle: '#8795D2',
     radius: 5 * scale,
+    requireVisibility: false,
   })
 
   if (display.etiquetas) {
