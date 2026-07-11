@@ -155,6 +155,7 @@ function normalizar(datos) {
   };
   if (datos.presupuesto && typeof datos.presupuesto === 'object') {
     for (const [catId, monto] of Object.entries(datos.presupuesto)) {
+      if (['__proto__', 'constructor', 'prototype'].includes(catId)) continue;
       const v = Math.max(0, n(num(monto)));
       if (v > 0) st.presupuesto[String(catId)] = v;
     }
@@ -226,7 +227,8 @@ export function editarMovimiento(id, cambios) {
   if (!mov) return;
   const montoNuevo = cambios.monto != null ? Math.max(0, Math.round(cambios.monto)) : mov.monto;
   // Si es un pago de deuda y cambió el monto, el saldo de la deuda se corrige.
-  if (mov.deudaId && montoNuevo !== mov.monto) {
+  // Los MSI no se tocan: su avance se mide en mensualidades, no en pesos.
+  if (mov.deudaId && montoNuevo !== mov.monto && deudaDe(mov.deudaId)?.tipo !== 'msi') {
     aplicarEfectoPago(mov.deudaId, -mov.monto);
     aplicarEfectoPago(mov.deudaId, montoNuevo);
   }
@@ -354,6 +356,9 @@ export function deudasActivas() {
 export function saldoPendiente(deuda) {
   if (!deuda) return 0;
   if (deuda.tipo === 'msi') {
+    // Con todas las mensualidades dadas la deuda está saldada, aunque el
+    // redondeo de montoTotal/meses deje centavos huérfanos.
+    if (deuda.mensualidadesPagadas >= deuda.meses) return 0;
     const mensualidad = mensualidadDe(deuda);
     return Math.max(0, deuda.montoTotal - deuda.mensualidadesPagadas * mensualidad);
   }
@@ -681,7 +686,9 @@ export function exportarCSV(mes = null) {
     ]);
   }
   const esc = (v) => {
-    const s = String(v ?? '');
+    let s = String(v ?? '');
+    // Anti-inyección de fórmulas: Excel ejecuta celdas que empiezan con = + - @.
+    if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
     return /[",\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s;
   };
   return '\ufeff' + filas.map((f) => f.map(esc).join(',')).join('\n');
