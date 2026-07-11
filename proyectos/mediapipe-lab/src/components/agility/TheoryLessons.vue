@@ -1,10 +1,11 @@
 <template>
   <section class="lessons">
     <template v-if="!activeLesson">
-      <div class="lessons-header">
-        <p class="lessons-progress">
-          {{ completedCount }} de {{ LESSONS.length }} lecciones completadas
-        </p>
+      <div class="lessons-topbar">
+        <h1 class="lessons-title">
+          Teoría
+        </h1>
+        <span class="badge">{{ completedCount }} de {{ LESSONS.length }} lecciones</span>
         <div
           class="progress-track"
           role="progressbar"
@@ -18,37 +19,58 @@
         </div>
       </div>
 
-      <div class="lesson-grid">
-        <button
-          v-for="lesson in LESSONS"
-          :key="lesson.id"
-          type="button"
-          class="lesson-card"
-          :class="{ done: progress[lesson.id] }"
-          @click="openLesson(lesson)"
-        >
-          <span class="lesson-icon">{{ lesson.icono }}</span>
-          <span class="lesson-body">
-            <strong>{{ lesson.titulo }}</strong>
-            <span class="lesson-resumen">{{ lesson.resumen }}</span>
-          </span>
-          <span
-            v-if="progress[lesson.id]"
-            class="lesson-check"
-            aria-label="completada"
-          >✓</span>
-        </button>
+      <div class="lessons-layout">
+        <div class="lesson-list">
+          <button
+            v-for="(lesson, i) in LESSONS"
+            :key="lesson.id"
+            type="button"
+            class="lesson-row"
+            :class="{ done: progress[lesson.id], next: !progress[lesson.id] && i === nextLessonIndex }"
+            @click="openLesson(lesson)"
+          >
+            <span class="lesson-num">{{ progress[lesson.id] ? '✓' : i + 1 }}</span>
+            <span class="lesson-body">
+              <strong>{{ lesson.titulo }}</strong>
+              <span class="lesson-resumen">{{ lesson.resumen }}</span>
+            </span>
+            <span
+              v-if="!progress[lesson.id] && i === nextLessonIndex"
+              class="badge badge-pop"
+            >Continuar</span>
+          </button>
+        </div>
+
+        <aside class="lessons-side">
+          <div class="panel-card">
+            <div class="libro-head">
+              <h3>Mini-libro</h3>
+              <span class="badge">intacto</span>
+            </div>
+            <p>El libro con bionic reader se queda tal cual está — vive en su propia entrada del menú.</p>
+            <a
+              class="libro-open"
+              href="./libro-agility.html"
+              target="_blank"
+              rel="noopener"
+            >Abrir el libro →</a>
+          </div>
+          <div class="panel-card stat-card">
+            <span class="stat-label">Progreso</span>
+            <strong class="stat-value">{{ completedCount }}<span> / {{ LESSONS.length }} lecciones</span></strong>
+          </div>
+        </aside>
       </div>
     </template>
 
     <template v-else>
       <div class="lesson-view">
         <button
-          class="btn mini"
+          class="back-link"
           type="button"
           @click="closeLesson"
         >
-          ← Todas las lecciones
+          ‹ Todas las lecciones
         </button>
         <h3>{{ activeLesson.icono }} {{ activeLesson.titulo }}</h3>
 
@@ -167,6 +189,7 @@ const quizMode = ref(false)
 const answers = ref([])
 
 const completedCount = computed(() => LESSONS.filter((lesson) => progress.value[lesson.id]).length)
+const nextLessonIndex = computed(() => LESSONS.findIndex((lesson) => !progress.value[lesson.id]))
 
 const openLesson = (lesson) => {
   activeLesson.value = lesson
@@ -211,35 +234,91 @@ const optionClass = (questionIndex, optionIndex) => {
 <style scoped>
 .lessons { display: grid; gap: var(--space-4); }
 
-.lessons-header { display: grid; gap: var(--space-2); }
-.lessons-progress { margin: 0; color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
-.progress-track { height: 10px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
+.lessons-topbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.lessons-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--periwinkle-600);
+}
+.lessons-topbar .progress-track { margin-left: auto; width: 180px; }
+.progress-track { height: 7px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
 .progress-fill { height: 100%; border-radius: var(--radius-pill); background: var(--periwinkle-500); transition: width var(--dur-slow) var(--ease-out); }
 
-.lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: var(--space-3); }
-.lesson-card {
+.lessons-layout { display: grid; grid-template-columns: minmax(0, 1fr) 264px; gap: var(--space-4); align-items: start; }
+
+.lesson-list { display: grid; gap: var(--space-2); }
+.lesson-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-3);
-  padding: var(--space-4);
+  padding: 13px 18px;
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius-md);
   background: var(--surface-card);
   cursor: pointer;
   text-align: left;
   font: inherit;
-  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
-.lesson-card:hover { border-color: var(--periwinkle-400); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.lesson-card.done { border-color: var(--success); background: linear-gradient(0deg, rgba(79, 164, 122, 0.06), rgba(79, 164, 122, 0.06)), var(--surface-card); }
-.lesson-icon { font-size: var(--text-xl); }
-.lesson-body { display: grid; gap: 4px; }
-.lesson-body strong { color: var(--text-primary); }
+.lesson-row:hover { border-color: var(--periwinkle-400); box-shadow: var(--shadow-sm); }
+.lesson-row.next { border-color: var(--periwinkle-300); }
+.lesson-num {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--ink-100);
+  color: var(--text-muted);
+}
+.lesson-row.done .lesson-num { background: var(--periwinkle-500); color: #fff; }
+.lesson-row.next .lesson-num { background: var(--pop-magenta); color: #fff; }
+.lesson-body { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.lesson-body strong { color: var(--text-primary); font-size: var(--text-base); }
 .lesson-resumen { color: var(--text-muted); font-size: var(--text-sm); }
-.lesson-check { margin-left: auto; color: var(--success); font-weight: var(--weight-bold); font-size: var(--text-md); }
+.badge-pop { background: var(--pop-magenta); color: #fff; }
+
+.lessons-side { display: grid; gap: var(--space-3); align-content: start; }
+.panel-card {
+  padding: var(--space-4);
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.panel-card h3 { margin: 0; font-size: var(--text-md); }
+.panel-card p { margin: var(--space-2) 0; color: var(--text-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
+.libro-head { display: flex; align-items: center; gap: var(--space-2); }
+.libro-open { font-size: var(--text-sm); font-weight: var(--weight-semibold); text-decoration: none; }
+.stat-card { display: grid; gap: 6px; }
+.stat-label { font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--text-muted); }
+.stat-value { font-size: var(--text-2xl); letter-spacing: -0.02em; }
+.stat-value span { font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--text-muted); }
+
+.back-link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+  padding: 0;
+}
 
 .lesson-view { display: grid; gap: var(--space-4); justify-items: start; }
 .lesson-view h3 { margin: 0; font-size: var(--text-xl); }
+
+@media (max-width: 880px) {
+  .lessons-layout { grid-template-columns: 1fr; }
+  .lessons-topbar .progress-track { width: 100%; margin-left: 0; flex-basis: 100%; }
+}
 
 .lesson-content { display: grid; gap: var(--space-3); max-width: 720px; }
 .lesson-content p { margin: 0; color: var(--text-secondary); line-height: var(--leading-relaxed); }

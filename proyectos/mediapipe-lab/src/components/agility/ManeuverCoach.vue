@@ -1,40 +1,159 @@
 <template>
   <section class="maneuvers">
-    <p class="maneuvers-intro">
-      Cada jugada de manejo tiene nombre propio y una mecánica exacta. Elige una, apréndela fase
-      por fase con la cámara, y cuando la tengas, entrena tu <strong>timing</strong> contra el
-      perro virtual. Colócate a 2–3 metros para que se vea tu cuerpo completo.
-    </p>
+    <!-- ── Hub: cuadrícula de maniobras + glosario ── -->
+    <template v-if="viewMode === 'hub'">
+      <div class="maneuvers-topbar">
+        <h1 class="maneuvers-title">
+          Maniobras
+        </h1>
+        <span class="badge">{{ MANEUVERS.length }} maniobras · 3 fases cada una</span>
+      </div>
 
-    <div
-      v-for="group in MANEUVER_GROUPS"
-      :key="group.id"
-      class="maneuver-group"
-    >
-      <h4 class="group-title">
-        {{ group.titulo }} <small>{{ group.descripcion }}</small>
-      </h4>
-      <div class="maneuver-grid">
+      <p class="maneuvers-intro">
+        Cada jugada de manejo tiene nombre propio y una mecánica exacta. Elige una, apréndela fase
+        por fase con la cámara, y cuando la tengas, entrena tu <strong>timing</strong> contra el
+        perro virtual. Colócate a 2–3 metros para que se vea tu cuerpo completo.
+      </p>
+
+      <div class="virtual-promo">
+        <div class="virtual-promo-copy">
+          <strong>Perro virtual</strong>
+          <span>Corre la maniobra en pantalla y marca tu señal en el momento exacto.</span>
+        </div>
         <button
-          v-for="m in maneuversIn(group.id)"
-          :key="m.id"
+          class="btn btn-pop"
           type="button"
-          class="maneuver-card"
-          :class="{ active: m.id === selectedId }"
-          @click="selectManeuver(m.id)"
+          @click="selectManeuver(selectedId)"
         >
-          <span class="maneuver-icon">{{ m.icono }}</span>
-          <span class="maneuver-names">
-            <strong>{{ m.nombreEN }}</strong>
-            <span>{{ m.nombreES }}</span>
-          </span>
-          <span class="maneuver-resumen">{{ m.resumen }}</span>
-          <span
-            v-if="m.virtualDog"
-            class="virtual-badge"
-          >🐕 perro virtual</span>
+          Sesión de timing
         </button>
       </div>
+
+      <div
+        v-for="group in MANEUVER_GROUPS"
+        :key="group.id"
+        class="maneuver-group"
+      >
+        <h4 class="group-title">
+          {{ group.titulo }} <small>{{ group.descripcion }}</small>
+        </h4>
+        <div class="maneuver-grid">
+          <button
+            v-for="m in maneuversIn(group.id)"
+            :key="m.id"
+            type="button"
+            class="maneuver-card"
+            :class="{ active: m.id === selectedId }"
+            @click="selectManeuver(m.id)"
+          >
+            <span class="maneuver-icon">{{ m.icono }}</span>
+            <span class="maneuver-names">
+              <strong>{{ m.nombreEN }}</strong>
+              <span>{{ m.nombreES }}</span>
+            </span>
+            <span class="maneuver-resumen">{{ m.resumen }}</span>
+            <span
+              v-if="m.virtualDog"
+              class="virtual-badge"
+            >🐕 perro virtual</span>
+          </button>
+        </div>
+      </div>
+
+      <details class="glossary">
+        <summary>📖 Glosario de manejo — TODAS las maniobras, paso a paso</summary>
+        <p class="glossary-intro">
+          Las que traen 🎥 se practican con la cámara. Las demás vienen con la descripción completa
+          (pasos, claves y errores) para que puedas ejecutarlas solo leyendo. Toca cualquier término
+          para abrirlo.
+        </p>
+        <div class="glossary-grid">
+          <details
+            v-for="term in GLOSSARY"
+            :key="term.en"
+            class="glossary-term"
+          >
+            <summary>
+              <span class="term-head">
+                <strong>{{ term.en }}</strong>
+                <em>{{ term.es }}</em>
+                <span
+                  class="term-badge"
+                  :class="{ trainable: term.entrenable }"
+                >{{ term.entrenable ? '🎥 entrenable' : '📖 lectura' }}</span>
+              </span>
+              <span class="term-desc">{{ term.desc }}</span>
+            </summary>
+            <div class="term-body">
+              <p class="term-quees">
+                {{ term.queEs }}
+              </p>
+              <h5>Cómo se hace</h5>
+              <ol>
+                <li
+                  v-for="(paso, i) in term.comoSeHace"
+                  :key="i"
+                >
+                  {{ paso }}
+                </li>
+              </ol>
+              <p class="term-cuando">
+                <strong>Cuándo usarla:</strong> {{ term.cuandoUsar }}
+              </p>
+              <h5>Claves</h5>
+              <ul>
+                <li
+                  v-for="(clave, i) in term.claves"
+                  :key="i"
+                >
+                  {{ clave }}
+                </li>
+              </ul>
+              <h5>Errores comunes</h5>
+              <ul class="term-errores">
+                <li
+                  v-for="(error, i) in term.errores"
+                  :key="i"
+                >
+                  {{ error }}
+                </li>
+              </ul>
+              <button
+                v-if="term.entrenable"
+                type="button"
+                class="btn mini term-practice"
+                @click="practiceFromGlossary(term.entrenable)"
+              >
+                🎥 Practicar esta con la cámara
+              </button>
+            </div>
+          </details>
+        </div>
+      </details>
+    </template>
+
+    <!-- ── Coach: práctica de la maniobra elegida ── -->
+    <template v-else>
+    <div class="coach-topbar">
+      <button
+        type="button"
+        class="back-link"
+        @click="backToHub"
+      >
+        ‹ Todas las maniobras
+      </button>
+      <h1 class="coach-title">
+        Coach
+      </h1>
+      <span class="badge">{{ maneuver.icono }} {{ maneuver.nombreEN }} · {{ maneuver.nombreES }}</span>
+      <span
+        v-if="mode === 'virtual'"
+        class="badge badge-soft"
+      >🐕 perro virtual</span>
+      <span
+        v-else
+        class="badge badge-soft"
+      >Fase {{ Math.min(currentPhaseIndex + 1, phaseView.length) }} de {{ phaseView.length }}</span>
     </div>
 
     <div class="coach-layout">
@@ -208,15 +327,18 @@
                 :key="phase.id"
                 :class="{ current: i === currentPhaseIndex && cameraActive && !attemptCompleted, done: i < currentPhaseIndex || attemptCompleted }"
               >
-                <strong>{{ phase.titulo }}</strong>
-                <span>{{ phase.instruccion }}</span>
-                <span
-                  v-if="i === currentPhaseIndex && holdProgress > 0 && !attemptCompleted"
-                  class="hold-track"
-                ><span
-                  class="hold-fill"
-                  :style="{ width: `${holdProgress * 100}%` }"
-                /></span>
+                <span class="phase-num">{{ i < currentPhaseIndex || attemptCompleted ? '✓' : i + 1 }}</span>
+                <span class="phase-body">
+                  <strong>{{ phase.titulo }}</strong>
+                  <span>{{ phase.instruccion }}</span>
+                  <span
+                    v-if="i === currentPhaseIndex && holdProgress > 0 && !attemptCompleted"
+                    class="hold-track"
+                  ><span
+                    class="hold-fill"
+                    :style="{ width: `${holdProgress * 100}%` }"
+                  /></span>
+                </span>
               </li>
             </ol>
             <p
@@ -266,77 +388,7 @@
         </div>
       </aside>
     </div>
-
-    <details class="glossary">
-      <summary>📖 Glosario de manejo — TODAS las maniobras, paso a paso</summary>
-      <p class="glossary-intro">
-        Las que traen 🎥 se practican con la cámara. Las demás vienen con la descripción completa
-        (pasos, claves y errores) para que puedas ejecutarlas solo leyendo. Toca cualquier término
-        para abrirlo.
-      </p>
-      <div class="glossary-grid">
-        <details
-          v-for="term in GLOSSARY"
-          :key="term.en"
-          class="glossary-term"
-        >
-          <summary>
-            <span class="term-head">
-              <strong>{{ term.en }}</strong>
-              <em>{{ term.es }}</em>
-              <span
-                class="term-badge"
-                :class="{ trainable: term.entrenable }"
-              >{{ term.entrenable ? '🎥 entrenable' : '📖 lectura' }}</span>
-            </span>
-            <span class="term-desc">{{ term.desc }}</span>
-          </summary>
-          <div class="term-body">
-            <p class="term-quees">
-              {{ term.queEs }}
-            </p>
-            <h5>Cómo se hace</h5>
-            <ol>
-              <li
-                v-for="(paso, i) in term.comoSeHace"
-                :key="i"
-              >
-                {{ paso }}
-              </li>
-            </ol>
-            <p class="term-cuando">
-              <strong>Cuándo usarla:</strong> {{ term.cuandoUsar }}
-            </p>
-            <h5>Claves</h5>
-            <ul>
-              <li
-                v-for="(clave, i) in term.claves"
-                :key="i"
-              >
-                {{ clave }}
-              </li>
-            </ul>
-            <h5>Errores comunes</h5>
-            <ul class="term-errores">
-              <li
-                v-for="(error, i) in term.errores"
-                :key="i"
-              >
-                {{ error }}
-              </li>
-            </ul>
-            <button
-              v-if="term.entrenable"
-              type="button"
-              class="btn mini term-practice"
-              @click="practiceFromGlossary(term.entrenable)"
-            >
-              🎥 Practicar esta con la cámara
-            </button>
-          </div>
-        </details>
-      </div>
-    </details>
+    </template>
   </section>
 </template>
 
@@ -367,6 +419,7 @@ const voice = createVoiceCoach()
 const voiceEnabled = ref(voice.supported)
 
 const selectedId = ref('front-cross')
+const viewMode = ref('hub')
 const dogSide = ref('left')
 const mode = ref('aprender')
 const reps = ref(0)
@@ -444,11 +497,17 @@ const restartAttempt = () => {
 
 const selectManeuver = (id) => {
   selectedId.value = id
+  viewMode.value = 'practice'
   if (!MANEUVERS_BY_ID[id].virtualDog && mode.value === 'virtual') mode.value = 'aprender'
   reps.value = 0
   attempts.value = []
   streak.value = 0
   restartAttempt()
+}
+
+const backToHub = () => {
+  stopSession()
+  viewMode.value = 'hub'
 }
 
 const setMode = (value) => {
@@ -859,6 +918,47 @@ onBeforeUnmount(() => {
 .maneuvers { display: grid; gap: var(--space-4); }
 .maneuvers-intro { margin: 0; max-width: 780px; color: var(--text-secondary); line-height: var(--leading-relaxed); }
 
+.maneuvers-topbar,
+.coach-topbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.maneuvers-title,
+.coach-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--periwinkle-600);
+}
+.badge-soft { background: var(--surface-section); color: var(--text-secondary); }
+.back-link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+  padding: 0;
+  flex-basis: 100%;
+}
+
+.btn-pop { background: var(--pop-magenta); color: #fff; }
+.btn-pop:hover { background: #D94F92; box-shadow: var(--shadow-md); }
+
+.virtual-promo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+}
+.virtual-promo-copy { flex: 1; min-width: 220px; display: grid; gap: 2px; }
+.virtual-promo-copy span { color: var(--text-muted); font-size: var(--text-sm); }
+
 .maneuver-group { display: grid; gap: var(--space-2); }
 .group-title { margin: 0; font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.08em; color: var(--periwinkle-800); }
 .group-title small { text-transform: none; letter-spacing: 0; color: var(--text-muted); font-weight: var(--weight-regular); margin-left: var(--space-2); }
@@ -912,19 +1012,19 @@ onBeforeUnmount(() => {
 .rep-counter {
   position: absolute;
   top: 12px;
-  right: 12px;
+  left: 12px;
   z-index: 4;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   min-width: 72px;
   padding: 8px 14px;
-  border-radius: var(--radius-md);
-  background: rgba(42, 41, 51, 0.72);
-  color: white;
-  backdrop-filter: blur(4px);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink-900);
 }
-.rep-number { font-size: var(--text-2xl); font-weight: var(--weight-bold); line-height: 1; }
-.rep-label { font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+.rep-number { font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: 1; }
+.rep-label { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--text-muted); }
 
 .dog-panel {
   display: grid;
@@ -953,13 +1053,27 @@ onBeforeUnmount(() => {
 .panel-card h3 small { color: var(--text-muted); font-weight: var(--weight-medium); }
 .cuando-usar { margin: 0 0 var(--space-3); color: var(--text-secondary); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
 
-.phase-list { margin: 0; padding: 0 0 0 20px; display: grid; gap: var(--space-2); }
-.phase-list li { display: grid; gap: 2px; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--text-muted); font-size: var(--text-sm); transition: background var(--dur-fast) var(--ease-out); }
+.phase-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
+.phase-list li { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--text-muted); font-size: var(--text-sm); transition: background var(--dur-fast) var(--ease-out); }
+.phase-num {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ink-100);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.phase-body { display: grid; gap: 2px; }
 .phase-list li strong { color: var(--text-secondary); }
 .phase-list li.current { background: var(--surface-brand-soft); }
 .phase-list li.current strong { color: var(--periwinkle-800); }
+.phase-list li.current .phase-num { background: var(--periwinkle-500); color: #fff; }
 .phase-list li.done strong { color: var(--success); }
-.phase-list li.done strong::after { content: ' ✓'; }
+.phase-list li.done .phase-num { background: var(--success); color: #fff; }
 
 .hold-track { display: block; height: 6px; margin-top: 4px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
 .hold-fill { display: block; height: 100%; background: var(--success); border-radius: var(--radius-pill); }

@@ -1,5 +1,12 @@
 <template>
   <section class="coach">
+    <div class="coach-topbar">
+      <h1 class="coach-title">
+        Coach
+      </h1>
+      <span class="badge">{{ activeDrill.icono }} {{ activeDrill.titulo }}</span>
+    </div>
+
     <p class="coach-intro">
       En agility el perro lee tu cuerpo: hombros, brazos y velocidad. Estos drills usan la cámara
       para verificar tus señales de guía — sin perro, frente a la cámara, a 2–3 metros para que se
@@ -49,6 +56,20 @@
             <span class="rep-number">{{ reps }}</span>
             <span class="rep-label">reps</span>
           </div>
+          <ul
+            class="criteria-overlay"
+            aria-live="polite"
+          >
+            <li
+              v-for="criterion in liveCriteria"
+              :key="criterion.id"
+              class="criteria-pill"
+              :class="{ pass: criterion.pass, idle: !cameraActive }"
+            >
+              <span class="criterion-mark">{{ cameraActive ? (criterion.pass ? '✓' : '✗') : '·' }}</span>
+              {{ criterion.label }}
+            </li>
+          </ul>
         </div>
         <div class="stage-controls">
           <button
@@ -111,20 +132,6 @@
               >Derecha 🐕</button>
             </div>
           </label>
-
-          <ul
-            class="criteria-list"
-            aria-live="polite"
-          >
-            <li
-              v-for="criterion in liveCriteria"
-              :key="criterion.id"
-              :class="{ pass: criterion.pass, idle: !cameraActive }"
-            >
-              <span class="criterion-mark">{{ cameraActive ? (criterion.pass ? '✓' : '✗') : '·' }}</span>
-              {{ criterion.label }}
-            </li>
-          </ul>
 
           <div
             v-if="cameraActive && holdProgress > 0 && holdProgress < 1"
@@ -392,6 +399,15 @@ const stopSession = () => {
 
 <style scoped>
 .coach { display: grid; gap: var(--space-4); }
+.coach-topbar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.coach-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--periwinkle-600);
+}
 .coach-intro { margin: 0; max-width: 760px; color: var(--text-secondary); line-height: var(--leading-relaxed); }
 
 .drill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: var(--space-3); }
@@ -421,19 +437,19 @@ const stopSession = () => {
 .rep-counter {
   position: absolute;
   top: 12px;
-  right: 12px;
+  left: 12px;
   z-index: 3;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
   min-width: 72px;
   padding: 8px 14px;
-  border-radius: var(--radius-md);
-  background: rgba(42, 41, 51, 0.72);
-  color: white;
-  backdrop-filter: blur(4px);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink-900);
 }
-.rep-number { font-size: var(--text-2xl); font-weight: var(--weight-bold); line-height: 1; }
-.rep-label { font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+.rep-number { font-size: var(--text-lg); font-weight: var(--weight-bold); line-height: 1; }
+.rep-label { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--text-muted); }
 
 .stage-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
@@ -452,23 +468,34 @@ const stopSession = () => {
 .btn.mini { min-height: 34px; padding: 6px 14px; font-size: var(--text-xs); box-shadow: none; border-color: var(--border-subtle); }
 .btn.mini.selected { border-color: var(--periwinkle-600); background: var(--surface-brand-soft); color: var(--periwinkle-800); font-weight: var(--weight-bold); }
 
-.criteria-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); }
-.criteria-list li {
+.criteria-overlay {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.criteria-pill {
+  display: flex;
+  gap: 6px;
   align-items: baseline;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: rgba(217, 83, 79, 0.07);
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(217, 83, 79, 0.85);
+  color: #fff;
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
   transition: background var(--dur-fast) var(--ease-out);
 }
-.criteria-list li.pass { background: rgba(79, 164, 122, 0.12); }
-.criteria-list li.idle { background: var(--surface-section); }
+.criteria-pill.pass { background: rgba(79, 164, 122, 0.9); }
+.criteria-pill.idle { background: rgba(255, 255, 255, 0.18); }
 .criterion-mark { font-weight: var(--weight-bold); }
-.criteria-list li.pass .criterion-mark { color: var(--success); }
-.criteria-list li:not(.pass):not(.idle) .criterion-mark { color: var(--danger); }
 
 .hold-track { margin-top: var(--space-3); height: 8px; border-radius: var(--radius-pill); background: var(--periwinkle-100); overflow: hidden; }
 .hold-fill { height: 100%; background: var(--success); border-radius: var(--radius-pill); }
