@@ -56,12 +56,20 @@ export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) =
     }
     lastFrameTime = now
 
-    handResults.value = hands && handLandmarker.value
-      ? handLandmarker.value.detectForVideo(videoRef.value, now)
-      : null
-    poseResults.value = pose && poseLandmarker.value
-      ? poseLandmarker.value.detectForVideo(videoRef.value, now)
-      : null
+    try {
+      handResults.value = hands && handLandmarker.value
+        ? handLandmarker.value.detectForVideo(videoRef.value, now)
+        : null
+      poseResults.value = pose && poseLandmarker.value
+        ? poseLandmarker.value.detectForVideo(videoRef.value, now)
+        : null
+    } catch (error) {
+      // Sin esto, un error de MediaPipe a media sesión (p. ej. contexto GPU
+      // perdido) mata el loop en silencio y todo se ve congelado.
+      stop()
+      cameraStatus.value = `El tracking se detuvo por un error de MediaPipe${error?.message ? ` (${error.message})` : ''}. Enciende la cámara de nuevo.`
+      return
+    }
 
     drawLandmarks(canvasRef.value, videoRef.value, {
       hands: handResults.value,
@@ -97,7 +105,14 @@ export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) =
     }
   }
 
-  const start = async (activeStatus = 'Cámara encendida con landmarks de cuerpo y manos.') => {
+  const start = async (activeStatus) => {
+    // Algunos botones llaman start directo (@click="startCamera") y Vue les
+    // pasa el evento de click: sin este filtro el status muestra
+    // "[object PointerEvent]".
+    const statusText = typeof activeStatus === 'string'
+      ? activeStatus
+      : 'Cámara encendida con landmarks de cuerpo y manos.'
+
     if (!navigator.mediaDevices?.getUserMedia) {
       cameraStatus.value = 'Navegador sin soporte para cámara.'
       return
@@ -106,7 +121,7 @@ export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) =
     stop()
 
     try {
-      cameraStatus.value = 'Cargando modelos de MediaPipe...'
+      cameraStatus.value = 'Cargando modelos de MediaPipe... (la primera vez tarda unos segundos)'
       const modelPromises = []
       if (hands && !handLandmarker.value) modelPromises.push(createHandLandmarker().then((model) => { handLandmarker.value = model }))
       if (pose && !poseLandmarker.value) modelPromises.push(createPoseLandmarker().then((model) => { poseLandmarker.value = model }))
@@ -114,7 +129,7 @@ export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) =
 
       cameraStream.value = await startCamera(videoRef.value)
       cameraActive.value = true
-      cameraStatus.value = activeStatus
+      cameraStatus.value = statusText
       detect()
     } catch (error) {
       stop()

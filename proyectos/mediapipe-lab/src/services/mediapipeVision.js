@@ -12,21 +12,50 @@ export const visionFileset = {
   wasmBinaryPath,
 }
 
+const GPU_INIT_TIMEOUT_MS = 10000
+
+const withTimeout = (promise, ms, label) => Promise.race([
+  promise,
+  new Promise((_, reject) => {
+    setTimeout(() => reject(new Error(`${label} no respondió en ${ms} ms`)), ms)
+  }),
+])
+
+// En algunos drivers la creación con GPU "funciona" pero la primera
+// inferencia truena (o la creación se cuelga sin lanzar error, dejando el
+// botón de cámara muerto). Se prueba con un frame sintético para que esas
+// GPUs caigan a CPU aquí, y no a media sesión.
+const warmUp = (landmarker) => {
+  const canvas = document.createElement('canvas')
+  canvas.width = 64
+  canvas.height = 64
+  canvas.getContext('2d').fillRect(0, 0, 64, 64)
+  landmarker.detectForVideo(canvas, performance.now())
+}
+
 // La inferencia con delegate GPU (WebGL) corre varias veces más rápido que
 // CPU; con pose + manos a la vez, CPU se arrastra a ~10 fps y el tracking se
-// ve tembloroso y atrasado. GPU puede fallar al crear el contexto en
-// navegadores/drivers raros, así que se recae a CPU en ese caso.
-export const createLandmarkerWithFallback = async (TaskClass, options) => {
+// ve tembloroso y atrasado. Si la GPU falla o se cuelga, se recae a CPU con
+// cpuOptions (permite un modelo más ligero para máquinas sin GPU).
+export const createLandmarkerWithFallback = async (TaskClass, options, cpuOptions = options) => {
+  let gpuLandmarker = null
   try {
-    return await TaskClass.createFromOptions(visionFileset, {
-      ...options,
-      baseOptions: { ...options.baseOptions, delegate: 'GPU' },
-    })
+    gpuLandmarker = await withTimeout(
+      TaskClass.createFromOptions(visionFileset, {
+        ...options,
+        baseOptions: { ...options.baseOptions, delegate: 'GPU' },
+      }),
+      GPU_INIT_TIMEOUT_MS,
+      'La inicialización GPU de MediaPipe',
+    )
+    warmUp(gpuLandmarker)
+    return gpuLandmarker
   } catch (error) {
-    console.warn('MotionLab: GPU no disponible para MediaPipe, usando CPU.', error)
+    console.warn('MotionLab: GPU no disponible/estable para MediaPipe, usando CPU.', error)
+    try { gpuLandmarker?.close() } catch { /* ya inválido */ }
     return TaskClass.createFromOptions(visionFileset, {
-      ...options,
-      baseOptions: { ...options.baseOptions, delegate: 'CPU' },
+      ...cpuOptions,
+      baseOptions: { ...cpuOptions.baseOptions, delegate: 'CPU' },
     })
   }
 }

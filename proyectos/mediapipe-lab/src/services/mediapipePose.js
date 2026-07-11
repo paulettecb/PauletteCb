@@ -8,15 +8,16 @@ const POSE_LANDMARKER_MODEL_URL =
   import.meta.env.VITE_POSE_LANDMARKER_MODEL_URL ||
   'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/1/pose_landmarker_full.task'
 
+// En CPU el modelo full es 2-3x más lento que lite; las máquinas que caen al
+// fallback son justo las que no lo aguantan, así que ahí se queda lite.
+const POSE_LANDMARKER_LITE_MODEL_URL =
+  'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task'
+
 export const createPoseLandmarker = async () => {
-  return createLandmarkerWithFallback(PoseLandmarker, {
-    baseOptions: {
-      modelAssetPath: POSE_LANDMARKER_MODEL_URL,
-    },
-    runningMode: 'VIDEO',
-    numPoses: 1,
-    minPoseDetectionConfidence: 0.5,
-    minPosePresenceConfidence: 0.5,
-    minTrackingConfidence: 0.5,
-  })
+  const baseOptions = { runningMode: 'VIDEO', numPoses: 1 }
+  return createLandmarkerWithFallback(
+    PoseLandmarker,
+    { ...baseOptions, baseOptions: { modelAssetPath: POSE_LANDMARKER_MODEL_URL } },
+    { ...baseOptions, baseOptions: { modelAssetPath: POSE_LANDMARKER_LITE_MODEL_URL } },
+  )
 }
