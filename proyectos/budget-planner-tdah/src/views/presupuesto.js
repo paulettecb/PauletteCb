@@ -1,4 +1,4 @@
-// presupuesto.js — el plan de gasto mensual de Lana 🎯
+// presupuesto.js — el plan de gasto mensual de Cuentas Claras 🎯
 // Contrato: export function render(el). main.js re-renderiza la vista completa
 // en cada cambio de estado o de mes; los listeners se wirean SOLO en nodos
 // recién creados. Los modales viven en #modales: después de mutar el store se

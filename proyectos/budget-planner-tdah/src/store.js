@@ -1,4 +1,4 @@
-// Store de Lana: estado, persistencia en localStorage y toda la lógica de dinero.
+// Store de Cuentas Claras: estado, persistencia en localStorage y toda la lógica de dinero.
 //
 // CONTRATO (las vistas solo usan esto, nunca tocan localStorage directo):
 //   Estado:      getState(), suscribir(fn) → unsub
@@ -14,6 +14,8 @@
 //   Plan:        planDePagos({estrategia, extraMensual, incluirIds})
 //   Datos:       exportarJSON(), importarJSON(str), exportarCSV(mes|null), borrarTodo(),
 //                setIngresoPlaneado, setNombre
+//   Candado:     await iniciar(codigo?) — ANTES de montar el shell —, tieneCodigo(),
+//                await activarCodigo(codigo), quitarCodigo(), bloquear()
 //
 // Regla de oro: TODOS los montos son centavos (enteros). Ver utils.js.
 
@@ -21,8 +23,10 @@ import {
   uid, hoyISO, mesActualKey, mesKeyDe, clampDia, fechaISO,
   sumarMeses, diasEnMes, fmtMoney,
 } from './utils.js';
+import { nuevoSalt, derivarLlave, cifrar, descifrar } from './crypto.js';
 
-const KEY = 'lana.v1';
+const KEY = 'cuentasclaras.v1';
+const KEY_ANTERIOR = 'lana.v1'; // nombre viejo de la app; se migra al cargar
 const VERSION = 1;
 
 /* =========================================================================
@@ -34,6 +38,7 @@ export const TIPOS_DEUDA = {
   msi:      { emoji: '🛍️', nombre: 'Meses sin intereses' },
   prestamo: { emoji: '🏦', nombre: 'Préstamo' },
   hipoteca: { emoji: '🏠', nombre: 'Hipoteca' },
+  persona:  { emoji: '🤝', nombre: 'Deuda con persona' },
 };
 
 // color = sufijo de las clases .tono-* definidas en styles.css
@@ -57,10 +62,20 @@ export const CATEGORIA_DEUDAS = 'cat-deudas';
    Estado + persistencia
    ========================================================================= */
 
+// Página "Cuentas Claras" en el Notion de Paulette (creada de fábrica); solo
+// sirve si su integración tiene acceso a ella, así que no es ningún secreto.
+const NOTION_PAGINA_DEFAULT = '39a9be0259d181a6ad3ed9efe9aa38cd';
+
+function notionBase() {
+  return { token: '', paginaId: NOTION_PAGINA_DEFAULT, dbMovimientos: '', dbDeudas: '', auto: false };
+}
+
 function estadoBase() {
   return {
     version: VERSION,
-    ajustes: { nombre: '', ingresoPlaneado: 0 },
+    ajustes: { nombre: '', ingresoPlaneado: 0, notion: notionBase() },
+    // Contabilidad del sync a Notion: id local → página de Notion / hash enviado.
+    notionSync: { paginas: {}, hashes: {}, paginasDeudas: {}, hashesDeudas: {}, ultimaSync: '' },
     categorias: JSON.parse(JSON.stringify(CATEGORIAS_BASE)),
     // movimiento: { id, tipo:'gasto'|'ingreso', fecha:'YYYY-MM-DD', monto,
     //               categoriaId|null, nota, deudaId|null, creadoEn }
@@ -75,14 +90,19 @@ function estadoBase() {
   };
 }
 
-function cargar() {
+// Lee el almacén crudo. Formatos posibles:
+//   { cifrado: true, salt, iv, blob }  ← con código de acceso
+//   { cifrado: false, datos }          ← formato actual sin código
+//   estado plano con .movimientos      ← formatos viejos (lana.v1 / pre-cifrado)
+function leerAlmacen() {
   try {
-    const crudo = localStorage.getItem(KEY);
-    if (!crudo) return estadoBase();
-    const datos = JSON.parse(crudo);
-    return normalizar(datos);
+    const crudo = localStorage.getItem(KEY) ?? localStorage.getItem(KEY_ANTERIOR);
+    if (!crudo) return null;
+    const parseado = JSON.parse(crudo);
+    if (parseado && typeof parseado === 'object' && 'cifrado' in parseado) return parseado;
+    return { cifrado: false, datos: parseado };
   } catch {
-    return estadoBase();
+    return null;
   }
 }
 
@@ -98,7 +118,9 @@ function normalizar(datos) {
     ajustes: {
       nombre: typeof datos.ajustes?.nombre === 'string' ? datos.ajustes.nombre.slice(0, 60) : '',
       ingresoPlaneado: Math.max(0, n(num(datos.ajustes?.ingresoPlaneado))),
+      notion: saneaNotion(datos.ajustes?.notion),
     },
+    notionSync: saneaNotionSync(datos.notionSync),
     categorias: Array.isArray(datos.categorias) && datos.categorias.length
       ? datos.categorias
           .filter((c) => c && c.id && c.nombre)
@@ -123,9 +145,12 @@ function normalizar(datos) {
     deudas: (Array.isArray(datos.deudas) ? datos.deudas : [])
       .filter((d) => d && d.id && TIPOS_DEUDA[d.tipo] && d.nombre)
       .map((d) => {
+        // Las deudas con personas pueden no tener día de abono (diaPago null);
+        // el resto de los tipos siempre traen día (los formularios lo exigen).
+        const sinDia = d.tipo === 'persona' && !Number(d.diaPago);
         const comun = {
           id: String(d.id), tipo: d.tipo, nombre: String(d.nombre).slice(0, 60),
-          creadoEn: d.creadoEn || '', diaPago: clampDiaLibre(d.diaPago),
+          creadoEn: d.creadoEn || '', diaPago: sinDia ? null : clampDiaLibre(d.diaPago),
         };
         if (d.tipo === 'tarjeta') {
           return {
@@ -148,13 +173,15 @@ function normalizar(datos) {
           saldo: Math.max(0, n(num(d.saldo))),
           montoOriginal: Math.max(0, n(num(d.montoOriginal ?? d.saldo))),
           mensualidad: Math.max(0, n(num(d.mensualidad))),
-          tasaAnual: Math.max(0, num(d.tasaAnual)),
+          // Con personas no corren intereses formales.
+          tasaAnual: d.tipo === 'persona' ? 0 : Math.max(0, num(d.tasaAnual)),
         };
       }),
     presupuesto: {},
   };
   if (datos.presupuesto && typeof datos.presupuesto === 'object') {
     for (const [catId, monto] of Object.entries(datos.presupuesto)) {
+      if (['__proto__', 'constructor', 'prototype'].includes(catId)) continue;
       const v = Math.max(0, n(num(monto)));
       if (v > 0) st.presupuesto[String(catId)] = v;
     }
@@ -170,7 +197,46 @@ function clampDiaLibre(dia) {
   return Math.max(1, Math.min(31, Math.round(Number(dia)) || 1));
 }
 
-let state = cargar();
+const str = (v, max) => (typeof v === 'string' ? v.slice(0, max) : '');
+
+function saneaNotion(crudo) {
+  const base = notionBase();
+  if (!crudo || typeof crudo !== 'object') return base;
+  return {
+    token: str(crudo.token, 300),
+    paginaId: str(crudo.paginaId, 64) || base.paginaId,
+    dbMovimientos: str(crudo.dbMovimientos, 64),
+    dbDeudas: str(crudo.dbDeudas, 64),
+    auto: Boolean(crudo.auto),
+  };
+}
+
+function saneaMapa(crudo) {
+  const mapa = {};
+  if (!crudo || typeof crudo !== 'object') return mapa;
+  for (const [k, v] of Object.entries(crudo)) {
+    if (['__proto__', 'constructor', 'prototype'].includes(k)) continue;
+    if (typeof v === 'string' || typeof v === 'number') mapa[String(k)] = String(v);
+  }
+  return mapa;
+}
+
+function saneaNotionSync(crudo) {
+  return {
+    paginas: saneaMapa(crudo?.paginas),
+    hashes: saneaMapa(crudo?.hashes),
+    paginasDeudas: saneaMapa(crudo?.paginasDeudas),
+    hashesDeudas: saneaMapa(crudo?.hashesDeudas),
+    ultimaSync: str(crudo?.ultimaSync, 40),
+  };
+}
+
+let state = estadoBase(); // se hidrata en iniciar()
+
+// Candado: la llave AES vive SOLO en memoria mientras la sesión está abierta.
+let llaveCifrado = null;
+let saltActual = null;
+let seqEscritura = 0; // los cifrados son async; solo aterriza el más reciente
 
 // Estado de UI (no se persiste): mes que se está viendo.
 const ui = { mes: mesActualKey() };
@@ -183,13 +249,84 @@ export function suscribir(fn) {
 function notificar() {
   for (const fn of subs) fn();
 }
-function commit() {
+
+function guardarCrudo(objeto) {
   try {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    localStorage.setItem(KEY, JSON.stringify(objeto));
   } catch (e) {
-    console.error('Lana: no se pudo guardar', e);
+    console.error('Cuentas Claras: no se pudo guardar', e);
   }
+}
+
+function persistir() {
+  if (llaveCifrado) {
+    const token = ++seqEscritura;
+    cifrar(JSON.stringify(state), llaveCifrado)
+      .then((c) => {
+        if (token !== seqEscritura) return; // ya hay una escritura más nueva
+        guardarCrudo({ cifrado: true, salt: saltActual, iv: c.iv, blob: c.blob });
+      })
+      .catch((e) => console.error('Cuentas Claras: no se pudo cifrar', e));
+  } else {
+    guardarCrudo({ cifrado: false, datos: state });
+  }
+}
+
+function commit() {
+  persistir();
   notificar();
+}
+
+/* =========================================================================
+   Arranque y código de acceso
+   ========================================================================= */
+
+// main.js llama esto ANTES de montar el shell (y otra vez con el código si
+// está bloqueado). → { ok: true } | { ok: false, bloqueado: true, codigoMalo? }
+export async function iniciar(codigo = null) {
+  const crudo = leerAlmacen();
+  if (!crudo) {
+    state = estadoBase();
+    return { ok: true };
+  }
+  if (!crudo.cifrado) {
+    state = normalizar(crudo.datos);
+    return { ok: true };
+  }
+  if (codigo == null) return { ok: false, bloqueado: true };
+  try {
+    const llave = await derivarLlave(codigo, crudo.salt);
+    state = normalizar(JSON.parse(await descifrar(crudo, llave)));
+    llaveCifrado = llave;
+    saltActual = crudo.salt;
+    return { ok: true };
+  } catch {
+    return { ok: false, bloqueado: true, codigoMalo: true };
+  }
+}
+
+export const tieneCodigo = () => llaveCifrado != null;
+
+// Activa el código (o lo cambia: re-deriva con salt nuevo) y re-guarda cifrado.
+export async function activarCodigo(codigo) {
+  saltActual = nuevoSalt();
+  llaveCifrado = await derivarLlave(codigo, saltActual);
+  persistir();
+  notificar();
+}
+
+// Quita el código (la sesión ya está abierta) y re-guarda en claro.
+export function quitarCodigo() {
+  llaveCifrado = null;
+  saltActual = null;
+  persistir();
+  notificar();
+}
+
+// Suelta la llave y recarga: la app queda en la pantalla de código.
+export function bloquear() {
+  llaveCifrado = null;
+  location.reload();
 }
 
 export const getState = () => state;
@@ -226,7 +363,8 @@ export function editarMovimiento(id, cambios) {
   if (!mov) return;
   const montoNuevo = cambios.monto != null ? Math.max(0, Math.round(cambios.monto)) : mov.monto;
   // Si es un pago de deuda y cambió el monto, el saldo de la deuda se corrige.
-  if (mov.deudaId && montoNuevo !== mov.monto) {
+  // Los MSI no se tocan: su avance se mide en mensualidades, no en pesos.
+  if (mov.deudaId && montoNuevo !== mov.monto && deudaDe(mov.deudaId)?.tipo !== 'msi') {
     aplicarEfectoPago(mov.deudaId, -mov.monto);
     aplicarEfectoPago(mov.deudaId, montoNuevo);
   }
@@ -340,6 +478,16 @@ export function setNombre(nombre) {
   commit();
 }
 
+export function setNotionConfig(cambios) {
+  state.ajustes.notion = saneaNotion({ ...state.ajustes.notion, ...cambios });
+  commit();
+}
+
+export function setNotionSync(sync) {
+  state.notionSync = saneaNotionSync(sync);
+  commit();
+}
+
 /* =========================================================================
    Deudas
    ========================================================================= */
@@ -354,6 +502,9 @@ export function deudasActivas() {
 export function saldoPendiente(deuda) {
   if (!deuda) return 0;
   if (deuda.tipo === 'msi') {
+    // Con todas las mensualidades dadas la deuda está saldada, aunque el
+    // redondeo de montoTotal/meses deje centavos huérfanos.
+    if (deuda.mensualidadesPagadas >= deuda.meses) return 0;
     const mensualidad = mensualidadDe(deuda);
     return Math.max(0, deuda.montoTotal - deuda.mensualidadesPagadas * mensualidad);
   }
@@ -629,6 +780,10 @@ function pagoBaseSim(d) {
     // Sin pago mínimo capturado: aprox. 3% del saldo, mínimo $200.
     return d.pagoMinimo || Math.max(20000, Math.round(saldoPendiente(d) * 0.03));
   }
+  if (d.tipo === 'persona' && !d.mensualidad) {
+    // Sin abono acordado: supone 5% del saldo, mínimo $200, para poder planear.
+    return Math.max(20000, Math.round(saldoPendiente(d) * 0.05));
+  }
   return d.mensualidad || 0;
 }
 
@@ -638,7 +793,7 @@ function pagoBaseSim(d) {
 
 export function exportarJSON() {
   return JSON.stringify(
-    { app: 'lana', version: VERSION, exportadoEl: hoyISO(), datos: state },
+    { app: 'cuentas-claras', version: VERSION, exportadoEl: hoyISO(), datos: state },
     null,
     2,
   );
@@ -652,12 +807,13 @@ export function importarJSON(texto) {
   } catch {
     return { ok: false, error: 'El archivo no es un JSON válido.' };
   }
-  const datos = crudo?.app === 'lana' ? crudo.datos : crudo;
+  const esPropio = crudo?.app === 'cuentas-claras' || crudo?.app === 'lana';
+  const datos = esPropio ? crudo.datos : crudo;
   if (!datos || typeof datos !== 'object' || (!Array.isArray(datos.movimientos) && !Array.isArray(datos.deudas))) {
-    return { ok: false, error: 'El archivo no parece un respaldo de Lana.' };
+    return { ok: false, error: 'El archivo no parece un respaldo de Cuentas Claras.' };
   }
-  if (crudo?.app === 'lana' && Number(crudo.version) > VERSION) {
-    return { ok: false, error: 'Este respaldo es de una versión más nueva de Lana.' };
+  if (esPropio && Number(crudo.version) > VERSION) {
+    return { ok: false, error: 'Este respaldo es de una versión más nueva de Cuentas Claras.' };
   }
   state = normalizar(datos);
   commit();
@@ -681,14 +837,24 @@ export function exportarCSV(mes = null) {
     ]);
   }
   const esc = (v) => {
-    const s = String(v ?? '');
+    let s = String(v ?? '');
+    // Anti-inyección de fórmulas: Excel ejecuta celdas que empiezan con = + - @.
+    if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
     return /[",\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s;
   };
   return '\ufeff' + filas.map((f) => f.map(esc).join(',')).join('\n');
 }
 
+// Borra datos Y código de acceso (sirve también como salida de emergencia
+// desde la pantalla de bloqueo cuando el código se olvidó).
 export function borrarTodo() {
+  llaveCifrado = null;
+  saltActual = null;
   state = estadoBase();
+  try {
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(KEY_ANTERIOR);
+  } catch { /* sin almacenamiento no hay nada que borrar */ }
   commit();
 }
 

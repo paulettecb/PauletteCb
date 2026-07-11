@@ -1,4 +1,4 @@
-// movimientos.js — el diario de dinero de Lana 🧾
+// movimientos.js — el diario de dinero de Cuentas Claras 🧾
 // Contrato: export function render(el). main.js re-renderiza la vista completa
 // en cada cambio de estado o de mes. Los filtros viven en variables de módulo
 // para sobrevivir esos re-renders; la búsqueda re-pinta SOLO la lista para no

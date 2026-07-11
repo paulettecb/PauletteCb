@@ -1,5 +1,5 @@
 /* =============================================================================
-   Lana · estilos base
+   Cuentas Claras · estilos base
    Tokens del design system KYN (fuente de verdad: proyectos/mediapipe-lab/src/styles.css)
    Tipos: Friendship (display), Farmhouse (eyebrow/acento), Hanken Grotesk (sans;
    títulos internos SIEMPRE en 900 + MAYÚSCULAS).
@@ -198,15 +198,21 @@ img { max-width: 100%; }
 
 .logo {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   color: var(--periwinkle-700);
   text-decoration: none;
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .logo .eyebrow { font-size: 0.85rem; }
+
+/* El nombre completo es largo: en pantallas chicas el tagline se despide */
+@media (max-width: 560px) {
+  .logo .eyebrow { display: none; }
+}
 
 /* Selector de mes global */
 .selector-mes {
@@ -807,6 +813,52 @@ img { max-width: 100%; }
 .deuda-tipo-msi { border-left: 5px solid var(--pastel-butter); }
 .deuda-tipo-prestamo { border-left: 5px solid var(--pastel-mint); }
 .deuda-tipo-hipoteca { border-left: 5px solid var(--pastel-lilac); }
+.deuda-tipo-persona { border-left: 5px solid var(--pastel-blush); }
+
+/* ---------- Pantalla de código de acceso ---------- */
+
+.candado {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.candado-caja {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.6rem;
+  text-align: center;
+}
+
+.candado-logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--periwinkle-700);
+}
+
+.candado-caja input[type='password'] {
+  text-align: center;
+  letter-spacing: 0.35em;
+}
+
+.candado-error {
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.candado-olvide {
+  margin-top: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+}
 
 /* ---------- Utilidades ---------- */
 

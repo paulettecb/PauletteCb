@@ -1,4 +1,4 @@
-// Vista "Resumen" de Lana: el "¿cómo voy?" en 5 segundos.
+// Vista "Resumen" de Cuentas Claras: el "¿cómo voy?" en 5 segundos.
 //
 // Contrato: export function render(el). main.js la llama en cada cambio de
 // estado y de mes; se re-renderiza completa (el.innerHTML = ...) y los
@@ -107,8 +107,8 @@ function cardHero(r) {
 // Estado vacío de bienvenida: primera vez, sin ingreso base ni movimientos.
 function cardBienvenida() {
   return vacio({
-    emoji: '🐑',
-    titulo: '¡bienvenida a Lana!',
+    emoji: '✨',
+    titulo: '¡bienvenida a Cuentas Claras!',
     texto: 'Apunta lo que entra y lo que sale, y yo te digo cómo vas — clarito y sin regaños.',
     boton: `
       <div class="fila" style="justify-content: center; flex-wrap: wrap">

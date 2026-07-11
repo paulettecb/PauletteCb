@@ -1,4 +1,4 @@
-// deudas.js — el módulo pesado de Lana: control de deudas + plan de escape 💪
+// deudas.js — el módulo pesado de Cuentas Claras: control de deudas + plan de escape 💪
 // Contrato: export function render(el). main.js re-renderiza la vista completa
 // en cada cambio de estado. El estado del simulador (estrategia, extra, deudas
 // incluidas) vive en variables de módulo para sobrevivir esos re-renders.
@@ -183,7 +183,7 @@ function cardDeuda(d) {
     }
     datos = `corte día ${d.diaCorte} · paga antes del día ${d.diaPago} · tasa ${d.tasaAnual}%`;
   } else {
-    // prestamo | hipoteca
+    // prestamo | hipoteca | persona
     if (d.montoOriginal > 0) {
       const pagado = Math.max(0, d.montoOriginal - d.saldo);
       const pctPag = Math.round((pagado / d.montoOriginal) * 100);
@@ -193,7 +193,13 @@ function cardDeuda(d) {
           ${barraProgreso(pctPag)}
         </div>`;
     }
-    datos = `mensualidad ${fmtMoney(d.mensualidad)} · tasa ${d.tasaAnual}% · pago el día ${d.diaPago}`;
+    if (d.tipo === 'persona') {
+      datos = d.mensualidad > 0
+        ? `abono ${fmtMoney(d.mensualidad)}${d.diaPago ? ` · el día ${d.diaPago}` : ''} · sin intereses 💛`
+        : 'sin abono fijo — tú decides cuánto y cuándo 💛';
+    } else {
+      datos = `mensualidad ${fmtMoney(d.mensualidad)} · tasa ${d.tasaAnual}% · pago el día ${d.diaPago}`;
+    }
   }
 
   const pillEstado = liquidada
@@ -282,6 +288,15 @@ function formCampos(tipo, d = null) {
       </div>
       ${campoNumero('diaPago', { etiqueta: 'Día de pago', valor: d?.diaPago ?? '', min: 1, max: 31, step: 1, placeholder: '1–31' })}`;
   }
+  if (tipo === 'persona') {
+    return `
+      ${campoTexto('nombre', { etiqueta: '¿A quién le debes?', valor: d?.nombre || '', placeholder: 'ej. papá 💛' })}
+      ${campoMonto('saldo', { etiqueta: '¿Cuánto le debes?', valor: d ? d.saldo : null })}
+      <div class="form-fila">
+        ${campoMonto('mensualidad', { etiqueta: 'Abono mensual', valor: d?.mensualidad ? d.mensualidad : null, ayuda: 'si acordaron un fijo; si no, déjalo vacío' })}
+        ${campoNumero('diaPago', { etiqueta: 'Día de abono', valor: d?.diaPago ?? '', min: 1, max: 31, step: 1, placeholder: 'opcional' })}
+      </div>`;
+  }
   // prestamo | hipoteca
   return `
     ${campoTexto('nombre', { etiqueta: '¿Cómo se llama?', valor: d?.nombre || '', placeholder: tipo === 'hipoteca' ? 'ej. la casita' : 'ej. préstamo del banco' })}
@@ -332,6 +347,19 @@ function leerDatosDeuda(tipo, form) {
       meses,
       mensualidadesPagadas: Math.max(0, Math.round(numero('pagadas'))),
       diaPago: numero('diaPago', 1),
+    };
+  }
+
+  if (tipo === 'persona') {
+    if (!nombre) { toastError('Cuéntame a quién le debes 🙏'); return null; }
+    const saldoPersona = leerMonto(form, 'saldo');
+    if (!saldoPersona || saldoPersona <= 0) { toastError('Necesito cuánto le debes 🙏'); return null; }
+    return {
+      nombre,
+      saldo: saldoPersona,
+      mensualidad: leerMonto(form, 'mensualidad') || 0,
+      tasaAnual: 0,
+      diaPago: numero('diaPago', 0) || null,
     };
   }
 

@@ -14,6 +14,19 @@
       "url": "proyectos/ceneval/index.html"
     },
     {
+      "slug": "budget-planner-tdah",
+      "title": "Cuentas Claras · Tu dinero del mes",
+      "description": {
+        "en": "Monthly money control: expenses, budget and a debt-payoff plan (snowball/avalanche). Local-only data, ADHD-friendly.",
+        "es": "Control del dinero del mes: gastos, presupuesto y plan para salir de deudas (bola de nieve/avalancha). Datos solo en tu navegador, TDAH-friendly.",
+        "fr": "Contrôle de l'argent du mois : dépenses, budget et plan de sortie de dettes. Données 100 % locales, pensé TDAH.",
+        "pt": "Controle do dinheiro do mês: gastos, orçamento e plano para sair das dívidas. Dados só no navegador, TDAH-friendly.",
+        "de": "Monatliche Geldkontrolle: Ausgaben, Budget und Schuldenabbau-Plan. Daten nur lokal, ADHS-freundlich."
+      },
+      "type": "Tool",
+      "url": "proyectos/budget-planner-tdah/index.html"
+    },
+    {
       "slug": "KYN Design System",
       "title": "KYN Design System",
       "description": {
@@ -27,17 +40,17 @@
       "url": "proyectos/KYN%20Design%20System/index.html"
     },
     {
-      "slug": "budget-planner-tdah",
-      "title": "Lana · Tu dinero del mes",
+      "slug": "kyn-studio",
+      "title": "KYN Studio",
       "description": {
-        "en": "Monthly money control: expenses, budget and a debt-payoff plan (snowball/avalanche). Local-only data, ADHD-friendly.",
-        "es": "Control del dinero del mes: gastos, presupuesto y plan para salir de deudas (bola de nieve/avalancha). Datos solo en tu navegador, TDAH-friendly.",
-        "fr": "Contrôle de l'argent du mois : dépenses, budget et plan de sortie de dettes. Données 100 % locales, pensé TDAH.",
-        "pt": "Controle do dinheiro do mês: gastos, orçamento e plano para sair das dívidas. Dados só no navegador, TDAH-friendly.",
-        "de": "Monatliche Geldkontrolle: Ausgaben, Budget und Schuldenabbau-Plan. Daten nur lokal, ADHS-freundlich."
+        "en": "KYN's home on the web — the studio behind the design system.",
+        "es": "La casa de KYN en la web — el estudio detrás del design system.",
+        "fr": "La maison de KYN sur le web — le studio derrière le design system.",
+        "pt": "A casa da KYN na web — o estúdio por trás do design system.",
+        "de": "KYNs Zuhause im Web — das Studio hinter dem Design System."
       },
-      "type": "Tool",
-      "url": "proyectos/budget-planner-tdah/index.html"
+      "type": "Studio",
+      "url": "https://kynstudio.com.mx"
     },
     {
       "slug": "lsm",

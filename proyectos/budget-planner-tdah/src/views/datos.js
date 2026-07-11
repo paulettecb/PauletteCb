@@ -1,4 +1,4 @@
-// Vista "Datos" de Lana: ajustes personales, respaldo/exportación y zona de peligro.
+// Vista "Datos" de Cuentas Claras: ajustes personales, respaldo/exportación y zona de peligro.
 //
 // Contrato: export function render(el). main.js la llama en cada cambio de
 // estado; se re-renderiza completa (el.innerHTML = ...) y los listeners se
@@ -6,10 +6,12 @@
 // Todo el dinero viaja en centavos; se muestra con fmtMoney.
 
 import * as store from '../store.js';
+import * as notion from '../notion.js';
 import {
   campoTexto, campoMonto, leerMonto, confirmar, toast, toastError,
+  abrirModal, cerrarModal,
 } from '../components.js';
-import { hoyISO } from '../utils.js';
+import { hoyISO, escapeHtml, fechaCorta } from '../utils.js';
 
 /* =========================================================================
    Render principal
@@ -18,16 +20,214 @@ import { hoyISO } from '../utils.js';
 export function render(el) {
   el.innerHTML = `
     <div class="seccion">${cardTu()}</div>
+    <div class="seccion">${cardCodigo()}</div>
+    <div class="seccion">${cardNotion()}</div>
     <div class="seccion">${cardRespaldo()}</div>
     <div class="seccion">${cardPeligro()}</div>
     <p class="nota-privacidad">
-      Lana 🐑 · hecha con cariño · tus datos nunca salen de aquí<br />
+      Cuentas Claras ✨ · hechas con cariño · tus datos nunca salen de aquí<br />
       <a href="../../index.html">← volver a paulettecb</a>
     </p>`;
 
   wirearCardTu(el);
+  wirearCardCodigo(el);
+  wirearCardNotion(el);
   wirearCardRespaldo(el);
   wirearCardPeligro(el);
+}
+
+/* =========================================================================
+   Card "conectar con Notion": espejo automático de movimientos y deudas
+   ========================================================================= */
+
+function cardNotion() {
+  const cfg = store.getState().ajustes.notion;
+  const ultima = store.getState().notionSync.ultimaSync;
+  const conectada = notion.configurada();
+
+  return `
+    <section class="card">
+      <div class="card-encabezado">
+        <h2 class="card-titulo">conectar con notion</h2>
+        ${conectada
+          ? '<span class="pill pill-ok">conectado</span>'
+          : '<span class="pill pill-neutra">sin conectar</span>'}
+      </div>
+      <p class="texto-secundario">
+        Manda un espejo de tus movimientos y deudas a tu página
+        <strong>Cuentas Claras</strong> de Notion. La app siempre manda; Notion solo recibe.
+      </p>
+      <details class="mt-1">
+        <summary class="texto-suave" style="cursor:pointer">¿cómo lo conecto? (3 pasos)</summary>
+        <ol class="texto-secundario" style="padding-left:1.2rem; margin-top:0.5rem">
+          <li>En <a href="https://www.notion.so/my-integrations" target="_blank" rel="noreferrer">notion.so/my-integrations</a> crea una <strong>integración interna</strong> y copia su token (empieza con <code>ntn_</code>).</li>
+          <li>En tu página "Cuentas Claras" de Notion: menú <strong>⋯ → Conexiones</strong> → agrega tu integración.</li>
+          <li>Pega aquí el token, guarda y dale sincronizar. Las databases se crean solitas la primera vez.</li>
+        </ol>
+      </details>
+      <form class="mt-2" data-form-notion>
+        <div class="campo">
+          <label for="campo-notion-token">Token de tu integración</label>
+          <input id="campo-notion-token" name="token" type="password" autocomplete="off"
+            placeholder="ntn_…" value="${escapeHtml(cfg.token)}" />
+          <span class="ayuda">se guarda solo en este navegador (cifrado si tienes código)</span>
+        </div>
+        <div class="campo">
+          <label for="campo-notion-pagina">Link o ID de tu página de Notion</label>
+          <input id="campo-notion-pagina" name="pagina" type="text" autocomplete="off"
+            value="${escapeHtml(cfg.paginaId)}" />
+        </div>
+        <label class="fila texto-secundario" style="cursor:pointer">
+          <input type="checkbox" name="auto" ${cfg.auto ? 'checked' : ''} style="width:auto" />
+          sincronizar solito después de cada cambio
+        </label>
+        <div class="fila mt-2" style="flex-wrap: wrap">
+          <button type="submit" class="btn btn-suave">guardar conexión</button>
+          <button type="button" class="btn btn-primario" data-sync-ahora ${conectada ? '' : 'disabled'}>🔄 sincronizar ahora</button>
+        </div>
+      </form>
+      ${ultima ? `<p class="texto-suave mt-1">última sincronización: ${escapeHtml(fechaCorta(ultima.slice(0, 10)))} a las ${escapeHtml(ultima.slice(11, 16))}</p>` : ''}
+    </section>`;
+}
+
+function wirearCardNotion(el) {
+  const form = el.querySelector('[data-form-notion]');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const datos = new FormData(form);
+    const paginaId = notion.extraerPaginaId(datos.get('pagina'));
+    if (datos.get('pagina') && !paginaId) {
+      toastError('Ese link de Notion no trae un ID de página válido 😕');
+      return;
+    }
+    store.setNotionConfig({
+      token: String(datos.get('token') || '').trim(),
+      paginaId,
+      auto: datos.get('auto') != null,
+    });
+    toast('Conexión guardada ✓');
+  });
+
+  const btnSync = el.querySelector('[data-sync-ahora]');
+  btnSync.addEventListener('click', async () => {
+    btnSync.disabled = true;
+    btnSync.textContent = 'sincronizando…';
+    const r = await notion.sincronizar();
+    if (r.ok) {
+      toast(`Notion al día ✓ ${r.creados} nuevas · ${r.actualizados} actualizadas${r.archivados ? ` · ${r.archivados} archivadas` : ''}`);
+    } else {
+      toastError(r.error);
+      // el re-render por setNotionSync ya restauró el botón; esto es por si no hubo commit
+      btnSync.disabled = false;
+      btnSync.textContent = '🔄 sincronizar ahora';
+    }
+  });
+}
+
+/* =========================================================================
+   Card "código de acceso": cifrado local con candado
+   ========================================================================= */
+
+function cardCodigo() {
+  const activo = store.tieneCodigo();
+  return `
+    <section class="card">
+      <div class="card-encabezado">
+        <h2 class="card-titulo">código de acceso</h2>
+        ${activo ? '<span class="pill pill-ok">🔒 activado</span>' : '<span class="pill pill-neutra">apagado</span>'}
+      </div>
+      ${activo
+        ? `
+          <p class="texto-secundario">
+            Tu información se guarda <strong>cifrada</strong> en este navegador: sin tu código, nadie la puede leer.
+          </p>
+          <div class="fila mt-2" style="flex-wrap: wrap">
+            <button class="btn btn-primario" data-bloquear>🔒 bloquear ahora</button>
+            <button class="btn btn-suave" data-cambiar-codigo>cambiar código</button>
+            <button class="btn btn-fantasma" data-quitar-codigo>quitar código</button>
+          </div>`
+        : `
+          <p class="texto-secundario">
+            Ponle un código y tus datos se guardan <strong>cifrados</strong> (AES): aunque alguien use tu
+            cel o tu compu, sin el código no ve nada.
+          </p>
+          <p class="texto-suave mt-1">
+            ⚠️ Si lo olvidas y no tienes un respaldo JSON descargado, no hay forma de recuperar tus datos.
+          </p>
+          <button class="btn btn-primario mt-2" data-activar-codigo>🔒 activar código</button>`}
+    </section>`;
+}
+
+function abrirModalCodigo({ cambiar = false } = {}) {
+  abrirModal({
+    titulo: cambiar ? 'Cambiar código' : 'Activar código',
+    cuerpo: `
+      <form data-form-codigo>
+        <div class="campo">
+          <label for="campo-codigo-nuevo">Código nuevo (mínimo 4)</label>
+          <input id="campo-codigo-nuevo" name="codigo" type="password" inputmode="numeric"
+            autocomplete="new-password" minlength="4" required />
+        </div>
+        <div class="campo">
+          <label for="campo-codigo-repite">Repítelo</label>
+          <input id="campo-codigo-repite" name="repite" type="password" inputmode="numeric"
+            autocomplete="new-password" minlength="4" required />
+        </div>
+        <p class="texto-suave">
+          ⚠️ Apúntalo donde no se pierda. Sin el código (y sin respaldo JSON) tus datos no se recuperan.
+        </p>
+        <button type="submit" class="btn btn-primario btn-bloque mt-1">Guardar código</button>
+      </form>`,
+    alAbrir(modal) {
+      const form = modal.querySelector('[data-form-codigo]');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const datos = new FormData(form);
+        const codigo = String(datos.get('codigo') || '');
+        if (codigo.length < 4) {
+          toastError('El código necesita al menos 4 caracteres 🙏');
+          return;
+        }
+        if (codigo !== String(datos.get('repite') || '')) {
+          toastError('Los códigos no coinciden 😅');
+          return;
+        }
+        const boton = form.querySelector('button[type="submit"]');
+        boton.disabled = true;
+        boton.textContent = 'Cifrando…';
+        await store.activarCodigo(codigo);
+        cerrarModal();
+        toast(cambiar ? 'Código cambiado 🔒' : 'Listo, tus datos ya viajan cifrados 🔒');
+      });
+    },
+  });
+}
+
+function wirearCardCodigo(el) {
+  const btnActivar = el.querySelector('[data-activar-codigo]');
+  if (btnActivar) btnActivar.addEventListener('click', () => abrirModalCodigo());
+
+  const btnCambiar = el.querySelector('[data-cambiar-codigo]');
+  if (btnCambiar) btnCambiar.addEventListener('click', () => abrirModalCodigo({ cambiar: true }));
+
+  const btnBloquear = el.querySelector('[data-bloquear]');
+  if (btnBloquear) btnBloquear.addEventListener('click', () => store.bloquear());
+
+  const btnQuitar = el.querySelector('[data-quitar-codigo]');
+  if (btnQuitar) {
+    btnQuitar.addEventListener('click', async () => {
+      const si = await confirmar(
+        'Sin código, tus datos quedan guardados en claro en este navegador (como antes). ¿Lo quito?',
+        { textoBoton: 'Sí, quitar código' },
+      );
+      if (si) {
+        store.quitarCodigo();
+        toast('Código quitado ✓');
+      }
+    });
+  }
 }
 
 /* =========================================================================
@@ -102,19 +302,19 @@ function cardRespaldo() {
 
 function wirearCardRespaldo(el) {
   el.querySelector('[data-descargar-json]').addEventListener('click', () => {
-    descargar(`lana-respaldo-${hoyISO()}.json`, store.exportarJSON(), 'application/json');
+    descargar(`cuentas-claras-respaldo-${hoyISO()}.json`, store.exportarJSON(), 'application/json');
     toast('Respaldo descargado ✓ guárdalo bien');
   });
 
   // El CSV del store YA trae BOM para Excel; aquí no se agrega nada.
   el.querySelector('[data-descargar-csv]').addEventListener('click', () => {
-    descargar('lana-movimientos.csv', store.exportarCSV(null), 'text/csv;charset=utf-8');
+    descargar('cuentas-claras-movimientos.csv', store.exportarCSV(null), 'text/csv;charset=utf-8');
     toast('Movimientos descargados ✓');
   });
 
   el.querySelector('[data-descargar-csv-mes]').addEventListener('click', () => {
     const mes = store.getMes();
-    descargar(`lana-movimientos-${mes}.csv`, store.exportarCSV(mes), 'text/csv;charset=utf-8');
+    descargar(`cuentas-claras-movimientos-${mes}.csv`, store.exportarCSV(mes), 'text/csv;charset=utf-8');
     toast('Movimientos del mes descargados ✓');
   });
 
@@ -127,7 +327,7 @@ function wirearCardRespaldo(el) {
     inputFile.value = '';
     if (!archivo) return;
     const seguro = await confirmar(
-      'Esto reemplaza TODO lo que hay ahorita en Lana con lo que traiga el respaldo. ¿Lo importo?',
+      'Esto reemplaza TODO lo que hay ahorita en Cuentas Claras con lo que traiga el respaldo. ¿Lo importo?',
       { textoBoton: 'Sí, importar' },
     );
     if (!seguro) return;
@@ -176,11 +376,11 @@ function cardPeligro() {
 function wirearCardPeligro(el) {
   el.querySelector('[data-borrar-todo]').addEventListener('click', async () => {
     const seguro = await confirmar(
-      'Vas a borrar TODO lo que Lana tiene guardado: movimientos, deudas, presupuestos y tu nombre. No se puede recuperar. ¿De verdad quieres empezar de cero?',
+      'Vas a borrar TODO lo que Cuentas Claras tiene guardado: movimientos, deudas, presupuestos y tu nombre. No se puede recuperar. ¿De verdad quieres empezar de cero?',
       { textoBoton: 'Sí, borrar todo' },
     );
     if (!seguro) return;
     store.borrarTodo();
-    toast('Todo borrado. Empezamos de cero 🐑');
+    toast('Todo borrado. Empezamos de cero ✨');
   });
 }

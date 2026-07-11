@@ -1,4 +1,4 @@
-// Utilidades compartidas de Lana.
+// Utilidades compartidas de Cuentas Claras.
 // Regla de oro del proyecto: el dinero SIEMPRE viaja en centavos (enteros).
 // Solo fmtMoney/parseMoney tocan la frontera con pesos decimales.
 

@@ -1,4 +1,4 @@
-// Componentes compartidos de Lana: modal, confirmación, toast, quick-add y
+// Componentes compartidos de Cuentas Claras: modal, confirmación, toast, quick-add y
 // pedacitos de HTML que usan todas las vistas.
 //
 // CONTRATO PARA LAS VISTAS:
@@ -265,7 +265,11 @@ export function abrirQuickAdd(tipoInicial = 'gasto') {
         const fecha = datos.get('fecha') || hoyISO();
         const nota = datos.get('nota') || '';
         if (tipo === 'pago') {
-          store.registrarPagoDeuda(datos.get('deudaId'), { monto, fecha, nota });
+          const pago = store.registrarPagoDeuda(datos.get('deudaId'), { monto, fecha, nota });
+          if (!pago) {
+            toastError('Esa deuda ya no existe 😅 refresca e intenta de nuevo');
+            return;
+          }
           toast('Pago registrado 💪');
         } else if (tipo === 'ingreso') {
           store.agregarMovimiento({ tipo: 'ingreso', monto, fecha, nota });
