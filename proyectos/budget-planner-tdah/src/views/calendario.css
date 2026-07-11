@@ -1,0 +1,60 @@
+/* Vista 📅 calendario de Lana — solo clases con prefijo .cal-x- (regla del repo).
+   Pensado para celulares de 360px: celdas compactas y nada se desborda. */
+
+/* La card del grid cede padding lateral en pantallas chicas
+   para regalarle esos pixeles a las 7 columnas. */
+.card.cal-x-card { padding: 1rem 0.55rem; }
+
+/* Celda con contenido: es un <button>, hereda el look de .cal-celda. */
+.cal .cal-x-tap {
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.cal .cal-x-tap:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Suma de gastos del día: chiquita, tabular y sin desbordar la celda. */
+.cal .cal-x-gasto {
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* Marcadores de eventos (✂️ / 💪 / 💪✓) pegados al fondo de la celda. */
+.cal .cal-x-marcas {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 2px;
+  font-size: 0.66rem;
+  line-height: 1.25;
+  overflow: hidden;
+}
+
+.cal .cal-x-mas {
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.cal-x-leyenda {
+  margin-top: 0.65rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 700px) {
+  .card.cal-x-card { padding: 1.1rem 1.2rem; }
+  .cal .cal-x-gasto { font-size: 0.7rem; }
+  .cal .cal-x-marcas { font-size: 0.82rem; }
+}
