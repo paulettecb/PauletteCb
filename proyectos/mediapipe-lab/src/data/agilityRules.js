@@ -3,6 +3,8 @@
 // Federación Canófila Mexicana (FCM, miembro de la FCI).
 // Todas las medidas en centímetros salvo indicación contraria.
 
+export const COURSES_STORAGE_KEY = 'motionlab-agility-courses'
+
 export const SIZE_CATEGORIES = [
   {
     id: 'S',

@@ -402,6 +402,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import ObstacleGlyph from './ObstacleGlyph.vue'
 import {
+  COURSES_STORAGE_KEY,
   GRADOS,
   OBSTACLES_BY_ID,
   OBSTACLE_TYPES,
@@ -410,7 +411,7 @@ import {
   validateCourse,
 } from '../../data/agilityRules'
 
-const STORAGE_KEY = 'motionlab-agility-courses'
+const STORAGE_KEY = COURSES_STORAGE_KEY
 const LONG_TYPES = new Set(['tunel', 'slalom', 'empalizada', 'pasarela', 'balancin'])
 
 const categoria = ref('L')
