@@ -44,6 +44,18 @@
     },
     "type": "Design system"
   },
+  "kyn-studio": {
+    "title": "KYN Studio",
+    "description": {
+      "en": "KYN's home on the web — the studio behind the design system.",
+      "es": "La casa de KYN en la web — el estudio detrás del design system.",
+      "fr": "La maison de KYN sur le web — le studio derrière le design system.",
+      "pt": "A casa da KYN na web — o estúdio por trás do design system.",
+      "de": "KYNs Zuhause im Web — das Studio hinter dem Design System."
+    },
+    "type": "Studio",
+    "url": "https://kynstudio.com.mx"
+  },
   "lsm": {
     "title": "LSM Practice Cards",
     "description": {

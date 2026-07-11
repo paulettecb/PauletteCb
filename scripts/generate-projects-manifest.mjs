@@ -92,6 +92,19 @@ for (const entry of entries) {
   });
 }
 
+// External projects live purely in projects.config.json (no local folder/index.html
+// to scan) — anything whose override url is absolute is treated as one.
+for (const [key, override] of Object.entries(projectConfig)) {
+  if (override.hidden || !override.url || !/^https?:\/\//i.test(override.url)) continue;
+  projects.push({
+    slug: key,
+    title: override.title || key,
+    description: override.description || '',
+    type: override.type || 'Project',
+    url: override.url,
+  });
+}
+
 projects.sort((a, b) => a.title.localeCompare(b.title));
 
 await writeFile(

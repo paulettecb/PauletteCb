@@ -324,9 +324,11 @@ function renderProjects(t) {
     return;
   }
   list.innerHTML = currentProjects
-    .map(
-      (project, index) => `
-        <a class="project-card" data-reveal href="${project.url}" style="--project-accent: ${pastels[index % pastels.length]}; transition-delay: ${index * 80}ms">
+    .map((project, index) => {
+      const isExternal = /^https?:\/\//i.test(project.url);
+      const linkAttrs = isExternal ? ' target="_blank" rel="noopener"' : '';
+      return `
+        <a class="project-card" data-reveal href="${project.url}"${linkAttrs} style="--project-accent: ${pastels[index % pastels.length]}; transition-delay: ${index * 80}ms">
           <span class="project-card__bar" aria-hidden="true"></span>
           <span class="project-card__top">
             <span class="project-card__type">${project.type || 'Project'}</span>
@@ -335,8 +337,8 @@ function renderProjects(t) {
           <span class="project-card__title">${project.title}</span>
           <span class="project-card__desc">${pickDescription(project.description, currentLang)}</span>
           <span class="project-card__open">${t.projectOpen} <span aria-hidden="true">→</span></span>
-        </a>`
-    )
+        </a>`;
+    })
     .join('');
 }
 
