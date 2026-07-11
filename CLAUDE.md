@@ -22,9 +22,9 @@ Ejemplo canónico: `proyectos/mediapipe-lab/libro-agility.html`. Para repetirlo 
 5. **Lector KYN obligatorio**: el bloque de accesibilidad de lectura (lectura biónica con 3 niveles, regla que sigue el cursor, tamaño A−/A+, localStorage, oculto en print, y modo mini: la barra se encoge a un botoncito ⚡ a los segundos de no usarla). Copiarlo desde `libro-agility.html` (bloques marcados `LECTOR KYN` en CSS y al final del body).
 6. **Integración**: agregar la copia en `scripts/build-all.mjs`, enlazar desde la página de la app, y verificar con Playwright (capítulos renderizan, fuentes Friendship/Farmhouse cargadas, lector funciona) antes de commitear.
 
-## Lana — finanzas personales (proyectos/budget-planner-tdah)
-- App de finanzas de Paulette (reemplazó al viejo budget planner en julio 2026): gastos, presupuesto, deudas (hipoteca/tarjetas/MSI/préstamos) y plan bola de nieve/avalancha. Es proyecto aparte de KYN aunque usa sus tokens.
-- **Privacidad**: los datos viven SOLO en localStorage (`lana.v1`) con export/import JSON y CSV. NUNCA commitear datos financieros reales ni agregar telemetría/red.
+## Cuentas Claras — finanzas personales (proyectos/budget-planner-tdah)
+- App de finanzas de Paulette (reemplazó al viejo budget planner en julio 2026; antes se llamó "Lana"): gastos, presupuesto, deudas (hipoteca/tarjetas/MSI/préstamos) y plan bola de nieve/avalancha. Es proyecto aparte de KYN aunque usa sus tokens.
+- **Privacidad**: los datos viven SOLO en localStorage (`cuentasclaras.v1`), cifrables con código de acceso (AES-GCM) con export/import JSON y CSV. NUNCA commitear datos financieros reales ni telemetría. Única red permitida: el sync opcional a Notion que Paulette pidió (token suyo, vía función Netlify).
 - Contrato interno: montos SIEMPRE en centavos (enteros); vistas exportan `render(el)` con re-render completo; el header de `src/store.js` documenta toda la API. Vanilla JS + Vite propio (ya orquestado en `build-all.mjs`, mismo folder de siempre).
 
 ## Gotchas técnicos de MotionLab (proyectos/mediapipe-lab)

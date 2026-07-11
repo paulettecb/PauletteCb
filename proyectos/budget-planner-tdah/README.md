@@ -1,15 +1,15 @@
-# Lana 🐑 · Tu dinero del mes
+# Cuentas Claras ✨ · Tu dinero del mes
 
 App de finanzas personales: gastos e ingresos del mes, presupuesto por categoría,
 control de deudas (hipoteca, tarjetas de crédito, MSI y préstamos) y un plan para
 salir de deudas con estrategias bola de nieve / avalancha.
 
-Reemplazó al viejo "Budget Planner TDAH" (julio 2026). Es un proyecto aparte de KYN,
+Reemplazó al viejo "Budget Planner TDAH" (julio 2026); antes se llamó "Lana". Es un proyecto aparte de KYN,
 aunque usa los tokens del design system (periwinkle, Friendship, Farmhouse, Hanken Grotesk).
 
 ## Privacidad
 
-- **Los datos viven SOLO en el navegador** (`localStorage`, llave `lana.v1`).
+- **Los datos viven SOLO en el navegador** (`localStorage`, llave `cuentasclaras.v1` (migra sola desde la vieja `lana.v1`)).
   Nada viaja a internet y nada se commitea al repo.
 - Respaldo: exportar/importar JSON completo y exportar movimientos a CSV (con BOM,
   listo para Excel) desde la sección **Datos**.

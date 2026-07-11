@@ -1,4 +1,4 @@
-// Componentes compartidos de Lana: modal, confirmación, toast, quick-add y
+// Componentes compartidos de Cuentas Claras: modal, confirmación, toast, quick-add y
 // pedacitos de HTML que usan todas las vistas.
 //
 // CONTRATO PARA LAS VISTAS:
