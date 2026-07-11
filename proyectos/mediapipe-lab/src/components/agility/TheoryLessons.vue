@@ -43,11 +43,8 @@
 
         <aside class="lessons-side">
           <div class="panel-card">
-            <div class="libro-head">
-              <h3>Mini-libro</h3>
-              <span class="badge">intacto</span>
-            </div>
-            <p>El libro con bionic reader se queda tal cual está — vive en su propia entrada del menú.</p>
+            <h3>Mini-libro</h3>
+            <p>El libro completo, capítulo por capítulo, vive en su propia entrada del menú.</p>
             <a
               class="libro-open"
               href="./libro-agility.html"
@@ -73,6 +70,12 @@
           ‹ Todas las lecciones
         </button>
         <h3>{{ activeLesson.icono }} {{ activeLesson.titulo }}</h3>
+
+        <LectorKYN
+          text-selector=".lesson-content p, .lesson-content li, .dato p"
+          container-selector=".lesson-content"
+          :content-key="`${activeLesson.id}-${quizMode}`"
+        />
 
         <template v-if="!quizMode">
           <div class="lesson-content">
@@ -182,6 +185,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { LESSONS, readProgress, saveProgress } from '../../data/agilityLessons'
+import LectorKYN from '../LectorKYN.vue'
 
 const progress = ref(readProgress())
 const activeLesson = ref(null)
@@ -294,7 +298,6 @@ const optionClass = (questionIndex, optionIndex) => {
 }
 .panel-card h3 { margin: 0; font-size: var(--text-md); }
 .panel-card p { margin: var(--space-2) 0; color: var(--text-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed); }
-.libro-head { display: flex; align-items: center; gap: var(--space-2); }
 .libro-open { font-size: var(--text-sm); font-weight: var(--weight-semibold); text-decoration: none; }
 .stat-card { display: grid; gap: 6px; }
 .stat-label { font-size: var(--text-xs); font-weight: var(--weight-semibold); color: var(--text-muted); }
