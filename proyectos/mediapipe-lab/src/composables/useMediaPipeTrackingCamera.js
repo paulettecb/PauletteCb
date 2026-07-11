@@ -42,6 +42,13 @@ export const useMediaPipeTrackingCamera = ({ hands = true, pose = true } = {}) =
   const detect = () => {
     if (!cameraActive.value || !videoRef.value) return
 
+    // detectForVideo truena si el video aún no tiene dimensiones (metadata
+    // sin cargar justo después de play()).
+    if (videoRef.value.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+      animationFrameId = requestAnimationFrame(detect)
+      return
+    }
+
     const now = performance.now()
     if (lastFrameTime) {
       const instantFps = 1000 / (now - lastFrameTime)

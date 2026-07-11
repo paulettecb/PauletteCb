@@ -134,6 +134,9 @@ const butterflies = []
 const handMemory = new Map()
 let wind = 0
 let gardenFrameId = null
+// El arte del jardín está dimensionado en pixeles pensados para video de 640
+// de ancho; a 720p las flores saldrían de la mitad de tamaño sin este factor.
+let resScale = 1
 
 const windLabel = computed(() => {
   if (windLevel.value > 0.6) return 'fuerte 🌬️'
@@ -237,8 +240,8 @@ const readHands = (width, height) => {
 
 const drawFlower = (context, flower, now) => {
   const growth = Math.min(1, (now - flower.plantedAt) / 900)
-  const scale = flower.size * easeOutBack(growth)
-  const sway = Math.sin(now * 0.0018 + flower.phase) * (2.5 + wind * 26)
+  const scale = flower.size * easeOutBack(growth) * resScale
+  const sway = Math.sin(now * 0.0018 + flower.phase) * (2.5 + wind * 26) * resScale
   const stemHeight = 46 * scale
   const headX = flower.x + sway
   const headY = flower.y - stemHeight
@@ -282,9 +285,9 @@ const drawSparkle = (context, sparkle, now) => {
   const age = (now - sparkle.bornAt) / 900
   if (age >= 1) return false
   const alpha = 1 - age
-  const size = 3 + age * 5
-  const x = sparkle.x + sparkle.drift * age * 60
-  const y = sparkle.y - age * 34
+  const size = (3 + age * 5) * resScale
+  const x = sparkle.x + sparkle.drift * age * 60 * resScale
+  const y = sparkle.y - age * 34 * resScale
 
   context.save()
   context.globalAlpha = alpha
@@ -309,13 +312,14 @@ const drawButterfly = (context, butterfly, now) => {
 
   butterfly.wobble += 0.14
   butterfly.angle += (Math.random() - 0.5) * 0.3
-  butterfly.x += Math.cos(butterfly.angle) * butterfly.speed * 2.2
-  butterfly.y += Math.sin(butterfly.angle) * butterfly.speed * 2.2 - 0.5
+  butterfly.x += Math.cos(butterfly.angle) * butterfly.speed * 2.2 * resScale
+  butterfly.y += (Math.sin(butterfly.angle) * butterfly.speed * 2.2 - 0.5) * resScale
 
   const flap = Math.abs(Math.sin(butterfly.wobble)) * 0.8 + 0.2
   context.save()
   context.globalAlpha = 1 - age
   context.translate(butterfly.x, butterfly.y)
+  context.scale(resScale, resScale)
   context.fillStyle = `hsl(${butterfly.hue} 82% 70%)`
   context.beginPath()
   context.ellipse(-5, 0, 6 * flap, 4, 0.5, 0, Math.PI * 2)
@@ -339,6 +343,7 @@ const renderGarden = () => {
   const height = video.videoHeight || 720
   if (canvas.width !== width) canvas.width = width
   if (canvas.height !== height) canvas.height = height
+  resScale = Math.max(width / 640, 1)
 
   const context = canvas.getContext('2d')
   const now = performance.now()
@@ -396,6 +401,10 @@ const startGarden = () => {
   height: 100%;
   pointer-events: none;
   transform: scaleX(-1);
+  /* Igual que .landmarks-canvas: el buffer mide videoWidth x videoHeight,
+     así que debe recortarse con cover como el video para que flores y
+     destellos caigan donde está la mano. */
+  object-fit: cover;
 }
 
 .stage-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
