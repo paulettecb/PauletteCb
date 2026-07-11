@@ -88,7 +88,6 @@
             <div class="metric-card">
               <span class="metric-label">Overall status</span>
               <strong>{{ poseDetected ? 'Pose detected' : 'No pose detected' }}</strong>
-              <span class="metric-label">Hands: {{ detectedHandsCount }}</span>
             </div>
           </div>
         </div>
@@ -102,17 +101,18 @@ import { computed, reactive, watch } from 'vue'
 import { useMediaPipeTrackingCamera } from '../composables/useMediaPipeTrackingCamera'
 import { isVisible } from '../utils/drawLandmarks'
 
+// Solo cuerpo: para análisis de ejercicio las manos no aportan y su modelo
+// cuesta FPS.
 const {
   cameraActive: analysisActive,
   cameraStatus: analysisStatus,
-  detectedHandsCount,
   poseDetected,
   poseResults,
   start: startTracking,
   trackingStatus,
   canvasRef,
   videoRef,
-} = useMediaPipeTrackingCamera({ hands: true, pose: true })
+} = useMediaPipeTrackingCamera({ hands: false, pose: true })
 
 const metrics = reactive({
   shouldersVisible: false,
@@ -133,6 +133,6 @@ watch(poseResults, (results) => {
 const analysisSummary = computed(() => trackingStatus.value || analysisStatus.value)
 
 const startAnalysis = () => {
-  startTracking('Exercise analysis activo con landmarks de cuerpo y manos.')
+  startTracking('Exercise analysis activo con landmarks de cuerpo.')
 }
 </script>
