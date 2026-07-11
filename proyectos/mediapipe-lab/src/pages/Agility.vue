@@ -41,7 +41,6 @@
           v-html="ICON_LIBRO"
         />
         Libro
-        <span class="libro-badge">intacto</span>
       </a>
     </nav>
 
@@ -187,16 +186,6 @@ const activeMode = ref('hoy')
 .nav-icon :deep(svg) { display: block; }
 
 .libro-item { margin-top: 4px; }
-.libro-badge {
-  margin-left: auto;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: var(--pastel-butter);
-  color: var(--ink-700);
-}
 
 /* ---------- Main ---------- */
 .agility-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
