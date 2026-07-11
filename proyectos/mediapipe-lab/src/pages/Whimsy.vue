@@ -108,6 +108,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { useMediaPipeTrackingCamera } from '../composables/useMediaPipeTrackingCamera'
 import { detectBasicGesture } from '../services/gestureRules'
+import { overlayScale } from '../utils/drawLandmarks'
 
 const MAX_FLOWERS = 36
 const MAX_SPARKLES = 140
@@ -134,8 +135,6 @@ const butterflies = []
 const handMemory = new Map()
 let wind = 0
 let gardenFrameId = null
-// El arte del jardín está dimensionado en pixeles pensados para video de 640
-// de ancho; a 720p las flores saldrían de la mitad de tamaño sin este factor.
 let resScale = 1
 
 const windLabel = computed(() => {
@@ -339,11 +338,17 @@ const renderGarden = () => {
     return
   }
 
-  const width = video.videoWidth || 1280
-  const height = video.videoHeight || 720
+  // Sin dimensiones reales del video todavía no hay dónde dibujar: con un
+  // tamaño inventado las flores ya plantadas saldrían movidas unos frames.
+  const width = video.videoWidth
+  const height = video.videoHeight
+  if (!width || !height) {
+    gardenFrameId = requestAnimationFrame(renderGarden)
+    return
+  }
   if (canvas.width !== width) canvas.width = width
   if (canvas.height !== height) canvas.height = height
-  resScale = Math.max(width / 640, 1)
+  resScale = overlayScale(width)
 
   const context = canvas.getContext('2d')
   const now = performance.now()

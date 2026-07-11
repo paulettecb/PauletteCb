@@ -16,6 +16,11 @@ const POSE_CONNECTIONS = [
 
 const REQUIRED_VISIBILITY = 0.5
 
+// Trazos, radios y fuentes de los overlays están dimensionados para video de
+// 640 de ancho; con esto se escalan igual en todos los canvas (landmarks,
+// jardín de Whimsy, métricas de ManeuverCoach) cuando la cámara da 720p+.
+export const overlayScale = (width) => Math.max(width / 640, 1)
+
 const getVideoSize = (video) => ({
   width: video.videoWidth || video.clientWidth || 0,
   height: video.videoHeight || video.clientHeight || 0,
@@ -80,9 +85,7 @@ export const drawLandmarks = (canvas, video, results) => {
   const hands = normalizedResults.hands?.landmarks || []
   const poses = normalizedResults.pose?.landmarks || []
 
-  // Grosores pensados para video de 640 de ancho; a 720p o más se escalan
-  // para que el trazo se vea igual en pantalla.
-  const scale = Math.max(width / 640, 1)
+  const scale = overlayScale(width)
 
   drawLandmarkGroup(context, poses, POSE_CONNECTIONS, width, height, {
     lineWidth: 4 * scale,

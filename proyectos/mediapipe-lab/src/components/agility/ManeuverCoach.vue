@@ -343,6 +343,7 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, shallowRef, watch } from 'vue'
 import { useMediaPipeTrackingCamera } from '../../composables/useMediaPipeTrackingCamera'
+import { overlayScale } from '../../utils/drawLandmarks'
 import { GLOSSARY, MANEUVER_GROUPS, MANEUVERS, MANEUVERS_BY_ID } from '../../data/agilityManeuvers'
 import { POSE } from '../../services/agilityHandlingRules'
 import {
@@ -515,9 +516,7 @@ const drawMetricsOverlay = (landmarks, current, now) => {
 
   const px = (lm) => ({ x: width - lm.x * width, y: lm.y * height })
   const metrics = tracker.latest
-  // Trazos y textos dimensionados para video de 640 de ancho; a 720p se
-  // escalan igual que en drawLandmarks para no verse diminutos.
-  const s = Math.max(width / 640, 1)
+  const s = overlayScale(width)
 
   // Línea de hombros + rotación (yaw)
   const ls = landmarks[POSE.leftShoulder]
