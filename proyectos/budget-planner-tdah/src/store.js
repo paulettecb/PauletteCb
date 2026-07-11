@@ -140,6 +140,8 @@ function normalizar(datos) {
         categoriaId: m.categoriaId ? String(m.categoriaId) : null,
         nota: typeof m.nota === 'string' ? m.nota.slice(0, 200) : '',
         deudaId: m.deudaId ? String(m.deudaId) : null,
+        // De dónde vino el dinero (por ahora solo se distingue KYN).
+        origen: m.origen === 'kyn' ? 'kyn' : null,
         creadoEn: m.creadoEn || '',
       })),
     deudas: (Array.isArray(datos.deudas) ? datos.deudas : [])
@@ -342,7 +344,7 @@ export function setMes(mesKey) {
    Movimientos
    ========================================================================= */
 
-export function agregarMovimiento({ tipo, fecha, monto, categoriaId = null, nota = '', deudaId = null }) {
+export function agregarMovimiento({ tipo, fecha, monto, categoriaId = null, nota = '', deudaId = null, origen = null }) {
   const mov = {
     id: uid(),
     tipo: tipo === 'ingreso' ? 'ingreso' : 'gasto',
@@ -351,6 +353,7 @@ export function agregarMovimiento({ tipo, fecha, monto, categoriaId = null, nota
     categoriaId,
     nota: (nota || '').slice(0, 200),
     deudaId,
+    origen: origen === 'kyn' ? 'kyn' : null,
     creadoEn: new Date().toISOString(),
   };
   state.movimientos.push(mov);
@@ -371,8 +374,21 @@ export function editarMovimiento(id, cambios) {
   if (cambios.fecha && /^\d{4}-\d{2}-\d{2}$/.test(cambios.fecha)) mov.fecha = cambios.fecha;
   if (cambios.nota != null) mov.nota = String(cambios.nota).slice(0, 200);
   if (cambios.categoriaId !== undefined && !mov.deudaId) mov.categoriaId = cambios.categoriaId;
+  if (cambios.origen !== undefined) mov.origen = cambios.origen === 'kyn' ? 'kyn' : null;
   mov.monto = montoNuevo;
   commit();
+}
+
+// Ingresos del mes por origen: cuánto puso KYN. → { total, kyn, pctKyn }
+export function origenIngresos(mes = ui.mes) {
+  let total = 0;
+  let kyn = 0;
+  for (const m of state.movimientos) {
+    if (m.tipo !== 'ingreso' || mesKeyDe(m.fecha) !== mes) continue;
+    total += m.monto;
+    if (m.origen === 'kyn') kyn += m.monto;
+  }
+  return { total, kyn, pctKyn: total > 0 ? Math.round((kyn / total) * 100) : 0 };
 }
 
 export function borrarMovimiento(id) {
@@ -578,6 +594,7 @@ export function registrarPagoDeuda(deudaId, { monto, fecha = hoyISO(), nota = ''
     categoriaId: CATEGORIA_DEUDAS,
     nota: nota || `Pago · ${deuda.nombre}`,
     deudaId,
+    origen: null,
     creadoEn: new Date().toISOString(),
   };
   state.movimientos.push(mov);
@@ -822,7 +839,7 @@ export function importarJSON(texto) {
 
 // CSV de movimientos (mes 'YYYY-MM' o null = todos), listo para Excel (BOM UTF-8).
 export function exportarCSV(mes = null) {
-  const filas = [['fecha', 'tipo', 'monto', 'categoria', 'nota', 'deuda']];
+  const filas = [['fecha', 'tipo', 'monto', 'categoria', 'nota', 'deuda', 'origen']];
   const movs = (mes ? state.movimientos.filter((m) => mesKeyDe(m.fecha) === mes) : state.movimientos)
     .slice()
     .sort((a, b) => a.fecha.localeCompare(b.fecha));
@@ -834,6 +851,7 @@ export function exportarCSV(mes = null) {
       m.categoriaId ? (categoriaDe(m.categoriaId)?.nombre || '') : '',
       m.nota || '',
       m.deudaId ? (deudaDe(m.deudaId)?.nombre || '') : '',
+      m.origen === 'kyn' ? 'KYN' : '',
     ]);
   }
   const esc = (v) => {

@@ -9,6 +9,7 @@ import {
   abrirModal, cerrarModal, confirmar, toast, toastError, abrirQuickAdd,
   campoMonto, leerMonto, campoFecha, campoTexto,
   chipsCategorias, wirearChips, chipSeleccionado, burbujaCat, vacio,
+  wirearToggleKyn, origenKynActivo,
 } from '../components.js';
 import { fmtMoney, escapeHtml, etiquetaRelativa } from '../utils.js';
 
@@ -49,6 +50,7 @@ export function render(el) {
 
   const { ingresos, gastos, balance } = store.totalesDelMes();
   const claseBalance = balance < 0 ? 'negativo' : balance > 0 ? 'positivo' : 'neutro';
+  const origen = store.origenIngresos();
 
   el.innerHTML = `
     <section class="seccion">
@@ -58,6 +60,7 @@ export function render(el) {
           <div>
             <div class="card-titulo">entró</div>
             <div class="monto-grande">${fmtMoney(ingresos)}</div>
+            ${origen.kyn > 0 ? `<div class="texto-suave">✨ ${origen.pctKyn}% de KYN</div>` : ''}
           </div>
           <div>
             <div class="card-titulo">salió</div>
@@ -184,6 +187,7 @@ function filaMov(m) {
   if (esIngreso) {
     titulo = m.nota || 'Ingreso';
     if (m.nota) partesDetalle.push('Ingreso');
+    if (m.origen === 'kyn') partesDetalle.push('✨ KYN');
   } else {
     titulo = m.nota || nombreCat;
     if (m.nota) partesDetalle.push(nombreCat);
@@ -229,7 +233,15 @@ function abrirEdicion(id) {
         </div>
         ${mov.deudaId
           ? `<p class="texto-suave">💪 Este pago está ligado a <strong>${escapeHtml(nombreDeuda)}</strong>; si cambias el monto, el saldo se ajusta solo.</p>`
-          : `<div class="campo">
+          : esIngreso
+            ? `<div class="campo">
+                 <label>Origen</label>
+                 <div class="chips">
+                   <button type="button" class="chip${mov.origen === 'kyn' ? ' activa' : ''}"
+                     data-origen-kyn aria-pressed="${mov.origen === 'kyn'}">✨ es de KYN</button>
+                 </div>
+               </div>`
+            : `<div class="campo">
                <label>Categoría</label>
                ${chipsCategorias(mov.categoriaId)}
              </div>`}
@@ -242,6 +254,7 @@ function abrirEdicion(id) {
       const form = modal.querySelector('[data-form-editar]');
       const chips = form.querySelector('[data-chips-categorias]');
       if (chips) wirearChips(chips);
+      wirearToggleKyn(form);
 
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -257,6 +270,7 @@ function abrirEdicion(id) {
           nota: datos.get('nota') || '',
         };
         if (chips) cambios.categoriaId = chipSeleccionado(chips);
+        if (esIngreso) cambios.origen = origenKynActivo(form) ? 'kyn' : null;
         store.editarMovimiento(mov.id, cambios);
         cerrarModal();
         toast('Cambios guardados ✓');

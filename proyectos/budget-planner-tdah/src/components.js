@@ -183,6 +183,20 @@ export function vacio({ emoji, titulo, texto, boton = '' }) {
 export const emojiDeuda = (tipo) => store.TIPOS_DEUDA[tipo]?.emoji || '💳';
 export const nombreTipoDeuda = (tipo) => store.TIPOS_DEUDA[tipo]?.nombre || tipo;
 
+// Toggle "✨ es de KYN" en formularios de ingreso (chip prendible/apagable).
+export function wirearToggleKyn(contenedor) {
+  const chip = contenedor.querySelector('[data-origen-kyn]');
+  if (!chip) return;
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('activa');
+    chip.setAttribute('aria-pressed', String(chip.classList.contains('activa')));
+  });
+}
+
+export function origenKynActivo(contenedor) {
+  return contenedor.querySelector('[data-origen-kyn]')?.classList.contains('activa') || false;
+}
+
 /* =========================================================================
    Quick-add: la puerta de entrada de casi todos los datos
    ========================================================================= */
@@ -211,6 +225,13 @@ export function abrirQuickAdd(tipoInicial = 'gasto') {
     if (t === 'ingreso') {
       return `
         ${campoMonto('monto', { autofocus: true })}
+        <div class="campo">
+          <label>Origen</label>
+          <div class="chips">
+            <button type="button" class="chip" data-origen-kyn aria-pressed="false">✨ es de KYN</button>
+          </div>
+          <span class="ayuda">márcalo y te enseño qué tanto de tu mes viene de KYN</span>
+        </div>
         <div class="form-fila">${campoFecha('fecha')}${campoTexto('nota', { etiqueta: 'De dónde', placeholder: 'sueldo, venta…' })}</div>`;
     }
     return `
@@ -240,6 +261,7 @@ export function abrirQuickAdd(tipoInicial = 'gasto') {
       const wirear = () => {
         const chips = cuerpoForm.querySelector('[data-chips-categorias]');
         if (chips) wirearChips(chips);
+        wirearToggleKyn(cuerpoForm);
         const inputMonto = cuerpoForm.querySelector('input[name="monto"]');
         if (inputMonto) setTimeout(() => inputMonto.focus(), 60);
       };
@@ -272,7 +294,10 @@ export function abrirQuickAdd(tipoInicial = 'gasto') {
           }
           toast('Pago registrado 💪');
         } else if (tipo === 'ingreso') {
-          store.agregarMovimiento({ tipo: 'ingreso', monto, fecha, nota });
+          store.agregarMovimiento({
+            tipo: 'ingreso', monto, fecha, nota,
+            origen: origenKynActivo(cuerpoForm) ? 'kyn' : null,
+          });
           toast('Ingreso guardado 💰');
         } else {
           const chips = cuerpoForm.querySelector('[data-chips-categorias]');
