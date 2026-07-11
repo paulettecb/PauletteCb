@@ -9,10 +9,13 @@
       aria-hidden="true"
     />
 
-    <!-- Panel de auto-vista + estado, visible solo con la mirada activa -->
+    <!-- Panel de estado. La vista-espejo solo se muestra al calibrar (para
+         acomodarse); al leer se colapsa a una pastilla de "te veo". El video
+         sigue montado (chiquito, oculto) para que la cámara no se pause. -->
     <div
       v-show="gazeOn"
       class="gaze-panel"
+      :class="{ 'with-preview': calibrating }"
     >
       <video
         ref="gazeVideo"
@@ -24,7 +27,7 @@
       <div class="gaze-panel-info">
         <span
           class="gaze-dot"
-          :class="{ on: gaze.facePresent.value }"
+          :class="{ on: gaze.facePresent.value && !gaze.blinking.value }"
         />
         <span class="gaze-panel-text">{{ gazePanelText }}</span>
         <button
@@ -49,21 +52,31 @@
       />
       <div class="gaze-cal-card">
         <strong>Calibrando la mirada · paso {{ calStep + 1 }} de {{ CAL_POINTS.length }}</strong>
-        <p>Sin mover la cabeza, <b>mira el punto {{ CAL_POINTS[calStep].label }}</b> y presiona Espacio (o el botón).</p>
+        <p v-if="capturing">
+          <b>Sostén la mirada en el punto {{ CAL_POINTS[calStep].label }}…</b> midiendo un momento.
+        </p>
+        <p v-else>
+          Sin mover la cabeza, <b>mira el punto {{ CAL_POINTS[calStep].label }}</b> y presiona Espacio (o el botón); aguanta ahí un momento.
+        </p>
         <p
           v-if="!gaze.facePresent.value"
           class="gaze-cal-warn"
         >No te veo bien: acomódate frente a la cámara con buena luz.</p>
+        <p
+          v-else-if="captureError"
+          class="gaze-cal-warn"
+        >No pude medir (¿parpadeaste?). Míralo fijo e inténtalo de nuevo.</p>
         <div class="gaze-cal-actions">
           <button
             type="button"
             class="btn btn-primary"
-            :disabled="!gaze.facePresent.value"
+            :disabled="!gaze.facePresent.value || capturing"
             @click="captureCalibration"
-          >Capturar punto</button>
+          >{{ capturing ? 'Midiendo…' : 'Capturar punto' }}</button>
           <button
             type="button"
             class="btn mini"
+            :disabled="capturing"
             @click="cancelCalibration"
           >Cancelar</button>
         </div>
@@ -183,6 +196,8 @@ const gaze = useGazeReader()
 const gazeVideo = ref(null)
 const gazeOn = ref(false)
 const calibrating = ref(false)
+const capturing = ref(false)
+const captureError = ref(false)
 const calStep = ref(0)
 let calSamples = []
 
@@ -191,7 +206,7 @@ const gazePanelText = computed(() => {
   if (gaze.status.value) return gaze.status.value
   if (calibrating.value) return 'Calibrando…'
   if (!gaze.facePresent.value) return 'No te veo — acomódate frente a la cámara.'
-  if (gaze.calibrated.value) return 'Siguiendo tu mirada.'
+  if (gaze.calibrated.value) return 'Siguiendo tu mirada 👁️'
   return 'Listo para calibrar.'
 })
 
@@ -289,12 +304,24 @@ const toggleMirada = async () => {
 const startCalibration = () => {
   calSamples = []
   calStep.value = 0
+  captureError.value = false
   calibrating.value = true
 }
 
-const captureCalibration = () => {
-  const offset = gaze.currentOffset()
-  if (offset === null || !gaze.facePresent.value) return
+const captureCalibration = async () => {
+  if (capturing.value || !gaze.facePresent.value) return
+  captureError.value = false
+  capturing.value = true
+  // Junta varias muestras de mirada (mediana, ignorando parpadeos) para un
+  // ancla firme; se adapta al framerate de la máquina.
+  const offset = await gaze.capturePoint()
+  capturing.value = false
+  if (!calibrating.value) return // se canceló mientras medía
+
+  if (offset === null) {
+    captureError.value = true
+    return
+  }
   calSamples.push({ offset, y: CAL_POINTS[calStep.value].frac * window.innerHeight })
 
   if (calStep.value < CAL_POINTS.length - 1) {
@@ -306,6 +333,7 @@ const captureCalibration = () => {
 }
 
 const cancelCalibration = () => {
+  if (capturing.value) return
   calibrating.value = false
   if (!gaze.calibrated.value) {
     gazeOn.value = false
@@ -314,7 +342,7 @@ const cancelCalibration = () => {
 }
 
 const onKeydown = (event) => {
-  if (calibrating.value && (event.code === 'Space' || event.key === ' ')) {
+  if (calibrating.value && !capturing.value && (event.code === 'Space' || event.key === ' ')) {
     event.preventDefault()
     captureCalibration()
   }
@@ -421,15 +449,24 @@ onBeforeUnmount(() => {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
 }
+/* El video se queda montado siempre (si no, la cámara se pausa), pero solo se
+   ve al calibrar; al leer queda de 1px oculto y el panel es solo la pastilla. */
 .gaze-video {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.gaze-panel.with-preview .gaze-video {
   width: 132px;
   height: 74px;
+  opacity: 1;
   object-fit: cover;
   border-radius: var(--radius-sm);
   background: var(--ink-900);
   transform: scaleX(-1);
 }
-.gaze-panel-info { display: flex; align-items: center; gap: 0.35rem; max-width: 132px; }
+.gaze-panel-info { display: flex; align-items: center; gap: 0.35rem; max-width: 180px; }
 .gaze-dot { width: 9px; height: 9px; flex: none; border-radius: 50%; background: var(--ink-300); }
 .gaze-dot.on { background: var(--success); }
 .gaze-panel-text { font-size: 0.68rem; line-height: 1.15; color: var(--ink-700); }
