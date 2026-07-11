@@ -390,6 +390,11 @@ a { font: inherit; }
   z-index: 2;
   pointer-events: none;
   transform: scaleX(-1);
+  /* El buffer del canvas mide lo mismo que el video (videoWidth x
+     videoHeight); debe recortarse con cover IGUAL que .camera-preview.
+     Estirado a 100%/100% los landmarks caen fuera de la persona en cuanto
+     la cámara no es exactamente 16:9. */
+  object-fit: cover;
 }
 
 .lab-footer { width: min(var(--container-max), calc(100% - (var(--container-pad) * 2))); margin: 0 auto var(--space-5); color: var(--text-muted); text-align: center; font-size: var(--text-sm); }

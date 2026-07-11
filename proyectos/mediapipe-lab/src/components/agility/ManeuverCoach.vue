@@ -515,6 +515,9 @@ const drawMetricsOverlay = (landmarks, current, now) => {
 
   const px = (lm) => ({ x: width - lm.x * width, y: lm.y * height })
   const metrics = tracker.latest
+  // Trazos y textos dimensionados para video de 640 de ancho; a 720p se
+  // escalan igual que en drawLandmarks para no verse diminutos.
+  const s = Math.max(width / 640, 1)
 
   // Línea de hombros + rotación (yaw)
   const ls = landmarks[POSE.leftShoulder]
@@ -523,7 +526,7 @@ const drawMetricsOverlay = (landmarks, current, now) => {
     const a = px(ls)
     const b = px(rs)
     context.strokeStyle = '#5562A4'
-    context.lineWidth = 5
+    context.lineWidth = 5 * s
     context.lineCap = 'round'
     context.beginPath()
     context.moveTo(a.x, a.y)
@@ -532,9 +535,9 @@ const drawMetricsOverlay = (landmarks, current, now) => {
 
     if (metrics?.yaw !== null && metrics?.yaw !== undefined) {
       const midX = (a.x + b.x) / 2
-      const topY = Math.min(a.y, b.y) - 26
+      const topY = Math.min(a.y, b.y) - 26 * s
       const turning = current.turnTracker.state.stage === 'turning' || current.turnTracker.state.stage === 'back'
-      context.font = 'bold 17px sans-serif'
+      context.font = `bold ${Math.round(17 * s)}px sans-serif`
       context.textAlign = 'center'
       context.fillStyle = turning ? '#E85DA0' : '#434D80'
       const dirLabel = current.turnTracker.state.directionLabel
@@ -555,7 +558,7 @@ const drawMetricsOverlay = (landmarks, current, now) => {
     const arm = side === 'left' ? metrics?.leftArm : metrics?.rightArm
     const color = arm?.extended ? '#4FA47A' : 'rgba(117, 115, 127, 0.55)'
     context.strokeStyle = color
-    context.lineWidth = arm?.extended ? 6 : 3
+    context.lineWidth = (arm?.extended ? 6 : 3) * s
     context.beginPath()
     const points = ids.map((i) => px(landmarks[i]))
     context.moveTo(points[0].x, points[0].y)
@@ -564,11 +567,11 @@ const drawMetricsOverlay = (landmarks, current, now) => {
     context.stroke()
     context.fillStyle = color
     context.beginPath()
-    context.arc(points[2].x, points[2].y, arm?.extended ? 9 : 6, 0, Math.PI * 2)
+    context.arc(points[2].x, points[2].y, (arm?.extended ? 9 : 6) * s, 0, Math.PI * 2)
     context.fill()
     if (arm?.raised) {
-      context.font = '15px sans-serif'
-      context.fillText('⬆', points[2].x + 14, points[2].y)
+      context.font = `${Math.round(15 * s)}px sans-serif`
+      context.fillText('⬆', points[2].x + 14 * s, points[2].y)
     }
   }
   drawArm('left')
@@ -583,7 +586,7 @@ const drawMetricsOverlay = (landmarks, current, now) => {
     while (hipTrail.length && now - hipTrail[0].t > 1400) hipTrail.shift()
 
     context.strokeStyle = 'rgba(232, 93, 160, 0.6)'
-    context.lineWidth = 3
+    context.lineWidth = 3 * s
     context.beginPath()
     hipTrail.forEach((p, i) => (i === 0 ? context.moveTo(p.x, p.y) : context.lineTo(p.x, p.y)))
     context.stroke()
@@ -591,17 +594,17 @@ const drawMetricsOverlay = (landmarks, current, now) => {
     const vel = tracker.hipVelocity()
     if (vel !== null && Math.abs(vel) > 0.05) {
       // vel > 0 = hacia la izquierda del guía = izquierda de la pantalla selfie.
-      const arrow = Math.min(70, Math.abs(vel) * 220) * (vel > 0 ? -1 : 1)
+      const arrow = Math.min(70, Math.abs(vel) * 220) * (vel > 0 ? -1 : 1) * s
       context.strokeStyle = '#E85DA0'
-      context.lineWidth = 5
+      context.lineWidth = 5 * s
       context.beginPath()
       context.moveTo(hip.x, hip.y)
       context.lineTo(hip.x + arrow, hip.y)
       context.stroke()
       context.beginPath()
       context.moveTo(hip.x + arrow, hip.y)
-      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10, hip.y - 7)
-      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10, hip.y + 7)
+      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10 * s, hip.y - 7 * s)
+      context.lineTo(hip.x + arrow - Math.sign(arrow) * 10 * s, hip.y + 7 * s)
       context.closePath()
       context.fillStyle = '#E85DA0'
       context.fill()
@@ -901,6 +904,10 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  /* Buffer = videoWidth x videoHeight: recortar con cover igual que
+     .camera-preview para que hombros/brazos caigan sobre el cuerpo. OJO: sin
+     scaleX(-1) — este canvas ya se espeja en JS (px() invierte las x). */
+  object-fit: cover;
 }
 
 .rep-counter {

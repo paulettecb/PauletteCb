@@ -80,18 +80,22 @@ export const drawLandmarks = (canvas, video, results) => {
   const hands = normalizedResults.hands?.landmarks || []
   const poses = normalizedResults.pose?.landmarks || []
 
+  // Grosores pensados para video de 640 de ancho; a 720p o más se escalan
+  // para que el trazo se vea igual en pantalla.
+  const scale = Math.max(width / 640, 1)
+
   drawLandmarkGroup(context, poses, POSE_CONNECTIONS, width, height, {
-    lineWidth: 4,
+    lineWidth: 4 * scale,
     strokeStyle: '#4FA47A',
     fillStyle: '#F4B860',
-    radius: 4,
+    radius: 4 * scale,
   })
 
   drawLandmarkGroup(context, hands, HAND_CONNECTIONS, width, height, {
-    lineWidth: 3,
+    lineWidth: 3 * scale,
     strokeStyle: '#E85DA0',
     fillStyle: '#8795D2',
-    radius: 5,
+    radius: 5 * scale,
   })
 }
 
