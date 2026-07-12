@@ -171,10 +171,14 @@ const TAMANOS = ['100%', '112%', '125%']
 const NIVEL_MARCAS = { 1: '▁', 2: '▃', 3: '▅' }
 const NIVEL_TITULOS = { 1: 'Fijación suave', 2: 'Fijación media', 3: 'Fijación fuerte' }
 // Puntos de calibración de mirada, de arriba a abajo del área de lectura.
+// Cinco anclas dan un mapa más fino (mejor resolución entre renglones) que
+// las tres de antes; la UI y el motor se adaptan a cualquier cantidad.
 const CAL_POINTS = [
-  { label: 'de arriba', frac: 0.22 },
+  { label: 'de hasta arriba', frac: 0.14 },
+  { label: 'de arriba', frac: 0.32 },
   { label: 'del centro', frac: 0.5 },
-  { label: 'de abajo', frac: 0.78 },
+  { label: 'de abajo', frac: 0.68 },
+  { label: 'de hasta abajo', frac: 0.86 },
 ]
 
 const readState = () => {

@@ -4,7 +4,7 @@ import { startCamera, stopCamera } from '../utils/camera'
 import { averageVerticalGaze, buildGazeMapping, eyeOpenness, isBlink, mapOffsetToY, median, updateOpenBaseline } from '../services/gazeReader'
 
 // Lee la mirada vertical con FaceLandmarker y la traduce a una Y de pantalla
-// usando una calibración de 3 puntos. Solo prende la cámara y descarga el
+// usando una calibración de varios puntos. Solo prende la cámara y descarga el
 // modelo cuando se activa; al apagar libera todo (privacidad + FPS).
 export const useGazeReader = () => {
   const faceLandmarker = shallowRef(null)
@@ -22,9 +22,23 @@ export const useGazeReader = () => {
   let smoothedOffset = null
   let smoothedY = null
 
-  // La mirada tiembla; se suaviza fuerte para que la regla planee, no salte.
-  const SMOOTH_OFFSET = 0.3
-  const SMOOTH_Y = 0.16
+  // Suavizado adaptativo (estilo 1€): quieto suaviza fuerte para matar el
+  // jitter del iris; cuando de verdad cambias de renglón sube la respuesta
+  // para que la regla te siga y no se quede pegada. Antes era un factor fijo
+  // pesado (0.16) y por eso los movimientos chicos "no movían nada".
+  const SMOOTH_MIN = 0.12
+  const SMOOTH_MAX = 0.6
+  const SMOOTH_Y = 0.5
+
+  // Rango de offset (arriba↔abajo) que capturó tu calibración; el alpha se
+  // escala con él para saber qué tan grande es "un movimiento real" en TUS
+  // ojos (span * 0.12 ≈ "un renglón").
+  let offsetSpan = null
+  const adaptiveAlpha = (delta) => {
+    const span = offsetSpan && offsetSpan > 1e-4 ? offsetSpan : 0.08
+    const speed = Math.abs(delta) / (span * 0.12)
+    return SMOOTH_MIN + (SMOOTH_MAX - SMOOTH_MIN) * Math.min(1, speed)
+  }
 
   // Nivel "abierto" aprendido en vivo para detectar parpadeos (ver gazeReader).
   let openBaseline = null
@@ -78,9 +92,10 @@ export const useGazeReader = () => {
       // Con el ojo cerrado la mirada no es fiable: se congela (no se toca
       // gazeY ni el suavizado), así la regla no se cae al parpadear.
       if (!blinking.value && frame.offset !== null) {
+        const alpha = smoothedOffset === null ? 1 : adaptiveAlpha(frame.offset - smoothedOffset)
         smoothedOffset = smoothedOffset === null
           ? frame.offset
-          : smoothedOffset + (frame.offset - smoothedOffset) * SMOOTH_OFFSET
+          : smoothedOffset + (frame.offset - smoothedOffset) * alpha
 
         if (collectBuf) collectBuf.push(frame.offset)
 
@@ -117,12 +132,15 @@ export const useGazeReader = () => {
   const setCalibration = (samples) => {
     mapping = buildGazeMapping(samples)
     calibrated.value = Boolean(mapping)
+    // El rango calibrado alimenta el suavizado adaptativo (ver adaptiveAlpha).
+    offsetSpan = mapping ? mapping[mapping.length - 1].offset - mapping[0].offset : null
     smoothedY = null
     return calibrated.value
   }
 
   const clearCalibration = () => {
     mapping = null
+    offsetSpan = null
     calibrated.value = false
     gazeY.value = null
     smoothedY = null
