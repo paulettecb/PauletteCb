@@ -882,3 +882,14 @@ img { max-width: 100%; }
   .tabbar, .fab, .encabezado, #toasts { display: none !important; }
   body { background: white; }
 }
+
+/* ===== Cursor KYN: corazón magenta translúcido =====
+   Solo en punteros finos con hover (nada en touch). En lo clickeable se
+   conserva la manita y en campos de texto el cursor de texto. Fallback: auto. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath d='M12 20.5 4.8 13.3a4.6 4.6 0 0 1 6.5-6.5l.7.7.7-.7a4.6 4.6 0 0 1 6.5 6.5z' fill='rgba(232,93,160,0.35)' stroke='%23E85DA0' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 14 24, auto;
+  }
+  a[href], button, [role="button"], summary, label[for], select, .clickable { cursor: pointer; }
+  input, textarea, [contenteditable] { cursor: auto; }
+}
