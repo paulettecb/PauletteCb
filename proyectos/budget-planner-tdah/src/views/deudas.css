@@ -127,3 +127,37 @@
   display: grid;
   gap: 0.35rem;
 }
+
+/* ---------- Gráfica "así va tu deuda" (prefijo .gd-) ---------- */
+.gd-svg { width: 100%; height: auto; display: block; }
+.gd-base { stroke: var(--border-subtle); stroke-width: 1; }
+.gd-area { fill: rgba(135, 149, 210, 0.16); stroke: none; }
+.gd-linea-real {
+  fill: none; stroke: var(--periwinkle-600);
+  stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round;
+}
+.gd-linea-proy {
+  fill: none; stroke: var(--periwinkle-400);
+  stroke-width: 2; stroke-dasharray: 4 4; stroke-linecap: round;
+}
+.gd-marca { stroke: var(--white); stroke-width: 2; }
+.gd-marca-hoy { fill: var(--periwinkle-700); }
+.gd-marca-libre { fill: var(--success); }
+.gd-valor-hoy {
+  fill: var(--text-primary); font-weight: 800; font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.gd-libre { fill: var(--success); font-weight: 800; font-size: 11px; }
+.gd-eje { fill: var(--text-muted); font-size: 10px; }
+.gd-hit { fill: transparent; cursor: pointer; }
+.gd-hit:focus-visible { outline: none; }
+.gd-hit-activo { fill: rgba(135, 149, 210, 0.28); }
+.gd-leyenda { display: flex; gap: 1rem; justify-content: center; margin-bottom: 0.35rem; }
+.gd-leg { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+.gd-sw { width: 18px; height: 0; border-top-width: 3px; border-top-style: solid; border-radius: 2px; }
+.gd-sw-real { border-top-color: var(--periwinkle-600); }
+.gd-sw-proy { border-top-color: var(--periwinkle-400); border-top-style: dashed; }
+.gd-cap { text-align: center; margin-top: 0.35rem; min-height: 1.2em; }
+.gd-vacio { text-align: center; padding: 0.5rem 0; }
+.gd-tabla-wrap { margin-top: 0.6rem; }
+.gd-tabla-wrap summary { cursor: pointer; }

@@ -12,6 +12,7 @@
 //                mensualidadDe(deuda), totalDeudas(), comprometidoMensual(),
 //                pagosDeDeudaEnMes(deudaId, mes), proximosEventos(dias)
 //   Plan:        planDePagos({estrategia, extraMensual, incluirIds})
+//   Gráfica:     serieDeuda() → {historia, proyeccion, totalHoy, alcanzable}
 //   Datos:       exportarJSON(), importarJSON(str), exportarCSV(mes|null), borrarTodo(),
 //                setIngresoPlaneado, setNombre
 //   Candado:     await iniciar(codigo?) — ANTES de montar el shell —, tieneCodigo(),
@@ -87,6 +88,8 @@ function estadoBase() {
     deudas: [],
     // presupuesto mensual por categoría: { [categoriaId]: centavos }
     presupuesto: {},
+    // foto mensual de la deuda total: [{ mesKey:'YYYY-MM', total }] (para la gráfica)
+    historialDeuda: [],
   };
 }
 
@@ -180,6 +183,7 @@ function normalizar(datos) {
         };
       }),
     presupuesto: {},
+    historialDeuda: saneaHistorial(datos.historialDeuda),
   };
   if (datos.presupuesto && typeof datos.presupuesto === 'object') {
     for (const [catId, monto] of Object.entries(datos.presupuesto)) {
@@ -233,6 +237,14 @@ function saneaNotionSync(crudo) {
   };
 }
 
+function saneaHistorial(crudo) {
+  if (!Array.isArray(crudo)) return [];
+  return crudo
+    .filter((p) => p && /^\d{4}-\d{2}$/.test(p.mesKey) && Number.isFinite(Number(p.total)))
+    .map((p) => ({ mesKey: p.mesKey, total: Math.max(0, Math.round(Number(p.total))) }))
+    .slice(-120); // guarda a lo mucho 10 años de fotos mensuales
+}
+
 let state = estadoBase(); // se hidrata en iniciar()
 
 // Candado: la llave AES vive SOLO en memoria mientras la sesión está abierta.
@@ -274,7 +286,22 @@ function persistir() {
   }
 }
 
+// Foto de la deuda total del mes actual: congela los meses pasados y mantiene
+// el mes en curso en vivo. Solo empieza a guardar cuando ha habido deuda alguna
+// vez (así quien nunca usa deudas no acumula ceros).
+function snapshotDeuda() {
+  const total = state.deudas.reduce((s, d) => s + saldoPendiente(d), 0);
+  const hist = state.historialDeuda;
+  if (total === 0 && hist.length === 0) return;
+  const mes = mesActualKey();
+  const ult = hist[hist.length - 1];
+  if (ult && ult.mesKey === mes) ult.total = total;
+  else hist.push({ mesKey: mes, total });
+  if (hist.length > 120) state.historialDeuda = hist.slice(-120);
+}
+
 function commit() {
+  snapshotDeuda();
   persistir();
   notificar();
 }
@@ -788,6 +815,33 @@ export function planDePagos({ estrategia = 'avalancha', extraMensual = 0, inclui
     orden,
     linea,
   };
+}
+
+// Serie para la gráfica "así va tu deuda":
+//   historia    = fotos mensuales REALES (pueden subir); el mes actual siempre
+//                 refleja el total en vivo, aunque commit aún no lo haya escrito.
+//   proyeccion  = si sigues pagando lo de siempre, cómo baja la deuda hasta 0
+//                 (todas las deudas activas, sin extra). Vacía si no es alcanzable
+//                 o si tomaría más de 10 años (ahí mejor manda el plan, no la gráfica).
+// → { historia:[{mesKey,total}], proyeccion:[{mesKey,total}], totalHoy, alcanzable }
+export function serieDeuda() {
+  const historia = state.historialDeuda.map((p) => ({ ...p }));
+  const totalHoy = state.deudas.reduce((s, d) => s + saldoPendiente(d), 0);
+  const mesHoy = mesActualKey();
+  const ult = historia[historia.length - 1];
+  if (ult && ult.mesKey === mesHoy) ult.total = totalHoy;
+  else if (totalHoy > 0 || historia.length) historia.push({ mesKey: mesHoy, total: totalHoy });
+
+  let proyeccion = [];
+  let alcanzable = true;
+  if (deudasActivas().length) {
+    const plan = planDePagos({ estrategia: 'avalancha', extraMensual: 0, incluirIds: null });
+    alcanzable = plan.alcanzable;
+    if (plan.alcanzable && plan.linea.length > 1 && plan.meses <= 120) {
+      proyeccion = plan.linea.map((p) => ({ ...p }));
+    }
+  }
+  return { historia, proyeccion, totalHoy, alcanzable };
 }
 
 // Pago base con el que la deuda entra al simulador.
