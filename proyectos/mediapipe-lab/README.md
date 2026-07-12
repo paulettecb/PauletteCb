@@ -1,10 +1,10 @@
-# MediaPipe Lab
+# Motion Lab
 
 Real-time computer vision experiments lab powered by Google MediaPipe and Vue 3.
 
 ## Overview
 
-MediaPipe Lab is an experimental playground for building and testing computer vision applications using MediaPipe tasks. Organized into five main sections:
+Motion Lab is an experimental playground for building and testing computer vision applications using MediaPipe tasks. Organized into five main sections:
 
 - **LSM** - Lengua de Señas Mexicana (Mexican Sign Language)
 - **AGILITY** - MotionLab Agility Trainer: FCI/FCM course designer, theory micro-lessons with quizzes, and a camera-based handler coach that checks your handling cues (signal arm, front cross rotation, weave entry stance, deceleration) with pose landmarks

@@ -44,7 +44,7 @@ const content = {
     now: [
       { k: 'Studying', v: 'EGEL Plus PSI (CENEVAL)' },
       { k: 'Training', v: 'Agility with Kenna' },
-      { k: 'Building', v: 'MediaPipe Lab' },
+      { k: 'Building', v: 'Motion Lab' },
       { k: 'Polishing', v: 'KYN Design System' },
     ],
     contactTitle: 'Let’s connect',
@@ -86,7 +86,7 @@ const content = {
     now: [
       { k: 'Estudiando', v: 'EGEL Plus PSI (CENEVAL)' },
       { k: 'Entrenando', v: 'Agility con Kenna' },
-      { k: 'Construyendo', v: 'MediaPipe Lab' },
+      { k: 'Construyendo', v: 'Motion Lab' },
       { k: 'Puliendo', v: 'KYN Design System' },
     ],
     contactTitle: 'Conectemos',
@@ -128,7 +128,7 @@ const content = {
     now: [
       { k: 'J’étudie', v: 'EGEL Plus PSI (CENEVAL)' },
       { k: 'J’entraîne', v: 'Agility avec Kenna' },
-      { k: 'Je construis', v: 'MediaPipe Lab' },
+      { k: 'Je construis', v: 'Motion Lab' },
       { k: 'Je peaufine', v: 'KYN Design System' },
     ],
     contactTitle: 'Connectons-nous',
@@ -170,7 +170,7 @@ const content = {
     now: [
       { k: 'Estudando', v: 'EGEL Plus PSI (CENEVAL)' },
       { k: 'Treinando', v: 'Agility com a Kenna' },
-      { k: 'Construindo', v: 'MediaPipe Lab' },
+      { k: 'Construindo', v: 'Motion Lab' },
       { k: 'Polindo', v: 'KYN Design System' },
     ],
     contactTitle: 'Vamos conectar',
@@ -212,7 +212,7 @@ const content = {
     now: [
       { k: 'Lernen', v: 'EGEL Plus PSI (CENEVAL)' },
       { k: 'Training', v: 'Agility mit Kenna' },
-      { k: 'Bauen', v: 'MediaPipe Lab' },
+      { k: 'Bauen', v: 'Motion Lab' },
       { k: 'Polieren', v: 'KYN Design System' },
     ],
     contactTitle: 'Lass uns connecten',
