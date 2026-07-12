@@ -67,7 +67,7 @@
     },
     {
       "slug": "mediapipe-lab",
-      "title": "MediaPipe Lab",
+      "title": "Motion Lab",
       "description": {
         "en": "Real-time computer vision: FCI/FCM agility trainer, LSM, exercise analysis and a hand-controlled whimsy garden.",
         "es": "Visión por computadora en tiempo real: entrenador de agility FCI/FCM, LSM, análisis de ejercicio y un jardín whimsy controlado con las manos.",

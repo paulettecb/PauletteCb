@@ -4,4 +4,4 @@ import './styles.css'
 
 createApp(App).mount('#app')
 
-console.log('✅ MediaPipe Lab initialized successfully')
+console.log('✅ Motion Lab initialized successfully')
