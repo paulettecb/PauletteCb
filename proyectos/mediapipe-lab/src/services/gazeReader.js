@@ -3,7 +3,7 @@
 // coordenadas absolutas: mide qué tan arriba/abajo está el iris respecto a
 // la línea de las comisuras del ojo, normalizado por el ancho del ojo (para
 // que no dependa de la distancia a la cámara ni de qué tan abierto esté el
-// ojo). La calibración de 3 puntos traduce ese offset a una Y de pantalla.
+// ojo). La calibración (varios puntos) traduce ese offset a una Y de pantalla.
 
 // Índices estándar del face mesh de MediaPipe.
 const LEFT_IRIS = 468
