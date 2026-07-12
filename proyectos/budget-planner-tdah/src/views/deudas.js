@@ -8,6 +8,7 @@
 import './deudas.css';
 
 import * as store from '../store.js';
+import { graficaDeudaHTML, wirearGrafica } from '../grafica-deuda.js';
 import {
   abrirModal, cerrarModal, confirmar, toast, toastError,
   campoMonto, leerMonto, campoFecha, campoTexto,
@@ -74,6 +75,7 @@ export function render(el) {
   const activas = sincronizarPlan();
   const { total } = store.totalDeudas();
   const comprometido = store.comprometidoMensual().total;
+  const serie = store.serieDeuda();
 
   el.innerHTML = `
     <section class="seccion">
@@ -88,6 +90,15 @@ export function render(el) {
         </div>
       </div>
 
+      ${serie.historia.length ? `
+        <div class="card" data-grafica>
+          <div class="card-encabezado">
+            <h2 class="card-titulo">así va tu deuda</h2>
+          </div>
+          ${graficaDeudaHTML(serie)}
+          <p class="texto-suave mt-1">Al principio puede subir — lo que importa es la tendencia 💪</p>
+        </div>` : ''}
+
       <div class="deu-lista" data-lista-deudas>
         ${deudas.map(cardDeuda).join('')}
       </div>
@@ -97,6 +108,8 @@ export function render(el) {
 
   // Listeners SOLO en nodos recién creados (nada en document/window/el).
   el.querySelector('[data-nueva-deuda]').addEventListener('click', () => abrirFormDeuda());
+  const grafica = el.querySelector('[data-grafica]');
+  if (grafica) wirearGrafica(grafica);
 
   el.querySelector('[data-lista-deudas]').addEventListener('click', (e) => {
     const btn = e.target.closest('[data-accion]');
