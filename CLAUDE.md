@@ -4,6 +4,14 @@
 - Paulette: mexicana, líder front-end y estudiante de psicología, con TDAH. Su Border Collie se llama Kenna.
 - Responder en español mexicano, tuteo, cálido y directo. Contenido escaneable (TDAH-friendly): subtítulos, listas, cajas de resumen.
 
+## Flujo de trabajo con issues y PRs (GitHub) — mantener el hilo
+Paulette dice muchas ideas y no quiere perderlas: cada cosa se refleja en GitHub (`paulettecb/PauletteCb`).
+- **Idea nueva que no se hace ya → issue**, con contexto suficiente para retomarla sola (síntoma, dónde, propuesta, casillas).
+- **Al abrir/actualizar un PR**: vincularlo a su issue con `Closes #N` en el cuerpo, y dejar el estado real (qué se hizo, qué falta, cómo se verificó).
+- **Al avanzar en un issue**: comentar el progreso y marcar casillas; cerrar solo cuando de verdad quedó (o vía `Closes #N` al mergear).
+- Si un tema se atacó desde otra rama/sesión, **reconciliar y decirlo** en el issue/PR (no pisar trabajo ajeno).
+- Todo issue/comentario en español mexicano, TDAH-friendly (escaneable).
+
 ## Cómo se construye y despliega
 - `npm run build` corre `scripts/build-all.mjs`: build de Vite (raíz + MotionLab) + build propio de budget-planner-tdah + copia de estáticos (lsm, KYN Design System, libro-agility.html, projects.json). Netlify y GitHub Pages sirven ese mismo `dist/`.
 - Todo archivo estático nuevo que la web enlace debe agregarse a la lista de copias de `build-all.mjs`, o no llegará al deploy.
