@@ -1,0 +1,40 @@
+/* Lector KYN — estilos compartidos (biónica + regla + tamaño + barra mini).
+   Fuente única para los mini-libros KYN; usa los tokens KYN de cada página
+   (--white, --periwinkle-*, --ink-*, --paper, --radius-*, --shadow-*, etc.). */
+.lector-bar {
+  position: fixed; left: 1rem; bottom: 1rem; z-index: 50;
+  display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; max-width: calc(100vw - 2rem);
+  padding: 0.4rem 0.7rem; background: var(--white); border: 1.5px solid var(--periwinkle-200);
+  border-radius: var(--radius-pill); box-shadow: var(--shadow-md); font-size: 0.82rem;
+}
+.lector-bar .lector-titulo { font-family: var(--font-accent); font-size: 1rem; color: var(--periwinkle-700); padding-right: 0.2rem; }
+.lector-bar button {
+  padding: 0.28rem 0.7rem; border: 1px solid var(--ink-100); border-radius: var(--radius-pill);
+  background: var(--paper); color: var(--ink-700); font: inherit; font-weight: 600; cursor: pointer;
+}
+.lector-bar button:hover { border-color: var(--periwinkle-300); }
+.lector-bar button[aria-pressed="true"] { background: var(--periwinkle-600); border-color: var(--periwinkle-600); color: var(--white); }
+.lector-bar .niveles { display: none; gap: 0.2rem; }
+body.bio-on .lector-bar .niveles { display: flex; }
+.lector-bar .niveles button { padding: 0.28rem 0.5rem; font-size: 0.75rem; }
+
+b.bio { font-weight: inherit; }
+body.bio-on b.bio { font-weight: 700; color: var(--ink-900); }
+body.bio-on .esencial b.bio, body.bio-on .nota-campo b.bio, body.bio-on .dato b.bio { color: inherit; }
+
+.regla { position: fixed; left: 0; right: 0; top: 40vh; height: 3.2em; display: none; pointer-events: none; z-index: 40;
+  background: rgba(135, 149, 210, 0.14); border-top: 1px solid rgba(135, 149, 210, 0.35); border-bottom: 1px solid rgba(135, 149, 210, 0.35); }
+body.regla-on .regla { display: block; }
+
+/* Modo mini: la barra se encoge a un botoncito flotante cuando no la usas */
+.lector-bar.mini { padding: 0; gap: 0; }
+.lector-bar.mini > :not(.lector-mini) { display: none; }
+.lector-mini {
+  display: none; width: 2.7rem; height: 2.7rem; border: none; border-radius: 50%;
+  background: transparent; font-size: 1.25rem; cursor: pointer; line-height: 1;
+}
+.lector-bar.mini .lector-mini { display: grid; place-items: center; }
+
+@media (max-width: 640px) { .lector-bar { font-size: 0.75rem; } .lector-bar .lector-titulo { display: none; } }
+
+@media print { .lector-bar, .regla { display: none !important; } }
