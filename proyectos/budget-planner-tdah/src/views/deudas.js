@@ -24,6 +24,8 @@ import {
 
 let planEstrategia = 'avalancha'; // 'avalancha' | 'bolaDeNieve'
 let planExtra = 0; // centavos
+let planKynGanancia = 0; // centavos: ganancia limpia por venta de KYN (motor del negocio)
+let planKynVentas = 0; // ventas estimadas al mes
 let planIncluidas = new Set(); // ids de deudas que entran al plan
 let planVistas = new Set(); // ids que ya pasaron por el default (para no re-marcar)
 let planCalculado = false; // si ya se pidió el plan, se recalcula en cada render
@@ -33,6 +35,35 @@ const DESCRIPCION_ESTRATEGIA = {
   bolaDeNieve: '⚪ primero la más chica — victorias rápidas',
 };
 
+// Las 3 canastas del plan de escape: cada deuda cae en una según tasa/tipo/plan.
+const CANASTAS = [
+  { id: 'atacar', emoji: '🔴', titulo: 'atacar', sub: 'aquí va el extra — la más cara primero' },
+  { id: 'fija', emoji: '🔒', titulo: 'fijas', sub: 'se pagan completas, sí o sí' },
+  { id: 'cero', emoji: '🟢', titulo: 'a 0%', sub: 'se pagan solitas — no adelantes' },
+  { id: 'liquidada', emoji: '🎉', titulo: 'liquidadas', sub: '' },
+];
+
+// Clasifica una deuda en su canasta: 0% (msi/sin interés), fija (hipoteca/persona
+// o fuera del plan) o atacar (con interés y dentro del plan). Liquidada aparte.
+function canastaDe(d) {
+  if (store.saldoPendiente(d) <= 0) return 'liquidada';
+  if (d.tipo === 'msi' || (Number(d.tasaAnual) === 0 && d.tipo !== 'persona')) return 'cero';
+  if (d.tipo === 'hipoteca' || d.tipo === 'persona' || !planIncluidas.has(d.id)) return 'fija';
+  return 'atacar';
+}
+
+// Extra mensual que entra al simulador: lo manual + el motor KYN (ventas × ganancia).
+function extraDelPlan() {
+  return Math.max(0, planExtra) + Math.max(0, planKynGanancia) * Math.max(0, planKynVentas);
+}
+
+// Línea "N ventas × $G = +$X/mes" del motor KYN (vacía si aún no hay números).
+function extraKynHtml() {
+  const extra = Math.max(0, planKynGanancia) * Math.max(0, planKynVentas);
+  if (extra <= 0) return '';
+  return `🧵 <strong>${planKynVentas}</strong> ${plural(planKynVentas, 'venta', 'ventas')} × ${fmtMoney(planKynGanancia)} = <strong>+${fmtMoney(extra)}</strong>/mes a tu plan`;
+}
+
 // Mantiene el set de incluidas al día: las deudas nuevas entran solas
 // (excepto hipoteca, que suele ir aparte) y las liquidadas/borradas salen.
 function sincronizarPlan() {
@@ -41,7 +72,8 @@ function sincronizarPlan() {
   for (const d of activas) {
     if (!planVistas.has(d.id)) {
       planVistas.add(d.id);
-      if (d.tipo !== 'hipoteca') planIncluidas.add(d.id);
+      // Hipoteca y deudas con personas van aparte (fijas), no al ataque por default.
+      if (d.tipo !== 'hipoteca' && d.tipo !== 'persona') planIncluidas.add(d.id);
     }
   }
   for (const id of [...planIncluidas]) {
@@ -100,7 +132,7 @@ export function render(el) {
         </div>` : ''}
 
       <div class="deu-lista" data-lista-deudas>
-        ${deudas.map(cardDeuda).join('')}
+        ${htmlCanastas(deudas)}
       </div>
 
       ${activas.length ? htmlPlanCard(activas) : htmlPlanLiquidado()}
@@ -145,9 +177,21 @@ export function render(el) {
     formPlan.querySelector('input[name="extra"]').addEventListener('change', () => {
       planExtra = Math.max(0, leerMonto(formPlan, 'extra') || 0);
     });
+
+    // Motor KYN: guarda ganancia/ventas y refresca la línea "+$X/mes" en vivo.
+    const kynOut = formPlan.querySelector('[data-kyn-out]');
+    const leerKyn = () => {
+      planKynGanancia = Math.max(0, leerMonto(formPlan, 'kynGanancia') || 0);
+      planKynVentas = Math.max(0, Math.round(Number(new FormData(formPlan).get('kynVentas')) || 0));
+      if (kynOut) kynOut.innerHTML = extraKynHtml();
+    };
+    formPlan.querySelector('input[name="kynGanancia"]')?.addEventListener('input', leerKyn);
+    formPlan.querySelector('input[name="kynVentas"]')?.addEventListener('input', leerKyn);
+
     formPlan.addEventListener('submit', (e) => {
       e.preventDefault();
       planExtra = Math.max(0, leerMonto(formPlan, 'extra') || 0);
+      leerKyn();
       if (!planIncluidas.size) {
         toastError('Elige al menos una deuda para tu plan 🙏');
         return;
@@ -161,6 +205,28 @@ export function render(el) {
 /* =========================================================================
    Card de cada deuda
    ========================================================================= */
+
+// Agrupa las cards en las 3 canastas (con subtotal por grupo). Solo muestra
+// las canastas que tienen deudas, en orden: atacar → fijas → 0% → liquidadas.
+function htmlCanastas(deudas) {
+  const por = { atacar: [], fija: [], cero: [], liquidada: [] };
+  for (const d of deudas) por[canastaDe(d)].push(d);
+  return CANASTAS.filter((c) => por[c.id].length).map((c) => {
+    const total = por[c.id].reduce((s, d) => s + store.saldoPendiente(d), 0);
+    return `
+      <div class="deu-canasta deu-canasta-${c.id}">
+        <div class="deu-canasta-head">
+          <span class="deu-canasta-emoji" aria-hidden="true">${c.emoji}</span>
+          <div class="deu-canasta-info">
+            <span class="deu-canasta-titulo">${c.titulo}</span>
+            ${c.sub ? `<span class="deu-canasta-sub">${c.sub}</span>` : ''}
+          </div>
+          <span class="deu-canasta-total">${fmtMoneyCorto(total)}</span>
+        </div>
+        ${por[c.id].map(cardDeuda).join('')}
+      </div>`;
+  }).join('');
+}
 
 // Barra de avance "vas bien" (siempre verde: aquí más lleno = mejor).
 function barraProgreso(pctNum) {
@@ -551,6 +617,15 @@ function htmlPlanCard(activas) {
       <p class="texto-suave centrado mt-1">${DESCRIPCION_ESTRATEGIA[planEstrategia]}</p>
       <form class="mt-2" data-form-plan>
         ${campoMonto('extra', { etiqueta: 'Extra al mes', valor: planExtra > 0 ? planExtra : null, ayuda: 'lo que puedas sumar a tus pagos; con $0 igual sale tu plan' })}
+        <div class="deu-kyn">
+          <span class="deu-kyn-titulo">🧵 motor KYN <span class="deu-kyn-opc">(opcional)</span></span>
+          <span class="deu-kyn-ayuda">lo que vendas de tu negocio se suma a tu plan</span>
+          <div class="form-fila">
+            ${campoMonto('kynGanancia', { etiqueta: 'Ganancia por venta', valor: planKynGanancia > 0 ? planKynGanancia : null, ayuda: 'lo que te queda limpio' })}
+            ${campoNumero('kynVentas', { etiqueta: 'Ventas al mes', valor: planKynVentas > 0 ? planKynVentas : '', min: 0, step: 1, placeholder: 'ej. 4' })}
+          </div>
+          <div class="deu-kyn-out" data-kyn-out>${extraKynHtml()}</div>
+        </div>
         <div class="campo">
           <label>¿Cuáles entran al plan?</label>
           <div class="chips" data-plan-deudas>
@@ -582,9 +657,10 @@ function htmlResultadoPlan() {
     return '<p class="texto-suave centrado mt-2">elige al menos una deuda y vuelve a calcular 🙏</p>';
   }
 
+  const extra = extraDelPlan();
   const plan = store.planDePagos({
     estrategia: planEstrategia,
-    extraMensual: planExtra,
+    extraMensual: extra,
     incluirIds,
   });
 
@@ -601,7 +677,7 @@ function htmlResultadoPlan() {
 
   // Presumir el ahorro: mismo plan pero sin extra, para comparar.
   let ahorroHtml = '';
-  if (planExtra > 0) {
+  if (extra > 0) {
     const planSinExtra = store.planDePagos({
       estrategia: planEstrategia,
       extraMensual: 0,
@@ -614,7 +690,11 @@ function htmlResultadoPlan() {
       if (ahorro > 0) logros.push(`te ahorras <strong>${fmtMoney(ahorro)}</strong> de intereses`);
       if (antes > 0) logros.push(`sales <strong>${antes} ${plural(antes, 'mes', 'meses')} antes</strong>`);
       if (logros.length) {
-        ahorroHtml = `<div class="deu-ahorro">🚀 Con tu extra de ${fmtMoney(planExtra)} ${logros.join(' y ')}.</div>`;
+        const kynExtra = Math.max(0, planKynGanancia) * Math.max(0, planKynVentas);
+        const fuente = kynExtra > 0
+          ? `Con ${fmtMoney(extra)}/mes extra (incluye 🧵 ${fmtMoney(kynExtra)} de KYN)`
+          : `Con tu extra de ${fmtMoney(extra)}`;
+        ahorroHtml = `<div class="deu-ahorro">🚀 ${fuente} ${logros.join(' y ')}.</div>`;
       }
     }
   }
