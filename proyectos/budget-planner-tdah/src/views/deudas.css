@@ -161,3 +161,50 @@
 .gd-vacio { text-align: center; padding: 0.5rem 0; }
 .gd-tabla-wrap { margin-top: 0.6rem; }
 .gd-tabla-wrap summary { cursor: pointer; }
+
+/* ---------- Canastas del plan de escape (atacar / fijas / 0%) ---------- */
+.deu-canasta { display: grid; gap: 0.9rem; }
+.deu-canasta + .deu-canasta { margin-top: 0.7rem; }
+.deu-canasta-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.15rem;
+}
+.deu-canasta-emoji { font-size: 1.05rem; line-height: 1; }
+.deu-canasta-info { display: grid; min-width: 0; }
+.deu-canasta-titulo {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.deu-canasta-sub { font-size: 0.74rem; color: var(--text-muted); }
+.deu-canasta-total {
+  margin-left: auto;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ---------- Motor KYN dentro del simulador ---------- */
+.deu-kyn {
+  margin-top: 0.9rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-brand-soft);
+  border: 1px dashed var(--border-subtle);
+  display: grid;
+  gap: 0.45rem;
+}
+.deu-kyn-titulo { font-weight: 800; font-size: 0.9rem; }
+.deu-kyn-opc { font-weight: 600; color: var(--text-muted); }
+.deu-kyn-ayuda { font-size: 0.78rem; color: var(--text-muted); margin-top: -0.2rem; }
+.deu-kyn-out:not(:empty) {
+  font-size: 0.9rem;
+  color: var(--periwinkle-700);
+  background: var(--white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.65rem;
+}
