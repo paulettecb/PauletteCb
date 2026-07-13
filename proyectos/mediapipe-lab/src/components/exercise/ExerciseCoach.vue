@@ -303,6 +303,7 @@ import { useMediaPipeTrackingCamera } from '../../composables/useMediaPipeTracki
 import { comparePose, createRepCounter, landmarksForJoint } from '../../services/poseCompare'
 import { drawExercisePose } from '../../utils/drawExercisePose'
 import { getReferencePose } from '../../data/referencePoses'
+import { createSquatCoach } from '../../services/squatCoach'
 import { RIGOR } from '../../data/exerciseLibrary'
 import PoseGlyph from './PoseGlyph.vue'
 import UiButton from './UiButton.vue'
@@ -338,6 +339,12 @@ const referencePose = computed(() => props.reference?.pose || getReferencePose(p
 const metaReps = computed(() => props.exercise.dosis?.reps ?? '—')
 const esAguante = computed(() => props.exercise.ref?.tipo === 'aguante' || !props.exercise.ref?.rep)
 
+// Piloto v2: la sentadilla usa un motor propio (estándares verificados +
+// vista frontal + detección de rodillas hacia adentro). Los demás ejercicios
+// siguen con el motor genérico (comparePose).
+const isSquat = computed(() => props.exercise.id === 'sentadilla')
+let squatCoach = createSquatCoach()
+
 const estado = computed(() => {
   if (!started.value) return 'permiso'
   if (fail.value) return 'error'
@@ -370,6 +377,7 @@ const lastCue = shallowRef('')
 
 const resetSesion = () => {
   repCounter = createRepCounter(props.exercise.ref?.rep || {})
+  squatCoach.reset()
   frames = 0; sumMatch = 0; bestHold = 0; cleanReps = 0; lastReps = 0
   lastRepMatch = []; jointFail.clear(); holdSeconds.value = 0
   reps.value = 0; matchDisplay.value = 0
@@ -377,7 +385,33 @@ const resetSesion = () => {
   lastFrameT = sessionStart
 }
 
+// Motor de la sentadilla (piloto v2).
+const onFrameSquat = (landmarks) => {
+  const result = squatCoach.update(landmarks, performance.now(), { paused: paused.value })
+  coverageOk.value = result.coverage.ok
+  faltan.value = result.coverage.faltan
+
+  drawExercisePose(overlayRef.value, videoRef.value, landmarks, {
+    referencePose: result.targetPose,
+    showReference: true,
+    statusByIndex: result.statusByIndex,
+  })
+
+  if (!result.detected) return
+  joints.value = result.joints
+  cues.value = result.cues
+  matchDisplay.value = Math.round(matchDisplay.value * 0.7 + result.matchPct * 0.3)
+  reps.value = result.reps
+
+  const top = result.cues.find((c) => c.tono === 'corrige')
+  if (voz.value && !paused.value && top && top.texto !== lastCue.value) {
+    lastCue.value = top.texto
+    speak(top.texto)
+  }
+}
+
 const onFrame = (landmarks) => {
+  if (isSquat.value) return onFrameSquat(landmarks)
   const result = comparePose(landmarks, props.exercise, { rigor: rigor.value, capturedAngles: capturedAngles.value })
   coverageOk.value = result.coverage.ok
   faltan.value = result.coverage.faltan
@@ -456,21 +490,26 @@ const iniciar = async () => {
 }
 
 const terminar = () => {
-  const calidad = frames ? Math.round(sumMatch / frames) : 0
-  const fallos = [...jointFail.entries()]
-    .map(([label, veces]) => ({ label, veces, pct: frames ? Math.round((veces / frames) * 100) : 0 }))
-    .sort((a, b) => b.pct - a.pct)
-    .slice(0, 4)
-  const resumen = {
-    exerciseId: props.exercise.id,
-    nombre: props.exercise.nombre,
-    reps: reps.value,
-    metaReps: Number(metaReps.value) || null,
-    cleanReps,
-    calidad,
-    bestHold: Math.round(bestHold),
-    fallos,
-    durationSec: sessionStart ? Math.round((performance.now() - sessionStart) / 1000) : 0,
+  let resumen
+  if (isSquat.value) {
+    resumen = squatCoach.summary(props.exercise.nombre, Number(metaReps.value) || null, performance.now())
+  } else {
+    const calidad = frames ? Math.round(sumMatch / frames) : 0
+    const fallos = [...jointFail.entries()]
+      .map(([label, veces]) => ({ label, veces, pct: frames ? Math.round((veces / frames) * 100) : 0 }))
+      .sort((a, b) => b.pct - a.pct)
+      .slice(0, 4)
+    resumen = {
+      exerciseId: props.exercise.id,
+      nombre: props.exercise.nombre,
+      reps: reps.value,
+      metaReps: Number(metaReps.value) || null,
+      cleanReps,
+      calidad,
+      bestHold: Math.round(bestHold),
+      fallos,
+      durationSec: sessionStart ? Math.round((performance.now() - sessionStart) / 1000) : 0,
+    }
   }
   stop()
   emit('finish', resumen)

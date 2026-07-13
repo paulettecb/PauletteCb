@@ -50,7 +50,7 @@ export const EXERCISES = [
     ],
     precauciones: DESCARGO,
     instruccion: 'Baja hasta que el muslo quede paralelo al piso',
-    instruccionSub: 'Mantén las rodillas alineadas con las puntas de los pies.',
+    instruccionSub: 'Ponte de frente a la cámara. Rodillas alineadas con la punta del pie (que no se metan).',
     dosis: { series: 3, reps: 12, repsLabel: 'reps', descanso: '60 s' },
     ref: {
       vista: 'lateral',
