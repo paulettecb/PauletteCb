@@ -4,10 +4,11 @@
 // letra, modo mini y —opt-in— la REGLA CON LA MIRADA (webcam/iris, todo local).
 //
 // Config (opcional) vía window.LECTOR_KYN_CONFIG antes del <script>:
-//   { textSelector, containerSelector, modelUrl }
+//   { textSelector, containerSelector, modelUrl, side }
 // - textSelector: nodos de texto corrido a bionizar (títulos quedan fuera).
 // - containerSelector: contenedor a escalar con A−/A+ (null ⇒ documentElement).
 // - modelUrl: override del modelo de cara (default: CDN de Google).
+// - side: 'left' (default) | 'right' — esquina de la barra y el panel.
 //
 // Requiere http(s) (o servidor local): al ser módulo ESM + WASM, abrir el HTML
 // como file:// no lo carga. La mirada además necesita permiso de cámara.
@@ -127,6 +128,11 @@ const init = () => {
   const panelText = $('.lk-panel-text')
   const recalBtn = $('.lk-recal')
   const capturarBtn = $('.lk-capturar')
+  const calCard = $('.lk-cal-card')
+
+  // Lado de la barra y el panel (default izquierda; los mini-libros KYN tienen
+  // el botón "↑ índice" abajo-derecha). Configurable: LECTOR_KYN_CONFIG.side.
+  if (CFG.side === 'right') { bar.classList.add('lk-right'); panel.classList.add('lk-right') }
 
   // ===== Lectura biónica =====
   let originales = new Map()
@@ -274,6 +280,12 @@ const init = () => {
     const p = calPoints[calStep]
     calDot.style.left = `${p.fx * 100}%`
     calDot.style.top = `${p.fy * 100}%`
+    // La tarjeta de instrucciones se coloca en el cuadrante OPUESTO al punto,
+    // para no taparlo nunca (antes tapaba los puntos de la esquina abajo-derecha).
+    calCard.style.left = p.fx < 0.5 ? 'auto' : '1.5rem'
+    calCard.style.right = p.fx < 0.5 ? '1.5rem' : 'auto'
+    calCard.style.top = p.fy < 0.5 ? 'auto' : '1.5rem'
+    calCard.style.bottom = p.fy < 0.5 ? '1.5rem' : 'auto'
   }
   const showWarn = (msg) => { calWarn.textContent = msg; calWarn.hidden = !msg }
 

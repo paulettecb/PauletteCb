@@ -4,7 +4,9 @@
 .lector-kyn-bar {
   --regla-alto: 1.2em;
   position: fixed;
-  right: 1rem;
+  /* Por default a la IZQUIERDA: los mini-libros KYN tienen el botón "↑ índice"
+     abajo-derecha, y así no se enciman. Configurable con LECTOR_KYN_CONFIG.side. */
+  left: 1rem;
   bottom: 1rem;
   z-index: 2147483000;
   display: flex;
@@ -21,6 +23,7 @@
   font-size: 0.82rem;
   color: var(--ink-700, #4a4955);
 }
+.lector-kyn-bar.lk-right { left: auto; right: 1rem; }
 .lector-kyn-bar .lk-titulo {
   font-family: var(--font-accent, var(--font-display, inherit));
   font-size: 1rem;
@@ -100,8 +103,10 @@ body.lk-regla-on .lector-kyn-regla { display: block; }
 /* Panel de mirada: el video solo se ve al calibrar; al leer es una pastilla. */
 .lector-kyn-panel {
   position: fixed;
+  /* Mismo lado que la barra, apilado encima (deja libre la otra esquina, donde
+     los libros tienen "↑ índice"). Se voltea con .lk-right igual que la barra. */
   left: 1rem;
-  bottom: 1rem;
+  bottom: 4.75rem;
   z-index: 2147483000;
   display: none;
   gap: 0.3rem;
@@ -112,6 +117,7 @@ body.lk-regla-on .lector-kyn-regla { display: block; }
   box-shadow: var(--shadow-md, 0 8px 24px rgba(47, 54, 88, 0.16));
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
 }
+.lector-kyn-panel.lk-right { left: auto; right: 1rem; }
 .lector-kyn-panel.lk-on { display: grid; }
 .lector-kyn-panel video {
   width: 1px;

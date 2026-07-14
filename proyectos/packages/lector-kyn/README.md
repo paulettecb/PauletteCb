@@ -19,6 +19,7 @@ auto-inyecta una barra flotante con:
   window.LECTOR_KYN_CONFIG = {
     textSelector: '.capitulo p:not(.eyebrow), .capitulo li, .capitulo td, .glos-item span',
     containerSelector: null,   // null ⇒ escala <html>; o pon un selector de contenedor
+    // side: 'left',           // 'left' (default) | 'right' — esquina de la barra/panel
     // modelUrl: '...'         // opcional: override del modelo de cara
   };
 </script>
