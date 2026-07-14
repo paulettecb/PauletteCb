@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dist-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "dist", "-l", "4177"],
+      "port": 4177
+    },
+    {
+      "name": "repo-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", ".", "-l", "4178"],
+      "port": 4178
+    }
+  ]
+}

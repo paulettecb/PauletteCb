@@ -1,0 +1,26 @@
+#separator:Semicolon
+#html:false
+#tags column:3
+¿Cuáles son los 4 alcances de la investigación?;Exploratorio (tema nuevo), descriptivo (características), correlacional (asociación entre variables) y explicativo (causas).;CENEVAL::Dia07-RutaCuantitativa
+¿Qué es una correlación espuria?;Es cuando dos variables se mueven juntas sin causarse entre sí, porque en realidad las mueve una tercera variable.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué representan Hi, Ho y Ha en una hipótesis?;Hi es la hipótesis de investigación, Ho es la nula (la niega, propuesta por Fisher), y Ha es la alternativa (otra posibilidad distinta a ambas).;CENEVAL::Dia07-RutaCuantitativa
+¿Qué es una definición operacional, a diferencia de una conceptual?;Son las operaciones concretas para MEDIR la variable, a diferencia de la definición conceptual, que es de diccionario.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué representa la notación R G X 0 de los diseños experimentales?;"R = asignación al azar, G = grupo, X = tratamiento, 0 = medición; un guion (—) indica el grupo control.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué diferencia hay entre un diseño preexperimental, uno puro y uno cuasiexperimental?;"El preexperimental tiene control mínimo; el puro tiene azar y grupos equivalentes; el cuasiexperimental usa grupos ya intactos, sin asignación al azar.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué es un diseño ex post facto?;Es un diseño no experimental donde las variables ya ocurrieron antes del estudio (autoselección de los participantes).;CENEVAL::Dia07-RutaCuantitativa
+¿Qué diferencia hay entre los diseños de tendencia, cohorte y panel?;"Tendencia estudia poblaciones generales; cohorte estudia subpoblaciones vinculadas por una característica; panel sigue a los mismos participantes en el tiempo.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué es la validez interna de un experimento?;"Es la calidad del experimento en sí; existen 12 amenazas posibles, como historia, maduración, selección o mortalidad experimental.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué es la validez externa de un experimento?;"Es la posibilidad de generalizar los resultados; existen 8 amenazas posibles, como el efecto Hawthorne o la interacción selección-tratamiento.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué es el efecto Hawthorne?;Es que la propia artificialidad del experimento cambia la conducta de los participantes, porque saben que están siendo observados.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué caracteriza a una muestra probabilística?;Que todos los elementos tengan la misma posibilidad de ser elegidos, mediante selección aleatoria (simple, estratificada o por racimos).;CENEVAL::Dia07-RutaCuantitativa
+¿Qué son las escalas NOIR?;Nominal, ordinal, de intervalos (con cero arbitrario) y de razón (con cero real).;CENEVAL::Dia07-RutaCuantitativa
+En la curva normal, ¿qué representa la regla 68-95-99.7?;El porcentaje de casos que caen a ±1, ±2 y ±3 desviaciones estándar de la media.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué indica una puntuación z?;La dirección y el grado de alejamiento de un dato respecto a la media, medido en unidades de desviación estándar.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué representan los niveles de significancia 0.05 y 0.01?;Es la significancia fijada a priori: 0.05 es el estándar en ciencias sociales, y 0.01 se usa cuando hay riesgos vitales de por medio.;CENEVAL::Dia07-RutaCuantitativa
+¿Qué diferencia hay entre el error tipo I y el tipo II?;El error tipo I (α) es un falso positivo: rechazar una Ho que era verdadera. El error tipo II (β) es un falso negativo. La potencia estadística es 1−β.;CENEVAL::Dia07-RutaCuantitativa
+¿Cuándo se usa la prueba t y cuándo el ANOVA?;"La prueba t compara diferencia de medias entre 2 grupos; el ANOVA se usa con 3 o más grupos, y se basa en el valor F (varianza entre grupos vs. dentro de grupos).";CENEVAL::Dia07-RutaCuantitativa
+¿Qué mide la r de Pearson, y qué agrega la r²?;"La r de Pearson mide asociación lineal entre variables de intervalo o razón, sin implicar causalidad; la r² es el coeficiente de determinación.";CENEVAL::Dia07-RutaCuantitativa
+¿Cuáles son los 3 supuestos para usar una prueba paramétrica?;Normalidad de los datos, que sean de escala de intervalo o razón, y homogeneidad de varianzas.;CENEVAL::Dia07-RutaCuantitativa
+¿Para qué se usa la chi cuadrada (χ²)?;Para medir la relación entre dos variables categóricas, usando una tabla de contingencia.;CENEVAL::Dia07-RutaCuantitativa
+¿Cuáles son los equivalentes no paramétricos de t independiente, t pareada, ANOVA y Pearson?;"Mann-Whitney equivale a t independiente; Wilcoxon a t pareada; Kruskal-Wallis a ANOVA; y Spearman a Pearson.";CENEVAL::Dia07-RutaCuantitativa
+¿Qué diferencia hay entre investigación básica y aplicada?;"La básica busca ampliar el conocimiento; la aplicada busca resolver problemas concretos. Son complementarias.";CENEVAL::Dia07-RutaCuantitativa

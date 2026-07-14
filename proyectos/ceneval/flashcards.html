@@ -101,18 +101,24 @@ footer .paws { font-family: var(--font-accent); font-size: 1.05rem; color: var(-
     </div>
 
     <div id="vista-mazos">
+      <h2 class="seccion">Mazos por día (sprint 10 días)</h2>
+      <p class="subtitulo" style="font-size:0.95rem;margin:-0.3rem 0 0.8rem">Repasa justo el tema que estudiaste hoy, antes de pasar a los reactivos.</p>
+      <div class="mazos" id="mazos-dia"></div>
+
       <h2 class="seccion">Mazos por área</h2>
+      <p class="subtitulo" style="font-size:0.95rem;margin:-0.3rem 0 0.8rem">Repaso completo del área, mezclando todos los días.</p>
       <div class="mazos" id="mazos"></div>
 
       <div class="como">
         <h3>Cómo llevarlas a Anki</h3>
         <ol>
-          <li>Descarga el CSV del área que quieras (botón <strong>⬇ CSV</strong>).</li>
+          <li>Descarga el CSV del mazo que quieras (botón <strong>⬇ CSV</strong>), por día o por área.</li>
           <li>En Anki: <code>Archivo → Importar</code> y elige el CSV.</li>
           <li>Ya trae la config adentro: separador <strong>punto y coma</strong>, columna 1 = frente, 2 = reverso, 3 = etiqueta. Deja "Los campos están separados por: Punto y coma".</li>
-          <li>Importa y a repasar con repetición espaciada. Cada área queda con su etiqueta <code>CENEVAL::AreaN</code>.</li>
+          <li>Importa y a repasar con repetición espaciada. Los mazos por día quedan con etiqueta <code>CENEVAL::DiaNN</code>, los de área con <code>CENEVAL::AreaN</code>.</li>
         </ol>
         <p style="margin:0.5rem 0 0">¿Sin ganas de abrir Anki? Dale a <strong>Estudiar aquí</strong> y repasa en el navegador (voltea con clic o barra espaciadora).</p>
+        <p style="margin:0.5rem 0 0">📌 Días 9 y 10 (transversal: comprensión lectora y redacción indirecta) todavía no tienen flashcards — son habilidad, no dato memorizable; ese repaso se hace mejor con el modo transversal del <a href="simulacro.html">simulacro</a>.</p>
       </div>
     </div>
 
@@ -126,11 +132,22 @@ footer .paws { font-family: var(--font-accent); font-size: 1.05rem; color: var(-
 
 <script>
 'use strict';
-const MAZOS = [
-  { slug: 'area1-diagnostico', titulo: 'Área 1 · Diagnóstico', emoji: '🧠' },
-  { slug: 'area2-intervencion', titulo: 'Área 2 · Intervención', emoji: '🛠️' },
-  { slug: 'area3-investigacion', titulo: 'Área 3 · Investigación', emoji: '🔬' },
+const MAZOS_DIA = [
+  { slug: 'dia01-instrumentos-propiedades-uso', titulo: 'Día 1 · Instrumentos: propiedades y uso', emoji: '📏', archivo: 'flashcards/por-dia/dia01-instrumentos-propiedades-uso.csv' },
+  { slug: 'dia02-instrumentos-interpretacion-evaluacion', titulo: 'Día 2 · Interpretación + evaluación psicológica', emoji: '🧩', archivo: 'flashcards/por-dia/dia02-instrumentos-interpretacion-evaluacion.csv' },
+  { slug: 'dia03-intervencion-psicodinamico-conductual', titulo: 'Día 3 · Psicodinámico + conductual/CC', emoji: '🛋️', archivo: 'flashcards/por-dia/dia03-intervencion-psicodinamico-conductual.csv' },
+  { slug: 'dia04-intervencion-humanista-sistemico-contemporaneas', titulo: 'Día 4 · Humanista, sistémico y contemporáneas', emoji: '🌱', archivo: 'flashcards/por-dia/dia04-intervencion-humanista-sistemico-contemporaneas.csv' },
+  { slug: 'dia05-intervencion-tecnicas-proposito-etica', titulo: 'Día 5 · Técnicas, propósito y ética', emoji: '🧰', archivo: 'flashcards/por-dia/dia05-intervencion-tecnicas-proposito-etica.csv' },
+  { slug: 'dia06-investigacion-fundamentos-epistemologia', titulo: 'Día 6 · Fundamentos y epistemología', emoji: '🔭', archivo: 'flashcards/por-dia/dia06-investigacion-fundamentos-epistemologia.csv' },
+  { slug: 'dia07-investigacion-ruta-cuantitativa', titulo: 'Día 7 · Ruta cuantitativa', emoji: '📊', archivo: 'flashcards/por-dia/dia07-investigacion-ruta-cuantitativa.csv' },
+  { slug: 'dia08-investigacion-cualitativa-mixta-resultados', titulo: 'Día 8 · Cualitativa/mixta + resultados', emoji: '📝', archivo: 'flashcards/por-dia/dia08-investigacion-cualitativa-mixta-resultados.csv' },
 ];
+const MAZOS = [
+  { slug: 'area1-diagnostico', titulo: 'Área 1 · Diagnóstico', emoji: '🧠', archivo: 'flashcards/area1-diagnostico.csv' },
+  { slug: 'area2-intervencion', titulo: 'Área 2 · Intervención', emoji: '🛠️', archivo: 'flashcards/area2-intervencion.csv' },
+  { slug: 'area3-investigacion', titulo: 'Área 3 · Investigación', emoji: '🔬', archivo: 'flashcards/area3-investigacion.csv' },
+];
+const TODOS_MAZOS = MAZOS_DIA.concat(MAZOS);
 const cache = {};
 
 function parseCSV(texto) {
@@ -158,7 +175,8 @@ function parseCSV(texto) {
 
 async function cargarMazo(slug) {
   if (cache[slug]) return cache[slug];
-  const r = await fetch('flashcards/' + slug + '.csv', { cache: 'no-store' });
+  const meta = TODOS_MAZOS.find(m => m.slug === slug);
+  const r = await fetch(meta.archivo, { cache: 'no-store' });
   const cards = parseCSV(await r.text());
   cache[slug] = cards;
   return cards;
@@ -171,19 +189,24 @@ function shuffle(a) {
 }
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
-async function renderMazos() {
-  const cont = document.getElementById('mazos');
-  cont.innerHTML = MAZOS.map(m => `
+function pintarGrid(contId, lista) {
+  const cont = document.getElementById(contId);
+  cont.innerHTML = lista.map(m => `
     <div class="mazo">
       <div class="fila"><span class="emoji">${m.emoji}</span><h3>${esc(m.titulo)}</h3><span class="cuenta" id="c-${m.slug}">…</span></div>
       <div class="acciones">
         <button class="boton" data-est="${m.slug}">Estudiar aquí</button>
-        <a class="boton suave" href="flashcards/${m.slug}.csv" download>⬇ CSV para Anki</a>
+        <a class="boton suave" href="${m.archivo}" download>⬇ CSV para Anki</a>
       </div>
     </div>`).join('');
   cont.querySelectorAll('button[data-est]').forEach(b =>
     b.addEventListener('click', () => estudiar(b.dataset.est)));
-  for (const m of MAZOS) {
+}
+
+async function renderMazos() {
+  pintarGrid('mazos-dia', MAZOS_DIA);
+  pintarGrid('mazos', MAZOS);
+  for (const m of TODOS_MAZOS) {
     try { const c = await cargarMazo(m.slug); document.getElementById('c-' + m.slug).textContent = c.length + ' tarjetas'; }
     catch (e) { document.getElementById('c-' + m.slug).textContent = '—'; }
   }
@@ -191,7 +214,7 @@ async function renderMazos() {
 
 let sesion = null;
 async function estudiar(slug) {
-  const meta = MAZOS.find(m => m.slug === slug);
+  const meta = TODOS_MAZOS.find(m => m.slug === slug);
   const cards = await cargarMazo(slug);
   sesion = { slug, titulo: meta.titulo, cola: shuffle(cards), hechas: 0, total: cards.length, volteada: false };
   document.getElementById('vista-mazos').classList.add('oculto');
