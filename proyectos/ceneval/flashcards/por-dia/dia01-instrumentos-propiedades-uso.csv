@@ -1,0 +1,13 @@
+#separator:Semicolon
+#html:false
+#tags column:3
+¿Cómo se llegó del concepto de edad mental al CI que conocemos hoy?;"Binet creó el concepto de edad mental; Stern propuso dividirla entre la edad cronológica; Terman multiplicó ese cociente ×100 para obtener el CI.";CENEVAL::Dia01-InstrumentosPropiedadesUso
+En la Teoría Clásica de los Tests de Spearman, ¿qué representa la fórmula X = V + e?;El puntaje observado (X) es igual al puntaje verdadero (V) más el error de medición (e).;CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué mide el Alfa de Cronbach?;Es el índice de consistencia interna, es decir, la confiabilidad de una prueba.;CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué es la validez de contenido y cómo se valida?;"Es que los reactivos representen bien el dominio que se quiere medir; se valida mediante jueceo de expertos.";CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué diferencia hay entre validez convergente y divergente?;"La convergente correlaciona alto con medidas del mismo constructo; la divergente correlaciona bajo con medidas de constructos distintos.";CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué es la validez de facies (aparente) y por qué es la más débil?;"Es que la prueba 'parezca' medir lo que dice medir, a simple vista; es la evidencia de validez más débil de todas.";CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Cuáles son las 4 escalas de medición de Stevens, de menos a más información?;Nominal, ordinal, de intervalo y de razón, en orden creciente de información.;CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Cómo es la escala Likert, y en qué se diferencia de Thurstone y Guttman?;"Likert mide grados de acuerdo (5 puntos) de forma sumativa; Thurstone se construye por jueceo de expertos; Guttman es acumulativa.";CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué es la Razón de Validez de Contenido (CVR) de Lawshe y qué rango tiene?;Se calcula como (n esencial − N/2) / (N/2), y va de −1 a +1.;CENEVAL::Dia01-InstrumentosPropiedadesUso
+¿Qué tipos de entrevista existen (por estructura y por directividad), y por qué es la herramienta más usada?;Se clasifica por estructura (estructurada, semiestructurada, abierta) y por estilo (directiva o no directiva). Es la herramienta de evaluación más usada en psicología.;CENEVAL::Dia01-InstrumentosPropiedadesUso
