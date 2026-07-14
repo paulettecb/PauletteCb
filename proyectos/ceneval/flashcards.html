@@ -282,7 +282,11 @@ document.addEventListener('keydown', e => {
   else if (sesion.volteada && (e.key === '2' || e.key.toLowerCase() === 'y')) calificar(true);
 });
 
-renderMazos();
+renderMazos().then(() => {
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('mazo') || params.get('dia');
+  if (slug && TODOS_MAZOS.some(m => m.slug === slug)) estudiar(slug);
+});
 </script>
 </body>
 </html>

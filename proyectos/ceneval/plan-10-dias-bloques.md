@@ -2,30 +2,41 @@
 
 > 10 días exactos, 10 categorías, 1 por día. Mecánica: tú estudias el tema del día → me avisas → te paso el bloque de reactivos de ese tema (del banco de 495 en `material/preguntas.json`) → los respondes → te doy feedback → pasamos al día siguiente.
 
-## Las 10 categorías (cubren el examen completo: 140 disciplinar + 60 transversal = 200 reactivos oficiales)
+## Las 10 categorías — qué leer cada día (esto es lo importante, no las subáreas)
 
-| Día | Categoría | Reactivos oficiales | Banco disponible para practicar |
+Nota importante: **las subáreas del temario oficial (1.1, 1.2, 2.1…) NO son capítulos de libro.** Son solo la forma en que CENEVAL pesa el examen. Lo que sí tienes que abrir para estudiar son los capítulos de tus mini libros, listados abajo — ya hice esa traducción por ti para los 10 días, no hace falta que la hagas tú.
+
+| Día | Categoría | Libro a abrir | Capítulos a leer (por número del índice) |
 |---|---|---|---|
-| 1 | **Área 1** — Propiedades y uso de instrumentos psicológicos (1.1+1.2) | 22 | de los 105 de Área 1 |
-| 2 | **Área 1** — Interpretación de instrumentos + evaluación psicológica (1.3+1.4) | 27 | de los 105 de Área 1 |
-| 3 | **Área 2** — Intervención: psicoanálisis/psicodinámico + conductual/cognitivo-conductual | ~parte de 22 | de los 151 de Área 2 |
-| 4 | **Área 2** — Intervención: humanista, sistémico y contemporáneas basadas en evidencia | ~parte de 22 | de los 151 de Área 2 |
-| 5 | **Área 2** — Técnicas/herramientas de intervención + propósito, contextos y ética (2.2+2.3) | 28 | de los 151 de Área 2 |
-| 6 | **Área 3** — Fundamentos de la ciencia + epistemología + arranque de la ruta cuantitativa (3.1) | 12+ | de los 113 de Área 3 |
-| 7 | **Área 3** — Ruta cuantitativa: diseños, validez interna/externa, estadística (parte de 3.2) | ~ | de los 113 de Área 3 |
-| 8 | **Área 3** — Ruta cualitativa/mixta + evaluación de resultados de investigación (parte de 3.2+3.3) | ~ | de los 113 de Área 3 |
-| 9 | **Transversal T1** — Comprensión lectora | 30 | de los 126 transversales |
-| 10 | **Transversal T2** — Redacción indirecta | 30 | de los 126 transversales |
+| 1 | Instrumentos: propiedades y uso | `libro-area1-diagnostico.html` | **04, 05** y la parte de entrevista/observación/escalas del **12** |
+| 2 | Instrumentos: interpretación + evaluación psicológica | `libro-area1-diagnostico.html` | **01, 02, 03, 06, 07, 08, 09, 10, 11**, la parte de proceso diagnóstico del **12**, y **13** |
+| 3 | Intervención: psicoanálisis + conductual/cognitivo-conductual | `libro-area2-intervencion.html` | **03 al 11** |
+| 4 | Intervención: humanista, sistémico, contemporáneas | `libro-area2-intervencion.html` | **12 al 15** |
+| 5 | Intervención: técnicas/herramientas + propósito, contextos y ética | `libro-area2-intervencion.html` | **01, 02**, y **16 al 28** (día largo — son 15 caps, si hace falta lo partimos en dos sesiones) |
+| 6 | Investigación: fundamentos + epistemología | `libro-area3-investigacion.html` | **01 al 06** |
+| 7 | Investigación: ruta cuantitativa | `libro-area3-investigacion.html` | **07 al 17** (también es día largo, 11 caps) |
+| 8 | Investigación: cualitativa/mixta + evaluación de resultados | `libro-area3-investigacion.html` | **18 al 26** |
+| 9 | Comprensión lectora | *(no hay libro — es habilidad, no contenido)* | practica directo en `simulacro.html` (modo transversal, trae los textos) + los 3 ejemplos oficiales de la guía |
+| 10 | Redacción indirecta | *(no hay libro — es habilidad, no contenido)* | practica directo en `simulacro.html` (modo solo redacción) + los 3 ejemplos oficiales de la guía |
+
+En todos los libros, el capítulo final (Glosario-chuleta) sirve de repaso rápido cualquier día que toque ese libro.
 
 Orden = el mismo de la guía oficial (Área 1 → 2 → 3 → transversal). Si a medio sprint sientes que un día te costó muchísimo más que otro, lo movemos — el orden no es sagrado, la cobertura de las 10 categorías sí.
-
-Fuente de la categorización: `temario.md` (desglose oficial por subárea) + los mini libros (`libro-area1/2/3-*.html`) ya construidos en este proyecto a partir de la guía CENEVAL.
 
 ---
 
 ## DÍA 1 — Propiedades y uso de instrumentos psicológicos
 
-Esto es lo que necesitas poder responder con los ojos cerrados:
+### 📖 Qué leer hoy (nada más que esto)
+
+Abre `libro-area1-diagnostico.html` y lee **solo estos 3 capítulos**:
+- **Capítulo 04 — Psicometría: historia de la medición**
+- **Capítulo 05 — Confiabilidad, validez y normas**
+- **Capítulo 12 — Herramientas de evaluación psicológica** (nada más la parte de entrevista, observación y escalas de actitud; el resto de ese capítulo es de Día 2)
+
+No leas los demás capítulos hoy (01, 02, 03, 06-11, 13) — esos son de Día 2, ya quedaron anotados ahí para no perderlos.
+
+### Qué necesitas poder responder con los ojos cerrados al terminar
 
 ### Confiabilidad (que la medida sea consistente)
 - **Test-retest** (estabilidad): mismo instrumento, dos aplicaciones, se espera r cercana a 1.
@@ -62,6 +73,14 @@ Nominal (solo clasifica) → Ordinal (ordena, sin distancia igual — ej. percen
 CVR de Lawshe, IVC de Lynn, V de Aiken — todos miden qué tanto los expertos coinciden en que un reactivo es relevante/representativo.
 
 **Fuentes para profundizar si algo no te queda claro:** `libro-area1-diagnostico.html` (capítulos "Psicometría", "Confiabilidad, validez y normas" y "Herramientas de evaluación psicológica") y `chuletas.html` (hoja imprimible de Área 1).
+
+⚠️ **Ojo:** los capítulos del libro (01, 02, 03…) NO son lo mismo que las subáreas del temario (1.1, 1.2…) — son dos numeraciones distintas. Para Día 1 lee del índice del libro **solo los caps. 04, 05 y 12** (marcados abajo). El resto (caps. 01-03, 06-11, 13) es contenido de Día 2.
+
+| Día | Caps. del libro `libro-area1-diagnostico.html` a leer |
+|---|---|
+| **1** | 04 Psicometría · 05 Confiabilidad, validez y normas · 12 Herramientas de evaluación (solo la parte de tipos de entrevista/observación/escalas) |
+| **2** | 01 Bases biológicas · 02 Neurona, sinapsis y neurotransmisores · 03 Neuroanatomía · 06 Metodología de la investigación · 07 Psicodiagnóstico infantil y proyectivas · 08 Inteligencia y neuropsicología · 09 Trastornos neurocognitivos (DSM-5) · 10 Trastornos de la personalidad · 11 CONOCER · 12 (la parte de proceso diagnóstico) · 13 Desarrollo y ciclo vital |
+| 14 Glosario-chuleta | repaso rápido, útil cualquier día |
 
 Cuando estudies esto y me avises, te paso el bloque de reactivos del Día 1 sacados del banco real (de los 105 de Área 1) para que los respondas sin apuntes.
 

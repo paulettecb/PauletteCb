@@ -163,6 +163,18 @@ footer .paws { font-family: var(--font-accent); font-size: 1.05rem; color: var(-
 const $app = document.getElementById('app');
 const $reloj = document.getElementById('reloj');
 const AREAS = { 1: 'Área 1 · Diagnóstico', 2: 'Área 2 · Intervención', 3: 'Área 3 · Investigación' };
+const DIAS = [
+  { n: 1, emoji: '📏', titulo: 'Instrumentos: propiedades y uso' },
+  { n: 2, emoji: '🧩', titulo: 'Interpretación + evaluación psicológica' },
+  { n: 3, emoji: '🛋️', titulo: 'Psicoanálisis + conductual/CC' },
+  { n: 4, emoji: '🌱', titulo: 'Humanista, sistémico, contemporáneas' },
+  { n: 5, emoji: '🧰', titulo: 'Técnicas, propósito y ética' },
+  { n: 6, emoji: '🔭', titulo: 'Fundamentos y epistemología' },
+  { n: 7, emoji: '📊', titulo: 'Ruta cuantitativa' },
+  { n: 8, emoji: '📝', titulo: 'Cualitativa/mixta + resultados' },
+  { n: 9, emoji: '📖', titulo: 'Comprensión lectora' },
+  { n: 10, emoji: '✍️', titulo: 'Redacción indirecta' },
+];
 const LS_KEY = 'simulacro-kyn-v1';
 
 const state = { data: null, ctx: {}, ronda: null, timerId: null };
@@ -208,6 +220,8 @@ function adoptarDatos(json) {
   state.ctx = {};
   (json.contextos || []).forEach(c => { state.ctx[c.id] = c; });
   renderInicio();
+  const dia = new URLSearchParams(location.search).get('dia');
+  if (dia && DIAS.some(d => d.n === +dia)) iniciarRonda({ tipo: 'dia', dia: +dia });
 }
 function renderSinDatos(msjExtra) {
   detenerReloj();
@@ -256,6 +270,8 @@ function renderInicio() {
   const porArea = { 1: 0, 2: 0, 3: 0 };
   disc.forEach(q => { porArea[q.area] = (porArea[q.area] || 0) + 1; });
   const trans = pool.filter(q => q.seccion === 'transversal');
+  const porDia = {};
+  pool.forEach(q => { if (q.dia) porDia[q.dia] = (porDia[q.dia] || 0) + 1; });
   const s = store();
   const numErrores = Object.keys(s.errores).length;
   const conExpl = pool.filter(q => q.explicacion).length;
@@ -277,6 +293,19 @@ function renderInicio() {
         <span class="chip c5">💡 ${conExpl} con explicación</span>
       </div>
     </div>
+
+    <h2 class="seccion">Mini-repaso del día (sprint 10 días)</h2>
+    <div class="tarjetas">
+      ${DIAS.map(d => {
+        const n = porDia[d.n] || 0;
+        return `
+        <div class="tarjeta">
+          <div class="fila"><span class="emoji">${d.emoji}</span><h3>Día ${d.n} · ${esc(d.titulo)}</h3><span class="cuenta">${n} disponibles</span></div>
+          <div class="tamanos"><button data-modo="dia" data-dia="${d.n}" ${n ? '' : 'disabled'}>${n ? 'Repasar todas' : 'Sin preguntas clasificadas aún'}</button></div>
+        </div>`;
+      }).join('')}
+    </div>
+    <p style="font-size:0.82rem;color:var(--ink-500);margin:-0.3rem 0 0">Reetiquetadas del mismo banco de 495, sin preguntas nuevas — 466 de 495 se pudieron ubicar en una categoría con confianza; el resto sigue disponible en las rondas por área.</p>
 
     <h2 class="seccion">Rondas por área</h2>
     <div class="tarjetas">
@@ -328,6 +357,7 @@ function renderInicio() {
   $app.querySelectorAll('button[data-modo]').forEach(b => b.addEventListener('click', () => {
     const d = b.dataset;
     if (d.modo === 'area') iniciarRonda({ tipo: 'area', area: +d.area, n: +d.n });
+    else if (d.modo === 'dia') iniciarRonda({ tipo: 'dia', dia: +d.dia });
     else if (d.modo === 'examen') iniciarRonda({ tipo: 'examen' });
     else if (d.modo === 'mixto') iniciarRonda({ tipo: 'mixto', n: +d.n });
     else if (d.modo === 'trans') iniciarRonda({ tipo: 'trans', examen: d.examen });
@@ -344,6 +374,10 @@ function iniciarRonda(cfg) {
     const de = shuffle(pool.filter(q => q.seccion === 'disciplinar' && q.area === cfg.area));
     items = cfg.n ? de.slice(0, cfg.n) : de;
     nombre = AREAS[cfg.area] + (cfg.n ? ` (${items.length})` : ' (todas)');
+  } else if (cfg.tipo === 'dia') {
+    const meta = DIAS.find(x => x.n === cfg.dia);
+    items = shuffle(pool.filter(q => q.dia === cfg.dia));
+    nombre = `Día ${cfg.dia} · ${meta ? meta.titulo : ''} (${items.length})`;
   } else if (cfg.tipo === 'mixto') {
     items = shuffle(pool.filter(q => q.seccion === 'disciplinar')).slice(0, cfg.n);
     nombre = `Mezcla disciplinar (${items.length})`;
