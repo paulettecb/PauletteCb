@@ -51,6 +51,10 @@ copy(path.join(root, 'proyectos/ceneval/flashcards'), path.join(dist, 'proyectos
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
 copy(path.join(root, 'proyectos/lsm/rescate'), path.join(dist, 'proyectos/lsm/rescate'));
 copy(path.join(root, 'proyectos/KYN Design System'), path.join(dist, 'proyectos/KYN Design System'));
+// Packages compartidos: módulos que las herramientas enlazan (hoy: lector-kyn,
+// con su vendor de MediaPipe). Se copia entero para que el WASM y el bundle
+// lleguen al deploy.
+copy(path.join(root, 'proyectos/packages/lector-kyn'), path.join(dist, 'proyectos/packages/lector-kyn'));
 copy(path.join(root, 'proyectos/projects.json'), path.join(dist, 'proyectos/projects.json'));
 
 console.log('✅ dist/ unificado listo (Netlify y GitHub Pages sirven el mismo contenido).');

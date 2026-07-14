@@ -1,0 +1,213 @@
+/* Lector KYN — estilos del package compartido. Usa tokens KYN si existen, con
+   FALLBACKS para servir en cualquier página. No asume ningún :root del host. */
+
+.lector-kyn-bar {
+  --regla-alto: 1.2em;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  max-width: calc(100vw - 2rem);
+  padding: 0.4rem 0.7rem;
+  background: var(--white, #fff);
+  border: 1.5px solid var(--periwinkle-200, #c9d0ed);
+  border-radius: var(--radius-pill, 999px);
+  box-shadow: var(--shadow-md, 0 8px 24px rgba(47, 54, 88, 0.16));
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  font-size: 0.82rem;
+  color: var(--ink-700, #4a4955);
+}
+.lector-kyn-bar .lk-titulo {
+  font-family: var(--font-accent, var(--font-display, inherit));
+  font-size: 1rem;
+  color: var(--periwinkle-700, #5562a4);
+  padding-right: 0.2rem;
+}
+.lector-kyn-bar button {
+  padding: 0.28rem 0.7rem;
+  border: 1px solid var(--ink-100, #e4e2e6);
+  border-radius: var(--radius-pill, 999px);
+  background: var(--paper, #fbfaf7);
+  color: var(--ink-700, #4a4955);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.1;
+}
+.lector-kyn-bar button:hover { border-color: var(--periwinkle-300, #aeb8e2); }
+.lector-kyn-bar button[aria-pressed='true'] {
+  background: var(--periwinkle-600, #6b7ac1);
+  border-color: var(--periwinkle-600, #6b7ac1);
+  color: var(--white, #fff);
+}
+.lector-kyn-bar .lk-niveles { display: none; gap: 0.2rem; }
+.lector-kyn-bar.lk-bio-on .lk-niveles { display: flex; }
+.lector-kyn-bar .lk-niveles button { padding: 0.28rem 0.5rem; font-size: 0.75rem; }
+.lector-kyn-bar .lk-grosor { font-size: 0.75rem; }
+
+/* Negritas de fijación biónica. Sin scoped: se inyectan sobre el texto del host. */
+b.lk-bio { font-weight: inherit; }
+body.lk-bio-on b.lk-bio { font-weight: 700; color: var(--ink-900, #2a2933); }
+body.lk-bio-on .esencial b.lk-bio,
+body.lk-bio-on .nota-campo b.lk-bio,
+body.lk-bio-on .dato b.lk-bio { color: inherit; }
+
+/* Regla de lectura */
+.lector-kyn-regla {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--regla-alto, 1.2em);
+  display: none;
+  pointer-events: none;
+  z-index: 2147482000;
+  background: rgba(135, 149, 210, 0.14);
+  border-top: 1px solid rgba(135, 149, 210, 0.35);
+  border-bottom: 1px solid rgba(135, 149, 210, 0.35);
+}
+body.lk-regla-on .lector-kyn-regla { display: block; }
+/* La regla de mirada glisa por transición para tapar el jitter residual, y es
+   delgadita por default (el jitter se ve peor con banda gruesa). */
+.lector-kyn-regla.lk-mirada {
+  background: rgba(232, 93, 160, 0.13);
+  border-top-color: rgba(232, 93, 160, 0.4);
+  border-bottom-color: rgba(232, 93, 160, 0.4);
+  transition: top 0.12s linear;
+}
+
+/* Modo mini: la barra se encoge a un botoncito flotante cuando no la usas */
+.lector-kyn-bar.lk-mini { padding: 0; gap: 0; border-color: transparent; box-shadow: none; background: transparent; }
+.lector-kyn-bar.lk-mini > :not(.lk-mini-btn) { display: none; }
+.lector-kyn-bar .lk-mini-btn {
+  display: none;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1.5px solid var(--periwinkle-200, #c9d0ed);
+  border-radius: 50%;
+  background: var(--white, #fff);
+  box-shadow: var(--shadow-md, 0 8px 24px rgba(47, 54, 88, 0.16));
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+.lector-kyn-bar.lk-mini .lk-mini-btn { display: grid; place-items: center; }
+
+/* Panel de mirada: el video solo se ve al calibrar; al leer es una pastilla. */
+.lector-kyn-panel {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 2147483000;
+  display: none;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  background: var(--white, #fff);
+  border: 1.5px solid var(--periwinkle-200, #c9d0ed);
+  border-radius: var(--radius-md, 16px);
+  box-shadow: var(--shadow-md, 0 8px 24px rgba(47, 54, 88, 0.16));
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+.lector-kyn-panel.lk-on { display: grid; }
+.lector-kyn-panel video {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.lector-kyn-panel.lk-calibrando video {
+  width: 132px;
+  height: 74px;
+  opacity: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  background: var(--ink-900, #2a2933);
+  transform: scaleX(-1);
+}
+.lector-kyn-panel .lk-panel-info { display: flex; align-items: center; gap: 0.35rem; max-width: 190px; }
+.lector-kyn-panel .lk-dot { width: 9px; height: 9px; flex: none; border-radius: 50%; background: var(--ink-300, #c4c2cc); }
+.lector-kyn-panel .lk-dot.lk-live { background: var(--ok, var(--success, #2e7d57)); }
+.lector-kyn-panel .lk-panel-text { font-size: 0.68rem; line-height: 1.15; color: var(--ink-700, #4a4955); }
+.lector-kyn-panel .lk-recal {
+  margin-left: auto;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--ink-100, #e4e2e6);
+  border-radius: var(--radius-pill, 999px);
+  background: var(--paper, #fbfaf7);
+  font: inherit;
+  font-size: 0.64rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Overlay de calibración */
+.lector-kyn-cal {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483600;
+  display: none;
+  background: rgba(38, 42, 74, 0.55);
+  backdrop-filter: blur(1px);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+.lector-kyn-cal.lk-on { display: block; }
+.lector-kyn-cal .lk-cal-dot {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: var(--pop-magenta, #e85da0);
+  box-shadow: 0 0 0 8px rgba(232, 93, 160, 0.28), 0 0 0 16px rgba(232, 93, 160, 0.14);
+  transition: top 0.35s ease, left 0.35s ease;
+}
+.lector-kyn-cal .lk-cal-card {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  max-width: 340px;
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--white, #fff);
+  border-radius: var(--radius-md, 16px);
+  box-shadow: 0 16px 44px rgba(47, 54, 88, 0.28);
+}
+.lector-kyn-cal .lk-cal-card strong { font-size: 0.9rem; color: var(--periwinkle-700, #5562a4); }
+.lector-kyn-cal .lk-cal-card p { margin: 0; font-size: 0.85rem; line-height: 1.4; color: var(--ink-700, #4a4955); }
+.lector-kyn-cal .lk-cal-warn { color: var(--danger, #c0392b); font-weight: 600; }
+.lector-kyn-cal .lk-cal-actions { display: flex; gap: 0.5rem; margin-top: 0.2rem; flex-wrap: wrap; }
+.lector-kyn-cal .lk-cal-card button {
+  min-height: 34px;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--ink-100, #e4e2e6);
+  border-radius: var(--radius-pill, 999px);
+  background: var(--paper, #fbfaf7);
+  color: var(--ink-700, #4a4955);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lector-kyn-cal .lk-cal-card button.lk-primary {
+  background: var(--periwinkle-700, #5562a4);
+  border-color: var(--periwinkle-700, #5562a4);
+  color: var(--white, #fff);
+}
+.lector-kyn-cal .lk-cal-card button:disabled { opacity: 0.5; cursor: default; }
+.lector-kyn-cal .lk-cal-modo { font-size: 0.78rem; }
+
+@media (max-width: 880px) {
+  .lector-kyn-bar { font-size: 0.75rem; }
+  .lector-kyn-bar .lk-titulo { display: none; }
+}
+
+@media print {
+  .lector-kyn-bar,
+  .lector-kyn-regla,
+  .lector-kyn-panel,
+  .lector-kyn-cal { display: none !important; }
+}
