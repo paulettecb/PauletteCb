@@ -79,20 +79,21 @@ body.lk-regla-on .lector-kyn-regla { display: block; }
   box-shadow: inset 0 0 0 1.5px rgba(85, 98, 164, 0.55);
 }
 
-/* Puntito de mirada: rayita magenta que marca a lo ancho (horizontal) dónde van
-   tus ojos, montada sobre la banda azul. La 'x' la mueve la mirada (con
-   transición para tapar el jitter); la 'y' la comparte con la banda (el mouse). */
+/* Puntito de mirada: un dot magenta que marca a lo ancho (horizontal) dónde van
+   tus ojos, montado sobre la banda azul —como un spot, no una línea que estorbe.
+   La 'x' la mueve la mirada (con transición para tapar el jitter); la 'y' la
+   comparte con la banda (el mouse). */
 .lector-kyn-punto {
   position: fixed;
-  width: 3px;
-  height: 1.5em;
+  width: 12px;
+  height: 12px;
   transform: translate(-50%, -50%);
   display: none;
   pointer-events: none;
   z-index: 2147482500;
   background: var(--pop-magenta, #e85da0);
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.7), 0 1px 3px rgba(47, 54, 88, 0.35);
   transition: left 0.12s linear;
 }
 .lector-kyn-punto.lk-frozen { background: var(--periwinkle-800, #434d80); }
