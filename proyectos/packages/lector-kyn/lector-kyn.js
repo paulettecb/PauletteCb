@@ -1,7 +1,9 @@
 // Lector KYN — módulo compartido de accesibilidad de lectura (TDAH / dislexia).
 // Se enlaza con <script type="module" src=".../lector-kyn/lector-kyn.js"> y se
-// auto-inyecta: barra de opciones, regla de lectura, lectura biónica, tamaño de
-// letra, modo mini y —opt-in— la REGLA CON LA MIRADA (webcam/iris, todo local).
+// auto-inyecta: barra de opciones, regla de lectura (sigue el cursor en vertical,
+// CLICK EN EL TEXTO = pausa/reanuda con cursor ⏸/▶️), lectura biónica, tamaño de
+// letra, modo mini y —opt-in— la MIRADA (webcam/iris, todo local): un puntito
+// magenta sobre la banda marca a lo ancho dónde miras (complemento del mouse).
 //
 // Config (opcional) vía window.LECTOR_KYN_CONFIG antes del <script>:
 //   { textSelector, containerSelector, modelUrl, side }
@@ -40,6 +42,12 @@ const GROSORES = [
 const CAL_ROWS = [0.14, 0.32, 0.5, 0.68, 0.86]
 const CAL_COLS = [0.2, 0.5, 0.8]
 
+// Cursores ⏸/▶️ para la pausa de la regla (click en el texto congela/reanuda).
+const cursorSvg = (inner) =>
+  `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>${inner}</svg>`)}") 12 12, pointer`
+const CURSOR_PAUSA = cursorSvg("<circle cx='12' cy='12' r='10' fill='white' stroke='#5562A4' stroke-width='2'/><rect x='8.6' y='8' width='2.3' height='8' rx='1.1' fill='#5562A4'/><rect x='13.1' y='8' width='2.3' height='8' rx='1.1' fill='#5562A4'/>")
+const CURSOR_PLAY = cursorSvg("<circle cx='12' cy='12' r='10' fill='white' stroke='#E85DA0' stroke-width='2'/><path d='M9.7 8L16 12L9.7 16Z' fill='#E85DA0'/>")
+
 const readState = () => {
   const base = { bio: false, nivel: 2, regla: false, fuente: 0, grosor: 1 }
   try {
@@ -67,6 +75,7 @@ const init = () => {
   const host = document.createElement('div')
   host.innerHTML = `
     <div class="lector-kyn-regla" aria-hidden="true"></div>
+    <div class="lector-kyn-punto" aria-hidden="true"></div>
     <div class="lector-kyn-panel" aria-live="polite">
       <video class="lk-video" autoplay playsinline muted></video>
       <div class="lk-panel-info">
@@ -87,7 +96,7 @@ const init = () => {
         </div>
         <div class="lk-cal-actions">
           <button type="button" class="lk-cal-modo" data-modo="max">Máxima (3×5)</button>
-          <button type="button" class="lk-cal-modo" data-modo="rapida">Rápida (5 pts)</button>
+          <button type="button" class="lk-cal-modo" data-modo="rapida">Rápida (3 pts)</button>
         </div>
       </div>
     </div>
@@ -112,6 +121,7 @@ const init = () => {
   const $ = (sel) => document.querySelector(sel)
   const bar = $('.lector-kyn-bar')
   const regla = $('.lector-kyn-regla')
+  const punto = $('.lector-kyn-punto')
   const panel = $('.lector-kyn-panel')
   const video = $('.lk-video')
   const cal = $('.lector-kyn-cal')
@@ -173,17 +183,36 @@ const init = () => {
     if (container) container.style.fontSize = TAMANOS[state.fuente]
   }
 
-  // ===== Regla =====
+  // ===== Regla + puntito de mirada + pausa =====
+  // Complemento: el MOUSE mueve la banda azul (el renglón, vertical) y —si la
+  // mirada está calibrada— un puntito magenta sobre la banda marca a lo ancho
+  // (horizontal) dónde van tus ojos. Un click en el texto CONGELA todo (pausa)
+  // y otro lo reanuda: así retomas el renglón exacto donde te quedaste.
+  let frozen = false
+  let lastPointerY = null
   const gazeRuling = () => gazeOn && reader && reader.state.calibrated
+  const bandVisible = () => state.regla || gazeRuling()
   const setReglaAt = (clientY) => {
     const alto = regla.offsetHeight || 0
     regla.style.top = `${clientY - alto / 2}px`
+    punto.style.top = `${clientY}px` // el puntito viaja centrado sobre la banda
+  }
+  const setPuntoX = (x) => { punto.style.left = `${x}px` }
+  const updateCursor = () => {
+    document.body.style.cursor = bandVisible() && !cal.classList.contains('lk-on')
+      ? (frozen ? CURSOR_PLAY : CURSOR_PAUSA)
+      : ''
   }
   const aplicarRegla = () => {
-    const ruling = gazeRuling()
-    regla.style.display = state.regla || ruling ? 'block' : 'none'
-    regla.classList.toggle('lk-mirada', ruling)
-    regla.style.setProperty('--regla-alto', ruling ? GROSORES[0].css : GROSORES[state.grosor].css)
+    const show = bandVisible()
+    if (!show) frozen = false
+    regla.style.display = show ? 'block' : 'none'
+    regla.style.setProperty('--regla-alto', GROSORES[state.grosor].css)
+    regla.classList.toggle('lk-frozen', frozen)
+    punto.style.display = gazeRuling() ? 'block' : 'none'
+    punto.classList.toggle('lk-frozen', frozen)
+    if (show && lastPointerY === null) setReglaAt(window.innerHeight * 0.4) // posición inicial
+    updateCursor()
   }
 
   const aplicar = () => {
@@ -215,11 +244,26 @@ const init = () => {
     state.fuente = Math.min(TAMANOS.length - 1, state.fuente + 1); persist(); aplicarFuente()
   })
 
-  // Regla que sigue el cursor (cuando no la lleva la mirada).
+  // La banda sigue el cursor en vertical (salvo congelada).
   let raf = null
   document.addEventListener('pointermove', (e) => {
-    if (gazeRuling() || !state.regla || raf) return
-    raf = requestAnimationFrame(() => { setReglaAt(e.clientY); raf = null })
+    lastPointerY = e.clientY
+    if (frozen || !bandVisible() || raf) return
+    raf = requestAnimationFrame(() => { setReglaAt(lastPointerY); raf = null })
+  })
+
+  // Click en el texto = pausa/reanuda (congela el renglón para retomarlo sin
+  // perderlo). No toca clics en enlaces/botones ni cuando estás seleccionando.
+  const NO_TOGGLE = 'a, button, input, textarea, select, label, summary, [role="button"], .lector-kyn-bar, .lector-kyn-panel, .lector-kyn-cal'
+  document.addEventListener('click', (e) => {
+    if (!bandVisible() || cal.classList.contains('lk-on')) return
+    if (e.target.closest && e.target.closest(NO_TOGGLE)) return
+    if (String(window.getSelection ? window.getSelection() : '').length) return // seleccionando texto
+    frozen = !frozen
+    if (!frozen && lastPointerY !== null) setReglaAt(lastPointerY) // al reanudar salta a donde está el mouse
+    regla.classList.toggle('lk-frozen', frozen)
+    punto.classList.toggle('lk-frozen', frozen)
+    updateCursor()
   })
 
   // Modo mini: la barra se encoge a un botoncito ⚡ tras unos segundos.
@@ -247,7 +291,9 @@ const init = () => {
     })
     return pts
   }
-  const verticalPoints = () => CAL_ROWS.map((fy) => ({ fx: 0.5, fy }))
+  // Rápida = 3 puntos horizontales (izq/centro/der): el complemento usa la
+  // mirada en horizontal, así que basta calibrar ese eje.
+  const rapidaPoints = () => CAL_COLS.map((fx) => ({ fx, fy: 0.5 }))
 
   const onStatus = (s) => {
     dot.classList.toggle('lk-live', s.facePresent && !s.blinking)
@@ -258,7 +304,9 @@ const init = () => {
     else if (s.calibrated) panelText.textContent = 'Siguiendo tu mirada 👁️'
     else panelText.textContent = 'Listo para calibrar.'
   }
-  const onGaze = (x, y) => { if (gazeRuling() && y !== null) setReglaAt(y) }
+  // La mirada mueve el puntito en HORIZONTAL sobre la banda (la vertical la
+  // lleva el mouse). Congelada, el puntito se queda marcando la palabra.
+  const onGaze = (x) => { if (gazeRuling() && !frozen && x !== null) setPuntoX(x) }
 
   const ensureReader = async () => {
     if (reader) return reader
@@ -291,7 +339,7 @@ const init = () => {
 
   const startCalibration = (mode) => {
     calMode = mode
-    calPoints = mode === 'rapida' ? verticalPoints() : gridPoints()
+    calPoints = mode === 'rapida' ? rapidaPoints() : gridPoints()
     calStep = 0
     calSamples = []
     capturing = false

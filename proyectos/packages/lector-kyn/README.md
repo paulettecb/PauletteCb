@@ -4,11 +4,15 @@ Módulo compartido de **accesibilidad de lectura** para TDAH / dislexia. Se
 auto-inyecta una barra flotante con:
 
 - **⚡ Biónica** — engrosa el inicio de cada palabra (3 niveles de fijación).
-- **📏 Regla** — una banda que sigue tu **cursor**, con grosor ajustable
-  (línea / fina / media / ancha).
-- **👁️ Mirada** *(opt-in)* — la regla sigue tus **ojos** por webcam (iris,
-  MediaPipe FaceLandmarker). Todo el procesamiento es **local**; nada de video
-  sale del navegador.
+- **📏 Regla** — una banda azul que sigue tu **cursor** en vertical (el
+  renglón), con grosor ajustable (línea / fina / media / ancha). **Click en el
+  texto = pausa**: congela el renglón para retomarlo sin perderlo (otro click lo
+  reanuda; el cursor se vuelve ⏸/▶️).
+- **👁️ Mirada** *(opt-in, complemento)* — con la cámara (iris, MediaPipe
+  FaceLandmarker), un **puntito magenta** sobre la banda marca a lo **ancho**
+  (horizontal) dónde van tus ojos. Los ejes se reparten a su fuerte: el **mouse
+  lleva el renglón** (vertical, preciso) y los **ojos el punto** (horizontal).
+  Todo **local**; nada de video sale del navegador.
 - **A− / A+** — tamaño de letra.
 - Preferencias en `localStorage` (`lector-kyn`) y **modo mini** (la barra se
   encoge a un botoncito ⚡).
@@ -36,13 +40,12 @@ así que **da igual dónde viva la herramienta** que lo importa.
 
 ## La mirada (calibración)
 - Al prender 👁️ se calibra: miras unos puntos y sostienes la vista.
-  - **Máxima (3×5 = 15 puntos)** — grid completo (izq/der + arriba/abajo), la
-    más precisa; corrige el "ladeo" que mete la posición horizontal en el eje
-    vertical.
-  - **Rápida (5 puntos)** — solo vertical, para cuando tienes prisa.
-- Es webcam: la precisión vertical es aproximada por límite físico de la cámara
-  (mejor entre renglones que pixel exacto). Anti-parpadeo + suavizado adaptativo
-  para que la regla no se caiga ni tiemble.
+  - **Máxima (3×5 = 15 puntos)** — grid completo, la más precisa a lo ancho.
+  - **Rápida (3 puntos)** — izquierda/centro/derecha, para cuando tienes prisa.
+- El puntito trabaja en **horizontal** a propósito: la webcam es más confiable en
+  ese eje que en el vertical (que lo lleva el mouse). Anti-parpadeo + suavizado
+  adaptativo para que no tiemble. La mate 2D sigue calibrando ambos ejes por si
+  se quiere la mirada vertical más adelante.
 
 ## Estructura
 ```
