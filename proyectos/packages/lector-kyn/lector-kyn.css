@@ -73,14 +73,29 @@ body.lk-bio-on .dato b.lk-bio { color: inherit; }
   border-bottom: 1px solid rgba(135, 149, 210, 0.35);
 }
 body.lk-regla-on .lector-kyn-regla { display: block; }
-/* La regla de mirada glisa por transición para tapar el jitter residual, y es
-   delgadita por default (el jitter se ve peor con banda gruesa). */
-.lector-kyn-regla.lk-mirada {
-  background: rgba(232, 93, 160, 0.13);
-  border-top-color: rgba(232, 93, 160, 0.4);
-  border-bottom-color: rgba(232, 93, 160, 0.4);
-  transition: top 0.12s linear;
+/* Congelada (pausa): la banda se ve "clavada" con un contorno interior. */
+.lector-kyn-regla.lk-frozen {
+  background: rgba(135, 149, 210, 0.24);
+  box-shadow: inset 0 0 0 1.5px rgba(85, 98, 164, 0.55);
 }
+
+/* Puntito de mirada: rayita magenta que marca a lo ancho (horizontal) dónde van
+   tus ojos, montada sobre la banda azul. La 'x' la mueve la mirada (con
+   transición para tapar el jitter); la 'y' la comparte con la banda (el mouse). */
+.lector-kyn-punto {
+  position: fixed;
+  width: 3px;
+  height: 1.5em;
+  transform: translate(-50%, -50%);
+  display: none;
+  pointer-events: none;
+  z-index: 2147482500;
+  background: var(--pop-magenta, #e85da0);
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55);
+  transition: left 0.12s linear;
+}
+.lector-kyn-punto.lk-frozen { background: var(--periwinkle-800, #434d80); }
 
 /* Modo mini: la barra se encoge a un botoncito flotante cuando no la usas */
 .lector-kyn-bar.lk-mini { padding: 0; gap: 0; border-color: transparent; box-shadow: none; background: transparent; }
@@ -214,6 +229,7 @@ body.lk-regla-on .lector-kyn-regla { display: block; }
 @media print {
   .lector-kyn-bar,
   .lector-kyn-regla,
+  .lector-kyn-punto,
   .lector-kyn-panel,
   .lector-kyn-cal { display: none !important; }
 }

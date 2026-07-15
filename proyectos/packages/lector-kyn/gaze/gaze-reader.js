@@ -135,7 +135,7 @@ export const createGazeReader = ({ onGaze, onStatus } = {}) => {
             smoothedX = smoothedX === null ? x : smoothedX + (x - smoothedX) * SMOOTH_XY
             state.gazeX = smoothedX
           }
-          if (y !== null && onGaze) onGaze(state.gazeX, state.gazeY)
+          if ((x !== null || y !== null) && onGaze) onGaze(state.gazeX, state.gazeY)
         }
       }
     }
