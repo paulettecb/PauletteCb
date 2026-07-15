@@ -54,8 +54,9 @@ function cardNotion() {
           : '<span class="pill pill-neutra">sin conectar</span>'}
       </div>
       <p class="texto-secundario">
-        Manda un espejo de tus movimientos y deudas a tu página
-        <strong>Cuentas Claras</strong> de Notion. La app siempre manda; Notion solo recibe.
+        Espeja tus movimientos y deudas con tu página <strong>Cuentas Claras</strong> de Notion.
+        La app <strong>manda</strong> a Notion, y con <em>traer de Notion</em> también
+        <strong>trae</strong> las deudas que edites allá.
       </p>
       <details class="mt-1">
         <summary class="texto-suave" style="cursor:pointer">¿cómo lo conecto? (3 pasos)</summary>
@@ -83,7 +84,8 @@ function cardNotion() {
         </label>
         <div class="fila mt-2" style="flex-wrap: wrap">
           <button type="submit" class="btn btn-suave">guardar conexión</button>
-          <button type="button" class="btn btn-primario" data-sync-ahora ${conectada ? '' : 'disabled'}>🔄 sincronizar ahora</button>
+          <button type="button" class="btn btn-primario" data-sync-ahora ${conectada ? '' : 'disabled'}>⬆️ mandar a Notion</button>
+          <button type="button" class="btn btn-suave" data-traer-notion ${conectada ? '' : 'disabled'}>⬇️ traer de Notion</button>
         </div>
       </form>
       ${ultima ? `<p class="texto-suave mt-1">última sincronización: ${escapeHtml(fechaCorta(ultima.slice(0, 10)))} a las ${escapeHtml(ultima.slice(11, 16))}</p>` : ''}
@@ -113,7 +115,7 @@ function wirearCardNotion(el) {
   const btnSync = el.querySelector('[data-sync-ahora]');
   btnSync.addEventListener('click', async () => {
     btnSync.disabled = true;
-    btnSync.textContent = 'sincronizando…';
+    btnSync.textContent = 'mandando…';
     const r = await notion.sincronizar();
     if (r.ok) {
       toast(`Notion al día ✓ ${r.creados} nuevas · ${r.actualizados} actualizadas${r.archivados ? ` · ${r.archivados} archivadas` : ''}`);
@@ -121,9 +123,33 @@ function wirearCardNotion(el) {
       toastError(r.error);
       // el re-render por setNotionSync ya restauró el botón; esto es por si no hubo commit
       btnSync.disabled = false;
-      btnSync.textContent = '🔄 sincronizar ahora';
+      btnSync.textContent = '⬆️ mandar a Notion';
     }
   });
+
+  const btnTraer = el.querySelector('[data-traer-notion]');
+  if (btnTraer) {
+    btnTraer.addEventListener('click', async () => {
+      const seguro = await confirmar(
+        'Trae tus deudas desde Notion: crea las que falten y actualiza las que ya tengas. ' +
+        'Si cambiaste algo en la app más reciente que en Notion, eso NO se pisa. ¿Le entro?',
+        { textoBoton: 'Sí, traer' },
+      );
+      if (!seguro) return;
+      btnTraer.disabled = true;
+      btnTraer.textContent = 'trayendo…';
+      const r = await notion.traerDeNotion();
+      if (r.ok) {
+        const cola = r.omitidas ? ` · ${r.omitidas} sin traer (revisa Tipo/nombre en Notion)` : '';
+        toast(`Traído de Notion ✓ ${r.traidas} ${r.traidas === 1 ? 'deuda' : 'deudas'}${cola}`);
+      } else {
+        toastError(r.error);
+      }
+      // Si hubo cambios, el re-render ya trae botón nuevo; esto cubre el resto.
+      btnTraer.disabled = false;
+      btnTraer.textContent = '⬇️ traer de Notion';
+    });
+  }
 }
 
 /* =========================================================================
