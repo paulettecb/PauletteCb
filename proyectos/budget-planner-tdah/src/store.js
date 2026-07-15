@@ -81,7 +81,10 @@ function estadoBase() {
     // movimiento: { id, tipo:'gasto'|'ingreso', fecha:'YYYY-MM-DD', monto,
     //               categoriaId|null, nota, deudaId|null, creadoEn }
     movimientos: [],
-    // deuda común: { id, tipo, nombre, creadoEn }
+    // deuda común: { id, tipo, nombre, creadoEn, actualizadoEn }
+    //   actualizadoEn = ISO de la última edición LOCAL (pago, ajuste, editar).
+    //   Sirve para que "traer de Notion" no pise un cambio fresco de la app con
+    //   un valor viejo del espejo (ver notion.js → esNotionMasReciente).
     //   tarjeta:  + { saldo, limite, tasaAnual, diaCorte, diaPago, pagoMinimo }
     //   msi:      + { montoTotal, meses, mensualidadesPagadas, diaPago }
     //   prestamo|hipoteca: + { saldo, montoOriginal, mensualidad, tasaAnual, diaPago }
@@ -156,6 +159,7 @@ function normalizar(datos) {
         const comun = {
           id: String(d.id), tipo: d.tipo, nombre: String(d.nombre).slice(0, 60),
           creadoEn: d.creadoEn || '', diaPago: sinDia ? null : clampDiaLibre(d.diaPago),
+          actualizadoEn: str(d.actualizadoEn, 40),
         };
         if (d.tipo === 'tarjeta') {
           return {
@@ -202,6 +206,9 @@ function normalizar(datos) {
 function clampDiaLibre(dia) {
   return Math.max(1, Math.min(31, Math.round(Number(dia)) || 1));
 }
+
+// Marca de tiempo de la última edición local (para el sync con Notion).
+const ahoraISO = () => new Date().toISOString();
 
 const str = (v, max) => (typeof v === 'string' ? v.slice(0, max) : '');
 
@@ -522,7 +529,15 @@ export function setNombre(nombre) {
 }
 
 export function setNotionConfig(cambios) {
-  state.ajustes.notion = saneaNotion({ ...state.ajustes.notion, ...cambios });
+  const anterior = state.ajustes.notion;
+  const fusion = { ...anterior, ...cambios };
+  // Si cambió la página, las databases descubiertas antes ya no cuelgan de ahí:
+  // se limpian para re-descubrirlas/crearlas y no apuntar a otra página.
+  if (cambios.paginaId !== undefined && cambios.paginaId !== anterior.paginaId) {
+    fusion.dbMovimientos = '';
+    fusion.dbDeudas = '';
+  }
+  state.ajustes.notion = saneaNotion(fusion);
   commit();
 }
 
@@ -563,7 +578,7 @@ export function mensualidadDe(deuda) {
 }
 
 export function agregarDeuda(datos) {
-  const deuda = normalizar({ deudas: [{ ...datos, id: `deuda-${uid()}`, creadoEn: hoyISO() }] }).deudas[0];
+  const deuda = normalizar({ deudas: [{ ...datos, id: `deuda-${uid()}`, creadoEn: hoyISO(), actualizadoEn: ahoraISO() }] }).deudas[0];
   if (!deuda) return null;
   state.deudas.push(deuda);
   commit();
@@ -573,10 +588,32 @@ export function agregarDeuda(datos) {
 export function editarDeuda(id, cambios) {
   const idx = state.deudas.findIndex((d) => d.id === id);
   if (idx === -1) return;
-  const fusion = { ...state.deudas[idx], ...cambios, id, tipo: state.deudas[idx].tipo };
+  const fusion = { ...state.deudas[idx], ...cambios, id, tipo: state.deudas[idx].tipo, actualizadoEn: ahoraISO() };
   const limpia = normalizar({ deudas: [fusion] }).deudas[0];
   if (limpia) state.deudas[idx] = limpia;
   commit();
+}
+
+// Inserta o mezcla una deuda por id (para traerla desde Notion). Si ya existe,
+// respeta su tipo y conserva los campos que Notion NO refleja (límite, día de
+// corte, estructura de MSI): solo pisa lo que venga en `datos`. NO estampa
+// actualizadoEn: un "traer" no es una edición local (esa marca protege lo local).
+// Con { commit:false } muta el estado pero no persiste: quien trae en lote
+// hace un solo commit al final (evita N escrituras y N auto-syncs).
+export function upsertDeuda(datos, { commit: hacerCommit = true } = {}) {
+  if (!datos || !datos.id) return null;
+  const idx = state.deudas.findIndex((d) => d.id === datos.id);
+  if (idx === -1) {
+    const nueva = normalizar({ deudas: [{ ...datos, creadoEn: hoyISO() }] }).deudas[0];
+    if (!nueva) return null;
+    state.deudas.push(nueva);
+  } else {
+    const fusion = { ...state.deudas[idx], ...datos, id: datos.id, tipo: state.deudas[idx].tipo };
+    const limpia = normalizar({ deudas: [fusion] }).deudas[0];
+    if (limpia) state.deudas[idx] = limpia;
+  }
+  if (hacerCommit) commit();
+  return state.deudas.find((d) => d.id === datos.id) || null;
 }
 
 // Borra la deuda; sus movimientos de pago se conservan como historial (pierden el vínculo).
@@ -591,6 +628,7 @@ export function ajustarSaldoDeuda(id, nuevoSaldo) {
   const deuda = deudaDe(id);
   if (!deuda || deuda.tipo === 'msi') return;
   deuda.saldo = Math.max(0, Math.round(nuevoSaldo || 0));
+  deuda.actualizadoEn = ahoraISO();
   commit();
 }
 
@@ -607,6 +645,7 @@ function aplicarEfectoPago(deudaId, deltaMonto, { revertirMsi = false } = {}) {
   } else {
     deuda.saldo = Math.max(0, (deuda.saldo || 0) - deltaMonto);
   }
+  deuda.actualizadoEn = ahoraISO();
 }
 
 // Crea el movimiento de gasto Y actualiza la deuda, en una sola operación.

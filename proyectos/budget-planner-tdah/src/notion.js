@@ -71,47 +71,84 @@ async function asegurarDatabases() {
   const cfg = store.getState().ajustes.notion;
   if (cfg.dbMovimientos && cfg.dbDeudas) return cfg;
 
+  // Antes de crear, reusa las databases que YA existan en la página compartida
+  // (así no se duplican, y el "traer de Notion" encuentra lo que ya está ahí).
+  const existentes = await buscarDatabases(cfg.paginaId);
+  let dbMovId = cfg.dbMovimientos || existentes.Movimientos;
+  let dbDeudasId = cfg.dbDeudas || existentes.Deudas;
   const parent = { type: 'page_id', page_id: cfg.paginaId };
 
-  const dbMovs = await llamar('/v1/databases', 'POST', {
-    parent,
-    icon: { type: 'emoji', emoji: '🧾' },
-    title: texto('Movimientos'),
-    properties: {
-      'Nota': { title: {} },
-      'Fecha': { date: {} },
-      'Tipo': { select: { options: [
-        { name: 'gasto', color: 'red' },
-        { name: 'ingreso', color: 'green' },
-      ] } },
-      'Monto': { number: { format: 'mexican_peso' } },
-      'Categoría': { rich_text: {} },
-      'Deuda': { rich_text: {} },
-      'Origen': { select: { options: [{ name: 'KYN', color: 'purple' }] } },
-      'ID': { rich_text: {} },
-    },
-  });
-  await pausa(PAUSA_MS);
+  if (!dbMovId) {
+    const dbMovs = await llamar('/v1/databases', 'POST', {
+      parent,
+      icon: { type: 'emoji', emoji: '🧾' },
+      title: texto('Movimientos'),
+      properties: {
+        'Nota': { title: {} },
+        'Fecha': { date: {} },
+        'Tipo': { select: { options: [
+          { name: 'gasto', color: 'red' },
+          { name: 'ingreso', color: 'green' },
+        ] } },
+        'Monto': { number: { format: 'mexican_peso' } },
+        'Categoría': { rich_text: {} },
+        'Deuda': { rich_text: {} },
+        'Origen': { select: { options: [{ name: 'KYN', color: 'purple' }] } },
+        'ID': { rich_text: {} },
+      },
+    });
+    dbMovId = dbMovs.id;
+    await pausa(PAUSA_MS);
+  }
 
-  const dbDeudas = await llamar('/v1/databases', 'POST', {
-    parent,
-    icon: { type: 'emoji', emoji: '💪' },
-    title: texto('Deudas'),
-    properties: {
-      'Nombre': { title: {} },
-      'Tipo': { rich_text: {} },
-      'Pendiente': { number: { format: 'mexican_peso' } },
-      'Mensualidad': { number: { format: 'mexican_peso' } },
-      'Día de pago': { number: {} },
-      'Tasa anual %': { number: {} },
-      'Liquidada': { checkbox: {} },
-      'ID': { rich_text: {} },
-    },
-  });
-  await pausa(PAUSA_MS);
+  if (!dbDeudasId) {
+    const dbDeudas = await llamar('/v1/databases', 'POST', {
+      parent,
+      icon: { type: 'emoji', emoji: '💪' },
+      title: texto('Deudas'),
+      properties: {
+        'Nombre': { title: {} },
+        'Tipo': { rich_text: {} },
+        'Pendiente': { number: { format: 'mexican_peso' } },
+        'Mensualidad': { number: { format: 'mexican_peso' } },
+        'Día de pago': { number: {} },
+        'Tasa anual %': { number: {} },
+        'Liquidada': { checkbox: {} },
+        'ID': { rich_text: {} },
+      },
+    });
+    dbDeudasId = dbDeudas.id;
+    await pausa(PAUSA_MS);
+  }
 
-  store.setNotionConfig({ dbMovimientos: dbMovs.id, dbDeudas: dbDeudas.id });
+  store.setNotionConfig({ dbMovimientos: dbMovId, dbDeudas: dbDeudasId });
   return store.getState().ajustes.notion;
+}
+
+// Busca por título las databases "Movimientos"/"Deudas" que cuelgan de la página
+// compartida, para reusarlas en vez de crear duplicados. Pagina el /v1/search y
+// deja que un error de red/API se propague (fail-closed): mejor abortar que crear
+// un duplicado por no haber "visto" la database que ya existía.
+async function buscarDatabases(paginaId) {
+  const res = { Movimientos: '', Deudas: '' };
+  const objetivo = String(paginaId || '').replaceAll('-', '');
+  if (!objetivo) return res;
+  let cursor;
+  do {
+    const body = { filter: { value: 'database', property: 'object' }, page_size: 100 };
+    if (cursor) body.start_cursor = cursor;
+    const data = await llamar('/v1/search', 'POST', body);
+    for (const db of data.results || []) {
+      const padre = String(db.parent?.page_id || '').replaceAll('-', '');
+      if (padre !== objetivo) continue;
+      const titulo = (db.title || []).map((t) => t.plain_text || '').join('').trim();
+      if (titulo === 'Movimientos' && !res.Movimientos) res.Movimientos = db.id;
+      if (titulo === 'Deudas' && !res.Deudas) res.Deudas = db.id;
+    }
+    cursor = data.has_more ? data.next_cursor : null;
+    if (cursor) await pausa(PAUSA_MS);
+  } while (cursor);
+  return res;
 }
 
 /* =========================================================================
@@ -241,6 +278,176 @@ export async function sincronizar() {
   } finally {
     enCurso = false;
     store.setNotionSync(sync); // guarda también el progreso parcial
+  }
+}
+
+/* =========================================================================
+   Traer de Notion → app (el otro sentido: bidireccional para deudas)
+   ========================================================================= */
+
+// Normaliza para comparar tipos con tolerancia (minúsculas, sin acentos).
+const normTexto = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+// Acepta tanto el nombre bonito ("Tarjeta de crédito") como la clave ("tarjeta"),
+// con o sin acentos/mayúsculas, para no descartar filas por un typo del espejo.
+const TIPO_POR_TEXTO = Object.fromEntries(
+  Object.entries(store.TIPOS_DEUDA).flatMap(([clave, t]) => [
+    [normTexto(t.nombre), clave],
+    [normTexto(clave), clave],
+  ]),
+);
+const tipoDesdeTexto = (txt) => TIPO_POR_TEXTO[normTexto(txt)] || null;
+
+const textoProp = (p) => (p?.title || p?.rich_text || []).map((t) => t.plain_text || '').join('').trim();
+const numeroProp = (p) => (typeof p?.number === 'number' ? p.number : null);
+const pesosProp = (p) => { const n = numeroProp(p); return n == null ? null : Math.round(n * 100); };
+
+// ¿La fila de Notion es más nueva que la última edición LOCAL de la deuda?
+// Fail-safe: si hay una marca local legible y no podemos leer la de Notion,
+// gana lo local (no pisamos un cambio fresco de la app con el espejo).
+function esNotionMasReciente(existente, fila) {
+  if (!existente || !existente.actualizadoEn) return true; // sin marca local → Notion manda
+  const localMs = new Date(existente.actualizadoEn).getTime();
+  if (Number.isNaN(localMs)) return true;
+  const notionMs = fila?.last_edited_time ? new Date(fila.last_edited_time).getTime() : NaN;
+  if (Number.isNaN(notionMs)) return false; // sin fecha de Notion → protege lo local
+  return notionMs > localMs;
+}
+
+// Trae TODAS las filas de un database (paginando).
+async function consultarFilas(dbId) {
+  const filas = [];
+  let cursor;
+  do {
+    const body = cursor ? { start_cursor: cursor, page_size: 100 } : { page_size: 100 };
+    const data = await llamar(`/v1/databases/${dbId}/query`, 'POST', body);
+    filas.push(...(data.results || []));
+    cursor = data.has_more ? data.next_cursor : null;
+    if (cursor) await pausa(PAUSA_MS);
+  } while (cursor);
+  return filas;
+}
+
+// Una fila de la database Deudas → { datos } listo para store.upsertDeuda, o
+// { error } explicando por qué se omitió (para poder avisarle a Paulette).
+// El espejo de Notion es simplificado, así que reconstruimos lo justo:
+//   - Si la deuda YA existe, conservamos su estructura que Notion no refleja
+//     (límite, día de corte, desglose de MSI) y su tipo.
+//   - Solo pisamos los campos reflejados si la fila de Notion es MÁS NUEVA que
+//     la última edición local (si no, se protege lo de la app).
+//   - Un 0 en un monto NO borra un valor real existente (0 se trata como "vacío"
+//     salvo en deudas nuevas); un null nunca pisa nada.
+function deudaDesdeFila(fila) {
+  const props = fila.properties || {};
+  const id = textoProp(props['ID']);
+  const nombre = textoProp(props['Nombre']);
+  if (!id) return { error: 'sin ID' };
+  if (!nombre) return { error: 'sin nombre' };
+
+  const existente = store.deudaDe(id);
+  const tipo = existente ? existente.tipo : tipoDesdeTexto(textoProp(props['Tipo']));
+  if (!tipo) return { error: 'tipo no reconocido' };
+
+  const nuevo = !existente;
+  const manda = esNotionMasReciente(existente, fila); // ¿Notion pisa lo local?
+  const pendiente = pesosProp(props['Pendiente']);
+  const mensualidad = pesosProp(props['Mensualidad']);
+  const tasa = numeroProp(props['Tasa anual %']);
+  const dia = numeroProp(props['Día de pago']);
+
+  // ponMonto: aplica un monto solo si Notion manda, no es null, y (es positivo o
+  // la deuda es nueva) — así un 0 del espejo no borra una mensualidad real.
+  const ponMonto = (v) => manda && v != null && (v > 0 || nuevo);
+  const ponNum = (v) => manda && v != null; // tasa/día: 0 sí es un valor válido
+
+  const base = { id, tipo };
+  if (manda) base.nombre = nombre; // el nombre solo se refresca si Notion manda
+  if (ponNum(dia)) base.diaPago = dia;
+
+  if (tipo === 'tarjeta') {
+    if (ponMonto(pendiente)) base.saldo = pendiente;
+    if (ponMonto(mensualidad)) base.pagoMinimo = mensualidad;
+    if (ponNum(tasa)) base.tasaAnual = tasa;
+    if (existente) { base.limite = existente.limite; base.diaCorte = existente.diaCorte; }
+  } else if (tipo === 'msi') {
+    // MSI ya existente: no lo degrades; deja su montoTotal/meses/pagadas tal cual
+    // (Notion no refleja el desglose y reconstruirlo lo corrompería).
+    if (nuevo) {
+      const total = pendiente ?? 0;
+      const meses = mensualidad && mensualidad > 0 ? Math.max(1, Math.round(total / mensualidad)) : 1;
+      base.montoTotal = total;
+      base.meses = meses;
+      base.mensualidadesPagadas = 0;
+    }
+  } else if (tipo === 'prestamo' || tipo === 'hipoteca') {
+    if (ponMonto(pendiente)) { base.saldo = pendiente; base.montoOriginal = existente?.montoOriginal || pendiente; }
+    if (ponMonto(mensualidad)) base.mensualidad = mensualidad;
+    if (ponNum(tasa)) base.tasaAnual = tasa;
+  } else if (tipo === 'persona') {
+    if (ponMonto(pendiente)) base.saldo = pendiente;
+    if (ponMonto(mensualidad)) base.mensualidad = mensualidad;
+    base.tasaAnual = 0;
+  }
+  // aplico = tomamos los valores de Notion. Si es false (protegimos lo local),
+  // el push debe volver a mandar lo local para corregir el espejo.
+  return { datos: base, aplico: manda };
+}
+
+// Resuelve la database de Deudas SIN crear nada (traer es de solo lectura):
+// usa la guardada en config o la busca en la página; si no existe, error claro.
+async function resolverDbDeudas() {
+  const cfg = store.getState().ajustes.notion;
+  if (cfg.dbDeudas) return cfg.dbDeudas;
+  const encontradas = await buscarDatabases(cfg.paginaId);
+  if (encontradas.Deudas) {
+    // Guárdala para que el próximo push la reuse (no re-descubrir cada vez).
+    store.setNotionConfig({ dbDeudas: encontradas.Deudas });
+    return encontradas.Deudas;
+  }
+  throw new Error('No encontré tu database de "Deudas" en esa página. Primero manda con ⬆️, o revisa que la página sea la correcta.');
+}
+
+// Lee la database Deudas de Notion y la vuelca a la app: crea las que falten y
+// actualiza las que ya tengas SIN pisar cambios locales más nuevos ni degradar
+// MSI. NO crea databases (es solo lectura). Registra el mapeo para que el push
+// no duplique, y hace UN solo commit al final.
+// → { ok, traidas, omitidas } | { ok: false, error }
+export async function traerDeNotion() {
+  if (enCurso) return { ok: false, error: 'Ya hay un sync corriendo, dale un momento.' };
+  if (!configurada()) return { ok: false, error: 'Primero guarda tu token y tu página de Notion.' };
+
+  enCurso = true;
+  const sync = JSON.parse(JSON.stringify(store.getState().notionSync));
+  let traidas = 0;
+  let omitidas = 0;
+  try {
+    const dbDeudas = await resolverDbDeudas();
+    const filas = await consultarFilas(dbDeudas);
+    for (const fila of filas) {
+      if (fila.archived) continue;
+      const { datos, error, aplico } = deudaDesdeFila(fila);
+      if (error) { omitidas += 1; continue; }
+      const d = store.upsertDeuda(datos, { commit: false }); // commit único al final
+      if (d) {
+        sync.paginasDeudas[d.id] = fila.id;
+        // Si tomamos los valores de Notion, el hash cuadra y el próximo push
+        // no re-manda. Si protegimos lo local, borramos el hash para que el
+        // push corrija el espejo con lo de la app.
+        if (aplico) sync.hashesDeudas[d.id] = hashDeuda(d);
+        else delete sync.hashesDeudas[d.id];
+        traidas += 1;
+      } else {
+        omitidas += 1;
+      }
+    }
+    sync.ultimaSync = new Date().toISOString();
+    return { ok: true, traidas, omitidas };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  } finally {
+    enCurso = false;
+    // setNotionSync hace commit(): persiste de una vez las deudas traídas Y el mapeo.
+    store.setNotionSync(sync);
   }
 }
 
