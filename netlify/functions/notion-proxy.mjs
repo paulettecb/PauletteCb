@@ -8,7 +8,8 @@ const RUTAS_PERMITIDAS = [
   /^\/v1\/pages$/,                          // crear página (fila) en una database
   /^\/v1\/pages\/[0-9a-f-]{32,36}$/,        // actualizar / archivar una fila
   /^\/v1\/databases$/,                      // crear las databases la primera vez
-  /^\/v1\/databases\/[0-9a-f-]{32,36}\/query$/, // consultar (verificación)
+  /^\/v1\/databases\/[0-9a-f-]{32,36}\/query$/, // consultar filas (traer de Notion)
+  /^\/v1\/search$/,                         // descubrir databases existentes (push y traer)
 ];
 
 const json = (cuerpo, status = 200) =>
@@ -54,4 +55,7 @@ export default async (req) => {
   });
 };
 
-export const config = { path: '/api/notion' };
+// Se sirve en el path por defecto (/.netlify/functions/notion-proxy) y la app le
+// pega vía /api/notion gracias al rewrite de dist/_redirects. Antes esto usaba
+// `config.path`, pero el deploy no publicaba las funciones, así que /api/notion
+// caía en 404 ("este sitio no tiene funciones de Netlify").
