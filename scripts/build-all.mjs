@@ -29,6 +29,11 @@ run('npx vite build');
 console.log('▶ Copiando styles.css plano (lo referencian lsm/rescate directo, sin bundle)');
 copy(path.join(root, 'styles.css'), path.join(dist, 'styles.css'));
 
+// _redirects: reescribe /api/notion → la función de Netlify (el sync de Cuentas
+// Claras). Debe vivir en la raíz de dist/ para que Netlify lo procese.
+console.log('▶ Copiando _redirects (mapea /api/notion a la función de Netlify)');
+copy(path.join(root, 'netlify/_redirects'), path.join(dist, '_redirects'));
+
 console.log('▶ Build de budget-planner-tdah (Vite propio, base relativa)');
 const budgetOut = path.join(dist, 'proyectos', 'budget-planner-tdah');
 run(`npx vite build proyectos/budget-planner-tdah --base ./ --outDir "${budgetOut}" --emptyOutDir`);

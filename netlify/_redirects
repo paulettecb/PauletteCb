@@ -1,0 +1,4 @@
+# La app de Cuentas Claras le pega a /api/notion; aquí se reescribe (200 = proxy,
+# conserva método y cuerpo) hacia la función de Netlify que reenvía a Notion.
+# Solo aplica en Netlify (GitHub Pages no corre funciones).
+/api/notion  /.netlify/functions/notion-proxy  200
