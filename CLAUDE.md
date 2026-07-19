@@ -39,6 +39,7 @@ Ejemplo canónico: `proyectos/mediapipe-lab/libro-agility.html`. Para repetirlo 
 - App de finanzas de Paulette (reemplazó al viejo budget planner en julio 2026; antes se llamó "Lana"): gastos, presupuesto, deudas (hipoteca/tarjetas/MSI/préstamos) y plan bola de nieve/avalancha. Es proyecto aparte de KYN aunque usa sus tokens.
 - **Privacidad**: los datos viven SOLO en localStorage (`cuentasclaras.v1`), cifrables con código de acceso (AES-GCM) con export/import JSON y CSV. NUNCA commitear datos financieros reales ni telemetría. Única red permitida: el sync opcional a Notion que Paulette pidió (token suyo, vía función Netlify).
 - Contrato interno: montos SIEMPRE en centavos (enteros); vistas exportan `render(el)` con re-render completo; el header de `src/store.js` documenta toda la API. Vanilla JS + Vite propio (ya orquestado en `build-all.mjs`, mismo folder de siempre).
+- **Bitácora, estado y playbook de estados de cuenta: `proyectos/budget-planner-tdah/MEMORIA.md`.** Léela al retomar Cuentas Claras (varias sesiones la tocan) y actualízala cuando cambie algo grande. Sus datos financieros reales viven en su app (`cuentasclaras.v1`) y su Notion; para verlos al día, lee su Notion vía MCP. NUNCA escribas cifras reales en el repo.
 
 ## Gotchas técnicos de MotionLab (proyectos/mediapipe-lab)
 - MediaPipe: usar `shallowRef` para landmarkers y resultados por frame (un `ref()` profundo rompe el estado interno del task). WASM se bundlea con imports `?url`, nunca CDN.
