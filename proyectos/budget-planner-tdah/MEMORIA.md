@@ -84,6 +84,13 @@ documenta la API.
 ## Gotchas
 - El sync con Notion **solo corre en el sitio de Netlify** (la función `/api/notion`);
   en `file://` o GitHub Pages no hay función y avisa con un error claro.
+- **Notion migró las databases a "data sources"**: en cuentas ya migradas el endpoint
+  clásico `POST /v1/databases/{id}/query` truena con **500** (el "traer de Notion"
+  fallaba por esto; el push seguía porque usa `/v1/pages` y `/v1/search`). `notion.js`
+  → `consultarFilas` ahora intenta el clásico y, si falla, descubre el data source
+  (`GET /v1/databases/{id}`, versión `2025-09-03`) y consulta
+  `/v1/data_sources/{id}/query`. El proxy acepta la versión por request y captura
+  errores para devolver un mensaje legible en vez de un 500 pelón.
 - Hubo un intento de sync (esta sesión) que agregó columnas `Datos`/`Editado` a las
   tablas de Notion; se descartó (se adoptó el sync de `main`) y esas columnas ya se
   quitaron. Quedó una página suelta "PRUEBA sync dos vías (borrar)" bajo Cuentas
@@ -91,6 +98,9 @@ documenta la API.
 - `npm run build` corre `build-all.mjs`; el sub-build de esta app ya está incluido.
 
 ## Bitácora (lo más nuevo arriba)
+- **2026-07**: fix del "traer de Notion" (daba 500). Causa: migración de Notion a
+  "data sources"; el query clásico dejó de servir. Se agregó fallback al endpoint de
+  data source + errores legibles en el proxy y en `llamar`.
 - **2026-07**: reconciliación — la gráfica de deuda (esta sesión) y el sync
   bidireccional + plan de 3 canastas + fix de la función Netlify (otra sesión)
   quedaron juntos en `main`. Se creó este archivo de memoria.

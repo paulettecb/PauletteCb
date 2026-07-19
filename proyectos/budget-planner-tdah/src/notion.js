@@ -35,14 +35,14 @@ export function extraerPaginaId(texto) {
 
 const pausa = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function llamar(path, method, body) {
+async function llamar(path, method, body, version) {
   const { token } = store.getState().ajustes.notion;
   let res;
   try {
     res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, path, method, body }),
+      body: JSON.stringify({ token, path, method, body, version }),
     });
   } catch {
     throw new Error('No hay conexión (¿estás sin internet?).');
@@ -50,13 +50,18 @@ async function llamar(path, method, body) {
   if (res.status === 404) {
     throw new Error('Este sitio no tiene funciones de Netlify; el sync solo corre en la versión de Netlify.');
   }
-  const json = await res.json().catch(() => null);
+  // Lee el cuerpo como texto y trata de parsearlo: así, si Notion (o el proxy)
+  // devuelve un 500 SIN JSON, igual mostramos el texto en vez de un "500" pelón.
+  const textoResp = await res.text();
+  let json = null;
+  try { json = textoResp ? JSON.parse(textoResp) : null; } catch { json = null; }
   if (!res.ok) {
     if (res.status === 401) throw new Error('Notion rechazó el token. Revísalo en notion.so/my-integrations.');
     if (json?.code === 'object_not_found') {
       throw new Error('Notion no encuentra la página. ¿Ya la compartiste con tu integración? (⋯ → Conexiones)');
     }
-    throw new Error(json?.message || `Notion respondió ${res.status}.`);
+    const detalle = json?.message || (textoResp ? textoResp.trim().slice(0, 180) : '');
+    throw new Error(detalle ? `Notion respondió ${res.status}: ${detalle}` : `Notion respondió ${res.status}.`);
   }
   return json;
 }
@@ -314,18 +319,48 @@ function esNotionMasReciente(existente, fila) {
   return notionMs > localMs;
 }
 
-// Trae TODAS las filas de un database (paginando).
-async function consultarFilas(dbId) {
+// Pagina un endpoint de query de Notion (mismo cuerpo/estructura para el clásico
+// de database y el nuevo de data source) y devuelve TODAS las filas.
+async function paginarQuery(path, version) {
   const filas = [];
   let cursor;
   do {
     const body = cursor ? { start_cursor: cursor, page_size: 100 } : { page_size: 100 };
-    const data = await llamar(`/v1/databases/${dbId}/query`, 'POST', body);
+    const data = await llamar(path, 'POST', body, version);
     filas.push(...(data.results || []));
     cursor = data.has_more ? data.next_cursor : null;
     if (cursor) await pausa(PAUSA_MS);
   } while (cursor);
   return filas;
+}
+
+// Descubre el "data source" de una database: Notion migró las databases a este
+// modelo nuevo (una database puede tener varias fuentes). Se lee con la versión
+// nueva de la API; si no aplica, devuelve null.
+async function dataSourceDe(dbId) {
+  const data = await llamar(`/v1/databases/${dbId}`, 'GET', null, '2025-09-03');
+  return data?.data_sources?.[0]?.id || null;
+}
+
+// Trae TODAS las filas de la database Deudas (paginando).
+// Notion migró las databases a "data sources" y en varias cuentas el endpoint
+// clásico /v1/databases/{id}/query empezó a tronar con un 500. Por eso: intenta
+// el clásico (lo que ya jalaba) y, si falla, cae al endpoint nuevo
+// /v1/data_sources/{id}/query (versión 2025-09-03). Así el "traer de Notion"
+// funciona tanto en cuentas viejas como en las ya migradas.
+async function consultarFilas(dbId) {
+  try {
+    return await paginarQuery(`/v1/databases/${dbId}/query`, undefined);
+  } catch (errClasico) {
+    let dsId;
+    try {
+      dsId = await dataSourceDe(dbId);
+    } catch {
+      throw errClasico; // si ni descubrir el data source jala, reporta el error original
+    }
+    if (!dsId) throw errClasico;
+    return await paginarQuery(`/v1/data_sources/${dsId}/query`, '2025-09-03');
+  }
 }
 
 // Una fila de la database Deudas → { datos } listo para store.upsertDeuda, o
