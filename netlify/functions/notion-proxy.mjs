@@ -8,7 +8,9 @@ const RUTAS_PERMITIDAS = [
   /^\/v1\/pages$/,                          // crear página (fila) en una database
   /^\/v1\/pages\/[0-9a-f-]{32,36}$/,        // actualizar / archivar una fila
   /^\/v1\/databases$/,                      // crear las databases la primera vez
-  /^\/v1\/databases\/[0-9a-f-]{32,36}\/query$/, // consultar filas (traer de Notion)
+  /^\/v1\/databases\/[0-9a-f-]{32,36}$/,    // leer la database (para descubrir su data source)
+  /^\/v1\/databases\/[0-9a-f-]{32,36}\/query$/, // consultar filas (endpoint clásico)
+  /^\/v1\/data_sources\/[0-9a-f-]{32,36}\/query$/, // consultar por data source (Notion nuevo)
   /^\/v1\/search$/,                         // descubrir databases existentes (push y traer)
 ];
 
@@ -28,31 +30,40 @@ export default async (req) => {
     return json({ message: 'Cuerpo inválido' }, 400);
   }
 
-  const { token, path, method = 'POST', body = null } = peticion || {};
+  const { token, path, method = 'POST', body = null, version } = peticion || {};
   if (typeof token !== 'string' || !/^(secret_|ntn_)[A-Za-z0-9_-]{20,}$/.test(token)) {
     return json({ message: 'Token de Notion inválido' }, 400);
   }
   if (typeof path !== 'string' || !RUTAS_PERMITIDAS.some((r) => r.test(path))) {
     return json({ message: 'Ruta no permitida' }, 400);
   }
-  if (!['POST', 'PATCH'].includes(method)) {
+  if (!['GET', 'POST', 'PATCH'].includes(method)) {
     return json({ message: 'Método no permitido' }, 400);
   }
+  // La versión de la API se puede pedir por request (los endpoints de "data
+  // source" necesitan una versión nueva); por defecto la clásica que ya funciona.
+  const notionVersion = typeof version === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(version)
+    ? version : '2022-06-28';
 
-  const respuesta = await fetch(`https://api.notion.com${path}`, {
-    method,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Notion-Version': '2022-06-28',
-      'Content-Type': 'application/json',
-    },
-    body: body ? JSON.stringify(body) : undefined,
-  });
-
-  return new Response(await respuesta.text(), {
-    status: respuesta.status,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  // Envolvemos en try/catch para que si la función se cae al hablar con Notion,
+  // la app reciba un mensaje legible en vez de un 500 pelón sin pista.
+  try {
+    const respuesta = await fetch(`https://api.notion.com${path}`, {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Notion-Version': notionVersion,
+        'Content-Type': 'application/json',
+      },
+      body: body && method !== 'GET' ? JSON.stringify(body) : undefined,
+    });
+    return new Response(await respuesta.text(), {
+      status: respuesta.status,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (e) {
+    return json({ message: `El proxy no pudo hablar con Notion: ${e?.message || e}` }, 502);
+  }
 };
 
 // Se sirve en el path por defecto (/.netlify/functions/notion-proxy) y la app le
