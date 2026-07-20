@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSM-5 aplicado y ciclo vital — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Complemento del mapa de Área 1: estructura y categorías del DSM-5, distinciones clave, y cómo cambia la evaluación psicológica a lo largo del ciclo vital (infancia, adolescencia, adultez, adultez mayor).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+section[id],header[id]{scroll-margin-top:150px}
+::selection{background:var(--periwinkle-100)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--pop{background:var(--pop-magenta);color:#fff;font-family:var(--font-accent);font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;padding:6px 14px;}
+.kyn-badge--brand{background:var(--periwinkle-500);color:#fff;}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-card{
+  background:var(--surface-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+  padding:var(--space-5);transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out);
+}
+.kyn-card--interactive{cursor:pointer;}
+.kyn-card--interactive:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+
+.mapa-topbar{max-width:1240px;margin:0 auto;padding:14px 24px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mapa-volver{font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--radius-pill);background:var(--periwinkle-100);color:var(--periwinkle-800)}
+.mapa-volver:hover{background:var(--periwinkle-200);color:var(--periwinkle-800)}
+.mapa-controles{display:flex;align-items:center;gap:12px;margin-left:auto;flex-wrap:wrap}
+.mapa-nivel{display:inline-flex;background:var(--white);border:1.5px solid var(--periwinkle-200);border-radius:var(--radius-pill);padding:3px;gap:2px}
+.mapa-nivel-btn{font-family:inherit;font-weight:800;font-size:12px;letter-spacing:0.02em;cursor:pointer;border:none;background:transparent;color:var(--periwinkle-700);padding:6px 14px;border-radius:var(--radius-pill);transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.mapa-nivel-btn.is-activo{background:var(--periwinkle-700);color:#fff}
+.mapa-nivel-btn:hover:not(.is-activo){background:var(--periwinkle-100)}
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+body.nivel-esenciales .mapa-detalle{display:none !important}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+.mapa-repaso-hint{display:none}
+body.modo-repaso .mapa-repaso-hint{display:flex}
+
+@media (max-width: 640px){
+  .mapa-topbar{padding-top:10px}
+  .mapa-controles{margin-left:0;width:100%;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+  <div class="mapa-topbar">
+    <a class="mapa-volver" href="index.html">← Base CENEVAL</a>
+    <div class="mapa-controles">
+      <div class="mapa-nivel" role="group" aria-label="Nivel de detalle">
+        <button type="button" class="mapa-nivel-btn is-activo" data-nivel="completo">Completo</button>
+        <button type="button" class="mapa-nivel-btn" data-nivel="esenciales">Esenciales</button>
+      </div>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </div>
+
+<div style="min-height:100vh;background:var(--paper)">
+
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(251,250,247,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a href="#inicio" style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:26px;color:var(--periwinkle-600)">mapa</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">complemento · área 1</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <a href="#dsm" class="kyn-badge" style="background:var(--periwinkle-100);color:var(--periwinkle-800);font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:var(--periwinkle-500);display:inline-block"></span>DSM-5 aplicado</a>
+        <a href="#ciclo" class="kyn-badge" style="background:var(--pastel-peach);color:#9A6A2E;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#D9A441;display:inline-block"></span>Ciclo vital</a>
+        <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio" style="max-width:1240px;margin:0 auto;padding:56px 24px 24px">
+    <span class="kyn-badge kyn-badge--soft" style="font-size:12px">EGEL Psicología · complemento del catálogo de instrumentos</span>
+    <h1 style="font-size:clamp(38px,6vw,72px);line-height:1.02;font-weight:900;letter-spacing:-0.02em;margin:18px 0 0;max-width:15ch">Los dos huecos de Área 1, <span style="color:var(--periwinkle-600)">mapeados</span>.</h1>
+    <p style="font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--ink-700);max-width:62ch;margin:18px 0 0"><strong>DSM-5 aplicado</strong> y el <strong>ciclo vital como eje diagnóstico</strong> — lo que quedó fuera de tu doc de instrumentos. La idea de fondo: en evaluación, muchas veces cambia el <em>método completo</em>, no solo la prueba que eliges.</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">DSM-IV → DSM-5</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">7 categorías diagnósticas</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">4 etapas del ciclo vital</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">tablas de decisión · trampas</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:36px">
+      <a href="#dsm" class="kyn-card kyn-card--interactive" style="border-top:5px solid var(--periwinkle-500);display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:52px;color:var(--periwinkle-500);line-height:0.8">1</span>
+          <span class="kyn-badge" style="background:var(--periwinkle-100);color:var(--periwinkle-800);font-size:10px">Manual diagnóstico</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">DSM-5<br>aplicado</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Qué cambió del DSM-IV, las categorías que caen, y las distinciones que confunden.</p>
+        <span style="font-size:13px;font-weight:800;color:var(--periwinkle-700);text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir sección →</span>
+      </a>
+      <a href="#ciclo" class="kyn-card kyn-card--interactive" style="border-top:5px solid #D9A441;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:52px;color:#D9A441;line-height:0.8">2</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:10px">Eje diagnóstico</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Ciclo vital<br>como eje</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Cómo cambia la evaluación en infancia, adolescencia, adultez y adultez mayor.</p>
+        <span style="font-size:13px;font-weight:800;color:#9A6A2E;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir sección →</span>
+      </a>
+    </div>
+
+    <div class="mapa-repaso-hint" style="margin-top:26px;align-items:center;gap:12px;background:var(--periwinkle-50);border:1px dashed var(--periwinkle-300);border-radius:var(--radius-md);padding:14px 18px">
+        <span class="kyn-badge kyn-badge--brand" style="font-size:11px">Modo repaso</span>
+        <span style="font-size:14px;color:var(--ink-700)">Las respuestas clave están difuminadas para que te autoevalúes. <strong>Pasa el cursor</strong> sobre cada una para revelarla.</span>
+      </div>
+  </header>
+
+  <!-- ================= DSM-5 ================= -->
+  <section id="dsm" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,var(--periwinkle-50),var(--pastel-sky));border:1px solid var(--periwinkle-100);border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:var(--periwinkle-500);line-height:1">1</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--periwinkle-700)">Sección 1</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">DSM-5 aplicado</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Estructura</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Categorías</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Distinciones clave</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Uso en la práctica</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--periwinkle-50);border-radius:var(--radius-md);padding:12px 16px;margin-bottom:26px;font-size:13.5px;color:var(--periwinkle-800);line-height:1.5"><strong>Alcance honesto:</strong> el DSM-5 tiene criterios para ~300 diagnósticos. Aquí va la <strong>estructura completa del manual</strong> + las categorías que más probablemente entran en un examen general — no cada trastorno uno por uno.</div>
+
+    <!-- 1.1 DSM-IV → DSM-5 -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Del DSM-IV al DSM-5 <span style="color:var(--ink-500);font-weight:500;font-size:16px">· qué cambió (2013)</span></h3>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:16px">
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-500)">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center">
+            <div style="background:var(--oat);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--ink-500);text-decoration:line-through">Sistema multiaxial (5 ejes)</div>
+            <span style="color:var(--periwinkle-500);font-weight:900;font-size:16px">→</span>
+            <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--periwinkle-800)"><strong>Listado único, no axial</strong></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center">
+            <div style="background:var(--oat);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--ink-500);text-decoration:line-through">Orden alfabético</div>
+            <span style="color:var(--periwinkle-500);font-weight:900;font-size:16px">→</span>
+            <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--periwinkle-800)"><strong>Orden por ciclo vital</strong></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center">
+            <div style="background:var(--oat);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--ink-500);text-decoration:line-through">Solo categórico</div>
+            <span style="color:var(--periwinkle-500);font-weight:900;font-size:16px">→</span>
+            <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--periwinkle-800)"><strong>Categórico + dimensional</strong> <span style="color:var(--ink-500)">(severidad)</span></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center">
+            <div style="background:var(--oat);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--ink-500);text-decoration:line-through">GAF (Eje V)</div>
+            <span style="color:var(--periwinkle-500);font-weight:900;font-size:16px">→</span>
+            <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px;font-size:12.5px;color:var(--periwinkle-800)"><strong>WHODAS 2.0</strong> <span style="color:var(--ink-500)">y otras medidas</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px">
+          <span class="kyn-badge kyn-badge--brand" style="font-size:10px">Eliminado</span>
+          <h4 style="margin:0;font-size:15px;font-weight:800">Los 5 ejes del DSM-IV</h4>
+        </div>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500)">Ya no se usan. Ahora las condiciones médicas y los estresores se anotan <strong>junto</strong> al diagnóstico.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px;color:var(--ink-500)"><strong style="color:var(--ink-700)">Eje I</strong> · trastornos clínicos</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px;color:var(--ink-500)"><strong style="color:var(--ink-700)">Eje II</strong> · personalidad y discapacidad intelectual</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px;color:var(--ink-500)"><strong style="color:var(--ink-700)">Eje III</strong> · condiciones médicas</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px;color:var(--ink-500)"><strong style="color:var(--ink-700)">Eje IV</strong> · problemas psicosociales</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px;color:var(--ink-500)"><strong style="color:var(--ink-700)">Eje V</strong> · funcionamiento global (GAF)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;margin-bottom:36px;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">Por qué el orden importa</span>
+        <p style="margin:5px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-700)">El manual arranca en <strong>trastornos del neurodesarrollo</strong> (aparecen temprano) y termina en <strong>trastornos neurocognitivos</strong> (etapas tardías). Ese mismo orden es el puente con la Sección 2: el DSM ya está organizado como un <em>ciclo vital</em>.</p>
+      </div>
+    </div>
+
+    <!-- 1.2 CATEGORÍAS -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.2</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Categorías diagnósticas <span style="color:var(--ink-500);font-weight:500;font-size:16px">· las que más caen</span></h3>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:36px">
+
+      <div class="kyn-card" style="border-left:5px solid var(--periwinkle-500)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--soft" style="font-size:11px">Neurodesarrollo</span><span style="font-size:12px;color:var(--ink-500)">aparecen en la infancia</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>Discapacidad intelectual</strong><br><span style="color:var(--ink-500)">elimina el término "retraso mental"</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>TEA</strong> · espectro autista<br><span style="color:var(--ink-500)">unifica autismo, Asperger y desintegrativo</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>TDAH</strong><br><span style="color:var(--ink-500)">inatenta · hiperactiva-impulsiva · combinada</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>Aprendizaje específico</strong><br><span style="color:var(--ink-500)">lectura, escritura, cálculo</span></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #6B7AC1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge" style="background:var(--pastel-sky);color:#3F5488;font-size:11px">Ansiedad</span><span style="font-size:12px;color:var(--ink-500)">TOC y trauma ya NO viven aquí</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-sky);border-radius:var(--radius-sm);padding:9px 11px;color:#3F5488"><strong>Ansiedad generalizada</strong></div>
+          <div style="background:var(--pastel-sky);border-radius:var(--radius-sm);padding:9px 11px;color:#3F5488"><strong>Fobia específica</strong></div>
+          <div style="background:var(--pastel-sky);border-radius:var(--radius-sm);padding:9px 11px;color:#3F5488"><strong>Trastorno de pánico</strong></div>
+          <div style="background:var(--pastel-sky);border-radius:var(--radius-sm);padding:9px 11px;color:#3F5488"><strong>Fobia social</strong></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #8B6FC0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Depresivos</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>Depresión mayor</strong><br><span>5+/9 síntomas · ≥2 semanas</span></div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>Depresivo persistente</strong><br><span>distimia · crónico, menor intensidad</span></div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>Disfórico premenstrual</strong><br><span>categoría nueva en DSM-5</span></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #E07AA5">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--blush" style="font-size:11px">Trauma y estresores</span><span style="font-size:12px;color:var(--ink-500)">capítulo propio, separado de ansiedad</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>TEPT</strong> · estrés postraumático</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>Estrés agudo</strong></div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>Apego reactivo</strong></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #D9A441">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--butter" style="font-size:11px">Personalidad</span><span style="font-size:12px;color:var(--ink-500)">3 clusters — detalle abajo en 1.3</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:9px 11px;color:#8A6D1F"><strong>Cluster A</strong> · raros/excéntricos</div>
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:9px 11px;color:#8A6D1F"><strong>Cluster B</strong> · dramáticos/emocionales</div>
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:9px 11px;color:#8A6D1F"><strong>Cluster C</strong> · ansiosos/temerosos</div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #4FA47A">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--mint" style="font-size:11px">Esquizofrenia y psicóticos</span><span style="font-size:12px;color:var(--ink-500)">positivos vs negativos — 1.3</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Esquizofrenia</strong></div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Esquizoafectivo</strong></div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Psicótico breve</strong></div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Delirante</strong></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #D98A4F">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge" style="background:var(--pastel-peach);color:#9A6A2E;font-size:11px">Neurocognitivos</span><span style="font-size:12px;color:var(--ink-500)">sustituye el término "demencias" · ↔ MMSE</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-peach);border-radius:var(--radius-sm);padding:9px 11px;color:#9A6A2E"><strong>Leve vs. mayor</strong><br><span>según severidad</span></div>
+          <div style="background:var(--pastel-peach);border-radius:var(--radius-sm);padding:9px 11px;color:#9A6A2E"><strong>Con/sin causa</strong><br><span>Alzheimer, vascular, cuerpos de Lewy…</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.3 DISTINCIONES -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.3</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Tres distinciones que confunden</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px">
+
+      <!-- positivos vs negativos -->
+      <div class="kyn-card">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Psicóticos · positivos vs negativos</h4>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">No es "bueno/malo": es qué le pasa al funcionamiento.</p>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:10px 12px;color:#8A3F58">
+            <div style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800"><span style="width:20px;height:20px;border-radius:50%;background:#E07AA5;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px">+</span> Positivos · se AGREGA</div>
+            <p style="margin:5px 0 0;font-size:12px;line-height:1.4">Algo aparece que no debería estar: <strong>delirios, alucinaciones</strong>.</p>
+          </div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:10px 12px;color:var(--ink-700)">
+            <div style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800"><span style="width:20px;height:20px;border-radius:50%;background:var(--ink-500);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px">−</span> Negativos · se PIERDE</div>
+            <p style="margin:5px 0 0;font-size:12px;line-height:1.4">Algo se pierde que debería estar: <strong>aplanamiento afectivo, abulia</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- clusters personalidad -->
+      <div class="kyn-card">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Personalidad · clusters A/B/C</h4>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">Se agrupan por el "aire" que comparten.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12px">
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:8px 11px;color:#8A6D1F"><strong>A — raros/excéntricos:</strong> paranoide, esquizoide, esquizotípico</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:8px 11px;color:#8A3F58"><strong>B — dramáticos/emocionales:</strong> antisocial, límite, histriónico, narcisista</div>
+          <div style="background:var(--pastel-sky);border-radius:var(--radius-sm);padding:8px 11px;color:#3F5488"><strong>C — ansiosos/temerosos:</strong> evitativo, dependiente, obsesivo-compulsivo</div>
+        </div>
+      </div>
+
+      <!-- criterio depresión mayor -->
+      <div class="kyn-card">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Depresión mayor · el criterio exacto</h4>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">El número que se pregunta directo.</p>
+        <div style="display:flex;align-items:stretch;gap:8px;margin-bottom:10px">
+          <div style="flex:1;background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:11px;text-align:center"><div style="font-family:var(--font-display);font-size:26px;line-height:1">5+</div><div style="font-size:10.5px;letter-spacing:0.04em">de 9 síntomas</div></div>
+          <div style="flex:1;background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:11px;text-align:center"><div style="font-family:var(--font-display);font-size:26px;line-height:1">≥2</div><div style="font-size:10.5px;letter-spacing:0.04em">semanas</div></div>
+        </div>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;font-size:12px;color:#2F6B4F;line-height:1.45"><strong>Obligatorio:</strong> ánimo deprimido <em>o</em> anhedonia. Distimia = versión crónica ≥2 años, menor intensidad.</div>
+      </div>
+    </div>
+
+    <!-- trampa DSM -->
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;margin-bottom:28px;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">Trampas del reordenamiento</span>
+        <p style="margin:5px 0 0;font-size:14px;line-height:1.55;color:var(--ink-700)">En el DSM-IV, <strong>TOC</strong> y <strong>trauma/TEPT</strong> vivían dentro de "ansiedad". En el DSM-5 son <span class="mapa-clave" style="background:#F6EBC4;padding:1px 6px;border-radius:4px;cursor:help">capítulos propios e independientes</span>. Y "retraso mental" es un término <span class="mapa-clave" style="background:#F6EBC4;padding:1px 6px;border-radius:4px;cursor:help">eliminado</span> → hoy es discapacidad intelectual.</p>
+      </div>
+    </div>
+
+    <!-- decision table DSM -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:36px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge kyn-badge--brand" style="font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el reactivo describe… → es…</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"unificó autismo, Asperger y desintegrativo infantil"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">TEA (espectro autista)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"5 de 9 síntomas por 2 semanas, con ánimo deprimido"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Depresión mayor</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"delirios y alucinaciones"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Síntomas positivos</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"aplanamiento afectivo y abulia"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Síntomas negativos</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"sustituye el término demencia"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Trastorno neurocognitivo</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"reemplazó al GAF del Eje V"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">WHODAS 2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-detalle">
+    <!-- 1.4 EN LA PRÁCTICA -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.4</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Cómo se usa en la evaluación</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:36px">
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-400)">
+        <h4 style="margin:0 0 8px;font-size:16px;font-weight:800">Más que "cumple criterios: sí/no"</h4>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Especificadores</strong> · severidad, curso, características asociadas</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Comorbilidad</strong> · más de un diagnóstico a la vez</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Evidencia</strong> · entrevista clínica + instrumentos + observación</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="kyn-badge kyn-badge--outline" style="font-size:10px">Confírmalo tú</span></div>
+        <p style="margin:0;font-size:13px;color:var(--ink-700);line-height:1.55">Quién tiene la <strong>responsabilidad final del diagnóstico formal</strong> varía según el contexto: a veces es exclusiva del psiquiatra, a veces compartida. Revísalo en tu bibliografía — no es un dato universal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CICLO VITAL ================= -->
+  <section id="ciclo" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#FBF1E4,var(--pastel-peach));border:1px solid #EED3B6;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:#D9A441;line-height:1">2</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#9A6A2E">Sección 2</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Ciclo vital como eje</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Infancia</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Adolescencia</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Adultez</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Adultez mayor</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--pastel-peach);border-radius:var(--radius-md);padding:14px 18px;margin-bottom:28px;font-size:14.5px;color:#9A6A2E;line-height:1.5"><strong>La idea central:</strong> la evaluación no es la misma prueba aplicada a edades distintas. Cambia el <strong>método completo</strong> — quién informa, qué se busca y cómo se pregunta — no solo el instrumento.</div>
+
+    <!-- 2.1 TIMELINE -->
+    <div style="margin-bottom:6px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#9A6A2E">2.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Las 4 etapas, lado a lado</h3>
+      <span class="kyn-badge kyn-badge--pop" style="font-size:14px">la estrella ♥</span>
+    </div>
+    <p style="margin:0 0 18px;font-size:14px;color:var(--ink-500);max-width:70ch">Lee cada columna de arriba abajo. Fíjate cómo se mueve el <strong>informante</strong>: de "otros hablan por el niño" a "la persona se reporta sola" y de vuelta a "hay que descartar confusores".</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px">
+
+      <!-- INFANCIA -->
+      <div class="kyn-card" style="border-top:5px solid #D9A441;padding:0;overflow:hidden">
+        <div style="background:var(--pastel-butter);padding:14px 16px">
+          <div style="font-size:16px;font-weight:900;color:#8A6D1F;text-transform:uppercase;letter-spacing:0.01em">Infancia</div>
+          <div style="font-size:12px;color:#9A6A2E;font-weight:700">≈ 0–12 años</div>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B08A3A;margin-bottom:3px">Informante</div><div style="font-size:12.5px;line-height:1.4">Terceros (padres, maestros) + observación y juego. El niño rara vez se reporta bien a sí mismo.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B08A3A;margin-bottom:3px">Foco</div><div style="font-size:12.5px;line-height:1.4"><strong>Hitos del desarrollo</strong> (motor, lenguaje, social) más que síntomas reportados.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#B08A3A;margin-bottom:3px">Instrumento</div><div style="font-size:12.5px;line-height:1.4"><strong>Escalas de Gesell</strong>; herramientas lúdicas y breves.</div></div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;line-height:1.4;color:var(--ink-700)"><strong>Clave:</strong> aquí se detecta el neurodesarrollo (TDAH, TEA, aprendizaje). La atención breve es esperable por edad, no patología.</div>
+        </div>
+      </div>
+
+      <!-- ADOLESCENCIA -->
+      <div class="kyn-card" style="border-top:5px solid #D98A4F;padding:0;overflow:hidden">
+        <div style="background:var(--pastel-peach);padding:14px 16px">
+          <div style="font-size:16px;font-weight:900;color:#9A6A2E;text-transform:uppercase;letter-spacing:0.01em">Adolescencia</div>
+          <div style="font-size:12px;color:#9A6A2E;font-weight:700">≈ 12–18 años</div>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C07A45;margin-bottom:3px">Informante</div><div style="font-size:12.5px;line-height:1.4">Autorreporte ya más confiable, <strong>pero se corrobora</strong> con padres/escuela. Nunca solo.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C07A45;margin-bottom:3px">Foco</div><div style="font-size:12.5px;line-height:1.4">Identidad, autoestima, conducta de riesgo (sustancias, autolesión); inicio de ánimo y ansiedad.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#C07A45;margin-bottom:3px">Tensión</div><div style="font-size:12.5px;line-height:1.4">Distinguir conducta típica de un cuadro clínico real.</div></div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;line-height:1.4;color:var(--ink-700)"><strong>Clave:</strong> el <strong>deterioro funcional</strong> (¿afecta escuela, relaciones, familia?) es lo que separa lo normal de lo clínico.</div>
+        </div>
+      </div>
+
+      <!-- ADULTEZ -->
+      <div class="kyn-card" style="border-top:5px solid var(--periwinkle-500);padding:0;overflow:hidden">
+        <div style="background:var(--periwinkle-50);padding:14px 16px">
+          <div style="font-size:16px;font-weight:900;color:var(--periwinkle-800);text-transform:uppercase;letter-spacing:0.01em">Adultez</div>
+          <div style="font-size:12px;color:var(--periwinkle-700);font-weight:700">≈ 18–60 años</div>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:3px">Informante</div><div style="font-size:12.5px;line-height:1.4"><strong>Autorreporte pleno</strong> como fuente primaria.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:3px">Foco</div><div style="font-size:12.5px;line-height:1.4">Se amplía a funcionamiento ocupacional y de pareja/familia, no solo síntomas.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:3px">Instrumento</div><div style="font-size:12.5px;line-height:1.4">Los estándar normados aquí: <strong>BDI, STAI, WAIS</strong>.</div></div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;line-height:1.4;color:var(--ink-700)"><strong>Clave:</strong> el contexto <strong>organizacional</strong> (selección, evaluación de puesto) es casi exclusivo de esta etapa.</div>
+        </div>
+      </div>
+
+      <!-- ADULTEZ MAYOR -->
+      <div class="kyn-card" style="border-top:5px solid #8B6FC0;padding:0;overflow:hidden">
+        <div style="background:var(--pastel-lilac);padding:14px 16px">
+          <div style="font-size:16px;font-weight:900;color:#5F4B8B;text-transform:uppercase;letter-spacing:0.01em">Adultez mayor</div>
+          <div style="font-size:12px;color:#5F4B8B;font-weight:700">etapa tardía</div>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:11px">
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#7A64A8;margin-bottom:3px">Informante</div><div style="font-size:12.5px;line-height:1.4">Autorreporte + <strong>descartar confusores</strong>: fatiga, déficit sensorial (vista/oído), medicación.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#7A64A8;margin-bottom:3px">Foco</div><div style="font-size:12.5px;line-height:1.4">Neurocognitivo + <strong>AVD</strong> (actividades de la vida diaria) e independencia.</div></div>
+          <div><div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#7A64A8;margin-bottom:3px">Instrumento</div><div style="font-size:12.5px;line-height:1.4"><strong>MMSE</strong> y similares para el cribado cognitivo.</div></div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;line-height:1.4;color:var(--ink-700)"><strong>Clave:</strong> diferenciar el envejecimiento normal del deterioro patológico (demencia / TNC mayor).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- puente DSM -->
+    <div class="kyn-card" style="border-left:5px solid var(--periwinkle-500);margin-bottom:36px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+      <span class="kyn-badge kyn-badge--soft" style="font-size:11px;flex:none">La conexión ♥</span>
+      <div style="flex:1;min-width:220px;font-size:13.5px;color:var(--ink-700);line-height:1.5">El DSM-5 ya está ordenado con esta misma lógica: abre en <strong>neurodesarrollo</strong> (infancia) y cierra en <strong>neurocognitivos</strong> (adultez mayor).</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;flex-wrap:wrap">
+        <span style="background:var(--pastel-butter);color:#8A6D1F;border-radius:var(--radius-pill);padding:5px 11px;font-weight:700">Neurodesarrollo</span>
+        <span style="color:var(--ink-300)">→ … →</span>
+        <span style="background:var(--pastel-lilac);color:#5F4B8B;border-radius:var(--radius-pill);padding:5px 11px;font-weight:700">Neurocognitivos</span>
+      </div>
+    </div>
+
+    <!-- 2.2 decision table ciclo -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:28px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge kyn-badge--butter" style="font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el caso apunta a… → etapa / clave</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"el informante son los padres; se observa el juego"</div>
+          <div class="mapa-clave" style="background:#D9A441;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Infancia · hitos</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"diferenciar rebeldía normal de un cuadro clínico"</div>
+          <div class="mapa-clave" style="background:#D98A4F;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Adolescencia · deterioro funcional</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"se aplica BDI/STAI/WAIS; autorreporte confiable"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Adultez</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"selección de personal / evaluación de puesto"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Adultez · organizacional</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"descartar déficit sensorial o medicación antes de dx"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Adultez mayor · confusores</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"MMSE para separar envejecimiento normal de demencia"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Adultez mayor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 principio -->
+    <div class="kyn-card" style="background:linear-gradient(120deg,var(--periwinkle-50),var(--pastel-lilac));border:1px solid var(--periwinkle-100);display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+      <span style="font-family:var(--font-display);font-size:52px;color:var(--periwinkle-500);line-height:0.8;flex:none">?</span>
+      <div style="flex:1;min-width:260px">
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--periwinkle-700)">El principio que atraviesa las 4 etapas</span>
+        <p style="margin:6px 0 0;font-size:15.5px;line-height:1.55;color:var(--ink-800,var(--ink-900))">Cambia el instrumento y el método, pero la pregunta de fondo es la misma que ya viste con <strong>Binet</strong>: <em>¿esta persona, en esta etapa de su vida, necesita un apoyo que no está recibiendo?</em> Cambia el <strong>"cómo preguntar"</strong>, no el <strong>"qué se pregunta"</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1240px;margin:0 auto;padding:30px 24px 70px;border-top:1px solid var(--border-subtle);margin-top:30px">
+    <p style="font-size:13px;color:var(--ink-500);margin:0;line-height:1.5">Complemento del mapa de Área 1 (evaluación psicológica). Los conceptos provienen de tus materiales de examen; úsalo como estructura de estudio, no como sustituto de las fuentes oficiales ni del manual DSM-5. · <a href="mapa-estudio.html">Volver al mapa completo →</a></p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-mapa-dsm5-ciclo-vital';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+  var nivelBtns = document.querySelectorAll('.mapa-nivel-btn');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarNivel(nivel){
+    body.classList.toggle('nivel-esenciales', nivel === 'esenciales');
+    nivelBtns.forEach(function(btn){
+      btn.classList.toggle('is-activo', btn.dataset.nivel === nivel);
+    });
+  }
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarNivel(estado.nivel || 'completo');
+  aplicarRepaso(!!estado.repaso);
+
+  nivelBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var nivel = btn.dataset.nivel;
+      aplicarNivel(nivel);
+      var e = leerEstado(); e.nivel = nivel; guardarEstado(e);
+    });
+  });
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

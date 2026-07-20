@@ -45,8 +45,14 @@ copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(di
 // (guía, libros con derechos y exámenes) — es local y gitignored.
 copy(path.join(root, 'proyectos/ceneval/index.html'), path.join(dist, 'proyectos/ceneval/index.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-estudio.html'), path.join(dist, 'proyectos/ceneval/mapa-estudio.html'));
+copy(path.join(root, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'), path.join(dist, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'));
+// Índice del sub-mapa "Instrumentos y propiedades" (Área 1). Sus 4 capítulos
+// (area1-instrumentos-1..4-*.html) aún no existen — se agregan aquí cuando se hagan.
+copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-indice.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-indice.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.join(dist, 'proyectos/ceneval/libro-area1-diagnostico.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.join(dist, 'proyectos/ceneval/libro-area2-intervencion.html'));
+copy(path.join(root, 'proyectos/ceneval/area2-enfoques.html'), path.join(dist, 'proyectos/ceneval/area2-enfoques.html'));
+copy(path.join(root, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'), path.join(dist, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
 copy(path.join(root, 'proyectos/ceneval/simulacro.html'), path.join(dist, 'proyectos/ceneval/simulacro.html'));
 copy(path.join(root, 'proyectos/ceneval/flashcards.html'), path.join(dist, 'proyectos/ceneval/flashcards.html'));
