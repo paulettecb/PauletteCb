@@ -20,6 +20,7 @@ Paulette dice muchas ideas y no quiere perderlas: cada cosa se refleja en GitHub
 ## Design system KYN (fuente de verdad local)
 - Tokens y fuentes: `proyectos/mediapipe-lab/src/styles.css` (paleta periwinkle/pasteles, `--font-display: Friendship`, `--font-accent: Farmhouse`) y `proyectos/KYN Design System/` (fuentes .otf en `assets/fonts/`).
 - Cualquier página o documento nuevo debe usar estos tokens, no colores/fuentes ad hoc.
+- **Toda página que declare `@font-face` para Friendship/Farmhouse debe precederlo con sus `<link rel="preload" as="font" type="font/otf" ... crossorigin>`** (mismo href que el `@font-face`, uno por fuente). Sin esto el h1/subtítulo de la portada — lo primero que se ve — pinta con la tipografía de respaldo del sistema mientras el .otf llega por red, y Paulette lo ve como "las fuentes no cargan".
 
 ## Patrón "mini libro KYN" (así se arman los proyectos de estudio/documento)
 Ejemplo canónico: `proyectos/mediapipe-lab/libro-agility.html`. Para repetirlo existe el comando `/mini-libro`. Las piezas:
