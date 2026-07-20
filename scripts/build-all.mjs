@@ -45,6 +45,7 @@ copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(di
 // (guía, libros con derechos y exámenes) — es local y gitignored.
 copy(path.join(root, 'proyectos/ceneval/index.html'), path.join(dist, 'proyectos/ceneval/index.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-estudio.html'), path.join(dist, 'proyectos/ceneval/mapa-estudio.html'));
+copy(path.join(root, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'), path.join(dist, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'));
 // Índice del sub-mapa "Instrumentos y propiedades" (Área 1). Sus 4 capítulos
 // (area1-instrumentos-1..4-*.html) aún no existen — se agregan aquí cuando se hagan.
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-indice.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-indice.html'));
