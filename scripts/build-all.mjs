@@ -66,6 +66,12 @@ copy(path.join(root, 'proyectos/ceneval/scribe-disenos-investigacion.html'), pat
 copy(path.join(root, 'proyectos/ceneval/scribe-dsm5.html'), path.join(dist, 'proyectos/ceneval/scribe-dsm5.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-ciclo-vital.html'), path.join(dist, 'proyectos/ceneval/scribe-ciclo-vital.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-lectura-redaccion.html'), path.join(dist, 'proyectos/ceneval/scribe-lectura-redaccion.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-etica-profesional.html'), path.join(dist, 'proyectos/ceneval/scribe-etica-profesional.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-ambitos-intervencion.html'), path.join(dist, 'proyectos/ceneval/scribe-ambitos-intervencion.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-teorias-desarrollo.html'), path.join(dist, 'proyectos/ceneval/scribe-teorias-desarrollo.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-aprendizaje.html'), path.join(dist, 'proyectos/ceneval/scribe-aprendizaje.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-muestreo.html'), path.join(dist, 'proyectos/ceneval/scribe-muestreo.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-estadistica-inferencial.html'), path.join(dist, 'proyectos/ceneval/scribe-estadistica-inferencial.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'), path.join(dist, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
 copy(path.join(root, 'proyectos/ceneval/simulacro.html'), path.join(dist, 'proyectos/ceneval/simulacro.html'));
