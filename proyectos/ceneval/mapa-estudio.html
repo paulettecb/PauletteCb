@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de estudio — CENEVAL EGEL Plus PSI · para Paulette</title>
+<meta name="description" content="Mapa visual de repaso para el EGEL Plus PSI (CENEVAL Psicología): los conceptos clave de las 3 áreas disciplinares y la habilidad transversal, agrupados y con modo autoevaluación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  /* ---- KYN · tokens (paleta periwinkle/pasteles) ---- */
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+section[id],header[id]{scroll-margin-top:150px}
+::selection{background:var(--periwinkle-100)}
+
+/* ---- componentes KYN usados en este mapa ---- */
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--pop{background:var(--pop-magenta);color:#fff;font-family:var(--font-accent);font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;padding:6px 14px;}
+.kyn-badge--brand{background:var(--periwinkle-500);color:#fff;}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-card{
+  background:var(--surface-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+  padding:var(--space-5);transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out);
+}
+.kyn-card--interactive{cursor:pointer;}
+.kyn-card--interactive:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+
+/* ---- barra de vuelta + controles (nuevo, para integrar el mapa al hub) ---- */
+.mapa-topbar{max-width:1240px;margin:0 auto;padding:14px 24px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mapa-volver{font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--radius-pill);background:var(--periwinkle-100);color:var(--periwinkle-800)}
+.mapa-volver:hover{background:var(--periwinkle-200);color:var(--periwinkle-800)}
+.mapa-controles{display:flex;align-items:center;gap:12px;margin-left:auto;flex-wrap:wrap}
+.mapa-nivel{display:inline-flex;background:var(--white);border:1.5px solid var(--periwinkle-200);border-radius:var(--radius-pill);padding:3px;gap:2px}
+.mapa-nivel-btn{font-family:inherit;font-weight:800;font-size:12px;letter-spacing:0.02em;cursor:pointer;border:none;background:transparent;color:var(--periwinkle-700);padding:6px 14px;border-radius:var(--radius-pill);transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.mapa-nivel-btn.is-activo{background:var(--periwinkle-700);color:#fff}
+.mapa-nivel-btn:hover:not(.is-activo){background:var(--periwinkle-100)}
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+/* ---- nivel de detalle: oculta bloques "Esenciales" ---- */
+body.nivel-esenciales .mapa-detalle{display:none !important}
+
+/* ---- modo repaso: difumina respuestas clave, clic/tap o foco para revelar ---- */
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+.mapa-repaso-hint{display:none}
+body.modo-repaso .mapa-repaso-hint{display:flex}
+
+@media (max-width: 640px){
+  .mapa-topbar{padding-top:10px}
+  .mapa-controles{margin-left:0;width:100%;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+  <div class="mapa-topbar">
+    <a class="mapa-volver" href="index.html">← Base CENEVAL</a>
+    <div class="mapa-controles">
+      <div class="mapa-nivel" role="group" aria-label="Nivel de detalle">
+        <button type="button" class="mapa-nivel-btn is-activo" data-nivel="completo">Completo</button>
+        <button type="button" class="mapa-nivel-btn" data-nivel="esenciales">Esenciales</button>
+      </div>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </div>
+
+<div style="min-height:100vh;background:var(--paper)">
+
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(251,250,247,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a href="#inicio" style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:26px;color:var(--periwinkle-600)">mapa</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">de estudio · egel psi</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <a href="#a1" class="kyn-badge" style="background:var(--periwinkle-100);color:var(--periwinkle-800);font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:var(--periwinkle-500);display:inline-block"></span>1 · Evaluación</a>
+        <a href="#a2" class="kyn-badge" style="background:var(--pastel-mint);color:#2F6B4F;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#4FA47A;display:inline-block"></span>2 · Intervención</a>
+        <a href="#a3" class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#8B6FC0;display:inline-block"></span>3 · Investigación</a>
+        <a href="#tx" class="kyn-badge" style="background:var(--pastel-peach);color:#9A6A2E;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#D9A441;display:inline-block"></span>Transversal</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio" style="max-width:1240px;margin:0 auto;padding:56px 24px 24px">
+    <span class="kyn-badge kyn-badge--soft" style="font-size:12px">EGEL Psicología · CENEVAL · repaso profundo</span>
+    <h1 style="font-size:clamp(38px,6vw,72px);line-height:1.02;font-weight:900;letter-spacing:-0.02em;margin:18px 0 0;max-width:16ch">Todo el examen, en un <span style="color:var(--periwinkle-600)">mapa</span>.</h1>
+    <p style="font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--ink-700);max-width:60ch;margin:18px 0 0">Los conceptos clave de <strong>495 reactivos</strong> destilados y agrupados por área. No es una lista de preguntas: es la estructura de lo que tienes que <em>entender</em> — para repasar rápido y a fondo.</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">3 áreas disciplinares</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">1 habilidad transversal</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">mapas · árboles de decisión · comparativas</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:36px">
+
+      <a href="#a1" class="kyn-card kyn-card--interactive" style="border-top:5px solid var(--periwinkle-500);display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:60px;color:var(--periwinkle-500);line-height:0.8">1</span>
+          <span class="kyn-badge" style="background:var(--periwinkle-100);color:var(--periwinkle-800);font-size:10px">Área 1</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Evaluación<br>psicológica</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Confiabilidad, validez, técnicas, catálogo de pruebas, ética y diagnóstico DSM-5.</p>
+        <span style="font-size:13px;font-weight:800;color:var(--periwinkle-700);text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir área →</span>
+      </a>
+
+      <a href="#a2" class="kyn-card kyn-card--interactive" style="border-top:5px solid #4FA47A;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:60px;color:#4FA47A;line-height:0.8">2</span>
+          <span class="kyn-badge kyn-badge--mint" style="font-size:10px">Área 2</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Intervención<br>psicológica</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Los 6 enfoques terapéuticos: idea núcleo, técnicas y cuándo usarlos.</p>
+        <span style="font-size:13px;font-weight:800;color:#2F6B4F;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir área →</span>
+      </a>
+
+      <a href="#a3" class="kyn-card kyn-card--interactive" style="border-top:5px solid #8B6FC0;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:60px;color:#8B6FC0;line-height:0.8">3</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px">Área 3</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Investigación<br>y estadística</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Diseños, variables, amenazas a la validez y el árbol para elegir prueba estadística.</p>
+        <span style="font-size:13px;font-weight:800;color:#5F4B8B;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir área →</span>
+      </a>
+
+      <a href="#tx" class="kyn-card kyn-card--interactive" style="border-top:5px solid #D9A441;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:60px;color:#D9A441;line-height:0.8">T</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:10px">Transversal</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Habilidad<br>transversal</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Comprensión lectora y redacción: qué te preguntan y cómo elegir el texto correcto.</p>
+        <span style="font-size:13px;font-weight:800;color:#9A6A2E;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir área →</span>
+      </a>
+    </div>
+
+    <div class="mapa-repaso-hint" style="margin-top:26px;align-items:center;gap:12px;background:var(--periwinkle-50);border:1px dashed var(--periwinkle-300);border-radius:var(--radius-md);padding:14px 18px">
+        <span class="kyn-badge kyn-badge--brand" style="font-size:11px">Modo repaso</span>
+        <span style="font-size:14px;color:var(--ink-700)">Las respuestas clave están difuminadas para que te autoevalúes. <strong>Pasa el cursor</strong> sobre cada una para revelarla.</span>
+      </div>
+  </header>
+
+  <!-- ================= ÁREA 1 ================= -->
+  <section id="a1" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,var(--periwinkle-50),var(--pastel-sky));border:1px solid var(--periwinkle-100);border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:var(--periwinkle-500);line-height:1">1</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--periwinkle-700)">Área disciplinar 1</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Evaluación psicológica</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Confiabilidad</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Validez</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Técnicas de recolección</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Catálogo de pruebas</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">Ética</span>
+          <span class="kyn-badge kyn-badge--soft" style="font-size:11px">DSM-5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.1 CONFIABILIDAD -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Confiabilidad <span style="color:var(--ink-500);font-weight:500;font-size:16px">· ¿mide de forma consistente?</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:20px">
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-400)">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Consistencia interna</h4>
+        <p style="margin:0 0 12px;font-size:13.5px;color:var(--ink-500);line-height:1.45">Los ítems concuerdan entre sí (miden un mismo constructo).</p>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px"><strong>Alfa de Cronbach</strong> · ítems politómicos / Likert</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px"><strong>KR-20</strong> · ítems dicotómicos (sí/no)</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px"><strong>Mitades partidas</strong> · divide y correlaciona</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-400)">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Estabilidad temporal</h4>
+        <p style="margin:0 0 12px;font-size:13.5px;color:var(--ink-500);line-height:1.45">La misma prueba da resultados parecidos en el tiempo.</p>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px"><strong>Test-retest</strong> · 2 aplicaciones separadas</div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px;color:#2F6B4F"><strong>r ≈ 0.80, p&lt;0.05</strong> = nivel aceptable</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-400)">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800">Equivalencia</h4>
+        <p style="margin:0 0 12px;font-size:13.5px;color:var(--ink-500);line-height:1.45">Dos versiones distintas miden lo mismo.</p>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px;font-size:13px"><strong>Formas paralelas / equivalentes</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISION TABLE confiabilidad -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:36px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge kyn-badge--brand" style="font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el reactivo dice… → es…</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"alfa de Cronbach de 0.87"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Consistencia interna</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">ítems dicotómicos (sí/no, realiza/no)</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">KR-20</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"dividió los ítems y correlacionó las mitades"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Mitades partidas</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"aplicó la misma prueba 5 meses después"</div>
+          <div class="mapa-clave" style="background:var(--periwinkle-500);color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Test-retest</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 VALIDEZ -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.2</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Validez <span style="color:var(--ink-500);font-weight:500;font-size:16px">· ¿mide lo que dice medir?</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:18px">
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-500)">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">De contenido</h4>
+        <p style="margin:0 0 10px;font-size:13.5px;color:var(--ink-500);line-height:1.45">Los ítems cubren el dominio — lo juzgan <strong>expertos</strong>.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:7px 10px"><strong>V de Aiken</strong></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:7px 10px"><strong>Congruencia ítem-objetivo</strong> · Rovinelli-Hambleton (jueces −1/0/+1)</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-500)">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">De facie (aparente)</h4>
+        <p style="margin:0;font-size:13.5px;color:var(--ink-500);line-height:1.45">Claridad y relevancia <em>percibida</em> de los ítems. Se cuida con prueba piloto y retroalimentación.</p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-500)">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">De constructo</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;margin-top:4px">
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:7px 10px;color:#2F6B4F"><strong>Convergente</strong> · r ALTA con medida similar</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:7px 10px;color:#9B4D67"><strong>Divergente</strong> · r BAJA con constructo distinto</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid var(--periwinkle-500)">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">De criterio · Factorial</h4>
+        <p style="margin:0;font-size:13.5px;color:var(--ink-500);line-height:1.45"><strong>Criterio:</strong> concurrente / predictiva.<br><strong>Factorial:</strong> factores que explican el % de varianza.</p>
+      </div>
+    </div>
+
+    <!-- TRAMPA convergente/divergente -->
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;margin-bottom:36px;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">Trampa clásica</span>
+        <p style="margin:5px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-700)"><strong>Convergente</strong> = se PARECE a lo que debería parecerse (r alta = ✓). <strong>Divergente</strong> = se SEPARA de lo distinto (r alta = ✗).<br>Ej.: r = 0.72 entre depresión y calidad de vida → <span class="mapa-clave" style="background:#F6EBC4;padding:1px 6px;border-radius:4px;cursor:help">pone en duda la validez divergente</span>.</p>
+      </div>
+    </div>
+
+    <!-- 1.3 TÉCNICAS -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.3</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Técnicas e instrumentos de recolección</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:36px">
+      <div class="kyn-card">
+        <h4 style="margin:0 0 8px;font-size:15px;font-weight:800;color:var(--periwinkle-700)">Entrevista</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+          <div><strong>Estructurada</strong> · sistemática, rígida, precisa</div>
+          <div><strong>Semiestructurada</strong> · guía + flexibilidad para ahondar</div>
+          <div><strong>No estructurada</strong> · libre, espontánea; eficiente con pocos casos</div>
+        </div>
+      </div>
+      <div class="kyn-card">
+        <h4 style="margin:0 0 8px;font-size:15px;font-weight:800;color:var(--periwinkle-700)">Observación</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+          <div><strong>Directa / indirecta</strong></div>
+          <div><strong>Participante / no participante</strong></div>
+          <div style="color:var(--ink-500)">Visión integral en varios contextos = dato confiable</div>
+        </div>
+      </div>
+      <div class="kyn-card">
+        <h4 style="margin:0 0 8px;font-size:15px;font-weight:800;color:var(--periwinkle-700)">Cuestionario</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+          <div><strong>Abierto</strong> · respuesta construida</div>
+          <div><strong>Cerrado</strong> · opciones fijas, grandes muestras</div>
+          <div><strong>Mixto</strong> · combina ambos</div>
+        </div>
+      </div>
+      <div class="kyn-card">
+        <h4 style="margin:0 0 8px;font-size:15px;font-weight:800;color:var(--periwinkle-700)">Otros</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:13px">
+          <div><strong>Escala</strong> (Likert) · intensidad/grado</div>
+          <div><strong>Lista de cotejo</strong> · presencia/ausencia de conductas</div>
+          <div><strong>Grupo focal</strong> · cualitativo; barreras y percepciones</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.4 CATÁLOGO DE PRUEBAS -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:var(--periwinkle-700)">1.4</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Catálogo de pruebas <span style="color:var(--ink-500);font-weight:500;font-size:16px">· para qué sirve cada una</span></h3>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px">
+      <div class="kyn-card" style="border-left:5px solid var(--periwinkle-500)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--soft" style="font-size:11px">Inteligencia</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>WPPSI-IV</strong><br><span style="color:var(--ink-500)">preescolar (2:6–7:7)</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>WISC-IV / V</strong><br><span style="color:var(--ink-500)">niños 6–16 años</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>WAIS-IV</strong><br><span style="color:var(--ink-500)">adultos (16+)</span></div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:9px 11px"><strong>Beta 4 · RIAS · Shipley-2</strong><br><span style="color:var(--ink-500)">colectiva; fluida/cristalizada</span></div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #B98BC9">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Proyectivas</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>HTP</strong> · casa-árbol-persona</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>Test de la familia</strong> · Corman</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>CAT-A</strong> · apercepción infantil</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:9px 11px;color:#4A3A6B"><strong>TAT</strong> · apercepción (adultos)</div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #E07AA5">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--blush" style="font-size:11px">Clínicas / psicopatología</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>Beck (BDI)</strong> · depresión</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>MMPI-2 / 2-RF</strong> · personalidad</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>STAI</strong> · ansiedad estado-rasgo</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>Hamilton</strong> · ansiedad / depresión</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>PSS-10</strong> · estrés percibido</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:9px 11px;color:#8A3F58"><strong>EGEP-5</strong> · estrés postraumático</div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #4FA47A">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--mint" style="font-size:11px">Neuropsicológicas</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Bender-Koppitz</strong> · visomotor, madurez</div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Rey-Osterrieth</strong> · memoria visual, organización</div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>Stroop</strong> · control inhibitorio</div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>ENFEN</strong> · funciones ejecutivas (niños)</div>
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:9px 11px;color:#2F6B4F"><strong>MoCA · MMSE</strong> · cribado cognitivo / demencia</div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #D9A441">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="kyn-badge kyn-badge--butter" style="font-size:11px">Vocacionales</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;font-size:12.5px">
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:9px 11px;color:#8A6D1F"><strong>Kuder</strong> · preferencias vocacionales</div>
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:9px 11px;color:#8A6D1F"><strong>BAT-7</strong> · aptitudes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-detalle" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:36px">
+      <!-- 1.5 ÉTICA -->
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:var(--periwinkle-700)">1.5</span><h3 style="font-size:18px;font-weight:800;margin:0">Ética de la evaluación</h3></div>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500)">Código de la Sociedad Mexicana de Psicología</p>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Competencia</strong> — actuar dentro de tu formación<br><span style="color:var(--ink-500);font-size:12px">ej.: pasar el caso a un estudiante no calificado</span></div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Confidencialidad</strong> — no dar resultados a terceros sin consentimiento<br><span style="color:var(--ink-500);font-size:12px">ej.: entregar el informe al médico y no al paciente</span></div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Integridad · Responsabilidad</strong> — honestidad, consentimiento informado, comunicación transparente</div>
+        </div>
+      </div>
+
+      <!-- 1.6 DSM-5 -->
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:var(--periwinkle-700)">1.6</span><h3 style="font-size:18px;font-weight:800;margin:0">DSM-5 · clusters rápidos</h3></div>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Neurodesarrollo</strong> · dislexia (lectura), disgrafía (trazo/escritura), discalculia (cálculo), TDAH</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Ánimo</strong> · depresión mayor · depresivo persistente / distimia (≥2 años) · ciclotimia · bipolar</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Ansiedad</strong> · generalizada · social · fobia específica · pánico</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Alimentarios</strong> · anorexia · bulimia · atracón</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Trauma</strong> · TEPT (intrusión + evitación + activación)</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong>Neurocognitivo</strong> · delirium (agudo, fluctuante) · demencia · heminegligencia (parietal der.) · afasias · apraxias (constructiva / ideacional / ideomotora)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÁREA 2 ================= -->
+  <section id="a2" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#EAF6EF,var(--pastel-mint));border:1px solid #BFE3CE;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:#4FA47A;line-height:1">2</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#2F6B4F">Área disciplinar 2</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Intervención psicológica</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--mint" style="font-size:11px">6 enfoques terapéuticos</span>
+          <span class="kyn-badge kyn-badge--mint" style="font-size:11px">objetivo por caso</span>
+          <span class="kyn-badge kyn-badge--mint" style="font-size:11px">contextos de aplicación</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--pastel-mint);border-radius:var(--radius-md);padding:12px 16px;margin-bottom:22px;font-size:14px;color:#2F6B4F;line-height:1.5"><strong>La estrategia:</strong> el caso casi siempre trae una <strong>palabra clave</strong> que apunta al enfoque. Apréndete el disparador de cada uno.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:26px">
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Conductual</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">La conducta observable se aprende y se modifica con <strong>consecuencias</strong>.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Técnicas:</strong> reforzamiento (intermitente), costo de respuesta, tiempo fuera, extinción, economía de fichas.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> berrinches / conductas observables</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Cognitivo-conductual</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">Pensamientos → emociones → conducta.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Técnicas:</strong> reestructuración cognitiva, registro pensamiento-sentimiento-acción, detención del pensamiento, exposición.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> analizar pensamientos, sentimientos y acciones</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Humanista</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">La persona, su libertad y su potencial de <strong>autorrealización</strong>.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Técnicas:</strong> empatía, aceptación incondicional, aquí y ahora.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> encontrarle sentido / propósito a la vida</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Sistémico (familiar)</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">El síntoma pertenece al <strong>sistema</strong>, no al individuo.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Conceptos:</strong> límites de subsistemas, jerarquías, triangulación, comunicación analógica/digital.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> familia / límites / triangulación</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Psicodinámico</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">Lo <strong>inconsciente</strong> y los conflictos no resueltos.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Objetivo:</strong> elaborar el duelo, hacer consciente el conflicto.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> duelo / pérdida / inconsciente</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:17px;font-weight:800">Neurocognitivo</h4>
+        <p style="margin:0 0 10px;font-size:13px;color:var(--ink-500);line-height:1.45">Entrenar <strong>funciones cognitivas</strong>.</p>
+        <p style="margin:0 0 10px;font-size:12.5px;line-height:1.5"><strong>Objetivo:</strong> atención sostenida y selectiva, memoria, funciones ejecutivas.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12.5px;color:#2F6B4F"><strong>Clave:</strong> concentración / atención / autogestión</div>
+      </div>
+    </div>
+
+    <!-- decision table enfoques -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:26px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge kyn-badge--mint" style="font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el caso pide… → enfoque</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">manejar berrinches / conductas observables</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Conductual · tiempo fuera</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">analizar pensamientos, sentimientos y acciones</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Cognitivo-conductual</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">encontrarle sentido a la vida</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Humanista</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">reorganizar límites y jerarquías familiares</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Sistémico</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">elaborar el duelo por una pérdida</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Psicodinámico</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">entrenar la atención y concentración</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Neurocognitivo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kyn-card mapa-detalle">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:#2F6B4F">+</span><h3 style="font-size:18px;font-weight:800;margin:0">Contextos de aplicación</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;font-size:13px">
+        <div style="background:var(--oat);border-radius:var(--radius-sm);padding:10px 13px"><strong>Clínico</strong><br><span style="color:var(--ink-500)">diagnóstico y tratamiento individual</span></div>
+        <div style="background:var(--oat);border-radius:var(--radius-sm);padding:10px 13px"><strong>Educativo / psicopedagógico</strong><br><span style="color:var(--ink-500)">aprendizaje, conducta escolar</span></div>
+        <div style="background:var(--oat);border-radius:var(--radius-sm);padding:10px 13px"><strong>Organizacional</strong><br><span style="color:var(--ink-500)">clima, desempeño, riesgo psicosocial</span></div>
+        <div style="background:var(--oat);border-radius:var(--radius-sm);padding:10px 13px"><strong>Comunitario / psicosocial</strong><br><span style="color:var(--ink-500)">redes de apoyo, vulnerabilidad estructural</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ÁREA 3 ================= -->
+  <section id="a3" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#F1EBFA,var(--pastel-lilac));border:1px solid #D6C6EC;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:#8B6FC0;line-height:1">3</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#5F4B8B">Área disciplinar 3</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Investigación y estadística</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Medición y variables</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Diseños</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Amenazas a la validez</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Árbol estadístico</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.1 NIVELES DE MEDICIÓN -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#5F4B8B">3.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Niveles de medición <span style="color:var(--ink-500);font-weight:500;font-size:16px">· de menos a más información</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:36px">
+      <div class="kyn-card" style="border-top:4px solid #C9B8E6">
+        <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px;margin-bottom:8px">1 · Nominal</span>
+        <p style="margin:8px 0 6px;font-size:13px;line-height:1.45">Categorías <strong>sin orden</strong>.</p>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500)">Ej.: religión, sexo, estado civil.<br>Medida: <strong>moda</strong></p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #A98FD6">
+        <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px;margin-bottom:8px">2 · Ordinal</span>
+        <p style="margin:8px 0 6px;font-size:13px;line-height:1.45"><strong>Orden</strong> sin distancia igual.</p>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500)">Ej.: bajo/medio/alto, Likert.<br>Medida: <strong>mediana</strong></p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #8B6FC0">
+        <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px;margin-bottom:8px">3 · Intervalar</span>
+        <p style="margin:8px 0 6px;font-size:13px;line-height:1.45">Distancia igual, <strong>sin cero absoluto</strong>.</p>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500)">Ej.: temperatura emocional −10 a +10.<br>Medida: <strong>media</strong></p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #6B4E9E">
+        <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px;margin-bottom:8px">4 · Razón</span>
+        <p style="margin:8px 0 6px;font-size:13px;line-height:1.45"><strong>Cero absoluto</strong> real.</p>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500)">Ej.: edad, tiempo, n.º de hijos.<br>Medida: <strong>media</strong></p>
+      </div>
+    </div>
+
+    <!-- 3.2 VARIABLES + DISEÑOS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:36px">
+      <div class="kyn-card" style="border-left:5px solid #8B6FC0">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">3.2</span><h3 style="font-size:18px;font-weight:800;margin:0">Variables</h3></div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:10px 13px;color:#4A3A6B"><strong>Independiente (VI)</strong> — la que se manipula / la causa<br><span style="font-size:12px">ej.: el programa, la gestión emocional</span></div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:10px 13px;color:#4A3A6B"><strong>Dependiente (VD)</strong> — la que se mide / el efecto<br><span style="font-size:12px">ej.: aprendizaje autónomo, rendimiento</span></div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-left:5px solid #8B6FC0">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">·</span><h3 style="font-size:18px;font-weight:800;margin:0">Diseños</h3></div>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:13px">
+          <div><strong>Experimental</strong> · manipula + aleatoriza + control</div>
+          <div><strong>Cuasiexperimental</strong> · grupos no aleatorios; pre-post con control</div>
+          <div><strong>Ex post facto</strong> · se estudia después del hecho</div>
+          <div><strong>Estudio de caso</strong> · un solo sujeto, a profundidad</div>
+          <div><strong>Transversal</strong> (un momento) / <strong>Longitudinal</strong> (en el tiempo)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 AMENAZAS A LA VALIDEZ -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#5F4B8B">3.3</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Amenazas a la validez</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:36px">
+      <div class="kyn-card" style="border-top:4px solid #6B7AC1">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800;color:var(--periwinkle-700)">Validez INTERNA</h4>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500)">¿el efecto es realmente del tratamiento?</p>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px">
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Historia</strong> · evento externo durante el estudio (actividades extra)</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Maduración</strong> · cambios por el paso del tiempo</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Instrumentación</strong> · cambia el instrumento / la medición</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Mortalidad experimental</strong> · participantes abandonan</div>
+          <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:8px 11px"><strong>Selección · regresión</strong></div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #B98BC9">
+        <h4 style="margin:0 0 4px;font-size:16px;font-weight:800;color:#5F4B8B">Validez EXTERNA</h4>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500)">¿los resultados se generalizan?</p>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Interacción historia × tratamiento</strong> · contexto irrepetible (pandemia)</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Efectos de novedad / reactividad</strong></div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Interferencia de tratamientos múltiples</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 ÁRBOL DE DECISIÓN ESTADÍSTICA -->
+    <div style="margin-bottom:6px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#5F4B8B">3.4</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Árbol de decisión estadística</h3>
+      <span class="kyn-badge kyn-badge--pop" style="font-size:14px">la estrella ♥</span>
+    </div>
+    <p style="margin:0 0 18px;font-size:14px;color:var(--ink-600,var(--ink-500));max-width:70ch">La pregunta más frecuente del área. Ve de arriba hacia abajo: <strong>objetivo → nivel de medición y supuestos → prueba</strong>.</p>
+
+    <div style="background:var(--oat);border:1px solid var(--border-on-oat);border-radius:var(--radius-lg);padding:22px;margin-bottom:36px">
+      <div style="text-align:center;margin-bottom:8px">
+        <span style="display:inline-block;background:var(--ink-900);color:#fff;font-weight:800;font-size:15px;padding:11px 22px;border-radius:var(--radius-pill)">¿Cuál es tu objetivo?</span>
+      </div>
+      <div style="text-align:center;color:var(--ink-300);font-size:20px;margin-bottom:6px">↓</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px">
+
+        <!-- COMPARAR -->
+        <div style="background:var(--white);border-radius:var(--radius-md);padding:16px;box-shadow:var(--shadow-sm)">
+          <div style="text-align:center;background:#8B6FC0;color:#fff;font-weight:800;font-size:14px;padding:9px;border-radius:var(--radius-sm);margin-bottom:14px">COMPARAR grupos</div>
+          <div style="border:1px solid var(--periwinkle-100);border-radius:var(--radius-sm);padding:11px;margin-bottom:11px">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--periwinkle-700);margin-bottom:8px">Paramétrica<br><span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-500)">intervalar/razón · normal · varianzas homogéneas</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">2 grupos independientes</span><span class="mapa-clave" style="background:#8B6FC0;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">t Student indep.</span></div>
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">2 medidas mismo grupo (antes/después)</span><span class="mapa-clave" style="background:#8B6FC0;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">t Student relac.</span></div>
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">3+ grupos</span><span class="mapa-clave" style="background:#8B6FC0;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">ANOVA</span></div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--sand);border-radius:var(--radius-sm);padding:11px">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#8A6D1F;margin-bottom:8px">No paramétrica<br><span style="font-weight:500;text-transform:none;letter-spacing:0;color:var(--ink-500)">ordinal · no normal · n pequeña</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">2 grupos independientes</span><span class="mapa-clave" style="background:#B98BC9;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">U Mann-Whitney</span></div>
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">2 relacionadas</span><span class="mapa-clave" style="background:#B98BC9;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Wilcoxon</span></div>
+              <div style="display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">3+ grupos</span><span class="mapa-clave" style="background:#B98BC9;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Kruskal-Wallis</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASOCIAR -->
+        <div style="background:var(--white);border-radius:var(--radius-md);padding:16px;box-shadow:var(--shadow-sm)">
+          <div style="text-align:center;background:#6B7AC1;color:#fff;font-weight:800;font-size:14px;padding:9px;border-radius:var(--radius-sm);margin-bottom:14px">ASOCIAR variables</div>
+          <div style="display:flex;flex-direction:column;gap:9px;font-size:12.5px">
+            <div style="border:1px solid var(--periwinkle-100);border-radius:var(--radius-sm);padding:11px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">2 continuas, normales</span><span class="mapa-clave" style="background:#6B7AC1;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Pearson (r)</span></div>
+            <div style="border:1px solid var(--sand);border-radius:var(--radius-sm);padding:11px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">ordinales / no normal</span><span class="mapa-clave" style="background:#B98BC9;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Spearman (ρ)</span></div>
+          </div>
+          <div style="margin-top:12px;background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:10px;font-size:12px;color:var(--periwinkle-800);line-height:1.45"><strong>Recuerda:</strong> Pearson y Spearman miden <em>relación</em> entre 2 variables continuas; no comparan grupos.</div>
+        </div>
+
+        <!-- PREDECIR -->
+        <div style="background:var(--white);border-radius:var(--radius-md);padding:16px;box-shadow:var(--shadow-sm)">
+          <div style="text-align:center;background:#5F4B8B;color:#fff;font-weight:800;font-size:14px;padding:9px;border-radius:var(--radius-sm);margin-bottom:14px">PREDECIR</div>
+          <div style="display:flex;flex-direction:column;gap:9px;font-size:12.5px">
+            <div style="border:1px solid var(--periwinkle-100);border-radius:var(--radius-sm);padding:11px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">VD continua · 1 predictor</span><span class="mapa-clave" style="background:#5F4B8B;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Reg. lineal simple</span></div>
+            <div style="border:1px solid var(--periwinkle-100);border-radius:var(--radius-sm);padding:11px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">VD continua · 2+ predictores</span><span class="mapa-clave" style="background:#5F4B8B;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Reg. lineal múltiple</span></div>
+            <div style="border:1px solid var(--sand);border-radius:var(--radius-sm);padding:11px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap"><span style="color:var(--ink-700);flex:1;min-width:0">VD categórica (sí/no)</span><span class="mapa-clave" style="background:#8B6FC0;color:#fff;padding:3px 9px;border-radius:var(--radius-pill);font-weight:700;font-size:11.5px;white-space:nowrap;flex:none;cursor:help">Reg. logística</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-detalle" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      <!-- 3.5 CUALITATIVA + MIXTA -->
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">3.5</span><h3 style="font-size:18px;font-weight:800;margin:0">Cualitativa y mixta</h3></div>
+        <p style="margin:0 0 8px;font-size:12.5px;color:var(--ink-500)"><strong>Cualitativa</strong> · subjetividad, significados, profundidad. Técnicas: entrevista en profundidad, grupo focal.</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;margin-bottom:12px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>De contenido</strong> · categorías y frecuencias</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Del discurso</strong> · cómo se dice; justifican posturas</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Temático</strong> · patrones de sentido compartido</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Categorial · hermenéutico</strong> · interpretación</div>
+        </div>
+        <p style="margin:0 0 6px;font-size:12.5px;color:var(--ink-500)"><strong>Mixta</strong></p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Convergente</strong> · cuali + cuanti a la vez, se integran al final</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Secuencial explicativa</strong> · cuanti → cuali (para explicar)</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Secuencial exploratoria</strong> · cuali → cuanti</div>
+        </div>
+      </div>
+
+      <!-- 3.6 ÉTICA + COMUNICACIÓN -->
+      <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat)">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">3.6</span><h3 style="font-size:18px;font-weight:800;margin:0">Ética (APA) y comunicación</h3></div>
+        <p style="margin:0 0 6px;font-size:12.5px;color:var(--ink-500)"><strong>Principios éticos (APA)</strong></p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px;margin-bottom:12px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Respeto a derechos y dignidad</strong> · autonomía, privacidad, consentimiento</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Fidelidad y responsabilidad</strong></div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Justicia</strong> · beneficencia / no maleficencia</div>
+        </div>
+        <p style="margin:0 0 6px;font-size:12.5px;color:var(--ink-500)"><strong>Comunicar resultados</strong></p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Revista científica</strong> · difusión académica + revisión por pares</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Cartel</strong> · impacto rápido y accesible (congresos)</div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:7px 10px"><strong>Foro</strong> · intercambio y discusión</div>
+          <div style="background:var(--pastel-butter);border-radius:var(--radius-sm);padding:7px 10px;color:#8A6D1F"><strong>APA:</strong> reporta medidas de tendencia central + la prueba estadística usada</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRANSVERSAL ================= -->
+  <section id="tx" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#FBF1E4,var(--pastel-peach));border:1px solid #EED3B6;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:44px;color:#D9A441;line-height:1">T</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#9A6A2E">Habilidad transversal</span>
+        <h2 style="font-size:clamp(24px,3.5vw,38px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Lectura y redacción</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Comprensión lectora</span>
+          <span class="kyn-badge kyn-badge--butter" style="font-size:11px">Redacción</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TX.1 COMPRENSIÓN LECTORA -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px;font-weight:900;color:#9A6A2E">T.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Comprensión lectora <span style="color:var(--ink-500);font-weight:500;font-size:16px">· qué te preguntan</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px">
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Idea central / tema</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">De qué trata TODO el texto — no un detalle.</p></div>
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Causa-efecto</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Qué provoca qué; relaciones entre ideas.</p></div>
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Inferencia</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Lo que se <em>desprende</em> o concluye, aunque no esté literal.</p></div>
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Completar ideas</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Coherencia y conectores: el par que encaja.</p></div>
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Propósito del autor</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Para qué escribe y a quién se dirige.</p></div>
+      <div class="kyn-card" style="border-top:4px solid #D9A441"><h4 style="margin:0 0 5px;font-size:15px;font-weight:800">Razón del título / postura</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Por qué se titula así; hechos vs. opiniones.</p></div>
+    </div>
+    <div style="background:var(--pastel-peach);border-radius:var(--radius-md);padding:12px 16px;margin-bottom:36px;font-size:13.5px;color:#9A6A2E;line-height:1.5"><strong>Truco:</strong> el <strong>tema</strong> es el asunto general (una frase); la <strong>idea central</strong> es la postura o tesis principal del autor sobre ese tema.</div>
+
+    <!-- TX.2 REDACCIÓN -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px;font-weight:900;color:#9A6A2E">T.2</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Redacción <span style="color:var(--ink-500);font-weight:500;font-size:16px">· elige el texto correcto</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:18px">
+      <div class="kyn-card" style="border-left:5px solid #D9A441"><h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Reseña</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.5">Presenta <strong>y valora</strong> una obra (crítica) y la recomienda. Registro ameno pero informado.</p></div>
+      <div class="kyn-card" style="border-left:5px solid #D9A441"><h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Divulgación científica</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.5">Rigurosa pero <strong>accesible</strong>: explica con precisión, sin coloquialismos ni rebuscamiento.</p></div>
+      <div class="kyn-card" style="border-left:5px solid #D9A441"><h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Proyecto de investigación</h4><p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.5"><strong>Objetivo + hipótesis + método</strong> claros. Registro formal y preciso.</p></div>
+    </div>
+
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">El registro es la trampa</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px;font-size:12.5px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong style="color:#D9534F">Coloquial ✗</strong><br><span style="color:var(--ink-500)">"los precios están por los cielos"</span></div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong style="color:#D9534F">Rebuscado ✗</strong><br><span style="color:var(--ink-500)">"la monta del pábulo y la indumentaria"</span></div>
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:9px 12px"><strong style="color:#4FA47A">Adecuado ✓</strong><br><span style="color:var(--ink-500)">claro, preciso, cohesionado, adecuado al público</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1240px;margin:0 auto;padding:30px 24px 70px;border-top:1px solid var(--border-subtle);margin-top:30px">
+    <p style="font-size:13px;color:var(--ink-500);margin:0;line-height:1.5">Mapa de repaso para el EGEL de Psicología. Los conceptos provienen de tus materiales de examen; úsalo como estructura de estudio, no como sustituto de las fuentes oficiales.</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-mapa-estudio';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+  var nivelBtns = document.querySelectorAll('.mapa-nivel-btn');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarNivel(nivel){
+    body.classList.toggle('nivel-esenciales', nivel === 'esenciales');
+    nivelBtns.forEach(function(btn){
+      btn.classList.toggle('is-activo', btn.dataset.nivel === nivel);
+    });
+  }
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarNivel(estado.nivel || 'completo');
+  aplicarRepaso(!!estado.repaso);
+
+  nivelBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var nivel = btn.dataset.nivel;
+      aplicarNivel(nivel);
+      var e = leerEstado(); e.nivel = nivel; guardarEstado(e);
+    });
+  });
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  // Modo repaso: además del hover, clic/tap o teclado revela una respuesta a la vez
+  // (accesible en móvil, donde no hay hover).
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
