@@ -56,6 +56,7 @@ copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-4-uso.html'), path.jo
 copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.join(dist, 'proyectos/ceneval/libro-area1-diagnostico.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.join(dist, 'proyectos/ceneval/libro-area2-intervencion.html'));
 copy(path.join(root, 'proyectos/ceneval/area2-enfoques.html'), path.join(dist, 'proyectos/ceneval/area2-enfoques.html'));
+copy(path.join(root, 'proyectos/ceneval/sketchnote-enfoques.html'), path.join(dist, 'proyectos/ceneval/sketchnote-enfoques.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'), path.join(dist, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
 copy(path.join(root, 'proyectos/ceneval/simulacro.html'), path.join(dist, 'proyectos/ceneval/simulacro.html'));
