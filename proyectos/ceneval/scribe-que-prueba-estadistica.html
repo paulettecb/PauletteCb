@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scribe: ¿Qué Prueba Estadística? — Área 3 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso estilo graphic recording para elegir la prueba estadística correcta según objetivo y nivel de datos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--oat);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--oat)">
+  <nav style="background:rgba(251,250,247,0.9);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1680px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">scribe</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">lámina de repaso · área 3</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <div id="scribeWrap" style="position:relative;width:100%;height:620px;overflow:hidden;margin:0 auto;background:var(--oat)">
+  <div id="scribeBoard" style="position:absolute;top:0;left:0;width:1680px;height:1240px;transform:scale(0.5);transform-origin:top left;background:var(--paper);box-shadow:0 10px 40px rgba(42,41,51,0.14)">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.16) 1.3px, transparent 1.3px);background-size:26px 26px"></div>
+
+    <svg viewBox="0 0 1680 1240" style="position:absolute;inset:0;width:1680px;height:1240px;z-index:1;pointer-events:none" fill="none">
+      <defs><marker id="ah" markerWidth="13" markerHeight="13" refX="8" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10" fill="none" stroke="#2A2933" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <path d="M720 520 C 610 470, 540 440, 452 432" stroke="#8B6FC0" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+      <path d="M715 585 C 610 640, 540 690, 452 712" stroke="#8B6FC0" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+      <path d="M735 635 C 650 780, 560 905, 486 946" stroke="#8B6FC0" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+      <path d="M960 520 C 1070 470, 1150 440, 1236 432" stroke="#8795D2" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+      <path d="M965 585 C 1070 640, 1150 690, 1236 712" stroke="#5F4B8B" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+      <path d="M945 635 C 1040 780, 1140 905, 1214 946" stroke="#D9A441" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ah)"/>
+    </svg>
+
+    <!-- HERO -->
+    <div style="position:absolute;left:632px;top:26px;font-family:var(--font-accent);font-size:54px;color:#E85DA0;transform:rotate(-6deg);z-index:3">¿cuál</div>
+    <div style="position:absolute;left:430px;top:74px;width:820px;text-align:center;z-index:2"><span style="font-family:var(--font-sans);font-weight:900;font-size:132px;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);text-shadow:5px 5px 0 var(--periwinkle-300)">PRUEBA?</span></div>
+    <div style="position:absolute;left:566px;top:212px;transform:rotate(-1.6deg);z-index:2">
+      <div style="position:relative;background:var(--periwinkle-500);color:#fff;font-family:var(--font-display);font-size:38px;letter-spacing:0.04em;padding:8px 40px;border-radius:8px;box-shadow:4px 5px 0 rgba(42,41,51,0.16)">ELIGE TU ESTADÍSTICO
+        <span style="position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:0;height:0;border:12px solid transparent;border-right-color:var(--periwinkle-700)"></span>
+        <span style="position:absolute;right:-16px;top:50%;transform:translateY(-50%);width:0;height:0;border:12px solid transparent;border-left-color:var(--periwinkle-700)"></span>
+      </div>
+    </div>
+    <div style="position:absolute;left:1128px;top:150px;color:#8B6FC0;transform:rotate(12deg);z-index:3"><svg width="34" height="34" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:360px;top:150px;color:#D9A441;transform:rotate(-8deg);z-index:3"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:596px;top:300px;width:488px;text-align:center;font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600);z-index:2">objetivo → nivel de datos → prueba</div>
+
+    <!-- HUB -->
+    <div style="position:absolute;left:600px;top:452px;width:480px;text-align:center;z-index:2">
+      <div style="font-family:var(--font-display);font-size:42px;color:var(--ink-900);line-height:0.95">¿CUÁL ES TU<br>OBJETIVO?</div>
+      <div style="display:flex;justify-content:center;color:var(--ink-900);margin:8px 0 6px"><svg width="80" height="46" viewBox="0 0 70 46" fill="none"><path d="M35 6v36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M35 12h22l6 6-6 6H35" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M35 24H13l-6 6 6 6h22" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg></div>
+      <div style="font-size:17px;color:var(--ink-700);line-height:1.4">y ¿tus datos son <strong style="color:#B0851F">paramétricos</strong> o no?</div>
+    </div>
+
+    <!-- TL Comparar 2 indep -->
+    <div style="position:absolute;left:70px;top:250px;width:250px;background:var(--pastel-lilac);border:2.5px solid var(--ink-900);border-radius:22px 180px 22px 180px/180px 22px 180px 22px;padding:10px 16px;transform:rotate(-3deg);z-index:3;font-size:15px;font-weight:700;color:#4A3A6B;line-height:1.3">¿2 grupos diferentes?</div>
+    <div style="position:absolute;left:40px;top:340px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:240px 20px 240px 20px/20px 240px 20px 240px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(-0.8deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#8B6FC0"><svg width="42" height="40" viewBox="0 0 42 40" fill="none"><path d="M5 36h34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M14 36V14M28 36V22" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:30px;margin:0;line-height:0.88;color:var(--ink-900)">Comparar<br>2 indep.</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)">2 grupos <strong style="color:#5F4B8B">distintos</strong> de personas</p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">t de Student indep. / U de Mann-Whitney</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#8B6FC0">clave→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;transform:rotate(-1deg);display:inline-block;cursor:help">grupo A vs grupo B</span></div>
+    </div>
+
+    <!-- ML Comparar relacionadas -->
+    <div style="position:absolute;left:70px;top:625px;width:236px;background:var(--pastel-lilac);border:2.5px solid var(--ink-900);border-radius:22px 170px 22px 170px/170px 22px 170px 22px;padding:10px 16px;transform:rotate(-2deg);z-index:3;font-size:15px;font-weight:700;color:#4A3A6B;line-height:1.3">¿antes y después?</div>
+    <div style="position:absolute;left:40px;top:712px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:240px 20px 240px 20px/20px 240px 20px 240px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(-0.6deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#8B6FC0"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M32 14a13 13 0 1 0 3 10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M32 5v10h-10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:27px;margin:0;line-height:0.88;color:var(--ink-900)">Comparar<br>relacionadas</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)">2 medidas del <strong style="color:#5F4B8B">mismo grupo</strong></p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">t relacionada / Wilcoxon</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#8B6FC0">clave→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;transform:rotate(-1deg);display:inline-block;cursor:help">pre-post en las mismas personas</span></div>
+    </div>
+
+    <!-- BL Comparar 3+ -->
+    <div style="position:absolute;left:80px;top:912px;width:236px;background:var(--pastel-lilac);border:2.5px solid var(--ink-900);border-radius:22px 160px 22px 160px/160px 22px 160px 22px;padding:10px 16px;transform:rotate(-2deg);z-index:3;font-size:15px;font-weight:700;color:#4A3A6B;line-height:1.3">¿3 o más grupos?</div>
+    <div style="position:absolute;left:60px;top:998px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:220px 20px 220px 20px/20px 220px 20px 220px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(-0.7deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#8B6FC0"><svg width="42" height="40" viewBox="0 0 42 40" fill="none"><path d="M4 36h34" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M11 36V16M21 36V8M31 36V22" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:31px;margin:0;line-height:0.9;color:var(--ink-900)">Comparar 3+</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)">tres o más <strong style="color:#5F4B8B">grupos</strong></p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">ANOVA / Kruskal-Wallis</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#8B6FC0">clave→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;transform:rotate(-1deg);display:inline-block;cursor:help">compara 4 tratamientos</span></div>
+    </div>
+
+    <!-- TR Asociar -->
+    <div style="position:absolute;left:1360px;top:250px;width:250px;background:var(--pastel-sky);border:2.5px solid var(--ink-900);border-radius:180px 22px 180px 22px/22px 180px 22px 180px;padding:10px 16px;transform:rotate(3deg);z-index:3;font-size:15px;font-weight:700;color:#3F5488;line-height:1.3;text-align:right">¿relación entre 2 variables?</div>
+    <div style="position:absolute;left:1240px;top:340px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:20px 240px 20px 240px/240px 20px 240px 20px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(0.7deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#8795D2"><svg width="42" height="40" viewBox="0 0 42 40" fill="none"><path d="M8 4v32h32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="16" cy="28" r="2.2" fill="currentColor"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/><circle cx="27" cy="24" r="2.2" fill="currentColor"/><circle cx="32" cy="15" r="2.2" fill="currentColor"/><circle cx="37" cy="11" r="2.2" fill="currentColor"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:33px;margin:0;line-height:0.9;color:var(--ink-900)">Asociar</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)"><strong style="color:#3F5488">relación</strong> entre 2 variables continuas</p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">Pearson (r) normal · Spearman (ρ) ordinal</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#8795D2">clave→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;transform:rotate(1deg);display:inline-block;cursor:help">¿a más X, más Y?</span></div>
+    </div>
+
+    <!-- MR Predecir -->
+    <div style="position:absolute;left:1372px;top:625px;width:238px;background:var(--pastel-lilac);border:2.5px solid var(--ink-900);border-radius:170px 22px 170px 22px/22px 170px 22px 170px;padding:10px 16px;transform:rotate(2deg);z-index:3;font-size:15px;font-weight:700;color:#4A3A6B;line-height:1.3;text-align:right">¿estimar un valor?</div>
+    <div style="position:absolute;left:1240px;top:712px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:20px 220px 20px 220px/220px 20px 220px 20px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(0.9deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#5F4B8B"><svg width="42" height="40" viewBox="0 0 42 40" fill="none"><path d="M6 34h32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M8 30l9-9 6 5 11-13" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 13h6v6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:33px;margin:0;line-height:0.9;color:var(--ink-900)">Predecir</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)">estimar una <strong style="color:#5F4B8B">VD</strong> desde predictores</p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">regresión simple / múltiple / logística (sí-no)</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#5F4B8B">clave→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;transform:rotate(1deg);display:inline-block;cursor:help">predice la nota final</span></div>
+    </div>
+
+    <!-- BR Paramétrica o no -->
+    <div style="position:absolute;left:1374px;top:912px;width:236px;background:var(--pastel-butter);border:2.5px solid var(--ink-900);border-radius:160px 22px 160px 22px/22px 160px 22px 160px;padding:10px 16px;transform:rotate(2deg);z-index:3;font-size:15px;font-weight:700;color:#8A6D1F;line-height:1.3;text-align:right">¿normal e intervalar?</div>
+    <div style="position:absolute;left:1240px;top:998px;width:400px;background:#fff;border:3px solid var(--ink-900);border-radius:20px 220px 20px 220px/220px 20px 220px 20px;padding:18px 22px;box-shadow:5px 6px 0 rgba(42,41,51,0.13);transform:rotate(0.6deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <span style="flex:none;color:#D9A441"><svg width="42" height="40" viewBox="0 0 42 40" fill="none"><path d="M8 20h9M17 20l9-9M17 20l9 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 11h8M26 29h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+        <h3 style="font-family:var(--font-display);font-size:27px;margin:0;line-height:0.88;color:var(--ink-900)">Paramétrica<br>o NO</h3>
+      </div>
+      <p style="margin:0 0 8px;font-size:17px;line-height:1.35;color:var(--ink-900)">el <strong style="color:#B0851F">supuesto</strong> decide la columna</p>
+      <p style="margin:0 0 12px;font-size:14px;color:var(--ink-500)">param.: intervalar+normal · no param.: ordinal / no normal / n chica</p>
+      <div style="display:inline-flex;align-items:center;gap:8px"><span style="font-family:var(--font-display);font-size:19px;color:#D9A441">clave→</span><span class="mapa-clave" style="background:var(--pastel-mint);padding:3px 10px;border-radius:6px;font-size:14.5px;font-weight:800;color:#2F6B4F;transform:rotate(1deg);display:inline-block;cursor:help">datos ordinales → no paramétrica</span></div>
+    </div>
+
+    <!-- RECUERDA -->
+    <div style="position:absolute;left:556px;top:958px;width:568px;background:var(--pastel-butter);border:3px solid var(--ink-900);border-radius:150px 160px 140px 160px/130px 150px 160px 130px;padding:18px 40px;box-shadow:5px 6px 0 rgba(217,164,65,0.35);transform:rotate(-0.6deg);z-index:3;text-align:center">
+      <span style="font-family:var(--font-display);font-size:30px;color:#B0851F">recuerda</span>
+      <p style="margin:4px 0 0;font-size:17px;line-height:1.4;color:#5C4A17">Pearson y Spearman miden <strong>relación</strong>, no comparan grupos. El nivel de medición + normalidad deciden paramétrica vs no <span style="font-family:var(--font-accent);color:#E85DA0;font-size:22px">♥</span></p>
+    </div>
+
+    <div style="position:absolute;left:1520px;top:40px;width:110px;height:110px;border:3px solid #8B6FC0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-6deg);z-index:3;background:var(--paper)">
+      <span style="font-family:var(--font-accent);font-size:30px;color:#E85DA0;line-height:0.8">kyn</span>
+      <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-top:2px">sketchnote</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:1680px;margin:0 auto;padding:20px 24px 60px;text-align:center">
+    <p style="font-size:13.5px;color:var(--ink-500);margin:0 0 12px;line-height:1.5">Lámina de repaso estilo <em>graphic recording</em>. Activa <strong>Modo repaso</strong> y pasa el cursor sobre las claves para autoevaluarte.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="scribe-confiabilidad-validez.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">confiabilidad & validez</a>
+      <a href="scribe-disenos-investigacion.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">diseños de investigación</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-scribe-prueba-estadistica';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+
+  var wrap = document.getElementById('scribeWrap');
+  var board = document.getElementById('scribeBoard');
+  function fit() {
+    if (!wrap || !board) return;
+    var scale = Math.min(1, wrap.clientWidth / 1680);
+    board.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (1240 * scale) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  [200, 600, 1200].forEach(function(t) { setTimeout(fit, t); });
+})();
+</script>
+</body>
+</html>
