@@ -46,9 +46,12 @@ copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(di
 copy(path.join(root, 'proyectos/ceneval/index.html'), path.join(dist, 'proyectos/ceneval/index.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-estudio.html'), path.join(dist, 'proyectos/ceneval/mapa-estudio.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'), path.join(dist, 'proyectos/ceneval/mapa-dsm5-ciclo-vital.html'));
-// Índice del sub-mapa "Instrumentos y propiedades" (Área 1). Sus 4 capítulos
-// (area1-instrumentos-1..4-*.html) aún no existen — se agregan aquí cuando se hagan.
+// Sub-mapa "Instrumentos y propiedades" (Área 1): índice + los 4 capítulos.
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-indice.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-indice.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-1-propiedades.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-1-propiedades.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-4-uso.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-4-uso.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.join(dist, 'proyectos/ceneval/libro-area1-diagnostico.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.join(dist, 'proyectos/ceneval/libro-area2-intervencion.html'));
 copy(path.join(root, 'proyectos/ceneval/area2-enfoques.html'), path.join(dist, 'proyectos/ceneval/area2-enfoques.html'));
