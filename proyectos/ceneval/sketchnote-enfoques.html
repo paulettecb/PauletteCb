@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sketchnote: Enfoques Terapéuticos — Área 2 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Apuntes visuales estilo sketchnote de los 6 enfoques terapéuticos (conductual, cognitivo-conductual, humanista, sistémico, psicodinámico, neurocognitivo) con su palabra clave disparadora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="position:relative;min-height:100vh;background:var(--paper);overflow:hidden">
+
+  <div style="position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.22) 1.3px, transparent 1.3px);background-size:24px 24px"></div>
+
+  <div style="position:relative;z-index:1">
+
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(251,250,247,0.82);backdrop-filter:blur(10px);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">sketchnote</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">apuntes visuales · área 2</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <main style="max-width:1180px;margin:0 auto;padding:44px 24px 80px">
+
+    <!-- HEADER -->
+    <div style="text-align:center;margin-bottom:14px">
+      <span style="font-family:var(--font-accent);font-size:34px;color:var(--magenta,#E85DA0);display:inline-block;transform:rotate(-3deg)">enfoques</span>
+      <h1 style="font-family:var(--font-display);font-size:clamp(44px,8vw,86px);line-height:0.9;color:var(--ink-900);margin:2px 0 0;letter-spacing:0.01em">TERAPÉUTICOS</h1>
+      <div style="color:var(--periwinkle-500);margin-top:2px;line-height:0">
+        <svg width="300" height="16" viewBox="0 0 300 16" fill="none" style="max-width:70%"><path d="M5 9 C 70 3, 150 14, 210 6 S 285 5, 295 8" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+      </div>
+      <p style="font-size:16px;color:var(--ink-700);max-width:52ch;margin:14px auto 0;line-height:1.5">6 formas de intervenir. En el examen, el caso casi siempre esconde una <strong>palabra clave</strong> que apunta al enfoque correcto.</p>
+    </div>
+
+    <!-- IDEA CENTRAL -->
+    <div style="max-width:640px;margin:0 auto 6px;background:var(--pastel-butter);border:2.5px solid var(--ink-900);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:16px 24px;box-shadow:4px 5px 0 rgba(42,41,51,0.14);transform:rotate(-0.6deg)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:var(--font-display);font-size:30px;color:#8A6D1F;flex:none;transform:rotate(-4deg)">¡ojo!</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.5;color:#5C4A17">Aprende el <strong>disparador</strong>, no memorices el enfoque. Cada tarjeta trae su palabra clave abajo <span style="font-family:var(--font-display)">↓</span></p>
+      </div>
+    </div>
+
+    <div style="text-align:center;color:var(--ink-300);margin:0 0 14px">
+      <svg width="46" height="48" viewBox="0 0 46 48" fill="none"><path d="M23 4 C 16 16, 30 26, 23 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 33 L23 43 L32 33" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- GRID DE ENFOQUES -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px 24px;align-items:start">
+
+      <!-- 1 CONDUCTUAL -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(-0.8deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:var(--periwinkle-500);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">1</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:var(--periwinkle-500)">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 5 l4.2 9.3 10.2 1 -7.6 6.8 2.3 10-9.1-5.4-9.1 5.4 2.3-10-7.6-6.8 10.2-1z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:27px;margin:0;line-height:0.95;color:var(--ink-900)">Conductual</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">La conducta observable <strong>se aprende</strong> y se modifica con <strong>consecuencias</strong>.</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:var(--periwinkle-700)">Técnicas ·</span> reforzamiento, tiempo fuera, extinción, economía de fichas.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:var(--periwinkle-500)">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#5C4A17;transform:rotate(-1deg);display:inline-block;cursor:help">berrinches / conducta observable</span>
+        </div>
+      </div>
+
+      <!-- 2 COGNITIVO-CONDUCTUAL -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:15px 225px 15px 255px/255px 15px 225px 15px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(0.7deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:#3F5488;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">2</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:#3F5488">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M10 9 h16 a6 6 0 0 1 6 6 v5 a6 6 0 0 1-6 6 h-9 l-6 5 v-5 a6 6 0 0 1-1-11z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><circle cx="16.5" cy="19" r="1.5" fill="currentColor"/><circle cx="21.5" cy="19" r="1.5" fill="currentColor"/><circle cx="26.5" cy="19" r="1.5" fill="currentColor"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:25px;margin:0;line-height:0.95;color:var(--ink-900)">Cognitivo-<br>conductual</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">Pensamiento <span style="font-family:var(--font-display);color:#3F5488">→</span> emoción <span style="font-family:var(--font-display);color:#3F5488">→</span> conducta.</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:#3F5488">Técnicas ·</span> reestructuración cognitiva, registro P-S-A, exposición.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:#3F5488">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-sky);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#3F5488;transform:rotate(1deg);display:inline-block;cursor:help">pensamientos, sentimientos y acciones</span>
+        </div>
+      </div>
+
+      <!-- 3 HUMANISTA -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(-0.5deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:#D9A441;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">3</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:#D9A441">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="2.4"/><path d="M20 4v4M20 32v4M4 20h4M32 20h4M8.5 8.5l2.8 2.8M28.7 28.7l2.8 2.8M31.5 8.5l-2.8 2.8M11.3 28.7l-2.8 2.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:27px;margin:0;line-height:0.95;color:var(--ink-900)">Humanista</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">La persona, su libertad y su potencial de <strong>autorrealización</strong>.</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:#8A6D1F">Técnicas ·</span> empatía, aceptación incondicional, aquí y ahora.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:#D9A441">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#5C4A17;transform:rotate(-1deg);display:inline-block;cursor:help">sentido / propósito de la vida</span>
+        </div>
+      </div>
+
+      <!-- 4 SISTÉMICO -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:15px 255px 15px 225px/225px 15px 255px 15px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(0.9deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:#4FA47A;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">4</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:#4FA47A">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="9" r="4.5" stroke="currentColor" stroke-width="2.4"/><circle cx="9" cy="29" r="4.5" stroke="currentColor" stroke-width="2.4"/><circle cx="31" cy="29" r="4.5" stroke="currentColor" stroke-width="2.4"/><path d="M17 12.5 L12 24.5M23 12.5 L28 24.5M13.5 29h13" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:26px;margin:0;line-height:0.95;color:var(--ink-900)">Sistémico</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">El síntoma pertenece al <strong>sistema</strong> (la familia), no al individuo.</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:#2F6B4F">Conceptos ·</span> límites, jerarquías, triangulación.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:#4FA47A">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-mint);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#2F6B4F;transform:rotate(1deg);display:inline-block;cursor:help">familia / límites / triangulación</span>
+        </div>
+      </div>
+
+      <!-- 5 PSICODINÁMICO -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(-0.9deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:#8B6FC0;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">5</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:#8B6FC0">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M6 17 h28" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="1 4"/><path d="M20 6 L30 17 H10 z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M10 17 L15 33 H25 L30 17" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" opacity="0.5"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:24px;margin:0;line-height:0.95;color:var(--ink-900)">Psicodinámico</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">Lo <strong>inconsciente</strong> y los conflictos no resueltos (la punta del iceberg).</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:#5F4B8B">Objetivo ·</span> elaborar el duelo, hacer consciente el conflicto.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:#8B6FC0">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-lilac);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#4A3A6B;transform:rotate(-1deg);display:inline-block;cursor:help">duelo / pérdida / inconsciente</span>
+        </div>
+      </div>
+
+      <!-- 6 NEUROCOGNITIVO -->
+      <div style="position:relative;background:var(--white);border:2.5px solid var(--ink-900);border-radius:15px 225px 15px 255px/255px 15px 225px 15px;padding:22px 22px 20px;box-shadow:4px 5px 0 rgba(42,41,51,0.13);transform:rotate(0.6deg)">
+        <span style="position:absolute;top:-16px;left:-12px;width:38px;height:38px;border-radius:50%;background:#D98A4F;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;box-shadow:2px 2px 0 rgba(42,41,51,0.18)">6</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+          <span style="flex:none;color:#D98A4F">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2.4"/><circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="2.4"/><circle cx="20" cy="20" r="2.4" fill="currentColor"/></svg>
+          </span>
+          <h3 style="font-family:var(--font-display);font-size:25px;margin:0;line-height:0.95;color:var(--ink-900)">Neurocognitivo</h3>
+        </div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:var(--ink-700)">Entrenar las <strong>funciones cognitivas</strong>.</p>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:var(--ink-500)"><span style="font-weight:800;color:#9A6A2E">Objetivo ·</span> atención sostenida/selectiva, memoria, funciones ejecutivas.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:var(--font-display);font-size:17px;color:#D98A4F">clave →</span>
+          <span class="mapa-clave" style="background:var(--pastel-peach);padding:3px 9px;border-radius:5px;font-size:12.5px;font-weight:700;color:#9A6A2E;transform:rotate(1deg);display:inline-block;cursor:help">concentración / atención</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NUBE RECUERDA -->
+    <div style="max-width:600px;margin:44px auto 0;position:relative">
+      <div style="background:var(--periwinkle-50);border:2.5px solid var(--periwinkle-500);border-radius:130px 140px 120px 140px/120px 130px 140px 120px;padding:24px 34px;box-shadow:4px 5px 0 rgba(135,149,210,0.22);transform:rotate(-0.5deg);text-align:center">
+        <span style="font-family:var(--font-display);font-size:22px;color:var(--periwinkle-600)">recuerda</span>
+        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-800,var(--ink-900))">El sketchnote no es "hacerlo bonito": es <strong>codificar con dibujo, posición y color</strong> para que la memoria lo enganche distinto que una lista. Dibujar mal a propósito también funciona <span style="font-family:var(--font-display);color:var(--magenta,#E85DA0)">♥</span></p>
+      </div>
+      <div style="display:flex;justify-content:center;gap:5px;margin-top:-4px">
+        <span style="width:14px;height:14px;border:2.5px solid var(--periwinkle-500);border-radius:50%;background:var(--periwinkle-50)"></span>
+        <span style="width:9px;height:9px;border:2.5px solid var(--periwinkle-500);border-radius:50%;background:var(--periwinkle-50);margin-top:8px"></span>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:44px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="area2-enfoques.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">guía completa de enfoques</a>
+      <a href="mapa-dsm5-ciclo-vital.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">DSM-5 y ciclo vital</a>
+      <a href="mapa-proyectivas-contextos.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">proyectivas y contextos</a>
+    </div>
+
+  </main>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-sketchnote-enfoques';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
