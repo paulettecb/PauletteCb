@@ -57,6 +57,14 @@ copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.joi
 copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.join(dist, 'proyectos/ceneval/libro-area2-intervencion.html'));
 copy(path.join(root, 'proyectos/ceneval/area2-enfoques.html'), path.join(dist, 'proyectos/ceneval/area2-enfoques.html'));
 copy(path.join(root, 'proyectos/ceneval/sketchnote-enfoques.html'), path.join(dist, 'proyectos/ceneval/sketchnote-enfoques.html'));
+// Láminas "scribe" estilo graphic recording: 1 por tema, con su palabra clave disparadora.
+copy(path.join(root, 'proyectos/ceneval/scribe-enfoques-terapeuticos.html'), path.join(dist, 'proyectos/ceneval/scribe-enfoques-terapeuticos.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-confiabilidad-validez.html'), path.join(dist, 'proyectos/ceneval/scribe-confiabilidad-validez.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-que-prueba-estadistica.html'), path.join(dist, 'proyectos/ceneval/scribe-que-prueba-estadistica.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-disenos-investigacion.html'), path.join(dist, 'proyectos/ceneval/scribe-disenos-investigacion.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-dsm5.html'), path.join(dist, 'proyectos/ceneval/scribe-dsm5.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-ciclo-vital.html'), path.join(dist, 'proyectos/ceneval/scribe-ciclo-vital.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-lectura-redaccion.html'), path.join(dist, 'proyectos/ceneval/scribe-lectura-redaccion.html'));
 copy(path.join(root, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'), path.join(dist, 'proyectos/ceneval/mapa-aprendizaje-profundo.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
 copy(path.join(root, 'proyectos/ceneval/simulacro.html'), path.join(dist, 'proyectos/ceneval/simulacro.html'));
