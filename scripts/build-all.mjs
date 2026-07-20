@@ -44,6 +44,7 @@ copy(path.join(root, 'proyectos/mediapipe-lab/libro-agility.html'), path.join(di
 // CENEVAL: solo los HTML (hub + mini libros por área). NUNCA copiar material/
 // (guía, libros con derechos y exámenes) — es local y gitignored.
 copy(path.join(root, 'proyectos/ceneval/index.html'), path.join(dist, 'proyectos/ceneval/index.html'));
+copy(path.join(root, 'proyectos/ceneval/mapa-estudio.html'), path.join(dist, 'proyectos/ceneval/mapa-estudio.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area1-diagnostico.html'), path.join(dist, 'proyectos/ceneval/libro-area1-diagnostico.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area2-intervencion.html'), path.join(dist, 'proyectos/ceneval/libro-area2-intervencion.html'));
 copy(path.join(root, 'proyectos/ceneval/libro-area3-investigacion.html'), path.join(dist, 'proyectos/ceneval/libro-area3-investigacion.html'));
