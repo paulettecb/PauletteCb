@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scribe: Psicoanálisis — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso estilo graphic recording del psicoanálisis freudiano: ello, yo y superyó, los niveles de consciencia y las etapas psicosexuales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--oat);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--oat)">
+  <nav style="background:rgba(251,250,247,0.9);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1680px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">scribe</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">lámina de repaso · psicoanálisis</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <div id="scribeWrap" style="position:relative;width:100%;height:620px;overflow:hidden;margin:0 auto;background:var(--oat)">
+  <div id="scribeBoard" style="position:absolute;top:0;left:0;width:1680px;height:1440px;transform:scale(0.5);transform-origin:top left;background:var(--paper);box-shadow:0 10px 40px rgba(42,41,51,0.14)">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.16) 1.3px, transparent 1.3px);background-size:26px 26px"></div>
+
+    <div style="position:absolute;left:590px;top:22px;font-family:var(--font-accent);font-size:46px;color:#E85DA0;transform:rotate(-6deg);z-index:3">la mente es un</div>
+    <div style="position:absolute;left:340px;top:64px;width:1000px;text-align:center;z-index:2"><span style="font-family:var(--font-sans);font-weight:900;font-size:112px;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);text-shadow:5px 5px 0 var(--periwinkle-300)">TEATRO</span></div>
+    <div style="position:absolute;left:600px;top:186px;transform:rotate(-1.4deg);z-index:2">
+      <div style="position:relative;background:var(--periwinkle-500);color:#fff;font-family:var(--font-display);font-size:29px;letter-spacing:0.03em;padding:7px 34px;border-radius:8px;box-shadow:4px 5px 0 rgba(42,41,51,0.16)">psicoanálisis · freud
+        <span style="position:absolute;left:-15px;top:50%;transform:translateY(-50%);width:0;height:0;border:11px solid transparent;border-right-color:var(--periwinkle-700)"></span>
+        <span style="position:absolute;right:-15px;top:50%;transform:translateY(-50%);width:0;height:0;border:11px solid transparent;border-left-color:var(--periwinkle-700)"></span>
+      </div>
+    </div>
+    <div style="position:absolute;left:1214px;top:150px;color:#B98BC9;transform:rotate(12deg);z-index:3"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:392px;top:150px;color:#D9A441;transform:rotate(-8deg);z-index:3"><svg width="24" height="24" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:500px;top:250px;width:680px;text-align:center;font-family:var(--font-display);font-size:22px;color:var(--periwinkle-600);z-index:2">tres personajes negocian en un escenario de tres profundidades</div>
+
+    <!-- ESCENARIO: estructural + tópico -->
+    <div style="position:absolute;left:56px;top:336px;width:1128px;height:664px;border:3px solid var(--ink-900);border-radius:24px;overflow:hidden;box-shadow:5px 6px 0 rgba(42,41,51,0.13);z-index:2;background:var(--paper)">
+      <div style="position:absolute;left:0;top:0;width:100%;height:221px;background:var(--paper)"></div>
+      <div style="position:absolute;left:0;top:221px;width:100%;height:221px;background:rgba(135,149,210,0.09)"></div>
+      <div style="position:absolute;left:0;top:442px;width:100%;height:222px;background:rgba(135,149,210,0.20)"></div>
+      <div style="position:absolute;left:0;top:221px;width:100%;border-top:1.5px dashed var(--periwinkle-300)"></div>
+      <div style="position:absolute;left:0;top:442px;width:100%;border-top:1.5px dashed var(--periwinkle-300)"></div>
+
+      <div style="position:absolute;left:16px;top:14px;z-index:3"><span style="font-family:var(--font-display);font-size:19px;color:var(--periwinkle-700)">consciente</span><div style="font-size:11px;color:var(--ink-500);font-weight:700">lo que sabes de ti</div></div>
+      <div style="position:absolute;left:16px;top:232px;z-index:3"><span style="font-family:var(--font-display);font-size:19px;color:var(--periwinkle-700)">preconsciente</span><div style="font-size:11px;color:var(--ink-500);font-weight:700">recuperable si lo buscas</div></div>
+      <div style="position:absolute;left:16px;top:452px;z-index:3"><span style="font-family:var(--font-display);font-size:20px;color:var(--periwinkle-800)">inconsciente</span><div style="font-size:11px;color:var(--ink-600);font-weight:700">reprimido · pulsional</div></div>
+
+      <div style="position:absolute;right:14px;top:16px;display:flex;flex-direction:column;align-items:center;z-index:3">
+        <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;writing-mode:vertical-rl;transform:rotate(180deg);height:auto">profundidad</span>
+      </div>
+
+      <!-- SUPERYÓ -->
+      <div style="position:absolute;left:344px;top:24px;width:440px;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:12px 16px;z-index:4;transform:rotate(-0.5deg)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px">
+          <span style="flex:none;width:34px;height:34px;border-radius:9px;background:var(--pastel-lilac);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#5F4B8B"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke-linejoin="round"/></svg></span>
+          <span style="font-family:var(--font-display);font-size:30px;line-height:0.85;color:var(--ink-900)">Superyó</span>
+          <span style="margin-left:auto;background:var(--pastel-lilac);border:1.5px solid rgba(185,139,201,.6);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;color:#5F4B8B">principio moral</span>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.34;color:var(--ink-700)">El <strong>juez</strong> interno: conciencia moral + ideal del yo. Interioriza las normas de los padres y la cultura. Dice <strong>«deberías»</strong>.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-top:6px"><span style="font-family:var(--font-display);color:#B98BC9;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">culpa cuando fallas al deber</span></div>
+      </div>
+
+      <div style="position:absolute;left:520px;top:198px;z-index:5;background:var(--pastel-lilac);border:2px solid var(--ink-900);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:800;color:#5F4B8B;transform:rotate(-1deg)">↓ deber · culpa</div>
+
+      <!-- YO -->
+      <div style="position:absolute;left:344px;top:252px;width:440px;background:#fff;border:3px solid var(--periwinkle-500);border-radius:18px;box-shadow:4px 5px 0 rgba(135,149,210,.28);padding:12px 16px;z-index:4;transform:rotate(0.4deg)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px">
+          <span style="flex:none;width:34px;height:34px;border-radius:9px;background:var(--periwinkle-100);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 3v17M6 20h12M7 7h10" stroke-linecap="round"/><path d="M7 7l-3 6a3 3 0 0 0 6 0z"/><path d="M17 7l-3 6a3 3 0 0 0 6 0z"/></svg></span>
+          <span style="font-family:var(--font-display);font-size:30px;line-height:0.85;color:var(--ink-900)">Yo <span style="font-size:16px;color:var(--periwinkle-600)">(ego)</span></span>
+          <span style="margin-left:auto;background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.6);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;color:#46509B">principio de realidad</span>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.34;color:var(--ink-700)">El <strong>mediador</strong>: negocia entre el ello, el superyó y el mundo. Usa los <strong>mecanismos de defensa</strong> para tolerar la angustia. Busca <strong>cómo y cuándo</strong>.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-top:6px"><span style="font-family:var(--font-display);color:var(--periwinkle-600);font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">espera el momento adecuado</span></div>
+      </div>
+
+      <div style="position:absolute;left:812px;top:300px;z-index:5;background:#fff;border:2px dashed var(--periwinkle-400);border-radius:14px;padding:6px 12px;font-size:11.5px;font-weight:700;color:var(--periwinkle-700);width:150px;line-height:1.25;transform:rotate(1.5deg)">← media con el <strong>mundo externo</strong> (realidad)</div>
+
+      <div style="position:absolute;left:516px;top:456px;z-index:5;background:#F6D9CC;border:2px solid var(--ink-900);border-radius:20px;padding:3px 12px;font-size:12px;font-weight:800;color:#9E4A2E;transform:rotate(1deg)">↑ deseo · placer</div>
+
+      <!-- ELLO -->
+      <div style="position:absolute;left:344px;top:490px;width:440px;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:12px 16px;z-index:4;transform:rotate(-0.4deg)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px">
+          <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F6D9CC;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#9E4A2E"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 3c1.2 4 5 5 5 9a5 5 0 0 1-10 0c0-2.2 1.2-3.4 2.4-4.4.2 1.3 1 2.2 2 2.2.2-3-1.2-4.8 .6-6.8z" stroke-linejoin="round"/></svg></span>
+          <span style="font-family:var(--font-display);font-size:30px;line-height:0.85;color:var(--ink-900)">Ello <span style="font-size:16px;color:#C15A38">(id)</span></span>
+          <span style="margin-left:auto;background:#F6D9CC;border:1.5px solid rgba(225,122,79,.6);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:800;color:#9E4A2E">principio del placer</span>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.34;color:var(--ink-700)">El <strong>impulsivo</strong>: pulsiones innatas (Eros y Tánatos), 100% inconsciente, presente al nacer. Quiere <strong>satisfacción YA</strong>, sin lógica ni moral.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;margin-top:6px"><span style="font-family:var(--font-display);color:#E07A4E;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">bebé que llora por comer ya</span></div>
+      </div>
+    </div>
+
+    <!-- COLUMNA CONCEPTOS CLAVE -->
+    <div style="position:absolute;left:1206px;top:336px;width:418px;height:664px;display:flex;flex-direction:column;gap:14px;z-index:2">
+      <div style="flex:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:13px 16px;transform:rotate(-0.4deg);display:flex;flex-direction:column;justify-content:center">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-peach);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A5A2E"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M13 2L4 14h6l-1 8 9-12h-6z" stroke-linejoin="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:22px;margin:0;color:var(--ink-900)">Libido</h3></div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700)">Energía psíquica de las pulsiones. Se va fijando en zonas del cuerpo → las <strong>etapas psicosexuales</strong>.</p>
+      </div>
+      <div style="flex:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:13px 16px;transform:rotate(0.4deg);display:flex;flex-direction:column;justify-content:center">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-sky);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#3F5488"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M4 8h11l-3-3M20 16H9l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:21px;margin:0;color:var(--ink-900)">Transferencia</h3></div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700)">El paciente <strong>proyecta en el analista</strong> figuras del pasado. Al revés = <strong>contratransferencia</strong>.</p>
+      </div>
+      <div style="flex:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:13px 16px;transform:rotate(-0.3deg);display:flex;flex-direction:column;justify-content:center">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-lilac);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#5F4B8B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 4a4 4 0 0 0-4 4c0 5-3 4-3 8a5 5 0 0 0 10 0c0-4-3-3-3-8a4 4 0 0 0 0 0" stroke-linecap="round"/><path d="M12 4a4 4 0 0 1 4 4c0 5 3 4 3 8" stroke-linecap="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:20px;margin:0;color:var(--ink-900)">Cómo se explora</h3></div>
+        <p style="margin:0;font-size:12px;line-height:1.3;color:var(--ink-700)"><strong>Asociación libre</strong> · <strong>sueños</strong> (contenido manifiesto vs latente) · <strong>actos fallidos</strong> (lapsus).</p>
+      </div>
+      <div style="flex:1;background:var(--pastel-blush);border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.12);padding:13px 16px;transform:rotate(0.3deg);display:flex;flex-direction:column;justify-content:center">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span style="flex:none;width:30px;height:30px;border-radius:8px;background:#fff;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A3F58"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" stroke-linejoin="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:20px;margin:0;color:var(--ink-900)">Defensas del yo</h3></div>
+        <p style="margin:0;font-size:12px;line-height:1.3;color:#8A3F58">Ante la angustia, el yo distorsiona la realidad. <a href="scribe-mecanismos-defensa.html" style="font-weight:800;color:#8A3F58;text-decoration:underline">ver las 13 máquinas →</a></p>
+      </div>
+    </div>
+
+    <!-- ETAPAS PSICOSEXUALES -->
+    <div style="position:absolute;left:56px;top:1020px;width:1568px;height:262px;background:rgba(135,149,210,0.07);border:2px dashed var(--periwinkle-300);border-radius:22px;padding:12px 20px;z-index:2">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px">
+        <span style="font-family:var(--font-display);font-size:26px;color:var(--periwinkle-700)">etapas psicosexuales</span>
+        <span style="font-size:12px;color:var(--ink-500);font-weight:700">la libido cambia de zona con la edad · fijarse ahí deja huella de por vida</span>
+      </div>
+      <div style="position:relative;display:flex;gap:14px;align-items:stretch">
+        <div style="position:absolute;left:10px;right:10px;top:104px;height:5px;background:repeating-linear-gradient(90deg,var(--periwinkle-400) 0 14px,transparent 14px 26px);z-index:0"></div>
+        <div style="width:290px;flex:none;position:relative;z-index:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:16px;box-shadow:3px 4px 0 rgba(42,41,51,.12);padding:11px 13px;transform:rotate(-0.4deg)">
+          <div style="display:flex;align-items:center;justify-content:space-between"><h4 style="font-family:var(--font-display);font-size:21px;margin:0;color:var(--ink-900)">Oral</h4><span style="background:var(--pastel-peach);border:1.5px solid rgba(217,164,65,.5);padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;color:#8A5A2E">0–1 año</span></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.3;color:var(--ink-700)"><strong>Boca:</strong> placer al succionar y morder.</p>
+          <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;margin-top:6px"><span style="font-family:var(--font-display);color:#C9922C;font-size:14px">fijación→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 7px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">fumar · comer · dependencia</span></div>
+        </div>
+        <div style="width:290px;flex:none;position:relative;z-index:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:16px;box-shadow:3px 4px 0 rgba(42,41,51,.12);padding:11px 13px;transform:rotate(0.4deg)">
+          <div style="display:flex;align-items:center;justify-content:space-between"><h4 style="font-family:var(--font-display);font-size:21px;margin:0;color:var(--ink-900)">Anal</h4><span style="background:var(--pastel-butter);border:1.5px solid rgba(217,164,65,.5);padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;color:#8A6D1F">1–3 años</span></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.3;color:var(--ink-700)"><strong>Esfínteres:</strong> control y autonomía.</p>
+          <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;margin-top:6px"><span style="font-family:var(--font-display);color:#C9922C;font-size:14px">fijación→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 7px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">orden/tacañería ↔ desorden</span></div>
+        </div>
+        <div style="width:290px;flex:none;position:relative;z-index:1;background:#fff;border:3px solid var(--ink-900);border-radius:16px;box-shadow:3px 4px 0 rgba(232,122,165,.3);padding:11px 13px;transform:rotate(-0.3deg)">
+          <div style="position:absolute;right:-8px;top:-11px;background:#E85DA0;color:#fff;font-family:var(--font-display);font-size:13px;padding:3px 11px;border-radius:14px;transform:rotate(4deg);box-shadow:2px 2px 0 rgba(42,41,51,.2);z-index:2">Edipo / Electra</div>
+          <div style="display:flex;align-items:center;justify-content:space-between"><h4 style="font-family:var(--font-display);font-size:21px;margin:0;color:var(--ink-900)">Fálica</h4><span style="background:var(--pastel-blush);border:1.5px solid rgba(232,122,165,.5);padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;color:#8A3F58">3–6 años</span></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.3;color:var(--ink-700)">Identificación con el progenitor del mismo sexo → <strong>nace el superyó</strong>.</p>
+          <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;margin-top:6px"><span style="font-family:var(--font-display);color:#E07AA5;font-size:14px">fijación→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 7px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">vanidad · problemas de identidad</span></div>
+        </div>
+        <div style="width:290px;flex:none;position:relative;z-index:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:16px;box-shadow:3px 4px 0 rgba(42,41,51,.12);padding:11px 13px;transform:rotate(0.3deg)">
+          <div style="display:flex;align-items:center;justify-content:space-between"><h4 style="font-family:var(--font-display);font-size:20px;margin:0;color:var(--ink-900)">Latencia</h4><span style="background:var(--pastel-sky);border:1.5px solid rgba(135,149,210,.5);padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;color:#3F5488">6–pubertad</span></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.3;color:var(--ink-700)">Pulsión <strong>en pausa</strong>: energía a la escuela y las amistades.</p>
+          <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;margin-top:6px"><span style="font-family:var(--font-display);color:var(--periwinkle-500);font-size:14px">clave→</span><span class="mapa-clave" style="background:var(--pastel-sky);padding:2px 7px;border-radius:5px;font-weight:800;color:#3F5488;cursor:help">socialización · habilidades</span></div>
+        </div>
+        <div style="width:290px;flex:none;position:relative;z-index:1;background:#fff;border:2.5px solid var(--ink-900);border-radius:16px;box-shadow:3px 4px 0 rgba(42,41,51,.12);padding:11px 13px;transform:rotate(-0.3deg)">
+          <div style="display:flex;align-items:center;justify-content:space-between"><h4 style="font-family:var(--font-display);font-size:20px;margin:0;color:var(--ink-900)">Genital</h4><span style="background:var(--pastel-lilac);border:1.5px solid rgba(139,111,192,.5);padding:2px 8px;border-radius:20px;font-size:10.5px;font-weight:800;color:#5F4B8B">pubertad+</span></div>
+          <p style="margin:5px 0 0;font-size:12px;line-height:1.3;color:var(--ink-700)">Sexualidad <strong>madura</strong>: intimidad y vínculos adultos.</p>
+          <div style="display:flex;align-items:center;gap:5px;font-size:10.5px;margin-top:6px"><span style="font-family:var(--font-display);color:#8B6FC0;font-size:14px">clave→</span><span class="mapa-clave" style="background:var(--pastel-lilac);padding:2px 7px;border-radius:5px;font-weight:800;color:#5F4B8B;cursor:help">amar y trabajar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:300px;top:1306px;width:1080px;background:var(--pastel-butter);border:3px solid var(--ink-900);border-radius:140px/86px;padding:13px 44px;box-shadow:5px 6px 0 rgba(217,164,65,0.35);transform:rotate(-0.5deg);z-index:3;text-align:center">
+      <span style="font-family:var(--font-display);font-size:26px;color:#B0851F">recuerda</span>
+      <p style="margin:3px 0 0;font-size:15px;line-height:1.4;color:#5C4A17"><strong>Ello</strong> quiere · <strong>Superyó</strong> prohíbe · <strong>Yo</strong> negocia. Lo reprimido vive en el <strong>inconsciente</strong> y regresa disfrazado en sueños, lapsus y síntomas <span style="font-family:var(--font-accent);color:#E85DA0;font-size:20px">♥</span></p>
+    </div>
+
+    <div style="position:absolute;left:1518px;top:34px;width:106px;height:106px;border:3px solid var(--periwinkle-500);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-6deg);z-index:3;background:var(--paper)">
+      <span style="font-family:var(--font-accent);font-size:29px;color:#E85DA0;line-height:0.8">kyn</span>
+      <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-top:2px">scribe</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:1680px;margin:0 auto;padding:20px 24px 60px;text-align:center">
+    <p style="font-size:13.5px;color:var(--ink-500);margin:0 0 12px;line-height:1.5">Lámina de repaso estilo <em>graphic recording</em>. Activa <strong>Modo repaso</strong> y pasa el cursor sobre las claves para autoevaluarte.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="scribe-mecanismos-defensa.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">mecanismos de defensa</a>
+      <a href="scribe-enfoques-terapeuticos.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">enfoques terapéuticos</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-scribe-psicoanalisis';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+
+  var wrap = document.getElementById('scribeWrap');
+  var board = document.getElementById('scribeBoard');
+  function fit() {
+    if (!wrap || !board) return;
+    var scale = Math.min(1, wrap.clientWidth / 1680);
+    board.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (1440 * scale) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  [200, 600, 1200].forEach(function(t) { setTimeout(fit, t); });
+})();
+</script>
+</body>
+</html>
