@@ -69,6 +69,8 @@ copy(path.join(root, 'proyectos/ceneval/scribe-lectura-redaccion.html'), path.jo
 copy(path.join(root, 'proyectos/ceneval/scribe-etica-profesional.html'), path.join(dist, 'proyectos/ceneval/scribe-etica-profesional.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-ambitos-intervencion.html'), path.join(dist, 'proyectos/ceneval/scribe-ambitos-intervencion.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-teorias-desarrollo.html'), path.join(dist, 'proyectos/ceneval/scribe-teorias-desarrollo.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-mecanismos-defensa.html'), path.join(dist, 'proyectos/ceneval/scribe-mecanismos-defensa.html'));
+copy(path.join(root, 'proyectos/ceneval/scribe-psicoanalisis.html'), path.join(dist, 'proyectos/ceneval/scribe-psicoanalisis.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-aprendizaje.html'), path.join(dist, 'proyectos/ceneval/scribe-aprendizaje.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-muestreo.html'), path.join(dist, 'proyectos/ceneval/scribe-muestreo.html'));
 copy(path.join(root, 'proyectos/ceneval/scribe-estadistica-inferencial.html'), path.join(dist, 'proyectos/ceneval/scribe-estadistica-inferencial.html'));
