@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uso e interpretación — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Cómo se usan los instrumentos en la práctica: screening vs. diagnóstico, batería, el reporte completo y los distintos contextos de evaluación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+  --warning: #D9A441;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(47, 54, 88, 0.06);
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body { margin: 0; background: var(--paper); overflow-x: hidden; }
+a { color: var(--periwinkle-700); }
+a:hover { color: var(--periwinkle-600); }
+@keyframes riseIn { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-sans);font-weight:var(--weight-black);
+  text-transform:uppercase;letter-spacing:0.06em;
+  border:1.5px solid transparent;border-radius:var(--radius-pill);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background var(--dur-fast) var(--ease-out),
+             color var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-out),
+             box-shadow var(--dur-base) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out);
+}
+.kyn-btn:focus-visible{outline:none;box-shadow:var(--shadow-focus);}
+.kyn-btn:active{transform:translateY(1px) scale(0.99);}
+.kyn-btn--sm{font-size:13px;padding:9px 18px;}
+.kyn-btn--md{font-size:15px;padding:13px 26px;}
+.kyn-btn--primary{background:var(--periwinkle-500);color:#fff;box-shadow:var(--shadow-sm);}
+.kyn-btn--primary:hover{background:var(--periwinkle-600);box-shadow:var(--shadow-md);color:#fff;}
+.kyn-btn--secondary{background:var(--white);color:var(--ink-900);border-color:var(--ink-100);}
+.kyn-btn--secondary:hover{border-color:var(--periwinkle-300);background:var(--periwinkle-50);color:var(--ink-900);}
+.kyn-btn--ghost{background:transparent;color:var(--periwinkle-700);}
+.kyn-btn--ghost:hover{background:var(--periwinkle-50);color:var(--periwinkle-700);}
+
+.kyn-alert{
+  display:flex;align-items:flex-start;gap:12px;font-family:var(--font-sans);
+  border-radius:var(--radius-md);padding:16px 18px;border:1px solid transparent;
+}
+.kyn-alert__icon{flex:none;display:inline-flex;padding-top:1px;}
+.kyn-alert__icon svg{width:20px;height:20px;}
+.kyn-alert__body{display:flex;flex-direction:column;gap:3px;}
+.kyn-alert__title{font-size:14px;font-weight:var(--weight-bold);}
+.kyn-alert__msg{font-size:13px;line-height:1.5;}
+.kyn-alert--warning{background:var(--pastel-butter);border-color:#EBD79A;}
+.kyn-alert--warning .kyn-alert__icon,.kyn-alert--warning .kyn-alert__title{color:#8A6D1F;}
+.kyn-alert--warning .kyn-alert__msg{color:#8A6D1F;}
+
+.no-print a.kyn-btn { text-decoration: none; }
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+}
+</style>
+</head>
+<body>
+  <div class="no-print" style="max-width: 1040px; margin: 0 auto; padding: 14px 24px 0;">
+    <a href="index.html" style="text-decoration:none;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800)">← Base CENEVAL</a>
+  </div>
+
+<div style="font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #2A2933; background: #FBFAF7; min-height: 100%; padding: 28px 24px 64px;">
+  <div style="max-width: 1040px; margin: 0 auto; animation: riseIn .5s cubic-bezier(0.22,1,0.36,1);">
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px;" class="no-print">
+      <a href="area1-instrumentos-3-escalas.html" class="kyn-btn kyn-btn--secondary kyn-btn--sm" style="text-decoration: none;">‹ Escalas</a>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #A8A6B0;">Bloque 4 / 4</div>
+      <a href="area1-instrumentos-indice.html" class="kyn-btn kyn-btn--ghost kyn-btn--sm" style="text-decoration: none;">Índice ›</a>
+    </div>
+
+    <header style="text-align: center; margin-bottom: 26px;">
+      <div style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8471C4;">Bloque 4 · Área 1 · subáreas 1.2–1.4</div>
+      <h1 style="font-weight: 800; font-size: 46px; line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0 4px;">Uso e interpretación</h1>
+      <div style="font-family: 'Friendship', cursive; font-size: 27px; color: #8471C4; line-height: 1;">cómo se usa de verdad</div>
+      <p style="font-size: 16.5px; line-height: 1.6; color: #75737F; max-width: 600px; margin: 14px auto 0;">Tener el número es el principio, no el final. Cuatro ideas sobre <b style="color: #4A4955;">qué se hace</b> con los instrumentos.</p>
+    </header>
+
+    <div style="display: flex; justify-content: center;">
+      <div style="background: #8471C4; color: #fff; font-weight: 900; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; padding: 13px 30px; border-radius: 999px; box-shadow: 0 8px 24px rgba(71,54,110,0.2);">Uso e interpretación</div>
+    </div>
+    <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 6px 0 2px;"><div style="width: 2.5px; height: 18px; background: #D8CCEC;"></div><div style="width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid #A98FD8;"></div></div></div>
+
+    <div style="display: flex; flex-direction: column; gap: 0;">
+
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #E2D6F0; color: #6A4FA0; display: flex; align-items: center; justify-content: center; font-weight: 900; flex: none;">1</div>
+          <div style="font-weight: 800; font-size: 19px; letter-spacing: -0.01em;">Screening ≠ diagnóstico</div>
+        </div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #4A4955; margin-top: 10px;">Un solo autorreporte (como el <b>Beck</b>) sirve para <b>identificar</b> que hay síntomas y su severidad. No diagnostica de forma definitiva ni distingue entre subtipos parecidos.</div>
+        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-top: 14px;">
+          <div style="background: #F0F2FB; border-radius: 12px; padding: 12px 14px;"><div style="font-weight: 800; font-size: 13.5px; color: #5562A4;">Screening</div><div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 3px;">detecta síntomas + su severidad.</div></div>
+          <div style="display: flex; align-items: center;"><div style="width: 18px; height: 2.5px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #9BA6DA;"></div></div>
+          <div style="background: #EFE7F7; border-radius: 12px; padding: 12px 14px;"><div style="font-weight: 800; font-size: 13.5px; color: #6A4FA0;">Diagnóstico</div><div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 3px;">juicio clínico: entrevista, historia y a veces una batería.</div></div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 10px 0;"><div style="width: 2.5px; height: 14px; background: #D8CCEC;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #A98FD8;"></div></div></div>
+
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #E2D6F0; color: #6A4FA0; display: flex; align-items: center; justify-content: center; font-weight: 900; flex: none;">2</div>
+          <div style="font-weight: 800; font-size: 19px; letter-spacing: -0.01em;">Batería: varios instrumentos juntos</div>
+        </div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #4A4955; margin-top: 10px;">Combinar varios instrumentos para construir un <b>panorama completo</b> en vez de depender de un solo dato.</div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+          <span style="background: #E4F1EA; color: #2F6B4F; font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 999px;">inteligencia</span>
+          <span style="font-weight: 800; color: #A8A6B0;">+</span>
+          <span style="background: #F0F2FB; color: #5562A4; font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 999px;">ansiedad</span>
+          <span style="font-weight: 800; color: #A8A6B0;">+</span>
+          <span style="background: #F6D2DD; color: #9B4D67; font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 999px;">depresión</span>
+          <div style="display: flex; align-items: center;"><div style="width: 20px; height: 2.5px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #9BA6DA;"></div></div>
+          <span style="background: #8471C4; color: #fff; font-size: 12.5px; font-weight: 800; padding: 6px 14px; border-radius: 999px;">panorama completo</span>
+        </div>
+        <div style="margin-top: 12px; background: #F7F4FB; border: 1px solid #E8E0F2; border-radius: 12px; padding: 10px 14px; font-size: 12.5px; line-height: 1.5; color: #4A4955;"><b style="color: #6A4FA0;">Caso típico de examen:</b> <b>Beck</b> (severidad de síntomas) + <b>MMPI-2-RF</b> (personalidad, escalas de validez) + <b>Hamilton</b> (depresión/ansiedad por entrevista) juntos, para diferenciar si es un trastorno del estado de ánimo, de personalidad, o ambos.</div>
+      </div>
+
+      <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 10px 0;"><div style="width: 2.5px; height: 14px; background: #D8CCEC;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #A98FD8;"></div></div></div>
+
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #8471C4; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #E2D6F0; color: #6A4FA0; display: flex; align-items: center; justify-content: center; font-weight: 900; flex: none;">3</div>
+          <div style="font-weight: 800; font-size: 19px; letter-spacing: -0.01em; flex: 1 1 auto; min-width: 0;">El reporte no se queda en el puntaje</div>
+          <span style="background: #F6EBC4; color: #8A6D1F; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; flex: none;">nivel sobresaliente</span>
+        </div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #4A4955; margin-top: 10px;">Un informe completo va más allá del número:</div>
+        <div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; margin-top: 14px;">
+          <div style="background: #F4F0E8; border-radius: 11px; padding: 11px 14px; text-align: center; min-width: 96px;"><div style="font-weight: 800; font-size: 13.5px; color: #75737F;">Puntaje</div><div style="font-size: 11.5px; color: #A8A6B0; margin-top: 2px;">el dato</div></div>
+          <div style="display: flex; align-items: center;"><div style="width: 16px; height: 2.5px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #9BA6DA;"></div></div>
+          <div style="background: #EFE7F7; border-radius: 11px; padding: 11px 14px; text-align: center; min-width: 96px;"><div style="font-weight: 800; font-size: 13.5px; color: #6A4FA0;">Diagnóstico</div><div style="font-size: 11.5px; color: #75737F; margin-top: 2px;">a veces diferencial</div></div>
+          <div style="display: flex; align-items: center;"><div style="width: 16px; height: 2.5px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #9BA6DA;"></div></div>
+          <div style="background: #EFE7F7; border-radius: 11px; padding: 11px 14px; text-align: center; min-width: 96px;"><div style="font-weight: 800; font-size: 13.5px; color: #6A4FA0;">Pronóstico</div><div style="font-size: 11.5px; color: #75737F; margin-top: 2px;">qué se espera</div></div>
+          <div style="display: flex; align-items: center;"><div style="width: 16px; height: 2.5px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid #9BA6DA;"></div></div>
+          <div style="background: #EFE7F7; border-radius: 11px; padding: 11px 14px; text-align: center; min-width: 96px;"><div style="font-weight: 800; font-size: 13.5px; color: #6A4FA0;">Recomendaciones</div><div style="font-size: 11.5px; color: #75737F; margin-top: 2px;">intervención / canalización</div></div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 10px 0;"><div style="width: 2.5px; height: 14px; background: #D8CCEC;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #A98FD8;"></div></div></div>
+
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,54,88,0.07); break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #E2D6F0; color: #6A4FA0; display: flex; align-items: center; justify-content: center; font-weight: 900; flex: none;">4</div>
+          <div style="font-weight: 800; font-size: 19px; letter-spacing: -0.01em;">Mismos instrumentos, distinto propósito</div>
+        </div>
+        <div style="font-size: 14.5px; line-height: 1.55; color: #4A4955; margin-top: 10px;">El proceso de evaluación cambia de <b>finalidad</b> según el contexto:</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 14px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 3px solid #6B7AC1; border-radius: 12px; padding: 13px 15px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5562A4" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg><div style="font-weight: 800; font-size: 14px; color: #5562A4;">Clínico</div></div>
+            <div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 5px;">diagnóstico y tratamiento.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 3px solid #4FA47A; border-radius: 12px; padding: 13px 15px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F6B4F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><div style="font-weight: 800; font-size: 14px; color: #2F6B4F;">Educativo</div></div>
+            <div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 5px;">necesidades de aprendizaje.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 3px solid #D9A441; border-radius: 12px; padding: 13px 15px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A6D1F" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg><div style="font-weight: 800; font-size: 14px; color: #8A6D1F;">Organizacional</div></div>
+            <div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 5px;">selección y evaluación de puesto.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 3px solid #8471C4; border-radius: 12px; padding: 13px 15px;">
+            <div style="display: flex; align-items: center; gap: 8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6A4FA0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><div style="font-weight: 800; font-size: 14px; color: #6A4FA0;">Comunitario</div></div>
+            <div style="font-size: 12.5px; color: #4A4955; line-height: 1.45; margin-top: 5px;">social: necesidades de una población.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 30px;">
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">Un solo dato no diagnostica</div><div class="kyn-alert__msg" style="font-size: 13px;">El puntaje <b>detecta</b>; el diagnóstico lo hace el <b>juicio clínico</b> (entrevista, historia, batería).</div></div>
+      </div>
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">El contexto cambia el propósito</div><div class="kyn-alert__msg" style="font-size: 13px;">Los mismos instrumentos sirven distinto en lo clínico, educativo, organizacional o social.</div></div>
+      </div>
+    </div>
+
+        <div style="margin-top: 30px; background: #fff; border: 1.5px solid #F7C9DE; border-radius: 20px; padding: 22px 24px; box-shadow: 0 2px 8px rgba(47,54,88,0.06);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#E85DA0" stroke="#E85DA0" stroke-width="1.5" stroke-linejoin="round" style="flex: none;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div style="font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #E85DA0;">Trucos para recordar</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4px 28px;">
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 108px;">Detecta ≠ diagnostica</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">El Beck te dice que <b>hay</b> síntomas y qué tan fuertes, no <b>cuál</b> trastorno.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 108px;">DPR</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Un buen reporte añade <b>D</b>iagnóstico, <b>P</b>ronóstico y <b>R</b>ecomendaciones al puntaje.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 108px;">CEOS</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Contextos: <b>C</b>línico, <b>E</b>ducativo, <b>O</b>rganizacional, <b>S</b>ocial.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 108px;">Batería &gt; dato</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Varios instrumentos cuentan la historia completa; uno solo, no.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 34px; background: #F0F2FB; border: 1px solid #E2E6F5; border-radius: 18px; padding: 22px 24px; text-align: center;">
+      <div style="font-family: 'Friendship', cursive; font-size: 26px; color: #8795D2; line-height: 1;">completaste el mapa</div>
+      <div style="font-size: 14px; color: #75737F; margin-top: 6px;">Ya recorriste los cuatro bloques del Área 1. Repite el que se te resista.</div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; padding-top: 22px; border-top: 1px solid #E9E3D7;" class="no-print">
+      <a href="area1-instrumentos-3-escalas.html" class="kyn-btn kyn-btn--secondary kyn-btn--md" style="text-decoration: none;">‹ Escalas</a>
+      <a href="area1-instrumentos-indice.html" class="kyn-btn kyn-btn--primary kyn-btn--md" style="text-decoration: none;">↺ Volver al índice</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
