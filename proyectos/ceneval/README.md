@@ -34,4 +34,8 @@ Regla: si la guía y un libro se contradicen, **gana la guía** (el examen se ca
 
 ## El plan
 
-Ver [`plan-2-semanas.md`](./plan-2-semanas.md) — diagnóstico → ciclos por área débil → simulacros de control → repaso final.
+Ver [`plan-2-semanas.md`](./plan-2-semanas.md) — diagnóstico → ciclos por área débil → simulacros de control → repaso final. Sprint final día a día en [`plan-10-dias-bloques.md`](./plan-10-dias-bloques.md).
+
+## Cómo aprende Paulette
+
+Ver [`perfil-aprendizaje.md`](./perfil-aprendizaje.md) — SOP vivo del método de estudio (TDAH, altas capacidades, rasgos autistas: narrativa causal, no listas, conversación socrática). Se auto-actualiza con cada tema. `CLAUDE.md` lo carga automáticamente al abrir el proyecto.
