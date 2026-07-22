@@ -968,7 +968,7 @@ footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--
 </ul>
 
 <h3>Predicción: regresión</h3>
-<p>La <strong>regresión lineal</strong> (asociada a Pearson) estima el valor de una variable a partir de otra; para más de dos variables está la <strong>correlación múltiple (R)</strong>. Pero la lineal exige que la variable a predecir sea <strong>continua</strong> (intervalo/razón). Cuando lo que quieres predecir es <strong>dicotómico</strong> (sí/no, enfermo/sano, aprueba/reprueba), la lineal ya no aplica — ahí entra la <strong>regresión logística binaria</strong>: en vez de una recta, modela la <strong>probabilidad</strong> de que ocurra el evento (transformación logit), y esa probabilidad siempre cae entre 0 y 1 (la lineal podría "predecir" valores absurdos, como −20% o 140%). No exige normalidad ni homocedasticidad como la lineal.</p>
+<p>La <strong>regresión lineal</strong> (asociada a Pearson) estima el valor de una variable a partir de otra; para más de dos variables está la <strong>correlación múltiple (R)</strong>.</p>
 
 <div class="tabla-scroll"><table>
 <thead><tr><th>Pregunta</th><th>Prueba</th><th>Pista</th></tr></thead>
@@ -976,15 +976,14 @@ footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--
 <tr><td>¿Difieren <strong>2 grupos</strong> en su media?</td><td><strong>t</strong></td><td>"dos grupos", "medias".</td></tr>
 <tr><td>¿Difieren <strong>3+ grupos</strong>?</td><td><strong>ANOVA</strong></td><td>"tres o más", reporta <strong>F</strong>.</td></tr>
 <tr><td>¿Se <strong>asocian</strong> 2 variables de intervalo/razón?</td><td><strong>Pearson (r)</strong></td><td>"a mayor X, mayor Y"; sin causalidad.</td></tr>
-<tr><td>¿<strong>Predecir</strong> Y (continua) desde X?</td><td><strong>Regresión lineal</strong></td><td>"estimar", "pronosticar" un valor numérico.</td></tr>
-<tr><td>¿<strong>Predecir</strong> Y (dicotómica: sí/no) desde X?</td><td><strong>Regresión logística</strong></td><td>"predecir si ocurre o no", variable binaria.</td></tr>
+<tr><td>¿<strong>Predecir</strong> Y desde X?</td><td><strong>Regresión lineal</strong></td><td>"estimar", "pronosticar".</td></tr>
 </tbody>
 </table></div>
 
-<div class="nota-campo"><p>Cuando el reactivo te dé un caso, subraya tres cosas: <strong>cuántos grupos</strong>, <strong>qué nivel de medición</strong> y <strong>qué verbo</strong> usa la pregunta (diferir / asociarse / predecir). Con esas tres coordenadas, la prueba sale sola — y si el nivel es ordinal o no hay normalidad, brinca al capítulo 16. Si lo que se predice es una variable de <strong>dos categorías</strong> (no un número continuo), la respuesta casi siempre es regresión logística, no lineal.</p></div>
+<div class="nota-campo"><p>Cuando el reactivo te dé un caso, subraya tres cosas: <strong>cuántos grupos</strong>, <strong>qué nivel de medición</strong> y <strong>qué verbo</strong> usa la pregunta (diferir / asociarse / predecir). Con esas tres coordenadas, la prueba sale sola — y si el nivel es ordinal o no hay normalidad, brinca al capítulo 16.</p></div>
 
 <div class="esencial">
-<p><strong>Diferencia:</strong> t (2 grupos) y ANOVA (3+, valor F = inter vs. intragrupos). <strong>Asociación:</strong> Pearson r (intervalo/razón, lineal, sin causalidad); r² = determinación (0.66-0.85 buena predicción; &gt;0.85 = casi el mismo constructo). <strong>Predicción:</strong> regresión lineal para variable continua (y correlación múltiple R para varias variables); <strong>regresión logística binaria</strong> para variable dicotómica (modela probabilidad 0-1, no exige normalidad).</p>
+<p><strong>Diferencia:</strong> t (2 grupos) y ANOVA (3+, valor F = inter vs. intragrupos). <strong>Asociación:</strong> Pearson r (intervalo/razón, lineal, sin causalidad); r² = determinación (0.66-0.85 buena predicción; &gt;0.85 = casi el mismo constructo). <strong>Predicción:</strong> regresión lineal (y correlación múltiple R para varias variables).</p>
 </div>
     </section>
 
@@ -1347,18 +1346,8 @@ footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--
 
 <div class="nota-campo"><p>Truco de bolsillo: <strong>difusión = "entre doctores"; divulgación = "para todo el vulgo"</strong> (divulgación y vulgo comparten raíz, literal). Si el reactivo describe un congreso o una revista arbitrada → difusión; si describe un museo de ciencias o un video para redes → divulgación.</p></div>
 
-<h3>Formatos concretos de difusión/divulgación</h3>
-<p>Dentro de "difusión" hay varios formatos que el examen nombra por separado — la pregunta suele ser "¿cuál es cuál?":</p>
-<ul>
-<li><strong>Simposio</strong>: un grupo <strong>reducido de expertos</strong> presenta investigaciones o reflexiones sobre un mismo tema especializado, seguido de análisis colectivo entre ellos.</li>
-<li><strong>Foro</strong>: espacio de <strong>diálogo abierto</strong> que prioriza la participación activa de la audiencia para contrastar ideas y generar propuestas — más conversación que exposición formal.</li>
-<li><strong>Cartel / póster</strong>: resumen <strong>gráfico</strong> de una investigación, montado visualmente; favorece la interacción informal uno a uno con quien pasa a verlo, a diferencia de una exposición oral.</li>
-<li><strong>Conferencia</strong>: exposición <strong>oral formal</strong> de un experto ante una audiencia amplia, en formato de auditorio, con interacción limitada.</li>
-</ul>
-<div class="dato"><p>Para diferenciarlos rápido: ¿quién habla más, el experto o el público? <strong>Conferencia</strong> = solo el experto. <strong>Foro</strong> = el público participa activamente. <strong>Simposio</strong> = varios expertos entre sí. <strong>Cartel</strong> = ni habla formal — se lee/observa, con conversación 1 a 1.</p></div>
-
 <div class="esencial">
-<p><strong>Difusión</strong> → pares, lenguaje técnico, revistas arbitradas. <strong>Divulgación</strong> → público general, lenguaje sencillo con analogías. <strong>Comunicación de la ciencia</strong> → el paraguas (criterio de noticiabilidad). Rueda: triángulo virtuoso <strong>lectores-autores-dictaminadores</strong>; internet = acceso libre y permanente; difundir también sirve a políticas y a la práctica cotidiana. <strong>Formatos:</strong> simposio (varios expertos) · foro (participa el público) · cartel/póster (gráfico, 1 a 1) · conferencia (un experto, formal).</p>
+<p><strong>Difusión</strong> → pares, lenguaje técnico, revistas arbitradas. <strong>Divulgación</strong> → público general, lenguaje sencillo con analogías. <strong>Comunicación de la ciencia</strong> → el paraguas (criterio de noticiabilidad). Rueda: triángulo virtuoso <strong>lectores-autores-dictaminadores</strong>; internet = acceso libre y permanente; difundir también sirve a políticas y a la práctica cotidiana.</p>
 </div>
     </section>
 
@@ -1422,8 +1411,6 @@ footer .paws { font-family: var(--font-accent); font-size: 1.2rem; color: var(--
         <div class="glos-item"><strong>et al.</strong><em>Cap. 25</em><span>APA 7ª: con 3+ autores, desde la PRIMERA cita.</span></div>
         <div class="glos-item"><strong>Difusión vs. divulgación</strong><em>Cap. 26</em><span>Pares y lenguaje técnico vs. público general y lenguaje sencillo.</span></div>
         <div class="glos-item"><strong>Triángulo virtuoso</strong><em>Cap. 26</em><span>Rueda: lectores, autores y dictaminadores sostienen una revista académica.</span></div>
-        <div class="glos-item"><strong>Regresión logística binaria</strong><em>Cap. 17</em><span>Predice variable dicotómica (sí/no) como probabilidad 0-1; no exige normalidad.</span></div>
-        <div class="glos-item"><strong>Simposio/foro/cartel/conferencia</strong><em>Cap. 26</em><span>Varios expertos / participa el público / gráfico 1 a 1 / un experto formal.</span></div>
       </div>
     </section>
 
