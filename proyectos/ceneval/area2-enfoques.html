@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enfoques de intervención — Área 2 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Los 6 enfoques de intervención psicológica (Área 2), procesados como cadena causal: cada escuela por bocados, con conceptos clave y preguntas de recall.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+:root {
+  --periwinkle-50:  #F0F2FB; --periwinkle-100: #E2E6F5; --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2; --periwinkle-400: #9BA6DA; --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1; --periwinkle-700: #5562A4; --periwinkle-800: #434D80; --periwinkle-900: #2F3658;
+  --white: #FFFFFF; --paper: #FBFAF7; --oat: #F4F0E8; --sand: #E9E3D7;
+  --ink-900: #2A2933; --ink-800: #3A3940; --ink-700: #4A4955; --ink-500: #75737F; --ink-300: #A8A6B0; --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0; --pop-magenta-soft: #F7C9DE;
+  --pastel-blush: #F6D2DD; --pastel-peach: #F8DCC9; --pastel-butter: #F6EBC4;
+  --pastel-mint: #CFE8DA; --pastel-sky: #CFE0F2; --pastel-lilac: #E2D6F0;
+  --border-subtle: var(--ink-100); --border-on-oat: var(--sand);
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent: 'Farmhouse', 'Georgia', serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius-sm: 10px; --radius-md: 16px; --radius-xl: 32px;
+  --shadow-xs: 0 1px 2px rgba(47,54,88,0.06); --shadow-sm: 0 2px 8px rgba(47,54,88,0.07);
+  --ease-out: cubic-bezier(0.22,1,0.36,1);
+}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{ margin:0; background:var(--paper); overflow-x:hidden; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+a{ color:var(--periwinkle-700); text-decoration:none; }
+a:hover{ color:var(--periwinkle-600); }
+
+/* ConceptoCard */
+.cc-card{ background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); box-shadow:var(--shadow-xs); overflow:hidden; }
+.cc-toggle{ background:none; border:none; cursor:pointer; width:100%; text-align:left; display:flex; align-items:center; gap:10px; padding:13px 15px; font:inherit; }
+.cc-term{ flex:1; min-width:0; font-family:var(--font-sans); font-weight:800; font-size:14px; color:var(--ink-900); line-height:1.3; }
+.cc-chev{ flex:none; color:var(--ink-300); font-size:19px; line-height:1; transform:rotate(0deg); transition:transform 200ms var(--ease-out); }
+.cc-card.is-open .cc-chev{ transform:rotate(90deg); }
+.cc-panel{ max-height:0; overflow:hidden; transition:max-height 320ms var(--ease-out); }
+.cc-def{ margin:0; padding:0 15px 14px; font-family:var(--font-sans); font-size:13.5px; line-height:1.55; color:var(--ink-700); }
+
+/* RecallCard */
+.rc-card{ background:var(--periwinkle-50); border:1px solid var(--periwinkle-100); border-radius:var(--radius-md); padding:15px 17px; display:flex; flex-direction:column; gap:11px; }
+.rc-q{ display:flex; gap:10px; align-items:flex-start; }
+.rc-q p{ margin:0; font-family:var(--font-sans); font-weight:700; font-size:14.5px; line-height:1.45; color:var(--ink-900); }
+.rc-panel{ max-height:0; overflow:hidden; transition:max-height 320ms var(--ease-out); }
+.rc-a{ margin:0; padding:11px 13px; background:var(--white); border-radius:var(--radius-sm); border-left:3px solid #4FA47A; font-family:var(--font-sans); font-size:13.5px; line-height:1.55; color:var(--ink-700); }
+.rc-btn{ align-self:flex-start; cursor:pointer; background:var(--periwinkle-500); border:none; color:#fff; font-family:var(--font-sans); font-weight:800; font-size:11px; letter-spacing:0.04em; text-transform:uppercase; padding:7px 14px; border-radius:999px; }
+
+/* CadenaCausal */
+.cad-bites{ display:flex; flex-direction:column; gap:10px; }
+.cad-bite{ display:flex; gap:12px; align-items:flex-start; background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:13px 15px; box-shadow:var(--shadow-xs); }
+.cad-who{ flex:none; font-family:var(--font-sans); font-weight:900; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; background:var(--paper); border:1px solid var(--border-subtle); border-radius:999px; padding:4px 9px; white-space:nowrap; margin-top:1px; }
+.cad-bite p{ margin:0; font-family:var(--font-sans); font-size:14px; line-height:1.55; color:var(--ink-800); }
+.cad-controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding-top:10px; }
+.cad-next{ cursor:pointer; border:none; color:#fff; font-family:var(--font-sans); font-weight:800; font-size:12px; letter-spacing:0.03em; text-transform:uppercase; padding:9px 16px; border-radius:999px; white-space:nowrap; }
+.cad-next span{ opacity:0.75; }
+.cad-all, .cad-reset{ cursor:pointer; background:none; border:none; color:var(--ink-500); font-family:var(--font-sans); font-weight:700; font-size:12px; text-decoration:underline; padding:0; }
+.cad-done{ display:none; align-items:center; gap:10px; flex-wrap:wrap; font-family:var(--font-sans); font-weight:700; font-size:12.5px; color:#3f7d5f; }
+.cad-wrap.is-done .cad-done{ display:inline-flex; }
+.cad-wrap.is-done .cad-next{ display:none; }
+.cad-wrap.is-done .cad-all{ display:none; }
+
+.a2-pill{ display:inline-block; padding:6px 13px; border:1px solid var(--periwinkle-200); border-radius:999px; background:var(--white); color:var(--ink-700); font-weight:700; font-size:12px; }
+.a2-pill:hover{ background:var(--periwinkle-50); color:var(--ink-700); }
+
+@media print {
+  .no-print{ display:none !important; }
+  .cc-panel, .rc-panel{ max-height:none !important; }
+  .cad-bite{ break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+<div style="background:var(--paper); min-height:100vh; font-family:var(--font-sans); color:var(--ink-900); -webkit-font-smoothing:antialiased;">
+
+  <div class="no-print" style="position:sticky; top:0; z-index:50; background:rgba(251,250,247,0.9); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--border-subtle);">
+    <div style="max-width:920px; margin:0 auto; padding:9px 24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+      <a href="index.html" style="font-weight:700; font-size:12.5px; padding:6px 13px; border-radius:999px; background:var(--periwinkle-100); color:var(--periwinkle-800);">← Base CENEVAL</a>
+      <span style="font-family:var(--font-sans); font-weight:900; font-size:12.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--ink-900); white-space:nowrap;">Guía · Área 2</span>
+      <span style="flex:1;"></span>
+      <a href="mapa-aprendizaje-profundo.html" style="display:inline-flex; align-items:center; gap:6px; background:var(--white); border:1.5px solid var(--periwinkle-200); color:var(--periwinkle-700); font-family:var(--font-sans); font-weight:800; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; padding:8px 14px; border-radius:999px;">Mapa de técnicas ▸</a>
+    </div>
+  </div>
+
+  <div style="max-width:920px; margin:0 auto; padding:0 24px 90px; position:relative;">
+
+    <header style="text-align:center; padding:46px 0 6px; position:relative;">
+      <div aria-hidden="true" style="position:absolute; top:26px; left:50%; transform:translateX(-50%); width:360px; height:210px; background:radial-gradient(closest-side, var(--pastel-lilac), transparent); opacity:0.5;"></div>
+      <div style="position:relative; z-index:1;">
+        <div style="font-family:var(--font-sans); font-weight:800; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--periwinkle-600);">CENEVAL · Área 2 · Intervención psicológica</div>
+        <div style="font-family:var(--font-display); color:var(--periwinkle-500); font-size:40px; line-height:1; margin:10px 0 0;">a tu manera</div>
+        <h1 style="font-family:var(--font-sans); font-weight:900; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(34px,7vw,52px); line-height:0.94; color:var(--ink-900); margin:2px 0 0;">Enfoques de<br>intervención</h1>
+        <p style="max-width:620px; margin:16px auto 0; font-size:16px; line-height:1.6; color:var(--ink-700);">Los 6 enfoques de tu material, procesados con tu método: cada escuela es <strong>un chisme con cadena causal</strong> que revelas por bocados, con sus conceptos en chunks y preguntas para razonar. No leas todo de corrido — un bocado, párate, y recupéralo.</p>
+        <nav class="no-print" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:22px;">
+          <a href="#como" class="a2-pill">Cómo usarla</a>
+          <a href="#pendulo" class="a2-pill">El péndulo</a>
+          <a href="#escuelas" class="a2-pill">Las 6 escuelas</a>
+          <a href="#comparativo" class="a2-pill">Comparativo</a>
+          <a href="#transversal" class="a2-pill">Transversal</a>
+          <a href="#plan" class="a2-pill">Plan de repaso</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="como" style="scroll-margin-top:64px; margin-top:34px; background:var(--oat); border:1px solid var(--border-on-oat); border-radius:var(--radius-xl); padding:26px 26px;">
+      <h2 style="font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:20px; letter-spacing:-0.01em; margin:0 0 16px;">Cómo usar esta guía</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px;">
+        <div style="display:flex; gap:12px; align-items:flex-start; background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:14px 15px;"><span style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--periwinkle-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;">1</span><p style="margin:0; font-size:13.5px; line-height:1.5; color:var(--ink-700);"><strong style="color:var(--ink-900);">Un bocado.</strong> En cada escuela, toca <em>Siguiente</em> para revelar la cadena causal línea por línea. No corras.</p></div>
+        <div style="display:flex; gap:12px; align-items:flex-start; background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:14px 15px;"><span style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--periwinkle-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;">2</span><p style="margin:0; font-size:13.5px; line-height:1.5; color:var(--ink-700);"><strong style="color:var(--ink-900);">Chismea.</strong> Cuéntatelo en voz alta como si fuera drama: quién le respondió a quién.</p></div>
+        <div style="display:flex; gap:12px; align-items:flex-start; background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:14px 15px;"><span style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--periwinkle-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;">3</span><p style="margin:0; font-size:13.5px; line-height:1.5; color:var(--ink-700);"><strong style="color:var(--ink-900);">Chunks.</strong> Abre los conceptos clave solo cuando los necesites; agrúpalos por lo que tienen en común.</p></div>
+        <div style="display:flex; gap:12px; align-items:flex-start; background:var(--white); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:14px 15px;"><span style="flex:none; width:28px; height:28px; border-radius:999px; background:var(--periwinkle-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px;">4</span><p style="margin:0; font-size:13.5px; line-height:1.5; color:var(--ink-700);"><strong style="color:var(--ink-900);">Recupéralo.</strong> Tápalo y responde las preguntas con tus palabras antes de ver la respuesta.</p></div>
+      </div>
+    </section>
+
+    <section id="pendulo" style="scroll-margin-top:64px; margin-top:44px;">
+      <div style="text-align:center; margin-bottom:6px;">
+        <span style="font-family:var(--font-accent); font-size:26px; color:var(--periwinkle-600);">el patrón global</span>
+      </div>
+      <h2 style="text-align:center; font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:28px; letter-spacing:-0.01em; margin:0 0 4px;">El péndulo</h2>
+      <p style="text-align:center; max-width:620px; margin:0 auto 24px; color:var(--ink-500); font-size:14.5px; line-height:1.55;">Ancla mental para no perderte: las escuelas oscilan como un péndulo entre mirar <strong style="color:var(--ink-700);">adentro</strong>, mirar <strong style="color:var(--ink-700);">la conducta</strong> y mirar <strong style="color:var(--ink-700);">afuera</strong> — y al final alguien decide integrarlo todo.</p>
+      <div id="pendulo-list" style="display:flex; flex-wrap:wrap; align-items:stretch; justify-content:center; gap:10px;"></div>
+    </section>
+
+    <section id="escuelas" style="scroll-margin-top:64px; margin-top:48px;">
+      <div style="text-align:center; margin-bottom:26px;">
+        <span style="font-family:var(--font-sans); font-weight:800; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--periwinkle-600);">Una a la vez · sin prisa</span>
+        <h2 style="font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:30px; letter-spacing:-0.01em; margin:4px 0 0;">Las 6 escuelas</h2>
+      </div>
+      <div id="escuelas-list" style="display:flex; flex-direction:column; gap:26px;"></div>
+    </section>
+
+    <section id="comparativo" style="scroll-margin-top:64px; margin-top:48px;">
+      <div style="text-align:center; margin-bottom:6px;">
+        <span style="font-family:var(--font-sans); font-weight:800; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--periwinkle-600);">Para ver el patrón de un vistazo</span>
+      </div>
+      <h2 style="text-align:center; font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:28px; letter-spacing:-0.01em; margin:4px 0 22px;">Cuadro comparativo</h2>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:grid; grid-template-columns:1.1fr 1.6fr 1.4fr 1.4fr; gap:10px; padding:0 4px;">
+          <span style="font-family:var(--font-sans); font-weight:900; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-500);">Enfoque</span>
+          <span style="font-family:var(--font-sans); font-weight:900; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-500);">¿Qué causa el problema?</span>
+          <span style="font-family:var(--font-sans); font-weight:900; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-500);">¿Dónde mira?</span>
+          <span style="font-family:var(--font-sans); font-weight:900; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-500);">Técnica distintiva</span>
+        </div>
+        <div id="comparativo-rows" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+      <div style="margin-top:16px; background:var(--periwinkle-50); border:1px solid var(--periwinkle-100); border-radius:var(--radius-md); padding:15px 18px;">
+        <p style="margin:0; font-size:13.5px; line-height:1.6; color:var(--ink-700);"><strong style="color:var(--periwinkle-700);">El patrón que extraes:</strong> las escuelas van, casi cronológicamente, en un péndulo entre mirar ADENTRO (psicoanálisis, humanismo), mirar LA CONDUCTA/EL SÍNTOMA (conductual, cognitivo-conductual) y mirar AFUERA, al sistema (sistémico) — y las contemporáneas dejan de elegir un nivel para integrarlos todos.</p>
+      </div>
+    </section>
+
+    <section id="transversal" style="scroll-margin-top:64px; margin-top:48px; background:var(--oat); border:1px solid var(--border-on-oat); border-radius:var(--radius-xl); padding:30px 26px;">
+      <div style="text-align:center; margin-bottom:6px;">
+        <span style="font-family:var(--font-sans); font-weight:800; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--periwinkle-600);">Lo que también cae en el examen</span>
+      </div>
+      <h2 style="text-align:center; font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:28px; letter-spacing:-0.01em; margin:4px 0 24px;">Contenido transversal</h2>
+      <div id="transversal-list" style="display:flex; flex-direction:column; gap:22px;"></div>
+    </section>
+
+    <section id="plan" style="scroll-margin-top:64px; margin-top:48px; background:var(--periwinkle-50); border:1px solid var(--periwinkle-100); border-radius:var(--radius-xl); padding:32px 28px;">
+      <div style="text-align:center; margin-bottom:6px;">
+        <span style="font-family:var(--font-accent); font-size:26px; color:var(--periwinkle-600);">no lo estudies de un jalón</span>
+      </div>
+      <h2 style="text-align:center; font-family:var(--font-sans); font-weight:900; text-transform:uppercase; font-size:28px; letter-spacing:-0.01em; margin:4px 0 6px;">Plan de repaso espaciado</h2>
+      <p style="text-align:center; max-width:600px; margin:0 auto 26px; color:var(--ink-700); font-size:14.5px; line-height:1.55;">Reparte las 6 escuelas en sesiones cortas e intercaladas. Antes de cada una, usa tu <a href="mapa-aprendizaje-profundo.html">protocolo de arranque ▸</a>.</p>
+      <div id="plan-list" style="display:flex; flex-direction:column; gap:10px; max-width:720px; margin:0 auto;"></div>
+    </section>
+
+    <footer style="margin-top:40px; text-align:center; color:var(--ink-500); font-size:13px; line-height:1.6;">
+      <p style="margin:0;">Contenido de tu documento <em>Enfoques y escuelas de intervención — Área 2</em>, reorganizado como sistema causal narrado.</p>
+      <p style="margin:8px 0 0;"><a href="sketchnote-enfoques.html" style="font-weight:700; color:var(--periwinkle-700);">Versión sketchnote: los 6 enfoques en una hoja, con su palabra clave →</a></p>
+      <p style="margin:8px 0 0; display:inline-flex; align-items:center; gap:7px; font-weight:700; color:var(--ink-700);">Hecho para tu forma de aprender <svg width="15" height="15" viewBox="0 0 24 24" fill="var(--pop-magenta)" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></p>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+const DATA = {
+  pendulo: [
+    { fase:'Adentro · inconsciente', escuelas:'Psicoanalítico', bg:'var(--pastel-sky)', color:'var(--periwinkle-700)' },
+    { fase:'La conducta / el pensar', escuelas:'Conductual · Cognitivo-cond.', bg:'var(--pastel-butter)', color:'#B5791F' },
+    { fase:'Adentro · la experiencia', escuelas:'Humanista', bg:'var(--pastel-mint)', color:'#3f7d5f' },
+    { fase:'Afuera · el sistema', escuelas:'Sistémico', bg:'var(--pastel-lilac)', color:'var(--periwinkle-700)' },
+    { fase:'Integrar todo', escuelas:'Contemporáneas', bg:'var(--pop-magenta-soft)', color:'#B8558F' },
+  ],
+
+  comparativo: [
+    { enfoque:'Psicoanalítico', color:'var(--periwinkle-700)', causa:'Conflicto inconsciente no resuelto, de origen temprano', mira:'El pasado, lo inconsciente, la relación terapéutica', tecnica:'Interpretación, análisis de la transferencia' },
+    { enfoque:'Conductual', color:'#B5791F', causa:'Conducta aprendida por asociación o por consecuencias', mira:'La conducta observable, aquí y ahora', tecnica:'Reforzamiento, extinción, desensibilización' },
+    { enfoque:'Cognitivo-conductual', color:'#B5791F', causa:'Interpretación distorsionada del evento, no el evento', mira:'Los pensamientos automáticos y los esquemas', tecnica:'Reestructuración cognitiva, exposición' },
+    { enfoque:'Humanista', color:'#3f7d5f', causa:'Bloqueo del crecimiento por condiciones de valía', mira:'La experiencia subjetiva presente', tecnica:'Relación no directiva (empatía, congruencia)' },
+    { enfoque:'Sistémico', color:'var(--periwinkle-700)', causa:'Disfunción del sistema/familia, no del individuo', mira:'Los patrones de interacción entre miembros', tecnica:'Reencuadre, directivas, preguntas circulares' },
+    { enfoque:'Contemporáneas', color:'#B8558F', causa:'Vulnerabilidad + entorno invalidante / patrones tempranos graves', mira:'La integración de varios niveles', tecnica:'Balance dialéctico, habilidades, relación activa' },
+  ],
+
+  plan: [
+    { cuando:'Hoy', texto:'Escuelas 1–2. Revela cada cadena por bocados, cuéntala como chisme, tápala y recupérala. Marca en color lo que falló.' },
+    { cuando:'Mañana', texto:'Escuelas 3–4. Antes, repasa 1–2 en 30 seg cada una (solo la cadena, tapada). Luego sus preguntas.' },
+    { cuando:'En 2 días', texto:'Escuelas 5–6. Repasa 1–4 tapadas primero. Fíjate en cómo el péndulo va cambiando de foco.' },
+    { cuando:'En 4 días', texto:'INTERCALA: baraja las preguntas de las 6 escuelas + el comparativo + lo transversal. No estudies en orden — obliga a discriminar.' },
+    { cuando:'+1 · +3 · +7 · +14', texto:'Repasos espaciados cortos: solo lo que fallaste. Cada recuperación al borde del olvido re-graba más fuerte.' },
+  ],
+
+  escuelas: [
+    {
+      id:'esc-1', num:'01', nombre:'Psicoanalítico / psicodinámico', pendulo:'Mira adentro · lo inconsciente',
+      mira:'El pasado y lo inconsciente', color:'var(--periwinkle-700)', bg:'var(--pastel-sky)',
+      bites:[
+        { who:'El problema', texto:'A finales del XIX no había un modelo de la mente que explicara síntomas sin causa física. Freud propone algo escandaloso: la conducta la gobiernan procesos INCONSCIENTES —deseos y conflictos a los que no tienes acceso directo.' },
+        { who:'El aparato', texto:'Divide la mente en tres: el Ello (impulsos y placer, desde que naces), el Superyó (las normas morales que internalizaste) y el Yo (el que media entre ambos y la realidad).' },
+        { who:'El síntoma', texto:'Para él, el síntoma es un conflicto inconsciente no resuelto —casi siempre de la infancia— que sale disfrazado. Y el Yo se protege con mecanismos de defensa: represión, negación, proyección…' },
+        { who:'La técnica', texto:'¿Cómo lo trabajas? Haciendo consciente lo inconsciente: asociación libre, análisis de sueños y sobre todo la transferencia —el paciente revive contigo patrones de sus padres—, que el terapeuta interpreta.' },
+        { who:'Quién sigue', texto:'Problema: es larguísimo, poco medible y muy interpretativo. Eso abre la puerta a quien dirá "midamos solo lo observable" → los conductistas. Y desde adentro, Klein, Winnicott y Kohut lo modernizan.' },
+      ],
+      conceptos:[
+        { termino:'Ello · Yo · Superyó', definicion:'Ello: impulsos y principio de placer (desde el nacimiento). Superyó: normas morales internalizadas. Yo: media entre ambos y la realidad (principio de realidad).' },
+        { termino:'Mecanismos de defensa', definicion:'Estrategias inconscientes del Yo contra la ansiedad. Represión (la base), negación, proyección, formación reactiva, sublimación (la más madura), racionalización, desplazamiento, regresión, disociación, intelectualización, anulación, escisión (splitting).' },
+        { termino:'Transferencia', definicion:'El paciente reactiva sin darse cuenta patrones con figuras del pasado (los padres) y los dirige al terapeuta. Es la herramienta central de trabajo, no un estorbo.' },
+        { termino:'Contratransferencia', definicion:'Las reacciones emocionales del terapeuta hacia el paciente; bien leídas, son fuente de información sobre él.' },
+        { termino:'Resistencia', definicion:'La oposición inconsciente a hacer consciente lo inconsciente. Es parte esperada del proceso, no falta de cooperación consciente.' },
+        { termino:'Técnicas de acceso', definicion:'Asociación libre (decir todo sin censura), análisis de sueños (contenido manifiesto vs. latente) e interpretación (señalar el significado inconsciente).' },
+        { termino:'Funciones del Yo (Bellak)', definicion:'Evaluar la salud psíquica por 12 funciones del Yo (juicio de realidad, control de impulsos, relaciones objetales, ARISE, etc.), no por síntomas.' },
+      ],
+      recall:[
+        { pregunta:'¿Por qué la transferencia es la herramienta central y no un obstáculo?', respuesta:'Porque en ella el paciente REVIVE con el terapeuta sus patrones relacionales tempranos; eso los vuelve observables y trabajables en el aquí y ahora, en vez de solo hablar de ellos.' },
+        { pregunta:'Con tus palabras: ¿diferencia entre represión y negación?', respuesta:'La represión saca de la conciencia un contenido interno perturbador (sin darte cuenta); la negación rechaza un hecho EXTERNO evidente. Una esconde adentro, la otra niega afuera.' },
+        { pregunta:'¿Por qué la sublimación se considera la defensa más madura?', respuesta:'Porque no reprime ni descarga destructivamente el impulso: lo canaliza hacia una actividad socialmente valiosa, transformándolo en algo adaptativo.' },
+      ],
+    },
+    {
+      id:'esc-2', num:'02', nombre:'Conductual', pendulo:'Mira la conducta',
+      mira:'La conducta observable, aquí y ahora', color:'#B5791F', bg:'var(--pastel-butter)',
+      bites:[
+        { who:'El problema', texto:'Cansados de lo inobservable del psicoanálisis, los conductistas ponen una regla dura: si no se puede medir, no es ciencia. Estudiemos solo la conducta observable.' },
+        { who:'Pavlov', texto:'Primero el condicionamiento clásico: un estímulo neutro, emparejado muchas veces con uno que sí provoca respuesta, termina provocándola solo. Aprendizaje por asociación, antes de cualquier voluntad.' },
+        { who:'Skinner', texto:'Luego el operante: la conducta se moldea por sus CONSECUENCIAS. Reforzar (positivo o negativo) la aumenta; castigar (positivo o negativo) la disminuye. Ojo: reforzamiento negativo NO es castigo.' },
+        { who:'Las herramientas', texto:'De ahí salen extinción, moldeamiento por aproximaciones sucesivas, economía de fichas, contratos conductuales y la desensibilización sistemática de Wolpe (inhibición recíproca: no puedes estar relajado y ansioso a la vez).' },
+        { who:'Quién sigue', texto:'Funciona, pero ignora por completo lo que PIENSAS entre el estímulo y la respuesta. Esa "caja negra" la va a abrir la corriente cognitiva.' },
+      ],
+      conceptos:[
+        { termino:'Condicionamiento clásico (Pavlov)', definicion:'Un estímulo neutro, emparejado repetidamente con uno incondicionado, termina provocando por sí solo la respuesta (ahora condicionada). Es asociación entre estímulos.' },
+        { termino:'Condicionamiento operante (Skinner)', definicion:'La conducta se moldea por sus consecuencias, no por la asociación de estímulos previos.' },
+        { termino:'Reforzamiento vs. castigo', definicion:'Reforzar SIEMPRE aumenta (positivo: agregar algo agradable / negativo: quitar algo desagradable). Castigar SIEMPRE disminuye (positivo: agregar desagradable / negativo: quitar agradable).' },
+        { termino:'Extinción', definicion:'Al dejar de reforzar una conducta antes reforzada, disminuye y desaparece. Suele haber un "estallido de extinción" (aumento temporal) antes de bajar.' },
+        { termino:'Moldeamiento (shaping)', definicion:'Reforzar aproximaciones sucesivas cada vez más cercanas a la conducta meta, cuando ésta todavía no existe en el repertorio.' },
+        { termino:'Economía de fichas y contratos', definicion:'Fichas/tokens canjeables por reforzadores reales (educativo, clínico, institucional). Contrato conductual: acuerdo escrito de conducta esperada y su consecuencia.' },
+        { termino:'Desensibilización sistemática (Wolpe)', definicion:'Jerarquía de situaciones temidas + una respuesta incompatible con la ansiedad (relajación). Principio: inhibición recíproca.' },
+      ],
+      recall:[
+        { pregunta:'¿Por qué el reforzamiento negativo NO es lo mismo que el castigo?', respuesta:'Porque el reforzamiento (positivo o negativo) siempre AUMENTA la conducta; el negativo lo hace quitando algo desagradable. El castigo, en cambio, DISMINUYE la conducta. El error es confundir "negativo" con "malo".' },
+        { pregunta:'¿Qué gran cosa ignora el conductismo, y quién la recogerá después?', respuesta:'Ignora lo que la persona PIENSA/interpreta entre el estímulo y la respuesta (la caja negra). Eso lo recoge la corriente cognitiva (Beck, Ellis).' },
+      ],
+    },
+    {
+      id:'esc-3', num:'03', nombre:'Cognitivo-conductual', pendulo:'Mira el pensamiento',
+      mira:'Los pensamientos y esquemas que median', color:'#B5791F', bg:'var(--pastel-butter)',
+      bites:[
+        { who:'El problema', texto:'Si el conductismo saltó el pensamiento, alguien tenía que decir: entre lo que pasa y cómo reaccionas hay una INTERPRETACIÓN. Ahí entra Beck.' },
+        { who:'Beck', texto:'No te afecta el evento, sino el pensamiento automático sobre el evento. En depresión: la tríada cognitiva (visión negativa de ti, del mundo y del futuro), alimentada por esquemas de la infancia. Y un catálogo de distorsiones.' },
+        { who:'Ellis', texto:'En paralelo, Ellis con su ABC: la A (evento) no causa la C (consecuencia emocional); la causa es B (tu creencia). Se debate la creencia irracional (D) para llegar a un efecto nuevo (E).' },
+        { who:'La técnica', texto:'Herramientas: reestructuración cognitiva (examinar la evidencia a favor y en contra), exposición (romper la asociación miedo-evitación) e inoculación de estrés de Meichenbaum.' },
+        { who:'Quién sigue', texto:'Muy eficaz y medible, pero muy centrado en el individuo y su cabeza. Faltaba mirar a la persona entera y su experiencia → humanistas; y su red de relaciones → sistémicos.' },
+      ],
+      conceptos:[
+        { termino:'Modelo cognitivo (Beck)', definicion:'No es el evento en sí, sino el pensamiento automático que haces sobre el evento, lo que genera el malestar.' },
+        { termino:'Tríada cognitiva', definicion:'En la depresión: visión negativa de uno mismo, del mundo/entorno y del futuro.' },
+        { termino:'Esquemas', definicion:'Creencias centrales, profundas y estables (formadas en la infancia) que filtran cómo interpretas la experiencia nueva.' },
+        { termino:'Distorsiones cognitivas', definicion:'Errores sistemáticos: todo-o-nada, sobregeneralización, filtro mental, descalificar lo positivo, conclusiones apresuradas, catastrofización, razonamiento emocional, "debería", etiquetación, personalización.' },
+        { termino:'ABC / ABCDE (Ellis)', definicion:'A (evento) no causa C (consecuencia); la causa es B (creencia). D: debatir la creencia irracional → E: efecto/filosofía racional nueva.' },
+        { termino:'Reestructuración cognitiva', definicion:'Identificar el pensamiento automático, examinar la evidencia a favor y en contra, y sustituirlo por una interpretación equilibrada (no es "pensar positivo").' },
+        { termino:'Exposición e inoculación de estrés', definicion:'Exposición: enfrentar el estímulo temido (gradual o inundación; con prevención de respuesta en TOC). Inoculación (Meichenbaum): entrenar el afrontamiento ANTES del estresor real.' },
+      ],
+      recall:[
+        { pregunta:'Explica por qué dos personas pueden vivir el mismo evento (A) y sentir cosas distintas (C).', respuesta:'Porque entre A y C está B: la creencia/interpretación. La emoción no la dispara el evento sino cómo cada quien lo interpreta; por eso el trabajo se hace sobre B, no sobre A.' },
+        { pregunta:'¿En qué se parecen y en qué difieren Beck y Ellis?', respuesta:'Ambos ponen el pensamiento en el centro. Beck describe pensamientos automáticos, tríada y esquemas (más descriptivo/estructural); Ellis usa el ABC y debate frontalmente las creencias irracionales (más directivo).' },
+      ],
+    },
+    {
+      id:'esc-4', num:'04', nombre:'Humanista', pendulo:'Vuelve adentro · la experiencia',
+      mira:'La experiencia subjetiva y el crecimiento', color:'#3f7d5f', bg:'var(--pastel-mint)',
+      bites:[
+        { who:'El problema', texto:'Contra el determinismo freudiano y el mecanicismo conductista, los humanistas dicen: la persona no es ni sus traumas ni sus refuerzos; tiene una tendencia innata a crecer.' },
+        { who:'Rogers', texto:'Terapia centrada en la persona: no dirige ni interpreta, crea las condiciones. La tríada: empatía, congruencia y aceptación positiva incondicional. El bloqueo viene de las "condiciones de valía".' },
+        { who:'Maslow', texto:'Su jerarquía de necesidades: hasta que lo básico (fisiológico, seguridad, pertenencia, estima) no está razonablemente cubierto, no puedes enfocarte de lleno en autorrealizarte.' },
+        { who:'Perls y Frankl', texto:'Perls y la Gestalt: el aquí y ahora, el darse cuenta (awareness), la silla vacía. Frankl y la logoterapia: la motivación central es el SENTIDO; el sufrimiento sin sentido es el que daña.' },
+        { who:'Quién sigue', texto:'Hermoso, pero poco estructurado y difícil de medir. Y sigue centrado en el individuo. Faltaba mirar el sistema completo → los sistémicos.' },
+      ],
+      conceptos:[
+        { termino:'Tendencia actualizante', definicion:'Fuerza innata hacia el crecimiento y el desarrollo de las propias capacidades; se bloquea con las "condiciones de valía" (aceptación condicionada a cumplir expectativas).' },
+        { termino:'Tríada rogeriana', definicion:'Empatía, congruencia/autenticidad y aceptación positiva incondicional: las condiciones necesarias y suficientes del cambio.' },
+        { termino:'Terapia centrada en la persona', definicion:'No dirige ni interpreta; crea las condiciones para que la tendencia actualizante retome su curso.' },
+        { termino:'Jerarquía de Maslow', definicion:'Fisiológicas → seguridad → pertenencia → estima → autorrealización. Lo básico debe estar cubierto para enfocarse en crecer.' },
+        { termino:'Gestalt (Perls)', definicion:'Énfasis en el aquí y ahora; awareness (darse cuenta); técnica de la silla vacía para integrar lo no resuelto.' },
+        { termino:'Logoterapia (Frankl)', definicion:'La motivación humana central es el SENTIDO. El sufrimiento sin sentido es el que daña; el análisis existencial ayuda a reconstruirlo.' },
+      ],
+      recall:[
+        { pregunta:'¿Por qué Rogers NO interpreta ni dirige, a diferencia del psicoanalista?', respuesta:'Porque parte de que la persona ya tiene una tendencia innata a crecer; el terapeuta no aporta el contenido, solo crea las condiciones (empatía, congruencia, aceptación) para desbloquearla.' },
+        { pregunta:'¿Qué tienen en común Maslow y Frankl frente al malestar?', respuesta:'Ambos lo miran desde la motivación y el crecimiento: Maslow, que no puedes autorrealizarte sin lo básico cubierto; Frankl, que el sentido sostiene incluso en el sufrimiento.' },
+      ],
+    },
+    {
+      id:'esc-5', num:'05', nombre:'Sistémico', pendulo:'Mira afuera · el sistema',
+      mira:'Los patrones de relación del sistema', color:'var(--periwinkle-600)', bg:'var(--pastel-lilac)',
+      bites:[
+        { who:'El problema', texto:'Todas las escuelas anteriores miran a UNA persona. Los sistémicos giran la cámara: el problema no está en el individuo, está en el SISTEMA (la familia).' },
+        { who:'El síntoma', texto:'La persona con síntoma es el "paciente identificado": expresa una disfunción de todo el sistema, no un problema suyo aislado.' },
+        { who:'Watzlawick', texto:'La Escuela de Palo Alto y sus axiomas: es imposible no comunicar; todo mensaje tiene contenido y relación; la puntuación de las secuencias; digital vs. analógico; simétrico vs. complementario.' },
+        { who:'Las escuelas', texto:'Minuchin (estructural: subsistemas, límites, jerarquía), Haley (estratégico: directivas para romper la secuencia), Milán (hipotetización, circularidad, neutralidad) y el MRI/soluciones (excepciones, pregunta milagro).' },
+        { who:'Quién sigue', texto:'Cada escuela hasta aquí escogió UN nivel (adentro, la conducta o afuera). La pregunta obvia: ¿y si integramos varios a la vez? → las contemporáneas.' },
+      ],
+      conceptos:[
+        { termino:'La familia como sistema', definicion:'Conjunto de elementos interrelacionados donde el todo es más que la suma de las partes; cambiar a un miembro afecta a todos los demás.' },
+        { termino:'Paciente identificado', definicion:'La persona con síntoma expresa una disfunción del sistema completo, no un problema aislado suyo.' },
+        { termino:'Axiomas de la comunicación (Watzlawick)', definicion:'1) Es imposible no comunicar. 2) Todo mensaje tiene contenido y relación. 3) La puntuación de las secuencias. 4) Digital vs. analógico. 5) Simétrico vs. complementario.' },
+        { termino:'Minuchin (estructural)', definicion:'Analiza subsistemas (conyugal, parental, fraternal), los límites (rígidos, difusos o claros) y la jerarquía (quién tiene el poder).' },
+        { termino:'Haley (estratégico)', definicion:'Directivas concretas para interrumpir la secuencia disfuncional que mantiene el síntoma; el cambio de conducta va primero, sin buscar insight.' },
+        { termino:'Milán y MRI/soluciones', definicion:'Milán: hipotetización, circularidad (preguntas circulares) y neutralidad. MRI/centrado en soluciones: buscar excepciones y la "pregunta milagro".' },
+      ],
+      recall:[
+        { pregunta:'¿Qué cambia cuando dejas de ver al "paciente identificado" como el problema?', respuesta:'El foco pasa del individuo al patrón de interacción del sistema: el síntoma se lee como una función dentro de la familia, y la intervención busca cambiar la secuencia, no "arreglar" a la persona.' },
+        { pregunta:'Explica el axioma "es imposible no comunicar" con un ejemplo.', respuesta:'Toda conducta en interacción es un mensaje: si alguien se queda callado o se va, eso también comunica (enojo, desinterés). No hay "no conducta", por lo tanto no hay "no comunicación".' },
+      ],
+    },
+    {
+      id:'esc-6', num:'06', nombre:'Contemporáneas (basadas en evidencia)', pendulo:'Integra varios niveles',
+      mira:'Conducta + emoción + relación, integradas', color:'#B8558F', bg:'var(--pop-magenta-soft)',
+      bites:[
+        { who:'El problema', texto:'En vez de elegir un solo nivel, las corrientes basadas en evidencia integran conducta, emoción y relación a la vez.' },
+        { who:'Linehan · DBT', texto:'La DBT, para el trastorno límite y la conducta suicida crónica. "Dialéctica" porque equilibra dos polos opuestos: aceptación (validar) y cambio (modificar). Cuatro módulos: mindfulness, regulación emocional, tolerancia al malestar, efectividad interpersonal.' },
+        { who:'Kernberg y Ryle', texto:'Kernberg y la TFP (psicodinámica moderna y estructurada para personalidad límite, que trabaja vía la transferencia). Ryle y la terapia cognitiva analítica, que integra explícitamente lo cognitivo-conductual con lo psicodinámico.' },
+        { who:'Mindfulness', texto:'Y las intervenciones basadas en mindfulness (MBSR, MBCT): atención plena al presente, sin juicio, como habilidad entrenable —independiente o dentro de otros modelos.' },
+        { who:'El patrón', texto:'Aquí cierra el péndulo: de mirar adentro (psicoanálisis, humanismo) ↔ a la conducta (conductual, cognitivo-conductual) ↔ afuera (sistémico) → a integrarlo todo.' },
+      ],
+      conceptos:[
+        { termino:'DBT (Linehan)', definicion:'Terapia dialéctico-conductual (Dialectical Behavior Therapy), para trastorno límite y conducta suicida/autolesiva crónica. Dialéctica: equilibra aceptación y cambio.' },
+        { termino:'Los 4 módulos de la DBT', definicion:'Mindfulness, regulación emocional, tolerancia al malestar y efectividad interpersonal.' },
+        { termino:'TFP (Kernberg)', definicion:'Terapia focalizada en la transferencia (Transference-Focused Psychotherapy): psicodinámica moderna y estructurada para trastornos de personalidad severos; usa la transferencia como terreno principal, más activa que el psicoanálisis clásico.' },
+        { termino:'Terapia cognitiva analítica (Ryle)', definicion:'Modelo integrador que combina lo cognitivo-conductual con lo psicodinámico, mapeando patrones relacionales repetitivos.' },
+        { termino:'Mindfulness (MBSR / MBCT)', definicion:'Atención plena al momento presente, sin juicio, como habilidad entrenable; se usa sola o dentro de otros modelos (es uno de los módulos de la DBT). MBSR: Mindfulness-Based Stress Reduction. MBCT: Mindfulness-Based Cognitive Therapy.' },
+      ],
+      recall:[
+        { pregunta:'¿Qué significa que la DBT sea "dialéctica"?', respuesta:'Que sostiene a la vez dos polos opuestos: aceptar a la persona tal como es (validación) Y trabajar activamente para que cambie. Ni pura aceptación ni pura exigencia.' },
+        { pregunta:'¿Qué une a estas corrientes frente a las escuelas clásicas?', respuesta:'Que en vez de elegir un solo nivel (adentro, la conducta o afuera) INTEGRAN varios: conducta, emoción y relación, con base en evidencia.' },
+      ],
+    },
+  ],
+
+  transversal: [
+    { titulo:'Niveles de prevención', items:[
+      { termino:'Prevención primaria', definicion:'Interviene ANTES de que aparezca el problema; dirigida a población general o en riesgo; busca reducir la incidencia (casos nuevos). Ej.: psicoeducación de manejo de estrés en escuelas.' },
+      { termino:'Prevención secundaria', definicion:'El problema ya apareció pero de forma temprana; busca detección oportuna y tratamiento rápido para reducir duración y severidad. Ej.: tamizaje de depresión en primer nivel.' },
+      { termino:'Prevención terciaria', definicion:'El problema ya está establecido o es crónico; busca rehabilitación, reducir secuelas y prevenir recaídas. Ej.: rehabilitación psicosocial en esquizofrenia.' },
+    ]},
+    { titulo:'Técnicas y herramientas', items:[
+      { termino:'Entrevista', definicion:'Estructurada (preguntas fijas, alta comparabilidad), semiestructurada (guion con libertad de profundizar) y no estructurada (abierta). Fases: apertura/rapport, desarrollo/exploración y cierre.' },
+      { termino:'Grupo focal', definicion:'Técnica cualitativa grupal para explorar percepciones compartidas sobre un tema, guiada por un moderador con una guía de preguntas.' },
+      { termino:'Narrativas', definicion:'Recolección de relatos personales para acceder al significado que la persona da a su experiencia (se usa en evaluación y en intervención).' },
+    ]},
+    { titulo:'Diseño y evaluación de proyectos', items:[
+      { termino:'Objetivos vs. metas', definicion:'El objetivo es la dirección general/cualitativa; la meta es su expresión concreta y medible (con cantidad y plazo).' },
+      { termino:'Cronograma', definicion:'La planeación temporal de las actividades del proyecto.' },
+      { termino:'Eficacia · efectividad · eficiencia', definicion:'Eficacia: logra el objetivo en condiciones ideales/controladas. Efectividad: lo logra en condiciones reales. Eficiencia: lo logra con la menor cantidad de recursos posible.' },
+    ]},
+    { titulo:'Crisis', items:[
+      { termino:'Intervención en crisis', definicion:'Ayuda inmediata y a corto plazo para restaurar el equilibrio funcional de la persona tras un evento que desborda sus recursos habituales de afrontamiento.' },
+      { termino:'Primeros auxilios psicológicos (PAP)', definicion:'Protocolo de respuesta inmediata (no terapia formal): contacto y compromiso, seguridad y comodidad, estabilización, recopilar necesidades, ayuda práctica, conexión con la red de apoyo, información de afrontamiento y vinculación con servicios.' },
+    ]},
+    { titulo:'Contextos y ética', items:[
+      { termino:'Contextos de intervención', definicion:'Los mismos enfoques cambian de énfasis según el contexto: educativo/psicopedagógico, organizacional, del deporte, además del clínico.' },
+      { termino:'Código ético (SMP)', definicion:'Principios de conducta profesional: confidencialidad, no maleficencia, competencia e integridad.' },
+      { termino:'Límites de competencia', definicion:'El psicólogo solo interviene en aquello para lo que está formado y capacitado; fuera de eso, refiere a otro profesional.' },
+    ]},
+  ],
+};
+
+function el(tag, attrs, children) {
+  const node = document.createElement(tag);
+  for (const k in attrs || {}) {
+    if (k === 'html') node.innerHTML = attrs[k];
+    else if (k === 'style') node.setAttribute('style', attrs[k]);
+    else node.setAttribute(k, attrs[k]);
+  }
+  (children || []).forEach(c => c && node.appendChild(c));
+  return node;
+}
+
+function renderConceptoCard(c) {
+  const card = el('div', { class: 'cc-card' });
+  const panel = el('div', { class: 'cc-panel' });
+  panel.appendChild(el('p', { class: 'cc-def', html: c.definicion }));
+  const btn = el('button', { type: 'button', class: 'cc-toggle', 'aria-expanded': 'false' }, [
+    el('span', { class: 'cc-term', html: c.termino }),
+    el('span', { class: 'cc-chev', 'aria-hidden': 'true', html: '›' }),
+  ]);
+  btn.addEventListener('click', () => {
+    const open = card.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    panel.style.maxHeight = open ? panel.scrollHeight + 40 + 'px' : '0px';
+  });
+  card.appendChild(btn);
+  card.appendChild(panel);
+  return card;
+}
+
+function renderRecallCard(q) {
+  const card = el('div', { class: 'rc-card' });
+  const panel = el('div', { class: 'rc-panel' });
+  panel.appendChild(el('p', { class: 'rc-a', html: q.respuesta }));
+  const btn = el('button', { type: 'button', class: 'rc-btn' }, []);
+  btn.textContent = 'Ya lo pensé · ver respuesta';
+  let shown = false;
+  btn.addEventListener('click', () => {
+    shown = !shown;
+    panel.style.maxHeight = shown ? panel.scrollHeight + 20 + 'px' : '0px';
+    btn.textContent = shown ? 'Ocultar' : 'Ya lo pensé · ver respuesta';
+  });
+  const qRow = el('div', { class: 'rc-q' }, [
+    el('svg', { 'aria-hidden': 'true', width: '19', height: '19', viewBox: '0 0 24 24', fill: 'none', stroke: 'var(--periwinkle-600)', 'stroke-width': '2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'flex:none;margin-top:1px', html: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>' }),
+    el('p', { html: q.pregunta }),
+  ]);
+  card.appendChild(qRow);
+  card.appendChild(panel);
+  card.appendChild(btn);
+  return card;
+}
+
+function renderCadenaCausal(bites, accent) {
+  const wrap = el('div', { class: 'cad-wrap' });
+  wrap.style.setProperty('--accent', accent);
+  const list = el('div', { class: 'cad-bites' });
+  let count = 0;
+
+  function addBite(i) {
+    const b = bites[i];
+    const bite = el('div', { class: 'cad-bite', style: `border-left:3px solid ${accent}` }, [
+      el('span', { class: 'cad-who', style: `color:${accent}`, html: b.who }),
+      el('p', { html: b.texto }),
+    ]);
+    list.appendChild(bite);
+  }
+
+  function updateProgress() {
+    progressEl.textContent = count + '/' + bites.length;
+    wrap.classList.toggle('is-done', count >= bites.length);
+  }
+
+  const progressEl = el('span', {}, []);
+  const nextBtn = el('button', { type: 'button', class: 'cad-next', style: `background:${accent}` }, [
+    document.createTextNode('Siguiente ▸  '), progressEl,
+  ]);
+  const allBtn = el('button', { type: 'button', class: 'cad-all' }, []);
+  allBtn.textContent = 'revelar todo';
+  const resetBtn = el('button', { type: 'button', class: 'cad-reset' }, []);
+  resetBtn.textContent = 'reiniciar';
+  const doneEl = el('span', { class: 'cad-done' }, []);
+  doneEl.append('✓ Ahora tápalo y cuéntalo con tus palabras.', resetBtn);
+
+  nextBtn.addEventListener('click', () => {
+    if (count < bites.length) { addBite(count); count++; updateProgress(); }
+  });
+  allBtn.addEventListener('click', () => {
+    while (count < bites.length) { addBite(count); count++; }
+    updateProgress();
+  });
+  resetBtn.addEventListener('click', () => {
+    list.innerHTML = '';
+    count = 0;
+    addBite(0); count = 1;
+    updateProgress();
+  });
+
+  addBite(0); count = 1;
+  updateProgress();
+
+  const controls = el('div', { class: 'cad-controls' }, [nextBtn, allBtn, doneEl]);
+  wrap.appendChild(list);
+  wrap.appendChild(controls);
+  return wrap;
+}
+
+function chunksGrid(items, renderFn, minwidth) {
+  const grid = el('div', { style: `display:grid;grid-template-columns:repeat(auto-fill,minmax(${minwidth}px,1fr));gap:9px;align-items:start` });
+  items.forEach(item => grid.appendChild(renderFn(item)));
+  return grid;
+}
+
+function renderEscuela(s) {
+  const section = el('section', { id: s.id, style: `scroll-margin-top:64px;background:var(--white);border:1px solid var(--border-subtle);border-top:5px solid ${s.color};border-radius:var(--radius-xl);box-shadow:var(--shadow-sm);padding:26px 24px` });
+
+  section.appendChild(el('div', { style: 'display:flex;align-items:flex-start;gap:16px;margin-bottom:18px' }, [
+    el('span', { style: `flex:none;font-family:var(--font-sans);font-weight:900;font-size:44px;line-height:0.9;color:${s.color}`, html: s.num }),
+    el('div', { style: 'flex:1;min-width:0' }, [
+      el('span', { style: `display:inline-block;font-family:var(--font-sans);font-weight:800;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-900);background:${s.bg};border-radius:999px;padding:4px 10px`, html: s.pendulo }),
+      el('h3', { style: 'font-family:var(--font-sans);font-weight:900;font-size:24px;letter-spacing:-0.01em;margin:8px 0 0;line-height:1.05;color:var(--ink-900)', html: s.nombre }),
+      el('p', { style: 'margin:3px 0 0;color:var(--ink-500);font-size:13.5px', html: s.mira }),
+    ]),
+  ]));
+
+  section.appendChild(el('div', { style: 'display:flex;align-items:center;gap:8px;margin:6px 0 12px' }, [
+    el('svg', { 'aria-hidden': 'true', width: '16', height: '16', viewBox: '0 0 24 24', fill: 'none', stroke: s.color, 'stroke-width': '2.2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', html: '<path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h6"/>' }),
+    el('span', { style: `font-family:var(--font-sans);font-weight:900;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${s.color}`, html: 'La cadena causal · cuéntatelo como chisme' }),
+  ]));
+  section.appendChild(renderCadenaCausal(s.bites, s.color));
+
+  section.appendChild(el('div', { style: 'display:flex;align-items:center;gap:8px;margin:24px 0 12px' }, [
+    el('svg', { 'aria-hidden': 'true', width: '16', height: '16', viewBox: '0 0 24 24', fill: 'none', stroke: s.color, 'stroke-width': '2.2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', html: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>' }),
+    el('span', { style: `font-family:var(--font-sans);font-weight:900;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${s.color}`, html: 'Conceptos clave · en chunks' }),
+  ]));
+  section.appendChild(chunksGrid(s.conceptos, renderConceptoCard, 255));
+
+  section.appendChild(el('div', { style: 'display:flex;align-items:center;gap:8px;margin:24px 0 12px' }, [
+    el('svg', { 'aria-hidden': 'true', width: '16', height: '16', viewBox: '0 0 24 24', fill: 'none', stroke: s.color, 'stroke-width': '2.2', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', html: '<path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/>' }),
+    el('span', { style: `font-family:var(--font-sans);font-weight:900;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${s.color}`, html: 'Recupéralo · razona antes de ver' }),
+  ]));
+  section.appendChild(chunksGrid(s.recall, renderRecallCard, 300));
+
+  return section;
+}
+
+function renderPendulo() {
+  const list = document.getElementById('pendulo-list');
+  DATA.pendulo.forEach(p => {
+    list.appendChild(el('div', { style: `flex:1;min-width:150px;max-width:200px;background:${p.bg};border:1px solid var(--border-on-oat);border-radius:var(--radius-md);padding:15px 14px;text-align:center;display:flex;flex-direction:column;gap:6px` }, [
+      el('span', { style: `font-family:var(--font-sans);font-weight:900;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${p.color}`, html: p.fase }),
+      el('span', { style: 'font-family:var(--font-sans);font-weight:800;font-size:13.5px;color:var(--ink-900);line-height:1.3', html: p.escuelas }),
+    ]));
+  });
+}
+
+function renderComparativo() {
+  const rows = document.getElementById('comparativo-rows');
+  DATA.comparativo.forEach(r => {
+    rows.appendChild(el('div', { style: `display:grid;grid-template-columns:1.1fr 1.6fr 1.4fr 1.4fr;gap:10px;background:var(--white);border:1px solid var(--border-subtle);border-left:4px solid ${r.color};border-radius:var(--radius-md);padding:13px 15px;box-shadow:var(--shadow-xs)` }, [
+      el('span', { style: 'font-family:var(--font-sans);font-weight:800;font-size:13px;color:var(--ink-900);line-height:1.3', html: r.enfoque }),
+      el('span', { style: 'font-family:var(--font-sans);font-size:12.5px;color:var(--ink-700);line-height:1.45', html: r.causa }),
+      el('span', { style: 'font-family:var(--font-sans);font-size:12.5px;color:var(--ink-700);line-height:1.45', html: r.mira }),
+      el('span', { style: 'font-family:var(--font-sans);font-size:12.5px;color:var(--ink-700);line-height:1.45', html: r.tecnica }),
+    ]));
+  });
+}
+
+function renderTransversal() {
+  const wrap = document.getElementById('transversal-list');
+  DATA.transversal.forEach(g => {
+    const group = el('div', {}, [
+      el('h3', { style: 'font-family:var(--font-sans);font-weight:900;font-size:15px;text-transform:uppercase;letter-spacing:0.02em;color:var(--ink-900);margin:0 0 11px;display:flex;align-items:center;gap:9px', html: `<span style="width:8px;height:8px;border-radius:999px;background:var(--periwinkle-500)"></span>${g.titulo}` }),
+    ]);
+    group.appendChild(chunksGrid(g.items, renderConceptoCard, 255));
+    wrap.appendChild(group);
+  });
+}
+
+function renderPlan() {
+  const list = document.getElementById('plan-list');
+  DATA.plan.forEach(p => {
+    list.appendChild(el('div', { style: 'display:flex;gap:15px;align-items:flex-start;background:var(--white);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:15px 17px;box-shadow:var(--shadow-xs)' }, [
+      el('span', { style: 'flex:none;font-family:var(--font-sans);font-weight:900;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#fff;background:var(--periwinkle-500);border-radius:999px;padding:6px 11px;white-space:nowrap;margin-top:1px', html: p.cuando }),
+      el('p', { style: 'margin:0;font-family:var(--font-sans);font-size:14px;line-height:1.55;color:var(--ink-800)', html: p.texto }),
+    ]));
+  });
+}
+
+function renderEscuelas() {
+  const wrap = document.getElementById('escuelas-list');
+  DATA.escuelas.forEach(s => wrap.appendChild(renderEscuela(s)));
+}
+
+renderPendulo();
+renderEscuelas();
+renderComparativo();
+renderTransversal();
+renderPlan();
+</script>
+</body>
+</html>

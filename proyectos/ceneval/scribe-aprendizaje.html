@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scribe: Aprendizaje — CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso estilo graphic recording del condicionamiento clásico, operante y vicario, con la matriz refuerzo/castigo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--oat);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--oat)">
+  <nav style="background:rgba(251,250,247,0.9);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1680px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">scribe</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">lámina de repaso · aprendizaje</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <div id="scribeWrap" style="position:relative;width:100%;height:620px;overflow:hidden;margin:0 auto;background:var(--oat)">
+  <div id="scribeBoard" style="position:absolute;top:0;left:0;width:1680px;height:1240px;transform:scale(0.5);transform-origin:top left;background:var(--paper);box-shadow:0 10px 40px rgba(42,41,51,0.14)">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.16) 1.3px, transparent 1.3px);background-size:26px 26px"></div>
+
+    <div style="position:absolute;left:600px;top:22px;font-family:var(--font-accent);font-size:46px;color:#E85DA0;transform:rotate(-6deg);z-index:3">¿cómo se</div>
+    <div style="position:absolute;left:340px;top:70px;width:1000px;text-align:center;z-index:2"><span style="font-family:var(--font-sans);font-weight:900;font-size:112px;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);text-shadow:5px 5px 0 var(--periwinkle-300)">APRENDE</span></div>
+    <div style="position:absolute;left:620px;top:212px;width:440px;text-align:center;z-index:3"><div style="display:inline-block;background:var(--periwinkle-500);color:#fff;font-family:var(--font-display);font-size:28px;padding:6px 30px;border-radius:8px;box-shadow:4px 5px 0 rgba(42,41,51,0.16);transform:rotate(-1deg)">la conducta?</div></div>
+
+    <!-- COL 1 Clásico -->
+    <div style="position:absolute;left:48px;top:306px;width:506px;height:396px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 26px 100px;padding:20px 24px;box-shadow:6px 7px 0 rgba(42,41,51,0.12);transform:rotate(-0.5deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><span style="flex:none;color:var(--periwinkle-500)"><svg width="42" height="42" viewBox="0 0 42 42" fill="none"><path d="M21 7a6 6 0 0 0-6 6v8c0 3-1 5-3 7h18c-2-2-3-4-3-7v-8a6 6 0 0 0-6-6z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M18 33a3 3 0 0 0 6 0M21 4v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><div><h3 style="font-family:var(--font-display);font-size:29px;margin:0;line-height:0.85;color:var(--ink-900)">Clásico</h3><span style="font-size:13px;font-weight:800;color:var(--periwinkle-600);text-transform:uppercase;letter-spacing:0.08em">Pavlov · Watson</span></div></div>
+      <p style="margin:0 0 10px;font-size:17px;line-height:1.35;color:var(--ink-900)">asociar <strong style="color:var(--periwinkle-700)">dos estímulos</strong>. Respuesta involuntaria, refleja.</p>
+      <div style="background:var(--periwinkle-100);border-radius:12px;padding:10px 14px;font-size:14.5px;line-height:1.5;color:var(--periwinkle-800);margin-bottom:12px">
+        EI → RI (comida → saliva)<br>EC + EI repetido<br><strong>EC → RC</strong> (campana → saliva)
+      </div>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:4px 12px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ campana = salivar (perro de Pavlov)</span>
+    </div>
+
+    <!-- COL 2 Operante -->
+    <div style="position:absolute;left:586px;top:306px;width:506px;height:396px;background:#fff;border:3px solid var(--ink-900);border-radius:26px;padding:20px 24px;box-shadow:6px 7px 0 rgba(42,41,51,0.12);transform:rotate(0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><span style="flex:none;color:#4FA47A"><svg width="42" height="42" viewBox="0 0 42 42" fill="none"><rect x="7" y="10" width="28" height="24" rx="3" stroke="currentColor" stroke-width="2.4"/><path d="M14 10V7a7 7 0 0 1 14 0v3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M15 22h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><div><h3 style="font-family:var(--font-display);font-size:29px;margin:0;line-height:0.85;color:var(--ink-900)">Operante</h3><span style="font-size:13px;font-weight:800;color:#2F6B4F;text-transform:uppercase;letter-spacing:0.08em">Skinner · Thorndike</span></div></div>
+      <p style="margin:0 0 10px;font-size:17px;line-height:1.35;color:var(--ink-900)">la conducta <strong style="color:#2F6B4F">voluntaria</strong> se moldea por sus <strong>consecuencias</strong>.</p>
+      <div style="background:var(--pastel-mint);border-radius:12px;padding:10px 14px;font-size:14.5px;line-height:1.5;color:#2F6B4F;margin-bottom:12px">
+        consecuencia agradable → <strong>se repite</strong><br>consecuencia molesta → <strong>se evita</strong><br><span style="color:#4FA47A;font-weight:800">↓ ver la matriz refuerzo/castigo</span>
+      </div>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:4px 12px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ palanca = comida (caja de Skinner)</span>
+    </div>
+
+    <!-- COL 3 Vicario -->
+    <div style="position:absolute;left:1124px;top:306px;width:508px;height:396px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 100px 26px;padding:20px 24px;box-shadow:6px 7px 0 rgba(42,41,51,0.12);transform:rotate(-0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px"><span style="flex:none;color:#B98BC9"><svg width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="14" cy="12" r="5" stroke="currentColor" stroke-width="2.4"/><circle cx="30" cy="14" r="4" stroke="currentColor" stroke-width="2.4"/><path d="M6 34c0-6 3-10 8-10s8 4 8 10M24 34c0-4 2-8 6-8s6 3 6 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span><div><h3 style="font-family:var(--font-display);font-size:27px;margin:0;line-height:0.85;color:var(--ink-900)">Vicario</h3><span style="font-size:13px;font-weight:800;color:#5F4B8B;text-transform:uppercase;letter-spacing:0.08em">Bandura · observacional</span></div></div>
+      <p style="margin:0 0 10px;font-size:17px;line-height:1.35;color:var(--ink-900)">aprender <strong style="color:#5F4B8B">observando</strong> a un modelo, sin ejecutar.</p>
+      <div style="background:var(--pastel-lilac);border-radius:12px;padding:10px 14px;font-size:14.5px;line-height:1.6;color:#4A3A6B;margin-bottom:12px">
+        <strong>1</strong> atención · <strong>2</strong> retención<br><strong>3</strong> reproducción · <strong>4</strong> motivación
+      </div>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:4px 12px;border-radius:6px;font-size:14.5px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ niño imita al adulto (muñeco Bobo)</span>
+    </div>
+
+    <!-- MATRIX -->
+    <div style="position:absolute;left:48px;top:744px;width:1044px;z-index:2">
+      <div style="font-family:var(--font-display);font-size:26px;color:var(--ink-900);margin-bottom:10px;transform:rotate(-0.5deg)">operante en detalle · <span style="color:#4FA47A">refuerzo</span> vs <span style="color:#C0557E">castigo</span></div>
+      <div style="display:grid;grid-template-columns:150px 1fr 1fr;grid-template-rows:60px 1fr 1fr;gap:10px">
+        <div style="background:var(--oat);border:2.5px dashed var(--ink-500);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--ink-500);text-align:center;line-height:1.2">el estímulo…</div>
+        <div style="background:var(--periwinkle-100);border:2.5px solid var(--ink-900);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-family:var(--font-display);font-size:22px;color:var(--periwinkle-700)">POSITIVO (+)</span><span style="font-size:13.5px;font-weight:700;color:var(--periwinkle-800)">agrego un estímulo</span></div>
+        <div style="background:var(--pastel-sky);border:2.5px solid var(--ink-900);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-family:var(--font-display);font-size:22px;color:#3F5488">NEGATIVO (−)</span><span style="font-size:13.5px;font-weight:700;color:#3F5488">quito un estímulo</span></div>
+
+        <div style="background:var(--pastel-mint);border:2.5px solid var(--ink-900);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px"><span style="font-family:var(--font-display);font-size:23px;color:#2F6B4F">REFUERZO</span><span style="font-size:13.5px;font-weight:800;color:#2F6B4F">↑ aumenta la conducta</span></div>
+        <div style="background:#fff;border:2.5px solid var(--ink-900);border-radius:12px;padding:12px 16px;box-shadow:3px 4px 0 rgba(42,41,51,0.1)"><h4 style="margin:0 0 3px;font-size:17px;color:#2F6B4F">Refuerzo positivo</h4><p style="margin:0 0 6px;font-size:14.5px;line-height:1.3;color:var(--ink-700)">doy algo agradable → premio, elogio</p><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 9px;border-radius:5px;font-size:13px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">buena nota → sticker</span></div>
+        <div style="background:#fff;border:2.5px solid var(--ink-900);border-radius:12px;padding:12px 16px;box-shadow:3px 4px 0 rgba(42,41,51,0.1)"><h4 style="margin:0 0 3px;font-size:17px;color:#2F6B4F">Refuerzo negativo</h4><p style="margin:0 0 6px;font-size:14.5px;line-height:1.3;color:var(--ink-700)">quito algo molesto → cesa el ruido</p><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 9px;border-radius:5px;font-size:13px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">me pongo el cinturón → apago la alarma</span></div>
+
+        <div style="background:var(--pastel-blush);border:2.5px solid var(--ink-900);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px"><span style="font-family:var(--font-display);font-size:23px;color:#8A3F58">CASTIGO</span><span style="font-size:13.5px;font-weight:800;color:#8A3F58">↓ disminuye la conducta</span></div>
+        <div style="background:#fff;border:2.5px solid var(--ink-900);border-radius:12px;padding:12px 16px;box-shadow:3px 4px 0 rgba(42,41,51,0.1)"><h4 style="margin:0 0 3px;font-size:17px;color:#8A3F58">Castigo positivo</h4><p style="margin:0 0 6px;font-size:14.5px;line-height:1.3;color:var(--ink-700)">agrego algo aversivo → regaño</p><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 9px;border-radius:5px;font-size:13px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">pega → lo regañan</span></div>
+        <div style="background:#fff;border:2.5px solid var(--ink-900);border-radius:12px;padding:12px 16px;box-shadow:3px 4px 0 rgba(42,41,51,0.1)"><h4 style="margin:0 0 3px;font-size:17px;color:#8A3F58">Castigo negativo</h4><p style="margin:0 0 6px;font-size:14.5px;line-height:1.3;color:var(--ink-700)">quito algo agradable → sin recreo</p><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 9px;border-radius:5px;font-size:13px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">se porta mal → le quitan el celular</span></div>
+      </div>
+    </div>
+
+    <!-- PROGRAMAS -->
+    <div style="position:absolute;left:1124px;top:744px;width:508px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 90px 26px 26px;padding:15px 22px;box-shadow:6px 7px 0 rgba(42,41,51,0.12);transform:rotate(0.5deg);z-index:2">
+      <h3 style="font-family:var(--font-display);font-size:23px;margin:0 0 6px;color:var(--ink-900)">Programas de reforzamiento</h3>
+      <p style="margin:0 0 9px;font-size:14.5px;line-height:1.32;color:var(--ink-900)"><strong>Razón</strong> (por # de respuestas) vs <strong>Intervalo</strong> (por tiempo); cada uno <strong>fijo</strong> o <strong>variable</strong>. El variable = más resistente a la extinción (tipo tragamonedas).</p>
+      <span class="mapa-clave" style="background:var(--pastel-mint);padding:3px 11px;border-radius:6px;font-size:14px;font-weight:800;color:#2F6B4F;display:inline-block;cursor:help">clave→ intermitente / variable = conducta más persistente</span>
+    </div>
+
+    <!-- TÉCNICAS APLICADAS -->
+    <div style="position:absolute;left:1124px;top:940px;width:508px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 90px 26px;padding:15px 22px;box-shadow:6px 7px 0 rgba(42,41,51,0.12);transform:rotate(-0.5deg);z-index:2">
+      <h3 style="font-family:var(--font-display);font-size:22px;margin:0 0 3px;color:var(--ink-900)">Reducir una conducta · 3 técnicas</h3>
+      <p style="margin:0 0 9px;font-size:12.5px;color:var(--ink-500);line-height:1.3">en el caso del berrinche, estas 3 son las opciones — distínguelas:</p>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+        <div style="font-size:14px;line-height:1.28;color:var(--ink-900)"><strong style="color:#2F6B4F">Tiempo fuera</strong> — saco a la persona del ambiente que la refuerza, un rato corto.</div>
+        <div style="font-size:14px;line-height:1.28;color:var(--ink-900)"><strong style="color:#8A3F58">Costo de respuesta</strong> — le quito algo que <strong>ya tiene</strong> (fichas, privilegios); no la saco del lugar.</div>
+        <div style="font-size:14px;line-height:1.28;color:var(--ink-900)"><strong style="color:#B0851F">Ref. intermitente mal usado</strong> — ceder &quot;a veces&quot; <strong>mantiene</strong> el berrinche.</div>
+      </div>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 11px;border-radius:6px;font-size:13.5px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ berrinche del niño → tiempo fuera</span>
+    </div>
+
+    <div style="position:absolute;left:1520px;top:40px;width:110px;height:110px;border:3px solid var(--periwinkle-500);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-6deg);z-index:3;background:var(--paper)">
+      <span style="font-family:var(--font-accent);font-size:30px;color:#E85DA0;line-height:0.8">kyn</span>
+      <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-top:2px">scribe</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:1680px;margin:0 auto;padding:20px 24px 60px;text-align:center">
+    <p style="font-size:13.5px;color:var(--ink-500);margin:0 0 12px;line-height:1.5">Lámina de repaso estilo <em>graphic recording</em>. Activa <strong>Modo repaso</strong> y pasa el cursor sobre las claves para autoevaluarte.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="scribe-teorias-desarrollo.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">teorías del desarrollo</a>
+      <a href="scribe-enfoques-terapeuticos.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">enfoques terapéuticos</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-scribe-aprendizaje';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+
+  var wrap = document.getElementById('scribeWrap');
+  var board = document.getElementById('scribeBoard');
+  function fit() {
+    if (!wrap || !board) return;
+    var scale = Math.min(1, wrap.clientWidth / 1680);
+    board.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (1240 * scale) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  [200, 600, 1200].forEach(function(t) { setTimeout(fit, t); });
+})();
+</script>
+</body>
+</html>

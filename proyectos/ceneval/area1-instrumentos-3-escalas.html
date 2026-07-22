@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escalas de puntuación — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Cómo leer el número que arroja un instrumento: escala Z, CI (100/15), T (50/10) y puntaje directo, con las bandas de CI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+  --warning: #D9A441;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(47, 54, 88, 0.06);
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body { margin: 0; background: var(--paper); overflow-x: hidden; }
+a { color: var(--periwinkle-700); }
+a:hover { color: var(--periwinkle-600); }
+@keyframes riseIn { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-sans);font-weight:var(--weight-black);
+  text-transform:uppercase;letter-spacing:0.06em;
+  border:1.5px solid transparent;border-radius:var(--radius-pill);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background var(--dur-fast) var(--ease-out),
+             color var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-out),
+             box-shadow var(--dur-base) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out);
+}
+.kyn-btn:focus-visible{outline:none;box-shadow:var(--shadow-focus);}
+.kyn-btn:active{transform:translateY(1px) scale(0.99);}
+.kyn-btn--sm{font-size:13px;padding:9px 18px;}
+.kyn-btn--md{font-size:15px;padding:13px 26px;}
+.kyn-btn--primary{background:var(--periwinkle-500);color:#fff;box-shadow:var(--shadow-sm);}
+.kyn-btn--primary:hover{background:var(--periwinkle-600);box-shadow:var(--shadow-md);color:#fff;}
+.kyn-btn--secondary{background:var(--white);color:var(--ink-900);border-color:var(--ink-100);}
+.kyn-btn--secondary:hover{border-color:var(--periwinkle-300);background:var(--periwinkle-50);color:var(--ink-900);}
+.kyn-btn--ghost{background:transparent;color:var(--periwinkle-700);}
+.kyn-btn--ghost:hover{background:var(--periwinkle-50);color:var(--periwinkle-700);}
+
+.kyn-alert{
+  display:flex;align-items:flex-start;gap:12px;font-family:var(--font-sans);
+  border-radius:var(--radius-md);padding:16px 18px;border:1px solid transparent;
+}
+.kyn-alert__icon{flex:none;display:inline-flex;padding-top:1px;}
+.kyn-alert__icon svg{width:20px;height:20px;}
+.kyn-alert__body{display:flex;flex-direction:column;gap:3px;}
+.kyn-alert__title{font-size:14px;font-weight:var(--weight-bold);}
+.kyn-alert__msg{font-size:13px;line-height:1.5;}
+.kyn-alert--warning{background:var(--pastel-butter);border-color:#EBD79A;}
+.kyn-alert--warning .kyn-alert__icon,.kyn-alert--warning .kyn-alert__title{color:#8A6D1F;}
+.kyn-alert--warning .kyn-alert__msg{color:#8A6D1F;}
+
+.no-print a.kyn-btn { text-decoration: none; }
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+}
+</style>
+</head>
+<body>
+  <div class="no-print" style="max-width: 1040px; margin: 0 auto; padding: 14px 24px 0;">
+    <a href="index.html" style="text-decoration:none;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800)">← Base CENEVAL</a>
+  </div>
+
+<div style="font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #2A2933; background: #FBFAF7; min-height: 100%; padding: 28px 24px 64px;">
+  <div style="max-width: 1040px; margin: 0 auto; animation: riseIn .5s cubic-bezier(0.22,1,0.36,1);">
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px;" class="no-print">
+      <a href="area1-instrumentos-2-instrumentos.html" class="kyn-btn kyn-btn--secondary kyn-btn--sm" style="text-decoration: none;">‹ Instrumentos</a>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #A8A6B0;">Bloque 3 / 4</div>
+      <a href="area1-instrumentos-4-uso.html" class="kyn-btn kyn-btn--ghost kyn-btn--sm" style="text-decoration: none;">Uso ›</a>
+    </div>
+
+    <header style="text-align: center; margin-bottom: 26px;">
+      <div style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #D9A441;">Bloque 3 · Área 1</div>
+      <h1 style="font-weight: 800; font-size: 46px; line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0 4px;">Escalas de puntuación</h1>
+      <div style="font-family: 'Friendship', cursive; font-size: 27px; color: #D9A441; line-height: 1;">cómo leer el número</div>
+      <p style="font-size: 16.5px; line-height: 1.6; color: #75737F; max-width: 600px; margin: 14px auto 0;">El mismo número significa cosas distintas según la escala. Toda escala estandarizada <b style="color: #4A4955;">nace de la Z</b>.</p>
+    </header>
+
+    <div style="display: flex; justify-content: center;">
+      <div style="background: #D9A441; color: #fff; font-weight: 900; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; padding: 13px 30px; border-radius: 999px; box-shadow: 0 8px 24px rgba(138,109,31,0.2);">Escalas</div>
+    </div>
+    <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 6px 0;"><div style="width: 2.5px; height: 20px; background: #ECDCA7;"></div><div style="width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid #E3C46B;"></div></div></div>
+
+    <div style="max-width: 380px; margin: 0 auto;">
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #8795D2; border-radius: 18px; padding: 18px 20px; text-align: center; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px;"><div style="font-weight: 900; font-size: 24px; color: #5562A4; letter-spacing: -0.01em;">Z</div><span class="kyn-badge kyn-badge--soft">la base</span></div>
+        <div style="font-size: 13px; color: #75737F; margin-top: 2px;">estadística general — de aquí nacen las demás</div>
+        <div style="display: flex; justify-content: center; gap: 12px; margin-top: 12px;">
+          <div style="background: #F0F2FB; border-radius: 12px; padding: 9px 16px;"><div style="font-weight: 900; font-size: 26px; color: #5562A4; line-height: 1;">0</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">media</div></div>
+          <div style="background: #F0F2FB; border-radius: 12px; padding: 9px 16px;"><div style="font-weight: 900; font-size: 26px; color: #5562A4; line-height: 1;">1</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">DE</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 16px; max-width: 720px; margin: 18px auto 20px;">
+      <div style="flex: 1; height: 1.5px; background: #E4E2E6;"></div>
+      <div style="background: #F0F2FB; color: #5562A4; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px;">se transforma en (media, DE fijas)</div>
+      <div style="flex: 1; height: 1.5px; background: #E4E2E6;"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px;">
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #6B7AC1; border-radius: 18px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 900; font-size: 22px; color: #5562A4;">CI</div><span style="background: #E4F1EA; color: #2F6B4F; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px;">WISC · WAIS</span></div>
+        <div style="display: flex; gap: 12px; margin: 12px 0;">
+          <div style="flex: 1; background: #F0F2FB; border-radius: 12px; padding: 10px 12px; text-align: center;"><div style="font-weight: 900; font-size: 30px; color: #5562A4; line-height: 1;">100</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">media</div></div>
+          <div style="flex: 1; background: #F0F2FB; border-radius: 12px; padding: 10px 12px; text-align: center;"><div style="font-weight: 900; font-size: 30px; color: #5562A4; line-height: 1;">15</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">DE</div></div>
+        </div>
+        <div style="background: #2A2933; color: #fff; font-size: 13.5px; font-weight: 700; padding: 8px 12px; border-radius: 9px; text-align: center; letter-spacing: 0.02em;">CI = 100 + 15 · z</div>
+      </div>
+      <div style="background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #6B7AC1; border-radius: 18px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 900; font-size: 22px; color: #5562A4;">T</div><span style="background: #F0F2FB; color: #5562A4; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px;">CMASR-2 · CDI · clínicas</span></div>
+        <div style="display: flex; gap: 12px; margin: 12px 0;">
+          <div style="flex: 1; background: #F0F2FB; border-radius: 12px; padding: 10px 12px; text-align: center;"><div style="font-weight: 900; font-size: 30px; color: #5562A4; line-height: 1;">50</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">media</div></div>
+          <div style="flex: 1; background: #F0F2FB; border-radius: 12px; padding: 10px 12px; text-align: center;"><div style="font-weight: 900; font-size: 30px; color: #5562A4; line-height: 1;">10</div><div style="font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #8795D2; margin-top: 4px;">DE</div></div>
+        </div>
+        <div style="background: #2A2933; color: #fff; font-size: 13.5px; font-weight: 700; padding: 8px 12px; border-radius: 9px; text-align: center; letter-spacing: 0.02em;">T = 50 + 10 · z</div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px; background: #FBF3D7; border-radius: 9px; padding: 8px 12px;"><span style="font-weight: 900; color: #8A6D1F; font-size: 15px;">≥ 65</span><span style="font-size: 12.5px; color: #8A6D1F; line-height: 1.4;">suele marcar <b>clínicamente significativo</b> (≈ +1.5 DE).</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 18px; background: #F4F0E8; border: 1px solid #E9E3D7; border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 10px;"><div style="font-weight: 900; font-size: 18px; color: #8A6D1F;">Puntaje directo</div><span class="kyn-badge kyn-badge--butter">la excepción</span></div>
+      <div style="flex: 1; min-width: 220px; font-size: 13.5px; color: #4A4955; line-height: 1.5;">No tiene media ni DE fijas: se lee <b>tal cual</b>. Ej.: <b>MMSE sobre 30</b> y muchas escalas de desarrollo.</div>
+    </div>
+
+    <div style="margin-top: 30px; background: #fff; border: 1px solid #E4E2E6; border-radius: 20px; padding: 22px 24px; box-shadow: 0 2px 8px rgba(47,54,88,0.06);">
+      <div style="font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #6B7AC1;">Bandas de CI — dónde cae el número</div>
+      <div style="font-size: 13px; color: #75737F; margin: 4px 0 18px;">Aplica también, con la misma lógica, a los 4 índices del WISC/WAIS.</div>
+
+      <div style="display: flex; text-align: center; margin-bottom: 4px;">
+        <div style="flex: 1; border-right: 1px dashed #D8D4CB; padding: 4px 2px;"><div style="font-weight: 900; font-size: 18px; color: #5562A4;">70</div><div style="font-size: 11px; font-weight: 700; color: #A8A6B0;">−2 DE</div></div>
+        <div style="flex: 1; border-right: 1px dashed #D8D4CB; padding: 4px 2px;"><div style="font-weight: 900; font-size: 18px; color: #5562A4;">85</div><div style="font-size: 11px; font-weight: 700; color: #A8A6B0;">−1 DE</div></div>
+        <div style="flex: 1; border-right: 1px dashed #D8D4CB; padding: 4px 2px;"><div style="font-weight: 900; font-size: 18px; color: #8795D2;">100</div><div style="font-size: 11px; font-weight: 700; color: #8795D2;">media</div></div>
+        <div style="flex: 1; border-right: 1px dashed #D8D4CB; padding: 4px 2px;"><div style="font-weight: 900; font-size: 18px; color: #5562A4;">115</div><div style="font-size: 11px; font-weight: 700; color: #A8A6B0;">+1 DE</div></div>
+        <div style="flex: 1; padding: 4px 2px;"><div style="font-weight: 900; font-size: 18px; color: #5562A4;">130</div><div style="font-size: 11px; font-weight: 700; color: #A8A6B0;">+2 DE</div></div>
+      </div>
+
+      <div style="display: flex; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(47,54,88,0.08); font-size: 11.5px;">
+        <div style="flex: 1; background: #F4F0E8; padding: 12px 6px; text-align: center; color: #4A4955;"><div style="font-weight: 900; font-size: 13px;">≤ 69</div><div style="margin-top: 2px; line-height: 1.25;">extrem. bajo</div></div>
+        <div style="flex: 1; background: #E2E6F5; padding: 12px 6px; text-align: center; color: #434D80;"><div style="font-weight: 900; font-size: 13px;">70–79</div><div style="margin-top: 2px; line-height: 1.25;">limítrofe</div></div>
+        <div style="flex: 1; background: #C9D0ED; padding: 12px 6px; text-align: center; color: #434D80;"><div style="font-weight: 900; font-size: 13px;">80–89</div><div style="margin-top: 2px; line-height: 1.25;">promedio bajo</div></div>
+        <div style="flex: 2; background: #8795D2; padding: 12px 6px; text-align: center; color: #fff;"><div style="font-weight: 900; font-size: 14px;">90–109</div><div style="margin-top: 2px; line-height: 1.25; font-weight: 700;">PROMEDIO (100)</div></div>
+        <div style="flex: 1; background: #C9D0ED; padding: 12px 6px; text-align: center; color: #434D80;"><div style="font-weight: 900; font-size: 13px;">110–119</div><div style="margin-top: 2px; line-height: 1.25;">promedio alto</div></div>
+        <div style="flex: 1; background: #E2E6F5; padding: 12px 6px; text-align: center; color: #434D80;"><div style="font-weight: 900; font-size: 13px;">120–129</div><div style="margin-top: 2px; line-height: 1.25;">superior</div></div>
+        <div style="flex: 1; background: #F4F0E8; padding: 12px 6px; text-align: center; color: #4A4955;"><div style="font-weight: 900; font-size: 13px;">≥ 130</div><div style="margin-top: 2px; line-height: 1.25;">muy superior</div></div>
+      </div>
+      <div style="font-size: 12px; color: #A8A6B0; margin-top: 10px;">≤ 69 entra en el rango de discapacidad intelectual. Cada 15 puntos = 1 desviación estándar.</div>
+    </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 30px;">
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">El número no vale igual en toda escala</div><div class="kyn-alert__msg" style="font-size: 13px;">Un <b>50</b> es la media en escala T… pero está muy por debajo del promedio en CI. Siempre revisa <b>qué escala</b> es.</div></div>
+      </div>
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">100 no es “100%”</div><div class="kyn-alert__msg" style="font-size: 13px;">En CI, <b>100 = promedio</b> (el centro), no una calificación perfecta. Lo mismo con 50 en T.</div></div>
+      </div>
+    </div>
+
+        <div style="margin-top: 30px; background: #fff; border: 1.5px solid #F7C9DE; border-radius: 20px; padding: 22px 24px; box-shadow: 0 2px 8px rgba(47,54,88,0.06);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#E85DA0" stroke="#E85DA0" stroke-width="1.5" stroke-linejoin="round" style="flex: none;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div style="font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #E85DA0;">Trucos para recordar</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4px 28px;">
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 96px;">Z es la mamá</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;"><b>0 y 1</b>. De ella nacen las demás: <b>T</b> = 50 + 10·z, <b>CI</b> = 100 + 15·z.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 96px;">100/15 y 50/10</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;"><b>CI</b> vive en 100 (DE 15). <b>T</b> vive en 50 (DE 10). Los pares que más se preguntan.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 96px;">±15 = 1 escalón</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">En CI cada <b>15 puntos = 1 DE</b>. 130 = +2 DE (muy superior); 70 = −2 DE (empieza el rango de discapacidad).</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 96px;">Directo = crudo</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">MMSE /30 no se estandariza: se lee <b>tal cual</b>, sin media ni DE.</div></div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 40px; padding-top: 22px; border-top: 1px solid #E9E3D7;" class="no-print">
+      <a href="area1-instrumentos-2-instrumentos.html" class="kyn-btn kyn-btn--secondary kyn-btn--md" style="text-decoration: none;">‹ Instrumentos</a>
+      <a href="area1-instrumentos-4-uso.html" class="kyn-btn kyn-btn--primary kyn-btn--md" style="text-decoration: none;">Uso e interpretación →</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

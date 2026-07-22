@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scribe: Mecanismos de Defensa — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso estilo graphic recording de los mecanismos de defensa del Yo: maduros, neuróticos, inmaduros y psicóticos, con ejemplos para autoevaluarte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--oat);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--oat)">
+  <nav style="background:rgba(251,250,247,0.9);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1680px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">scribe</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">lámina de repaso · mecanismos de defensa</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <div id="scribeWrap" style="position:relative;width:100%;height:620px;overflow:hidden;margin:0 auto;background:var(--oat)">
+  <div id="scribeBoard" style="position:absolute;top:0;left:0;width:1680px;height:1500px;transform:scale(0.5);transform-origin:top left;background:var(--paper);box-shadow:0 10px 40px rgba(42,41,51,0.14)">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.16) 1.3px, transparent 1.3px);background-size:26px 26px"></div>
+
+    <div style="position:absolute;left:600px;top:22px;font-family:var(--font-accent);font-size:46px;color:#E85DA0;transform:rotate(-6deg);z-index:3">el yo se</div>
+    <div style="position:absolute;left:340px;top:64px;width:1000px;text-align:center;z-index:2"><span style="font-family:var(--font-sans);font-weight:900;font-size:112px;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);text-shadow:5px 5px 0 var(--periwinkle-300)">DEFIENDE</span></div>
+    <div style="position:absolute;left:610px;top:186px;transform:rotate(-1.4deg);z-index:2">
+      <div style="position:relative;background:var(--periwinkle-500);color:#fff;font-family:var(--font-display);font-size:29px;letter-spacing:0.03em;padding:7px 34px;border-radius:8px;box-shadow:4px 5px 0 rgba(42,41,51,0.16)">sala de máquinas
+        <span style="position:absolute;left:-15px;top:50%;transform:translateY(-50%);width:0;height:0;border:11px solid transparent;border-right-color:var(--periwinkle-700)"></span>
+        <span style="position:absolute;right:-15px;top:50%;transform:translateY(-50%);width:0;height:0;border:11px solid transparent;border-left-color:var(--periwinkle-700)"></span>
+      </div>
+    </div>
+    <div style="position:absolute;left:1214px;top:150px;color:#B98BC9;transform:rotate(12deg);z-index:3"><svg width="32" height="32" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:392px;top:150px;color:#D9A441;transform:rotate(-8deg);z-index:3"><svg width="24" height="24" viewBox="0 0 26 26" fill="none"><path d="M13 1v24M1 13h24M4 4l18 18M22 4L4 22" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div style="position:absolute;left:540px;top:250px;width:600px;text-align:center;font-family:var(--font-display);font-size:22px;color:var(--periwinkle-600);z-index:2">cada defensa es una máquina que transforma un impulso inaceptable</div>
+
+    <div style="position:absolute;left:360px;top:300px;width:960px;background:#fff;border:2.5px dashed var(--periwinkle-300);border-radius:16px;padding:11px 22px;display:flex;align-items:center;justify-content:center;gap:13px;z-index:3;box-shadow:4px 5px 0 rgba(42,41,51,0.08)">
+      <span style="font-family:var(--font-display);font-size:19px;color:var(--periwinkle-600);flex:none">cómo leer:</span>
+      <span style="flex:none;width:30px;height:30px;border-radius:50%;background:#E86A45;border:2.5px solid var(--ink-900);display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 rgba(42,41,51,.15)"><svg width="14" height="14" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+      <span style="font-size:12px;font-weight:700;color:var(--ink-700);line-height:1.15">impulso<br>inaceptable</span>
+      <span style="color:var(--ink-500);font-size:18px;font-weight:900">→</span>
+      <span style="flex:none;width:32px;height:32px;border-radius:8px;background:var(--periwinkle-100);border:2.5px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" stroke-linecap="round"/></svg></span>
+      <span style="font-size:12px;font-weight:700;color:var(--ink-700);line-height:1.15">la defensa<br>lo transforma</span>
+      <span style="color:var(--ink-500);font-size:18px;font-weight:900">→</span>
+      <span style="background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.5);padding:4px 11px;border-radius:20px;font-size:12px;font-weight:800;color:var(--periwinkle-700);flex:none">lo que se ve</span>
+    </div>
+
+    <!-- BAND A · MADURAS -->
+    <div style="position:absolute;left:56px;top:396px;width:1568px;height:232px;background:rgba(139,111,192,0.09);border:2px dashed rgba(139,111,192,0.55);border-radius:22px;padding:14px 20px;display:flex;align-items:stretch;gap:14px;z-index:2">
+      <div style="width:150px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:7px">
+        <span style="font-family:var(--font-display);font-size:30px;color:#5F4B8B;line-height:0.9">maduras</span>
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-500);font-weight:700">madurez</span>
+        <div style="display:flex;gap:3px;align-items:flex-end;height:18px"><span style="width:9px;height:18px;background:#8B6FC0;border-radius:2px"></span><span style="width:9px;height:14px;background:#8B6FC0;border-radius:2px"></span><span style="width:9px;height:10px;background:#8B6FC0;border-radius:2px"></span><span style="width:9px;height:6px;background:#8B6FC0;border-radius:2px"></span></div>
+        <span style="font-size:11px;font-weight:800;color:#5F4B8B;line-height:1.2">más sana · adaptativa</span>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.5deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Sublimación</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-lilac);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#5F4B8B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M9 3h6M10 3v7l-5 9a1.6 1.6 0 0 0 1.5 2.4h11A1.6 1.6 0 0 0 19 19l-5-9V3" stroke-linejoin="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-lilac);border:1.5px solid rgba(139,111,192,.5);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#5F4B8B">logro valioso</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Canaliza el impulso hacia una meta socialmente valiosa.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#8B6FC0;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">agresividad → cirugía o box</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Anticipación</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-lilac);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#5F4B8B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-lilac);border:1.5px solid rgba(139,111,192,.5);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#5F4B8B">plan · ensayo</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Prevé el malestar futuro y se prepara para afrontarlo.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#8B6FC0;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">ensaya la entrevista temida</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.3deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Humor</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-lilac);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#5F4B8B"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c1 1.4 2.2 2.1 3.5 2.1s2.5-.7 3.5-2.1" stroke-linecap="round"/><path d="M9 9.5h.01M15 9.5h.01" stroke-linecap="round" stroke-width="2.6"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-lilac);border:1.5px solid rgba(139,111,192,.5);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#5F4B8B">chiste sano</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Expresa el conflicto con gracia, sin dañar a nadie.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#8B6FC0;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">reírse de la propia desgracia</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:rgba(139,111,192,0.13);border:2px dashed rgba(139,111,192,0.6);border-radius:18px;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:6px">
+        <span style="font-family:var(--font-display);font-size:20px;color:#5F4B8B;line-height:0.95">las buenas</span>
+        <p style="margin:0;font-size:12.5px;line-height:1.35;color:#5F4B8B">Adaptativas y casi conscientes: transforman el impulso <strong>sin negar la realidad</strong>.</p>
+      </div>
+    </div>
+
+    <!-- BAND B · NEURÓTICAS -->
+    <div style="position:absolute;left:56px;top:644px;width:1568px;height:232px;background:rgba(135,149,210,0.10);border:2px dashed rgba(135,149,210,0.6);border-radius:22px;padding:14px 20px;display:flex;align-items:stretch;gap:14px;z-index:2">
+      <div style="width:150px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:7px">
+        <span style="font-family:var(--font-display);font-size:27px;color:#46509B;line-height:0.9">neuróticas</span>
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-500);font-weight:700">madurez</span>
+        <div style="display:flex;gap:3px;align-items:flex-end;height:18px"><span style="width:9px;height:18px;background:var(--periwinkle-500);border-radius:2px"></span><span style="width:9px;height:14px;background:var(--periwinkle-500);border-radius:2px"></span><span style="width:9px;height:10px;background:var(--periwinkle-500);border-radius:2px"></span><span style="width:9px;height:6px;background:#D8DAF0;border-radius:2px"></span></div>
+        <span style="font-size:11px;font-weight:800;color:#46509B;line-height:1.2">conflicto interno</span>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Represión</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--periwinkle-100);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#46509B">queda en el icc</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Empuja el impulso o recuerdo fuera de la conciencia. <strong>Base de las demás.</strong></p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:var(--periwinkle-600);font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">«no recuerdo» el trauma</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:20px;margin:0;line-height:0.95;color:var(--ink-900)">Formación reactiva</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--periwinkle-100);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M6 9a6 6 0 0 1 11-2"/><path d="M17 3v4h-4"/><path d="M18 15a6 6 0 0 1-11 2"/><path d="M7 21v-4h4"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#46509B">conducta opuesta</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Convierte el impulso en su contrario exagerado.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:var(--periwinkle-600);font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">odia y trata con dulzura excesiva</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.3deg)">
+        <h3 style="font-family:var(--font-display);font-size:21px;margin:0;line-height:0.95;color:var(--ink-900)">Desplazamiento</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--periwinkle-100);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M5 5v7a4 4 0 0 0 4 4h8" stroke-linecap="round"/><path d="M14 12l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#46509B">blanco seguro</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Redirige el afecto hacia un objeto menos amenazante.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:var(--periwinkle-600);font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">enojo con el jefe → grita en casa</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(0.3deg)">
+        <h3 style="font-family:var(--font-display);font-size:20px;margin:0;line-height:0.95;color:var(--ink-900)">Racionalización</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--periwinkle-100);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:var(--periwinkle-700)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--periwinkle-100);border:1.5px solid rgba(135,149,210,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#46509B">excusa lógica</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Inventa razones lógicas para justificar lo inaceptable.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:var(--periwinkle-600);font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">«igual no lo quería» (uvas verdes)</span></div>
+      </div>
+    </div>
+
+    <!-- BAND C · INMADURAS -->
+    <div style="position:absolute;left:56px;top:892px;width:1568px;height:232px;background:rgba(217,164,65,0.10);border:2px dashed rgba(217,164,65,0.6);border-radius:22px;padding:14px 20px;display:flex;align-items:stretch;gap:14px;z-index:2">
+      <div style="width:150px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:7px">
+        <span style="font-family:var(--font-display);font-size:28px;color:#8A6D1F;line-height:0.9">inmaduras</span>
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-500);font-weight:700">madurez</span>
+        <div style="display:flex;gap:3px;align-items:flex-end;height:18px"><span style="width:9px;height:18px;background:#D9A441;border-radius:2px"></span><span style="width:9px;height:14px;background:#D9A441;border-radius:2px"></span><span style="width:9px;height:10px;background:#EBD9B0;border-radius:2px"></span><span style="width:9px;height:6px;background:#EBD9B0;border-radius:2px"></span></div>
+        <span style="font-size:11px;font-weight:800;color:#8A6D1F;line-height:1.2">distorsiona · regresa</span>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Proyección</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-peach);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A5A2E"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3" y="9" width="6" height="6" rx="1.5"/><path d="M9 10.5l11-4M9 13.5l11 4" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-peach);border:1.5px solid rgba(217,164,65,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A5A2E">culpa al otro</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Atribuye a los demás el propio impulso inaceptable.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#C9922C;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">«él me odia» (yo lo odio)</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Regresión</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-peach);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A5A2E"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M11 6L4 12l7 6z" stroke-linejoin="round"/><path d="M20 6l-7 6 7 6z" stroke-linejoin="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-peach);border:1.5px solid rgba(217,164,65,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A5A2E">conducta infantil</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Vuelve a conductas de una etapa anterior del desarrollo.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#C9922C;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">adulto estresado hace berrinche</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.3deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Introyección</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-peach);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A5A2E"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="16" cy="12" r="6"/><path d="M3 12h9M9 8l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-peach);border:1.5px solid rgba(217,164,65,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A5A2E">lo ajeno como propio</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Incorpora rasgos o valores de otro como si fueran propios.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#C9922C;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">adopta los valores del agresor</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:rgba(217,164,65,0.15);border:2px dashed rgba(217,164,65,0.65);border-radius:18px;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:6px">
+        <span style="font-family:var(--font-display);font-size:20px;color:#8A6D1F;line-height:0.95">las torpes</span>
+        <p style="margin:0;font-size:12.5px;line-height:1.35;color:#8A6D1F">Distorsionan la realidad o regresan; frecuentes en <strong>estrés</strong> y en patología.</p>
+      </div>
+    </div>
+
+    <!-- BAND D · PSICÓTICAS -->
+    <div style="position:absolute;left:56px;top:1140px;width:1568px;height:232px;background:rgba(232,122,165,0.10);border:2px dashed rgba(232,122,165,0.6);border-radius:22px;padding:14px 20px;display:flex;align-items:stretch;gap:14px;z-index:2">
+      <div style="width:150px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:7px">
+        <span style="font-family:var(--font-display);font-size:27px;color:#8A3F58;line-height:0.9">psicóticas</span>
+        <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-500);font-weight:700">madurez</span>
+        <div style="display:flex;gap:3px;align-items:flex-end;height:18px"><span style="width:9px;height:18px;background:#E07AA5;border-radius:2px"></span><span style="width:9px;height:14px;background:#F0CEDD;border-radius:2px"></span><span style="width:9px;height:10px;background:#F0CEDD;border-radius:2px"></span><span style="width:9px;height:6px;background:#F0CEDD;border-radius:2px"></span></div>
+        <span style="font-size:11px;font-weight:800;color:#8A3F58;line-height:1.2">rompe la realidad</span>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Negación</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-blush);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A3F58"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><circle cx="12" cy="12" r="2.4"/><path d="M4 4l16 16" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-blush);border:1.5px solid rgba(232,122,165,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A3F58">«no pasa nada»</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Rechaza una realidad externa evidente y dolorosa.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#E07AA5;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">enfermo grave actúa como si nada</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(0.4deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Escisión</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-blush);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A3F58"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-blush);border:1.5px solid rgba(232,122,165,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A3F58">todo bueno / malo</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Ve a personas o hechos como absolutos, sin matiz (<em>splitting</em>).</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#E07AA5;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">idealiza hoy, devalúa mañana</span></div>
+      </div>
+      <div style="width:320px;flex:none;background:#fff;border:2.5px solid var(--ink-900);border-radius:18px;box-shadow:4px 5px 0 rgba(42,41,51,.13);padding:12px 14px;display:flex;flex-direction:column;gap:7px;transform:rotate(-0.3deg)">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin:0;line-height:0.95;color:var(--ink-900)">Distorsión</h3>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E86A45;border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M7 1 L3 7 H6 L5 11 L9 5 H6 Z" fill="#fff"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="flex:none;width:30px;height:30px;border-radius:8px;background:var(--pastel-blush);border:2px solid var(--ink-900);display:flex;align-items:center;justify-content:center;color:#8A3F58"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M3 8c4-4 6 4 10 0s6-3 8 0" stroke-linecap="round"/><path d="M3 16c4-4 6 4 10 0s6-3 8 0" stroke-linecap="round"/></svg></span>
+          <span style="color:var(--ink-500);font-size:14px;font-weight:900">→</span>
+          <span style="background:var(--pastel-blush);border:1.5px solid rgba(232,122,165,.6);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800;color:#8A3F58">realidad a medida</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;line-height:1.32;color:var(--ink-700);flex:1">Remodela la realidad externa para ajustarla a deseos internos.</p>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px"><span style="font-family:var(--font-display);color:#E07AA5;font-size:15px">ej→</span><span class="mapa-clave" style="background:var(--pastel-butter);padding:2px 8px;border-radius:5px;font-weight:800;color:#5C4A17;cursor:help">delirio de grandeza · omnipotencia</span></div>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:300px;top:1402px;width:1080px;background:var(--pastel-butter);border:3px solid var(--ink-900);border-radius:140px/86px;padding:13px 44px;box-shadow:5px 6px 0 rgba(217,164,65,0.35);transform:rotate(-0.5deg);z-index:3;text-align:center">
+      <span style="font-family:var(--font-display);font-size:26px;color:#B0851F">recuerda</span>
+      <p style="margin:3px 0 0;font-size:15px;line-height:1.4;color:#5C4A17">La <strong>represión</strong> es la madre de todas: primero empuja el impulso al inconsciente, luego otra máquina lo disfraza. <strong>A más madura, más se parece a la realidad</strong> <span style="font-family:var(--font-accent);color:#E85DA0;font-size:20px">♥</span></p>
+    </div>
+
+    <div style="position:absolute;left:1518px;top:34px;width:106px;height:106px;border:3px solid var(--periwinkle-500);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-6deg);z-index:3;background:var(--paper)">
+      <span style="font-family:var(--font-accent);font-size:29px;color:#E85DA0;line-height:0.8">kyn</span>
+      <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-top:2px">scribe</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:1680px;margin:0 auto;padding:20px 24px 60px;text-align:center">
+    <p style="font-size:13.5px;color:var(--ink-500);margin:0 0 12px;line-height:1.5">Lámina de repaso estilo <em>graphic recording</em>. Activa <strong>Modo repaso</strong> y pasa el cursor sobre los ejemplos para autoevaluarte.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="scribe-teorias-desarrollo.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">teorías del desarrollo</a>
+      <a href="scribe-dsm5.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">DSM-5</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-scribe-mecanismos-defensa';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+
+  var wrap = document.getElementById('scribeWrap');
+  var board = document.getElementById('scribeBoard');
+  function fit() {
+    if (!wrap || !board) return;
+    var scale = Math.min(1, wrap.clientWidth / 1680);
+    board.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (1500 * scale) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  [200, 600, 1200].forEach(function(t) { setTimeout(fit, t); });
+})();
+</script>
+</body>
+</html>

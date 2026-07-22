@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instrumentos, por lo que miden — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Catálogo de instrumentos de evaluación psicológica por lo que miden: inteligencia, proyectivas, ansiedad, depresión, neurocognitivo y desarrollo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+  --warning: #D9A441;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(47, 54, 88, 0.06);
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body { margin: 0; background: var(--paper); overflow-x: hidden; }
+a { color: var(--periwinkle-700); }
+a:hover { color: var(--periwinkle-600); }
+@keyframes riseIn { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-sans);font-weight:var(--weight-black);
+  text-transform:uppercase;letter-spacing:0.06em;
+  border:1.5px solid transparent;border-radius:var(--radius-pill);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background var(--dur-fast) var(--ease-out),
+             color var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-out),
+             box-shadow var(--dur-base) var(--ease-out),
+             transform var(--dur-fast) var(--ease-out);
+}
+.kyn-btn:focus-visible{outline:none;box-shadow:var(--shadow-focus);}
+.kyn-btn:active{transform:translateY(1px) scale(0.99);}
+.kyn-btn--sm{font-size:13px;padding:9px 18px;}
+.kyn-btn--md{font-size:15px;padding:13px 26px;}
+.kyn-btn--primary{background:var(--periwinkle-500);color:#fff;box-shadow:var(--shadow-sm);}
+.kyn-btn--primary:hover{background:var(--periwinkle-600);box-shadow:var(--shadow-md);color:#fff;}
+.kyn-btn--secondary{background:var(--white);color:var(--ink-900);border-color:var(--ink-100);}
+.kyn-btn--secondary:hover{border-color:var(--periwinkle-300);background:var(--periwinkle-50);color:var(--ink-900);}
+.kyn-btn--ghost{background:transparent;color:var(--periwinkle-700);}
+.kyn-btn--ghost:hover{background:var(--periwinkle-50);color:var(--periwinkle-700);}
+
+.kyn-alert{
+  display:flex;align-items:flex-start;gap:12px;font-family:var(--font-sans);
+  border-radius:var(--radius-md);padding:16px 18px;border:1px solid transparent;
+}
+.kyn-alert__icon{flex:none;display:inline-flex;padding-top:1px;}
+.kyn-alert__icon svg{width:20px;height:20px;}
+.kyn-alert__body{display:flex;flex-direction:column;gap:3px;}
+.kyn-alert__title{font-size:14px;font-weight:var(--weight-bold);}
+.kyn-alert__msg{font-size:13px;line-height:1.5;}
+.kyn-alert--warning{background:var(--pastel-butter);border-color:#EBD79A;}
+.kyn-alert--warning .kyn-alert__icon,.kyn-alert--warning .kyn-alert__title{color:#8A6D1F;}
+.kyn-alert--warning .kyn-alert__msg{color:#8A6D1F;}
+
+.no-print a.kyn-btn { text-decoration: none; }
+
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+}
+</style>
+</head>
+<body>
+  <div class="no-print" style="max-width: 1040px; margin: 0 auto; padding: 14px 24px 0;">
+    <a href="index.html" style="text-decoration:none;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800)">← Base CENEVAL</a>
+  </div>
+
+<div style="font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #2A2933; background: #FBFAF7; min-height: 100%; padding: 28px 24px 64px;">
+  <div style="max-width: 1040px; margin: 0 auto; animation: riseIn .5s cubic-bezier(0.22,1,0.36,1);">
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px;" class="no-print">
+      <a href="area1-instrumentos-1-propiedades.html" class="kyn-btn kyn-btn--secondary kyn-btn--sm" style="text-decoration: none;">‹ Propiedades</a>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #A8A6B0;">Bloque 2 / 4</div>
+      <a href="area1-instrumentos-3-escalas.html" class="kyn-btn kyn-btn--ghost kyn-btn--sm" style="text-decoration: none;">Escalas ›</a>
+    </div>
+
+    <header style="text-align: center; margin-bottom: 26px;">
+      <div style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #4FA47A;">Bloque 2 · Área 1</div>
+      <h1 style="font-weight: 800; font-size: 46px; line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0 4px;">Instrumentos, por lo que miden</h1>
+      <div style="font-family: 'Friendship', cursive; font-size: 27px; color: #4FA47A; line-height: 1;">el catálogo</div>
+      <p style="font-size: 16.5px; line-height: 1.6; color: #75737F; max-width: 600px; margin: 14px auto 0;">Seis familias, agrupadas por <b style="color: #4A4955;">lo que mide cada instrumento</b>. La pista más útil suele ser la <b style="color: #4A4955;">población</b> (niños vs. adultos) y el <b style="color: #4A4955;">tipo</b> (autorreporte vs. proyectiva).</p>
+    </header>
+
+    <div style="display: flex; justify-content: center;">
+      <div style="background: #4FA47A; color: #fff; font-weight: 900; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; padding: 13px 30px; border-radius: 999px; box-shadow: 0 8px 24px rgba(47,74,54,0.18);">Instrumentos</div>
+    </div>
+    <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 6px 0;"><div style="width: 2.5px; height: 20px; background: #C7E2D3;"></div><div style="width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid #79C2A0;"></div></div></div>
+    <div style="display: flex; align-items: center; gap: 16px; max-width: 820px; margin: 0 auto 26px;">
+      <div style="flex: 1; height: 1.5px; background: #E4E2E6;"></div>
+      <div style="background: #E4F1EA; color: #2F6B4F; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px;">se agrupan por lo que miden</div>
+      <div style="flex: 1; height: 1.5px; background: #E4E2E6;"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 26px; align-items: start;">
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #4FA47A; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #CFE8DA; color: #2F6B4F; display: flex; align-items: center; justify-content: center; flex: none; font-weight: 900;">IQ</div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #2F6B4F;">Inteligencia</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #C7E2D3;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #79C2A0;"></div></div></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #4FA47A; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">WISC <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Wechsler Intelligence Scale for Children)</span></div><span class="kyn-badge kyn-badge--mint" style="flex: none;">niños 6–16</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Escala Wechsler para Niños. La <b>WISC-IV</b> da un <b>CI Total</b> + 4 índices:</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;">
+              <span style="background: #E4F1EA; color: #2F6B4F; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">Comprensión Verbal</span>
+              <span style="background: #E4F1EA; color: #2F6B4F; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">Razonamiento Perceptual</span>
+              <span style="background: #E4F1EA; color: #2F6B4F; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">Memoria de Trabajo</span>
+              <span style="background: #E4F1EA; color: #2F6B4F; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">Velocidad de Procesamiento</span>
+            </div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #4FA47A; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">WAIS <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Wechsler Adult Intelligence Scale)</span></div><span class="kyn-badge kyn-badge--mint" style="flex: none;">adultos</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Escala Wechsler para Adultos. Misma familia y misma lógica que el WISC, pero para adultos.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #4FA47A; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">Raven <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Matrices Progresivas)</span></div><span class="kyn-badge kyn-badge--mint" style="flex: none;">no verbal</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Razonamiento abstracto con series de figuras incompletas. Es <b>“culture-fair”</b>: depende menos del idioma o la escolaridad.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #8471C4; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #E2D6F0; color: #6A4FA0; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.03em; text-transform: uppercase; color: #6A4FA0;">Personalidad y proyectivas</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #D8CCEC;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #A98FD8;"></div></div></div>
+        <div style="background: #F7F4FB; border: 1px solid #E8E0F2; border-radius: 12px; padding: 11px 14px; font-size: 12.5px; line-height: 1.5; color: #4A4955; margin-bottom: 12px;"><b style="color: #6A4FA0;">Sin “respuesta correcta”.</b> Un estímulo ambiguo y la persona proyecta su mundo interno. Más cualitativas; algunas con calificación estandarizada (sistema de Exner para Rorschach), pero la lectura final es clínica.</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="font-weight: 800; font-size: 16px;">Rorschach</div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 4px;">Manchas de tinta simétricas. Se analiza <b>qué</b> ve, <b>cómo</b> lo ve (forma, color, movimiento) y <b>dónde</b> en la mancha.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="font-weight: 800; font-size: 16px;">TAT <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Apercepción Temática · Thematic Apperception Test)</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 4px;">Láminas con escenas ambiguas: la persona <b>inventa una historia</b>; se analizan los temas recurrentes (conflictos, motivaciones, vínculos).</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="font-weight: 800; font-size: 16px;">H-T-P <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Casa-Árbol-Persona · House-Tree-Person)</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 4px;">Dibuja los tres y se interpreta simbólicamente:</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;">
+              <span style="background: #EFE7F7; color: #6A4FA0; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">casa = vida familiar</span>
+              <span style="background: #EFE7F7; color: #6A4FA0; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">árbol = raíces / crecimiento</span>
+              <span style="background: #EFE7F7; color: #6A4FA0; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">persona = autoimagen</span>
+            </div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="font-weight: 800; font-size: 16px;">Machover / DFH <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Figura Humana · Draw-A-Person Test)</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 4px;">Variante enfocada solo en dibujar <b>una persona</b>: explora autoimagen y autoconcepto.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #A98FD8; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="font-weight: 800; font-size: 16px;">Bender <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Guestáltico Visomotor · Visual-Motor Gestalt Test)</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 4px;">Copia figuras geométricas: detecta <b>maduración neurológica / disfunción cerebral</b> y da pistas de personalidad por cómo organiza el dibujo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #6B7AC1; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #CFE0F2; color: #5562A4; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #5562A4;">Ansiedad</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #C9D0ED;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #9BA6DA;"></div></div></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #9BA6DA; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">CMASR-2</div><span class="kyn-badge kyn-badge--soft" style="flex: none;">niños · escala T</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Escala de Ansiedad Manifiesta en Niños, Revisada (2ª ed.). <b>Autorreporte</b>, población infantil/adolescente.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #9BA6DA; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">STAI <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Estado-Rasgo · State-Trait Anxiety Inventory)</span></div><span class="kyn-badge kyn-badge--soft" style="flex: none;">adultos</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Distingue ansiedad como <b>estado</b> (cómo te sientes ahora) de ansiedad como <b>rasgo</b> (cómo eres en general).</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #D9779E; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #F6D2DD; color: #9B4D67; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #9B4D67;">Depresión</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #EFC3D3;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #E39BB6;"></div></div></div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #E39BB6; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">CDI <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Depresión Infantil · Children's Depression Inventory)</span></div><span class="kyn-badge kyn-badge--blush" style="flex: none;">niños</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Inventario de Depresión Infantil. <b>Autorreporte</b>, población infantil/adolescente.</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #D9779E; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">BDI / Beck <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Beck Depression Inventory)</span></div><span class="kyn-badge kyn-badge--blush" style="flex: none;">adultos · el más citado</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Inventario de Beck. Población adulta; el <b>más citado</b> en la literatura clínica para depresión.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #D9A441; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #F6EBC4; color: #8A6D1F; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #8A6D1F;">Neurocognitivo</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #ECDCA7;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #E3C46B;"></div></div></div>
+        <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #E3C46B; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">MMSE <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Mini-Mental · Mini-Mental State Examination)</span></div><span class="kyn-badge kyn-badge--butter" style="flex: none;">adultos mayores · /30</span></div>
+          <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Cribado rápido de deterioro cognitivo. <b>Puntaje directo sobre 30</b> — no usa escala T ni CI.</div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #E08A5B; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #F8DCC9; color: #A55A2E; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #A55A2E;">Desarrollo</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #F1CBB0;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #EDA97F;"></div></div></div>
+        <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #EDA97F; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+          <div style="font-weight: 800; font-size: 16px;">Escalas de Gesell <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Gesell Developmental Schedules)</span> <span style="display: inline-block; vertical-align: middle; background: #F8DCC9; color: #A55A2E; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-left: 4px;">infantil</span></div>
+          <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Desarrollo infantil por áreas contra hitos por edad. Da un <b>perfil por área</b>, no un solo número:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;">
+            <span style="background: #FBEEE3; color: #A55A2E; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">motora</span>
+            <span style="background: #FBEEE3; color: #A55A2E; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">adaptativa</span>
+            <span style="background: #FBEEE3; color: #A55A2E; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">lenguaje</span>
+            <span style="background: #FBEEE3; color: #A55A2E; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;">personal-social</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="break-inside: avoid;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #E4E2E6; border-top: 4px solid #2E9E93; border-radius: 18px; padding: 15px 18px; box-shadow: 0 2px 8px rgba(47,54,88,0.07);">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #CFEAE6; color: #1F6E65; display: flex; align-items: center; justify-content: center; flex: none;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></div>
+          <div style="font-weight: 900; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; color: #1F6E65;">Orientación vocacional</div>
+        </div>
+        <div style="display: flex; justify-content: center;"><div style="display: flex; flex-direction: column; align-items: center; margin: 7px 0;"><div style="width: 2.5px; height: 14px; background: #B6E0D9;"></div><div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #5EC2B4;"></div></div></div>
+        <div style="background: #EAF7F5; border: 1px solid #CFEAE6; border-radius: 12px; padding: 11px 14px; font-size: 12.5px; line-height: 1.5; color: #4A4955; margin-bottom: 12px;"><b style="color: #1F6E65;">Se aplican juntos:</b> uno mide qué le gusta a la persona, el otro para qué tiene capacidad real. Ninguno solo basta para orientar una elección de carrera.</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #5EC2B4; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">Kuder <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Escala/Registro de Preferencias Vocacionales)</span></div><span style="background: #CFEAE6; color: #1F6E65; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; flex: none;">intereses</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Elección forzada en <b>tríadas</b>: de 3 actividades, marca la que más y la que menos le gusta. Perfil en <b>10 escalas</b> (aire libre, mecánica, cálculo, científico, persuasivo, artístico, literario, musical, servicio social, oficinista) + escala de <b>Verificación</b> (detecta azar/descuido).</div>
+          </div>
+          <div style="background: #fff; border: 1px solid #E4E2E6; border-left: 4px solid #5EC2B4; border-radius: 14px; padding: 14px 16px; box-shadow: 0 1px 2px rgba(47,54,88,0.06); break-inside: avoid;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;"><div style="font-weight: 800; font-size: 16px; flex: 1 1 auto; min-width: 0;">BAT-7 <span style="font-weight: 500; color: #75737F; font-size: 13px;">(Batería de Aptitudes de TEA)</span></div><span style="background: #CFEAE6; color: #1F6E65; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; flex: none;">aptitud</span></div>
+            <div style="font-size: 13.5px; line-height: 1.5; color: #4A4955; margin-top: 5px;">Subpruebas de aptitud <b>verbal, espacial, atención/concentración, razonamiento, numérica, mecánica y ortografía</b> (+ factores g, Gf, Gc). Tres niveles de dificultad —Elemental, Medio, Superior— según escolaridad.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 30px;">
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">Niños vs. adultos</div><div class="kyn-alert__msg" style="font-size: 13px;">Niños: <b>WISC · CMASR-2 · CDI</b>. Adultos: <b>WAIS · STAI · BDI</b>. Casi siempre preguntan la versión por edad.</div></div>
+      </div>
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">Autorreporte vs. proyectiva</div><div class="kyn-alert__msg" style="font-size: 13px;">Autorreporte: contestas sobre ti (<b>Beck, STAI, CDI, CMASR-2</b>). Proyectiva: interpretas un estímulo ambiguo (<b>Rorschach, TAT, HTP</b>).</div></div>
+      </div>
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">STAI: estado ≠ rasgo</div><div class="kyn-alert__msg" style="font-size: 13px;"><b>Estado</b> = ansiedad pasajera (ahora). <b>Rasgo</b> = tendencia estable (cómo eres en general).</div></div>
+      </div>
+      <div class="kyn-alert kyn-alert--warning">
+        <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="kyn-alert__body"><div class="kyn-alert__title" style="font-size: 14.5px;">Kuder vs. BAT-7</div><div class="kyn-alert__msg" style="font-size: 13px;"><b>Interés</b> (Kuder) = qué le gusta. <b>Aptitud</b> (BAT-7) = para qué tiene capacidad. Se aplican juntos.</div></div>
+      </div>
+    </div>
+
+        <div style="margin-top: 30px; background: #fff; border: 1px solid #E4E2E6; border-radius: 20px; box-shadow: 0 2px 8px rgba(47,54,88,0.06); overflow: hidden;">
+      <div style="padding: 16px 22px 4px; font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #6B7AC1;">Tabla comparativa</div>
+      <div style="overflow-x: auto; padding: 8px 10px 12px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 640px;">
+          <thead>
+            <tr style="text-align: left; color: #5562A4;">
+              <th style="padding: 10px 14px; font-weight: 800; border-bottom: 2px solid #E2E6F5;">Instrumento</th>
+              <th style="padding: 10px 14px; font-weight: 800; border-bottom: 2px solid #E2E6F5;">Qué mide</th>
+              <th style="padding: 10px 14px; font-weight: 800; border-bottom: 2px solid #E2E6F5;">Población</th>
+              <th style="padding: 10px 14px; font-weight: 800; border-bottom: 2px solid #E2E6F5;">Escala / puntaje</th>
+            </tr>
+          </thead>
+          <tbody style="color: #4A4955;">
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #2F6B4F; border-bottom: 1px solid #F0EEE9;">WISC</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Inteligencia</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Niños 6–16</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">CI · 100/15</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #2F6B4F; border-bottom: 1px solid #F0EEE9;">WAIS</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Inteligencia</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Adultos</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">CI · 100/15</td></tr>
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #2F6B4F; border-bottom: 1px solid #F0EEE9;">Raven</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Razonamiento abstracto (no verbal)</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Amplia</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Percentil</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #6A4FA0; border-bottom: 1px solid #F0EEE9;">Rorschach · TAT · H-T-P · Machover · Bender</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Personalidad (proyectivas)</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Según prueba</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Cualitativa*</td></tr>
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #5562A4; border-bottom: 1px solid #F0EEE9;">CMASR-2</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Ansiedad</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Niños/adol</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">T · 50/10</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #5562A4; border-bottom: 1px solid #F0EEE9;">STAI</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Ansiedad estado-rasgo</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Adultos</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Percentil</td></tr>
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #9B4D67; border-bottom: 1px solid #F0EEE9;">CDI</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Depresión</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Niños/adol</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">T · 50/10</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #9B4D67; border-bottom: 1px solid #F0EEE9;">BDI / Beck</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Depresión</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Adultos</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Puntaje directo</td></tr>
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #8A6D1F; border-bottom: 1px solid #F0EEE9;">MMSE</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Deterioro cognitivo</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Adultos mayores</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Directo /30</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #A55A2E;">Gesell</td><td style="padding: 9px 14px;">Desarrollo por áreas</td><td style="padding: 9px 14px;">Infantil</td><td style="padding: 9px 14px;">Perfil por área</td></tr>
+            <tr><td style="padding: 9px 14px; font-weight: 800; color: #1F6E65; border-bottom: 1px solid #F0EEE9;">Kuder</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Intereses vocacionales</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Adolescentes/adultos</td><td style="padding: 9px 14px; border-bottom: 1px solid #F0EEE9;">Perfil en 10 escalas</td></tr>
+            <tr style="background: #FBFAF7;"><td style="padding: 9px 14px; font-weight: 800; color: #1F6E65;">BAT-7</td><td style="padding: 9px 14px;">Aptitudes (verbal, espacial…)</td><td style="padding: 9px 14px;">Secundaria–adultos</td><td style="padding: 9px 14px;">Perfil por aptitud</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding: 0 22px 16px; font-size: 12px; color: #A8A6B0;">*Proyectivas: lectura cualitativa/clínica; algunas con sistemas de codificación (p. ej. Exner para Rorschach).</div>
+    </div>
+
+        <div style="margin-top: 30px; background: #fff; border: 1.5px solid #F7C9DE; border-radius: 20px; padding: 22px 24px; box-shadow: 0 2px 8px rgba(47,54,88,0.06);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#E85DA0" stroke="#E85DA0" stroke-width="1.5" stroke-linejoin="round" style="flex: none;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <div style="font-weight: 900; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #E85DA0;">Trucos para recordar</div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4px 28px;">
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">WIS-C = Children</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">La <b>C</b> de WIS<b>C</b> = niños; el WAIS es el otro (adultos). Igual el <b>C</b>DI (Children's Depression Inventory).</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">Casa-Árbol-Persona</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Casa = familia · Árbol = raíces/crecimiento · Persona = autoimagen.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">Dibujar vs. contar</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Proyectivas de <b>dibujo</b>: HTP, Machover, Bender. De <b>contar/interpretar</b>: Rorschach, TAT.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">Beck manda</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">En depresión adulta, el <b>más citado</b> es el Inventario de Beck (BDI).</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">MMSE = 30</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Mini-Mental: cribado en adultos mayores, puntaje <b>directo /30</b> (ni CI ni T).</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">Gesell = perfil</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Desarrollo por áreas → un <b>perfil</b>, no un solo número.</div></div>
+        <div style="display: flex; gap: 11px; align-items: flex-start; padding: 11px 0; border-top: 1px solid #F3ECEF;"><div style="font-weight: 800; color: #E85DA0; font-size: 14px; min-width: 104px;">Gusto ≠ capacidad</div><div style="font-size: 13.5px; color: #4A4955; line-height: 1.5;">Ku<b>d</b>er = <b>d</b>eseo/gusto. BAT-7 = capacidad real. Por eso van juntos en vocacional.</div></div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 40px; padding-top: 22px; border-top: 1px solid #E9E3D7;" class="no-print">
+      <a href="area1-instrumentos-1-propiedades.html" class="kyn-btn kyn-btn--secondary kyn-btn--md" style="text-decoration: none;">‹ Propiedades</a>
+      <a href="area1-instrumentos-3-escalas.html" class="kyn-btn kyn-btn--primary kyn-btn--md" style="text-decoration: none;">Escalas →</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

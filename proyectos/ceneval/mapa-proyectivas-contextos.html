@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyectivas y contextos, a fondo — Área 1 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Complemento del mapa de Área 1: cómo se interpretan las pruebas proyectivas (Rorschach/Exner, TAT, H-T-P, Bender) y cómo se usan de verdad los contextos organizacional y comunitario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+section[id],header[id]{scroll-margin-top:150px}
+::selection{background:var(--periwinkle-100)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--pop{background:var(--pop-magenta);color:#fff;font-family:var(--font-accent);font-size:18px;letter-spacing:0;text-transform:none;font-weight:400;padding:6px 14px;}
+.kyn-badge--brand{background:var(--periwinkle-500);color:#fff;}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--blush{background:var(--pastel-blush);color:#9B4D67;}
+.kyn-badge--mint{background:var(--pastel-mint);color:#2F6B4F;}
+.kyn-badge--butter{background:var(--pastel-butter);color:#8A6D1F;}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.kyn-card{
+  background:var(--surface-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
+  padding:var(--space-5);transition:box-shadow var(--dur-base) var(--ease-out),transform var(--dur-base) var(--ease-out);
+}
+.kyn-card--interactive{cursor:pointer;}
+.kyn-card--interactive:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+
+.mapa-topbar{max-width:1240px;margin:0 auto;padding:14px 24px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mapa-volver{font-weight:700;font-size:13px;padding:7px 14px;border-radius:var(--radius-pill);background:var(--periwinkle-100);color:var(--periwinkle-800)}
+.mapa-volver:hover{background:var(--periwinkle-200);color:var(--periwinkle-800)}
+.mapa-controles{display:flex;align-items:center;gap:12px;margin-left:auto;flex-wrap:wrap}
+.mapa-nivel{display:inline-flex;background:var(--white);border:1.5px solid var(--periwinkle-200);border-radius:var(--radius-pill);padding:3px;gap:2px}
+.mapa-nivel-btn{font-family:inherit;font-weight:800;font-size:12px;letter-spacing:0.02em;cursor:pointer;border:none;background:transparent;color:var(--periwinkle-700);padding:6px 14px;border-radius:var(--radius-pill);transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.mapa-nivel-btn.is-activo{background:var(--periwinkle-700);color:#fff}
+.mapa-nivel-btn:hover:not(.is-activo){background:var(--periwinkle-100)}
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+body.nivel-esenciales .mapa-detalle{display:none !important}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+.mapa-repaso-hint{display:none}
+body.modo-repaso .mapa-repaso-hint{display:flex}
+
+@media (max-width: 640px){
+  .mapa-topbar{padding-top:10px}
+  .mapa-controles{margin-left:0;width:100%;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+  <div class="mapa-topbar">
+    <a class="mapa-volver" href="index.html">← Base CENEVAL</a>
+    <div class="mapa-controles">
+      <div class="mapa-nivel" role="group" aria-label="Nivel de detalle">
+        <button type="button" class="mapa-nivel-btn is-activo" data-nivel="completo">Completo</button>
+        <button type="button" class="mapa-nivel-btn" data-nivel="esenciales">Esenciales</button>
+      </div>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </div>
+
+<div style="min-height:100vh;background:var(--paper)">
+
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(251,250,247,0.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border-subtle)">
+    <div style="max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <a href="#inicio" style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:26px;color:var(--periwinkle-600)">mapa</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">complemento · área 1</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <a href="#proy" class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#8B6FC0;display:inline-block"></span>Proyectivas a fondo</a>
+        <a href="#ctx" class="kyn-badge" style="background:var(--pastel-mint);color:#2F6B4F;font-size:12px;padding:8px 13px"><span style="width:8px;height:8px;border-radius:50%;background:#4FA47A;display:inline-block"></span>Contextos</a>
+        <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio" style="max-width:1240px;margin:0 auto;padding:56px 24px 24px">
+    <span class="kyn-badge kyn-badge--soft" style="font-size:12px">EGEL Psicología · complemento del catálogo de instrumentos</span>
+    <h1 style="font-size:clamp(38px,6vw,72px);line-height:1.02;font-weight:900;letter-spacing:-0.02em;margin:18px 0 0;max-width:16ch">Proyectivas y contextos, <span style="color:#8B6FC0">a fondo</span>.</h1>
+    <p style="font-size:clamp(17px,2vw,21px);line-height:1.5;color:var(--ink-700);max-width:64ch;margin:18px 0 0">Ya sabías <strong>qué son</strong> estas pruebas y dónde se aplican. Esto es el nivel que faltaba: <strong>cómo se interpretan</strong> las proyectivas y <strong>cómo se usan de verdad</strong> los contextos organizacional y comunitario.</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">Rorschach · Exner</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">TAT · H-T-P · Bender</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">Organizacional · comunitario</span>
+      <span class="kyn-badge kyn-badge--outline" style="font-size:12px">tablas de decisión · la regla de oro</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:36px">
+      <a href="#proy" class="kyn-card kyn-card--interactive" style="border-top:5px solid #8B6FC0;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:52px;color:#8B6FC0;line-height:0.8">1</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px">Interpretación</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Proyectivas<br>a fondo</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Cómo se codifica e interpreta cada una: Rorschach, TAT (Thematic Apperception Test), H-T-P/DFH (House-Tree-Person / Draw-A-Person) y Bender.</p>
+        <span style="font-size:13px;font-weight:800;color:#5F4B8B;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir sección →</span>
+      </a>
+      <a href="#ctx" class="kyn-card kyn-card--interactive" style="border-top:5px solid #4FA47A;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-family:var(--font-display);font-size:52px;color:#4FA47A;line-height:0.8">2</span>
+          <span class="kyn-badge kyn-badge--mint" style="font-size:10px">Aplicación</span>
+        </div>
+        <h3 style="font-size:19px;font-weight:900;text-transform:uppercase;letter-spacing:0.01em;margin:0;line-height:1.1">Contextos<br>de aplicación</h3>
+        <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.45">Organizacional y comunitario: qué se hace, con qué, y la diferencia ética clave.</p>
+        <span style="font-size:13px;font-weight:800;color:#2F6B4F;text-transform:uppercase;letter-spacing:0.04em;margin-top:auto">Abrir sección →</span>
+      </a>
+    </div>
+
+    <div class="mapa-repaso-hint" style="margin-top:26px;align-items:center;gap:12px;background:var(--periwinkle-50);border:1px dashed var(--periwinkle-300);border-radius:var(--radius-md);padding:14px 18px">
+        <span class="kyn-badge kyn-badge--brand" style="font-size:11px">Modo repaso</span>
+        <span style="font-size:14px;color:var(--ink-700)">Las respuestas clave están difuminadas para que te autoevalúes. <strong>Pasa el cursor</strong> sobre cada una para revelarla.</span>
+      </div>
+  </header>
+
+  <!-- ================= PROYECTIVAS ================= -->
+  <section id="proy" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#F1EBFA,var(--pastel-lilac));border:1px solid #D6C6EC;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:#8B6FC0;line-height:1">1</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#5F4B8B">Sección 1</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Proyectivas a fondo</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Rorschach</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">TAT</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">H-T-P · DFH</span>
+          <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:11px">Bender</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--pastel-lilac);border-radius:var(--radius-md);padding:12px 16px;margin-bottom:26px;font-size:13.5px;color:#4A3A6B;line-height:1.5"><strong>El salto:</strong> antes viste <em>qué</em> son. Aquí va el <em>cómo se interpretan</em> — los códigos, signos y patrones reales que lee el clínico.</div>
+
+    <!-- 1.1 RORSCHACH (estrella) -->
+    <div style="margin-bottom:6px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#5F4B8B">1.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Rorschach · sistema de Exner <span style="font-size:0.55em;font-weight:600;color:var(--ink-500);text-transform:none">(Exner Comprehensive System)</span></h3>
+      <span class="kyn-badge kyn-badge--pop" style="font-size:14px">la estrella ♥</span>
+    </div>
+    <p style="margin:0 0 18px;font-size:14px;color:var(--ink-500);max-width:72ch">El <strong>sistema comprehensivo de Exner</strong> estandarizó una calificación que antes era muy subjetiva. Cada respuesta se codifica en varias categorías:</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-bottom:16px">
+      <div class="kyn-card" style="border-top:4px solid #8B6FC0">
+        <h4 style="margin:0 0 4px;font-size:15px;font-weight:800">Localización</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.4">¿Qué parte de la mancha se usó?</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>W</strong> · respuesta global (toda la mancha)</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>D</strong> · detalle usual</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>Dd</strong> · detalle inusual</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #8B6FC0">
+        <h4 style="margin:0 0 4px;font-size:15px;font-weight:800">Determinantes</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.4">¿Qué "disparó" la respuesta?</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>F</strong> · forma</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>C</strong> · color cromático → expresión emocional</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>M / FM</strong> · movimiento humano / animal</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:7px 10px;color:#4A3A6B"><strong>Sombreado / textura</strong> → ansiedad, necesidad de contacto</div>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #8B6FC0">
+        <h4 style="margin:0 0 4px;font-size:15px;font-weight:800">Contenido</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.4">¿Qué se vio?</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px">
+          <span style="background:var(--pastel-lilac);border-radius:var(--radius-pill);padding:6px 11px;color:#4A3A6B"><strong>H</strong> humana</span>
+          <span style="background:var(--pastel-lilac);border-radius:var(--radius-pill);padding:6px 11px;color:#4A3A6B"><strong>A</strong> animal</span>
+          <span style="background:var(--pastel-lilac);border-radius:var(--radius-pill);padding:6px 11px;color:#4A3A6B">anatomía</span>
+          <span style="background:var(--pastel-lilac);border-radius:var(--radius-pill);padding:6px 11px;color:#4A3A6B">naturaleza</span>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #8B6FC0">
+        <h4 style="margin:0 0 4px;font-size:15px;font-weight:800">Popular (P)</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.4">¿Coincide con lo que ve la mayoría?</p>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+          <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:7px 10px;color:#2F6B4F"><strong>Muchas P</strong> → conexión convencional con la realidad compartida</div>
+          <div style="background:var(--pastel-blush);border-radius:var(--radius-sm);padding:7px 10px;color:#8A3F58"><strong>Muy pocas P</strong> → percepción muy idiosincrática</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:36px;display:flex;gap:14px;align-items:flex-start">
+      <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#8B6FC0;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px">÷</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#5F4B8B">Ratios e índices</span>
+        <p style="margin:5px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-700)">Con los códigos se calculan proporciones (p. ej. <strong>movimiento humano vs. color</strong>) que el clínico lee como indicadores de <strong>estilo de afrontamiento, control de impulsos y relación con la realidad</strong>. La respuesta individual no dice nada sola: importa el conjunto.</p>
+      </div>
+    </div>
+
+    <!-- 1.2 TAT + 1.3 HTP -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:16px">
+      <div class="kyn-card" style="border-left:5px solid #8B6FC0">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">1.2</span><h3 style="font-size:18px;font-weight:800;margin:0">TAT · temas interpretativos <span style="font-size:0.6em;font-weight:600;color:var(--ink-500);text-transform:none">(Thematic Apperception Test)</span></h3></div>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">Más allá de "inventa una historia": el clínico busca patrones a través de varias láminas. Creado por <strong>Henry Murray</strong>.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px">
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Necesidades del protagonista</strong> · logro, afiliación, poder (teoría de Murray)</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Presiones del entorno</strong> percibidas en la historia</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Resolución de conflictos</strong> · finales optimistas vs. catastróficos</div>
+          <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:8px 11px;color:#4A3A6B"><strong>Con quién se identifica</strong> · no siempre el personaje obvio</div>
+        </div>
+      </div>
+
+      <div class="kyn-card" style="border-left:5px solid #8B6FC0">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">1.3</span><h3 style="font-size:18px;font-weight:800;margin:0">H-T-P y Machover/DFH <span style="font-size:0.6em;font-weight:600;color:var(--ink-500);text-transform:none">(House-Tree-Person / Draw-A-Person Test)</span></h3></div>
+        <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">Más allá de "casa/árbol/persona": los signos concretos del dibujo.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:12.5px">
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 11px"><strong>Tamaño</strong> · muy pequeño → baja autoestima/retraimiento; muy grande → sobrecompensación/impulsividad</div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 11px"><strong>Presión del trazo</strong> · fuerte → energía/tensión; débil → baja energía/inseguridad</div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 11px"><strong>Ubicación</strong> · centrada → seguridad; en la esquina → inseguridad/evitación</div>
+          <div style="background:var(--oat);border-radius:var(--radius-sm);padding:8px 11px"><strong>Detalles</strong> · manos ocultas/ausentes → dificultad para actuar o culpa; ojos muy marcados → hipervigilancia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.4 BENDER -->
+    <div class="kyn-card" style="border-left:5px solid #8B6FC0;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span style="font-size:20px;font-weight:900;color:#5F4B8B">1.4</span><h3 style="font-size:18px;font-weight:800;margin:0">Bender · dos lecturas distintas <span style="font-size:0.6em;font-weight:600;color:var(--ink-500);text-transform:none">(Bender Visual-Motor Gestalt Test)</span></h3></div>
+      <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-500);line-height:1.45">Copiar figuras geométricas revela dos tipos de información — no las confundas.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+        <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:12px 14px">
+          <div style="font-size:13px;font-weight:800;color:var(--periwinkle-800);margin-bottom:6px">Maduración neurológica / visomotora <span style="font-weight:600;color:var(--ink-500)">· niños</span></div>
+          <p style="margin:0;font-size:12px;line-height:1.5;color:var(--ink-700)">Se compara el error contra lo esperado para la edad: <strong>rotación, distorsión de la forma, dificultad para integrar las partes, perseveración</strong>. Señala inmadurez o disfunción — <em>no</em> personalidad.</p>
+        </div>
+        <div style="background:var(--pastel-lilac);border-radius:var(--radius-sm);padding:12px 14px">
+          <div style="font-size:13px;font-weight:800;color:#5F4B8B;margin-bottom:6px">Organización / personalidad <span style="font-weight:600;color:#7A64A8">· adultos, con cautela</span></div>
+          <p style="margin:0;font-size:12px;line-height:1.5;color:#4A3A6B"><strong>Tamaño de las figuras, uso del espacio y orden</strong> al copiar pueden leerse como indicadores de ansiedad, impulsividad o estilo de organización.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGLA DE ORO -->
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;margin-bottom:28px;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">La regla de oro de las proyectivas</span>
+        <p style="margin:5px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-700)"><strong>Ningún signo aislado es diagnóstico por sí solo.</strong> Se interpreta como parte de un <span class="mapa-clave" style="background:#F6EBC4;padding:1px 6px;border-radius:4px;cursor:help">patrón, junto con el resto de la batería</span> — nunca de forma aislada. Es el mismo principio de <strong>screening vs. diagnóstico diferencial</strong>, ahora aplicado a un dibujo en vez de a un puntaje.</p>
+      </div>
+    </div>
+
+    <!-- decision table proyectivas -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:36px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge" style="background:var(--pastel-lilac);color:#5F4B8B;font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el reactivo describe… → código / prueba</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"usó toda la mancha para responder"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Localización W (global)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"el color cromático disparó la respuesta"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Determinante C · emoción</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"coincide con lo que ve la mayoría"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Respuesta Popular (P)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"necesidad de logro/afiliación/poder en la historia"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">TAT (Murray)</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"manos ausentes en el dibujo de la persona"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">DFH · dificultad para actuar/culpa</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"rotación y perseveración al copiar figuras"</div>
+          <div class="mapa-clave" style="background:#8B6FC0;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Bender · visomotor</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTEXTOS ================= -->
+  <section id="ctx" style="max-width:1240px;margin:0 auto;padding:40px 24px">
+    <div style="display:flex;align-items:center;gap:20px;background:linear-gradient(120deg,#EAF6EF,var(--pastel-mint));border:1px solid #BFE3CE;border-radius:var(--radius-xl);padding:26px 30px;margin-bottom:30px">
+      <div style="flex:none;width:74px;height:74px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)">
+        <span style="font-family:var(--font-display);font-size:46px;color:#4FA47A;line-height:1">2</span>
+      </div>
+      <div>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#2F6B4F">Sección 2</span>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:900;text-transform:uppercase;letter-spacing:-0.01em;margin:4px 0 6px;line-height:1">Contextos de aplicación</h2>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="kyn-badge kyn-badge--mint" style="font-size:11px">Organizacional</span>
+          <span class="kyn-badge kyn-badge--mint" style="font-size:11px">Social / comunitario</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.1 ORGANIZACIONAL -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#2F6B4F">2.1</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Organizacional <span style="color:var(--ink-500);font-weight:500;font-size:16px">· predecir, no diagnosticar</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:16px">
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Selección de personal</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.45">Batería típica: aptitud/habilidad cognitiva + personalidad orientada al trabajo + entrevista por competencias.</p>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:8px 11px;font-size:12px;color:#2F6B4F"><strong>Objetivo:</strong> predecir desempeño futuro en un puesto — no diagnosticar.</div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Evaluación de puesto / desempeño</h4>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Evaluación periódica de quien <strong>ya ocupa</strong> el puesto, ligada a desarrollo o promoción — no a diagnóstico clínico.</p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Assessment center</h4>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.45">Combina varias técnicas (dinámicas grupales, simulaciones, entrevistas) en un solo proceso extendido. Típico en puestos de <strong>mayor responsabilidad</strong>.</p>
+      </div>
+    </div>
+
+    <div class="kyn-card" style="background:#FFF8E8;border:1.5px solid #EBD9A6;margin-bottom:36px;display:flex;gap:16px;align-items:flex-start">
+      <span style="flex:none;width:40px;height:40px;border-radius:50%;background:#F6EBC4;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#8A6D1F">!</span>
+      <div>
+        <span style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#8A6D1F">La diferencia ética clave</span>
+        <p style="margin:5px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-700)">En lo organizacional, el "cliente" formal suele ser <span class="mapa-clave" style="background:#F6EBC4;padding:1px 6px;border-radius:4px;cursor:help">la organización, no la persona evaluada</span>. Eso cambia a quién pertenece la información y cómo se maneja el consentimiento — a diferencia del contexto clínico.</p>
+      </div>
+    </div>
+
+    <!-- 2.2 COMUNITARIO -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px;font-weight:900;color:#2F6B4F">2.2</span>
+      <h3 style="font-size:22px;font-weight:800;margin:0">Social / comunitario <span style="color:var(--ink-500);font-weight:500;font-size:16px">· la población, no el individuo</span></h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:16px">
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Diagnóstico de necesidades</h4>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.5">Evalúa a una <strong>población completa</strong> para identificar qué problemas psicosociales predominan y dimensionar su magnitud — insumo para diseñar un programa o política.</p>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">Evaluación de programas</h4>
+        <p style="margin:0 0 10px;font-size:12.5px;color:var(--ink-500);line-height:1.5">Medir si una intervención comunitaria ya en marcha funciona.</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;font-size:11.5px">
+          <span style="background:var(--pastel-mint);border-radius:var(--radius-pill);padding:5px 10px;color:#2F6B4F;font-weight:700">eficacia</span>
+          <span style="background:var(--pastel-mint);border-radius:var(--radius-pill);padding:5px 10px;color:#2F6B4F;font-weight:700">efectividad</span>
+          <span style="background:var(--pastel-mint);border-radius:var(--radius-pill);padding:5px 10px;color:#2F6B4F;font-weight:700">eficiencia</span>
+        </div>
+      </div>
+      <div class="kyn-card" style="border-top:4px solid #4FA47A">
+        <h4 style="margin:0 0 6px;font-size:16px;font-weight:800">El instrumento cambia</h4>
+        <p style="margin:0;font-size:12.5px;color:var(--ink-500);line-height:1.5">Aquí <strong>no</strong> es una prueba psicométrica individual, sino <strong>encuestas, grupos focales y observación participante</strong> a nivel de comunidad.</p>
+      </div>
+    </div>
+
+    <!-- clínico vs organizacional -->
+    <div class="kyn-card" style="margin-bottom:28px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span class="kyn-badge kyn-badge--mint" style="font-size:10px">¿Quién es el cliente?</span><span style="font-size:13px;color:var(--ink-500)">la pregunta que reordena todo</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;font-size:13px">
+        <div style="background:var(--periwinkle-50);border-radius:var(--radius-sm);padding:12px 14px"><strong style="color:var(--periwinkle-800)">Clínico</strong><br><span style="color:var(--ink-600,var(--ink-500))">el cliente es la persona · foco: diagnóstico y tratamiento</span></div>
+        <div style="background:var(--pastel-mint);border-radius:var(--radius-sm);padding:12px 14px;color:#2F6B4F"><strong>Organizacional</strong><br><span>el cliente es la organización · foco: predecir desempeño</span></div>
+        <div style="background:var(--pastel-peach);border-radius:var(--radius-sm);padding:12px 14px;color:#9A6A2E"><strong>Comunitario</strong><br><span>el "cliente" es la población · foco: necesidades y programas</span></div>
+      </div>
+    </div>
+
+    <!-- decision table contextos -->
+    <div class="kyn-card" style="background:var(--oat);border:1px solid var(--border-on-oat);margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+        <span class="kyn-badge kyn-badge--mint" style="font-size:10px">Elige rápido</span>
+        <span style="font-size:14px;font-weight:700;color:var(--ink-700)">Si el caso pide… → contexto / método</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"predecir el desempeño futuro en un puesto"</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Organizacional · selección</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"dinámicas grupales + simulaciones en un proceso extendido"</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Assessment center</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"identificar los problemas psicosociales de una población"</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Comunitario · dx de necesidades</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"medir si un programa en marcha está funcionando"</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Evaluación de programas</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:10px">
+          <div style="background:var(--white);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;color:var(--ink-700)">"el cliente formal es la organización, no la persona"</div>
+          <div class="mapa-clave" style="background:#4FA47A;color:#fff;border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;font-weight:700;cursor:help">Organizacional · ética</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="max-width:1240px;margin:0 auto;padding:30px 24px 70px;border-top:1px solid var(--border-subtle);margin-top:30px">
+    <p style="font-size:13px;color:var(--ink-500);margin:0 0 10px;line-height:1.5">Complemento del mapa de Área 1 (evaluación psicológica). Los conceptos provienen de tus materiales de examen; úsalo como estructura de estudio, no como sustituto de las fuentes oficiales.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="mapa-dsm5-ciclo-vital.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">complemento: DSM-5 y ciclo vital →</a>
+    </div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-mapa-proyectivas-contextos';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+  var nivelBtns = document.querySelectorAll('.mapa-nivel-btn');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarNivel(nivel){
+    body.classList.toggle('nivel-esenciales', nivel === 'esenciales');
+    nivelBtns.forEach(function(btn){
+      btn.classList.toggle('is-activo', btn.dataset.nivel === nivel);
+    });
+  }
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarNivel(estado.nivel || 'completo');
+  aplicarRepaso(!!estado.repaso);
+
+  nivelBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var nivel = btn.dataset.nivel;
+      aplicarNivel(nivel);
+      var e = leerEstado(); e.nivel = nivel; guardarEstado(e);
+    });
+  });
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

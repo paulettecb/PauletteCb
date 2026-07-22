@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scribe: Muestreo — Área 3 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso estilo graphic recording de los tipos de muestreo probabilístico y no probabilístico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400; font-display: swap;
+}
+
+:root {
+  --periwinkle-50:  #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-300: #AEB8E2;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-600: #6B7AC1;
+  --periwinkle-700: #5562A4;
+  --periwinkle-800: #434D80;
+  --periwinkle-900: #2F3658;
+
+  --white:    #FFFFFF;
+  --paper:    #FBFAF7;
+  --oat:      #F4F0E8;
+  --sand:     #E9E3D7;
+  --ink-900:  #2A2933;
+  --ink-800:  #3A3940;
+  --ink-700:  #4A4955;
+  --ink-500:  #75737F;
+  --ink-300:  #A8A6B0;
+  --ink-100:  #E4E2E6;
+
+  --pop-magenta:      #E85DA0;
+  --pop-magenta-soft: #F7C9DE;
+  --magenta: #E85DA0;
+
+  --pastel-blush:  #F6D2DD;
+  --pastel-peach:  #F8DCC9;
+  --pastel-butter: #F6EBC4;
+  --pastel-mint:   #CFE8DA;
+  --pastel-sky:    #CFE0F2;
+  --pastel-lilac:  #E2D6F0;
+
+  --surface-card: var(--white);
+  --border-subtle: var(--ink-100);
+  --border-on-oat: var(--sand);
+
+  --font-display: 'Friendship', 'Comic Sans MS', cursive;
+  --font-accent:  'Farmhouse', 'Georgia', serif;
+  --font-sans:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --weight-bold:  700;
+  --weight-black: 900;
+
+  --space-5: 1.5rem;
+
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(47, 54, 88, 0.07);
+  --shadow-md: 0 8px 24px rgba(47, 54, 88, 0.09);
+  --shadow-lg: 0 18px 48px rgba(47, 54, 88, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(135, 149, 210, 0.35);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;background:var(--oat);color:var(--ink-900);font-family:var(--font-sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+a{color:var(--periwinkle-700);text-decoration:none}
+a:hover{color:var(--periwinkle-600)}
+::selection{background:var(--pastel-butter)}
+
+.kyn-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-sans);font-weight:var(--weight-bold);
+  font-size:11px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:5px 12px;border-radius:var(--radius-pill);line-height:1;white-space:nowrap;
+}
+.kyn-badge--soft{background:var(--periwinkle-100);color:var(--periwinkle-800);}
+.kyn-badge--outline{background:transparent;border:1.5px solid var(--ink-100);color:var(--ink-700);}
+
+.mapa-repaso-switch{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:12.5px;color:var(--ink-700);cursor:pointer;user-select:none}
+.mapa-repaso-switch input{position:absolute;opacity:0;width:0;height:0}
+.mapa-repaso-switch__track{width:38px;height:22px;border-radius:var(--radius-pill);background:var(--ink-100);position:relative;flex:none;transition:background var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch__thumb{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--dur-base) var(--ease-out)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track{background:var(--periwinkle-500)}
+.mapa-repaso-switch input:checked + .mapa-repaso-switch__track .mapa-repaso-switch__thumb{transform:translateX(16px)}
+.mapa-repaso-switch input:focus-visible + .mapa-repaso-switch__track{box-shadow:var(--shadow-focus)}
+
+.mapa-clave{cursor:help}
+body.modo-repaso .mapa-clave{filter:blur(5px);transition:filter .2s var(--ease-out)}
+body.modo-repaso .mapa-clave:hover,
+body.modo-repaso .mapa-clave:focus-visible,
+body.modo-repaso .mapa-clave.revelada{filter:none}
+
+@media (max-width: 640px){
+  nav > div{padding-top:10px}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:var(--oat)">
+  <nav style="background:rgba(251,250,247,0.9);border-bottom:1.5px dashed var(--periwinkle-200)">
+    <div style="max-width:1680px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="display:flex;flex-direction:column;line-height:0.9;margin-right:auto">
+        <span style="font-family:var(--font-display);font-size:24px;color:var(--periwinkle-600)">scribe</span>
+        <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-500);font-weight:700">lámina de repaso · muestreo</span>
+      </span>
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px;padding:8px 13px">← mapa completo</a>
+      <label class="mapa-repaso-switch">
+        <input type="checkbox" id="mapa-modo-repaso">
+        <span class="mapa-repaso-switch__track"><span class="mapa-repaso-switch__thumb"></span></span>
+        Modo repaso
+      </label>
+    </div>
+  </nav>
+
+  <div id="scribeWrap" style="position:relative;width:100%;height:620px;overflow:hidden;margin:0 auto;background:var(--oat)">
+  <div id="scribeBoard" style="position:absolute;top:0;left:0;width:1680px;height:1240px;transform:scale(0.5);transform-origin:top left;background:var(--paper);box-shadow:0 10px 40px rgba(42,41,51,0.14)">
+
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(135,149,210,0.16) 1.3px, transparent 1.3px);background-size:26px 26px"></div>
+
+    <svg viewBox="0 0 1680 1240" style="position:absolute;inset:0;width:1680px;height:1240px;z-index:1;pointer-events:none" fill="none">
+      <path d="M840 330 L840 1150" stroke="#8795D2" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 12"/>
+      <path d="M792 268 C 700 268, 640 285, 600 300" stroke="#4FA47A" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ahg)"/>
+      <path d="M888 268 C 980 268, 1040 285, 1080 300" stroke="#E07AA5" stroke-width="3.5" stroke-linecap="round" marker-end="url(#ahp)"/>
+      <defs>
+        <marker id="ahg" markerWidth="13" markerHeight="13" refX="8" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10" fill="none" stroke="#2F6B4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="ahp" markerWidth="13" markerHeight="13" refX="8" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10" fill="none" stroke="#8A3F58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+    </svg>
+
+    <div style="position:absolute;left:640px;top:22px;font-family:var(--font-accent);font-size:46px;color:#E85DA0;transform:rotate(-6deg);z-index:3">toma una</div>
+    <div style="position:absolute;left:340px;top:70px;width:1000px;text-align:center;z-index:2"><span style="font-family:var(--font-sans);font-weight:900;font-size:112px;letter-spacing:-0.02em;line-height:1;color:var(--ink-900);text-shadow:5px 5px 0 var(--periwinkle-300)">MUESTRA</span></div>
+
+    <div style="position:absolute;left:560px;top:214px;width:560px;text-align:center;z-index:3">
+      <div style="display:inline-block;background:var(--periwinkle-500);color:#fff;font-family:var(--font-display);font-size:28px;padding:7px 30px;border-radius:8px;box-shadow:4px 5px 0 rgba(42,41,51,0.16);transform:rotate(-1deg)">¿la elegí AL AZAR?</div>
+    </div>
+
+    <!-- LEFT: probabilístico -->
+    <div style="position:absolute;left:48px;top:342px;width:744px;display:flex;align-items:center;gap:12px;z-index:3">
+      <span style="background:var(--pastel-mint);border:2.5px solid var(--ink-900);border-radius:40px;padding:7px 20px;font-family:var(--font-display);font-size:26px;color:#2F6B4F;transform:rotate(-1deg)">PROBABILÍSTICO</span>
+      <span style="font-size:16px;font-weight:800;color:#2F6B4F">→ SÍ generalizo a la población</span>
+    </div>
+
+    <div style="position:absolute;left:48px;top:414px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 26px 90px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(-0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#4FA47A"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect x="6" y="6" width="22" height="22" rx="5" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="22" cy="22" r="2" fill="currentColor"/><circle cx="22" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="22" r="2" fill="currentColor"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Aleatorio simple</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">todos tienen la <strong style="color:#2F6B4F">misma probabilidad</strong> — tómbola o números al azar</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ rifa sobre toda la lista</span>
+    </div>
+    <div style="position:absolute;left:48px;top:600px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 26px 90px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(0.3deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#4FA47A"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M8 9h18M8 17h18M8 25h18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="8" cy="9" r="2.6" fill="currentColor"/><circle cx="8" cy="25" r="2.6" fill="currentColor"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Sistemático</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">cada <strong style="color:#2F6B4F">k-ésimo</strong> desde un arranque azaroso</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ cada 10º de la lista</span>
+    </div>
+    <div style="position:absolute;left:48px;top:786px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 26px 90px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(-0.3deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#4FA47A"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M17 5l12 6-12 6-12-6z" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/><path d="M5 17l12 6 12-6M5 24l12 6 12-6" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Estratificado</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">divide en <strong style="color:#2F6B4F">estratos</strong> y toma proporción de cada uno</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ 300 de 1200 respetando % por grado y escuela</span>
+    </div>
+    <div style="position:absolute;left:48px;top:972px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 26px 90px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#4FA47A"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect x="5" y="5" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2.3"/><rect x="19" y="5" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2.3"/><rect x="5" y="19" width="10" height="10" rx="2" fill="currentColor" opacity="0.25" stroke="currentColor" stroke-width="2.3"/><rect x="19" y="19" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2.3"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Por conglomerados</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">elige <strong style="color:#2F6B4F">grupos completos</strong> al azar (aulas, escuelas)</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ sorteo 5 escuelas y estudio a TODOS sus alumnos</span>
+    </div>
+
+    <!-- RIGHT: no probabilístico -->
+    <div style="position:absolute;left:888px;top:342px;width:744px;display:flex;align-items:center;gap:12px;justify-content:flex-end;z-index:3">
+      <span style="font-size:16px;font-weight:800;color:#8A3F58">describo, NO generalizo ←</span>
+      <span style="background:var(--pastel-blush);border:2.5px solid var(--ink-900);border-radius:40px;padding:7px 20px;font-family:var(--font-display);font-size:23px;color:#8A3F58;transform:rotate(1deg)">NO PROBABILÍSTICO</span>
+    </div>
+
+    <div style="position:absolute;left:888px;top:414px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 90px 26px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#E07AA5"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><path d="M10 16V8a2 2 0 0 1 4 0v6m0-1V6a2 2 0 0 1 4 0v7m0-1V8a2 2 0 0 1 4 0v9c0 6-3 11-9 11-4 0-6-2-8-6l-3-6a2 2 0 0 1 3-2l2 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Por conveniencia</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">los que están <strong style="color:#8A3F58">a la mano</strong> — rápido pero sesgado</p>
+      <span class="mapa-clave" style="background:var(--pastel-mint);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#2F6B4F;display:inline-block;cursor:help">clave→ encuesto a mi propio grupo de clase</span>
+    </div>
+    <div style="position:absolute;left:888px;top:600px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 90px 26px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(-0.3deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#E07AA5"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="12" stroke="currentColor" stroke-width="2.3"/><circle cx="17" cy="17" r="6" stroke="currentColor" stroke-width="2.3"/><circle cx="17" cy="17" r="1.8" fill="currentColor"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Intencional / por juicio</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">el investigador <strong style="color:#8A3F58">elige a propósito</strong> por un criterio</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ 16 participantes elegidos por el autor</span>
+    </div>
+    <div style="position:absolute;left:888px;top:786px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 90px 26px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(0.3deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#E07AA5"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="8" cy="10" r="3.4" stroke="currentColor" stroke-width="2.2"/><circle cx="24" cy="8" r="3.4" stroke="currentColor" stroke-width="2.2"/><circle cx="17" cy="24" r="3.4" stroke="currentColor" stroke-width="2.2"/><circle cx="27" cy="24" r="3.4" stroke="currentColor" stroke-width="2.2"/><path d="M11 11l10-1M23 12l-4 9M20 25h4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Bola de nieve</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">un participante <strong style="color:#8A3F58">refiere</strong> al siguiente — poblaciones ocultas</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ un consumidor me presenta a otro</span>
+    </div>
+    <div style="position:absolute;left:888px;top:972px;width:744px;background:#fff;border:3px solid var(--ink-900);border-radius:26px 26px 90px 26px;padding:14px 20px;box-shadow:5px 6px 0 rgba(42,41,51,0.12);transform:rotate(-0.4deg);z-index:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:5px"><span style="flex:none;color:#E07AA5"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"><circle cx="17" cy="17" r="12" stroke="currentColor" stroke-width="2.3"/><path d="M17 17V5M17 17l10 6" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg></span><h3 style="font-family:var(--font-display);font-size:24px;margin:0;color:var(--ink-900)">Por cuotas</h3></div>
+      <p style="margin:0 0 6px;font-size:16px;line-height:1.3;color:var(--ink-900)">cupos por característica, pero <strong style="color:#8A3F58">sin azar</strong> dentro</p>
+      <span class="mapa-clave" style="background:var(--pastel-butter);padding:3px 10px;border-radius:6px;font-size:14px;font-weight:800;color:#5C4A17;display:inline-block;cursor:help">clave→ &quot;quiero 50 hombres y 50 mujeres&quot; como sea</span>
+    </div>
+
+    <div style="position:absolute;left:1520px;top:40px;width:110px;height:110px;border:3px solid var(--periwinkle-500);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-6deg);z-index:3;background:var(--paper)">
+      <span style="font-family:var(--font-accent);font-size:30px;color:#E85DA0;line-height:0.8">kyn</span>
+      <span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-500);font-weight:700;margin-top:2px">scribe</span>
+    </div>
+
+    <div style="position:absolute;left:1160px;top:200px;width:340px;background:var(--pastel-butter);border:2.5px solid var(--ink-900);border-radius:120px 130px 110px 130px/100px 120px 130px 100px;padding:12px 22px;box-shadow:4px 5px 0 rgba(217,164,65,0.32);transform:rotate(1deg);z-index:3;text-align:center">
+      <span style="font-family:var(--font-display);font-size:22px;color:#B0851F">regla de oro</span>
+      <p style="margin:2px 0 0;font-size:14.5px;line-height:1.35;color:#5C4A17">si hay <strong>azar</strong> → probabilístico → generalizas. Sin azar → describes tu muestra, no a todos.</p>
+    </div>
+  </div>
+  </div>
+
+  <div style="max-width:1680px;margin:0 auto;padding:20px 24px 60px;text-align:center">
+    <p style="font-size:13.5px;color:var(--ink-500);margin:0 0 12px;line-height:1.5">Lámina de repaso estilo <em>graphic recording</em>. Activa <strong>Modo repaso</strong> y pasa el cursor sobre las claves para autoevaluarte.</p>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <a href="mapa-estudio.html" class="kyn-badge kyn-badge--outline" style="font-size:12px">← mapa completo</a>
+      <a href="scribe-disenos-investigacion.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">diseños de investigación</a>
+      <a href="scribe-estadistica-inferencial.html" class="kyn-badge kyn-badge--soft" style="font-size:12px">estadística inferencial</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var STORAGE_KEY = 'ceneval-scribe-muestreo';
+  var body = document.body;
+  var chk = document.getElementById('mapa-modo-repaso');
+
+  function leerEstado(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function guardarEstado(estado){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+    catch (e) { /* localStorage no disponible (modo privado, etc.) */ }
+  }
+
+  function aplicarRepaso(activo){
+    body.classList.toggle('modo-repaso', activo);
+    if (chk) chk.checked = activo;
+  }
+
+  var estado = leerEstado();
+  aplicarRepaso(!!estado.repaso);
+
+  if (chk) {
+    chk.addEventListener('change', function(){
+      aplicarRepaso(chk.checked);
+      var e = leerEstado(); e.repaso = chk.checked; guardarEstado(e);
+    });
+  }
+
+  document.querySelectorAll('.mapa-clave').forEach(function(el){
+    el.setAttribute('tabindex', '0');
+    el.addEventListener('click', function(){ el.classList.toggle('revelada'); });
+    el.addEventListener('keydown', function(ev){
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        el.classList.toggle('revelada');
+      }
+    });
+  });
+
+  var wrap = document.getElementById('scribeWrap');
+  var board = document.getElementById('scribeBoard');
+  function fit() {
+    if (!wrap || !board) return;
+    var scale = Math.min(1, wrap.clientWidth / 1680);
+    board.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (1240 * scale) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  [200, 600, 1200].forEach(function(t) { setTimeout(fit, t); });
+})();
+</script>
+</body>
+</html>
