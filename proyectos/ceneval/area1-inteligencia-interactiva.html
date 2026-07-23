@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área 1 · Inteligencia — una prueba, una vista</title>
+
+<meta name="description" content="Área 1 · Inteligencia: una prueba, una vista. Catálogo interactivo de las 7 pruebas de inteligencia (WPPSI, WISC, WAIS, Raven, RIAS, Shipley-2, Beta-4) con medidores de CI, percentil y deterioro para el CENEVAL EGEL Plus PSI.">
+
+<!-- KYN design system — tokens inline + fuentes desde el DS compartido (../KYN Design System),
+     con preload obligatorio de Friendship (regla de CLAUDE.md). Sin copia local del DS. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+
+<style>
+  @font-face {
+    font-family: 'Friendship';
+    src: url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  /* KYN tokens — valores del design system compartido (proyectos/KYN Design System/tokens/*) */
+  :root {
+    --periwinkle-50:#F0F2FB; --periwinkle-100:#E2E6F5; --periwinkle-200:#C9D0ED;
+    --periwinkle-300:#AEB8E2; --periwinkle-400:#9BA6DA; --periwinkle-500:#8795D2;
+    --periwinkle-600:#6B7AC1; --periwinkle-700:#5562A4; --periwinkle-800:#434D80; --periwinkle-900:#2F3658;
+    --white:#FFFFFF; --paper:#FBFAF7; --oat:#F4F0E8; --sand:#E9E3D7;
+    --ink-900:#2A2933; --ink-700:#4A4955; --ink-500:#75737F; --ink-300:#A8A6B0; --ink-100:#E4E2E6;
+    --pop-magenta:#E85DA0; --pop-magenta-soft:#F7C9DE;
+    --pastel-blush:#F6D2DD; --pastel-peach:#F8DCC9; --pastel-butter:#F6EBC4;
+    --pastel-mint:#CFE8DA; --pastel-sky:#CFE0F2; --pastel-lilac:#E2D6F0;
+    --success:#4FA47A; --warning:#D9A441; --danger:#D9534F;
+    --border-subtle:var(--ink-100); --border-on-oat:var(--sand);
+    --radius-md:16px; --radius-lg:24px; --radius-pill:999px;
+    --shadow-sm:0 2px 8px rgba(47,54,88,.07); --shadow-md:0 8px 24px rgba(47,54,88,.09);
+    --shadow-focus:0 0 0 3px rgba(135,149,210,.35);
+    --ease-out:cubic-bezier(.22,1,.36,1);
+    --font-display:'Friendship','Comic Sans MS',cursive;
+    --font-serif:'Farmhouse','Georgia',serif;
+    --font-sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--periwinkle-700); text-decoration: none; }
+  a:hover { color: var(--periwinkle-900); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* Slider — periwinkle track + white thumb with periwinkle ring */
+  input[type=range].kyn-range {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 8px; border-radius: 999px;
+    background: linear-gradient(90deg, var(--periwinkle-200), var(--periwinkle-400));
+    cursor: pointer;
+  }
+  input[type=range].kyn-range::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--white); border: 3px solid var(--periwinkle-600);
+    box-shadow: var(--shadow-md, 0 8px 20px rgba(85,98,164,.28)); margin-top: -8px;
+  }
+  input[type=range].kyn-range::-moz-range-thumb {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--white); border: 3px solid var(--periwinkle-600);
+    box-shadow: var(--shadow-md, 0 8px 20px rgba(85,98,164,.28));
+  }
+  input[type=range].kyn-range:focus-visible {
+    outline: none; box-shadow: var(--shadow-focus, 0 0 0 3px rgba(135,149,210,.35));
+  }
+
+  .shell { max-width: 1120px; margin: 0 auto; padding: 0 24px 90px; }
+
+  /* Responsive collapse of the two-column card body on narrow screens */
+  @media (max-width: 720px) {
+    .card-body { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; padding-top:14px;">
+    <a href="index.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">← Base CENEVAL</a>
+    <a href="area1-instrumentos-indice.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Instrumentos Área 1</a>
+  </div>
+
+  <header style="padding: 34px 0 8px;">
+    <div style="font-size: .72rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--periwinkle-600);">Área 1 · Diagnóstico · Catálogo visual de pruebas</div>
+    <h1 style="font-family: var(--font-sans); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.0; margin: .18em 0 .1em;">Inteligencia</h1>
+    <div style="font-family: var(--font-display); font-size: 1.5rem; color: var(--pop-magenta); margin-bottom: 14px;">una prueba, una vista</div>
+    <p style="max-width: 60ch; font-size: 1.06rem; line-height: 1.6; color: var(--ink-700); margin: 0 0 22px; text-wrap: pretty;">Cada prueba tiene su propio espacio: qué mide, a quién, cómo se aplica, qué tipo de puntaje da y —lo que te faltaba— <strong>cómo se interpreta</strong>. Los recuadros marcados resuelven, una por una, los huecos de tu propia auditoría.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 14px 18px; background: var(--oat); border-radius: var(--radius-md, 14px); border: 1px solid var(--border-on-oat);">
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:34px;height:12px;border-radius:999px;background:linear-gradient(90deg,#E7B7B7,#C6E4D3,#A9B4E0);"></span> Bandas = clasificación</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:3px;height:16px;background:var(--ink-900);border-radius:2px;"></span> Marca = puntuación</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:16px;height:16px;border-radius:50%;background:var(--white);border:3px solid var(--periwinkle-600);"></span> Deslizador = pruébalo tú</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:14px;height:14px;border-radius:4px;background:var(--warning);"></span> Etiqueta auditoría = hueco resuelto</div>
+    </div>
+  </header>
+
+  <nav id="jumpNav" style="position: sticky; top: 0; z-index: 30; background: rgba(251,250,247,.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-subtle); margin: 22px -24px 30px; padding: 12px 24px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+    <span style="font-size: .68rem; font-weight: 900; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-500); margin-right: 4px;">Ir a</span>
+    <!-- chips injected by JS -->
+  </nav>
+
+  <main id="cards"><!-- cards injected by JS --></main>
+
+  <footer style="text-align: center; color: var(--ink-500); font-size: .82rem; padding-top: 26px; line-height: 1.6;">
+    Categoría 1 de 10 · <strong style="color: var(--ink-700);">Inteligencia</strong> (7 pruebas).<br>
+    Siguen: neuropsicológicas · proyectivas · ansiedad · depresión · personalidad · calidad de vida · funcionalidad · desarrollo · vocacional.
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   Área 1 · Inteligencia — interactive catalogue
+   Vanilla-JS port of the original Claude Design `DCLogic` component.
+   Behaviour (bands, bell curve, percentile grades, deterioro gap,
+   derived T / percentile / z) is reproduced 1:1; the two prototype
+   editor props default to on, as in the exported default view.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var SHOW_AUDIT = true;   // prototype prop "showAudit"  (default true)
+  var SHOW_CURVE = true;   // prototype prop "showCurve"  (default true)
+
+  var sliders = { WPPSI: 105, WISC: 100, WAIS: 112, Raven: 50, RIAS: 100, Shipley: 12, Beta: 100 };
+
+  // ---- Standard-normal CDF (Abramowitz-Stegun 26.2.17), clamped ----
+  function cdf(z) {
+    var t = 1 / (1 + 0.2316419 * Math.abs(z));
+    var d = 0.3989423 * Math.exp(-z * z / 2);
+    var p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+    var r = z > 0 ? 1 - p : p;
+    return Math.min(0.999, Math.max(0.001, r));
+  }
+
+  // ---- CI bands (mean 100 / SD 15), plotted across 40..160 ----
+  function ciBands() {
+    return [
+      [40, 70, "Extremadamente bajo (≤69)", "Ext. bajo", "#E7B7B7"],
+      [70, 80, "Limítrofe (70–79)", "Limít.", "#F0CDA6"],
+      [80, 90, "Medio bajo (80–89)", "Medio bajo", "#F3E3AE"],
+      [90, 110, "Promedio (90–109)", "Promedio", "#C6E4D3"],
+      [110, 120, "Medio alto (110–119)", "Medio alto", "#CADCF0"],
+      [120, 130, "Superior (120–129)", "Superior", "#BFC8E9"],
+      [130, 160, "Muy superior (≥130)", "Muy sup.", "#A9B4E0"]
+    ].map(function (b) {
+      return { from: b[0], to: b[1], label: b[2], short: b[3], color: b[4], widthPct: (b[1] - b[0]) / 120 * 100 };
+    });
+  }
+
+  // ---- Percentile grades I–V (Raven) ----
+  function pctBands() {
+    return [
+      [0, 5, "Grado V · Deficiente (Pc ≤5)", "V", "#E7B7B7"],
+      [5, 25, "Grado IV · Inferior al término medio (Pc 6–24)", "IV", "#F0CDA6"],
+      [25, 75, "Grado III · Término medio (Pc 25–74)", "III", "#C6E4D3"],
+      [75, 95, "Grado II · Superior al término medio (Pc 75–94)", "II", "#CADCF0"],
+      [95, 101, "Grado I · Superior (Pc ≥95)", "I", "#A9B4E0"]
+    ].map(function (b) {
+      return { from: b[0], to: b[1], label: b[2], short: b[3], color: b[4], widthPct: (Math.min(b[1], 100) - b[0]) / 100 * 100 };
+    });
+  }
+
+  function apBg(label) {
+    var m = {
+      "Individual": "--pastel-sky", "Colectiva": "--pastel-butter",
+      "Heteroaplicada": "--pastel-lilac", "Autoaplicable": "--pastel-mint",
+      "Verbal": "--periwinkle-100", "No verbal": "--pastel-peach",
+      "Manipulativa": "--pastel-blush", "Papel y lápiz": "--oat"
+    };
+    return m[label] || "--periwinkle-50";
+  }
+
+  var EXAM_TIPS = {
+    WPPSI: "En el reactivo: “preescolar / 2 a 7 años / aún no lee” → WPPSI. Si el caso es escolar (≥6), salta a WISC.",
+    WISC: "Palabras gancho: “niño escolar 6–16” + “perfil / índices”. Si hay mucha dispersión entre índices, la clave menciona ICG/ICC.",
+    WAIS: "Distractor típico: confundirla con el WISC. Regla: ≥16 años = WAIS. Comparte los 4 índices; lo que cambia es la población.",
+    Raven: "Si el caso dice “no habla español / sordera / analfabetismo / libre de cultura / no verbal” → casi siempre es Raven.",
+    RIAS: "Gancho: “breve / rápido” + “verbal y no verbal” con métrica CI. Si piden batería completa, es Wechsler, no RIAS.",
+    Shipley: "Gancho: “deterioro” + contraste “vocabulario vs. abstracción”. Recuerda: la fluida (abstracción) cae primero.",
+    Beta: "Gancho: “grupal / masivo / selección de personal” + no verbal → Beta. Si la aplicación es individual, NO es Beta."
+  };
+
+  function defs() {
+    return [
+      {
+        id: "WPPSI", sigla: "WPPSI-IV", nombre: "Wechsler Preschool and Primary Scale of Intelligence", autor: "D. Wechsler", familia: "Familia Wechsler", type: "ci",
+        edadFrom: 2.5, edadTo: 7.6, edadLabel: "2:6 – 7:7 años (preescolar)",
+        evalua: "La inteligencia general en la primera infancia, cuando el niño aún no lee ni escribe: se apoya en material manipulativo y en el juego.",
+        construyes: ["CI Total", "Comprensión verbal", "Viso-espacial", "Razonamiento fluido", "Memoria de trabajo", "Velocidad de procesamiento"],
+        aplicacion: ["Individual", "Heteroaplicada", "Verbal", "Manipulativa"],
+        resultadoLabel: "CI (media 100 · DE 15)", resultadoDetail: "CI Total + índices, todos en métrica 100/15.",
+        interpreta: "Se lee por bandas de CI. Los cortes clave caen en ±1 y ±2 desviaciones estándar: 70 · 85 · 100 · 115 · 130.",
+        tip: "WPPSI = la Wechsler de los peques (PreSchool). Ordena la familia por edad: WPPSI → WISC → WAIS.",
+        hueco: "En tu catálogo visual solo aparecía el rango de edad suelto, sin ficha propia. Aquí queda completa.", huecoKind: "fill"
+      },
+      {
+        id: "WISC", sigla: "WISC-V", nombre: "Wechsler Intelligence Scale for Children", autor: "D. Wechsler", familia: "Familia Wechsler", type: "ci",
+        edadFrom: 6, edadTo: 16.99, edadLabel: "6 – 16:11 años (edad escolar)",
+        evalua: "La inteligencia en edad escolar, desglosada en índices que muestran el PERFIL del niño, no solo un número global.",
+        construyes: ["CI Total", "WISC-IV: 4 índices — ICV · IRP · IMT · IVP", "WISC-V: 5 índices (separa viso-espacial y razonamiento fluido)"],
+        aplicacion: ["Individual", "Heteroaplicada", "Verbal", "Manipulativa"],
+        resultadoLabel: "CI (media 100 · DE 15)", resultadoDetail: "CI Total + índices factoriales.",
+        interpreta: "Bandas de CI. Si los índices están muy dispersos entre sí, el CI Total pierde sentido y se usan índices alternativos ICG/ICC (enfoque Flanagan-Kaufman).",
+        tip: "Los 4 índices del WISC-IV: ICV · IRP · IMT · IVP (comprensión verbal, razonamiento perceptual, memoria de trabajo, velocidad).",
+        hueco: "Ficha completa en tu catálogo (edad, índices y regla de dispersión).", huecoKind: "ok"
+      },
+      {
+        id: "WAIS", sigla: "WAIS-IV", nombre: "Wechsler Adult Intelligence Scale", autor: "D. Wechsler", familia: "Familia Wechsler", type: "ci",
+        edadFrom: 16, edadTo: 90, edadLabel: "16 – 90 años (adultos)",
+        evalua: "La inteligencia adulta. Misma lógica y métrica que el WISC, pero con normas para adultos y adultos mayores.",
+        construyes: ["CI Total", "ICV — comprensión verbal", "IRP — razonamiento perceptual", "IMT — memoria de trabajo", "IVP — velocidad de procesamiento"],
+        aplicacion: ["Individual", "Heteroaplicada", "Verbal", "Manipulativa"],
+        resultadoLabel: "CI (media 100 · DE 15)", resultadoDetail: "CI Total + 4 índices.",
+        interpreta: "Bandas de CI idénticas a las del WISC. Sirve también como línea base en la evaluación de deterioro.",
+        tip: "WAIS = Adult. Misma métrica que WISC (100/15); cambia la población: 16 a 90 años.",
+        hueco: "Tu catálogo solo decía “misma familia que WISC” sin listar índices. Aquí van los 4: ICV · IRP · IMT · IVP.", huecoKind: "fill"
+      },
+      {
+        id: "Raven", sigla: "Raven", nombre: "Matrices Progresivas de Raven", autor: "J. C. Raven", familia: "No verbal · culture-fair", type: "percentile",
+        edadFrom: 4, edadTo: 90, edadLabel: "Amplia (varía según versión)",
+        evalua: "El razonamiento abstracto puro: completar una matriz visual con la pieza que sigue la lógica. Al no usar lenguaje, es “libre de cultura”.",
+        construyes: ["Factor g (razonamiento inductivo)", "Color (niños) · General/SPM · Superior/APM"],
+        aplicacion: ["Individual", "Colectiva", "No verbal", "Autoaplicable"],
+        resultadoLabel: "Percentil → grados I–V", resultadoDetail: "La puntuación directa se convierte a percentil y de ahí al grado.",
+        interpreta: "Se ubica el percentil y se traduce a un grado: I superior, II superior al término medio, III término medio, IV inferior, V deficiente.",
+        tip: "No verbal + culture-fair = tu mejor opción cuando el lenguaje estorba (otra lengua, sordera, afasia).",
+        hueco: "Faltaba la tabla de percentiles/bandas. Aquí están los 5 grados de Raven, listos para leer.", huecoKind: "fill"
+      },
+      {
+        id: "RIAS", sigla: "RIAS", nombre: "Reynolds Intellectual Assessment Scales", autor: "Reynolds & Kamphaus", familia: "Inteligencia breve", type: "ci",
+        edadFrom: 3, edadTo: 94, edadLabel: "3 – 94 años",
+        evalua: "Una estimación rápida de la inteligencia verbal y no verbal, con un índice de memoria breve. Pensada para tamizaje ágil.",
+        construyes: ["IIG — inteligencia general", "IIV — verbal", "IIN — no verbal", "IMC — memoria compuesta"],
+        aplicacion: ["Individual", "Heteroaplicada", "Verbal", "No verbal"],
+        resultadoLabel: "Índices tipo CI (media 100 · DE 15)", resultadoDetail: "Sus índices se leen igual que un CI Wechsler.",
+        interpreta: "Mismas bandas que un CI (100/15). El índice general (IIG) resume; verbal y no verbal marcan el perfil.",
+        tip: "RIAS = Wechsler exprés: mismo idioma 100/15, mucho más corto (~20–25 min).",
+        hueco: "Dudabas: “¿CI o índice propio?”. Resuelto: son índices en métrica CI (media 100, DE 15).", huecoKind: "fill"
+      },
+      {
+        id: "Shipley", sigla: "Shipley-2", nombre: "Shipley Institute of Living Scale-2", autor: "W. Shipley", familia: "Cribado de deterioro", type: "compare",
+        edadFrom: 7, edadTo: 89, edadLabel: "7 – 89 años",
+        evalua: "Un cribado breve que enfrenta lo que YA sabes (vocabulario) contra tu capacidad de razonar en caliente (abstracción). El contraste delata el deterioro.",
+        construyes: ["Vocabulario (cristalizada)", "Abstracción (fluida)", "Índice de deterioro / cociente conceptual"],
+        aplicacion: ["Individual", "Colectiva", "Autoaplicable", "Papel y lápiz"],
+        resultadoLabel: "Comparación entre subpruebas", resultadoDetail: "También genera puntuaciones estándar y un índice de deterioro.",
+        interpreta: "El vocabulario (cristalizada) suele conservarse; la abstracción (fluida) cae primero. Una brecha grande a favor del vocabulario sugiere posible deterioro.",
+        tip: "Cristalizada = lo aprendido, aguanta. Fluida = pensar al momento, se va primero.",
+        hueco: "No se detallaba la escala base. En realidad da puntuaciones estándar + un índice de deterioro.", huecoKind: "fill"
+      },
+      {
+        id: "Beta", sigla: "Beta-4", nombre: "Beta III / Beta-4", autor: "Kellogg & Morton", familia: "No verbal · grupal", type: "ci",
+        edadFrom: 16, edadTo: 99, edadLabel: "16 – 99+ años",
+        evalua: "Una medida NO verbal de inteligencia diseñada para aplicarse a muchas personas a la vez y en poco tiempo: clásica en selección masiva.",
+        construyes: ["CI no verbal", "Razonamiento perceptual y velocidad"],
+        aplicacion: ["Colectiva", "No verbal", "Papel y lápiz"],
+        resultadoLabel: "CI no verbal (media 100 · DE 15)", resultadoDetail: "Screening rápido y aplicable en grupo.",
+        interpreta: "Se lee con bandas de CI (100/15). Pensada más para cribado que para diagnóstico fino.",
+        tip: "Beta = el “no verbal grupal” por excelencia (selección laboral, contextos con baja escolaridad).",
+        hueco: "El tipo de puntaje no aparecía en ningún lado. Resuelto: es un CI no verbal (media 100, DE 15).", huecoKind: "fill"
+      }
+    ];
+  }
+
+  // ---- Build the computed view-model for one card (port of buildCard) ----
+  function buildCard(d, i) {
+    var value = sliders[d.id];
+    var c = Object.assign({}, d);
+    c.num = i + 1;
+    c.value = value;
+    c.examTip = EXAM_TIPS[d.id];
+    c.showAudit = SHOW_AUDIT;
+    c.edadFromPct = d.edadFrom / 95 * 100;
+    c.edadWidthPct = Math.min(100 - c.edadFromPct, (d.edadTo - d.edadFrom) / 95 * 100);
+    c.aplicacion = d.aplicacion.map(function (l) { return { label: l, bg: apBg(l) }; });
+
+    if (d.huecoKind === "ok") { c.huecoTag = "Ficha completa"; c.huecoBg = "#E7F2EA"; c.huecoBar = "var(--success)"; }
+    else { c.huecoTag = "Tu auditoría · resuelto"; c.huecoBg = "#FBF1DA"; c.huecoBar = "var(--warning)"; }
+
+    c.isCi = false; c.isPct = false; c.isCompare = false; c.hasMeter = false; c.showBell = false;
+
+    if (d.type === "ci") {
+      var min = 40, max = 160;
+      c.min = min; c.max = max; c.step = 1;
+      c.bands = ciBands();
+      c.anchors = [[70, "−2DE"], [85, "−1DE"], [100, "media"], [115, "+1DE"], [130, "+2DE"]].map(function (a) {
+        return { label: a[1], leftPct: (a[0] - min) / (max - min) * 100 };
+      });
+      c.markerPct = Math.max(0, Math.min(100, (value - min) / (max - min) * 100));
+      var b = c.bands.find(function (x) { return value >= x.from && value < x.to; }) || c.bands[c.bands.length - 1];
+      c.activeLabel = b.label; c.activeColor = b.color;
+      var z = (value - 100) / 15, pct = Math.round(cdf(z) * 100), T = Math.round(50 + 10 * z);
+      c.valueLabel = String(value);
+      c.derived = "Percentil ~" + pct + " · puntuación T ≈ " + T + " · z = " + z.toFixed(2);
+      c.isCi = true; c.hasMeter = true; c.showBell = SHOW_CURVE;
+    } else if (d.type === "percentile") {
+      var pmin = 0, pmax = 100;
+      c.min = pmin; c.max = pmax; c.step = 1;
+      c.bands = pctBands();
+      c.anchors = [5, 25, 50, 75, 95].map(function (v) { return { label: "Pc " + v, leftPct: v }; });
+      c.markerPct = value;
+      var pb = c.bands.find(function (x) { return value >= x.from && value < x.to; }) || c.bands[c.bands.length - 1];
+      c.activeLabel = pb.label; c.activeColor = pb.color;
+      c.valueLabel = "Pc " + value;
+      c.derived = "Supera aproximadamente al " + value + "% de su grupo normativo.";
+      c.isPct = true; c.hasMeter = true;
+    } else if (d.type === "compare") {
+      c.min = 0; c.max = 100; c.step = 1;
+      var vocab = 88, abstr = Math.max(22, 92 - value), brecha = Math.round(vocab - abstr);
+      c.vocabPct = vocab; c.abstrPct = abstr; c.brecha = brecha;
+      if (brecha >= 22) { c.brechaVerdict = "Brecha amplia → posible deterioro"; c.brechaColor = "var(--danger)"; }
+      else if (brecha >= 12) { c.brechaVerdict = "Brecha moderada → conviene vigilar"; c.brechaColor = "var(--warning)"; }
+      else { c.brechaVerdict = "Brecha pequeña → dentro de lo esperable"; c.brechaColor = "var(--success)"; }
+      c.valueLabel = "Brecha " + brecha + " pts";
+      c.isCompare = true;
+    }
+    return c;
+  }
+
+  // ---- Tiny HTML helpers ----
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (m) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m];
+    });
+  }
+
+  // ---- Result panel (meter / compare) — rebuilt live on slider input ----
+  function resultInner(c) {
+    var h = "";
+    h += '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;">' +
+           '<div style="font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:var(--periwinkle-700);">Resultado · ' + esc(c.resultadoLabel) + '</div>' +
+           '<div style="font-size:.84rem;color:var(--ink-500);">' + esc(c.resultadoDetail) + '</div>' +
+         '</div>';
+
+    if (c.hasMeter) {
+      h += '<div>';
+      if (c.showBell) {
+        h += '<div style="position:relative;height:58px;">' +
+               '<svg viewBox="0 0 300 90" preserveAspectRatio="none" style="width:100%;height:58px;display:block;">' +
+                 '<path d="M0 84 C 96 84, 118 12, 150 12 C 182 12, 204 84, 300 84" fill="var(--periwinkle-100)" stroke="var(--periwinkle-400)" stroke-width="2"></path>' +
+               '</svg>' +
+               '<div style="position:absolute;top:0;bottom:0;left:' + c.markerPct + '%;width:2px;background:var(--periwinkle-800);opacity:.8;"></div>' +
+             '</div>';
+      }
+      h += '<div style="position:relative;margin-top:8px;">' +
+             '<div style="display:flex;height:28px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--border-subtle);">';
+      c.bands.forEach(function (b) {
+        h += '<div style="flex:0 0 ' + b.widthPct + '%;background:' + b.color + ';display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:var(--ink-700);white-space:nowrap;overflow:hidden;">' + esc(b.short) + '</div>';
+      });
+      h += '</div>' +
+           '<div style="position:absolute;top:-7px;bottom:-7px;left:' + c.markerPct + '%;width:3px;background:var(--ink-900);border-radius:2px;"></div>' +
+           '<div style="position:absolute;top:-34px;left:' + c.markerPct + '%;transform:translateX(-50%);background:var(--ink-900);color:var(--white);padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:800;white-space:nowrap;">' + esc(c.valueLabel) + '</div>' +
+         '</div>';
+      h += '<div style="position:relative;height:16px;margin-top:8px;">';
+      c.anchors.forEach(function (a) {
+        h += '<span style="position:absolute;left:' + a.leftPct + '%;transform:translateX(-50%);font-size:.6rem;color:var(--ink-500);white-space:nowrap;">' + esc(a.label) + '</span>';
+      });
+      h += '</div>';
+      h += '<input type="range" class="kyn-range" min="' + c.min + '" max="' + c.max + '" step="' + c.step + '" value="' + c.value + '" data-id="' + c.id + '" style="margin-top:12px;">';
+      h += '<div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;">' +
+             '<span style="background:' + c.activeColor + ';color:var(--ink-900);font-weight:800;padding:5px 13px;border-radius:999px;font-size:.84rem;">' + esc(c.activeLabel) + '</span>' +
+             '<span style="color:var(--ink-700);font-size:.84rem;">' + esc(c.derived) + '</span>' +
+           '</div>';
+      h += '<div style="font-size:.72rem;color:var(--ink-500);margin-top:8px;">Mueve el deslizador para ver en qué banda cae cada puntuación. <em>(demostrativo)</em></div>';
+      h += '</div>';
+    }
+
+    if (c.isCompare) {
+      h += '<div style="display:grid;gap:14px;">' +
+             '<div>' +
+               '<div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:5px;"><span style="font-weight:700;">Vocabulario · inteligencia cristalizada</span><span style="color:var(--ink-500);">' + c.vocabPct + '</span></div>' +
+               '<div style="height:18px;border-radius:999px;background:var(--oat);overflow:hidden;"><div style="height:100%;width:' + c.vocabPct + '%;background:linear-gradient(90deg,var(--periwinkle-400),var(--periwinkle-600));"></div></div>' +
+             '</div>' +
+             '<div>' +
+               '<div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:5px;"><span style="font-weight:700;">Abstracción · inteligencia fluida</span><span style="color:var(--ink-500);">' + c.abstrPct + '</span></div>' +
+               '<div style="height:18px;border-radius:999px;background:var(--oat);overflow:hidden;"><div style="height:100%;width:' + c.abstrPct + '%;background:linear-gradient(90deg,var(--pastel-peach),var(--pop-magenta));"></div></div>' +
+             '</div>' +
+             '<input type="range" class="kyn-range" min="' + c.min + '" max="' + c.max + '" step="' + c.step + '" value="' + c.value + '" data-id="' + c.id + '">' +
+             '<div style="font-size:.72rem;color:var(--ink-500);margin-top:-4px;">Simula un mayor deterioro deslizando a la derecha → la abstracción cae y la brecha crece.</div>' +
+             '<div style="border-left:5px solid ' + c.brechaColor + ';background:var(--oat);border-radius:8px;padding:12px 14px;font-size:.9rem;color:var(--ink-900);"><strong>' + esc(c.valueLabel) + '</strong> — ' + esc(c.brechaVerdict) + '</div>' +
+           '</div>';
+    }
+    return h;
+  }
+
+  // ---- Full card markup ----
+  function cardMarkup(c) {
+    var construyes = c.construyes.map(function (k) {
+      return '<span style="font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--periwinkle-50);border:1px solid var(--periwinkle-100);color:var(--periwinkle-800);">' + esc(k) + '</span>';
+    }).join("");
+
+    var aplicacion = c.aplicacion.map(function (ap) {
+      return '<span style="font-size:.78rem;font-weight:700;padding:5px 11px;border-radius:8px;background:var(' + ap.bg + ');color:var(--ink-900);">' + esc(ap.label) + '</span>';
+    }).join("");
+
+    var audit = "";
+    if (c.showAudit) {
+      audit = '<div style="border-left:5px solid ' + c.huecoBar + ';background:' + c.huecoBg + ';border-radius:var(--radius-md,14px);padding:15px 16px;">' +
+                '<div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-700);margin-bottom:7px;">' + esc(c.huecoTag) + '</div>' +
+                '<p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-900);text-wrap:pretty;">' + esc(c.hueco) + '</p>' +
+              '</div>';
+    }
+
+    return '' +
+    '<article id="' + c.id + '" style="scroll-margin-top:72px;background:var(--white);border:1px solid var(--border-subtle);border-radius:var(--radius-lg,22px);box-shadow:var(--shadow-md,0 10px 30px rgba(85,98,164,.12));overflow:hidden;margin-bottom:34px;animation:fadeUp .5s var(--ease-out,ease) both;">' +
+
+      '<div style="display:flex;align-items:flex-start;gap:18px;padding:24px 26px;background:linear-gradient(180deg,var(--periwinkle-50),var(--white));border-bottom:1px solid var(--border-subtle);">' +
+        '<div style="flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--periwinkle-500);color:var(--white);font-weight:900;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm,0 2px 8px rgba(85,98,164,.2));">' + c.num + '</div>' +
+        '<div style="flex:1 1 auto;min-width:0;">' +
+          '<div style="font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:1.9rem;line-height:1;color:var(--ink-900);">' + esc(c.sigla) + '</div>' +
+          '<div style="font-size:.98rem;color:var(--ink-700);margin-top:4px;">' + esc(c.nombre) + '</div>' +
+        '</div>' +
+        '<div style="flex:0 0 auto;text-align:right;">' +
+          '<div style="display:inline-block;font-size:.74rem;font-weight:800;padding:5px 11px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">' + esc(c.familia) + '</div>' +
+          '<div style="font-size:.76rem;color:var(--ink-500);margin-top:6px;">' + esc(c.autor) + '</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="card-body" style="display:grid;grid-template-columns:1.25fr .95fr;gap:26px;padding:24px 26px;">' +
+        '<div>' +
+          '<div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:8px;">¿Qué evalúa?</div>' +
+          '<p style="font-size:1.08rem;line-height:1.55;color:var(--ink-900);margin:0 0 16px;text-wrap:pretty;">' + esc(c.evalua) + '</p>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;">' + construyes + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:8px;">Aplicación</div>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;">' + aplicacion + '</div>' +
+          '<div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:6px;">Población · edad</div>' +
+          '<div style="font-size:.9rem;color:var(--ink-700);margin-bottom:8px;">' + esc(c.edadLabel) + '</div>' +
+          '<div style="position:relative;height:14px;border-radius:999px;background:var(--oat);border:1px solid var(--border-on-oat);">' +
+            '<div style="position:absolute;top:-1px;bottom:-1px;left:' + c.edadFromPct + '%;width:' + c.edadWidthPct + '%;border-radius:999px;background:linear-gradient(90deg,var(--periwinkle-400),var(--periwinkle-600));"></div>' +
+          '</div>' +
+          '<div style="position:relative;height:16px;margin-top:4px;font-size:.62rem;color:var(--ink-500);">' +
+            '<span style="position:absolute;left:0%;">0</span>' +
+            '<span style="position:absolute;left:25%;transform:translateX(-50%);">~25</span>' +
+            '<span style="position:absolute;left:50%;transform:translateX(-50%);">~50</span>' +
+            '<span style="position:absolute;left:75%;transform:translateX(-50%);">~70</span>' +
+            '<span style="position:absolute;right:0%;">95 años</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="result" data-card="' + c.id + '" style="padding:22px 26px;border-top:1px solid var(--border-subtle);background:var(--periwinkle-50);">' + resultInner(c) + '</div>' +
+
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;padding:22px 26px 26px;">' +
+        '<div style="background:var(--periwinkle-50);border-radius:var(--radius-md,14px);padding:15px 16px;">' +
+          '<div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--periwinkle-700);margin-bottom:7px;">Cómo se lee</div>' +
+          '<p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-700);text-wrap:pretty;">' + esc(c.interpreta) + '</p>' +
+        '</div>' +
+        '<div style="background:#EAF4EE;border-radius:var(--radius-md,14px);padding:15px 16px;">' +
+          '<div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3B7C5B;margin-bottom:7px;">Clave para recordar</div>' +
+          '<p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-700);text-wrap:pretty;">' + esc(c.tip) + '</p>' +
+        '</div>' +
+        '<div style="border-left:5px solid var(--pop-magenta);background:var(--pop-magenta-soft);border-radius:var(--radius-md,14px);padding:15px 16px;">' +
+          '<div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#B03B78;margin-bottom:7px;">Tip de examen</div>' +
+          '<p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-900);text-wrap:pretty;">' + esc(c.examTip) + '</p>' +
+        '</div>' +
+        audit +
+      '</div>' +
+
+    '</article>';
+  }
+
+  var DEFS = defs();
+
+  // ---- Initial render ----
+  var navEl = document.getElementById("jumpNav");
+  DEFS.forEach(function (d) {
+    var a = document.createElement("a");
+    a.href = "#" + d.id;
+    a.textContent = d.sigla;
+    a.style.cssText = "font-size:.82rem;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--white);border:1px solid var(--border-subtle);color:var(--periwinkle-700);";
+    navEl.appendChild(a);
+  });
+
+  var cardsEl = document.getElementById("cards");
+  cardsEl.innerHTML = DEFS.map(function (d, i) { return cardMarkup(buildCard(d, i)); }).join("");
+
+  // ---- Live interactivity: rebuild only the affected card's result panel ----
+  var indexById = {};
+  DEFS.forEach(function (d, i) { indexById[d.id] = i; });
+
+  cardsEl.addEventListener("input", function (e) {
+    var input = e.target;
+    if (!input.matches || !input.matches('input[type=range][data-id]')) return;
+    var id = input.dataset.id;
+    sliders[id] = Number(input.value);
+    var i = indexById[id];
+    var panel = cardsEl.querySelector('.result[data-card="' + id + '"]');
+    if (panel) panel.innerHTML = resultInner(buildCard(DEFS[i], i));
+  });
+})();
+</script>
+</body>
+</html>
