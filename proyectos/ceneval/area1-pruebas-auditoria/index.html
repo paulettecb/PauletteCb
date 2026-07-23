@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Una prueba, una vista · Área 1</title>
+<meta name="description" content="Vista visual completa de pruebas psicológicas del Área 1 CENEVAL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#5562A4;--ink:#1C1E2E;--muted:#626477;--paper:#FBFAF7;--white:#fff;--mint:#C6E4D3;--mint2:#EAF4EE;--butter:#FBF1DA;--sky:#EAF0FB;--blush:#F8DDE8;--lilac:#EEE5FA;--line:#DFDDE8;--shadow:0 22px 70px rgba(28,30,46,.18)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:'Hanken Grotesk',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--bg) 0 560px,#F7F3EC 560px)}a{color:inherit}.top{max-width:1180px;margin:auto;padding:20px 18px 0;display:flex;gap:10px;flex-wrap:wrap}.top a{text-decoration:none;background:rgba(251,250,247,.92);color:var(--bg);font-weight:900;border-radius:999px;padding:10px 14px;box-shadow:0 10px 28px rgba(28,30,46,.14)}.hero{max-width:1180px;margin:auto;min-height:520px;padding:48px 18px 70px;display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;color:var(--paper)}.eyebrow{display:inline-flex;border:1px solid rgba(251,250,247,.45);border-radius:999px;padding:8px 14px;font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;background:rgba(251,250,247,.12)}h1{font-family:Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(56px,9vw,112px);line-height:.88;margin:22px 0 16px}.lead{font-size:20px;max-width:640px;line-height:1.55;margin:0;color:#F4F0E8}.mock{background:var(--paper);border-radius:34px;padding:22px;box-shadow:var(--shadow)}.mock-title{height:88px;border-radius:22px;background:#fff;margin-bottom:22px}.mock-bar{height:92px;border-radius:22px;background:#A9B4E0;position:relative;overflow:hidden}.mock-bar:before{content:'';position:absolute;inset:0 38% 0 0;background:var(--mint)}.mock-bar:after{content:'';position:absolute;left:61%;top:-12px;bottom:-12px;width:8px;border-radius:8px;background:var(--ink)}.mock-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.mock-cell{height:64px;border-radius:18px;background:var(--mint2)}.mock-cell:nth-child(2){background:var(--butter)}.wrap{max-width:1180px;margin:-52px auto 80px;padding:0 18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 12px 34px rgba(47,54,88,.1)}.stat strong{display:block;font-size:34px;color:var(--bg);line-height:1}.stat span{font-weight:900;color:var(--muted)}.toolbar{position:sticky;top:0;z-index:2;display:flex;gap:10px;flex-wrap:wrap;background:rgba(247,243,236,.92);backdrop-filter:blur(10px);padding:14px 0}input,button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:999px;padding:12px 16px;font-weight:900;color:var(--ink)}input{flex:1;min-width:240px}button.active{background:var(--ink);color:#fff}.toc{display:flex;gap:10px;overflow:auto;padding:4px 0 18px}.toc a{white-space:nowrap;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;font-weight:900;color:var(--bg)}.family{margin:24px 0}.family-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:12px}.family-head span{font-weight:900;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--bg)}.family-head h2{margin:2px 0 0;font-size:32px}.family-head b{background:#fff;border-radius:999px;padding:8px 12px;white-space:nowrap}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}.test-card{background:#fff;border:1px solid var(--line);border-top:8px solid var(--mint);border-radius:24px;padding:18px;box-shadow:0 12px 36px rgba(47,54,88,.08)}.test-card.butter{border-top-color:#E8C85A}.test-card.sky{border-top-color:#A9B4E0}.test-card.blush{border-top-color:#E85DA0}.test-card.lilac{border-top-color:#B798E6}.card-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:900}.badge{border-radius:999px;padding:5px 9px;font-size:12px;font-weight:900}.badge.done{background:var(--mint);color:#28523c}.badge.warn{background:var(--butter);color:#735600}.test-card h3{font-size:25px;line-height:1.05;margin:14px 0}dl{display:grid;gap:10px;margin:0}dl div{border-top:1px solid var(--line);padding-top:9px}dt{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--bg);font-weight:900}dd{margin:3px 0 0;color:#3D3B46;font-weight:700}.audit{background:#F7F3EC;border-radius:16px;padding:12px;margin:14px 0 0;color:#4A4955;font-weight:800}.hidden,.family.hidden{display:none}footer{text-align:center;color:var(--muted);padding:36px}@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:auto}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="top"><a href="../index.html">← Base CENEVAL</a><a href="../area1-instrumentos-indice.html">Instrumentos</a><a href="../libro-area1-diagnostico.html">Mini libro Área 1</a></nav>
+<header class="hero"><div><span class="eyebrow">Área 1 · vista real integrada</span><h1>una prueba,<br>una vista</h1><p class="lead">Catálogo visual completo: cada prueba en una tarjeta con edad, aplicación, qué evalúa, resultado, interpretación y auditoría de lo que todavía requiere manual o baremo.</p></div><div class="mock" aria-hidden="true"><div class="mock-title"></div><div class="mock-bar"></div><div class="mock-grid"><div class="mock-cell"></div><div class="mock-cell"></div></div></div></header>
+<main class="wrap">
+<section class="stats"><div class="stat"><strong>43</strong><span>pruebas</span></div><div class="stat"><strong>10</strong><span>familias</span></div><div class="stat"><strong>27</strong><span>completadas</span></div><div class="stat"><strong>16</strong><span>requieren manual ⚠️</span></div></section>
+<section class="toolbar"><input id="q" type="search" placeholder="Buscar prueba, aplicación, resultado…"><button class="active" data-filter="all">Todas</button><button data-filter="ok">Completas</button><button data-filter="pending">Pendiente manual ⚠️</button></section>
+<nav class="toc"><a href="#familia-1">Inteligencia</a><a href="#familia-2">Neuropsicológicas / funciones ejecutivas / visomotoras</a><a href="#familia-3">Proyectivas</a><a href="#familia-4">Ansiedad</a><a href="#familia-5">Depresión</a><a href="#familia-6">Personalidad objetiva</a><a href="#familia-7">Calidad de vida / discapacidad</a><a href="#familia-8">Funcionalidad (adulto mayor)</a><a href="#familia-9">Desarrollo</a><a href="#familia-10">Vocacional</a></nav>
+<section class="family" id="familia-1">
+  <div class="family-head"><span>familia 1</span><h2>Inteligencia</h2><b>7 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="WPPSI-III/IV 2:6–7:7 Inteligencia preescolar CI (100/15) Bandas de CI (70/85/100/115/130) Completado: ficha de inteligencia preescolar; individual; CI media 100/DE 15; interpretar con bandas Wechsler y manual vigente. Individual · heteroaplicada">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>WPPSI-III/IV</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>2:6–7:7</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · heteroaplicada</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Inteligencia preescolar</dd></div>
+    <div><dt>Resultado</dt><dd>CI (100/15)</dd></div>
+    <div><dt>Interpretación</dt><dd>Bandas de CI (70/85/100/115/130)</dd></div>
+  </dl>
+  <p class="audit">Completado: ficha de inteligencia preescolar; individual; CI media 100/DE 15; interpretar con bandas Wechsler y manual vigente.</p>
+</article><article class="test-card butter" data-status="ok" data-search="WISC-IV/V 6–16 Inteligencia + 4 índices (ICV, IRP, IMT, IVP) CI (100/15) Bandas de CI · ICG/ICC (Flanagan-Kaufman) si hay dispersión Completa con los datos disponibles del catálogo. Individual · heteroaplicada">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge done">listo</span></div>
+  <h3>WISC-IV/V</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>6–16</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · heteroaplicada</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Inteligencia + 4 índices (ICV, IRP, IMT, IVP)</dd></div>
+    <div><dt>Resultado</dt><dd>CI (100/15)</dd></div>
+    <div><dt>Interpretación</dt><dd>Bandas de CI · ICG/ICC (Flanagan-Kaufman) si hay dispersión</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card sky" data-status="ok" data-search="WAIS-IV 16–90 Inteligencia adulta CI (100/15) Bandas de CI Completado: índices ICV, IRP, IMT e IVP + CIT; usar bandas de CI y cautela si hay dispersión. Individual · heteroaplicada">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge done">listo</span></div>
+  <h3>WAIS-IV</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>16–90</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · heteroaplicada</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Inteligencia adulta</dd></div>
+    <div><dt>Resultado</dt><dd>CI (100/15)</dd></div>
+    <div><dt>Interpretación</dt><dd>Bandas de CI</dd></div>
+  </dl>
+  <p class="audit">Completado: índices ICV, IRP, IMT e IVP + CIT; usar bandas de CI y cautela si hay dispersión.</p>
+</article><article class="test-card blush" data-status="pending" data-search="Raven Amplia Razonamiento abstracto no verbal, culture-fair Percentil Percentiles/rangos por baremo y versión Completado parcial: percentiles/rangos normativos dependen de versión y baremo; usar manual local para bandas. Individual/colectiva · no verbal">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Raven</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual/colectiva · no verbal</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Razonamiento abstracto no verbal, culture-fair</dd></div>
+    <div><dt>Resultado</dt><dd>Percentil</dd></div>
+    <div><dt>Interpretación</dt><dd>Percentiles/rangos por baremo y versión</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: percentiles/rangos normativos dependen de versión y baremo; usar manual local para bandas.</p>
+</article><article class="test-card lilac" data-status="pending" data-search="RIAS 3–94 CI verbal/no verbal + índice compuesto + memoria (breve) Índices estándar (100/15) + subpruebas T (50/10) Bandas tipo CI/índices estándar + percentiles Completado: índices estándar media 100/DE 15; subpruebas T media 50/DE 10; percentiles/IC según manual. Individual · breve">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>RIAS</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>3–94</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · breve</dd></div>
+    <div><dt>Qué evalúa</dt><dd>CI verbal/no verbal + índice compuesto + memoria (breve)</dd></div>
+    <div><dt>Resultado</dt><dd>Índices estándar (100/15) + subpruebas T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>Bandas tipo CI/índices estándar + percentiles</dd></div>
+  </dl>
+  <p class="audit">Completado: índices estándar media 100/DE 15; subpruebas T media 50/DE 10; percentiles/IC según manual.</p>
+</article><article class="test-card mint" data-status="pending" data-search="Shipley-2 7–89 Cribado breve: vocabulario vs. abstracción Comparación entre subpruebas Diferencia grande = posible deterioro Completado parcial: usar puntuaciones normativas del manual; contraste vocabulario-abstracción orienta deterioro, no diagnostica solo. Individual/colectiva · cribado">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Shipley-2</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>7–89</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual/colectiva · cribado</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Cribado breve: vocabulario vs. abstracción</dd></div>
+    <div><dt>Resultado</dt><dd>Comparación entre subpruebas</dd></div>
+    <div><dt>Interpretación</dt><dd>Diferencia grande = posible deterioro</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: usar puntuaciones normativas del manual; contraste vocabulario-abstracción orienta deterioro, no diagnostica solo.</p>
+</article><article class="test-card butter" data-status="pending" data-search="Beta III / Beta-4 16–99+ Inteligencia no verbal, grupal NIQ/CI no verbal estándar (100/15; según versión) Bandas de CI/NIQ por manual Completado parcial: NIQ/CI no verbal estandarizado; confirmar versión Beta-III vs Beta-4 en manual disponible. Individual/colectiva · no verbal">
+  <div class="card-top"><span class="tag">Inteligencia</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Beta III / Beta-4</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>16–99+</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual/colectiva · no verbal</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Inteligencia no verbal, grupal</dd></div>
+    <div><dt>Resultado</dt><dd>NIQ/CI no verbal estándar (100/15; según versión)</dd></div>
+    <div><dt>Interpretación</dt><dd>Bandas de CI/NIQ por manual</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: NIQ/CI no verbal estandarizado; confirmar versión Beta-III vs Beta-4 en manual disponible.</p>
+</article></div>
+</section>
+<section class="family" id="familia-2">
+  <div class="family-head"><span>familia 2</span><h2>Neuropsicológicas / funciones ejecutivas / visomotoras</h2><b>10 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="ok" data-search="MMSE Adultos mayores Deterioro cognitivo global Directo /30 ≥27 normal · 24-26 dudoso · 19-23 leve · 10-18 moderado · &lt;10 grave Completa con los datos disponibles del catálogo. Individual · cribado">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>MMSE</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos mayores</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · cribado</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Deterioro cognitivo global</dd></div>
+    <div><dt>Resultado</dt><dd>Directo /30</dd></div>
+    <div><dt>Interpretación</dt><dd>≥27 normal · 24-26 dudoso · 19-23 leve · 10-18 moderado · &lt;10 grave</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card butter" data-status="ok" data-search="MoCA Adultos mayores Cribado cognitivo/demencia Directo /30 ≥26 suele usarse como cribado normal; ajustar por escolaridad/contexto Completado: directo /30; corte de cribado usado frecuentemente ≈26, ajustando por escolaridad/contexto. Individual · cribado">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>MoCA</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos mayores</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · cribado</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Cribado cognitivo/demencia</dd></div>
+    <div><dt>Resultado</dt><dd>Directo /30</dd></div>
+    <div><dt>Interpretación</dt><dd>≥26 suele usarse como cribado normal; ajustar por escolaridad/contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: directo /30; corte de cribado usado frecuentemente ≈26, ajustando por escolaridad/contexto.</p>
+</article><article class="test-card sky" data-status="pending" data-search="ENFEN 6–12 Funciones ejecutivas (fluidez, senderos, anillas, interferencia) Perfil por tarea Comparar perfil por edad; bajos señalan debilidad ejecutiva Completado parcial: perfil por tarea con baremos por edad; confirmar métrica exacta en manual TEA. Individual · ejecución">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>ENFEN</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>6–12</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · ejecución</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Funciones ejecutivas (fluidez, senderos, anillas, interferencia)</dd></div>
+    <div><dt>Resultado</dt><dd>Perfil por tarea</dd></div>
+    <div><dt>Interpretación</dt><dd>Comparar perfil por edad; bajos señalan debilidad ejecutiva</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: perfil por tarea con baremos por edad; confirmar métrica exacta en manual TEA.</p>
+</article><article class="test-card blush" data-status="ok" data-search="Rey-Osterrieth Amplia Memoria visual + organización perceptiva Directo: copia/recuerdo (36 pts clásico) Normas por edad; baja copia = organización/percepción; bajo recuerdo = memoria visual Completado: copia y recuerdo con sistema clásico de 36 puntos; interpretación por normas de edad. Individual · copia/recuerdo">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>Rey-Osterrieth</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · copia/recuerdo</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Memoria visual + organización perceptiva</dd></div>
+    <div><dt>Resultado</dt><dd>Directo: copia/recuerdo (36 pts clásico)</dd></div>
+    <div><dt>Interpretación</dt><dd>Normas por edad; baja copia = organización/percepción; bajo recuerdo = memoria visual</dd></div>
+  </dl>
+  <p class="audit">Completado: copia y recuerdo con sistema clásico de 36 puntos; interpretación por normas de edad.</p>
+</article><article class="test-card lilac" data-status="pending" data-search="Stroop Amplia Atención selectiva / inhibición Directo + índice de interferencia Efecto Stroop = enlentecimiento Completado parcial: palabras, colores, palabra-color e interferencia; normas y cortes dependen de versión. Individual · cronometrada">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Stroop</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · cronometrada</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Atención selectiva / inhibición</dd></div>
+    <div><dt>Resultado</dt><dd>Directo + índice de interferencia</dd></div>
+    <div><dt>Interpretación</dt><dd>Efecto Stroop = enlentecimiento</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: palabras, colores, palabra-color e interferencia; normas y cortes dependen de versión.</p>
+</article><article class="test-card mint" data-status="ok" data-search="Beery-Buktenica (VMI) 2–100 Visomotor; aísla percepción vs. motricidad Estándar (edad equivalente) Comparar estándar/percentil por edad; contrastar VMI vs percepción/motricidad Completado: puntuación estándar, percentil y edad equivalente; interpretar con normas por edad. Individual/colectiva · copia">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>Beery-Buktenica (VMI)</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>2–100</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual/colectiva · copia</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Visomotor; aísla percepción vs. motricidad</dd></div>
+    <div><dt>Resultado</dt><dd>Estándar (edad equivalente)</dd></div>
+    <div><dt>Interpretación</dt><dd>Comparar estándar/percentil por edad; contrastar VMI vs percepción/motricidad</dd></div>
+  </dl>
+  <p class="audit">Completado: puntuación estándar, percentil y edad equivalente; interpretar con normas por edad.</p>
+</article><article class="test-card butter" data-status="ok" data-search="Bender-Koppitz 5–11:11 Madurez visomotora + indicadores emocionales Sistema Koppitz (conteo de errores) Más errores sugieren inmadurez visomotora; indicadores emocionales no son diagnóstico aislado Completado: sistema Koppitz por conteo de errores e indicadores emocionales; rango infantil. Individual · copia">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>Bender-Koppitz</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>5–11:11</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · copia</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Madurez visomotora + indicadores emocionales</dd></div>
+    <div><dt>Resultado</dt><dd>Sistema Koppitz (conteo de errores)</dd></div>
+    <div><dt>Interpretación</dt><dd>Más errores sugieren inmadurez visomotora; indicadores emocionales no son diagnóstico aislado</dd></div>
+  </dl>
+  <p class="audit">Completado: sistema Koppitz por conteo de errores e indicadores emocionales; rango infantil.</p>
+</article><article class="test-card sky" data-status="ok" data-search="DTVP-2 (Frostig) 4–10:11 Percepción visual pre-lectura/escritura 3 cocientes: PVG, PMR, IVM PMR normal + IVM bajo = problema motor, no perceptual Completado: cocientes PVG/PMR/IVM y subpruebas visoperceptivas/visomotoras; normas por edad. Individual · visoperceptiva">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>DTVP-2 (Frostig)</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>4–10:11</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · visoperceptiva</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Percepción visual pre-lectura/escritura</dd></div>
+    <div><dt>Resultado</dt><dd>3 cocientes: PVG, PMR, IVM</dd></div>
+    <div><dt>Interpretación</dt><dd>PMR normal + IVM bajo = problema motor, no perceptual</dd></div>
+  </dl>
+  <p class="audit">Completado: cocientes PVG/PMR/IVM y subpruebas visoperceptivas/visomotoras; normas por edad.</p>
+</article><article class="test-card blush" data-status="pending" data-search="BANETA 7–11:11 Procesamiento fonológico, lectoescritura, cálculo, signos neurológicos blandos Perfil por área Comparar fortalezas/debilidades por área y baremos escolares Completado parcial: perfil por áreas de lectoescritura/cálculo/procesamiento; revisar baremos específicos. Individual · batería escolar">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>BANETA</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>7–11:11</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · batería escolar</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Procesamiento fonológico, lectoescritura, cálculo, signos neurológicos blandos</dd></div>
+    <div><dt>Resultado</dt><dd>Perfil por área</dd></div>
+    <div><dt>Interpretación</dt><dd>Comparar fortalezas/debilidades por área y baremos escolares</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: perfil por áreas de lectoescritura/cálculo/procesamiento; revisar baremos específicos.</p>
+</article><article class="test-card lilac" data-status="ok" data-search="ENI-2 5–16 Perfil neuropsicológico completo (11 procesos) Perfil por proceso (percentil) Percentiles bajos señalan debilidad; interpretar patrón intra/interindividual Completado: perfil por proceso con percentiles/puntuaciones normativas; interpretación intra/interindividual. Individual · batería neuro">
+  <div class="card-top"><span class="tag">Neuropsicológicas / funciones ejecutivas / visomotoras</span><span class="badge done">listo</span></div>
+  <h3>ENI-2</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>5–16</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · batería neuro</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Perfil neuropsicológico completo (11 procesos)</dd></div>
+    <div><dt>Resultado</dt><dd>Perfil por proceso (percentil)</dd></div>
+    <div><dt>Interpretación</dt><dd>Percentiles bajos señalan debilidad; interpretar patrón intra/interindividual</dd></div>
+  </dl>
+  <p class="audit">Completado: perfil por proceso con percentiles/puntuaciones normativas; interpretación intra/interindividual.</p>
+</article></div>
+</section>
+<section class="family" id="familia-3">
+  <div class="family-head"><span>familia 3</span><h2>Proyectivas</h2><b>7 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="Rorschach Amplia Personalidad/estructura psíquica vía manchas Cualitativo (sistema Exner opcional) Qué ve / cómo lo ve / dónde Completado parcial: edad amplia; sistema de interpretación depende de Exner/R-PAS o escuela usada. Individual · proyectiva">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Rorschach</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · proyectiva</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Personalidad/estructura psíquica vía manchas</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo (sistema Exner opcional)</dd></div>
+    <div><dt>Interpretación</dt><dd>Qué ve / cómo lo ve / dónde</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: edad amplia; sistema de interpretación depende de Exner/R-PAS o escuela usada.</p>
+</article><article class="test-card butter" data-status="ok" data-search="TAT Adultos Conflictos y motivaciones vía relato Cualitativo Temas recurrentes Completado: Murray y Morgan; adultos/adolescentes; cualitativo por temas, necesidades, presiones y desenlaces. Individual · narrativa">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>TAT</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · narrativa</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Conflictos y motivaciones vía relato</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo</dd></div>
+    <div><dt>Interpretación</dt><dd>Temas recurrentes</dd></div>
+  </dl>
+  <p class="audit">Completado: Murray y Morgan; adultos/adolescentes; cualitativo por temas, necesidades, presiones y desenlaces.</p>
+</article><article class="test-card sky" data-status="ok" data-search="HTP Amplia Vínculos familiares y autoimagen vía dibujo Cualitativo simbólico Casa=familia · Árbol=raíces · Persona=autoimagen Completa con los datos disponibles del catálogo. Individual · gráfica">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>HTP</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · gráfica</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Vínculos familiares y autoimagen vía dibujo</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo simbólico</dd></div>
+    <div><dt>Interpretación</dt><dd>Casa=familia · Árbol=raíces · Persona=autoimagen</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card blush" data-status="ok" data-search="CAT-A Niños Igual que TAT, con animales Cualitativo Interpretación cualitativa integrada con entrevista y contexto Completado: Bellak; infantil; cualitativo narrativo con animales. Individual · narrativa infantil">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>CAT-A</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Niños</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · narrativa infantil</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Igual que TAT, con animales</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretación cualitativa integrada con entrevista y contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: Bellak; infantil; cualitativo narrativo con animales.</p>
+</article><article class="test-card lilac" data-status="ok" data-search="Test de la familia (Corman) Niños Percepción de la dinámica familiar Cualitativo Interpretación cualitativa integrada con entrevista y contexto Completado: Louis Corman; infantil; interpretación cualitativa del dibujo familiar. Individual · gráfica infantil">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>Test de la familia (Corman)</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Niños</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · gráfica infantil</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Percepción de la dinámica familiar</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretación cualitativa integrada con entrevista y contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: Louis Corman; infantil; interpretación cualitativa del dibujo familiar.</p>
+</article><article class="test-card mint" data-status="ok" data-search="Machover / DFH Amplia Autoimagen/autoconcepto Cualitativo Interpretación cualitativa integrada con entrevista y contexto Completado: figura humana; lectura cualitativa de autoimagen/autoconcepto; autoría base Machover. Individual · gráfica">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>Machover / DFH</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · gráfica</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Autoimagen/autoconcepto</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretación cualitativa integrada con entrevista y contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: figura humana; lectura cualitativa de autoimagen/autoconcepto; autoría base Machover.</p>
+</article><article class="test-card butter" data-status="ok" data-search="Bender (uso proyectivo) Niños/amplia Maduración neurológica + pistas de personalidad Cualitativo/Koppitz en niños Interpretación cualitativa integrada con entrevista y contexto Completado: separar uso visomotor/Koppitz infantil del uso proyectivo-emocional cualitativo. Individual · gráfica/cualitativa">
+  <div class="card-top"><span class="tag">Proyectivas</span><span class="badge done">listo</span></div>
+  <h3>Bender (uso proyectivo)</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Niños/amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · gráfica/cualitativa</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Maduración neurológica + pistas de personalidad</dd></div>
+    <div><dt>Resultado</dt><dd>Cualitativo/Koppitz en niños</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretación cualitativa integrada con entrevista y contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: separar uso visomotor/Koppitz infantil del uso proyectivo-emocional cualitativo.</p>
+</article></div>
+</section>
+<section class="family" id="familia-4">
+  <div class="family-head"><span>familia 4</span><h2>Ansiedad</h2><b>4 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="ok" data-search="CMASR-2 Niños/adol Ansiedad manifiesta T (50/10) Interpretar con baremos de la versión aplicada Completa con los datos disponibles del catálogo. Autorreporte">
+  <div class="card-top"><span class="tag">Ansiedad</span><span class="badge done">listo</span></div>
+  <h3>CMASR-2</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Niños/adol</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Ansiedad manifiesta</dd></div>
+    <div><dt>Resultado</dt><dd>T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretar con baremos de la versión aplicada</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card butter" data-status="pending" data-search="STAI Adultos Ansiedad estado vs. rasgo Percentil Interpretar con baremos de la versión aplicada Completado parcial: percentiles/decatipos según baremo; no usar bandas clínicas universales. Autorreporte">
+  <div class="card-top"><span class="tag">Ansiedad</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>STAI</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Ansiedad estado vs. rasgo</dd></div>
+    <div><dt>Resultado</dt><dd>Percentil</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretar con baremos de la versión aplicada</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: percentiles/decatipos según baremo; no usar bandas clínicas universales.</p>
+</article><article class="test-card sky" data-status="ok" data-search="BAI Adultos Ansiedad (21 ítems) Directo /63 0-7 mínima · 8-15 leve · 16-25 moderada · 26-63 grave Completa con los datos disponibles del catálogo. Autorreporte">
+  <div class="card-top"><span class="tag">Ansiedad</span><span class="badge done">listo</span></div>
+  <h3>BAI</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Ansiedad (21 ítems)</dd></div>
+    <div><dt>Resultado</dt><dd>Directo /63</dd></div>
+    <div><dt>Interpretación</dt><dd>0-7 mínima · 8-15 leve · 16-25 moderada · 26-63 grave</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card blush" data-status="ok" data-search="GAD-7 Adultos Ansiedad generalizada (7 ítems) Directo /21 0-4 mínima · 5-9 leve · 10-14 moderada · 15-21 grave Completa con los datos disponibles del catálogo. Autorreporte breve">
+  <div class="card-top"><span class="tag">Ansiedad</span><span class="badge done">listo</span></div>
+  <h3>GAD-7</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte breve</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Ansiedad generalizada (7 ítems)</dd></div>
+    <div><dt>Resultado</dt><dd>Directo /21</dd></div>
+    <div><dt>Interpretación</dt><dd>0-4 mínima · 5-9 leve · 10-14 moderada · 15-21 grave</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article></div>
+</section>
+<section class="family" id="familia-5">
+  <div class="family-head"><span>familia 5</span><h2>Depresión</h2><b>3 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="CDI Niños/adol Depresión infantil T (50/10) Interpretar con baremos de la versión aplicada Completado parcial: T media 50/DE 10; cortes de severidad dependen de versión/baremo. Autorreporte infantil">
+  <div class="card-top"><span class="tag">Depresión</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>CDI</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Niños/adol</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte infantil</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Depresión infantil</dd></div>
+    <div><dt>Resultado</dt><dd>T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>Interpretar con baremos de la versión aplicada</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: T media 50/DE 10; cortes de severidad dependen de versión/baremo.</p>
+</article><article class="test-card butter" data-status="ok" data-search="BDI / Beck Adultos Depresión Directo (0-63) 0-13 mínima · 14-19 leve · 20-28 moderada · 29-63 severa Completado: BDI-II suele leerse 0-13 mínima, 14-19 leve, 20-28 moderada, 29-63 severa. Autorreporte">
+  <div class="card-top"><span class="tag">Depresión</span><span class="badge done">listo</span></div>
+  <h3>BDI / Beck</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Depresión</dd></div>
+    <div><dt>Resultado</dt><dd>Directo (0-63)</dd></div>
+    <div><dt>Interpretación</dt><dd>0-13 mínima · 14-19 leve · 20-28 moderada · 29-63 severa</dd></div>
+  </dl>
+  <p class="audit">Completado: BDI-II suele leerse 0-13 mínima, 14-19 leve, 20-28 moderada, 29-63 severa.</p>
+</article><article class="test-card sky" data-status="pending" data-search="Hamilton (HAM-D) Adultos Depresión (heteroaplicada) Tendencia Leve/moderada/severa Completado parcial: rangos dependen de versión 17/21 ítems; usar manual del formato aplicado. Heteroaplicada · entrevista">
+  <div class="card-top"><span class="tag">Depresión</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Hamilton (HAM-D)</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Heteroaplicada · entrevista</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Depresión (heteroaplicada)</dd></div>
+    <div><dt>Resultado</dt><dd>Tendencia</dd></div>
+    <div><dt>Interpretación</dt><dd>Leve/moderada/severa</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: rangos dependen de versión 17/21 ítems; usar manual del formato aplicado.</p>
+</article></div>
+</section>
+<section class="family" id="familia-6">
+  <div class="family-head"><span>familia 6</span><h2>Personalidad objetiva</h2><b>4 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="MMPI-2 Adultos Personalidad + validez (567 ítems) T (50/10) Elevado = por arriba del estándar Completado parcial: T≥65 suele considerarse elevación clínica; escalas de validez/clínicas requieren manual. Autorreporte objetivo">
+  <div class="card-top"><span class="tag">Personalidad objetiva</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>MMPI-2</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte objetivo</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Personalidad + validez (567 ítems)</dd></div>
+    <div><dt>Resultado</dt><dd>T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>Elevado = por arriba del estándar</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: T≥65 suele considerarse elevación clínica; escalas de validez/clínicas requieren manual.</p>
+</article><article class="test-card butter" data-status="pending" data-search="MMPI-2-RF Adultos Igual, más corto (338 ítems) T (50/10) Elevado/normal/minimización Completado parcial: T≥65/70 según escala; requiere manual RF para cortes por escala. Autorreporte objetivo">
+  <div class="card-top"><span class="tag">Personalidad objetiva</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>MMPI-2-RF</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte objetivo</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Igual, más corto (338 ítems)</dd></div>
+    <div><dt>Resultado</dt><dd>T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>Elevado/normal/minimización</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: T≥65/70 según escala; requiere manual RF para cortes por escala.</p>
+</article><article class="test-card sky" data-status="ok" data-search="MMPI-A Adolescentes Igual que MMPI-2 T (50/10) — Completa con los datos disponibles del catálogo. Autorreporte adolescente">
+  <div class="card-top"><span class="tag">Personalidad objetiva</span><span class="badge done">listo</span></div>
+  <h3>MMPI-A</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adolescentes</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte adolescente</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Igual que MMPI-2</dd></div>
+    <div><dt>Resultado</dt><dd>T (50/10)</dd></div>
+    <div><dt>Interpretación</dt><dd>—</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card blush" data-status="ok" data-search="16PF-5 Adol-adultos Personalidad normal (no clínica) Decatipo (1-10, media 5.5) 1-3 bajo · 4-7 promedio · 8-10 alto Completa con los datos disponibles del catálogo. Autorreporte objetivo">
+  <div class="card-top"><span class="tag">Personalidad objetiva</span><span class="badge done">listo</span></div>
+  <h3>16PF-5</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adol-adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte objetivo</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Personalidad normal (no clínica)</dd></div>
+    <div><dt>Resultado</dt><dd>Decatipo (1-10, media 5.5)</dd></div>
+    <div><dt>Interpretación</dt><dd>1-3 bajo · 4-7 promedio · 8-10 alto</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article></div>
+</section>
+<section class="family" id="familia-7">
+  <div class="family-head"><span>familia 7</span><h2>Calidad de vida / discapacidad</h2><b>2 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="SF-36 Amplia Calidad de vida subjetiva (8 dominios) 0-100 Más alto = mejor calidad de vida; comparar dominios con normas/grupo Completado parcial: 0-100 por dominio; no hay bandas universales, comparar con normas/grupo. Autorreporte">
+  <div class="card-top"><span class="tag">Calidad de vida / discapacidad</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>SF-36</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Calidad de vida subjetiva (8 dominios)</dd></div>
+    <div><dt>Resultado</dt><dd>0-100</dd></div>
+    <div><dt>Interpretación</dt><dd>Más alto = mejor calidad de vida; comparar dominios con normas/grupo</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: 0-100 por dominio; no hay bandas universales, comparar con normas/grupo.</p>
+</article><article class="test-card butter" data-status="ok" data-search="WHODAS 2.0 Amplia Discapacidad/funcionamiento (6 dominios) 0-144 (36 ítems) Entre más alto, más discapacidad; sin tabla oficial de cortes Completa con los datos disponibles del catálogo. Autorreporte/entrevista/proxy">
+  <div class="card-top"><span class="tag">Calidad de vida / discapacidad</span><span class="badge done">listo</span></div>
+  <h3>WHODAS 2.0</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Amplia</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte/entrevista/proxy</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Discapacidad/funcionamiento (6 dominios)</dd></div>
+    <div><dt>Resultado</dt><dd>0-144 (36 ítems)</dd></div>
+    <div><dt>Interpretación</dt><dd>Entre más alto, más discapacidad; sin tabla oficial de cortes</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article></div>
+</section>
+<section class="family" id="familia-8">
+  <div class="family-head"><span>familia 8</span><h2>Funcionalidad (adulto mayor)</h2><b>3 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="ok" data-search="Katz Adultos mayores AVD básicas Independiente/asistido/dependiente A = independiente; G = dependiente; patrones intermedios describen ayuda requerida Completa con los datos disponibles del catálogo. Heteroaplicada/observacional">
+  <div class="card-top"><span class="tag">Funcionalidad (adulto mayor)</span><span class="badge done">listo</span></div>
+  <h3>Katz</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos mayores</dd></div>
+    <div><dt>Aplicación</dt><dd>Heteroaplicada/observacional</dd></div>
+    <div><dt>Qué evalúa</dt><dd>AVD básicas</dd></div>
+    <div><dt>Resultado</dt><dd>Independiente/asistido/dependiente</dd></div>
+    <div><dt>Interpretación</dt><dd>A = independiente; G = dependiente; patrones intermedios describen ayuda requerida</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card butter" data-status="ok" data-search="Barthel Adultos mayores AVD básicas Directo /100 &gt;90 independiente · 60-90 leve · 40-55 moderada · 20-35 severa · &lt;20 total Completa con los datos disponibles del catálogo. Heteroaplicada/observacional">
+  <div class="card-top"><span class="tag">Funcionalidad (adulto mayor)</span><span class="badge done">listo</span></div>
+  <h3>Barthel</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos mayores</dd></div>
+    <div><dt>Aplicación</dt><dd>Heteroaplicada/observacional</dd></div>
+    <div><dt>Qué evalúa</dt><dd>AVD básicas</dd></div>
+    <div><dt>Resultado</dt><dd>Directo /100</dd></div>
+    <div><dt>Interpretación</dt><dd>&gt;90 independiente · 60-90 leve · 40-55 moderada · 20-35 severa · &lt;20 total</dd></div>
+  </dl>
+  <p class="audit">Completa con los datos disponibles del catálogo.</p>
+</article><article class="test-card sky" data-status="ok" data-search="Lawton-Brody Adultos mayores AVD instrumentales 0-8 habitual + perfil por actividad Más bajo = mayor dependencia instrumental; interpretar por sexo/contexto Completado: puntaje sumario 0-8 habitual; interpretar por sexo/contexto y pérdida de AVD instrumentales. Heteroaplicada/autorreporte">
+  <div class="card-top"><span class="tag">Funcionalidad (adulto mayor)</span><span class="badge done">listo</span></div>
+  <h3>Lawton-Brody</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adultos mayores</dd></div>
+    <div><dt>Aplicación</dt><dd>Heteroaplicada/autorreporte</dd></div>
+    <div><dt>Qué evalúa</dt><dd>AVD instrumentales</dd></div>
+    <div><dt>Resultado</dt><dd>0-8 habitual + perfil por actividad</dd></div>
+    <div><dt>Interpretación</dt><dd>Más bajo = mayor dependencia instrumental; interpretar por sexo/contexto</dd></div>
+  </dl>
+  <p class="audit">Completado: puntaje sumario 0-8 habitual; interpretar por sexo/contexto y pérdida de AVD instrumentales.</p>
+</article></div>
+</section>
+<section class="family" id="familia-9">
+  <div class="family-head"><span>familia 9</span><h2>Desarrollo</h2><b>1 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="ok" data-search="Escalas de Gesell Infantil Desarrollo por área (motora, adaptativa, lenguaje, personal-social) CD + perfil por área CD = edad de desarrollo / edad cronológica × 100; comparar áreas Completado: Cociente de Desarrollo (CD) = edad de desarrollo / edad cronológica × 100. Individual · observacional">
+  <div class="card-top"><span class="tag">Desarrollo</span><span class="badge done">listo</span></div>
+  <h3>Escalas de Gesell</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Infantil</dd></div>
+    <div><dt>Aplicación</dt><dd>Individual · observacional</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Desarrollo por área (motora, adaptativa, lenguaje, personal-social)</dd></div>
+    <div><dt>Resultado</dt><dd>CD + perfil por área</dd></div>
+    <div><dt>Interpretación</dt><dd>CD = edad de desarrollo / edad cronológica × 100; comparar áreas</dd></div>
+  </dl>
+  <p class="audit">Completado: Cociente de Desarrollo (CD) = edad de desarrollo / edad cronológica × 100.</p>
+</article></div>
+</section>
+<section class="family" id="familia-10">
+  <div class="family-head"><span>familia 10</span><h2>Vocacional</h2><b>2 pruebas</b></div>
+  <div class="cards"><article class="test-card mint" data-status="pending" data-search="Kuder Adol-adultos Intereses vocacionales (tríadas) Perfil en 10 escalas + Verificación Leer perfil por escalas más altas y consistencia/verificación Completado parcial: perfil/ranking de intereses; revisar si baremo reporta percentiles por escala. Autorreporte vocacional">
+  <div class="card-top"><span class="tag">Vocacional</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>Kuder</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Adol-adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Autorreporte vocacional</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Intereses vocacionales (tríadas)</dd></div>
+    <div><dt>Resultado</dt><dd>Perfil en 10 escalas + Verificación</dd></div>
+    <div><dt>Interpretación</dt><dd>Leer perfil por escalas más altas y consistencia/verificación</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: perfil/ranking de intereses; revisar si baremo reporta percentiles por escala.</p>
+</article><article class="test-card butter" data-status="pending" data-search="BAT-7 Secundaria-adultos Aptitudes (verbal, espacial, numérica…) Perfil por aptitud, 3 niveles de dificultad Comparar aptitudes por baremos/percentiles y patrón de fortalezas Completado parcial: aptitudes con puntuaciones normativas/percentiles según nivel y baremo. Colectiva/individual · aptitudes">
+  <div class="card-top"><span class="tag">Vocacional</span><span class="badge warn">⚠️ manual</span></div>
+  <h3>BAT-7</h3>
+  <dl>
+    <div><dt>Edad / población</dt><dd>Secundaria-adultos</dd></div>
+    <div><dt>Aplicación</dt><dd>Colectiva/individual · aptitudes</dd></div>
+    <div><dt>Qué evalúa</dt><dd>Aptitudes (verbal, espacial, numérica…)</dd></div>
+    <div><dt>Resultado</dt><dd>Perfil por aptitud, 3 niveles de dificultad</dd></div>
+    <div><dt>Interpretación</dt><dd>Comparar aptitudes por baremos/percentiles y patrón de fortalezas</dd></div>
+  </dl>
+  <p class="audit">Completado parcial: aptitudes con puntuaciones normativas/percentiles según nivel y baremo.</p>
+</article></div>
+</section>
+</main><footer>una prueba, una vista · Área 1 CENEVAL</footer>
+<script>
+const q=document.querySelector('#q');const buttons=[...document.querySelectorAll('[data-filter]')];let mode='all';function apply(){const needle=q.value.trim().toLowerCase();document.querySelectorAll('.test-card').forEach(card=>{const match=card.dataset.search.toLowerCase().includes(needle);const modeOk=mode==='all'||card.dataset.status===mode;card.classList.toggle('hidden',!(match&&modeOk));});document.querySelectorAll('.family').forEach(section=>section.classList.toggle('hidden',!section.querySelector('.test-card:not(.hidden)')));}buttons.forEach(btn=>btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));btn.classList.add('active');mode=btn.dataset.filter;apply();}));q.addEventListener('input',apply);
+</script>
+</body>
+</html>
