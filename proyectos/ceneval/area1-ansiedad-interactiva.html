@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Área 1 · Depresión — una prueba, una vista</title>
-<meta name="description" content="Área 1 · Depresión: catálogo interactivo (CDI, BDI/Beck, Hamilton HAM-D) con los cortes de severidad de cada escala. CENEVAL EGEL Plus PSI.">
+<title>Área 1 · Ansiedad — una prueba, una vista</title>
+<meta name="description" content="Área 1 · Ansiedad: catálogo interactivo (CMASR-2, STAI, BAI, GAD-7) con T, percentil y cortes de severidad. CENEVAL EGEL Plus PSI.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -36,14 +36,14 @@
   <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; padding-top:14px;">
     <a href="index.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">← Base CENEVAL</a>
     <a href="area1-instrumentos-indice.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Instrumentos Área 1</a>
-    <a href="area1-ansiedad-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">‹ Ansiedad</a>
-    <a href="area1-personalidad-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Personalidad ›</a>
+    <a href="area1-proyectivas-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">‹ Proyectivas</a>
+    <a href="area1-depresion-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Depresión ›</a>
   </div>
   <header style="padding:34px 0 8px;">
     <div style="font-size:.72rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--periwinkle-600);">Área 1 · Diagnóstico · Catálogo visual de pruebas</div>
-    <h1 style="font-weight:900; text-transform:uppercase; letter-spacing:-.02em; font-size:clamp(2.2rem,5.6vw,3.4rem); line-height:1.0; margin:.18em 0 .1em;">Depresión</h1>
+    <h1 style="font-weight:900; text-transform:uppercase; letter-spacing:-.02em; font-size:clamp(2.2rem,5.6vw,3.4rem); line-height:1.0; margin:.18em 0 .1em;">Ansiedad</h1>
     <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--pop-magenta); margin-bottom:14px;">una prueba, una vista</div>
-    <p style="max-width:62ch; font-size:1.06rem; line-height:1.6; color:var(--ink-700); margin:0 0 22px; text-wrap:pretty;">Tres escalas, tres puntajes directos con <strong>cortes de severidad</strong>. Lo que te faltaba en tu auditoría eran justo esas bandas numéricas: aquí están, con el detalle de cuál es autorreporte y cuál la aplica el clínico.</p>
+    <p style="max-width:62ch; font-size:1.06rem; line-height:1.6; color:var(--ink-700); margin:0 0 22px; text-wrap:pretty;">Cuatro escalas de autorreporte, tres tipos de puntaje: T en niños (CMASR-2), percentil en el STAI y directos con cortes en BAI y GAD-7. El detalle fino: el STAI <strong>no</strong> trae bandas de severidad como BAI/GAD-7 — se lee por percentil.</p>
     <div style="display:flex; flex-wrap:wrap; gap:10px 22px; padding:14px 18px; background:var(--oat); border-radius:var(--radius-md); border:1px solid var(--border-on-oat);">
       <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:34px;height:12px;border-radius:999px;background:linear-gradient(90deg,#C6E4D3,#F3E3AE,#E7B7B7);"></span> Bandas = severidad</div>
       <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:3px;height:16px;background:var(--ink-900);border-radius:2px;"></span> Marca = puntuación</div>
@@ -56,61 +56,74 @@
   </nav>
   <main id="cards"></main>
   <footer style="text-align:center; color:var(--ink-500); font-size:.82rem; padding-top:26px; line-height:1.6;">
-    Categoría 5 de 10 · <strong style="color:var(--ink-700);">Depresión</strong> (3 pruebas).<br>
-    Anterior: proyectivas · Siguen: personalidad · calidad de vida · funcionalidad · desarrollo · vocacional.
+    Categoría 4 de 10 · <strong style="color:var(--ink-700);">Ansiedad</strong> (4 pruebas).<br>
+    Anterior: proyectivas · Siguen: depresión · personalidad · calidad de vida · funcionalidad · desarrollo · vocacional.
   </footer>
 </div>
 <script>
 (function () {
   "use strict";
   var SHOW_AUDIT = true, SHOW_CURVE = true;
-  var sliders = { CDI: 22, BDI: 24, HAMD: 15 };
+  var sliders = { CMASR: 52, STAI: 60, BAI: 18, GAD7: 8 };
   function cdf(z){var t=1/(1+0.2316419*Math.abs(z));var d=0.3989423*Math.exp(-z*z/2);var p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));var r=z>0?1-p:p;return Math.min(0.999,Math.max(0.001,r));}
-  var apBgMap = { "Individual":"--pastel-sky","Colectiva":"--pastel-butter","Autoaplicable":"--pastel-mint","Autorreporte":"--pastel-mint","Heteroaplicada":"--pastel-lilac","Niños":"--pastel-blush","Adultos":"--periwinkle-100" };
+  var apBgMap = { "Individual":"--pastel-sky","Colectiva":"--pastel-butter","Autoaplicable":"--pastel-mint","Autorreporte":"--pastel-mint","Niños":"--pastel-blush","Adultos":"--periwinkle-100","Papel y lápiz":"--oat" };
   function apBg(l){return apBgMap[l]||"--periwinkle-50";}
   var EXAM_TIPS = {
-    CDI: "Gancho: “depresión + niños/adolescentes + autorreporte” → CDI (Kovacs). Corte más citado ≥19 (27 ítems); en CDI-2 por perfil, T≥65.",
-    BDI: "El MÁS citado en depresión adulta. Directo 0–63 con 4 bandas Beck. Si dan un número y piden severidad, casi siempre es BDI-II.",
-    HAMD: "Distintivo: NO es autorreporte, la aplica el clínico (heteroaplicada). Versión de 17 ítems (0–52) es la más citada."
+    CMASR: "Gancho: “ansiedad + niños/adolescentes + escala T” → CMASR-2 (la R de Revisada). Igual que CDI/WISC: piensa población infantil.",
+    STAI: "Distintivo: separa ESTADO (ahora) de RASGO (cómo eres). Ojo: a diferencia de BAI/GAD-7, NO tiene banda de severidad — se lee por percentil.",
+    BAI: "Gancho: “ansiedad adulto + 21 ítems + /63”. Cortes: 0–7 mínima · 8–15 leve · 16–25 moderada · 26–63 grave.",
+    GAD7: "Gancho: “cribado breve de ansiedad + 7 ítems + /21”. Cortes: 0–4 · 5–9 · 10–14 · 15–21 (mínima/leve/moderada/grave)."
   };
   function defs(){
     return [
-      { id:"CDI", sigla:"CDI", nombre:"Inventario de Depresión Infantil (Children's Depression Inventory)", autor:"M. Kovacs", familia:"Depresión (niños)",
-        edadFrom:7, edadTo:17, edadLabel:"7 – 17 años (niños y adolescentes)",
-        evalua:"Síntomas depresivos en población infantil y adolescente por autorreporte: estado de ánimo, autoestima, problemas interpersonales y de conducta.",
-        construyes:["Estado de ánimo negativo","Autoestima","Problemas interpersonales","Anhedonia"],
-        aplicacion:["Individual","Autorreporte","Niños"],
-        resultadoLabel:"Directo (o T por perfil)", resultadoDetail:"27 ítems (0–2 c/u) → 0–54.",
-        interpreta:"El corte más citado es directo ≥19 (CDI original, Kovacs). El CDI-2 reporta por perfil en puntuaciones T, donde T≥65 marca elevación clínica.",
-        tip:"CDI = la C de Children. Igual que WISC y CMASR-2: la C te dice “niños”.",
-        hueco:"Tu catálogo no tenía puntos de corte de severidad. Resuelto: ≥19 directo (o T≥65 en CDI-2).", huecoKind:"fill",
-        meter:{ kind:"band", min:0, max:54, step:1, suf:" pts",
-          bands:[[0,19,"No clínico (<19)","No clínico","#C6E4D3"],[19,54.01,"Elevado (≥19)","Elevado","#E7B7B7"]],
-          anchors:[[19,"corte 19"]], info:"Corte ≥19 (CDI 27 ítems, Kovacs); en el CDI-2 por perfil, T≥65." } },
-      { id:"BDI", sigla:"BDI / Beck", nombre:"Inventario de Depresión de Beck (BDI-II)", autor:"A. T. Beck, 1996", familia:"Depresión (adultos)",
-        edadFrom:13, edadTo:80, edadLabel:"Adolescentes y adultos",
-        evalua:"Intensidad de los síntomas depresivos por autorreporte en las últimas dos semanas. Es el instrumento más citado de depresión adulta.",
-        construyes:["Síntomas afectivos","Síntomas cognitivos","Síntomas somáticos/vegetativos"],
-        aplicacion:["Individual","Autorreporte","Adultos"],
+      { id:"CMASR", sigla:"CMASR-2", nombre:"Escala de Ansiedad Manifiesta en Niños, Revisada (2ª ed.)", autor:"Reynolds & Richmond", familia:"Ansiedad (niños)",
+        edadFrom:6, edadTo:19, edadLabel:"6 – 19 años (niños y adolescentes)",
+        evalua:"Ansiedad manifiesta en población infantil y adolescente por autorreporte: ansiedad fisiológica, inquietud/hipersensibilidad y preocupaciones sociales.",
+        construyes:["Ansiedad fisiológica","Inquietud / hipersensibilidad","Preocupaciones sociales","Mentira (validez)"],
+        aplicacion:["Individual","Colectiva","Autorreporte","Niños"],
+        resultadoLabel:"T (media 50 · DE 10)", resultadoDetail:"Puntuación T por escala.",
+        interpreta:"Se lee en T (50/10). Valores altos indican más ansiedad; T≥60 marca elevación y T≥65 suele considerarse clínicamente significativo.",
+        tip:"CMASR-2 = ansiedad en niños, en escala T. La R es de Revisada.",
+        hueco:"Ficha completa en tu catálogo (población y métrica T).", huecoKind:"ok",
+        meter:{ kind:"band", min:20, max:80, step:1, pre:"T ", showBell:true, dyn:"t",
+          bands:[[20,40,"Bajo (T<40)","Bajo","#CFE0F2"],[40,60,"Promedio (T 40–59)","Promedio","#C6E4D3"],[60,80.01,"Elevado (T≥60)","Elevado","#E7B7B7"]],
+          anchors:[[40,"−1DE"],[50,"media"],[60,"+1DE"]] } },
+      { id:"STAI", sigla:"STAI", nombre:"Inventario de Ansiedad Estado-Rasgo", autor:"C. Spielberger", familia:"Ansiedad (adultos)",
+        edadFrom:16, edadTo:80, edadLabel:"Adolescentes y adultos",
+        evalua:"Distingue la ansiedad como ESTADO (cómo te sientes ahora, transitoria) de la ansiedad como RASGO (tu tendencia estable a ponerte ansioso).",
+        construyes:["Ansiedad estado (A/E)","Ansiedad rasgo (A/R)"],
+        aplicacion:["Individual","Colectiva","Autorreporte","Adultos"],
+        resultadoLabel:"Percentil (por grupo normativo)", resultadoDetail:"Sin banda universal de severidad.",
+        interpreta:"A diferencia de BAI/GAD-7, no tiene una tabla de cortes oficial única: se interpreta por percentil contra el grupo normativo (trabajadores, estudiantes, pacientes), no por una banda fija.",
+        tip:"STAI = Estado (ahora) vs. Rasgo (siempre). Se lee por percentil, no por corte de severidad.",
+        hueco:"Tu auditoría marcaba que no tiene bandas de severidad (a diferencia de BAI/GAD-7). Aclarado: se lee por percentil.", huecoKind:"fill",
+        meter:{ kind:"plain", min:0, max:100, step:1, pre:"P ",
+          anchors:[[25,"P25"],[50,"P50"],[75,"P75"],[100,"alto"]],
+          derive:function(v){return "Percentil P"+v+" contra su grupo normativo; no hay banda universal de severidad.";} } },
+      { id:"BAI", sigla:"BAI", nombre:"Inventario de Ansiedad de Beck", autor:"A. T. Beck", familia:"Ansiedad (adultos)",
+        edadFrom:17, edadTo:80, edadLabel:"Adultos",
+        evalua:"Intensidad de los síntomas de ansiedad (sobre todo somáticos) por autorreporte, en 21 ítems. Diseñado para separarse bien de la depresión.",
+        construyes:["Síntomas somáticos","Síntomas subjetivos","21 ítems (0–3)"],
+        aplicacion:["Individual","Autorreporte","Adultos","Papel y lápiz"],
         resultadoLabel:"Directo /63", resultadoDetail:"21 ítems (0–3 c/u).",
-        interpreta:"Bandas oficiales (Beck, 1996): 0–13 mínima · 14–19 leve · 20–28 moderada · 29–63 grave.",
-        tip:"Beck manda en depresión adulta. Cuatro bandas: 13 · 19 · 28 son los cortes clave.",
-        hueco:"Al catálogo le faltaba la tabla completa de cortes del BDI-II. Aquí están las 4 bandas.", huecoKind:"fill",
+        interpreta:"Puntos de corte: 0–7 mínima · 8–15 leve · 16–25 moderada · 26–63 grave.",
+        tip:"BAI = ansiedad adulto, /63, cortes 7 · 15 · 25. Ojo: es el de ANSIEDAD, no el BDI (depresión).",
+        hueco:"Ficha completa (cortes de severidad claros).", huecoKind:"ok",
         meter:{ kind:"band", min:0, max:63, step:1, suf:"/63",
-          bands:[[0,14,"Mínima (0–13)","Mínima","#C6E4D3"],[14,20,"Leve (14–19)","Leve","#F3E3AE"],[20,29,"Moderada (20–28)","Moderada","#F0CDA6"],[29,63.01,"Grave (29–63)","Grave","#E7B7B7"]],
-          anchors:[[13,"13"],[19,"19"],[28,"28"]], info:"BDI-II, 21 ítems, 0–63 (Beck, 1996)." } },
-      { id:"HAMD", sigla:"Hamilton", nombre:"Escala de Hamilton para la Depresión (HAM-D)", autor:"M. Hamilton", familia:"Depresión (heteroaplicada)",
-        edadFrom:16, edadTo:85, edadLabel:"Adultos",
-        evalua:"Gravedad de la depresión evaluada por el clínico en entrevista (no es autorreporte). Existe también versión para ansiedad (HAM-A).",
-        construyes:["Ánimo depresivo","Culpa e ideación","Insomnio","Síntomas somáticos"],
-        aplicacion:["Individual","Heteroaplicada","Adultos"],
-        resultadoLabel:"Directo /52 (17 ítems)", resultadoDetail:"La aplica el clínico, no el paciente.",
-        interpreta:"Versión de 17 ítems (0–52): 0–7 normal · 8–13 leve · 14–18 moderada · 19–22 grave · ≥23 muy grave. Las versiones de 21 y 24 ítems tienen otros máximos.",
-        tip:"Hamilton = la aplica el clínico (heteroaplicada). Si dice “el evaluador puntúa”, es Hamilton, no Beck.",
-        hueco:"Faltaban los rangos numéricos exactos. Resuelto para la versión de 17 ítems.", huecoKind:"fill",
-        meter:{ kind:"band", min:0, max:52, step:1, suf:"/52",
-          bands:[[0,8,"Normal (0–7)","Normal","#C6E4D3"],[8,14,"Leve (8–13)","Leve","#F3E3AE"],[14,19,"Moderada (14–18)","Moderada","#F0CDA6"],[19,23,"Grave (19–22)","Grave","#E7B7B7"],[23,52.01,"Muy grave (≥23)","Muy grave","#D98F8F"]],
-          anchors:[[7,"7"],[13,"13"],[18,"18"],[22,"22"]], info:"Versión de 17 ítems (la más citada, 0–52)." } }
+          bands:[[0,8,"Mínima (0–7)","Mínima","#C6E4D3"],[8,16,"Leve (8–15)","Leve","#F3E3AE"],[16,26,"Moderada (16–25)","Moderada","#F0CDA6"],[26,63.01,"Grave (26–63)","Grave","#E7B7B7"]],
+          anchors:[[7,"7"],[15,"15"],[25,"25"]], info:"BAI, 21 ítems, 0–63." } },
+      { id:"GAD7", sigla:"GAD-7", nombre:"Generalized Anxiety Disorder-7", autor:"Spitzer et al., 2006", familia:"Ansiedad (cribado)",
+        edadFrom:16, edadTo:80, edadLabel:"Adultos",
+        evalua:"Cribado breve de ansiedad generalizada por autorreporte en solo 7 ítems: rápido para tamizaje en atención primaria.",
+        construyes:["Preocupación","Tensión / inquietud","7 ítems (0–3)"],
+        aplicacion:["Individual","Autorreporte","Adultos"],
+        resultadoLabel:"Directo /21", resultadoDetail:"7 ítems (0–3 c/u).",
+        interpreta:"Puntos de corte: 0–4 mínima · 5–9 leve · 10–14 moderada · 15–21 grave. Un puntaje ≥10 suele ser el umbral de derivación.",
+        tip:"GAD-7 = cribado exprés (7 ítems, /21). Cortes en 5 · 10 · 15. ≥10 = derivar.",
+        hueco:"Ficha completa (cortes claros).", huecoKind:"ok",
+        meter:{ kind:"band", min:0, max:21, step:1, suf:"/21",
+          bands:[[0,5,"Mínima (0–4)","Mínima","#C6E4D3"],[5,10,"Leve (5–9)","Leve","#F3E3AE"],[10,15,"Moderada (10–14)","Moderada","#F0CDA6"],[15,21.01,"Grave (15–21)","Grave","#E7B7B7"]],
+          anchors:[[4,"4"],[9,"9"],[14,"14"]], info:"GAD-7, 7 ítems, 0–21." } }
     ];
   }
   function esc(s){return String(s).replace(/[&<>"']/g,function(m){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];});}
@@ -136,7 +149,7 @@
       if(m.dyn==="ci"||m.dyn==="t"){var mean=m.dyn==="ci"?100:50,sd=m.dyn==="ci"?15:10;var z=(value-mean)/sd,pct=Math.round(cdf(z)*100);mv.derived="Percentil ~"+pct+" · z = "+z.toFixed(2);}
       else if(typeof m.derive==="function"){mv.derived=m.derive(value);} else {mv.derived=m.info||"";}
       c.mv=mv;
-    } else if(m&&m.kind==="qualitative"){ c.mv={kind:"qualitative",note:m.note}; }
+    }
     return c;
   }
   function resultInner(c){
