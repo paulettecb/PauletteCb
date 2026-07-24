@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clasificación de hipótesis estadísticas — Área 3 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Lámina de repaso: el zoológico de hipótesis (Hi, Ho, Ha y estadísticas) según Sampieri, cuándo se formulan por alcance, y la diferencia correlacional vs. causal (VI/VD). Área 3 · Investigación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<style>
+  @font-face { font-family:'Friendship'; src:url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype'); font-weight:500; font-display:swap; }
+  @font-face { font-family:'Farmhouse'; src:url('../KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype'); font-weight:400; font-display:swap; }
+  :root {
+    --periwinkle-50:#F0F2FB; --periwinkle-100:#E2E6F5; --periwinkle-200:#C9D0ED; --periwinkle-300:#AEB8E2; --periwinkle-400:#9BA6DA; --periwinkle-500:#8795D2; --periwinkle-600:#6B7AC1; --periwinkle-700:#5562A4; --periwinkle-800:#434D80; --periwinkle-900:#2F3658;
+    --white:#FFFFFF; --paper:#FBFAF7; --oat:#F4F0E8; --sand:#E9E3D7; --ink-900:#2A2933; --ink-700:#4A4955; --ink-500:#75737F; --ink-300:#A8A6B0; --ink-100:#E4E2E6; --border-subtle:#E4E2E6;
+    --pop-magenta:#E85DA0; --pop-magenta-soft:#F7C9DE; --pastel-blush:#F6D2DD; --pastel-peach:#F8DCC9; --pastel-butter:#F6EBC4; --pastel-mint:#CFE8DA; --pastel-sky:#CFE0F2; --pastel-lilac:#E2D6F0;
+    --success:#4FA47A; --warning:#D9A441; --danger:#D9534F; --plum:#6A4FA0;
+    --radius-md:16px; --radius-lg:24px; --radius-pill:999px; --shadow-sm:0 2px 8px rgba(47,54,88,.07); --shadow-md:0 8px 24px rgba(47,54,88,.09);
+    --font-display:'Friendship','Comic Sans MS',cursive; --font-accent:'Farmhouse','Georgia',serif; --font-sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink-900); font-family:var(--font-sans); line-height:1.6; }
+  a { color:var(--periwinkle-700); }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 24px 80px; }
+  .eyebrow { font-size:.72rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--periwinkle-600); }
+  h1.title { font-family:var(--font-display); font-weight:500; font-size:clamp(2.6rem,7vw,4rem); line-height:1.02; color:var(--periwinkle-700); margin:.2em 0 .05em; }
+  .subtitle { font-family:var(--font-accent); font-size:1.4rem; color:var(--pop-magenta); margin-bottom:14px; }
+  .lead { max-width:64ch; font-size:1.06rem; color:var(--ink-700); text-wrap:pretty; }
+  h2.sec { font-family:var(--font-sans); font-weight:900; text-transform:uppercase; letter-spacing:.02em; font-size:1.35rem; color:var(--ink-900); margin:44px 0 4px; }
+  h2.sec .kick { display:block; font-family:var(--font-accent); font-weight:400; text-transform:none; letter-spacing:0; font-size:1rem; color:var(--plum); }
+  .card { background:var(--white); border:1px solid var(--border-subtle,#E4E2E6); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); }
+  .chip { display:inline-block; font-size:.8rem; font-weight:600; padding:5px 12px; border-radius:999px; }
+  .tip { border-left:5px solid var(--pop-magenta); background:var(--pop-magenta-soft); border-radius:var(--radius-md); padding:14px 16px; }
+  .esencial { border-left:5px solid var(--warning); background:#FBF1DA; border-radius:var(--radius-md); padding:16px 18px; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; background:var(--white); }
+  th,td { padding:11px 14px; text-align:left; border-top:1px solid var(--ink-100); }
+  thead th { background:var(--periwinkle-50); color:var(--periwinkle-800); border-top:none; }
+  @media print { .no-print { display:none !important; } body { background:#fff; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; padding-top:14px;">
+    <a href="index.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);text-decoration:none;">← Base CENEVAL</a>
+    <a href="libro-area3-investigacion.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);text-decoration:none;">Mini libro Área 3</a>
+    <a href="scribe-que-prueba-estadistica.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);text-decoration:none;">¿Qué prueba estadística? ›</a>
+  </div>
+
+  <header style="padding:30px 0 4px;">
+    <div class="eyebrow">Área 3 · Investigación · Estadística</div>
+    <h1 class="title">clasificación de hipótesis</h1>
+    <div class="subtitle">el zoológico</div>
+    <p class="lead">La <strong>hipótesis</strong> es una “explicación tentativa del fenómeno investigado”: la <strong>guía del estudio</strong>. Se deriva de la teoría y es una respuesta provisional a la pregunta de investigación (del griego <em>hypotithenai</em>, “suponer”). Aquí, sus cuatro familias, cuándo se formulan y el detalle que separa correlación de causa.</p>
+  </header>
+
+  <h2 class="sec">¿Lleva hipótesis?<span class="kick">depende del alcance — esta tabla cae muchísimo</span></h2>
+  <div class="card" style="overflow-x:auto; margin-top:12px;">
+    <table>
+      <thead><tr><th>Alcance</th><th>¿Lleva hipótesis?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Exploratorio</strong></td><td><span class="chip" style="background:#FBE0DF;color:#9B2E62;">No se formulan</span></td></tr>
+        <tr><td><strong>Descriptivo</strong></td><td>Solo cuando se <strong>pronostica</strong> un hecho o dato</td></tr>
+        <tr><td><strong>Correlacional</strong></td><td>Hipótesis <strong>correlacionales</strong></td></tr>
+        <tr><td><strong>Explicativo</strong></td><td>Hipótesis <strong>causales</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.95rem; color:var(--ink-700); margin-top:10px;">Los estudios <strong>cualitativos</strong>, por lo regular, <strong>no formulan hipótesis antes</strong> de recolectar datos: las van induciendo durante el proceso.</p>
+
+  <h2 class="sec">Las cuatro familias<span class="kick">de investigación · nula · alternativa · estadística</span></h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px;">
+
+    <div class="card" style="border-top:6px solid var(--periwinkle-500); padding:18px 18px 20px;">
+      <div style="font-weight:900; font-size:1.15rem; color:var(--periwinkle-800);">Hi · de investigación</div>
+      <p style="margin:8px 0 10px; font-size:.94rem; color:var(--ink-700);">Lo que el investigador espera encontrar. Cuatro tipos:</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="chip" style="background:var(--pastel-sky);color:#2b4a70;">Descriptivas (valor pronosticado)</span>
+        <span class="chip" style="background:var(--pastel-sky);color:#2b4a70;">Correlacionales</span>
+        <span class="chip" style="background:var(--pastel-sky);color:#2b4a70;">De diferencia de grupos</span>
+        <span class="chip" style="background:var(--pastel-sky);color:#2b4a70;">Causales</span>
+      </div>
+    </div>
+
+    <div class="card" style="border-top:6px solid var(--ink-500); padding:18px 18px 20px;">
+      <div style="font-weight:900; font-size:1.15rem; color:var(--ink-900);">Ho · nula</div>
+      <p style="margin:8px 0 10px; font-size:.94rem; color:var(--ink-700);"><strong>Niega o refuta</strong> la relación entre variables — el reverso exacto de la Hi, con su misma tipología.</p>
+      <p style="margin:0; font-size:.9rem; color:var(--ink-700);">Concepto de <strong>Fisher (1925)</strong>. En estadística dice que el patrón en los datos se debe a la <strong>casualidad</strong>.</p>
+    </div>
+
+    <div class="card" style="border-top:6px solid var(--plum); padding:18px 18px 20px;">
+      <div style="font-weight:900; font-size:1.15rem; color:var(--plum);">Ha · alternativas</div>
+      <p style="margin:8px 0 10px; font-size:.94rem; color:var(--ink-700);">Posibilidades “alternas”, distintas de la Hi y de la Ho. Solo se formulan cuando de verdad hay otras opciones.</p>
+      <div style="font-size:.88rem; color:var(--ink-700); background:var(--oat); border-radius:12px; padding:10px 12px;">“La silla es roja” (Hi) · “no es roja” (Ho) · <strong>“es azul” (Ha)</strong>.</div>
+    </div>
+
+    <div class="card" style="border-top:6px solid var(--success); padding:18px 18px 20px;">
+      <div style="font-weight:900; font-size:1.15rem; color:#2F6B4F;">Estadísticas</div>
+      <p style="margin:8px 0 10px; font-size:.94rem; color:var(--ink-700);">Las anteriores <strong>traducidas a símbolos</strong> para poder contrastarlas. Tres formas:</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="chip" style="background:var(--pastel-mint);color:#2F6B4F;">De estimación</span>
+        <span class="chip" style="background:var(--pastel-mint);color:#2F6B4F;">De correlación</span>
+        <span class="chip" style="background:var(--pastel-mint);color:#2F6B4F;">De diferencia de medias</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">Cómo se relacionan<span class="kick">de la idea al símbolo</span></h2>
+  <div class="card" style="padding:18px; margin-top:12px;">
+    <div style="display:flex; flex-wrap:wrap; align-items:stretch; gap:10px; font-weight:800; text-align:center;">
+      <div style="flex:1; min-width:150px; background:var(--periwinkle-50); border-radius:14px; padding:14px;"><div style="color:var(--periwinkle-800);">Hi</div><div style="font-weight:600; font-size:.86rem; color:var(--ink-700);">lo que espero</div></div>
+      <div style="align-self:center; color:var(--ink-300);">→ la niega →</div>
+      <div style="flex:1; min-width:150px; background:#F1F1F3; border-radius:14px; padding:14px;"><div style="color:var(--ink-900);">Ho</div><div style="font-weight:600; font-size:.86rem; color:var(--ink-700);">casualidad</div></div>
+      <div style="align-self:center; color:var(--ink-300);">→ ¿otra? →</div>
+      <div style="flex:1; min-width:150px; background:#F1ECF8; border-radius:14px; padding:14px;"><div style="color:var(--plum);">Ha</div><div style="font-weight:600; font-size:.86rem; color:var(--ink-700);">otra opción</div></div>
+      <div style="align-self:center; color:var(--ink-300);">→ a símbolos →</div>
+      <div style="flex:1; min-width:150px; background:var(--pastel-mint); border-radius:14px; padding:14px;"><div style="color:#2F6B4F;">Estadísticas</div><div style="font-weight:600; font-size:.86rem; color:var(--ink-700);">se contrastan</div></div>
+    </div>
+  </div>
+
+  <h2 class="sec">Correlación ≠ causa<span class="kick">el detalle que más se pregunta</span></h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:12px;">
+    <div class="card" style="padding:18px; border-left:5px solid var(--periwinkle-400);">
+      <div style="font-weight:900; text-transform:uppercase; letter-spacing:.04em; color:var(--periwinkle-700); font-size:.9rem;">Correlacional</div>
+      <p style="margin:8px 0 0; font-size:.94rem; color:var(--ink-700);">“El orden de los factores no altera el producto”: <strong>no hay VI ni VD</strong>. Señalarlas aquí es un <strong style="color:var(--danger);">error</strong>.</p>
+    </div>
+    <div class="card" style="padding:18px; border-left:5px solid var(--plum);">
+      <div style="font-weight:900; text-transform:uppercase; letter-spacing:.04em; color:var(--plum); font-size:.9rem;">Causal</div>
+      <p style="margin:8px 0 0; font-size:.94rem; color:var(--ink-700);">El <strong>orden importa</strong>: la <strong>independiente (VI) es la causa</strong> y la <strong>dependiente (VD) el efecto</strong>.</p>
+    </div>
+  </div>
+
+  <h2 class="sec">Tips de examen<span class="kick">los matices que caen en reactivo</span></h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:12px;">
+    <div class="tip"><strong>No son verdaderas por decreto.</strong> Las hipótesis son tentativas (no los hechos en sí); se ponen a prueba con datos.</div>
+    <div class="tip"><strong>Censo completo = hecho.</strong> Si algo se sostiene con datos completos (un censo), ya es un hecho, no una hipótesis.</div>
+    <div class="tip"><strong>Ho la propuso Fisher.</strong> Si el reactivo pregunta “¿quién propuso la nula?” → Fisher (1925).</div>
+  </div>
+
+  <div class="esencial" style="margin-top:30px;">
+    <strong>⭐ En una frase:</strong> hipótesis = explicaciones tentativas, guías del estudio; se formulan según el alcance (exploratorio: no; descriptivo: solo pronóstico; correlacional y explicativo: sí). Familias: <strong>Hi</strong> (descriptivas, correlacionales, de diferencia de grupos, causales), <strong>Ho</strong> (las niegan; Fisher), <strong>Ha</strong> (otras posibilidades) y <strong>estadísticas</strong> (a símbolos). En correlacionales <strong>no</strong> hay VI/VD; en causales sí (VI = causa, VD = efecto).
+  </div>
+
+  <footer style="margin-top:34px; padding-top:18px; border-top:1.5px solid var(--sand); text-align:center; color:var(--ink-500); font-size:.85rem;">
+    Área 3 · Investigación · lámina de repaso · basada en tu mini libro (Sampieri).
+  </footer>
+
+</div>
+</body>
+</html>
