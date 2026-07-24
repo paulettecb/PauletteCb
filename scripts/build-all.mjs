@@ -53,9 +53,19 @@ copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-1-propiedades.html'),
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-4-uso.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-4-uso.html'));
+// Mapa estático "43 pruebas de un vistazo" (Área 1): overview sin JavaScript.
+copy(path.join(root, 'proyectos/ceneval/pruebas-inteligencia.html'), path.join(dist, 'proyectos/ceneval/pruebas-inteligencia.html'));
 // Vistas interactivas "una prueba, una vista" (Área 1): catálogos con medidores por categoría.
 copy(path.join(root, 'proyectos/ceneval/area1-inteligencia-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-inteligencia-interactiva.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-neuropsicologicas-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-neuropsicologicas-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-proyectivas-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-proyectivas-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-ansiedad-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-ansiedad-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-depresion-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-depresion-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-personalidad-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-personalidad-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-calidadvida-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-calidadvida-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-desarrollo-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-desarrollo-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-vocacional-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-vocacional-interactiva.html'));
 // Complemento "Cerebro interactivo" (Área 1): hotspots sobre un corte sagital + su imagen.
 copy(path.join(root, 'proyectos/ceneval/area1-cerebro-interactivo.html'), path.join(dist, 'proyectos/ceneval/area1-cerebro-interactivo.html'));
 copy(path.join(root, 'proyectos/ceneval/assets'), path.join(dist, 'proyectos/ceneval/assets'));

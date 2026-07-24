@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área 1 · Funcionalidad (adulto mayor) — una prueba, una vista</title>
+<meta name="description" content="Área 1 · Funcionalidad del adulto mayor: catálogo interactivo (Katz, Barthel, Lawton-Brody) con sus grados de dependencia. CENEVAL EGEL Plus PSI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<style>
+  @font-face { font-family:'Friendship'; src:url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
+  :root {
+    --periwinkle-50:#F0F2FB; --periwinkle-100:#E2E6F5; --periwinkle-200:#C9D0ED; --periwinkle-300:#AEB8E2; --periwinkle-400:#9BA6DA; --periwinkle-500:#8795D2; --periwinkle-600:#6B7AC1; --periwinkle-700:#5562A4; --periwinkle-800:#434D80; --periwinkle-900:#2F3658;
+    --white:#FFFFFF; --paper:#FBFAF7; --oat:#F4F0E8; --sand:#E9E3D7; --ink-900:#2A2933; --ink-700:#4A4955; --ink-500:#75737F; --ink-300:#A8A6B0; --ink-100:#E4E2E6;
+    --pop-magenta:#E85DA0; --pop-magenta-soft:#F7C9DE; --pastel-blush:#F6D2DD; --pastel-peach:#F8DCC9; --pastel-butter:#F6EBC4; --pastel-mint:#CFE8DA; --pastel-sky:#CFE0F2; --pastel-lilac:#E2D6F0;
+    --success:#4FA47A; --warning:#D9A441; --danger:#D9534F; --border-subtle:var(--ink-100); --border-on-oat:var(--sand);
+    --radius-md:16px; --radius-lg:24px; --radius-pill:999px; --shadow-sm:0 2px 8px rgba(47,54,88,.07); --shadow-md:0 8px 24px rgba(47,54,88,.09); --shadow-focus:0 0 0 3px rgba(135,149,210,.35); --ease-out:cubic-bezier(.22,1,.36,1);
+    --font-display:'Friendship','Comic Sans MS',cursive; --font-serif:'Farmhouse','Georgia',serif; --font-sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  * { box-sizing:border-box; } html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--paper); color:var(--ink-900); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; }
+  a { color:var(--periwinkle-700); text-decoration:none; } a:hover { color:var(--periwinkle-900); }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+  input[type=range].kyn-range { -webkit-appearance:none; appearance:none; width:100%; height:8px; border-radius:999px; background:linear-gradient(90deg,var(--periwinkle-200),var(--periwinkle-400)); cursor:pointer; }
+  input[type=range].kyn-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:24px; height:24px; border-radius:50%; background:var(--white); border:3px solid var(--periwinkle-600); box-shadow:var(--shadow-md); margin-top:-8px; }
+  input[type=range].kyn-range::-moz-range-thumb { width:24px; height:24px; border-radius:50%; background:var(--white); border:3px solid var(--periwinkle-600); box-shadow:var(--shadow-md); }
+  input[type=range].kyn-range:focus-visible { outline:none; box-shadow:var(--shadow-focus); }
+  .shell { max-width:1120px; margin:0 auto; padding:0 24px 90px; }
+  @media (max-width:720px) { .card-body { grid-template-columns:1fr !important; } }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="no-print" style="display:flex; gap:8px; flex-wrap:wrap; padding-top:14px;">
+    <a href="index.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">← Base CENEVAL</a>
+    <a href="area1-instrumentos-indice.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Instrumentos Área 1</a>
+    <a href="area1-calidadvida-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">‹ Calidad de vida</a>
+    <a href="area1-desarrollo-interactiva.html" style="font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">Desarrollo ›</a>
+  </div>
+  <header style="padding:34px 0 8px;">
+    <div style="font-size:.72rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--periwinkle-600);">Área 1 · Diagnóstico · Catálogo visual de pruebas</div>
+    <h1 style="font-weight:900; text-transform:uppercase; letter-spacing:-.02em; font-size:clamp(2.0rem,5vw,3.2rem); line-height:1.0; margin:.18em 0 .1em;">Funcionalidad</h1>
+    <div style="font-family:var(--font-display); font-size:1.5rem; color:var(--pop-magenta); margin-bottom:14px;">una prueba, una vista</div>
+    <p style="max-width:62ch; font-size:1.06rem; line-height:1.6; color:var(--ink-700); margin:0 0 22px; text-wrap:pretty;">En el adulto mayor no se mide cognición (eso es el MMSE), sino <strong>qué tanto puede hacer la persona por sí misma</strong> en su día a día. Katz y Barthel miden AVD básicas; Lawton, las instrumentales (más complejas).</p>
+    <div style="display:flex; flex-wrap:wrap; gap:10px 22px; padding:14px 18px; background:var(--oat); border-radius:var(--radius-md); border:1px solid var(--border-on-oat);">
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:34px;height:12px;border-radius:999px;background:linear-gradient(90deg,#E7B7B7,#F3E3AE,#C6E4D3);"></span> Bandas = dependencia</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:3px;height:16px;background:var(--ink-900);border-radius:2px;"></span> Marca = puntuación</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:16px;height:16px;border-radius:50%;background:var(--white);border:3px solid var(--periwinkle-600);"></span> Deslizador = pruébalo tú</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--ink-700);"><span style="width:14px;height:14px;border-radius:4px;background:var(--warning);"></span> Etiqueta auditoría = hueco resuelto</div>
+    </div>
+  </header>
+  <nav id="jumpNav" style="position:sticky; top:0; z-index:30; background:rgba(251,250,247,.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--border-subtle); margin:22px -24px 30px; padding:12px 24px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+    <span style="font-size:.68rem; font-weight:900; text-transform:uppercase; letter-spacing:.14em; color:var(--ink-500); margin-right:4px;">Ir a</span>
+  </nav>
+  <main id="cards"></main>
+  <footer style="text-align:center; color:var(--ink-500); font-size:.82rem; padding-top:26px; line-height:1.6;">
+    Categoría 8 de 10 · <strong style="color:var(--ink-700);">Funcionalidad (adulto mayor)</strong> (3 pruebas).<br>
+    Anterior: calidad de vida · Siguen: desarrollo · vocacional.
+  </footer>
+</div>
+<script>
+(function () {
+  "use strict";
+  var SHOW_AUDIT = true;
+  var sliders = { Katz: 5, Barthel: 85, Lawton: 6 };
+  var apBgMap = { "Individual":"--pastel-sky","Heteroaplicada":"--pastel-lilac","Observación":"--pastel-peach","Adultos mayores":"--periwinkle-100" };
+  function apBg(l){return apBgMap[l]||"--periwinkle-50";}
+  var EXAM_TIPS = {
+    Katz: "Gancho: “AVD básicas + independiente/asistido/dependiente” → Katz (cualitativo por categorías, no puntaje fino).",
+    Barthel: "Gancho: “AVD básicas + puntaje /100” → Barthel. Bandas de Shah: 100 indep · 91–99 leve · 61–90 moderada · 21–60 severa · 0–20 total.",
+    Lawton: "Gancho: “AVD INSTRUMENTALES (teléfono, dinero, compras)” → Lawton-Brody. 0–8, sin tabla de cortes oficial."
+  };
+  function defs(){
+    return [
+      { id:"Katz", sigla:"Katz", nombre:"Índice de Katz de Independencia en AVD", autor:"S. Katz", familia:"AVD básicas",
+        edadFrom:60, edadTo:95, edadLabel:"Adultos mayores",
+        evalua:"El grado de independencia en las actividades básicas de la vida diaria: bañarse, vestirse, usar el baño, transferencia, continencia y alimentación.",
+        construyes:["Baño y vestido","Uso del baño y transferencia","Continencia y alimentación"],
+        aplicacion:["Individual","Heteroaplicada","Observación","Adultos mayores"],
+        resultadoLabel:"Categorías / conteo (0–6)", resultadoDetail:"Independiente · asistido · dependiente.",
+        interpreta:"Se cuenta cuántas AVD hace la persona sin ayuda (6 = independiente). Clásicamente se reporta como independiente, con asistencia o dependiente, no con un puntaje fino.",
+        tip:"Katz = AVD básicas, lectura por categorías (independiente/asistido/dependiente).",
+        hueco:"Ficha completa en tu catálogo (AVD básicas y sus niveles).", huecoKind:"ok",
+        meter:{ kind:"band", min:0, max:6, step:1, suf:"/6",
+          bands:[[0,2,"Dependiente (0–1)","Dependiente","#E7B7B7"],[2,5,"Asistencia parcial (2–4)","Parcial","#F3E3AE"],[5,6.01,"Independiente (5–6)","Independiente","#C6E4D3"]],
+          anchors:[[2,"2"],[4,"4"],[6,"6"]], info:"Cuenta AVD básicas independientes; 6 = totalmente independiente." } },
+      { id:"Barthel", sigla:"Barthel", nombre:"Índice de Barthel", autor:"Mahoney & Barthel", familia:"AVD básicas",
+        edadFrom:60, edadTo:95, edadLabel:"Adultos mayores",
+        evalua:"También las AVD básicas, pero con puntaje directo sobre 100: más detallado que Katz, distingue mejor los niveles de dependencia.",
+        construyes:["10 AVD ponderadas","Movilidad y transferencias","Autocuidado"],
+        aplicacion:["Individual","Heteroaplicada","Observación","Adultos mayores"],
+        resultadoLabel:"Directo /100", resultadoDetail:"Más alto = más independiente.",
+        interpreta:"Bandas más enseñadas (Shah, 1989): 100 independiente · 91–99 leve · 61–90 moderada · 21–60 severa · 0–20 total.",
+        tip:"Barthel = /100. Más fino que Katz; recuerda que 100 = independiente y bajar = más dependencia.",
+        hueco:"Faltaban las bandas de dependencia. Aquí están (versión Shah).", huecoKind:"fill",
+        meter:{ kind:"band", min:0, max:100, step:1, suf:"/100",
+          bands:[[0,21,"Total (0–20)","Total","#D98F8F"],[21,61,"Severa (21–60)","Severa","#E7B7B7"],[61,91,"Moderada (61–90)","Moderada","#F0CDA6"],[91,100,"Leve (91–99)","Leve","#F3E3AE"],[100,100.01,"Independiente (100)","Indep.","#C6E4D3"]],
+          anchors:[[20,"20"],[60,"60"],[90,"90"],[100,"100"]], info:"Bandas de Shah (1989)." } },
+      { id:"Lawton", sigla:"Lawton-Brody", nombre:"Escala de Lawton y Brody (AVD instrumentales)", autor:"Lawton & Brody, 1969", familia:"AVD instrumentales",
+        edadFrom:60, edadTo:95, edadLabel:"Adultos mayores",
+        evalua:"Las actividades instrumentales de la vida diaria (manejar dinero, usar el teléfono, hacer compras, cocinar, transporte): más complejas que las básicas de Katz/Barthel.",
+        construyes:["Teléfono · compras · dinero","Cocina · casa · lavado","Transporte · medicación"],
+        aplicacion:["Individual","Heteroaplicada","Adultos mayores"],
+        resultadoLabel:"Directo /8", resultadoDetail:"Hoy se puntúan los 8 ítems para ambos sexos.",
+        interpreta:"No tiene tabla de cortes oficial (a diferencia de Barthel): se lee como puntaje continuo o % del máximo (p. ej. 6/8 = 75%). La versión de 1969 daba 5 a hombres; hoy se usan los 8.",
+        tip:"Lawton = INSTRUMENTALES (más complejas). Katz/Barthel = básicas. 0–8, sin corte oficial.",
+        hueco:"Faltaban puntaje sumario y corte. Aclarado: 0–8, sin tabla oficial (se lee como % del máximo).", huecoKind:"fill",
+        meter:{ kind:"plain", min:0, max:8, step:1, suf:"/8",
+          anchors:[[0,"0"],[4,"4"],[8,"8"]],
+          derive:function(v){return "= "+v+"/8 ("+Math.round(v/8*100)+"% del máximo); a mayor puntaje, más independencia instrumental.";} } }
+    ];
+  }
+  function esc(s){return String(s).replace(/[&<>"']/g,function(m){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m];});}
+  function fmtVal(m,v){return (m.pre||"")+v+(m.suf||"");}
+  function buildCard(d,i){
+    var value=sliders[d.id]; var c=Object.assign({},d);
+    c.num=i+1; c.value=value; c.examTip=EXAM_TIPS[d.id]; c.showAudit=SHOW_AUDIT;
+    c.edadFromPct=d.edadFrom/95*100; c.edadWidthPct=Math.min(100-c.edadFromPct,(d.edadTo-d.edadFrom)/95*100);
+    c.aplicacion=d.aplicacion.map(function(l){return {label:l,bg:apBg(l)};});
+    if(d.huecoKind==="ok"){c.huecoTag="Ficha completa";c.huecoBg="#E7F2EA";c.huecoBar="var(--success)";}else{c.huecoTag="Tu auditoría · resuelto";c.huecoBg="#FBF1DA";c.huecoBar="var(--warning)";}
+    var m=d.meter; c.mv=null;
+    if(m&&(m.kind==="band"||m.kind==="plain")){
+      var span=m.max-m.min;
+      var mv={ kind:m.kind, min:m.min, max:m.max, step:m.step||1, showBell:false,
+        markerPct:Math.max(0,Math.min(100,(value-m.min)/span*100)), valueLabel:fmtVal(m,value),
+        anchors:(m.anchors||[]).map(function(a){return {label:a[1],leftPct:(a[0]-m.min)/span*100};}),
+        bands:[], activeLabel:"", activeColor:"var(--periwinkle-100)", derived:"" };
+      if(m.kind==="band"){
+        mv.bands=m.bands.map(function(b){return {short:b[3],color:b[4],widthPct:(Math.min(b[1],m.max)-b[0])/span*100};});
+        var b=m.bands.find(function(x){return value>=x[0]&&value<x[1];})||m.bands[m.bands.length-1];
+        mv.activeLabel=b[2]; mv.activeColor=b[4];
+      }
+      mv.derived = (typeof m.derive==="function") ? m.derive(value) : (m.info||"");
+      c.mv=mv;
+    }
+    return c;
+  }
+  function resultInner(c){
+    var h="";
+    h+='<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;"><div style="font-size:.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:var(--periwinkle-700);">Resultado · '+esc(c.resultadoLabel)+'</div><div style="font-size:.84rem;color:var(--ink-500);">'+esc(c.resultadoDetail)+'</div></div>';
+    var mv=c.mv;
+    if(mv){
+      h+='<div><div style="position:relative;margin-top:8px;">';
+      if(mv.kind==="band"){h+='<div style="display:flex;height:28px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--border-subtle);">';mv.bands.forEach(function(b){h+='<div style="flex:0 0 '+b.widthPct+'%;background:'+b.color+';display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;color:var(--ink-700);white-space:nowrap;overflow:hidden;">'+esc(b.short)+'</div>';});h+='</div>';}
+      else {h+='<div style="height:28px;border-radius:999px;background:linear-gradient(90deg,var(--periwinkle-200),var(--periwinkle-500));box-shadow:inset 0 0 0 1px var(--border-subtle);"></div>';}
+      h+='<div style="position:absolute;top:-7px;bottom:-7px;left:'+mv.markerPct+'%;width:3px;background:var(--ink-900);border-radius:2px;"></div><div style="position:absolute;top:-34px;left:'+mv.markerPct+'%;transform:translateX(-50%);background:var(--ink-900);color:var(--white);padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:800;white-space:nowrap;">'+esc(mv.valueLabel)+'</div></div>';
+      h+='<div style="position:relative;height:16px;margin-top:8px;">';mv.anchors.forEach(function(a){h+='<span style="position:absolute;left:'+a.leftPct+'%;transform:translateX(-50%);font-size:.6rem;color:var(--ink-500);white-space:nowrap;">'+esc(a.label)+'</span>';});h+='</div>';
+      h+='<input type="range" class="kyn-range" min="'+mv.min+'" max="'+mv.max+'" step="'+mv.step+'" value="'+c.value+'" data-id="'+c.id+'" style="margin-top:12px;">';
+      h+='<div style="display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;">';
+      if(mv.kind==="band"){h+='<span style="background:'+mv.activeColor+';color:var(--ink-900);font-weight:800;padding:5px 13px;border-radius:999px;font-size:.84rem;">'+esc(mv.activeLabel)+'</span>';}
+      h+='<span style="color:var(--ink-700);font-size:.84rem;">'+esc(mv.derived)+'</span></div>';
+      h+='<div style="font-size:.72rem;color:var(--ink-500);margin-top:8px;">Mueve el deslizador para ver dónde cae cada puntuación. <em>(demostrativo)</em></div></div>';
+    }
+    return h;
+  }
+  function cardMarkup(c){
+    var construyes=c.construyes.map(function(k){return '<span style="font-size:.8rem;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--periwinkle-50);border:1px solid var(--periwinkle-100);color:var(--periwinkle-800);">'+esc(k)+'</span>';}).join("");
+    var aplicacion=c.aplicacion.map(function(ap){return '<span style="font-size:.78rem;font-weight:700;padding:5px 11px;border-radius:8px;background:var('+ap.bg+');color:var(--ink-900);">'+esc(ap.label)+'</span>';}).join("");
+    var audit=""; if(c.showAudit){audit='<div style="border-left:5px solid '+c.huecoBar+';background:'+c.huecoBg+';border-radius:var(--radius-md);padding:15px 16px;"><div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-700);margin-bottom:7px;">'+esc(c.huecoTag)+'</div><p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-900);text-wrap:pretty;">'+esc(c.hueco)+'</p></div>';}
+    return '<article id="'+c.id+'" style="scroll-margin-top:72px;background:var(--white);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);overflow:hidden;margin-bottom:34px;animation:fadeUp .5s var(--ease-out) both;">'+
+      '<div style="display:flex;align-items:flex-start;gap:18px;padding:24px 26px;background:linear-gradient(180deg,var(--periwinkle-50),var(--white));border-bottom:1px solid var(--border-subtle);"><div style="flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--periwinkle-500);color:var(--white);font-weight:900;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);">'+c.num+'</div><div style="flex:1 1 auto;min-width:0;"><div style="font-weight:900;text-transform:uppercase;letter-spacing:-.01em;font-size:1.7rem;line-height:1.05;color:var(--ink-900);">'+esc(c.sigla)+'</div><div style="font-size:.98rem;color:var(--ink-700);margin-top:4px;">'+esc(c.nombre)+'</div></div><div style="flex:0 0 auto;text-align:right;"><div style="display:inline-block;font-size:.74rem;font-weight:800;padding:5px 11px;border-radius:999px;background:var(--periwinkle-100);color:var(--periwinkle-800);">'+esc(c.familia)+'</div><div style="font-size:.76rem;color:var(--ink-500);margin-top:6px;">'+esc(c.autor)+'</div></div></div>'+
+      '<div class="card-body" style="display:grid;grid-template-columns:1.25fr .95fr;gap:26px;padding:24px 26px;"><div><div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:8px;">¿Qué evalúa?</div><p style="font-size:1.08rem;line-height:1.55;color:var(--ink-900);margin:0 0 16px;text-wrap:pretty;">'+esc(c.evalua)+'</p><div style="display:flex;flex-wrap:wrap;gap:8px;">'+construyes+'</div></div><div><div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:8px;">Aplicación</div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;">'+aplicacion+'</div><div style="font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--periwinkle-600);margin-bottom:6px;">Población · edad</div><div style="font-size:.9rem;color:var(--ink-700);margin-bottom:8px;">'+esc(c.edadLabel)+'</div><div style="position:relative;height:14px;border-radius:999px;background:var(--oat);border:1px solid var(--border-on-oat);"><div style="position:absolute;top:-1px;bottom:-1px;left:'+c.edadFromPct+'%;width:'+c.edadWidthPct+'%;border-radius:999px;background:linear-gradient(90deg,var(--periwinkle-400),var(--periwinkle-600));"></div></div><div style="position:relative;height:16px;margin-top:4px;font-size:.62rem;color:var(--ink-500);"><span style="position:absolute;left:0%;">0</span><span style="position:absolute;left:25%;transform:translateX(-50%);">~25</span><span style="position:absolute;left:50%;transform:translateX(-50%);">~50</span><span style="position:absolute;left:75%;transform:translateX(-50%);">~70</span><span style="position:absolute;right:0%;">95 años</span></div></div></div>'+
+      '<div class="result" data-card="'+c.id+'" style="padding:22px 26px;border-top:1px solid var(--border-subtle);background:var(--periwinkle-50);">'+resultInner(c)+'</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;padding:22px 26px 26px;"><div style="background:var(--periwinkle-50);border-radius:var(--radius-md);padding:15px 16px;"><div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--periwinkle-700);margin-bottom:7px;">Cómo se lee</div><p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-700);text-wrap:pretty;">'+esc(c.interpreta)+'</p></div><div style="background:#EAF4EE;border-radius:var(--radius-md);padding:15px 16px;"><div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#3B7C5B;margin-bottom:7px;">Clave para recordar</div><p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-700);text-wrap:pretty;">'+esc(c.tip)+'</p></div><div style="border-left:5px solid var(--pop-magenta);background:var(--pop-magenta-soft);border-radius:var(--radius-md);padding:15px 16px;"><div style="font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#B03B78;margin-bottom:7px;">Tip de examen</div><p style="margin:0;font-size:.92rem;line-height:1.5;color:var(--ink-900);text-wrap:pretty;">'+esc(c.examTip)+'</p></div>'+audit+'</div></article>';
+  }
+  var DEFS=defs();
+  var navEl=document.getElementById("jumpNav");
+  DEFS.forEach(function(d){var a=document.createElement("a");a.href="#"+d.id;a.textContent=d.sigla;a.style.cssText="font-size:.82rem;font-weight:800;padding:6px 13px;border-radius:999px;background:var(--white);border:1px solid var(--border-subtle);color:var(--periwinkle-700);";navEl.appendChild(a);});
+  var cardsEl=document.getElementById("cards");
+  cardsEl.innerHTML=DEFS.map(function(d,i){return cardMarkup(buildCard(d,i));}).join("");
+  var indexById={}; DEFS.forEach(function(d,i){indexById[d.id]=i;});
+  cardsEl.addEventListener("input",function(e){var input=e.target;if(!input.matches||!input.matches('input[type=range][data-id]'))return;var id=input.dataset.id;sliders[id]=Number(input.value);var i=indexById[id];var panel=cardsEl.querySelector('.result[data-card="'+id+'"]');if(panel)panel.innerHTML=resultInner(buildCard(DEFS[i],i));});
+})();
+</script>
+</body>
+</html>
