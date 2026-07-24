@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Encuentra tu prueba — Área 3 · CENEVAL EGEL Plus PSI</title>
+<meta name="description" content="Herramienta interactiva: contesta 2–4 preguntas (qué te pide el reactivo, cuántos grupos, relacionados o no, nivel de medición) y llegas a la prueba estadística exacta. Área 3 · Investigación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<style>
+  @font-face { font-family:'Friendship'; src:url('../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype'); font-weight:500; font-style:normal; font-display:swap; }
+
+  /* ---- KYN tokens (colors · typography · spacing · effects) ---- */
+  :root {
+    --periwinkle-50:#F0F2FB; --periwinkle-100:#E2E6F5; --periwinkle-200:#C9D0ED; --periwinkle-300:#AEB8E2;
+    --periwinkle-400:#9BA6DA; --periwinkle-500:#8795D2; --periwinkle-600:#6B7AC1; --periwinkle-700:#5562A4;
+    --periwinkle-800:#434D80; --periwinkle-900:#2F3658;
+    --white:#FFFFFF; --paper:#FBFAF7; --oat:#F4F0E8; --sand:#E9E3D7;
+    --ink-900:#2A2933; --ink-700:#4A4955; --ink-500:#75737F; --ink-300:#A8A6B0; --ink-100:#E4E2E6;
+    --pop-magenta:#E85DA0; --pop-magenta-soft:#F7C9DE;
+    --pastel-blush:#F6D2DD; --pastel-peach:#F8DCC9; --pastel-butter:#F6EBC4;
+    --pastel-mint:#CFE8DA; --pastel-sky:#CFE0F2; --pastel-lilac:#E2D6F0;
+
+    --surface-card:var(--white);
+    --text-secondary:var(--ink-700); --text-muted:var(--ink-500);
+    --border-subtle:var(--ink-100);
+    --success:#4FA47A; --warning:#D9A441; --danger:#D9534F;
+
+    --font-sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-display:'Friendship','Comic Sans MS',cursive;
+    --font-heading:var(--font-sans);
+    --text-xs:0.75rem; --text-sm:0.875rem; --text-base:1rem; --text-md:1.125rem;
+    --text-lg:1.375rem; --text-xl:1.75rem; --text-2xl:2.25rem; --text-3xl:3rem;
+    --weight-light:300; --weight-regular:400; --weight-medium:500; --weight-semibold:600;
+    --weight-bold:700; --weight-black:900;
+    --leading-tight:1.08; --leading-snug:1.2; --leading-normal:1.5; --leading-relaxed:1.65;
+    --tracking-tight:-0.02em; --tracking-wide:0.04em; --tracking-eyebrow:0.18em;
+
+    --space-5:1.5rem;
+    --radius-xs:6px; --radius-sm:10px; --radius-md:16px; --radius-lg:24px; --radius-pill:999px;
+    --shadow-xs:0 1px 2px rgba(47,54,88,.06); --shadow-sm:0 2px 8px rgba(47,54,88,.07);
+    --shadow-md:0 8px 24px rgba(47,54,88,.09); --shadow-lg:0 18px 48px rgba(47,54,88,.12);
+    --shadow-focus:0 0 0 3px rgba(135,149,210,.35);
+    --ease-out:cubic-bezier(.22,1,.36,1); --dur-fast:140ms; --dur-base:220ms;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink-900); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; }
+  a { color:var(--periwinkle-700); }
+  a:hover { color:var(--periwinkle-600); }
+
+  /* ---- KYN components usados en esta página ---- */
+  .kyn-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--font-sans); font-weight:var(--weight-bold);
+    font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    padding:5px 12px; border-radius:var(--radius-pill); line-height:1; white-space:nowrap;
+  }
+  .kyn-badge--soft { background:var(--periwinkle-100); color:var(--periwinkle-800); }
+  .kyn-badge--outline { background:transparent; border:1.5px solid var(--ink-100); color:var(--ink-700); }
+
+  .kyn-card {
+    background:var(--surface-card); border:1px solid var(--border-subtle);
+    border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); padding:var(--space-5);
+    transition:box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .kyn-card--interactive { cursor:pointer; }
+  .kyn-card--interactive:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+  .kyn-card--interactive:focus-visible { outline:none; box-shadow:var(--shadow-focus), var(--shadow-md); }
+
+  .kyn-alert {
+    display:flex; align-items:flex-start; gap:12px; font-family:var(--font-sans);
+    border-radius:var(--radius-md); padding:16px 18px; border:1px solid transparent;
+  }
+  .kyn-alert__icon { flex:none; display:inline-flex; padding-top:1px; }
+  .kyn-alert__icon svg { width:20px; height:20px; }
+  .kyn-alert__body { display:flex; flex-direction:column; gap:3px; }
+  .kyn-alert__title { font-size:14px; font-weight:var(--weight-bold); }
+  .kyn-alert__msg { font-size:13px; line-height:1.5; }
+  .kyn-alert--info { background:var(--periwinkle-50); border-color:var(--periwinkle-100); }
+  .kyn-alert--info .kyn-alert__icon, .kyn-alert--info .kyn-alert__title { color:var(--periwinkle-700); }
+  .kyn-alert--info .kyn-alert__msg { color:var(--periwinkle-800); }
+
+  /* ---- Navegación de la casa ---- */
+  .nav-chips { display:flex; gap:8px; flex-wrap:wrap; width:100%; max-width:720px; }
+  .nav-chips a { font-weight:700; font-size:13px; padding:7px 14px; border-radius:999px; background:var(--periwinkle-100); color:var(--periwinkle-800); text-decoration:none; }
+  .nav-chips a:hover { background:var(--periwinkle-200); color:var(--periwinkle-900); }
+
+  /* ---- Rejillas de opciones ---- */
+  .opts-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .opts-row { display:flex; gap:16px; }
+
+  .step { animation:fadeUp var(--dur-base) var(--ease-out); }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce) {
+    .step { animation:none; }
+    .kyn-card--interactive:hover { transform:none; }
+  }
+
+  @media (max-width:640px) {
+    .opts-grid { grid-template-columns:1fr; }
+    .opts-row { flex-direction:column; }
+    .tool-card { padding:22px !important; }
+    .page-title { font-size:var(--text-2xl) !important; }
+  }
+</style>
+</head>
+<body>
+
+<div style="background:var(--paper);min-height:100vh;font-family:var(--font-sans);color:var(--ink-900);display:flex;flex-direction:column;align-items:center;padding:16px 24px 96px;">
+
+  <div class="nav-chips">
+    <a href="index.html">← Base CENEVAL</a>
+    <a href="libro-area3-investigacion.html">Mini libro Área 3</a>
+    <a href="scribe-que-prueba-estadistica.html">Lámina ¿Qué prueba? ›</a>
+  </div>
+
+  <div style="max-width:620px;text-align:center;margin:48px 0 36px;">
+    <span class="kyn-badge kyn-badge--outline">CAPÍTULO 15 · CENEVAL</span>
+    <h1 class="page-title" style="font-family:var(--font-heading);font-weight:var(--weight-black);font-size:var(--text-3xl);text-transform:uppercase;letter-spacing:var(--tracking-tight);line-height:var(--leading-tight);margin:18px 0 6px;color:var(--ink-900);">Encuentra tu prueba</h1>
+    <div class="spark" style="font-family:var(--font-display);font-size:1.5rem;line-height:1.15;color:var(--pop-magenta);margin:0 0 14px;">una pregunta a la vez</div>
+    <p style="font-size:var(--text-md);color:var(--text-secondary);line-height:var(--leading-relaxed);margin:0;text-wrap:pretty;">Contesta unas preguntas y llegamos juntos a la prueba exacta — sin memorizar el mapa completo.</p>
+  </div>
+
+  <div class="kyn-card tool-card" id="tool" style="width:100%;max-width:720px;padding:40px;display:flex;flex-direction:column;gap:24px;"></div>
+
+  <p style="max-width:720px;font-size:var(--text-xs);color:var(--text-muted);text-align:center;margin:24px 0 0;">Para que una prueba de <strong>intervalo-razón</strong> sea válida: distribución normal · nivel intervalo/razón · homogeneidad de varianzas.</p>
+
+  <div class="kyn-alert kyn-alert--info" style="max-width:720px;width:100%;margin-top:16px;">
+    <span class="kyn-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12M12 15l-3.5-3.5M12 15l3.5-3.5" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;"></path><path d="M5 19h14" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;"></path></svg></span>
+    <div class="kyn-alert__body">
+      <span class="kyn-alert__title">El truco de examen</span>
+      <span class="kyn-alert__msg">Subraya tres cosas en el reactivo: cuántos grupos, qué nivel de medición y qué verbo usa. Es justo lo que te acabamos de preguntar aquí.</span>
+    </div>
+  </div>
+
+  <footer style="max-width:720px;text-align:center;color:var(--ink-500);font-size:.82rem;margin-top:34px;line-height:1.6;">
+    Área 3 · Investigación · Estadística · herramienta de decisión.<br>
+    Misma ruta que el árbol de tu diagrama: verbo → grupos → relación → nivel de medición.
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var NIVEL_LABEL = { nominal: 'Nominal', ordinal: 'Ordinal', intervalo: 'Intervalo-razón' };
+  var NIVEL_ASOC_LABEL = { oo: 'Ordinal + Ordinal', oi: 'Ordinal + Intervalo-razón', ii: 'Intervalo-razón + Intervalo-razón' };
+  var OFICIO_LABEL = { descriptiva: 'Descriptiva', diferencia: 'Diferencia', asociacion: 'Asociación', prediccion: 'Predicción' };
+
+  var DIFERENCIA = {
+    '2|relacionados|nominal':    { test: 'Chi cuadrada de McNemar', pista: '2 grupos, mismos sujetos, variable nominal dicotómica (p. ej. aprobó/no aprobó).' },
+    '2|relacionados|ordinal':    { test: 'Wilcoxon (rangos con signo)', pista: '2 medidas del mismo grupo (antes/después), variable ordinal.' },
+    '2|relacionados|intervalo':  { test: 't para muestras correlacionadas', pista: '2 medidas del mismo grupo, variable de intervalo/razón.' },
+    '2|independientes|nominal':  { test: 'Chi cuadrada', pista: '2 grupos distintos, variable nominal.' },
+    '2|independientes|ordinal':  { test: 'U de Mann-Whitney', pista: '2 grupos distintos, variable ordinal.' },
+    '2|independientes|intervalo':{ test: 't para muestras independientes', pista: '2 grupos distintos, variable de intervalo/razón. Con gl > 120 se aproxima a la normal.' },
+    '3+|relacionados|nominal':   { test: 'Q de Cochran', pista: '3+ medidas del mismo grupo, variable nominal dicotómica (p. ej. sí/no en cada medición).' },
+    '3+|relacionados|ordinal':   { test: 'Friedman', pista: '3+ medidas del mismo grupo, variable ordinal.' },
+    '3+|relacionados|intervalo': { test: 'ANOVA de medidas repetidas', pista: '3+ medidas del mismo grupo, variable de intervalo/razón.' },
+    '3+|independientes|nominal': { test: 'Análisis de correspondencias', pista: '3+ grupos distintos, variable nominal.' },
+    '3+|independientes|ordinal': { test: 'H de Kruskal-Wallis', pista: '3+ grupos distintos, variable ordinal.' },
+    '3+|independientes|intervalo':{ test: 'ANOVA', pista: 'Produce F: variación entre grupos ÷ dentro de los grupos. Ej.: tres porras y su actitud hacia el entrenador.', visual: 'f' }
+  };
+  var ASOCIACION = {
+    oo: { test: 'Tau B y Tau C', pista: 'Ambas variables ordinales.' },
+    oi: { test: 'Rho de Spearman', pista: 'Una ordinal, otra de intervalo/razón — o relación curvilínea.' },
+    ii: { test: 'Pearson (r)', pista: 'Ambas de intervalo/razón, relación lineal. No implica causalidad.', visual: 'r2' }
+  };
+  var DESCRIPTIVA = {
+    nominal:   { test: 'Moda', pista: 'Variable nominal.' },
+    ordinal:   { test: 'Moda y mediana', pista: 'Variable ordinal.' },
+    intervalo: { test: 'Medidas de tendencia central y de dispersión', pista: 'Variable de intervalo/razón.' }
+  };
+  var PREDICCION = {
+    continua:   { test: 'Regresión lineal', pista: 'Y continua (intervalo/razón). Para varias variables a la vez: correlación múltiple R.', visual: 'lineal' },
+    dicotomica: { test: 'Regresión logística binaria', pista: 'Y dicotómica (sí/no). Modela una probabilidad (logit) siempre entre 0 y 1. No exige normalidad ni homocedasticidad.', visual: 'logistica' }
+  };
+
+  var GRUPOS_OPTIONS = [
+    { key: 'grupos:2',  label: '2 grupos', sub: 'comparas un par' },
+    { key: 'grupos:3+', label: '3 o más grupos', sub: 'comparas varios a la vez' }
+  ];
+  var RELACION_OPTIONS = [
+    { key: 'relacion:relacionados',   label: 'Relacionados', sub: 'mismo grupo, antes/después' },
+    { key: 'relacion:independientes', label: 'Independientes', sub: 'grupos distintos' }
+  ];
+  var NIVEL_OPTIONS = [
+    { key: 'nivel:nominal',   label: 'Nominal', sub: 'categorías (sí/no, tipos)' },
+    { key: 'nivel:ordinal',   label: 'Ordinal', sub: 'rangos u orden' },
+    { key: 'nivel:intervalo', label: 'Intervalo-razón', sub: 'cantidades continuas' }
+  ];
+  var NIVEL_ASOC_OPTIONS = [
+    { key: 'nivelAsoc:oo', label: 'Ordinal + Ordinal', sub: 'ambas de rango' },
+    { key: 'nivelAsoc:oi', label: 'Ordinal + Intervalo-razón', sub: 'mixta, o relación curva' },
+    { key: 'nivelAsoc:ii', label: 'Intervalo-razón + Intervalo-razón', sub: 'ambas continuas, lineal' }
+  ];
+  var TIPO_PRED_OPTIONS = [
+    { key: 'tipoPred:continua',   label: 'Continua', sub: 'un número (precio, edad, puntaje)' },
+    { key: 'tipoPred:dicotomica', label: 'Dicotómica', sub: 'sí / no, sano / enfermo' }
+  ];
+
+  var OFICIO_CARDS = [
+    { key: 'oficio:descriptiva', title: 'Descriptiva', quote: '"¿Cómo resumo esta variable?"', bg: 'var(--periwinkle-100)',
+      icon: '<circle cx="10" cy="10" r="6" style="stroke:currentColor;stroke-width:1.75;"></circle><path d="M15 15l5 5" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;"></path>' },
+    { key: 'oficio:diferencia', title: 'Diferencia', quote: '"¿Son distintos?"', bg: 'var(--pastel-sky)',
+      icon: '<path d="M4 20V10M12 20V4M20 20V13" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;"></path>' },
+    { key: 'oficio:asociacion', title: 'Asociación', quote: '"¿Se mueven juntos?"', bg: 'var(--pastel-mint)',
+      icon: '<circle cx="9" cy="12" r="6" style="stroke:currentColor;stroke-width:1.75;"></circle><circle cx="15" cy="12" r="6" style="stroke:currentColor;stroke-width:1.75;"></circle>' },
+    { key: 'oficio:prediccion', title: 'Predicción', quote: '"¿Puedo estimar uno con el otro?"', bg: 'var(--pastel-butter)',
+      icon: '<path d="M4 16l5-5 4 4 7-7" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;"></path><path d="M15 8h4v4" style="stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;"></path>' }
+  ];
+
+  var SHOW_VISUALS = true;   // los diagramas F / r² / regresión del resultado
+  var SHOW_HINTS = true;     // los subtítulos grises bajo cada opción
+
+  var state = { oficio: null, grupos: null, relacion: null, nivel: null, nivelAsoc: null, tipoPred: null };
+  var tool = document.getElementById('tool');
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+
+  function currentStep() {
+    var s = state;
+    if (s.oficio === 'diferencia') return !s.grupos ? 'grupos' : !s.relacion ? 'relacion' : !s.nivel ? 'nivel' : 'resultado';
+    if (s.oficio === 'asociacion') return s.nivelAsoc ? 'resultado' : 'nivelAsoc';
+    if (s.oficio === 'prediccion') return s.tipoPred ? 'resultado' : 'tipoPred';
+    if (s.oficio === 'descriptiva') return s.nivel ? 'resultado' : 'nivel';
+    return 'oficio';
+  }
+
+  function crumbs() {
+    var s = state, out = [];
+    if (s.oficio) out.push(OFICIO_LABEL[s.oficio]);
+    if (s.grupos) out.push(s.grupos === '2' ? '2 grupos' : '3+ grupos');
+    if (s.relacion) out.push(s.relacion === 'relacionados' ? 'Relacionados' : 'Independientes');
+    if ((s.oficio === 'diferencia' || s.oficio === 'descriptiva') && s.nivel) out.push(NIVEL_LABEL[s.nivel]);
+    if (s.nivelAsoc) out.push(NIVEL_ASOC_LABEL[s.nivelAsoc]);
+    if (s.tipoPred) out.push(s.tipoPred === 'continua' ? 'Continua' : 'Dicotómica');
+    return out;
+  }
+
+  function mkOpt(label, test, active) {
+    return {
+      label: label, test: test,
+      bg: active ? 'var(--periwinkle-500)' : 'var(--white)',
+      fg: active ? '#fff' : 'var(--ink-900)',
+      bd: active ? 'var(--periwinkle-500)' : 'var(--border-subtle)'
+    };
+  }
+
+  function resolve() {
+    var s = state, resultObj = null, compareRow = [];
+    if (s.oficio === 'diferencia') {
+      var prefix = s.grupos + '|' + s.relacion + '|';
+      resultObj = DIFERENCIA[prefix + s.nivel];
+      compareRow = ['nominal', 'ordinal', 'intervalo'].map(function (n) {
+        return mkOpt(NIVEL_LABEL[n], DIFERENCIA[prefix + n].test, n === s.nivel);
+      });
+    } else if (s.oficio === 'asociacion') {
+      resultObj = ASOCIACION[s.nivelAsoc];
+      compareRow = ['oo', 'oi', 'ii'].map(function (k) {
+        return mkOpt(NIVEL_ASOC_LABEL[k], ASOCIACION[k].test, k === s.nivelAsoc);
+      });
+    } else if (s.oficio === 'prediccion') {
+      resultObj = PREDICCION[s.tipoPred];
+      compareRow = [['continua', 'Continua'], ['dicotomica', 'Dicotómica']].map(function (p) {
+        return mkOpt(p[1], PREDICCION[p[0]].test, p[0] === s.tipoPred);
+      });
+    } else if (s.oficio === 'descriptiva') {
+      resultObj = DESCRIPTIVA[s.nivel];
+      compareRow = ['nominal', 'ordinal', 'intervalo'].map(function (n) {
+        return mkOpt(NIVEL_LABEL[n], DESCRIPTIVA[n].test, n === s.nivel);
+      });
+    }
+    return { result: resultObj || {}, compareRow: compareRow };
+  }
+
+  /* ---------- plantillas ---------- */
+
+  var H2 = 'font-family:var(--font-heading);font-weight:var(--weight-bold);font-size:var(--text-xl);margin:0 0 24px;color:var(--ink-900);';
+  var EYEBROW = 'font-size:var(--text-xs);font-weight:var(--weight-bold);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;margin:0 0 8px;';
+
+  function crumbsHtml() {
+    var list = crumbs();
+    if (!list.length) return '';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+      list.map(function (c) { return '<span class="kyn-badge kyn-badge--soft">' + esc(c) + '</span>'; }).join('') +
+      '</div>' +
+      '<span data-action="reset" role="button" tabindex="0" style="font-size:var(--text-sm);color:var(--text-muted);cursor:pointer;white-space:nowrap;">↺ reiniciar</span>' +
+      '</div>';
+  }
+
+  function optionCard(opt, pad) {
+    return '<div class="kyn-card kyn-card--interactive" role="button" tabindex="0" data-set="' + opt.key + '" ' +
+      'style="cursor:pointer;flex:1;text-align:center;padding:' + pad + ';">' +
+      '<div style="font-weight:var(--weight-bold);font-size:' + (opt.big ? 'var(--text-base)' : 'var(--text-md)') + ';color:var(--ink-900);">' + esc(opt.label) + '</div>' +
+      (SHOW_HINTS ? '<div style="font-size:var(--text-sm);color:var(--text-muted);margin-top:4px;">' + esc(opt.sub) + '</div>' : '') +
+      '</div>';
+  }
+
+  function questionStep(title, options, pad, big) {
+    return '<div class="step">' +
+      '<h2 style="' + H2 + '">' + esc(title) + '</h2>' +
+      '<div class="opts-row">' +
+      options.map(function (o) { return optionCard({ key: o.key, label: o.label, sub: o.sub, big: big }, pad); }).join('') +
+      '</div></div>';
+  }
+
+  function oficioStep() {
+    return '<div class="step">' +
+      '<p style="' + EYEBROW + 'color:var(--periwinkle-700);">La primera pregunta</p>' +
+      '<h2 style="' + H2 + '">¿Qué te pide el reactivo?</h2>' +
+      '<div class="opts-grid">' +
+      OFICIO_CARDS.map(function (c) {
+        return '<div class="kyn-card kyn-card--interactive" role="button" tabindex="0" data-set="' + c.key + '" ' +
+          'style="cursor:pointer;display:flex;flex-direction:column;gap:10px;">' +
+          '<div style="width:36px;height:36px;border-radius:50%;background:' + c.bg + ';display:flex;align-items:center;justify-content:center;color:var(--periwinkle-800);">' +
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">' + c.icon + '</svg></div>' +
+          '<h3 style="font-family:var(--font-heading);font-weight:var(--weight-bold);font-size:var(--text-md);margin:0;color:var(--ink-900);">' + esc(c.title) + '</h3>' +
+          '<p style="font-size:var(--text-sm);font-style:italic;color:var(--text-secondary);margin:0;">' + esc(c.quote) + '</p>' +
+          '</div>';
+      }).join('') +
+      '</div></div>';
+  }
+
+  function visualHtml(kind) {
+    if (!SHOW_VISUALS) return '';
+    if (kind === 'f') {
+      return '<div style="display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:20px 0 4px;">' +
+        '<div style="text-align:center;"><div style="width:32px;height:52px;background:var(--periwinkle-400);border-radius:6px 6px 0 0;margin:0 auto;"></div>' +
+        '<span style="font-size:10px;color:var(--text-muted);">entre grupos</span></div>' +
+        '<span style="font-weight:700;color:var(--text-muted);padding-bottom:20px;">÷</span>' +
+        '<div style="text-align:center;"><div style="width:32px;height:24px;background:var(--periwinkle-200);border-radius:6px 6px 0 0;margin:0 auto;"></div>' +
+        '<span style="font-size:10px;color:var(--text-muted);">dentro de grupos</span></div>' +
+        '<span style="font-weight:700;color:var(--text-muted);padding-bottom:20px;">=</span>' +
+        '<span style="font-family:var(--font-heading);font-weight:var(--weight-black);font-size:22px;color:var(--periwinkle-700);padding-bottom:14px;">F</span>' +
+        '</div>';
+    }
+    if (kind === 'r2') {
+      return '<div style="max-width:340px;margin:20px auto 4px;">' +
+        '<div style="height:14px;border-radius:999px;overflow:hidden;display:flex;">' +
+        '<div style="width:66%;background:var(--ink-100);"></div>' +
+        '<div style="width:19%;background:var(--periwinkle-400);"></div>' +
+        '<div style="width:15%;background:var(--pop-magenta);"></div></div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;justify-content:center;">' +
+        '<span class="kyn-badge" style="background:var(--periwinkle-400);color:#fff;">0.66–0.85 buena predicción</span>' +
+        '<span class="kyn-badge" style="background:var(--pop-magenta);color:#fff;">&gt; 0.85 sospecha</span>' +
+        '</div></div>';
+    }
+    if (kind === 'lineal') {
+      return '<div style="display:flex;justify-content:center;margin:16px 0 4px;">' +
+        '<svg width="160" height="70" viewBox="0 0 160 70" fill="none" aria-hidden="true">' +
+        '<line x1="10" y1="12" x2="150" y2="12" style="stroke:var(--ink-100);stroke-width:1.5;stroke-dasharray:3 3;"></line>' +
+        '<line x1="10" y1="58" x2="150" y2="58" style="stroke:var(--ink-100);stroke-width:1.5;stroke-dasharray:3 3;"></line>' +
+        '<text x="0" y="15" style="font-size:9px;fill:var(--text-muted);">1</text>' +
+        '<text x="0" y="61" style="font-size:9px;fill:var(--text-muted);">0</text>' +
+        '<path d="M20 64 L140 6" style="stroke:var(--periwinkle-500);stroke-width:2.5;stroke-linecap:round;" fill="none"></path>' +
+        '</svg></div>' +
+        '<p style="font-size:var(--text-sm);color:var(--text-muted);margin:0;">Puede "predecir" fuera de 0–1 (p. ej. −20% o 140%).</p>';
+    }
+    if (kind === 'logistica') {
+      return '<div style="display:flex;justify-content:center;margin:16px 0 4px;">' +
+        '<svg width="160" height="70" viewBox="0 0 160 70" fill="none" aria-hidden="true">' +
+        '<line x1="10" y1="12" x2="150" y2="12" style="stroke:var(--ink-100);stroke-width:1.5;stroke-dasharray:3 3;"></line>' +
+        '<line x1="10" y1="58" x2="150" y2="58" style="stroke:var(--ink-100);stroke-width:1.5;stroke-dasharray:3 3;"></line>' +
+        '<text x="0" y="15" style="font-size:9px;fill:var(--text-muted);">1</text>' +
+        '<text x="0" y="61" style="font-size:9px;fill:var(--text-muted);">0</text>' +
+        '<path d="M20 55 C 60 55, 60 15, 100 15 C 120 15, 130 15, 140 14" style="stroke:var(--pop-magenta);stroke-width:2.5;stroke-linecap:round;" fill="none"></path>' +
+        '</svg></div>' +
+        '<p style="font-size:var(--text-sm);color:var(--text-muted);margin:0;">Siempre entre 0 y 1 — nunca se sale de rango.</p>';
+    }
+    return '';
+  }
+
+  function resultadoStep() {
+    var r = resolve();
+    return '<div class="step" style="text-align:center;">' +
+      '<p style="' + EYEBROW + 'color:var(--periwinkle-700);">Tu prueba es</p>' +
+      '<h2 style="font-family:var(--font-heading);font-weight:var(--weight-black);font-size:var(--text-2xl);margin:0 0 12px;color:var(--ink-900);">' + esc(r.result.test || '') + '</h2>' +
+      '<p style="font-size:var(--text-base);color:var(--text-secondary);line-height:var(--leading-relaxed);max-width:520px;margin:0 auto 8px;text-wrap:pretty;">' + esc(r.result.pista || '') + '</p>' +
+      visualHtml(r.result.visual) +
+      '<p style="' + EYEBROW + 'color:var(--text-muted);margin:28px 0 12px;">Mismo caso, otro nivel</p>' +
+      '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">' +
+      r.compareRow.map(function (o) {
+        return '<div style="background:' + o.bg + ';color:' + o.fg + ';border:1px solid ' + o.bd + ';border-radius:var(--radius-sm);padding:10px 14px;min-width:120px;">' +
+          '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.04em;opacity:0.8;">' + esc(o.label) + '</div>' +
+          '<div style="font-size:var(--text-sm);font-weight:var(--weight-bold);margin-top:2px;">' + esc(o.test) + '</div>' +
+          '</div>';
+      }).join('') +
+      '</div>' +
+      '<div class="kyn-card kyn-card--interactive" role="button" tabindex="0" data-action="reset" style="cursor:pointer;display:inline-block;margin-top:28px;padding:14px 28px;">' +
+      '<span style="font-weight:var(--weight-bold);color:var(--periwinkle-700);">Probar otro camino →</span></div>' +
+      '</div>';
+  }
+
+  function stepHtml() {
+    switch (currentStep()) {
+      case 'grupos':    return questionStep('¿Cuántos grupos comparas?', GRUPOS_OPTIONS, '22px 16px');
+      case 'relacion':  return questionStep('¿Las mediciones están relacionadas?', RELACION_OPTIONS, '22px 16px');
+      case 'nivel':     return questionStep('¿Qué nivel de medición tiene tu variable?', NIVEL_OPTIONS, '22px 16px');
+      case 'nivelAsoc': return questionStep('¿Qué nivel de medición tienen tus dos variables?', NIVEL_ASOC_OPTIONS, '22px 14px', true);
+      case 'tipoPred':  return questionStep('¿Qué tipo de variable predices?', TIPO_PRED_OPTIONS, '22px 16px');
+      case 'resultado': return resultadoStep();
+      default:          return oficioStep();
+    }
+  }
+
+  function render() {
+    tool.innerHTML = crumbsHtml() + stepHtml();
+  }
+
+  function reset() {
+    state = { oficio: null, grupos: null, relacion: null, nivel: null, nivelAsoc: null, tipoPred: null };
+    render();
+  }
+
+  function activate(el) {
+    if (el.hasAttribute('data-action')) { reset(); return; }
+    var parts = el.getAttribute('data-set').split(':');
+    state[parts[0]] = parts[1];
+    render();
+  }
+
+  tool.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-set],[data-action]');
+    if (el) activate(el);
+  });
+
+  tool.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var el = ev.target.closest('[data-set],[data-action]');
+    if (!el) return;
+    ev.preventDefault();
+    activate(el);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -66,6 +66,8 @@ copy(path.join(root, 'proyectos/ceneval/area1-calidadvida-interactiva.html'), pa
 copy(path.join(root, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-desarrollo-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-desarrollo-interactiva.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-vocacional-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-vocacional-interactiva.html'));
+// Herramienta de decisión "Encuentra tu prueba" (Área 3): el árbol de estadística, contestando.
+copy(path.join(root, 'proyectos/ceneval/area3-que-prueba-interactiva.html'), path.join(dist, 'proyectos/ceneval/area3-que-prueba-interactiva.html'));
 // Complemento "Cerebro interactivo" (Área 1): hotspots sobre un corte sagital + su imagen.
 copy(path.join(root, 'proyectos/ceneval/area1-cerebro-interactivo.html'), path.join(dist, 'proyectos/ceneval/area1-cerebro-interactivo.html'));
 copy(path.join(root, 'proyectos/ceneval/assets'), path.join(dist, 'proyectos/ceneval/assets'));
