@@ -53,6 +53,9 @@ copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-1-propiedades.html'),
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-2-instrumentos.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-3-escalas.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-instrumentos-4-uso.html'), path.join(dist, 'proyectos/ceneval/area1-instrumentos-4-uso.html'));
+// Vistas interactivas "una prueba, una vista" (Área 1): catálogos con medidores por categoría.
+copy(path.join(root, 'proyectos/ceneval/area1-inteligencia-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-inteligencia-interactiva.html'));
+copy(path.join(root, 'proyectos/ceneval/area1-neuropsicologicas-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-neuropsicologicas-interactiva.html'));
 // Complemento "Cerebro interactivo" (Área 1): hotspots sobre un corte sagital + su imagen.
 copy(path.join(root, 'proyectos/ceneval/area1-cerebro-interactivo.html'), path.join(dist, 'proyectos/ceneval/area1-cerebro-interactivo.html'));
 copy(path.join(root, 'proyectos/ceneval/assets'), path.join(dist, 'proyectos/ceneval/assets'));
