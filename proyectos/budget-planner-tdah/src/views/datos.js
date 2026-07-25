@@ -69,9 +69,12 @@ function cardNotion() {
       <form class="mt-2" data-form-notion>
         <div class="campo">
           <label for="campo-notion-token">Token de tu integración</label>
-          <input id="campo-notion-token" name="token" type="password" autocomplete="off"
-            placeholder="ntn_…" value="${escapeHtml(cfg.token)}" />
-          <span class="ayuda">se guarda solo en este navegador (cifrado si tienes código)</span>
+          <div class="fila" style="gap:0.5rem">
+            <input id="campo-notion-token" name="token" type="password" autocomplete="new-password"
+              placeholder="ntn_…" value="${escapeHtml(cfg.token)}" style="flex:1" />
+            <button type="button" class="btn btn-suave" data-toggle-token style="flex:none" aria-label="mostrar/ocultar token">👁️</button>
+          </div>
+          <span class="ayuda">se guarda solo en este navegador (cifrado si tienes código) · dale al 👁️ para confirmar que pegaste el token y no otra cosa</span>
         </div>
         <div class="campo">
           <label for="campo-notion-pagina">Link o ID de tu página de Notion</label>
@@ -95,6 +98,16 @@ function cardNotion() {
 function wirearCardNotion(el) {
   const form = el.querySelector('[data-form-notion]');
   if (!form) return;
+
+  const inputToken = el.querySelector('#campo-notion-token');
+  const btnToggleToken = el.querySelector('[data-toggle-token]');
+  if (inputToken && btnToggleToken) {
+    btnToggleToken.addEventListener('click', () => {
+      const vaAMostrar = inputToken.type === 'password';
+      inputToken.type = vaAMostrar ? 'text' : 'password';
+      btnToggleToken.textContent = vaAMostrar ? '🙈' : '👁️';
+    });
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
