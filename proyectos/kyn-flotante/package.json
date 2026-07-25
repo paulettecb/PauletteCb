@@ -1,0 +1,13 @@
+{
+  "name": "kyn-flotante",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Utilidades flotantes KYN: lector, recordatorios y journal, siempre a la mano en la barra de menú.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "latest"
+  }
+}

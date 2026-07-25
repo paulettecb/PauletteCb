@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KYN Flotante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="../../KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="../../KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <p class="app-kicker">KYN</p>
+    <h1 class="app-title">Flotante</h1>
+    <p class="app-sub">tus herramientas, siempre a la mano — esqueleto v0.1</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="lector" role="tab">📏 LECTOR</button>
+    <button class="tab-btn" data-tab="recordatorios" role="tab">🐶 RECORDATORIOS</button>
+    <button class="tab-btn" data-tab="journal" role="tab">📓 JOURNAL</button>
+  </nav>
+
+  <main>
+    <section id="tab-lector" class="tab-panel active">
+      <h2>LECTOR KYN</h2>
+      <p class="panel-copy">
+        Overlay de prueba: una ventana transparente, siempre-encima y
+        click-through (los clicks pasan a la app de abajo, como Slack o
+        Notas). Esto valida el mecanismo central antes de enlazar el lector
+        de verdad.
+      </p>
+      <div class="panel-actions">
+        <button id="overlay-toggle" class="btn-primary">Prender overlay de prueba</button>
+        <span id="overlay-status" class="status-pill">⚪ apagado</span>
+      </div>
+      <p class="panel-note">
+        Pendiente: enlazar <code>proyectos/packages/lector-kyn/</code> de
+        verdad, y resolver la pausa-por-click (choca con el click-through —
+        se ataca aparte).
+      </p>
+    </section>
+
+    <section id="tab-recordatorios" class="tab-panel">
+      <h2>RECORDATORIOS</h2>
+      <form id="board-form" class="board-form">
+        <input id="board-text" type="text" placeholder="¿qué necesitas recordar?" required>
+        <input id="board-date" type="datetime-local">
+        <button type="submit" class="btn-primary">Guardar</button>
+      </form>
+      <p class="panel-note">Sin fecha → Pendientes. Con fecha → Programados.</p>
+      <div class="board-columns">
+        <div class="board-column">
+          <h3>PENDIENTES</h3>
+          <ul id="board-pendientes" class="board-list"></ul>
+        </div>
+        <div class="board-column">
+          <h3>PROGRAMADOS</h3>
+          <ul id="board-programados" class="board-list"></ul>
+        </div>
+      </div>
+      <p class="panel-note">
+        Pendiente: que Kenna cruce la pantalla con el recordatorio cuando
+        llegue la hora de un "programado" (falta decidir el arte — las
+        poses actuales son de cursor, no un ciclo de caminata).
+      </p>
+    </section>
+
+    <section id="tab-journal" class="tab-panel">
+      <h2>JOURNAL</h2>
+      <form id="journal-form" class="journal-form">
+        <textarea id="journal-text" rows="3" placeholder="¿qué quieres guardar hoy?" required></textarea>
+        <button type="submit" class="btn-primary">Guardar entrada</button>
+      </form>
+      <div class="journal-export-row">
+        <button id="journal-export" class="btn-secondary">Exportar todo (copiar)</button>
+        <span id="journal-export-status" class="status-note"></span>
+      </div>
+      <ul id="journal-list" class="journal-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
