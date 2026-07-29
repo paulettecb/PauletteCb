@@ -2,3 +2,6 @@
 # conserva método y cuerpo) hacia la función de Netlify que reenvía a Notion.
 # Solo aplica en Netlify (GitHub Pages no corre funciones).
 /api/notion  /.netlify/functions/notion-proxy  200
+
+# Registro de visitas: POST desde public/visitas.js y GET (con token) desde /visitas.html.
+/api/visitas  /.netlify/functions/visitas  200
