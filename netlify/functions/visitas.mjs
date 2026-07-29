@@ -14,7 +14,7 @@
 //   GET   → devuelve los agregados para el panel. Exige el token de Paulette
 //           (header `x-visitas-token`, variable de entorno VISITAS_TOKEN en Netlify).
 
-import { getStore } from '@netlify/blobs';
+import { getStore, getDeployStore } from '@netlify/blobs';
 import { createHash, timingSafeEqual } from 'node:crypto';
 
 // Topes para que un bot o un troll no infle el blob con miles de llaves basura.
@@ -32,7 +32,13 @@ const json = (cuerpo, status = 200) =>
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
   });
 
-const almacen = () => getStore({ name: 'visitas', consistency: 'strong' });
+// Producción escribe en el almacén global (persiste entre deploys y no se borra
+// solo). Los previews y las ramas escriben en su propio almacén del deploy, para
+// que las pruebas no ensucien las cifras reales ni al revés.
+const almacen = () =>
+  process.env.CONTEXT === 'production'
+    ? getStore({ name: 'visitas', consistency: 'strong' })
+    : getDeployStore({ name: 'visitas', consistency: 'strong' });
 
 const fechaISO = (d = new Date()) => d.toISOString().slice(0, 10);
 
