@@ -233,6 +233,13 @@ label.check { display: flex; gap: 10px; align-items: center; font-size: 14px; cu
       <div class="nota aviso" style="margin-top:14px">
         Esto se guarda en <b>este</b> navegador. Si entras desde el celular, préndelo también allá.
       </div>
+
+      <h3 style="margin-top:22px">Respaldo</h3>
+      <p style="margin-top:0; font-size:14px">Bájate el último año de registros a tu compu. Así tienes tu propia copia aunque un día se caiga Netlify.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <button type="button" id="bajar-json">Descargar JSON</button>
+        <button type="button" id="bajar-csv">Descargar CSV</button>
+      </div>
     </section>
 
     <div class="nota error oculto" id="error-panel"></div>
@@ -387,6 +394,39 @@ label.check { display: flex; gap: 10px; align-items: center; font-size: 14px; cu
       await cargar(guardado(LLAVE_TOKEN) || '');
     });
   });
+
+  // --- Respaldo: se pide el año completo y se baja como archivo ---
+  function bajarArchivo(nombre, contenido, tipo) {
+    const url = URL.createObjectURL(new Blob([contenido], { type: tipo }));
+    const enlace = document.createElement('a');
+    enlace.href = url;
+    enlace.download = nombre;
+    enlace.click();
+    URL.revokeObjectURL(url);
+  }
+
+  const hoyISO = () => new Date().toISOString().slice(0, 10);
+
+  async function respaldo(formato) {
+    const rangoPrevio = dias;
+    dias = 365;
+    try {
+      const datos = await pedirDatos(guardado(LLAVE_TOKEN) || '');
+      if (formato === 'json') {
+        bajarArchivo(`visitas-${hoyISO()}.json`, JSON.stringify(datos, null, 2), 'application/json');
+      } else {
+        const filas = [['fecha', 'visitas', 'personas'], ...datos.serie.map((d) => [d.fecha, d.visitas, d.personas])];
+        bajarArchivo(`visitas-${hoyISO()}.csv`, filas.map((f) => f.join(',')).join('\n'), 'text/csv');
+      }
+    } catch (error) {
+      mostrarError($('error-panel'), error.message);
+    } finally {
+      dias = rangoPrevio;
+    }
+  }
+
+  $('bajar-json').addEventListener('click', () => respaldo('json'));
+  $('bajar-csv').addEventListener('click', () => respaldo('csv'));
 
   $('salir').addEventListener('click', () => {
     borrar(LLAVE_TOKEN);

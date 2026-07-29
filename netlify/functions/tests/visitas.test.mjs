@@ -4,30 +4,39 @@
 import test, { mock, before, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
 
+// Dos almacenes falsos: el global (producción) y el del deploy (previews y ramas).
 const guardado = new Map();
+const guardadoDeploy = new Map();
 
-const storeFalso = {
+const storeFalso = (mapa) => ({
   async get(llave, opciones) {
-    const valor = guardado.get(llave);
+    const valor = mapa.get(llave);
     if (valor === undefined) return null;
     return opciones?.type === 'json' ? JSON.parse(valor) : valor;
   },
   async setJSON(llave, valor) {
-    guardado.set(llave, JSON.stringify(valor));
+    mapa.set(llave, JSON.stringify(valor));
   },
-};
+});
 
 let visitas;
 
 before(async () => {
-  mock.module('@netlify/blobs', { namedExports: { getStore: () => storeFalso } });
+  mock.module('@netlify/blobs', {
+    namedExports: {
+      getStore: () => storeFalso(guardado),
+      getDeployStore: () => storeFalso(guardadoDeploy),
+    },
+  });
   visitas = (await import('../visitas.mjs')).default;
 });
 
 beforeEach(() => {
   guardado.clear();
+  guardadoDeploy.clear();
   process.env.VISITAS_TOKEN = 'token-de-prueba';
   process.env.VISITAS_SALT = 'sal-de-prueba';
+  process.env.CONTEXT = 'production';
 });
 
 const UA_HUMANO =
@@ -149,6 +158,14 @@ test('los días sin visitas salen en cero, no huecos', async () => {
     datos.serie.map((d) => d.visitas),
     [0, 0, 0],
   );
+});
+
+test('un preview NO escribe en las cifras reales de producción', async () => {
+  process.env.CONTEXT = 'deploy-preview';
+  await visitas(peticionPost({ ruta: '/' }), contexto);
+
+  assert.equal(guardado.size, 0, 'el almacén de producción queda intacto');
+  assert.equal(guardadoDeploy.size, 1, 'la visita de prueba se queda en el almacén del preview');
 });
 
 test('otros métodos se rechazan', async () => {
