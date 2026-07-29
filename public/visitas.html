@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Registro de visitas · Paulette C</title>
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="preload" as="font" type="font/otf" href="./proyectos/KYN%20Design%20System/assets/fonts/Friendship-Medium.otf" crossorigin>
+<link rel="preload" as="font" type="font/otf" href="./proyectos/KYN%20Design%20System/assets/fonts/Farmhouse.otf" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Friendship';
+  src: url('./proyectos/KYN%20Design%20System/assets/fonts/Friendship-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Farmhouse';
+  src: url('./proyectos/KYN%20Design%20System/assets/fonts/Farmhouse.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+:root {
+  --periwinkle-50: #F0F2FB;
+  --periwinkle-100: #E2E6F5;
+  --periwinkle-200: #C9D0ED;
+  --periwinkle-400: #9BA6DA;
+  --periwinkle-500: #8795D2;
+  --periwinkle-700: #5562A4;
+  --periwinkle-900: #2F3658;
+  --white: #FFFFFF;
+  --paper: #FBFAF7;
+  --oat: #F4F0E8;
+  --sand: #E9E3D7;
+  --ink-900: #2A2933;
+  --ink-700: #4A4955;
+  --ink-500: #75737F;
+  --ink-100: #E4E2E6;
+  --pop-magenta: #E85DA0;
+  --pastel-blush: #F6D2DD;
+  --pastel-mint: #CFE8DA;
+  --pastel-sky: #CFE0F2;
+  --pastel-lilac: #E2D6F0;
+  --pastel-butter: #F6EBC4;
+  --font-display: 'Friendship', Georgia, serif;
+  --font-accent: 'Farmhouse', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --radius: 18px;
+  --shadow: 0 14px 34px rgba(47, 54, 88, .10);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-900);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) 80px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+
+/* Portada */
+.hero { text-align: center; margin-bottom: 34px; }
+.sello {
+  display: inline-block; font-family: var(--font-accent); font-size: 15px;
+  letter-spacing: .12em; color: var(--periwinkle-700);
+  background: var(--periwinkle-50); border: 1px solid var(--periwinkle-200);
+  border-radius: 999px; padding: 5px 16px; margin-bottom: 14px;
+}
+h1 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(38px, 7vw, 62px); line-height: 1.05; margin: 0 0 8px;
+  color: var(--periwinkle-900);
+}
+.subtitulo { font-family: var(--font-accent); font-size: clamp(17px, 2.4vw, 21px); color: var(--ink-700); margin: 0; }
+
+h2 {
+  font-family: var(--font-sans); font-weight: 900; text-transform: uppercase;
+  letter-spacing: .04em; font-size: 15px; color: var(--periwinkle-700);
+  margin: 0 0 14px;
+}
+h3 {
+  font-family: var(--font-sans); font-weight: 900; text-transform: uppercase;
+  letter-spacing: .04em; font-size: 13px; color: var(--ink-700); margin: 0 0 10px;
+}
+
+/* Bloques */
+.card {
+  background: var(--white); border: 1px solid var(--ink-100);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: clamp(16px, 3vw, 24px); margin-bottom: 22px;
+}
+.resumen {
+  background: linear-gradient(180deg, var(--periwinkle-50), var(--white));
+  border-color: var(--periwinkle-200);
+}
+.grid-kpis { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.kpi { background: var(--oat); border: 1px solid var(--sand); border-radius: 14px; padding: 14px 16px; }
+.kpi__num { font-size: clamp(26px, 4.6vw, 36px); font-weight: 900; line-height: 1.1; color: var(--periwinkle-900); }
+.kpi__label { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; font-weight: 700; color: var(--ink-500); }
+
+/* Controles */
+.controles { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.rangos { display: flex; gap: 8px; flex-wrap: wrap; }
+button, .btn {
+  font-family: var(--font-sans); font-weight: 700; font-size: 14px;
+  border-radius: 999px; border: 1px solid var(--periwinkle-200);
+  background: var(--white); color: var(--periwinkle-700);
+  padding: 8px 16px; cursor: pointer;
+}
+button:hover { border-color: var(--periwinkle-400); }
+button[aria-pressed="true"] { background: var(--periwinkle-500); border-color: var(--periwinkle-500); color: var(--white); }
+button.primario { background: var(--pop-magenta); border-color: var(--pop-magenta); color: var(--white); }
+input[type="password"], input[type="text"] {
+  font-family: var(--font-sans); font-size: 15px; padding: 10px 14px;
+  border-radius: 12px; border: 1px solid var(--periwinkle-200); background: var(--white);
+  color: var(--ink-900); min-width: min(320px, 100%);
+}
+
+/* Serie por día */
+.serie { display: flex; align-items: flex-end; gap: 3px; height: 170px; padding-top: 10px; overflow-x: auto; }
+.barra { flex: 1 0 8px; min-width: 8px; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.barra span {
+  display: block; width: 100%; border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, var(--periwinkle-400), var(--periwinkle-500)); min-height: 3px;
+}
+.barra.hoy span { background: linear-gradient(180deg, var(--pop-magenta), #d24a8c); }
+.serie-pies { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-500); margin-top: 8px; }
+
+/* Listas top */
+.columnas { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+ul.top { list-style: none; margin: 0; padding: 0; }
+ul.top li { margin-bottom: 10px; }
+.fila { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 4px; }
+.fila b { font-weight: 700; }
+.pista { height: 8px; background: var(--ink-100); border-radius: 999px; overflow: hidden; }
+.pista i { display: block; height: 100%; border-radius: 999px; background: var(--periwinkle-500); }
+.top--rutas .pista i { background: var(--periwinkle-500); }
+.top--ref .pista i { background: var(--pop-magenta); }
+.top--paises .pista i { background: #6fae8e; }
+.top--disp .pista i { background: #d9a441; }
+.vacio { color: var(--ink-500); font-size: 14px; }
+
+/* Notas */
+.nota {
+  background: var(--pastel-mint); border-left: 5px solid #6fae8e; border-radius: 12px;
+  padding: 12px 16px; font-size: 14px; margin-top: 18px;
+}
+.aviso { background: var(--pastel-butter); border-left-color: #d9a441; }
+.error { background: var(--pastel-blush); border-left-color: var(--pop-magenta); }
+.privacidad { font-size: 13px; color: var(--ink-500); margin-top: 26px; }
+.oculto { display: none !important; }
+label.check { display: flex; gap: 10px; align-items: center; font-size: 14px; cursor: pointer; }
+@media print { .controles, .puerta { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="sello">Solo para ti</span>
+    <h1>Registro de visitas</h1>
+    <p class="subtitulo">Quién pasa por paulettecb.com — sin cookies y sin nadie más mirando</p>
+  </header>
+
+  <!-- Puerta: pide el token antes de mostrar nada -->
+  <section class="card puerta" id="puerta">
+    <h2>Entrar</h2>
+    <p style="margin-top:0">Escribe tu token (el valor de <code>VISITAS_TOKEN</code> en Netlify). Se guarda solo en este navegador.</p>
+    <form id="form-token" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+      <label class="oculto" for="token">Token</label>
+      <input id="token" type="password" placeholder="tu token secreto" autocomplete="off">
+      <button class="primario" type="submit">Ver mis visitas</button>
+    </form>
+    <div class="nota error oculto" id="error-token"></div>
+  </section>
+
+  <!-- Panel -->
+  <main id="panel" class="oculto">
+    <div class="controles">
+      <div class="rangos" role="group" aria-label="Rango de días">
+        <button type="button" data-dias="7">7 días</button>
+        <button type="button" data-dias="30" aria-pressed="true">30 días</button>
+        <button type="button" data-dias="90">90 días</button>
+        <button type="button" data-dias="365">1 año</button>
+      </div>
+      <button type="button" id="salir">Cerrar sesión</button>
+    </div>
+
+    <section class="card resumen">
+      <h2>De un vistazo</h2>
+      <div class="grid-kpis" id="kpis"></div>
+      <p class="vacio" id="periodo" style="margin-bottom:0"></p>
+    </section>
+
+    <section class="card">
+      <h2>Visitas por día</h2>
+      <div class="serie" id="serie" role="img" aria-label="Visitas por día"></div>
+      <div class="serie-pies"><span id="serie-inicio"></span><span id="serie-fin"></span></div>
+    </section>
+
+    <section class="card">
+      <h2>Qué miran y de dónde llegan</h2>
+      <div class="columnas">
+        <div>
+          <h3>Páginas más vistas</h3>
+          <ul class="top top--rutas" id="top-rutas"></ul>
+        </div>
+        <div>
+          <h3>De dónde llegan</h3>
+          <ul class="top top--ref" id="top-ref"></ul>
+        </div>
+        <div>
+          <h3>Países</h3>
+          <ul class="top top--paises" id="top-paises"></ul>
+        </div>
+        <div>
+          <h3>Dispositivo e idioma</h3>
+          <ul class="top top--disp" id="top-disp"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Ajustes</h2>
+      <label class="check"><input type="checkbox" id="optout"> No contar mis propias visitas en este dispositivo</label>
+      <div class="nota aviso" style="margin-top:14px">
+        Esto se guarda en <b>este</b> navegador. Si entras desde el celular, préndelo también allá.
+      </div>
+    </section>
+
+    <div class="nota error oculto" id="error-panel"></div>
+
+    <p class="privacidad">
+      <b>Qué se guarda:</b> solo cuentas por día (visitas, personas distintas del día, páginas, dominio de referencia, país y tipo de dispositivo), en tu propio sitio de Netlify.
+      <b>Qué no:</b> IPs, cookies, ni forma de seguir a alguien entre días. Cuentas Claras no se rastrea.
+    </p>
+  </main>
+</div>
+
+<script>
+(() => {
+  const LLAVE_TOKEN = 'visitas-kyn-token';
+  const LLAVE_OPTOUT = 'visitas-optout';
+  const $ = (id) => document.getElementById(id);
+  const num = (n) => new Intl.NumberFormat('es-MX').format(n || 0);
+
+  let dias = 30;
+
+  const guardado = (llave) => { try { return localStorage.getItem(llave); } catch { return null; } };
+  const guardar = (llave, valor) => { try { localStorage.setItem(llave, valor); } catch { /* modo privado */ } };
+  const borrar = (llave) => { try { localStorage.removeItem(llave); } catch { /* modo privado */ } };
+
+  function mostrarError(el, mensaje) {
+    el.textContent = mensaje;
+    el.classList.remove('oculto');
+  }
+
+  async function pedirDatos(token) {
+    const res = await fetch(`/api/visitas?dias=${dias}`, { headers: { 'x-visitas-token': token } });
+    if (!res.ok) {
+      const cuerpo = await res.json().catch(() => ({}));
+      throw new Error(cuerpo.message || `No se pudo leer (error ${res.status})`);
+    }
+    return res.json();
+  }
+
+  function fechaCorta(iso) {
+    const [a, m, d] = iso.split('-');
+    return `${d}/${m}`;
+  }
+
+  function pintarSerie(serie) {
+    const cont = $('serie');
+    cont.innerHTML = '';
+    const max = Math.max(1, ...serie.map((d) => d.visitas));
+    const hoy = new Date().toISOString().slice(0, 10);
+    for (const dia of serie) {
+      const barra = document.createElement('div');
+      barra.className = 'barra' + (dia.fecha === hoy ? ' hoy' : '');
+      barra.title = `${fechaCorta(dia.fecha)}: ${num(dia.visitas)} visitas · ${num(dia.personas)} personas`;
+      const relleno = document.createElement('span');
+      relleno.style.height = `${Math.round((dia.visitas / max) * 100)}%`;
+      barra.appendChild(relleno);
+      cont.appendChild(barra);
+    }
+    $('serie-inicio').textContent = serie.length ? fechaCorta(serie[0].fecha) : '';
+    $('serie-fin').textContent = serie.length ? fechaCorta(serie[serie.length - 1].fecha) : '';
+  }
+
+  function pintarTop(idLista, items, formato = (x) => x) {
+    const ul = $(idLista);
+    ul.innerHTML = '';
+    if (!items || !items.length) {
+      ul.innerHTML = '<li class="vacio">Todavía nada por aquí.</li>';
+      return;
+    }
+    const max = Math.max(...items.map((i) => i.conteo));
+    for (const item of items) {
+      const li = document.createElement('li');
+      const fila = document.createElement('div');
+      fila.className = 'fila';
+      const nombre = document.createElement('span');
+      nombre.textContent = formato(item.nombre);
+      const conteo = document.createElement('b');
+      conteo.textContent = num(item.conteo);
+      fila.append(nombre, conteo);
+      const pista = document.createElement('div');
+      pista.className = 'pista';
+      const relleno = document.createElement('i');
+      relleno.style.width = `${Math.round((item.conteo / max) * 100)}%`;
+      pista.appendChild(relleno);
+      li.append(fila, pista);
+      ul.appendChild(li);
+    }
+  }
+
+  const NOMBRES_PAIS = new Intl.DisplayNames(['es'], { type: 'region' });
+  const nombrePais = (codigo) => {
+    if (!codigo || codigo === '??') return 'Desconocido';
+    try { return NOMBRES_PAIS.of(codigo) || codigo; } catch { return codigo; }
+  };
+
+  function pintar(datos) {
+    const serie = datos.serie || [];
+    const hoy = serie[serie.length - 1] || { visitas: 0, personas: 0 };
+    const mejor = serie.reduce((a, b) => (b.visitas > (a?.visitas || 0) ? b : a), null);
+    const promedio = serie.length ? Math.round(datos.totales.visitas / serie.length) : 0;
+
+    $('kpis').innerHTML = [
+      ['Visitas hoy', num(hoy.visitas)],
+      [`Visitas en ${datos.dias} días`, num(datos.totales.visitas)],
+      ['Promedio por día', num(promedio)],
+      ['Mejor día', mejor && mejor.visitas ? `${num(mejor.visitas)} · ${fechaCorta(mejor.fecha)}` : '—'],
+    ].map(([label, valor]) => `<div class="kpi"><div class="kpi__num">${valor}</div><div class="kpi__label">${label}</div></div>`).join('');
+
+    $('periodo').textContent = `Del ${datos.desde} al ${datos.hasta} · ${num(datos.totales.personasPorDia)} personas distintas sumando día por día.`;
+
+    pintarSerie(serie);
+    pintarTop('top-rutas', datos.rutas);
+    pintarTop('top-ref', datos.referrers);
+    pintarTop('top-paises', datos.paises, nombrePais);
+    pintarTop('top-disp', [...(datos.dispositivos || []), ...(datos.idiomas || []).map((i) => ({ ...i, nombre: `idioma: ${i.nombre}` }))]);
+  }
+
+  async function cargar(token) {
+    $('error-panel').classList.add('oculto');
+    try {
+      pintar(await pedirDatos(token));
+      return true;
+    } catch (error) {
+      mostrarError($('error-panel'), error.message);
+      return false;
+    }
+  }
+
+  function abrirPanel() {
+    $('puerta').classList.add('oculto');
+    $('panel').classList.remove('oculto');
+  }
+
+  // --- Eventos ---
+  $('form-token').addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    const token = $('token').value.trim();
+    if (!token) return;
+    $('error-token').classList.add('oculto');
+    try {
+      pintar(await pedirDatos(token));
+      guardar(LLAVE_TOKEN, token);
+      abrirPanel();
+    } catch (error) {
+      mostrarError($('error-token'), error.message);
+    }
+  });
+
+  document.querySelectorAll('[data-dias]').forEach((boton) => {
+    boton.addEventListener('click', async () => {
+      dias = Number(boton.dataset.dias);
+      document.querySelectorAll('[data-dias]').forEach((b) => b.setAttribute('aria-pressed', String(b === boton)));
+      await cargar(guardado(LLAVE_TOKEN) || '');
+    });
+  });
+
+  $('salir').addEventListener('click', () => {
+    borrar(LLAVE_TOKEN);
+    location.reload();
+  });
+
+  $('optout').checked = guardado(LLAVE_OPTOUT) === '1';
+  $('optout').addEventListener('change', (evento) => {
+    if (evento.target.checked) guardar(LLAVE_OPTOUT, '1');
+    else borrar(LLAVE_OPTOUT);
+  });
+
+  // Si ya hay token guardado, entrar directo.
+  const previo = guardado(LLAVE_TOKEN);
+  if (previo) {
+    cargar(previo).then((ok) => {
+      if (ok) abrirPanel();
+      else borrar(LLAVE_TOKEN);
+    });
+  }
+})();
+</script>
+</body>
+</html>

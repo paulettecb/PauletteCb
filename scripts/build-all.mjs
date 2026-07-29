@@ -26,6 +26,8 @@ console.log('▶ Build principal (raíz + MediaPipe Lab)');
 rmSync(dist, { recursive: true, force: true });
 run('npx vite build');
 
+// Nota: lo que vive en public/ (favicons, visitas.js y visitas.html) lo copia
+// Vite solo a la raíz de dist/. Por eso no aparece en las copias de abajo.
 console.log('▶ Copiando styles.css plano (lo referencian lsm/rescate directo, sin bundle)');
 copy(path.join(root, 'styles.css'), path.join(dist, 'styles.css'));
 
