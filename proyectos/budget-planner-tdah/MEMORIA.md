@@ -59,11 +59,19 @@ documenta la API.
    - Saldo deudor total · desglose **regular (con interés)** vs **MSI** · límite ·
      crédito disponible · **día de corte** · **día límite de pago** · pago mínimo ·
      pago para no generar intereses · tasa de interés / CAT.
-3. **Modela la tarjeta como DOS piezas** para que el plan sea real:
+3. **Modela la tarjeta como HASTA TRES piezas** para que el plan sea real:
    - **Saldo facturado** = el "pago para no generar intereses" **tal cual**, con su tasa.
-   - **MSI por facturar** aparte = el "total de plan de meses sin intereses" (saldo pendiente),
-     a 0%, con mensualidad = **suma de las mensualidades de todos los planes vigentes**
-     (baja sola conforme los planes terminan; no es un número fijo).
+   - **Meses SIN intereses por facturar** = saldo pendiente de los planes a 0%, con
+     mensualidad = **suma del "pago requerido" de todos los planes vigentes** (baja sola
+     conforme terminan; no es un número fijo).
+   - **Meses CON intereses por facturar** ⚠️ = en BBVA aparecen como
+     **"ABONO POR TRASP. A PROMOC."** en una tabla aparte ("compras y cargos diferidos a meses
+     **con** intereses"). Suenan a meses pero cobran ~30% anual. **Nunca los metas en la
+     canasta de 0%.** Son cuota fija (el interés ya está pactado), así que adelantarlos ahorra
+     menos de lo que sugiere la tasa: trátalos como préstamo, no como revolvente.
+
+   El estado de cuenta trae las tres tablas por separado — hay que leer las tres. Si solo
+   aparecen dos secciones de meses, revisa igual: la de "con intereses" es fácil de pasar por alto.
 
    ⚠️ **NUNCA restes los MSI del saldo facturado.** Son cosas separadas: los MSI pendientes
    son compras que *todavía no se cobran*, no están dentro del saldo. Restarlos inventa un
@@ -117,6 +125,13 @@ documenta la API.
 - `npm run build` corre `build-all.mjs`; el sub-build de esta app ya está incluido.
 
 ## Bitácora (lo más nuevo arriba)
+- **2026-07-31**: se leyó el estado de cuenta de la segunda tarjeta y salió **otro tipo de deuda
+  que la app no modela**: los **meses CON intereses** (traspasos a promoción, ~30% anual). Estaban
+  contados dentro de la canasta de meses sin intereses como si fueran 0% — o sea, una parte grande
+  de la deuda figuraba como gratis. Se separó en una deuda nueva en Notion y se actualizó el
+  paso 3 del playbook a **tres piezas**. De paso, el saldo facturado de esa tarjeta estaba
+  desactualizado (traía el del periodo anterior). El uso de esa línea está casi al tope, así que
+  hay que vigilar el score. Sigue todo en el issue **#199**.
 - **2026-07-30**: se leyó un estado de cuenta real de tarjeta y salió un **error de modelado**:
   la tarjeta con MSI estaba cargada como `revolvente = facturado − MSI pendientes`, o sea
   restando cosas que no se restan. La deuda real era bastante mayor y el plan de escape estaba
