@@ -60,9 +60,28 @@ documenta la API.
      crédito disponible · **día de corte** · **día límite de pago** · pago mínimo ·
      pago para no generar intereses · tasa de interés / CAT.
 3. **Modela la tarjeta como DOS piezas** para que el plan sea real:
-   - Tarjeta = solo la parte **regular** (la que genera interés) con su tasa.
-   - MSI aparte (saldo restante, mensualidad ≈ pago a meses del estado de cuenta,
-     meses restantes ≈ saldo/mensualidad). Los MSI no llevan interés.
+   - **Saldo facturado** = el "pago para no generar intereses" **tal cual**, con su tasa.
+   - **MSI por facturar** aparte = el "total de plan de meses sin intereses" (saldo pendiente),
+     a 0%, con mensualidad = **suma de las mensualidades de todos los planes vigentes**
+     (baja sola conforme los planes terminan; no es un número fijo).
+
+   ⚠️ **NUNCA restes los MSI del saldo facturado.** Son cosas separadas: los MSI pendientes
+   son compras que *todavía no se cobran*, no están dentro del saldo. Restarlos inventa un
+   número que no existe en ningún lado y subestima la deuda por el monto completo de los MSI.
+   (Pasó en julio 2026 y el plan de escape estuvo mal durante semanas.)
+
+   **Verificación obligatoria** — si no cuadra, el modelo está mal:
+   ```
+   límite de crédito − crédito disponible == saldo facturado + MSI por facturar
+   ```
+
+   Dos cosas más que hay que capturar del estado de cuenta:
+   - **"Pago mínimo más meses sin intereses"**: es el pago real que evita que la deuda crezca.
+     Pagar solo el mínimo la hace SUBIR, porque las mensualidades MSI que se facturan cada mes
+     son mayores que el abono a capital del mínimo. Este número casi nadie lo lee.
+   - **Diferido automático**: hay tarjetas (Amex Platinum) que mandan a 3 MSI automáticamente
+     toda compra arriba de cierto monto **y toda compra en moneda extranjera**. Si compra
+     insumos en dólares, el saldo crece solo — hay que decírselo, es la causa raíz.
 4. **Compara contra el mes pasado** (usa su Notion / la gráfica): si el estado de
    cuenta es después del corte, aclara qué movimientos ya entraron y cuáles no.
 5. Ofrece **armarle un archivo JSON para importar** (Datos → importar) con la
@@ -98,6 +117,15 @@ documenta la API.
 - `npm run build` corre `build-all.mjs`; el sub-build de esta app ya está incluido.
 
 ## Bitácora (lo más nuevo arriba)
+- **2026-07-30**: se leyó un estado de cuenta real de tarjeta y salió un **error de modelado**:
+  la tarjeta con MSI estaba cargada como `revolvente = facturado − MSI pendientes`, o sea
+  restando cosas que no se restan. La deuda real era bastante mayor y el plan de escape estaba
+  calculado sobre el número chico. Se corrigieron los renglones en **Notion** (con la
+  explicación dentro de cada página) y se reescribió el paso 3 del playbook de arriba.
+  **La app todavía tiene los números viejos** — no hacer "mandar a Notion" desde la app antes
+  de arreglarla, o pisa la corrección ("traer de Notion" sí es seguro). Fix pendiente en
+  el issue **#199**, que además creció para incluir el IVA sobre intereses y la calculadora
+  de "¿a dónde mando este dinero extra?". Falta verificar si BBVA tiene el mismo problema.
 - **2026-07**: fix del "traer de Notion" (daba 500). Causa: migración de Notion a
   "data sources"; el query clásico dejó de servir. Se agregó fallback al endpoint de
   data source + errores legibles en el proxy y en `llamar`.
