@@ -1,0 +1,226 @@
+/* simulador.css — estilos propios de la vista "¿Qué pasa si…?" (prefijo .sim-).
+   Todo lo demás sale de las clases compartidas de styles.css. */
+
+.sim-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .sim-campos { grid-template-columns: 1fr; }
+}
+
+.sim-disponible {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--ink-700);
+}
+
+.sim-fila-extra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ink-100);
+}
+
+.sim-check {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--ink-700);
+  cursor: pointer;
+}
+
+.sim-check select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--ink-100);
+  border-radius: 0.6rem;
+  background: var(--white);
+  font: inherit;
+  color: var(--ink-900);
+}
+
+/* ---------- Resumen ---------- */
+
+.sim-resumen { margin-top: 0.9rem; }
+
+.sim-resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .sim-resumen-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.sim-resumen-grid .monto-grande { font-size: 1.15rem; }
+
+.sim-alerta {
+  margin-top: 0.9rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.75rem;
+  background: var(--periwinkle-50);
+  border: 1px solid var(--periwinkle-200);
+  font-size: 0.88rem;
+  color: var(--ink-700);
+}
+
+.sim-libres {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top: 1px solid var(--ink-100);
+  display: grid;
+  gap: 0.4rem;
+}
+
+.sim-libres li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+}
+
+.sim-libres span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Tabla ---------- */
+
+.sim-tabla-card { margin-top: 0.9rem; }
+
+/* La tabla scrollea sola; el body de la página nunca se va de lado. */
+.sim-scroll {
+  margin-top: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sim-tabla {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.sim-tabla th,
+.sim-tabla td {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--ink-100);
+  text-align: right;
+}
+
+.sim-tabla thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--oat);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-700);
+}
+
+.sim-tabla thead .sim-subhead th {
+  top: 2rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0;
+  color: var(--ink-500);
+}
+
+.sim-th-deuda {
+  text-align: center;
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* La columna del mes se queda pegada al hacer scroll horizontal. */
+.sim-col-mes {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--white);
+  text-align: left;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.sim-tabla thead .sim-col-mes {
+  z-index: 4;
+  background: var(--oat);
+}
+
+.sim-tabla tbody tr:nth-child(even) td,
+.sim-tabla tbody tr:nth-child(even) .sim-col-mes {
+  background: var(--paper);
+}
+
+.sim-celda-pago { position: relative; }
+
+.sim-input {
+  width: 5.5rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--ink-100);
+  border-radius: 0.5rem;
+  background: var(--white);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--ink-900);
+}
+
+.sim-input:focus {
+  outline: 2px solid var(--periwinkle-400);
+  outline-offset: 1px;
+}
+
+/* Amarillo = ese pago lo fijaste tú; vacíalo y vuelve al reparto automático. */
+.sim-input.manual {
+  border-color: var(--periwinkle-400);
+  background: var(--periwinkle-50);
+  font-weight: 700;
+}
+
+.sim-cargo {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--pop-magenta);
+}
+
+.sim-saldo,
+.sim-total {
+  font-variant-numeric: tabular-nums;
+}
+
+.sim-total { font-weight: 700; }
+
+.sim-mas {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--periwinkle-700);
+}
+
+.sim-nota {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--ink-500);
+  text-align: center;
+}

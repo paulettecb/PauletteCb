@@ -18,8 +18,15 @@ las vistas exportan `render(el)` con re-render completo; el header de `src/store
 documenta la API.
 
 ## Estado actual (lo que YA existe y está en `main`)
-- **6 vistas**: resumen, movimientos, presupuesto (topes por categoría), deudas,
-  calendario del mes, datos/ajustes.
+- **7 vistas**: resumen, movimientos, presupuesto (topes por categoría), deudas,
+  **simular** 🔮, calendario del mes, datos/ajustes.
+- **Simulador "¿qué pasa si…?"** (`views/simulador.js` + `store.simular()`): tabla mes a mes
+  donde escribes el pago de CADA deuda en CADA mes y todo se recalcula en vivo; también deja
+  meter compras nuevas por mes. Lo que fijas a mano se respeta y el resto se reparte solo
+  (avalancha o bola de nieve); vaciar una celda la regresa al automático. Tiene casilla de
+  **IVA sobre intereses** (16%, así lo cobra el banco en MX — el plan de escape todavía no lo
+  modela, ver #199). No toca las deudas reales y su estado vive en variables de módulo, así
+  que se borra al recargar.
 - **Deudas** por tipo: tarjeta, MSI, préstamo, hipoteca y **persona** (a quién le
   debes, sin intereses — p. ej. a su papá).
 - **Plan de escape** con **3 canastas** (🔴 atacar / 🔒 fijas / 🟢 a 0%) + **motor
@@ -125,6 +132,12 @@ documenta la API.
 - `npm run build` corre `build-all.mjs`; el sub-build de esta app ya está incluido.
 
 ## Bitácora (lo más nuevo arriba)
+- **2026-07-31**: vista **🔮 Simular** + `store.simular()`. Nació de una sesión larga de
+  planeación en la que quedó claro que el plan de escape (un solo "extra mensual" repartido
+  por la app) no alcanza cuando quieres decidir mes por mes y deuda por deuda. Probado con
+  Playwright servido por http: recalcula al cambiar un pago, la celda fijada se marca y al
+  vaciarla vuelve al automático, el IVA cambia los intereses, las compras nuevas se pintan y
+  el estado vacío sale sin deudas.
 - **2026-07-31**: se leyó el estado de cuenta de la segunda tarjeta y salió **otro tipo de deuda
   que la app no modela**: los **meses CON intereses** (traspasos a promoción, ~30% anual). Estaban
   contados dentro de la canasta de meses sin intereses como si fueran 0% — o sea, una parte grande
