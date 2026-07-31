@@ -18,8 +18,15 @@ las vistas exportan `render(el)` con re-render completo; el header de `src/store
 documenta la API.
 
 ## Estado actual (lo que YA existe y está en `main`)
-- **6 vistas**: resumen, movimientos, presupuesto (topes por categoría), deudas,
-  calendario del mes, datos/ajustes.
+- **7 vistas**: resumen, movimientos, presupuesto (topes por categoría), deudas,
+  **simular** 🔮, calendario del mes, datos/ajustes.
+- **Simulador "¿qué pasa si…?"** (`views/simulador.js` + `store.simular()`): tabla mes a mes
+  donde escribes el pago de CADA deuda en CADA mes y todo se recalcula en vivo; también deja
+  meter compras nuevas por mes. Lo que fijas a mano se respeta y el resto se reparte solo
+  (avalancha o bola de nieve); vaciar una celda la regresa al automático. Tiene casilla de
+  **IVA sobre intereses** (16%, así lo cobra el banco en MX — el plan de escape todavía no lo
+  modela, ver #199). No toca las deudas reales y su estado vive en variables de módulo, así
+  que se borra al recargar.
 - **Deudas** por tipo: tarjeta, MSI, préstamo, hipoteca y **persona** (a quién le
   debes, sin intereses — p. ej. a su papá).
 - **Plan de escape** con **3 canastas** (🔴 atacar / 🔒 fijas / 🟢 a 0%) + **motor
@@ -59,10 +66,37 @@ documenta la API.
    - Saldo deudor total · desglose **regular (con interés)** vs **MSI** · límite ·
      crédito disponible · **día de corte** · **día límite de pago** · pago mínimo ·
      pago para no generar intereses · tasa de interés / CAT.
-3. **Modela la tarjeta como DOS piezas** para que el plan sea real:
-   - Tarjeta = solo la parte **regular** (la que genera interés) con su tasa.
-   - MSI aparte (saldo restante, mensualidad ≈ pago a meses del estado de cuenta,
-     meses restantes ≈ saldo/mensualidad). Los MSI no llevan interés.
+3. **Modela la tarjeta como HASTA TRES piezas** para que el plan sea real:
+   - **Saldo facturado** = el "pago para no generar intereses" **tal cual**, con su tasa.
+   - **Meses SIN intereses por facturar** = saldo pendiente de los planes a 0%, con
+     mensualidad = **suma del "pago requerido" de todos los planes vigentes** (baja sola
+     conforme terminan; no es un número fijo).
+   - **Meses CON intereses por facturar** ⚠️ = en BBVA aparecen como
+     **"ABONO POR TRASP. A PROMOC."** en una tabla aparte ("compras y cargos diferidos a meses
+     **con** intereses"). Suenan a meses pero cobran ~30% anual. **Nunca los metas en la
+     canasta de 0%.** Son cuota fija (el interés ya está pactado), así que adelantarlos ahorra
+     menos de lo que sugiere la tasa: trátalos como préstamo, no como revolvente.
+
+   El estado de cuenta trae las tres tablas por separado — hay que leer las tres. Si solo
+   aparecen dos secciones de meses, revisa igual: la de "con intereses" es fácil de pasar por alto.
+
+   ⚠️ **NUNCA restes los MSI del saldo facturado.** Son cosas separadas: los MSI pendientes
+   son compras que *todavía no se cobran*, no están dentro del saldo. Restarlos inventa un
+   número que no existe en ningún lado y subestima la deuda por el monto completo de los MSI.
+   (Pasó en julio 2026 y el plan de escape estuvo mal durante semanas.)
+
+   **Verificación obligatoria** — si no cuadra, el modelo está mal:
+   ```
+   límite de crédito − crédito disponible == saldo facturado + MSI por facturar
+   ```
+
+   Dos cosas más que hay que capturar del estado de cuenta:
+   - **"Pago mínimo más meses sin intereses"**: es el pago real que evita que la deuda crezca.
+     Pagar solo el mínimo la hace SUBIR, porque las mensualidades MSI que se facturan cada mes
+     son mayores que el abono a capital del mínimo. Este número casi nadie lo lee.
+   - **Diferido automático**: hay tarjetas (Amex Platinum) que mandan a 3 MSI automáticamente
+     toda compra arriba de cierto monto **y toda compra en moneda extranjera**. Si compra
+     insumos en dólares, el saldo crece solo — hay que decírselo, es la causa raíz.
 4. **Compara contra el mes pasado** (usa su Notion / la gráfica): si el estado de
    cuenta es después del corte, aclara qué movimientos ya entraron y cuáles no.
 5. Ofrece **armarle un archivo JSON para importar** (Datos → importar) con la
@@ -98,6 +132,28 @@ documenta la API.
 - `npm run build` corre `build-all.mjs`; el sub-build de esta app ya está incluido.
 
 ## Bitácora (lo más nuevo arriba)
+- **2026-07-31**: vista **🔮 Simular** + `store.simular()`. Nació de una sesión larga de
+  planeación en la que quedó claro que el plan de escape (un solo "extra mensual" repartido
+  por la app) no alcanza cuando quieres decidir mes por mes y deuda por deuda. Probado con
+  Playwright servido por http: recalcula al cambiar un pago, la celda fijada se marca y al
+  vaciarla vuelve al automático, el IVA cambia los intereses, las compras nuevas se pintan y
+  el estado vacío sale sin deudas.
+- **2026-07-31**: se leyó el estado de cuenta de la segunda tarjeta y salió **otro tipo de deuda
+  que la app no modela**: los **meses CON intereses** (traspasos a promoción, ~30% anual). Estaban
+  contados dentro de la canasta de meses sin intereses como si fueran 0% — o sea, una parte grande
+  de la deuda figuraba como gratis. Se separó en una deuda nueva en Notion y se actualizó el
+  paso 3 del playbook a **tres piezas**. De paso, el saldo facturado de esa tarjeta estaba
+  desactualizado (traía el del periodo anterior). El uso de esa línea está casi al tope, así que
+  hay que vigilar el score. Sigue todo en el issue **#199**.
+- **2026-07-30**: se leyó un estado de cuenta real de tarjeta y salió un **error de modelado**:
+  la tarjeta con MSI estaba cargada como `revolvente = facturado − MSI pendientes`, o sea
+  restando cosas que no se restan. La deuda real era bastante mayor y el plan de escape estaba
+  calculado sobre el número chico. Se corrigieron los renglones en **Notion** (con la
+  explicación dentro de cada página) y se reescribió el paso 3 del playbook de arriba.
+  **La app todavía tiene los números viejos** — no hacer "mandar a Notion" desde la app antes
+  de arreglarla, o pisa la corrección ("traer de Notion" sí es seguro). Fix pendiente en
+  el issue **#199**, que además creció para incluir el IVA sobre intereses y la calculadora
+  de "¿a dónde mando este dinero extra?". Falta verificar si BBVA tiene el mismo problema.
 - **2026-07**: fix del "traer de Notion" (daba 500). Causa: migración de Notion a
   "data sources"; el query clásico dejó de servir. Se agregó fallback al endpoint de
   data source + errores legibles en el proxy y en `llamar`.

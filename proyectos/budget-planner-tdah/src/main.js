@@ -12,6 +12,7 @@ import * as resumen from './views/resumen.js';
 import * as movimientos from './views/movimientos.js';
 import * as presupuesto from './views/presupuesto.js';
 import * as deudas from './views/deudas.js';
+import * as simulador from './views/simulador.js';
 import * as calendario from './views/calendario.js';
 import * as datos from './views/datos.js';
 
@@ -20,6 +21,7 @@ const RUTAS = {
   movimientos: { vista: movimientos, emoji: '🧾', nombre: 'Movs',      conMes: true },
   presupuesto: { vista: presupuesto, emoji: '🎯', nombre: 'Plan',      conMes: true },
   deudas:      { vista: deudas,      emoji: '💪', nombre: 'Deudas',    conMes: false },
+  simulador:   { vista: simulador,   emoji: '🔮', nombre: 'Simular',   conMes: false },
   calendario:  { vista: calendario,  emoji: '📅', nombre: 'Mes',       conMes: true },
   datos:       { vista: datos,       emoji: '⚙️', nombre: 'Datos',     conMes: false },
 };
