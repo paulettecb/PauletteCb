@@ -37,20 +37,34 @@
   </svg>
 </template>
 
-<div style="min-height:100vh; background:#FBFAF7; font-family:'Hanken Grotesk', system-ui, sans-serif; color:#2A2933; padding:56px 44px 90px; box-sizing:border-box">
-  <div style="max-width:1340px; margin:0 auto; display:flex; flex-direction:column; gap:52px">
+<div style="min-height:100vh; background:#FBFAF7; font-family:'Hanken Grotesk', system-ui, sans-serif; color:#2A2933; box-sizing:border-box">
+  <header style="display:flex; flex-direction:column; gap:12px; border-bottom:1px solid #E9E3D7; padding:40px 44px 26px; max-width:1440px; margin:0 auto; box-sizing:border-box">
+    <div style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8795D2; font-weight:700">Cribado del corpus · Penitencia</div>
+    <h1 style="font-family:'Friendship', cursive; font-size:46px; line-height:1.04; margin:0">SELECCIÓN DE LA MUESTRA</h1>
+    <div style="display:flex; gap:34px; flex-wrap:wrap; margin-top:6px">
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:26px; font-weight:800; letter-spacing:-0.02em">{{ nTotal }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">transcripciones</span></div>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:26px; font-weight:800; letter-spacing:-0.02em">{{ nAptos }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">aptas por tipo</span></div>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:26px; font-weight:800; letter-spacing:-0.02em">{{ nCodificados }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">leídas y codificadas</span></div>
+      <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:26px; font-weight:800; letter-spacing:-0.02em">{{ nPresel }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">preseleccionadas</span></div>
+    </div>
+  </header>
 
-    <header style="display:flex; flex-direction:column; gap:14px; border-bottom:1px solid #E9E3D7; padding-bottom:30px">
-      <div style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8795D2; font-weight:700">Cribado del corpus · Penitencia</div>
-      <h1 style="font-family:'Friendship', cursive; font-size:54px; line-height:1.04; margin:0">SELECCIÓN DE LA MUESTRA</h1>
-      <p style="margin:0; max-width:78ch; font-size:16px; line-height:1.62; color:#4A4955; text-wrap:pretty">Todas las transcripciones pasaron por un cribado léxico que cuenta marcadores de las trece categorías de experiencia adversa y mide cuánto habla cada testimonio de su propia infancia. El índice ordena el corpus por riqueza de material — pero no decide nada por sí solo.</p>
-      <div style="display:flex; gap:34px; flex-wrap:wrap; margin-top:10px">
-        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nTotal }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">transcripciones</span></div>
-        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nAptos }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">aptas por tipo</span></div>
-        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nCodificados }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">leídas y codificadas</span></div>
-        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nPresel }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">preseleccionadas</span></div>
-      </div>
-    </header>
+  <div style="max-width:1440px; margin:0 auto; display:flex; align-items:flex-start">
+
+    <nav style="position:sticky; top:0; align-self:flex-start; width:196px; flex:none; padding:34px 14px 40px 44px; display:flex; flex-direction:column; gap:4px; box-sizing:border-box">
+      <sc-for list="{{ navItems }}" as="nv" hint-placeholder-count="5">
+        <button type="button" onClick="{{ nv.click }}" style="{{ nv.style }}" style-hover="{{ nv.hoverStyle }}">
+          <span style="{{ nv.dotStyle }}"></span>{{ nv.label }}
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="flex:1; min-width:0; padding:34px 44px 90px 20px; display:flex; flex-direction:column; gap:52px; box-sizing:border-box">
+
+    <sc-if value="{{ mostrarResumen }}" hint-placeholder-val="{{ true }}">
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <p style="margin:0; max-width:78ch; font-size:15px; line-height:1.62; color:#4A4955; text-wrap:pretty">Todas las transcripciones pasaron por un cribado léxico que cuenta marcadores de las trece categorías de experiencia adversa y mide cuánto habla cada testimonio de su propia infancia. El índice ordena el corpus por riqueza de material — pero no decide nada por sí solo.</p>
+    </section>
 
     <section style="display:flex; flex-direction:column; gap:18px">
       <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Qué significa cada estado</h2>
@@ -84,7 +98,9 @@
         </sc-for>
       </div>
     </section>
+    </sc-if>
 
+    <sc-if value="{{ mostrarDistribucion }}" hint-placeholder-val="{{ false }}">
     <section style="display:flex; flex-direction:column; gap:20px">
       <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Dónde cortar · distribución del índice</h2>
       <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; padding:28px 30px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
@@ -141,7 +157,9 @@
         </div>
       </div>
     </section>
+    </sc-if>
 
+    <sc-if value="{{ mostrarSolapamiento }}" hint-placeholder-val="{{ false }}">
     <section style="display:flex; flex-direction:column; gap:20px">
       <div style="display:flex; flex-direction:column; gap:8px">
         <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Solapamiento entre categorías</h2>
@@ -224,7 +242,9 @@
         </div>
       </details>
     </section>
+    </sc-if>
 
+    <sc-if value="{{ mostrarCorpus }}" hint-placeholder-val="{{ false }}">
     <section style="display:flex; flex-direction:column; gap:18px">
       <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:16px">
         <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Corpus ordenado · {{ nAptos }} episodios</h2>
@@ -279,6 +299,60 @@
       </div>
       <p style="margin:0; font-size:12.5px; color:#75737F; line-height:1.6; max-width:88ch">Las filas ya codificadas (badge rosa) recalculan el Índice con la misma fórmula — amplitud × señales × densidad de infancia — pero con la amplitud verificada por lectura completa, así que queda en la misma escala y es comparable directamente con el resto. Inf. y la intensidad de señal siguen del cribado: la codificación guarda una cita ejemplo por categoría, no cuenta repeticiones, así que no hay con qué sustituirlas sin perder precisión. Las 13 celdas sí muestran el E/I/NM/NO real — haz clic en cualquier fila codificada para abrir su ficha de evidencia con citas y minuto exacto.</p>
     </section>
+    </sc-if>
+
+    <sc-if value="{{ mostrarHallazgos }}" hint-placeholder-val="{{ false }}">
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Hallazgos sobre el corpus codificado</h2>
+        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Dos patrones que emergen de los {{ nCodificados }} casos ya codificados por lectura completa — exploratorios, no confirmatorios: la muestra no es aleatoria y el dato es autorreportado.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">A más ACEs, inicio delictivo más temprano</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Puntaje ACE = categorías marcadas E o I (de 13). Solo casos con edad de inicio delictivo declarada explícitamente por la persona.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:11px">
+          <sc-for list="{{ dosisBarras }}" as="d" hint-placeholder-count="4">
+            <div title="{{ d.tip }}" style="display:grid; grid-template-columns:96px 1fr 76px 52px; align-items:center; gap:12px">
+              <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ d.etiqueta }}</span>
+              <div style="height:18px; background:#F4F0E8; border-radius:5px; overflow:hidden"><div style="{{ d.barra }}"></div></div>
+              <span style="font-size:13px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ d.valorTxt }}</span>
+              <span style="font-size:11px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">n={{ d.n }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:6px 0 0; font-size:12px; color:#75737F; line-height:1.6">Correlación de Pearson entre puntaje ACE y edad de inicio delictivo: <strong style="color:#2A2933">r = {{ rDosisTxt }}</strong> (n={{ nDosis }} de {{ nCodificados }} — el resto no declaró edad exacta). {{ nDosis }} casos, {{ rDosisTxt }} de correlación: entre el grupo de menor y mayor carga de ACEs hay {{ brechaAnios }} años de diferencia en la edad promedio de inicio.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:22px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Brecha de género en tres categorías</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Prevalencia de cada categoría (E o I) calculada por separado sobre mujeres ({{ nMujeres }}) y hombres ({{ nHombres }}) del corpus codificado.</p>
+        </div>
+        <sc-for list="{{ brechaGenero }}" as="b" hint-placeholder-count="3">
+          <div style="display:flex; flex-direction:column; gap:7px">
+            <span style="font-size:13px; font-weight:800; color:#2A2933">{{ b.nombre }} <span style="font-weight:600; color:#75737F; font-size:11.5px">— {{ b.brechaTxt }}</span></span>
+            <div style="display:grid; grid-template-columns:64px 1fr 42px; align-items:center; gap:10px">
+              <span style="font-size:11px; color:#C23E82; font-weight:700">Mujeres</span>
+              <div style="height:14px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ b.barraM }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ b.pctM }}%</span>
+            </div>
+            <div style="display:grid; grid-template-columns:64px 1fr 42px; align-items:center; gap:10px">
+              <span style="font-size:11px; color:#5562A4; font-weight:700">Hombres</span>
+              <div style="height:14px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ b.barraH }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ b.pctH }}%</span>
+            </div>
+          </div>
+        </sc-for>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Exploratorio: no controla por tipo de delito ni por cuánto habla cada persona de su propia infancia.</p>
+      </div>
+    </section>
+    </sc-if>
+
+    </div>
+  </div>
 
     <sc-if value="{{ hayModal }}" hint-placeholder-val="{{ false }}">
       <div onClick="{{ cerrarFicha }}" style="position:fixed; inset:0; background:rgba(42,41,51,0.44); z-index:60; display:flex; align-items:flex-start; justify-content:center; padding:48px 24px; overflow-y:auto">
@@ -316,7 +390,6 @@
       </div>
     </sc-if>
 
-  </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;episodiosVisibles&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:45,&quot;min&quot;:15,&quot;max&quot;:234,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Corpus&quot;},&quot;ordenarPor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;índice&quot;,&quot;options&quot;:[&quot;índice&quot;,&quot;infancia&quot;,&quot;categorías&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Corpus&quot;},&quot;corteMinimo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:21,&quot;min&quot;:0,&quot;max&quot;:49,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Corpus&quot;}}">
@@ -361,7 +434,7 @@ const B_CON = BADGE + "color:#75737F;background:#F4F0E8";
 const PROFUNDOS = new Set(["057","130","295","030","006","049","080","005"]);
 
 class Component extends DCLogic {
-  state = { cribado: [], casos: [], citas: [], ancla: 1, fichaAbierta: null, pagina: 0 };
+  state = { cribado: [], casos: [], citas: [], ancla: 1, fichaAbierta: null, pagina: 0, seccion: "resumen" };
 
   componentDidMount() {
     const res = (typeof window !== "undefined" && window.__resources) || {};
@@ -732,7 +805,90 @@ class Component extends DCLogic {
     const hayModal = !!fichaActiva;
     const cerrarFicha = () => this.setState({ fichaAbierta: null });
 
+    // ---- Navegación por secciones ----
+    const SECCIONES = [
+      { id: "resumen", label: "Resumen" },
+      { id: "distribucion", label: "Distribución" },
+      { id: "solapamiento", label: "Solapamiento" },
+      { id: "corpus", label: "Corpus" },
+      { id: "hallazgos", label: "Hallazgos" }
+    ];
+    const seccionActual = this.state.seccion || "resumen";
+    const navItems = SECCIONES.map(s => {
+      const activo = s.id === seccionActual;
+      return {
+        label: s.label,
+        click: () => this.setState({ seccion: s.id }),
+        dotStyle: `width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:9px;flex:none;background:${activo ? "#E85DA0" : "#E9E3D7"}`,
+        style: `font-family:inherit;text-align:left;font-size:13px;font-weight:${activo ? 800 : 600};padding:10px 14px;border-radius:10px;border:none;cursor:pointer;display:flex;align-items:center;background:${activo ? "#F7C9DE" : "transparent"};color:${activo ? "#2A2933" : "#4A4955"}`,
+        hoverStyle: activo ? "" : "background:#F4F0E8"
+      };
+    });
+    const mostrarResumen = seccionActual === "resumen";
+    const mostrarDistribucion = seccionActual === "distribucion";
+    const mostrarSolapamiento = seccionActual === "solapamiento";
+    const mostrarCorpus = seccionActual === "corpus";
+    const mostrarHallazgos = seccionActual === "hallazgos";
+
+    // ---- Hallazgo 1: dosis-respuesta — puntaje ACE vs edad de inicio delictivo ----
+    const scoreACE = c => ACES.filter(([n]) => c["ace"+n] === "E" || c["ace"+n] === "I").length;
+    const conEdad = this.state.casos.filter(c => c.edad_inicio_delictivo && c.edad_inicio_delictivo !== "NM" && !isNaN(parseInt(c.edad_inicio_delictivo, 10)));
+    const GRUPOS_DOSIS = [
+      { k: "0–2 ACEs", min: 0, max: 2 },
+      { k: "3–5 ACEs", min: 3, max: 5 },
+      { k: "6–8 ACEs", min: 6, max: 8 },
+      { k: "9+ ACEs",  min: 9, max: 13 }
+    ];
+    const dosisCrudo = GRUPOS_DOSIS.map(g => {
+      const grupo = conEdad.filter(c => { const s = scoreACE(c); return s >= g.min && s <= g.max; });
+      const prom = grupo.length ? grupo.reduce((a, c) => a + parseInt(c.edad_inicio_delictivo, 10), 0) / grupo.length : 0;
+      return { etiqueta: g.k, n: grupo.length, promedio: prom };
+    });
+    const maxEdadProm = Math.max(1, ...dosisCrudo.map(d => d.promedio));
+    const dosisBarras = dosisCrudo.map(d => ({
+      etiqueta: d.etiqueta, n: d.n,
+      valorTxt: d.promedio ? d.promedio.toFixed(1) + " años" : "—",
+      tip: d.n ? `${d.n} casos con ${d.etiqueta.toLowerCase()} · edad promedio de inicio ${d.promedio.toFixed(1)} años` : "sin casos en este grupo",
+      barra: `width:${Math.round(d.promedio / maxEdadProm * 100)}%;height:100%;border-radius:5px;background:linear-gradient(90deg,#F2C6D9,#A02A5E)`
+    }));
+    const nDosis = conEdad.length;
+    let rDosis = 0;
+    if (nDosis > 2) {
+      const xs = conEdad.map(scoreACE), ys = conEdad.map(c => parseInt(c.edad_inicio_delictivo, 10));
+      const mx = xs.reduce((a,b)=>a+b,0)/nDosis, my = ys.reduce((a,b)=>a+b,0)/nDosis;
+      const cov = xs.reduce((s,x,i)=>s+(x-mx)*(ys[i]-my),0)/nDosis;
+      const sx = Math.sqrt(xs.reduce((s,x)=>s+(x-mx)**2,0)/nDosis);
+      const sy = Math.sqrt(ys.reduce((s,y)=>s+(y-my)**2,0)/nDosis);
+      rDosis = (sx && sy) ? cov/(sx*sy) : 0;
+    }
+    const rDosisTxt = rDosis.toFixed(3);
+    const primerGrupo = dosisCrudo.find(d => d.n > 0);
+    const ultimoGrupo = [...dosisCrudo].reverse().find(d => d.n > 0);
+    const brechaAnios = (primerGrupo && ultimoGrupo) ? Math.abs(primerGrupo.promedio - ultimoGrupo.promedio).toFixed(1) : "—";
+
+    // ---- Hallazgo 2: brecha de género en tres categorías ----
+    const mujeresCasos = this.state.casos.filter(c => c.sexo === "Mujer");
+    const hombresCasos = this.state.casos.filter(c => c.sexo === "Hombre");
+    const CATS_GENERO = [["ace03","Abuso sexual"], ["ace13","Violencia comunitaria"], ["ace02","Maltrato emocional"]];
+    const brechaGenero = CATS_GENERO.map(([key, nombre]) => {
+      const pctM = mujeresCasos.length ? Math.round(100 * mujeresCasos.filter(c => c[key]==="E"||c[key]==="I").length / mujeresCasos.length) : 0;
+      const pctH = hombresCasos.length ? Math.round(100 * hombresCasos.filter(c => c[key]==="E"||c[key]==="I").length / hombresCasos.length) : 0;
+      const brechaTxt = pctM === pctH ? "sin diferencia"
+        : pctH === 0 ? `${pctM}% solo en mujeres`
+        : pctM === 0 ? `${pctH}% solo en hombres`
+        : pctM > pctH ? `${(pctM/pctH).toFixed(1)}x más en mujeres`
+        : `${(pctH/pctM).toFixed(1)}x más en hombres`;
+      return {
+        nombre, pctM, pctH, brechaTxt,
+        barraM: `width:${pctM}%;height:100%;border-radius:4px;background:#E85DA0`,
+        barraH: `width:${pctH}%;height:100%;border-radius:4px;background:#6B7AC1`
+      };
+    });
+
     return {
+      navItems, mostrarResumen, mostrarDistribucion, mostrarSolapamiento, mostrarCorpus, mostrarHallazgos,
+      dosisBarras, rDosisTxt, nDosis, brechaAnios,
+      brechaGenero, nMujeres: mujeresCasos.length, nHombres: hombresCasos.length,
       glosario, preseleccionados, histograma, cuartiles, cobertura, puntos, filas,
       composicion, notaComposicion, pares, matriz, notaMatriz, betoAmpl, posicionBeto,
       leyenda: ACES.map(([num, nombre, fuerte]) => ({ num, nombre, swatch: `width:12px;height:12px;border-radius:3px;background:${fuerte};display:inline-block;flex:none` })),
