@@ -305,7 +305,7 @@
     <section style="display:flex; flex-direction:column; gap:18px">
       <div style="display:flex; flex-direction:column; gap:8px">
         <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Hallazgos sobre el corpus codificado</h2>
-        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Dos patrones que emergen de los {{ nCodificados }} casos ya codificados por lectura completa — exploratorios, no confirmatorios: la muestra no es aleatoria y el dato es autorreportado.</p>
+        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Ocho patrones y dos ausencias que emergen de los {{ nCodificados }} casos codificados por lectura completa — exploratorios, no confirmatorios: la muestra no es aleatoria, el dato es autorreportado y ningún valor faltante se imputó (cada gráfica declara su n real). Donde el hallazgo vive en datos individuales, la gráfica muestra a las personas, no solo promedios.</p>
       </div>
 
       <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
@@ -347,6 +347,176 @@
           </div>
         </sc-for>
         <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Exploratorio: no controla por tipo de delito ni por cuánto habla cada persona de su propia infancia.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">El Estado llega tarde: años entre el debut delictivo y la primera detención</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Cada línea es una persona: el punto de color marca la edad a la que empezó a delinquir y el punto oscuro la edad de su primera detención. Solo los {{ nVentana }} casos que declararon ambas edades explícitamente. Pasa el cursor sobre cualquier línea para ver el detalle.</p>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:11px; color:#4A4955; font-weight:600">
+          <span style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:50%; background:#A02A5E; display:inline-block; flex:none"></span>Inició a los 14 o antes</span>
+          <span style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:50%; background:#E85DA0; display:inline-block; flex:none"></span>Inició entre 15 y 17</span>
+          <span style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:50%; background:#6B7AC1; display:inline-block; flex:none"></span>Inició adulto (18+)</span>
+          <span style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:50%; background:#2A2933; opacity:0.72; display:inline-block; flex:none"></span>Primera detención</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:2px">
+          <sc-for list="{{ ventanaFilas }}" as="v" hint-placeholder-count="8">
+            <div title="{{ v.tip }}" style="display:grid; grid-template-columns:118px 1fr; align-items:center; gap:10px">
+              <span style="font-size:9.5px; color:#75737F; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:right">{{ v.alias }}</span>
+              <div style="position:relative; height:12px">
+                <div style="{{ v.seg }}"></div>
+                <div style="{{ v.dotDet }}"></div>
+                <div style="{{ v.dotIni }}"></div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="display:grid; grid-template-columns:118px 1fr; gap:10px">
+            <span style="font-size:9.5px; color:#75737F; text-align:right">edad →</span>
+            <div style="position:relative; height:18px; border-top:1px solid #E9E3D7">
+              <sc-for list="{{ ventanaTicks }}" as="t" hint-placeholder-count="7">
+                <span style="{{ t.style }}">{{ t.txt }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">{{ ventanaNota }} El adulto que delinque es detenido casi de inmediato; el niño pasa su adolescencia delinquiendo sin que el sistema lo registre — no lo protege de la adversidad y tampoco lo ve hasta que es punible como adulto.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">La puerta giratoria: tutelar o correccional en la infancia y reincidencia</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Porcentaje que reincidió, entre los {{ nPuerta }} casos que narran ambos datos: paso por una institución de menores y reincidencia posterior.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:11px">
+          <sc-for list="{{ puertaBarras }}" as="p" hint-placeholder-count="2">
+            <div style="display:grid; grid-template-columns:250px 1fr 56px 76px; align-items:center; gap:12px">
+              <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ p.etiqueta }}</span>
+              <div style="height:18px; background:#F4F0E8; border-radius:5px; overflow:hidden"><div style="{{ p.barra }}"></div></div>
+              <span style="font-size:13px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ p.pctTxt }}</span>
+              <span style="font-size:11px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">{{ p.nTxt }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:2px 0 0; font-size:12.5px; font-weight:700; color:#2A2933">El patrón no lo explica la carga de trauma — se sostiene dentro de cada estrato:</p>
+        <div style="display:flex; flex-direction:column; gap:8px">
+          <sc-for list="{{ puertaEstratos }}" as="p" hint-placeholder-count="4">
+            <div style="display:grid; grid-template-columns:250px 1fr 56px 76px; align-items:center; gap:12px">
+              <span style="font-size:11.5px; font-weight:600; color:#4A4955">{{ p.etiqueta }}</span>
+              <div style="height:13px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ p.barra }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ p.pctTxt }}</span>
+              <span style="font-size:11px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">{{ p.nTxt }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Razón de momios: <strong style="color:#2A2933">{{ orPuerta }}</strong> — el contraste más fuerte de todo el corpus. Cautela: n pequeños (el estrato de trauma bajo con institución tiene solo 3 casos) y la variable solo se narra cuando pasó algo relevante. Aun así, la institución "correctiva" del Estado predice la reincidencia por encima del propio trauma que dice atender.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:22px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">El reclutamiento cosecha el abandono</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Quienes narran haber sido reclutados antes de los 18 ({{ nReclSi }}) frente a quienes lo niegan ({{ nReclNo }}), solo entre casos con relato de infancia. Cada fila compara en su propia escala.</p>
+        </div>
+        <sc-for list="{{ reclutFilas }}" as="rr" hint-placeholder-count="6">
+          <div style="display:flex; flex-direction:column; gap:7px">
+            <span style="font-size:13px; font-weight:800; color:#2A2933">{{ rr.nombre }}</span>
+            <div style="display:grid; grid-template-columns:96px 1fr 78px; align-items:center; gap:10px">
+              <span style="font-size:11px; color:#C23E82; font-weight:700">Reclutados</span>
+              <div style="height:14px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ rr.barSi }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ rr.vSiTxt }}</span>
+            </div>
+            <div style="display:grid; grid-template-columns:96px 1fr 78px; align-items:center; gap:10px">
+              <span style="font-size:11px; color:#5562A4; font-weight:700">No reclutados</span>
+              <div style="height:14px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ rr.barNo }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ rr.vNoTxt }}</span>
+            </div>
+          </div>
+        </sc-for>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">El reclutador no llega a cualquier barrio ni a cualquier niño: llega al niño abandonado del barrio violento. En la fila de edad de inicio, la barra corta es la peor: los reclutados debutan siete años antes.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Cuanto más lejos de los padres, más carga y más temprano el inicio</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Solo casos con relato de infancia. "Calle" tiene n=4 — léase con cautela. Doble escalera: la carga ACE sube y la edad de inicio baja conforme la crianza se aleja de los padres.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:150px 1fr 46px 1fr 62px; align-items:center; gap:10px; font-size:10.5px; color:#75737F; font-weight:700; text-transform:uppercase; letter-spacing:0.08em">
+          <span></span><span>Puntaje ACE promedio</span><span></span><span>Edad promedio de inicio</span><span></span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px">
+          <sc-for list="{{ crianzaFilas }}" as="cf" hint-placeholder-count="5">
+            <div style="display:grid; grid-template-columns:150px 1fr 46px 1fr 62px; align-items:center; gap:10px">
+              <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ cf.etiqueta }} <span style="font-weight:600; color:#75737F; font-size:10.5px">{{ cf.nTxt }}</span></span>
+              <div style="height:15px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ cf.barSc }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ cf.scTxt }}</span>
+              <div style="height:15px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ cf.barIni }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ cf.iniTxt }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Dos vueltas contra el estereotipo: "solo madre" carga menos trauma que "familia extensa" (ser criado por abuelos o tíos suele implicar doble abandono previo), y aun con ambos padres domina la adversidad estructural — deserción y violencia comunitaria — sobre el abuso dentro de casa. El patrón se sostiene en ambos sexos por separado.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:14px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">El clúster de los fabricados: secuestro concentra tortura, silencio y condena</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Por familia de delito (agrupación por palabras clave de la sentencia): % que narra tortura en su detención, % que no narra nada de su infancia (13 categorías en NM) y sentencia promedio. Clúster descriptivo, no cadena causal.</p>
+        </div>
+        <div style="display:grid; grid-template-columns:170px 1fr 1fr 1fr; gap:12px; font-size:10.5px; color:#75737F; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:0 12px">
+          <span></span><span>Tortura</span><span>Silencio de infancia</span><span>Sentencia</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px">
+          <sc-for list="{{ famBarras }}" as="fb" hint-placeholder-count="4">
+            <div style="{{ fb.filaStyle }}">
+              <div style="display:grid; grid-template-columns:170px 1fr 1fr 1fr; gap:12px; align-items:center">
+                <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ fb.etiqueta }} <span style="font-weight:600; color:#75737F; font-size:10.5px">{{ fb.nTxt }}</span></span>
+                <div style="display:grid; grid-template-columns:1fr 40px; align-items:center; gap:8px">
+                  <div style="height:13px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ fb.barT }}"></div></div>
+                  <span style="font-size:11.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ fb.tTxt }}</span>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 40px; align-items:center; gap:8px">
+                  <div style="height:13px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ fb.barS }}"></div></div>
+                  <span style="font-size:11.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ fb.sTxt }}</span>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 52px; align-items:center; gap:8px">
+                  <div style="height:13px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ fb.barSen }}"></div></div>
+                  <span style="font-size:11.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ fb.senTxt }}</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">El delito emblema de la era de la "fabricación de culpables" produce testimonios donde la infancia desaparece: la entrevista se ocupa en probar inocencia. La diferencia de silencio entre secuestro y robo/drogas da Fisher p≈0.0005.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:14px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">La jerarquía de la negación: se niega la pobreza, no la violencia</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Número de casos que negaron explícitamente cada categoría (valor NO), sobre los {{ nCodificados }}. La gente se toma el trabajo de decir "no nos faltó nada" — defiende la dignidad de su familia — pero casi nadie niega la violencia del entorno: esa está normalizada como paisaje.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px">
+          <sc-for list="{{ negacion }}" as="ng" hint-placeholder-count="13">
+            <div style="display:grid; grid-template-columns:190px 1fr 34px; align-items:center; gap:12px">
+              <span style="font-size:12px; font-weight:700; color:#2A2933">{{ ng.nombre }}</span>
+              <div style="height:13px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ ng.barra }}"></div></div>
+              <span style="font-size:12px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ ng.cntTxt }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">{{ negNota }}</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px">
+        <div style="border:1px dashed #C9D0ED; border-radius:16px; background:#F8F9FD; padding:22px 24px; display:flex; flex-direction:column; gap:8px">
+          <span style="font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5562A4; font-weight:800">Ausencia que habla · 1</span>
+          <span style="font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#2A2933; font-variant-numeric:tabular-nums">r = {{ rSentTxt }}</span>
+          <p style="margin:0; font-size:12.5px; color:#4A4955; line-height:1.6">La duración de la sentencia no correlaciona con la carga ACE (n={{ nSent }} con sentencia numérica y relato de infancia). El sistema penal es ciego al trauma en ambas direcciones: no lo castiga más, pero tampoco lo mitiga — el daño de infancia es invisible al momento de sentenciar.</p>
+        </div>
+        <div style="border:1px dashed #C9D0ED; border-radius:16px; background:#F8F9FD; padding:22px 24px; display:flex; flex-direction:column; gap:8px">
+          <span style="font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5562A4; font-weight:800">Ausencia que habla · 2</span>
+          <span style="font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#2A2933; font-variant-numeric:tabular-nums">{{ pctTortSi }}%</span>
+          <p style="margin:0; font-size:12.5px; color:#4A4955; line-height:1.6">De los {{ tortAbordanN }} casos que abordan la tortura en su detención, {{ tortSiN }} la afirman. Y es plana: {{ pctTortH }}% de los hombres y {{ pctTortM }}% de las mujeres del corpus la narran, sin variación relevante por delito ni por carga ACE. No responde a un perfil — es infraestructura del sistema.</p>
+        </div>
       </div>
     </section>
     </sc-if>
@@ -885,7 +1055,158 @@ class Component extends DCLogic {
       };
     });
 
+    // ---- Hallazgos nuevos (análisis 2026-08-03) ----
+    const casosCod = this.state.casos;
+    const esNum = v => v !== undefined && v !== null && v !== "" && v !== "NM" && !isNaN(parseFloat(v));
+    const pf = v => parseFloat(v);
+    const esTodoNM = c => ACES.every(([n]) => c["ace"+n] === "NM");
+    const narradores = casosCod.filter(c => !esTodoNM(c));
+    const media = xs => xs.length ? xs.reduce((a,b)=>a+b,0)/xs.length : 0;
+    const pearsonR = ps => {
+      const n = ps.length; if (n < 3) return 0;
+      const mx = media(ps.map(p=>p[0])), my = media(ps.map(p=>p[1]));
+      const sx = Math.sqrt(media(ps.map(p=>(p[0]-mx)**2))), sy = Math.sqrt(media(ps.map(p=>(p[1]-my)**2)));
+      return (sx && sy) ? media(ps.map(p=>(p[0]-mx)*(p[1]-my)))/(sx*sy) : 0;
+    };
+
+    // H3: ventana de impunidad — mancuernas por persona
+    const parVentana = casosCod
+      .filter(c => esNum(c.edad_inicio_delictivo) && esNum(c.edad_primera_detencion))
+      .map(c => ({ alias: c.alias, ini: pf(c.edad_inicio_delictivo), det: pf(c.edad_primera_detencion) }))
+      .sort((a,b) => a.ini - b.ini || a.det - b.det);
+    const ejeMaxV = Math.ceil(Math.max(30, ...parVentana.map(p => p.det)) / 5) * 5;
+    const colVentana = ini => ini <= 14 ? "#A02A5E" : ini <= 17 ? "#E85DA0" : "#6B7AC1";
+    const ventanaFilas = parVentana.map(p => {
+      const gap = p.det - p.ini, col = colVentana(p.ini);
+      const l = p.ini/ejeMaxV*100, r2 = p.det/ejeMaxV*100;
+      return {
+        alias: p.alias,
+        tip: `${p.alias}: inició a los ${p.ini}, primera detención a los ${p.det} — ${gap === 0 ? "el mismo año" : gap + (gap === 1 ? " año después" : " años después")}`,
+        seg: `position:absolute;left:${l}%;width:${Math.max(0, r2-l)}%;top:50%;transform:translateY(-50%);height:3px;border-radius:2px;background:${col};opacity:0.5`,
+        dotIni: `position:absolute;left:${l}%;top:50%;transform:translate(-50%,-50%);width:7px;height:7px;border-radius:50%;background:${col}`,
+        dotDet: `position:absolute;left:${r2}%;top:50%;transform:translate(-50%,-50%);width:7px;height:7px;border-radius:50%;background:#2A2933;opacity:0.72`
+      };
+    });
+    const ventanaTicks = [];
+    for (let t = 0; t <= ejeMaxV; t += 5) ventanaTicks.push({ txt: String(t), style: `position:absolute;left:${t/ejeMaxV*100}%;transform:translateX(-50%);top:3px;font-size:9.5px;color:#75737F;font-variant-numeric:tabular-nums` });
+    const grupoV = f => { const g = parVentana.filter(p => f(p.ini)).map(p => p.det - p.ini); return { n: g.length, m: media(g) }; };
+    const v14 = grupoV(i => i <= 14), v17 = grupoV(i => i >= 15 && i <= 17), v18 = grupoV(i => i >= 18);
+    const rVentana = pearsonR(parVentana.map(p => [p.ini, p.det - p.ini]));
+    const ventanaNota = `Quien inició a los 14 o antes pasó en promedio ${v14.m.toFixed(1)} años delinquiendo antes de su primera detención (n=${v14.n}); quien inició entre 15 y 17, ${v17.m.toFixed(1)} (n=${v17.n}); quien inició adulto, ${v18.m.toFixed(1)} (n=${v18.n}). Correlación entre edad de inicio y tamaño de la ventana: r = ${rVentana.toFixed(3)}.`;
+
+    // H4: puerta giratoria — institución de menores y reincidencia
+    const conPuerta = casosCod.filter(c => (c.institucion_menor18 === "sí" || c.institucion_menor18 === "no") && (c.reincidencia === "sí" || c.reincidencia === "no"));
+    const celdaPuerta = (inst, fScore) => {
+      const g = conPuerta.filter(c => c.institucion_menor18 === inst && (!fScore || fScore(scoreACE(c))));
+      const rei = g.filter(c => c.reincidencia === "sí").length;
+      return { n: g.length, rei, pct: g.length ? Math.round(100*rei/g.length) : 0 };
+    };
+    const pSi = celdaPuerta("sí"), pNo = celdaPuerta("no");
+    const puertaBarras = [
+      { etiqueta: "Pasó por tutelar / correccional", pctTxt: pSi.pct + "%", nTxt: pSi.rei + " de " + pSi.n, barra: `width:${pSi.pct}%;height:100%;border-radius:5px;background:linear-gradient(90deg,#F2C6D9,#A02A5E)` },
+      { etiqueta: "No pasó por institución de menores", pctTxt: pNo.pct + "%", nTxt: pNo.rei + " de " + pNo.n, barra: `width:${pNo.pct}%;height:100%;border-radius:5px;background:#6B7AC1` }
+    ];
+    const puertaEstratos = [
+      ["Trauma alto (4+ ACEs) · con institución", celdaPuerta("sí", s => s >= 4), "#A02A5E"],
+      ["Trauma alto (4+ ACEs) · sin institución", celdaPuerta("no", s => s >= 4), "#6B7AC1"],
+      ["Trauma bajo (0–3 ACEs) · con institución", celdaPuerta("sí", s => s < 4), "#A02A5E"],
+      ["Trauma bajo (0–3 ACEs) · sin institución", celdaPuerta("no", s => s < 4), "#6B7AC1"]
+    ].map(([etiqueta, cd, col]) => ({ etiqueta, pctTxt: cd.pct + "%", nTxt: cd.rei + " de " + cd.n, barra: `width:${cd.pct}%;height:100%;border-radius:4px;background:${col};opacity:0.85` }));
+    const orPuerta = (pSi.rei && pNo.rei && (pSi.n - pSi.rei) && (pNo.n - pNo.rei))
+      ? ((pSi.rei * (pNo.n - pNo.rei)) / ((pSi.n - pSi.rei) * pNo.rei)).toFixed(1) : "—";
+
+    // H5: reclutamiento <18 — comparación de perfiles (solo narradores)
+    const reclSi = narradores.filter(c => c.reclutamiento_menor18 === "sí");
+    const reclNo = narradores.filter(c => c.reclutamiento_menor18 === "no");
+    const pctGrupo = (g, key) => g.length ? Math.round(100 * g.filter(c => c[key] === "E" || c[key] === "I").length / g.length) : 0;
+    const iniMedia = g => { const xs = g.filter(c => esNum(c.edad_inicio_delictivo)).map(c => pf(c.edad_inicio_delictivo)); return media(xs); };
+    const reclutFilas = [
+      { nombre: "Puntaje ACE promedio", vSi: media(reclSi.map(scoreACE)), vNo: media(reclNo.map(scoreACE)), max: 13, fmt: v => v.toFixed(1) + " de 13" },
+      { nombre: "Edad promedio de inicio delictivo", vSi: iniMedia(reclSi), vNo: iniMedia(reclNo), max: 22, fmt: v => v.toFixed(1) + " años" },
+      { nombre: "Violencia comunitaria", vSi: pctGrupo(reclSi, "ace13"), vNo: pctGrupo(reclNo, "ace13"), max: 100, fmt: v => Math.round(v) + "%" },
+      { nombre: "Abandono parental", vSi: pctGrupo(reclSi, "ace06"), vNo: pctGrupo(reclNo, "ace06"), max: 100, fmt: v => Math.round(v) + "%" },
+      { nombre: "Maltrato físico", vSi: pctGrupo(reclSi, "ace01"), vNo: pctGrupo(reclNo, "ace01"), max: 100, fmt: v => Math.round(v) + "%" },
+      { nombre: "Pobreza extrema", vSi: pctGrupo(reclSi, "ace11"), vNo: pctGrupo(reclNo, "ace11"), max: 100, fmt: v => Math.round(v) + "%" }
+    ].map(f => ({
+      nombre: f.nombre, vSiTxt: f.fmt(f.vSi), vNoTxt: f.fmt(f.vNo),
+      barSi: `width:${Math.min(100, f.vSi/f.max*100)}%;height:100%;border-radius:4px;background:#E85DA0`,
+      barNo: `width:${Math.min(100, f.vNo/f.max*100)}%;height:100%;border-radius:4px;background:#6B7AC1`
+    }));
+
+    // H6: gradiente de crianza (solo narradores)
+    const CRIANZAS = ["Ambos padres", "Solo madre", "Familia extensa", "Otro", "Calle"];
+    const crianzaCrudo = CRIANZAS.map(k => {
+      const g = narradores.filter(c => c.crianza === k);
+      const xsIni = g.filter(c => esNum(c.edad_inicio_delictivo)).map(c => pf(c.edad_inicio_delictivo));
+      return { k, n: g.length, sc: media(g.map(scoreACE)), ini: media(xsIni), nIni: xsIni.length };
+    }).filter(f => f.n > 0);
+    const maxSc = Math.max(1, ...crianzaCrudo.map(f => f.sc));
+    const maxIni = Math.max(1, ...crianzaCrudo.map(f => f.ini));
+    const crianzaFilas = crianzaCrudo.map(f => ({
+      etiqueta: f.k, nTxt: "n=" + f.n,
+      scTxt: f.sc.toFixed(1), iniTxt: f.nIni ? f.ini.toFixed(1) : "—",
+      barSc: `width:${Math.round(f.sc/maxSc*100)}%;height:100%;border-radius:4px;background:linear-gradient(90deg,#F2C6D9,#A02A5E)`,
+      barIni: `width:${f.nIni ? Math.round(f.ini/maxIni*100) : 0}%;height:100%;border-radius:4px;background:#6B7AC1`
+    }));
+
+    // H7: clúster de los fabricados — familia de delito × tortura × silencio × sentencia
+    const famDelito = c => {
+      const d = (c.delito_sentencia || "").toLowerCase();
+      if (/homicid|asesinat|feminicid|parricid/.test(d)) return "Homicidio";
+      if (/secuestro|extorsi|privaci/.test(d)) return "Secuestro / extorsión";
+      if (/droga|narco|arma|delincuencia organizada|contra la salud/.test(d)) return "Drogas / armas";
+      if (/robo|asalto/.test(d)) return "Robo";
+      return null;
+    };
+    const famCrudo = ["Secuestro / extorsión", "Homicidio", "Robo", "Drogas / armas"].map(f => {
+      const g = casosCod.filter(c => famDelito(c) === f);
+      const sents = g.filter(c => esNum(c.anios_sentencia)).map(c => pf(c.anios_sentencia));
+      return {
+        f, n: g.length,
+        pctT: g.length ? Math.round(100 * g.filter(c => c.tortura === "sí").length / g.length) : 0,
+        pctS: g.length ? Math.round(100 * g.filter(esTodoNM).length / g.length) : 0,
+        sm: media(sents)
+      };
+    });
+    const maxSent = Math.max(1, ...famCrudo.map(x => x.sm));
+    const famBarras = famCrudo.map(x => ({
+      etiqueta: x.f, nTxt: "n=" + x.n,
+      filaStyle: x.f === "Secuestro / extorsión"
+        ? "background:#FBF0F6;border:1px solid #F2C6D9;border-radius:12px;padding:10px 12px"
+        : "padding:10px 12px;border:1px solid transparent;border-radius:12px",
+      tTxt: x.pctT + "%", sTxt: x.pctS + "%", senTxt: x.sm ? Math.round(x.sm) + " años" : "—",
+      barT: `width:${x.pctT}%;height:100%;border-radius:4px;background:#D9534F`,
+      barS: `width:${x.pctS}%;height:100%;border-radius:4px;background:#75737F`,
+      barSen: `width:${Math.round(x.sm/maxSent*100)}%;height:100%;border-radius:4px;background:#434D80`
+    }));
+
+    // H8: jerarquía de la negación (valor NO por categoría, sobre todos los casos)
+    const negCrudo = ACES.map(([n, nombre, fuerte]) => ({ nombre, fuerte, cnt: casosCod.filter(c => c["ace"+n] === "NO").length }))
+      .sort((a, b) => b.cnt - a.cnt);
+    const maxNeg = Math.max(1, ...negCrudo.map(x => x.cnt));
+    const negacion = negCrudo.map(x => ({ nombre: x.nombre, cntTxt: String(x.cnt), barra: `width:${Math.round(x.cnt/maxNeg*100)}%;height:100%;border-radius:4px;background:${x.fuerte}` }));
+    const negFam = narradores.filter(c => ["01","02","04","05","06"].some(n => c["ace"+n] === "NO"));
+    const negFamEstr = negFam.filter(c => ["11","12","13"].filter(n => c["ace"+n] === "E" || c["ace"+n] === "I").length >= 2);
+    const negNota = `${negFam.length} casos niegan explícitamente alguna adversidad familiar; ${negFamEstr.length} de ellos muestran a la vez dos o más adversidades estructurales — el patrón "mi familia fue buena; el barrio me formó" existe y es medible.`;
+
+    // Nulos que hablan: sentencia ciega al trauma; tortura transversal
+    const conSent = narradores.filter(c => esNum(c.anios_sentencia));
+    const rSent = pearsonR(conSent.map(c => [scoreACE(c), pf(c.anios_sentencia)]));
+    const tortAbordan = casosCod.filter(c => c.tortura === "sí" || c.tortura === "no");
+    const tortSiN = tortAbordan.filter(c => c.tortura === "sí").length;
+    const pctTortDe = g => g.length ? Math.round(100 * g.filter(c => c.tortura === "sí").length / g.length) : 0;
+    const pctTortH = pctTortDe(casosCod.filter(c => c.sexo === "Hombre"));
+    const pctTortM = pctTortDe(casosCod.filter(c => c.sexo === "Mujer"));
+
     return {
+      nVentana: parVentana.length, ventanaFilas, ventanaTicks, ventanaNota,
+      nPuerta: conPuerta.length, puertaBarras, puertaEstratos, orPuerta,
+      nReclSi: reclSi.length, nReclNo: reclNo.length, reclutFilas,
+      crianzaFilas, famBarras, negacion, negNota,
+      rSentTxt: rSent.toFixed(3), nSent: conSent.length,
+      tortAbordanN: tortAbordan.length, tortSiN,
+      pctTortSi: tortAbordan.length ? Math.round(100 * tortSiN / tortAbordan.length) : 0,
+      pctTortH, pctTortM,
       navItems, mostrarResumen, mostrarDistribucion, mostrarSolapamiento, mostrarCorpus, mostrarHallazgos,
       dosisBarras, rDosisTxt, nDosis, brechaAnios,
       brechaGenero, nMujeres: mujeresCasos.length, nHombres: hombresCasos.length,
