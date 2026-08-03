@@ -999,3 +999,125 @@ export function resumenDelMes(mes = ui.mes) {
     pctGastado: ingresoBase > 0 ? Math.round((gastos / ingresoBase) * 100) : 0,
   };
 }
+
+/* =========================================================================
+   Simulador mes a mes (vista "Simular")
+   ========================================================================= */
+
+// Proyección editable: tú decides cuánto le pones a cada deuda cada mes, y
+// puedes meter compras nuevas. Todo lo que no toques se reparte solo según la
+// estrategia. Es el "¿qué pasa si…?" que el plan de escape no permite.
+//
+//   meses       — horizonte a simular (tope 120)
+//   ingreso     — centavos que entran al mes
+//   gastosVida  — centavos que NO son deuda (comida, gasolina, mantenimiento…)
+//   estrategia  — 'avalancha' (tasa más alta) | 'bolaDeNieve' (saldo más chico)
+//   conIva      — sumar el 16% de IVA sobre intereses (así lo cobra el banco en MX)
+//   pagos       — { 'YYYY-MM': { [deudaId]: centavos } } lo que tú fijaste a mano
+//   cargos      — { 'YYYY-MM': { [deudaId]: centavos } } compras nuevas de ese mes
+//   incluirIds  — qué deudas entran (null = todas las activas)
+//
+// → { filas, liquidadas, interesTotal, pagadoTotal, alcanzable, mesesUsados }
+//   filas[i] = { mesKey, disponible, pagoTotal, sobra, total,
+//                deudas: [{ id, cargo, interes, minimo, pago, manual, saldo }] }
+export function simular({
+  meses = 36, ingreso = 0, gastosVida = 0, estrategia = 'avalancha',
+  conIva = true, pagos = {}, cargos = {}, incluirIds = null,
+} = {}) {
+  const horizonte = Math.max(1, Math.min(120, Math.round(meses)));
+  const factorIva = conIva ? 1.16 : 1;
+  const sims = deudasActivas()
+    .filter((d) => !incluirIds || incluirIds.includes(d.id))
+    .map((d) => ({
+      id: d.id,
+      tipo: d.tipo,
+      saldo: saldoPendiente(d),
+      tasaMensual: ((d.tasaAnual || 0) / 100 / 12) * factorIva,
+      base: pagoBaseSim(d),
+    }));
+
+  const disponible = Math.max(0, Math.round(ingreso) - Math.round(gastosVida));
+  const prioridad = (a, b) =>
+    estrategia === 'bolaDeNieve'
+      ? a.saldo - b.saldo || b.tasaMensual - a.tasaMensual
+      : b.tasaMensual - a.tasaMensual || a.saldo - b.saldo;
+
+  const filas = [];
+  const liquidadas = {};
+  let interesTotal = 0;
+  let pagadoTotal = 0;
+
+  for (let m = 0; m < horizonte; m += 1) {
+    const mesKey = sumarMeses(mesActualKey(), m + 1);
+    const cargosMes = cargos[mesKey] || {};
+    const pagosMes = pagos[mesKey] || {};
+
+    // 1) compras nuevas e intereses del periodo
+    const detalle = sims.map((s) => {
+      const cargo = Math.max(0, Math.round(cargosMes[s.id] || 0));
+      s.saldo += cargo;
+      const interes = s.saldo > 0 ? Math.round(s.saldo * s.tasaMensual) : 0;
+      s.saldo += interes;
+      interesTotal += interes;
+      const minimo = Math.min(s.base, s.saldo);
+      return { id: s.id, cargo, interes, minimo, pago: 0, manual: false, saldo: s.saldo };
+    });
+    const porId = Object.fromEntries(detalle.map((d) => [d.id, d]));
+
+    // 2) lo que fijaste a mano se respeta tal cual
+    let bolsa = disponible;
+    for (const s of sims) {
+      if (pagosMes[s.id] == null) continue;
+      const pago = Math.min(Math.max(0, Math.round(pagosMes[s.id])), s.saldo);
+      s.saldo -= pago;
+      porId[s.id].pago = pago;
+      porId[s.id].manual = true;
+      bolsa -= pago;
+    }
+
+    // 3) el resto recibe su mínimo, por prioridad si la bolsa no alcanza
+    const auto = () => sims.filter((s) => pagosMes[s.id] == null && s.saldo > 0);
+    for (const s of auto().sort(prioridad)) {
+      if (bolsa <= 0) break;
+      const pago = Math.min(porId[s.id].minimo, s.saldo, bolsa);
+      s.saldo -= pago;
+      porId[s.id].pago += pago;
+      bolsa -= pago;
+    }
+
+    // 4) lo que sobre ataca según la estrategia
+    let objetivo = auto().sort(prioridad)[0];
+    while (bolsa > 0 && objetivo) {
+      const pago = Math.min(bolsa, objetivo.saldo);
+      objetivo.saldo -= pago;
+      porId[objetivo.id].pago += pago;
+      bolsa -= pago;
+      objetivo = auto().sort(prioridad)[0];
+    }
+
+    for (const s of sims) {
+      porId[s.id].saldo = Math.max(0, s.saldo);
+      if (s.saldo <= 0 && !liquidadas[s.id]) liquidadas[s.id] = mesKey;
+    }
+    const pagoTotal = detalle.reduce((sum, d) => sum + d.pago, 0);
+    pagadoTotal += pagoTotal;
+    filas.push({
+      mesKey,
+      disponible,
+      pagoTotal,
+      sobra: disponible - pagoTotal,
+      total: sims.reduce((sum, s) => sum + Math.max(0, s.saldo), 0),
+      deudas: detalle,
+    });
+    if (filas[filas.length - 1].total <= 0) break;
+  }
+
+  return {
+    filas,
+    liquidadas,
+    interesTotal,
+    pagadoTotal,
+    alcanzable: sims.every((s) => s.saldo <= 0),
+    mesesUsados: filas.length,
+  };
+}

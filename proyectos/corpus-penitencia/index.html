@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corpus Penitencia · Cribado del corpus</title>
+<meta name="description" content="Cribado de 239 testimonios para una investigación sobre trauma infantil y conducta delictiva adulta: cobertura, co-ocurrencia y validación del instrumento contra la codificación completa.">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="ext-resource-dependency" content="datos/cribado.csv" data-resource-id="cribadoCsv" />
+<meta name="ext-resource-dependency" content="datos/codificacion.csv" data-resource-id="codificacionCsv" />
+<meta name="ext-resource-dependency" content="datos/citas.csv" data-resource-id="citasCsv" />
+<link rel="stylesheet" href="../KYN Design System/tokens/fonts.css">
+<link rel="stylesheet" href="../KYN Design System/tokens/colors.css">
+<link rel="stylesheet" href="../KYN Design System/tokens/typography.css">
+<link rel="stylesheet" href="../KYN Design System/tokens/spacing.css">
+<link rel="stylesheet" href="../KYN Design System/tokens/effects.css">
+<link rel="stylesheet" href="../KYN Design System/components/components.css">
+<link rel="stylesheet" href="../KYN Design System/styles.css">
+<script src="../KYN Design System/_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: #FBFAF7; }
+  a { color: #6B7AC1; text-decoration: none; }
+  a:hover { color: #E85DA0; }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" data-bg-color="#FBFAF7">
+    <rect width="200" height="200" fill="#FBFAF7"/>
+    <circle cx="80" cy="120" r="24" fill="#8795D2"/>
+    <circle cx="122" cy="86" r="24" fill="#AEB8E2"/>
+    <circle cx="128" cy="140" r="20" fill="#E85DA0" opacity="0.88"/>
+  </svg>
+</template>
+
+<div style="min-height:100vh; background:#FBFAF7; font-family:'Hanken Grotesk', system-ui, sans-serif; color:#2A2933; padding:56px 44px 90px; box-sizing:border-box">
+  <div style="max-width:1340px; margin:0 auto; display:flex; flex-direction:column; gap:52px">
+
+    <header style="display:flex; flex-direction:column; gap:14px; border-bottom:1px solid #E9E3D7; padding-bottom:30px">
+      <div style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#8795D2; font-weight:700">Cribado del corpus · Penitencia</div>
+      <h1 style="font-family:'Friendship', cursive; font-size:54px; line-height:1.04; margin:0">SELECCIÓN DE LA MUESTRA</h1>
+      <p style="margin:0; max-width:78ch; font-size:16px; line-height:1.62; color:#4A4955; text-wrap:pretty">Todas las transcripciones pasaron por un cribado léxico que cuenta marcadores de las trece categorías de experiencia adversa y mide cuánto habla cada testimonio de su propia infancia. El índice ordena el corpus por riqueza de material — pero no decide nada por sí solo.</p>
+      <div style="display:flex; gap:34px; flex-wrap:wrap; margin-top:10px">
+        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nTotal }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">transcripciones</span></div>
+        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nAptos }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">aptas por tipo</span></div>
+        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nCodificados }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">leídas y codificadas</span></div>
+        <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:30px; font-weight:800; letter-spacing:-0.02em">{{ nPresel }}</span><span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:600">preseleccionadas</span></div>
+      </div>
+    </header>
+
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Qué significa cada estado</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px">
+        <sc-for list="{{ glosario }}" as="g" hint-placeholder-count="4">
+          <div style="border:1px solid #E9E3D7; border-radius:14px; background:#fff; padding:20px 22px; display:flex; flex-direction:column; gap:9px">
+            <span style="{{ g.badge }}">{{ g.k }}</span>
+            <p style="margin:0; font-size:13.5px; line-height:1.55; color:#4A4955; text-wrap:pretty">{{ g.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Tus tres preseleccionados frente al corpus</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px">
+        <sc-for list="{{ preseleccionados }}" as="p" hint-placeholder-count="3">
+          <div style="border:1px solid #E9E3D7; border-left:4px solid #D9A441; border-radius:14px; background:#fff; padding:22px 24px; display:flex; flex-direction:column; gap:14px">
+            <div style="display:flex; flex-direction:column; gap:3px">
+              <span style="font-size:19px; font-weight:800; letter-spacing:-0.01em">{{ p.nombre }}</span>
+              <span style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#A8A6B0; font-weight:700">Archivo {{ p.archivo }} · {{ p.duracion }}</span>
+            </div>
+            <p style="margin:0; font-size:13px; line-height:1.5; color:#75737F; text-wrap:pretty">{{ p.titulo }}</p>
+            <div style="display:flex; gap:22px; flex-wrap:wrap; padding-top:12px; border-top:1px solid #F4F0E8">
+              <div style="display:flex; flex-direction:column; gap:1px"><span style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#75737F; font-weight:700">Índice</span><span style="font-size:19px; font-weight:800">{{ p.indice }}</span></div>
+              <div style="display:flex; flex-direction:column; gap:1px"><span style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#75737F; font-weight:700">Lugar</span><span style="font-size:19px; font-weight:800">{{ p.lugar }}</span></div>
+              <div style="display:flex; flex-direction:column; gap:1px"><span style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#75737F; font-weight:700">Categorías</span><span style="font-size:19px; font-weight:800">{{ p.amplitud }}</span></div>
+              <div style="display:flex; flex-direction:column; gap:1px"><span style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:#75737F; font-weight:700">Estado</span><span style="font-size:13px; font-weight:700; padding-top:4px">{{ p.estado }}</span></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display:flex; flex-direction:column; gap:20px">
+      <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Dónde cortar · distribución del índice</h2>
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; padding:28px 30px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; align-items:flex-end; gap:5px; height:190px">
+          <sc-for list="{{ histograma }}" as="h" hint-placeholder-count="14">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:7px; height:100%">
+              <span style="font-size:11px; font-weight:700; color:#75737F">{{ h.n }}</span>
+              <div style="{{ h.barra }}"></div>
+              <span style="font-size:10px; color:#A8A6B0; font-variant-numeric:tabular-nums">{{ h.etiqueta }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:26px; flex-wrap:wrap; padding-top:14px; border-top:1px solid #F4F0E8">
+          <sc-for list="{{ cuartiles }}" as="c" hint-placeholder-count="6">
+            <div style="display:flex; flex-direction:column; gap:2px"><span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:700">{{ c.k }}</span><span style="font-size:17px; font-weight:800">{{ c.v }}</span></div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12.5px; color:#75737F; line-height:1.6; max-width:88ch">El índice normaliza por extensión: se compone de amplitud de categorías, marcadores por cada mil palabras y densidad de relato biográfico. Así una entrevista de veinte minutos compite en igualdad con una de hora y media.</p>
+      </div>
+    </section>
+
+    <section style="display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:start">
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Cobertura por categoría</h2>
+        <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; padding:26px 28px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:11px">
+          <sc-for list="{{ cobertura }}" as="c" hint-placeholder-count="13">
+            <div style="display:grid; grid-template-columns:172px 1fr 62px; align-items:center; gap:12px">
+              <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; line-height:1.25"><span style="{{ c.swatch }}"></span>{{ c.nombre }}</span>
+              <div style="height:16px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ c.barra }}"></div></div>
+              <span style="font-size:12px; font-weight:700; text-align:right; font-variant-numeric:tabular-nums; color:#4A4955">{{ c.txt }}</span>
+            </div>
+          </sc-for>
+          <p style="margin:6px 0 0; font-size:12px; color:#75737F; line-height:1.55">Episodios donde el cribado detectó al menos un marcador. Las categorías bajas no son raras en la realidad: son las más difíciles de nombrar frente a una cámara.</p>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Amplitud frente a profundidad</h2>
+        <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; padding:26px 28px 20px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:14px">
+          <div style="position:relative; height:340px; border-left:1.5px solid #E9E3D7; border-bottom:1.5px solid #E9E3D7; margin:6px 0 0 30px">
+            <sc-for list="{{ puntos }}" as="p" hint-placeholder-count="40">
+              <div title="{{ p.tip }}" style="{{ p.style }}"></div>
+            </sc-for>
+            <span style="position:absolute; left:-30px; top:-4px; font-size:10px; color:#A8A6B0; writing-mode:vertical-rl; transform:rotate(180deg); height:100%; display:flex; align-items:center; justify-content:center">categorías con señal →</span>
+            <span style="position:absolute; bottom:-22px; right:0; font-size:10px; color:#A8A6B0">densidad de relato de infancia →</span>
+          </div>
+          <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:16px">
+            <div style="display:flex; align-items:center; gap:7px"><span style="width:11px; height:11px; border-radius:50%; background:#E85DA0; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">codificado</span></div>
+            <div style="display:flex; align-items:center; gap:7px"><span style="width:11px; height:11px; border-radius:50%; background:#D9A441; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">preseleccionado</span></div>
+            <div style="display:flex; align-items:center; gap:7px"><span style="width:8px; height:8px; border-radius:50%; background:rgba(135,149,210,0.5); display:inline-block"></span><span style="font-size:11.5px; color:#75737F">resto del corpus</span></div>
+          </div>
+          <p style="margin:6px 0 0; font-size:12.5px; color:#4A4955; line-height:1.6; text-wrap:pretty">El eje vertical mide amplitud —cuántas categorías toca— y el horizontal, cuánto habla la persona de su propia infancia. Al corregir los patrones, Beto subió {{ posicionBeto }}: {{ betoAmpl }} de trece categorías. Pero sigue pegado al extremo izquierdo, y ahí está lo interesante.</p>
+          <p style="margin:0; font-size:12.5px; color:#4A4955; line-height:1.6; text-wrap:pretty">El eje horizontal cuenta expresiones como «mi mamá», «mi papá», «la escuela», «mis hermanos». Beto no tuvo ninguna de las cuatro: lo abandonaron al nacer y creció en la calle. Su infancia no aparece medida porque el instrumento da por supuesto que hubo una familia de la cual hablar. Leído solo por ese eje, el caso más extremo del corpus quedaba enterrado — razón de más para que el índice priorice y nunca descarte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="display:flex; flex-direction:column; gap:20px">
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Solapamiento entre categorías</h2>
+        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Cada barra mide sobre <strong style="color:#2A2933">el corpus completo</strong>: lo que ocupa es su prevalencia y lo que queda vacío son los casos que no la presentan. La franja de color muestra <strong style="color:#2A2933">de qué está hecha su compañía</strong>.</p>
+      </div>
+
+      <div style="display:flex; gap:14px 22px; flex-wrap:wrap; padding:16px 20px; border:1px solid #E9E3D7; border-radius:14px; background:#FFFFFF">
+        <sc-for list="{{ leyenda }}" as="l" hint-placeholder-count="13">
+          <span style="display:flex; align-items:center; gap:8px; font-size:12px; color:#4A4955"><span style="{{ l.swatch }}"></span>{{ l.nombre }}</span>
+        </sc-for>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:28px 30px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:15px">
+        <div style="display:grid; grid-template-columns:210px 1fr 80px 118px 92px; gap:16px; padding-bottom:12px; border-bottom:1px solid #F4F0E8">
+          <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:800">Categoría</span>
+          <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:800">Prevalencia sobre el corpus y composición de su compañía</span>
+          <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:800; text-align:right">Casos</span>
+          <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:800; text-align:right">Sin compañía</span>
+          <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:800; text-align:right">Promedio</span>
+        </div>
+        <sc-for list="{{ composicion }}" as="s" hint-placeholder-count="13">
+          <div style="display:grid; grid-template-columns:210px 1fr 80px 118px 92px; align-items:center; gap:16px">
+            <span style="display:flex; align-items:center; gap:9px"><span style="{{ s.swatch }}"></span><span style="font-size:12.5px; line-height:1.25; color:#2A2933">{{ s.nombre }}</span></span>
+            <div style="display:flex; height:26px; background:#FBFAF7; border:1px solid #E9E3D7; border-radius:5px; overflow:hidden; box-sizing:border-box">
+              <sc-for list="{{ s.segmentos }}" as="g" hint-placeholder-count="8">
+                <div title="{{ g.tip }}" style="{{ g.style }}"></div>
+              </sc-for>
+            </div>
+            <span style="font-size:12.5px; font-weight:800; color:#2A2933; text-align:right; font-variant-numeric:tabular-nums">{{ s.n }} · {{ s.pct }}</span>
+            <span style="font-size:11.5px; color:#75737F; text-align:right">{{ s.solaTxt }}</span>
+            <span style="font-size:11.5px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">{{ s.promedio }}</span>
+          </div>
+        </sc-for>
+        <p style="margin:8px 0 0; font-size:12.5px; color:#75737F; line-height:1.6; max-width:92ch">{{ notaComposicion }}</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; overflow:hidden; box-shadow:0 2px 10px rgba(135,149,210,0.06)">
+        <div style="padding:24px 28px 18px; display:flex; flex-direction:column; gap:5px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Las parejas que más viajan juntas</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:92ch">Cuántos casos presentan las dos categorías a la vez. Debajo de cada cifra, qué proporción representa dentro de cada una de las dos: por ahí se ve cuál arrastra a cuál.</p>
+        </div>
+        <div style="padding:0 28px 26px; display:flex; flex-direction:column; gap:9px">
+          <sc-for list="{{ pares }}" as="p" hint-placeholder-count="14">
+            <div title="{{ p.tip }}" style="display:grid; grid-template-columns:minmax(300px,1.1fr) 1fr 52px 168px; align-items:center; gap:16px">
+              <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:#2A2933; line-height:1.25">
+                <span style="{{ p.swatchA }}"></span>{{ p.a }}
+                <span style="color:#A8A6B0; font-weight:700">+</span>
+                <span style="{{ p.swatchB }}"></span>{{ p.b }}
+              </span>
+              <div style="height:14px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ p.barra }}"></div></div>
+              <span style="font-size:15px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ p.n }}</span>
+              <span style="font-size:11.5px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">{{ p.detalle }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <details style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; overflow:hidden; box-shadow:0 2px 10px rgba(135,149,210,0.06)">
+        <summary style="padding:20px 28px; cursor:pointer; font-size:14px; font-weight:800; list-style:none">Ver la matriz completa de co-ocurrencia ▾</summary>
+        <div style="padding:0 28px 24px; display:flex; flex-direction:column; gap:16px">
+          <p style="margin:0; font-size:12.5px; color:#75737F; line-height:1.55; max-width:92ch">Se lee por renglón: de los casos con la categoría de la fila, qué porcentaje presenta también la de la columna. No es simétrica, y ahí está su valor — {{ notaMatriz }}</p>
+          <div style="overflow-x:auto">
+            <div style="min-width:700px">
+              <div style="display:grid; grid-template-columns:184px repeat(13, 1fr); gap:3px; margin-bottom:3px">
+                <div></div>
+                <sc-for list="{{ encabezadosAce }}" as="h" hint-placeholder-count="13">
+                  <div title="{{ h.nombre }}" style="font-size:9.5px; font-weight:800; color:#75737F; text-align:center; padding-bottom:4px">{{ h.num }}</div>
+                </sc-for>
+              </div>
+              <sc-for list="{{ matriz }}" as="m" hint-placeholder-count="13">
+                <div style="display:grid; grid-template-columns:184px repeat(13, 1fr); gap:3px; margin-bottom:3px; align-items:center">
+                  <span style="display:flex; align-items:center; gap:8px; font-size:11.5px; color:#4A4955; padding-right:8px; line-height:1.2"><span style="{{ m.swatch }}"></span>{{ m.nombre }}</span>
+                  <sc-for list="{{ m.celdas }}" as="c" hint-placeholder-count="13">
+                    <div title="{{ c.tip }}" style="{{ c.style }}">{{ c.txt }}</div>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:16px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Corpus ordenado · {{ nAptos }} episodios</h2>
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap">
+          <div style="display:flex; align-items:center; gap:7px"><span style="width:14px; height:14px; border-radius:3px; background:#F4F0E8; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">sin señal</span></div>
+          <div style="display:flex; align-items:center; gap:7px"><span style="width:14px; height:14px; border-radius:3px; background:#E2E6F5; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">1–2</span></div>
+          <div style="display:flex; align-items:center; gap:7px"><span style="width:14px; height:14px; border-radius:3px; background:#AEB8E2; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">3–5</span></div>
+          <div style="display:flex; align-items:center; gap:7px"><span style="width:14px; height:14px; border-radius:3px; background:#8795D2; display:inline-block"></span><span style="font-size:11.5px; color:#75737F">6+</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:18px; flex-wrap:wrap; padding:14px 18px; border:1px solid #E9E3D7; border-radius:12px; background:#FBFAF7">
+        <span style="font-size:11.5px; color:#75737F">Celdas codificadas (fila con badge rosa):</span>
+        <span style="font-size:12.5px; color:#4A4955"><strong style="color:#fff; background:#8795D2; border-radius:4px; padding:1px 6px; margin-right:5px">E</strong>explícito — lo dice con esas palabras o su equivalente directo</span>
+        <span style="font-size:12.5px; color:#4A4955"><strong style="color:#434D80; background:#E2E6F5; border-radius:4px; padding:1px 6px; margin-right:5px">I</strong>inferido — el contexto lo sostiene con claridad</span>
+        <span style="font-size:12.5px; color:#4A4955"><strong style="color:#A8A6B0; background:#F4F0E8; border-radius:4px; padding:1px 6px; margin-right:5px">NM</strong>no mencionado</span>
+        <span style="font-size:12.5px; color:#4A4955"><strong style="color:#A8A6B0; background:#FBFAF7; border:1.5px dashed #A8A6B0; border-radius:4px; padding:0px 5px; margin-right:5px">NO</strong>negado explícitamente</span>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; overflow:hidden; box-shadow:0 2px 10px rgba(135,149,210,0.06)">
+        <div style="overflow-x:auto">
+          <div style="min-width:1060px">
+            <div style="display:grid; grid-template-columns:56px minmax(290px,1fr) 60px 56px repeat(13, 30px) 96px; background:#F4F0E8; border-bottom:1px solid #E9E3D7; align-items:end">
+              <div style="padding:14px 8px 12px 20px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; color:#4A4955">Ep.</div>
+              <div style="padding:14px 8px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; color:#4A4955">Título</div>
+              <div style="padding:14px 6px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; color:#4A4955; text-align:center">Índice</div>
+              <div style="padding:14px 6px 12px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; color:#4A4955; text-align:center">Inf.</div>
+              <sc-for list="{{ encabezadosAce }}" as="h" hint-placeholder-count="13">
+                <div title="{{ h.nombre }}" style="padding:14px 0 12px; font-size:9.5px; font-weight:800; color:#75737F; text-align:center; font-variant-numeric:tabular-nums">{{ h.num }}</div>
+              </sc-for>
+              <div style="padding:14px 14px 12px 6px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; color:#4A4955; text-align:right">Estado</div>
+            </div>
+            <sc-for list="{{ filas }}" as="r" hint-placeholder-count="45">
+              <div style="{{ r.filaStyle }}" onClick="{{ r.abrir }}" style-hover="{{ r.rowHover }}">
+                <div style="padding:0 8px 0 20px; font-size:12px; font-weight:700; color:{{ r.mutedColor }}; font-variant-numeric:tabular-nums">{{ r.archivo }}</div>
+                <div style="padding:0 10px 0 0; font-size:13px; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:{{ r.txtColor }}">{{ r.titulo }}</div>
+                <div style="font-size:12.5px; font-weight:800; text-align:center; font-variant-numeric:tabular-nums; color:{{ r.txtColor }}">{{ r.indice }}</div>
+                <div style="font-size:11.5px; text-align:center; color:{{ r.mutedColor }}; font-variant-numeric:tabular-nums">{{ r.inf }}</div>
+                <sc-for list="{{ r.celdas }}" as="c" hint-placeholder-count="13">
+                  <div style="display:flex; align-items:center; justify-content:center"><span title="{{ c.tip }}" style="{{ c.style }}"></span></div>
+                </sc-for>
+                <div style="padding-right:14px; text-align:right"><span style="{{ r.estadoStyle }}">{{ r.estado }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:16px; padding:6px 0 4px">
+        <button type="button" onClick="{{ paginaAnterior }}" style="{{ btnPrevStyle }}">‹ Anterior</button>
+        <span style="font-size:12.5px; color:#75737F; font-variant-numeric:tabular-nums">Página {{ paginaNum }} de {{ totalPaginas }} · ajusta cuántas por página en Ajustes → Corpus</span>
+        <button type="button" onClick="{{ paginaSiguiente }}" style="{{ btnNextStyle }}">Siguiente ›</button>
+      </div>
+      <p style="margin:0; font-size:12.5px; color:#75737F; line-height:1.6; max-width:88ch">Las filas ya codificadas (badge rosa) recalculan el Índice con la misma fórmula — amplitud × señales × densidad de infancia — pero con la amplitud verificada por lectura completa, así que queda en la misma escala y es comparable directamente con el resto. Inf. y la intensidad de señal siguen del cribado: la codificación guarda una cita ejemplo por categoría, no cuenta repeticiones, así que no hay con qué sustituirlas sin perder precisión. Las 13 celdas sí muestran el E/I/NM/NO real — haz clic en cualquier fila codificada para abrir su ficha de evidencia con citas y minuto exacto.</p>
+    </section>
+
+    <sc-if value="{{ hayModal }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ cerrarFicha }}" style="position:fixed; inset:0; background:rgba(42,41,51,0.44); z-index:60; display:flex; align-items:flex-start; justify-content:center; padding:48px 24px; overflow-y:auto">
+        <article onClick="{{ detener }}" style="background:#FFFFFF; border-radius:20px; max-width:820px; width:100%; overflow:hidden; box-shadow:0 24px 60px rgba(42,41,51,0.28)">
+          <div style="padding:24px 30px; background:#F4F0E8; display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between">
+            <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap">
+              <h3 style="margin:0; font-size:24px; font-weight:800; letter-spacing:-0.01em">{{ fichaActiva.alias }}</h3>
+              <span style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#75737F; font-weight:700">Episodio {{ fichaActiva.episodio }}</span>
+            </div>
+            <div style="display:flex; gap:16px; align-items:center">
+              <a href="{{ fichaActiva.url }}" target="_blank" rel="noopener" style="font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase">Ver episodio →</a>
+              <button type="button" onClick="{{ cerrarFicha }}" style="font-family:inherit; font-size:18px; line-height:1; width:34px; height:34px; border-radius:999px; border:1px solid #E9E3D7; background:#FFFFFF; color:#4A4955; cursor:pointer" style-hover="background:#F0F2FB; border-color:#AEB8E2">×</button>
+            </div>
+          </div>
+          <div style="padding:24px 30px; display:flex; flex-wrap:wrap; gap:24px; border-bottom:1px solid #F4F0E8">
+            <sc-for list="{{ fichaActiva.meta }}" as="m" hint-placeholder-count="8">
+              <div style="display:flex; flex-direction:column; gap:2px; min-width:118px">
+                <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:700">{{ m.k }}</span>
+                <span style="font-size:13.5px; font-weight:600">{{ m.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="padding:8px 30px 26px; display:flex; flex-direction:column">
+            <sc-for list="{{ fichaActiva.citas }}" as="q" hint-placeholder-count="6">
+              <div style="padding:16px 0; border-bottom:1px solid #F4F0E8; display:flex; flex-direction:column; gap:8px">
+                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+                  <span style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:#6B7AC1; background:#F0F2FB; padding:4px 9px; border-radius:999px">{{ q.categoria }}</span>
+                  <a href="{{ q.url }}" target="_blank" rel="noopener" style="font-size:11.5px; font-weight:700; font-variant-numeric:tabular-nums">{{ q.minuto }}</a>
+                </div>
+                <blockquote style="margin:0; font-size:16px; line-height:1.62; color:#2A2933; border-left:2.5px solid #8795D2; padding-left:16px; text-wrap:pretty">{{ q.cita }}</blockquote>
+              </div>
+            </sc-for>
+          </div>
+        </article>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;episodiosVisibles&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:45,&quot;min&quot;:15,&quot;max&quot;:234,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Corpus&quot;},&quot;ordenarPor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;índice&quot;,&quot;options&quot;:[&quot;índice&quot;,&quot;infancia&quot;,&quot;categorías&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Corpus&quot;},&quot;corteMinimo&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:21,&quot;min&quot;:0,&quot;max&quot;:49,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Corpus&quot;}}">
+// Un color por categoría, todos tomados de la paleta KYN
+const ACES = [
+  ["01","Maltrato físico",            "#E85DA0", "#F7C9DE"],
+  ["02","Maltrato emocional",         "#D9534F", "#F6D2DD"],
+  ["03","Abuso sexual",               "#2F3658", "#C9D0ED"],
+  ["04","Negligencia física",         "#D9A441", "#F8DCC9"],
+  ["05","Negligencia emocional",      "#9BA6DA", "#E2E6F5"],
+  ["06","Abandono parental",          "#434D80", "#AEB8E2"],
+  ["07","Sustancias en el hogar",     "#4FA47A", "#CFE8DA"],
+  ["08","Violencia entre cuidadores", "#5562A4", "#E2D6F0"],
+  ["09","Familiar encarcelado",       "#75737F", "#E4E2E6"],
+  ["10","Enfermedad o discapacidad",  "#6B7AC1", "#CFE0F2"],
+  ["11","Pobreza extrema",            "#8795D2", "#F0F2FB"],
+  ["12","Deserción escolar",          "#4A4955", "#E9E3D7"],
+  ["13","Violencia comunitaria",      "#2A2933", "#A8A6B0"]
+];
+
+function parseCSV(text) {
+  const rows = []; let row = [], field = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) { if (ch === '"') { if (text[i+1] === '"') { field += '"'; i++; } else q = false; } else field += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ',') { row.push(field); field = ""; }
+    else if (ch === '\n') { row.push(field); rows.push(row); row = []; field = ""; }
+    else if (ch !== '\r') field += ch;
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  const head = rows.shift();
+  return rows.filter(r => r.length > 1).map(r => Object.fromEntries(head.map((h,i) => [h.trim(), (r[i]||"").trim()])));
+}
+
+const BADGE = "font-size:10px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap;align-self:flex-start;";
+const B_COD = BADGE + "color:#2A2933;background:#F7C9DE";
+const B_PRE = BADGE + "color:#2A2933;background:#F6EBC4";
+const B_CAN = BADGE + "color:#434D80;background:#F0F2FB";
+const B_CON = BADGE + "color:#75737F;background:#F4F0E8";
+// Los 8 casos de cita profunda acordados: los 3 preseleccionados (Beto, Kitty, Pichardo) + 5 elegidos por riqueza y diversidad de perfil
+const PROFUNDOS = new Set(["057","130","295","030","006","049","080","005"]);
+
+class Component extends DCLogic {
+  state = { cribado: [], casos: [], citas: [], ancla: 1, fichaAbierta: null, pagina: 0 };
+
+  componentDidMount() {
+    const res = (typeof window !== "undefined" && window.__resources) || {};
+    const v = Date.now();
+    const load = (id, path) => res[id]
+      ? fetch(res[id]).then(r => r.text())
+      : fetch(path + "?v=" + v, { cache: "no-store" }).then(r => r.text());
+    Promise.all([
+      load("cribadoCsv", "datos/cribado.csv"),
+      load("codificacionCsv", "datos/codificacion.csv"),
+      load("citasCsv", "datos/citas.csv")
+    ]).then(([a,b,c]) => this.setState({ cribado: parseCSV(a), casos: parseCSV(b), citas: parseCSV(c) }))
+      .catch(e => console.warn("Datos no disponibles:", e));
+  }
+
+  heat(n) {
+    const base = "width:17px;height:17px;border-radius:4px;display:block;";
+    if (n >= 6) return base + "background:#8795D2";
+    if (n >= 3) return base + "background:#AEB8E2";
+    if (n >= 1) return base + "background:#E2E6F5";
+    return base + "background:#F4F0E8";
+  }
+
+  heatReal(v) {
+    const base = "width:17px;height:17px;border-radius:4px;display:block;box-sizing:border-box;";
+    if (v === "E") return base + "background:#8795D2";
+    if (v === "I") return base + "background:#AEB8E2";
+    if (v === "NO") return base + "background:#FBFAF7;border:1.5px dashed #A8A6B0";
+    return base + "background:#F4F0E8";
+  }
+
+  celdaCod(cod) {
+    const base = "display:flex;align-items:center;justify-content:center;width:30px;height:25px;border-radius:6px;font-size:10.5px;font-weight:800;box-sizing:border-box;";
+    if (cod === "E") return base + "background:#8795D2;color:#fff";
+    if (cod === "I") return base + "background:#E2E6F5;color:#434D80";
+    if (cod === "NO") return base + "background:#FBFAF7;color:#A8A6B0;border:1.5px dashed #A8A6B0";
+    return base + "background:#F4F0E8;color:#A8A6B0";
+  }
+
+  renderVals() {
+    const cri = this.state.cribado;
+    const aptos = cri.filter(r => r.excluido === "no");
+    const codSet = new Set(this.state.casos.map(c => c.archivo));
+    const num = (r, k) => parseFloat(r[k]) || 0;
+
+    const topN = Math.round(this.props.episodiosVisibles ?? 45);
+    const orden = this.props.ordenarPor ?? "índice";
+    const corte = this.props.corteMinimo ?? 21;
+
+    const codPorArchivo = new Map(this.state.casos.map(c => [c.archivo, c]));
+    const ampReal = r => {
+      const c = codPorArchivo.get(r.archivo);
+      if (!c) return null;
+      return ACES.filter(([n]) => c["ace"+n] === "E" || c["ace"+n] === "I").length;
+    };
+    // Pesos recuperados por regresión lineal sobre cribado.csv (R²=0.99999):
+    // indice = amplitud·3.0778 + tasa_señales·4.1718 + densidad_infancia·2.3939
+    // Con un caso codificado sustituimos solo la amplitud (la única pieza que la lectura completa
+    // verifica de forma fiel); tasa_señales y densidad_infancia siguen del cribado porque miden
+    // repetición de menciones en todo el texto, algo que la codificación no vuelve a contar.
+    const indiceReal = r => {
+      const ar = ampReal(r);
+      if (ar === null) return null;
+      return ar * 3.0778 + num(r,"tasa_senales") * 4.1718 + num(r,"densidad_infancia") * 2.3939;
+    };
+    const cmp = {
+      "índice": r => indiceReal(r) ?? num(r,"indice"),
+      "infancia": r => num(r,"densidad_infancia"),
+      "categorías": r => ampReal(r) ?? num(r,"amplitud")
+    }[orden] || (r => num(r,"indice"));
+    const ordenados = [...aptos].sort((a,b) => cmp(b) - cmp(a));
+    const rankIdx = [...aptos].sort((a,b) => num(b,"indice") - num(a,"indice"));
+
+    const glosario = [
+      { k: "Codificado", badge: B_COD, d: "Leí la transcripción completa y asigné E, I, NM o NO a cada una de las trece categorías, con cita y minuto de respaldo. Es el único dato que puede entrar a la matriz final." },
+      { k: "Preseleccionado", badge: B_PRE, d: "Elegido por ti como candidato de partida. Se muestra siempre, sin importar su índice, para que puedas compararlo contra el resto con los mismos criterios." },
+      { k: "Candidato", badge: B_CAN, d: "Su índice queda sobre el corte: el cribado sugiere que hay material biográfico suficiente. Es una hipótesis a confirmar leyendo, no un resultado." },
+      { k: "Contraste", badge: B_CON, d: "Índice bajo. Puede ser una entrevista centrada en el proceso penal, o alguien que narra sin las palabras del libro de códigos. Sigue siendo elegible: aquí caía Beto." }
+    ];
+
+    const preseleccionados = aptos.filter(r => r.preseleccion === "sí")
+      .sort((a,b) => num(b,"indice") - num(a,"indice"))
+      .map(r => ({
+        nombre: r.nota_presel || r.archivo,
+        archivo: r.archivo,
+        duracion: r.duracion || "—",
+        titulo: r.titulo,
+        indice: r.indice,
+        amplitud: r.amplitud,
+        lugar: (rankIdx.findIndex(x => x.archivo === r.archivo) + 1) + " / " + aptos.length,
+        estado: codSet.has(r.archivo) ? "Codificado" : "Por leer"
+      }));
+
+    // Histograma sobre el índice
+    const vals = aptos.map(r => num(r,"indice"));
+    const max = Math.max(10, ...vals);
+    const bins = 14, ancho = max / bins;
+    const cuenta = new Array(bins).fill(0);
+    vals.forEach(v => { const i = Math.min(bins - 1, Math.floor(v / ancho)); cuenta[i]++; });
+    const maxN = Math.max(1, ...cuenta);
+    const histograma = cuenta.map((n, i) => {
+      const desde = i * ancho;
+      const alto = Math.max(3, Math.round(n / maxN * 132));
+      const dentro = desde + ancho > corte;
+      return { n, etiqueta: Math.round(desde), barra: `width:100%;height:${alto}px;border-radius:5px 5px 2px 2px;background:${dentro ? "#8795D2" : "#E9E3D7"}` };
+    });
+
+    const ord2 = [...vals].sort((a,b) => a-b);
+    const qf = f => ord2.length ? ord2[Math.floor(ord2.length * f)] : 0;
+    const cuartiles = [
+      { k: "mínimo", v: ord2[0] ?? 0 }, { k: "cuartil 1", v: qf(0.25) }, { k: "mediana", v: qf(0.5) },
+      { k: "cuartil 3", v: qf(0.75) }, { k: "máximo", v: ord2[ord2.length-1] ?? 0 },
+      { k: "corte aplicado", v: corte }, { k: "sobre el corte", v: aptos.filter(r => num(r,"indice") >= corte).length }
+    ];
+
+    const maxCob = Math.max(1, ...ACES.map(([n]) => aptos.filter(r => num(r,"ace"+n) > 0).length));
+    const cobertura = ACES.map(([n, nombre, fuerte]) => {
+      const c = aptos.filter(r => num(r,"ace"+n) > 0).length;
+      const pct = aptos.length ? Math.round(c / aptos.length * 100) : 0;
+      return {
+        nombre, txt: `${c} · ${pct}%`,
+        swatch: `width:11px;height:11px;border-radius:3px;background:${fuerte};display:inline-block;flex:none`,
+        barra: `width:${Math.round(c/maxCob*100)}%;height:100%;background:${fuerte};border-radius:4px`
+      };
+    });
+
+    const maxInf = Math.max(1, ...aptos.map(r => num(r,"densidad_infancia")));
+    const maxCat = Math.max(1, ...aptos.map(r => num(r,"amplitud")));
+    const puntos = aptos.map(r => {
+      const x = num(r,"densidad_infancia") / maxInf * 96;
+      const y = num(r,"amplitud") / maxCat * 92;
+      const hecho = codSet.has(r.archivo);
+      const pre = r.preseleccion === "sí";
+      const d = (hecho || pre) ? 11 : 7;
+      const color = hecho ? "#E85DA0" : (pre ? "#D9A441" : "rgba(135,149,210,0.5)");
+      const halo = hecho ? "box-shadow:0 0 0 3px rgba(232,93,160,0.18)" : (pre ? "box-shadow:0 0 0 3px rgba(217,164,65,0.28)" : "");
+      return { tip: `${r.archivo} · ${r.titulo}`, style: `position:absolute;left:${x.toFixed(1)}%;bottom:${y.toFixed(1)}%;width:${d}px;height:${d}px;border-radius:50%;background:${color};transform:translate(-50%,50%);${halo}` };
+    });
+
+    // ---- Solapamiento entre categorías ----
+    const tiene = (r, i) => num(r, "ace" + String(i).padStart(2, "0")) > 0;
+    const anclaN = this.state.ancla;
+    const anclaNombre = (ACES[anclaN - 1] || ACES[0])[1];
+    const total = aptos.length || 1;
+    const conAncla = aptos.filter(r => tiene(r, anclaN));
+
+    const anclas = ACES.map(([n, nombre, fuerte], idx) => {
+      const activo = (idx + 1) === anclaN;
+      return {
+        nombre,
+        click: () => this.setState({ ancla: idx + 1 }),
+        activo,
+        inactivo: !activo,
+        swatchOn: `width:9px;height:9px;border-radius:2px;background:#FFFFFF;display:inline-block;flex:none`,
+        swatchOff: `width:9px;height:9px;border-radius:2px;background:${fuerte};display:inline-block;flex:none`
+      };
+    });
+
+    // Cada barra mide sobre el corpus entero: su largo es la prevalencia real de la categoría
+    // y se reparte entre los colores de lo que la acompaña. Cada caso reparte su peso
+    // en partes iguales entre sus acompañantes, así la suma da exactamente la prevalencia.
+    const composicion = ACES.map(([n, nombre, fuerte], idx) => {
+      const i = idx + 1;
+      const conI = aptos.filter(r => tiene(r, i));
+      const peso = new Array(14).fill(0);
+      let solos = 0, sumaAcomp = 0;
+      conI.forEach(r => {
+        const acomp = [];
+        for (let j = 1; j <= 13; j++) if (j !== i && tiene(r, j)) acomp.push(j);
+        if (!acomp.length) { solos++; return; }
+        sumaAcomp += acomp.length;
+        acomp.forEach(j => { peso[j] += 1 / acomp.length; });
+      });
+      const anchoDe = v => (v / total * 100).toFixed(3);
+      const segmentos = [];
+      if (solos) segmentos.push({
+        style: `width:${anchoDe(solos)}%;background:${fuerte};height:100%;flex:none`,
+        tip: `${solos} caso${solos === 1 ? "" : "s"} donde ${nombre} aparece sin ninguna otra categoría`
+      });
+      ACES.forEach(([n2, nombre2, fuerte2], k) => {
+        const j = k + 1;
+        if (j === i || peso[j] <= 0) return;
+        const coinciden = conI.filter(r => tiene(r, j)).length;
+        segmentos.push({
+          style: `width:${anchoDe(peso[j])}%;background:${fuerte2};height:100%;flex:none`,
+          tip: `${coinciden} de los ${conI.length} casos con ${nombre} presentan también ${nombre2} — ${Math.round(coinciden / conI.length * 100)}%`
+        });
+      });
+      return {
+        nombre,
+        swatch: `width:13px;height:13px;border-radius:3px;background:${fuerte};display:inline-block;flex:none`,
+        n: conI.length,
+        pct: total ? Math.round(conI.length / total * 100) + "%" : "0%",
+        solaTxt: conI.length ? (solos ? `${solos} sin compañía` : "nunca sola") : "—",
+        promedio: conI.length ? (sumaAcomp / conI.length).toFixed(1) + " otras" : "—",
+        segmentos
+      };
+    }).sort((a, b) => b.n - a.n);
+
+    const notaComposicion = `Cada barra abarca el corpus completo, así que su largo es la prevalencia real de la categoría y el hueco final son los casos que no la presentan. Dentro, los colores reparten esa franja entre las adversidades que la acompañan: cada caso divide su peso en partes iguales entre las categorías con las que coincide, de modo que los anchos suman exactamente la prevalencia. Si una barra no arranca con su propio color, esa categoría nunca aparece sola.`;
+
+    // Parejas que más viajan juntas — sustituye a la matriz como lectura principal
+    const paresFrecuentes = [];
+    for (let i = 1; i <= 13; i++) {
+      for (let j = i + 1; j <= 13; j++) {
+        const ambos = aptos.filter(r => tiene(r, i) && tiene(r, j)).length;
+        if (!ambos) continue;
+        const nI = aptos.filter(r => tiene(r, i)).length;
+        const nJ = aptos.filter(r => tiene(r, j)).length;
+        const union = nI + nJ - ambos;
+        paresFrecuentes.push({ i, j, ambos, nI, nJ, jaccard: ambos / union });
+      }
+    }
+    paresFrecuentes.sort((a, b) => b.ambos - a.ambos);
+    const maxPar = paresFrecuentes.length ? paresFrecuentes[0].ambos : 1;
+    const pares = paresFrecuentes.slice(0, 14).map(p => {
+      const A = ACES[p.i - 1], B = ACES[p.j - 1];
+      return {
+        a: A[1], b: B[1],
+        swatchA: `width:11px;height:11px;border-radius:3px;background:${A[2]};display:inline-block;flex:none`,
+        swatchB: `width:11px;height:11px;border-radius:3px;background:${B[2]};display:inline-block;flex:none`,
+        barra: `width:${(p.ambos / maxPar * 100).toFixed(1)}%;height:100%;border-radius:4px;background:linear-gradient(90deg, ${A[2]}, ${B[2]})`,
+        n: p.ambos,
+        detalle: `${Math.round(p.ambos / p.nI * 100)}% de ${p.nI} · ${Math.round(p.ambos / p.nJ * 100)}% de ${p.nJ}`,
+        tip: `${p.ambos} casos presentan ${A[1]} y ${B[1]} a la vez`
+      };
+    });
+
+    const notaSolape = conAncla.length
+      ? `De los ${conAncla.length} casos con ${anclaNombre} (${Math.round(conAncla.length / total * 100)}% del corpus), la porción oscura de cada barra muestra cuántos comparten también esa categoría. Las barras con mucha porción oscura señalan adversidades que rara vez llegan solas.`
+      : "Selecciona una categoría de anclaje.";
+
+    const matriz = ACES.map(([n, nombre, fuerte], idx) => {
+      const i = idx + 1;
+      const conI = aptos.filter(r => tiene(r, i));
+      return {
+        nombre,
+        swatch: `width:10px;height:10px;border-radius:3px;background:${fuerte};display:inline-block;flex:none`,
+        celdas: ACES.map(([n2, nombre2], idx2) => {
+          const j = idx2 + 1;
+          const inter = conI.filter(r => tiene(r, j)).length;
+          const pct = conI.length ? Math.round(inter / conI.length * 100) : 0;
+          const diag = i === j;
+          let bg = "#F4F0E8", fg = "#A8A6B0";
+          if (!diag) {
+            if (pct >= 75) { bg = "#8795D2"; fg = "#FFFFFF"; }
+            else if (pct >= 50) { bg = "#AEB8E2"; fg = "#2A2933"; }
+            else if (pct >= 25) { bg = "#E2E6F5"; fg = "#434D80"; }
+            else if (pct > 0) { bg = "#F0F2FB"; fg = "#75737F"; }
+          } else { bg = "#FFFFFF"; fg = "#A8A6B0"; }
+          return {
+            txt: diag ? "—" : (pct || ""),
+            tip: diag ? `${conI.length} casos con ${nombre}` : `${pct}% de los casos con ${nombre} presentan también ${nombre2} (${inter} de ${conI.length})`,
+            style: `display:flex;align-items:center;justify-content:center;height:30px;border-radius:5px;font-size:10.5px;font-weight:700;background:${bg};color:${fg};${diag ? "border:1px dashed #E9E3D7;" : ""}`
+          };
+        })
+      };
+    });
+
+    // El par más asimétrico se lee de la propia matriz, para que el texto nunca contradiga la cifra
+    let notaMatriz = "las dos direcciones de una misma pareja de categorías dicen cosas distintas.";
+    let mejor = null;
+    const PISO_N = 25; // ninguna afirmación de la leyenda puede apoyarse en menos casos que esto
+    for (let i = 1; i <= 13; i++) {
+      const conI = aptos.filter(r => tiene(r, i));
+      if (conI.length < PISO_N) continue;
+      for (let j = 1; j <= 13; j++) {
+        if (i === j) continue;
+        const conJ = aptos.filter(r => tiene(r, j));
+        if (conJ.length < PISO_N) continue;
+        const iaj = Math.round(conI.filter(r => tiene(r, j)).length / conI.length * 100);
+        const jai = Math.round(conJ.filter(r => tiene(r, i)).length / conJ.length * 100);
+        const brecha = iaj - jai;
+        if (brecha > 0 && (!mejor || brecha > mejor.brecha)) mejor = { i, j, iaj, jai, brecha, nI: conI.length, nJ: conJ.length };
+      }
+    }
+    if (mejor) {
+      const a = ACES[mejor.i - 1][1].toLowerCase();
+      const b = ACES[mejor.j - 1][1].toLowerCase();
+      notaMatriz = `el ${mejor.iaj}% de los ${mejor.nI} casos con ${a} presenta también ${b}, pero solo el ${mejor.jai}% de los ${mejor.nJ} casos con ${b} presenta ${a}. La dirección de la lectura cambia la conclusión.`;
+    }
+
+    // La leyenda del gráfico se deriva del dato para que ningún superlativo quede fijo
+    const betoFila = aptos.find(r => r.archivo === "057");
+    const betoAmpl = betoFila ? num(betoFila, "amplitud") : 9;
+    const maxAmpl = Math.max(...aptos.map(r => num(r, "amplitud")));
+    const posicionBeto = betoAmpl >= maxAmpl ? "hasta lo más alto del gráfico" : "hasta la parte alta del gráfico";
+
+    const presEnLista = new Set(aptos.filter(r => r.preseleccion === "sí").map(r => r.archivo));
+    const totalPaginas = Math.max(1, Math.ceil(ordenados.length / topN));
+    const paginaEfectiva = Math.min(this.state.pagina, totalPaginas - 1);
+    const inicioPagina = paginaEfectiva * topN;
+    const visibles = ordenados.slice(inicioPagina, inicioPagina + topN);
+    if (paginaEfectiva === 0) {
+      aptos.filter(r => (presEnLista.has(r.archivo) || PROFUNDOS.has(r.archivo)) && !visibles.includes(r)).forEach(r => visibles.push(r));
+    }
+    const paginaAnterior = () => this.setState(s => ({ pagina: Math.max(0, s.pagina - 1) }));
+    const paginaSiguiente = () => this.setState(s => ({ pagina: Math.min(totalPaginas - 1, s.pagina + 1) }));
+    const enPrimera = paginaEfectiva <= 0;
+    const enUltima = paginaEfectiva >= totalPaginas - 1;
+    const BTN_PAG = "font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:999px;border:1px solid #E9E3D7;background:#FFFFFF;cursor:pointer;color:#2A2933";
+    const BTN_PAG_OFF = "font-family:inherit;font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:999px;border:1px solid #F4F0E8;background:#FBFAF7;cursor:default;color:#C7C4CC";
+
+    const filas = visibles.map((r, i) => {
+      const hecho = codSet.has(r.archivo);
+      const pre = r.preseleccion === "sí";
+      const sobre = num(r,"indice") >= corte;
+      const estado = hecho ? "Codificado" : (pre ? "Preseleccionado" : (sobre ? "Candidato" : "Contraste"));
+      const prof = PROFUNDOS.has(r.archivo);
+      const bg = prof ? "#E85DA0" : (hecho ? "#FBFAF7" : (pre ? "#FBFAF7" : (i % 2 ? "#FBFAF7" : "#fff")));
+      const izq = prof ? "border-left:3px solid #C23E82;" : (pre ? "border-left:3px solid #D9A441;" : "border-left:3px solid transparent;");
+      const idxReal = hecho ? indiceReal(r) : null;
+      const txtColor = prof ? "#FFFFFF" : "#2A2933";
+      const mutedColor = prof ? "rgba(255,255,255,0.82)" : "#75737F";
+      return {
+        archivo: r.archivo, titulo: r.titulo,
+        indice: idxReal !== null ? idxReal.toFixed(1) : r.indice,
+        inf: r.densidad_infancia,
+        estado, txtColor, mutedColor,
+        estadoStyle: hecho ? B_COD : (pre ? B_PRE : (sobre ? B_CAN : B_CON)),
+        filaStyle: `display:grid;grid-template-columns:56px minmax(290px,1fr) 60px 56px repeat(13, 30px) 96px;align-items:center;min-height:38px;border-bottom:1px solid #F4F0E8;${izq}background:${bg};${hecho ? "cursor:pointer" : ""}`,
+        rowHover: hecho ? (prof ? "background:#D94B8F" : "background:#F0F2FB") : "",
+        abrir: hecho ? (() => this.setState({ fichaAbierta: r.archivo })) : undefined,
+        celdas: ACES.map(([n, nombre]) => {
+          if (hecho) {
+            const v = (codPorArchivo.get(r.archivo) || {})["ace"+n] || "NM";
+            const et = v === "E" ? "explícito" : v === "I" ? "inferido" : v === "NO" ? "negado" : "no mencionado";
+            return { tip: `${nombre}: ${et} · codificado`, style: this.heatReal(v) };
+          }
+          return { tip: `${nombre}: ${r["ace"+n]} menciones · cribado`, style: this.heat(num(r,"ace"+n)) };
+        })
+      };
+    });
+
+    const val = v => (!v || v === "NM") ? "No se menciona" : ({ "sí":"Sí", "no":"No" }[v] || v);
+    const construirFicha = (c, idx) => {
+      const marcas = ACES.map(([n, nombre, fuerte, suave], k) => {
+        const v = c["ace" + n];
+        const activa = v === "E" || v === "I";
+        return {
+          nombre, activa,
+          punto: `width:10px;height:10px;border-radius:3px;flex:none;background:${activa ? fuerte : "#F4F0E8"}`,
+          tip: `${nombre}: ${v === "E" ? "explícito" : v === "I" ? "inferido" : v === "NO" ? "negado" : "no mencionado"}`
+        };
+      });
+      return {
+        idx, archivo: c.archivo, alias: c.alias, episodio: c.episodio, url: c.url, marcas,
+        totalMarcas: marcas.filter(m => m.activa).length,
+        resumen: [val(c.sexo), val(c.origen), val(c.delito_sentencia)].filter(x => x !== "No se menciona").join(" · "),
+        abrir: () => this.setState({ fichaAbierta: c.archivo }),
+        meta: [
+          { k: "Sexo", v: val(c.sexo) }, { k: "Edad", v: val(c.edad) }, { k: "Origen", v: val(c.origen) },
+          { k: "Delito", v: val(c.delito_sentencia) },
+          { k: "Sentencia", v: c.anios_sentencia === "NM" ? "No se menciona" : c.anios_sentencia + " años" },
+          { k: "Inicio delictivo", v: c.edad_inicio_delictivo === "NM" ? "No se menciona" : c.edad_inicio_delictivo + " años" },
+          { k: "Escolaridad", v: val(c.escolaridad) }, { k: "Crianza", v: val(c.crianza) }
+        ],
+        citas: this.state.citas.filter(q => q.episodio === c.episodio && q.alias === c.alias)
+          .map(q => ({ categoria: q.categoria, minuto: q.minuto, cita: "«" + q.cita + "»", url: q.url_timestamp }))
+      };
+    };
+    const ordenados2 = [...this.state.casos].sort((a, b) => {
+      const cuenta = x => ACES.filter(([n]) => x["ace" + n] === "E" || x["ace" + n] === "I").length;
+      return cuenta(b) - cuenta(a);
+    });
+    const fichas = ordenados2.map(construirFicha);
+    const fichaActiva = fichas.find(f => f.archivo === this.state.fichaAbierta) || null;
+    const hayModal = !!fichaActiva;
+    const cerrarFicha = () => this.setState({ fichaAbierta: null });
+
+    return {
+      glosario, preseleccionados, histograma, cuartiles, cobertura, puntos, filas,
+      composicion, notaComposicion, pares, matriz, notaMatriz, betoAmpl, posicionBeto,
+      leyenda: ACES.map(([num, nombre, fuerte]) => ({ num, nombre, swatch: `width:12px;height:12px;border-radius:3px;background:${fuerte};display:inline-block;flex:none` })),
+      fichaActiva, hayModal, cerrarFicha,
+      detener: e => e.stopPropagation(),
+      encabezadosAce: ACES.map(([num, nombre]) => ({ num, nombre })),
+      nTotal: cri.length || 239,
+      nAptos: aptos.length || 234,
+      paginaNum: paginaEfectiva + 1,
+      totalPaginas,
+      paginaAnterior, paginaSiguiente,
+      btnPrevStyle: enPrimera ? BTN_PAG_OFF : BTN_PAG,
+      btnNextStyle: enUltima ? BTN_PAG_OFF : BTN_PAG,
+      nPresel: preseleccionados.length,
+      nFilas: filas.length,
+      nCodificados: this.state.casos.length
+    };
+  }
+}
+</script>
+</body>
+</html>

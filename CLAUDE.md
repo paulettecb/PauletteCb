@@ -17,6 +17,14 @@ Paulette dice muchas ideas y no quiere perderlas: cada cosa se refleja en GitHub
 - Todo archivo estático nuevo que la web enlace debe agregarse a la lista de copias de `build-all.mjs`, o no llegará al deploy.
 - NUNCA re-ejecutar runs viejos del workflow "Deploy to Netlify" (los anteriores al fix del SITE_ID apuntaban al sitio de kyncost y lo sobreescriben).
 
+## Registro de visitas (analítica propia, privada)
+- Función `netlify/functions/visitas.mjs` + `/api/visitas` (en `netlify/_redirects`). Guarda **solo agregados por día** en Netlify Blobs (store `visitas`): visitas, personas distintas del día, rutas, dominio de referencia, país y dispositivo. **Nunca IPs, cookies ni terceros**; las "personas" se cuentan con un hash irreversible que incluye la fecha, así que nadie es rastreable entre días.
+- Tracker: `public/visitas.js` (1 aviso por carga, `sendBeacon`). Se salta solo en localhost, en GitHub Pages (no hay funciones), con Do Not Track y si `localStorage['visitas-optout'] === '1'`.
+- Panel privado: `/visitas.html` (en `public/`), protegido con token. **Cuentas Claras NO se rastrea** (es su app privada).
+- **Setup en Netlify** (Site configuration → Environment variables): `VISITAS_TOKEN` (el que se escribe en el panel; sin él el panel responde 503) y `VISITAS_SALT` (cualquier texto largo aleatorio).
+- Para trackear una página nueva, agrégale `<script defer src="/visitas.js"></script>` antes de `</body>`.
+- Tests: `npm run test:visitas` (Blobs falso en memoria).
+
 ## Design system KYN (fuente de verdad local)
 - Tokens y fuentes: `proyectos/mediapipe-lab/src/styles.css` (paleta periwinkle/pasteles, `--font-display: Friendship`, `--font-accent: Farmhouse`) y `proyectos/KYN Design System/` (fuentes .otf en `assets/fonts/`).
 - Cualquier página o documento nuevo debe usar estos tokens, no colores/fuentes ad hoc.

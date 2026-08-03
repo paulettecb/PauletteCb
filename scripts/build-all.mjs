@@ -26,6 +26,8 @@ console.log('▶ Build principal (raíz + MediaPipe Lab)');
 rmSync(dist, { recursive: true, force: true });
 run('npx vite build');
 
+// Nota: lo que vive en public/ (favicons, visitas.js y visitas.html) lo copia
+// Vite solo a la raíz de dist/. Por eso no aparece en las copias de abajo.
 console.log('▶ Copiando styles.css plano (lo referencian lsm/rescate directo, sin bundle)');
 copy(path.join(root, 'styles.css'), path.join(dist, 'styles.css'));
 
@@ -66,6 +68,8 @@ copy(path.join(root, 'proyectos/ceneval/area1-calidadvida-interactiva.html'), pa
 copy(path.join(root, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-funcionalidad-interactiva.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-desarrollo-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-desarrollo-interactiva.html'));
 copy(path.join(root, 'proyectos/ceneval/area1-vocacional-interactiva.html'), path.join(dist, 'proyectos/ceneval/area1-vocacional-interactiva.html'));
+// Herramienta de decisión "Encuentra tu prueba" (Área 3): el árbol de estadística, contestando.
+copy(path.join(root, 'proyectos/ceneval/area3-que-prueba-interactiva.html'), path.join(dist, 'proyectos/ceneval/area3-que-prueba-interactiva.html'));
 // Complemento "Cerebro interactivo" (Área 1): hotspots sobre un corte sagital + su imagen.
 copy(path.join(root, 'proyectos/ceneval/area1-cerebro-interactivo.html'), path.join(dist, 'proyectos/ceneval/area1-cerebro-interactivo.html'));
 copy(path.join(root, 'proyectos/ceneval/assets'), path.join(dist, 'proyectos/ceneval/assets'));
@@ -102,6 +106,9 @@ copy(path.join(root, 'proyectos/ceneval/flashcards'), path.join(dist, 'proyectos
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
 copy(path.join(root, 'proyectos/lsm/rescate'), path.join(dist, 'proyectos/lsm/rescate'));
 copy(path.join(root, 'proyectos/KYN Design System'), path.join(dist, 'proyectos/KYN Design System'));
+
+console.log('▶ Copiando Corpus Penitencia (cribado del corpus, datos y runtime del doc)');
+copy(path.join(root, 'proyectos/corpus-penitencia'), path.join(dist, 'proyectos/corpus-penitencia'));
 // Packages compartidos: módulos que las herramientas enlazan (hoy: lector-kyn,
 // con su vendor de MediaPipe). Se copia entero para que el WASM y el bundle
 // lleguen al deploy.

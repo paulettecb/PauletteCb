@@ -14,6 +14,19 @@
       "url": "proyectos/ceneval/index.html"
     },
     {
+      "slug": "corpus-penitencia",
+      "title": "Corpus Penitencia · Cribado del corpus",
+      "description": {
+        "en": "Screening of 239 testimonies for a study on childhood trauma and adult crime: coverage, co-occurrence and instrument validation against full coding.",
+        "es": "Cribado de 239 testimonios para una investigación sobre trauma infantil y conducta delictiva adulta: cobertura, co-ocurrencia y validación del instrumento contra la codificación completa.",
+        "fr": "Criblage de 239 témoignages pour une étude sur le traumatisme infantile et le comportement délictueux adulte : couverture, co-occurrence et validation de l'instrument.",
+        "pt": "Triagem de 239 depoimentos para uma pesquisa sobre trauma infantil e conduta delitiva adulta: cobertura, co-ocorrência e validação do instrumento.",
+        "de": "Screening von 239 Zeugenaussagen für eine Studie zu Kindheitstrauma und delinquentem Verhalten Erwachsener: Abdeckung, Ko-Okkurrenz und Instrumentenvalidierung."
+      },
+      "type": "Research",
+      "url": "proyectos/corpus-penitencia/index.html"
+    },
+    {
       "slug": "budget-planner-tdah",
       "title": "Cuentas Claras · Tu dinero del mes",
       "description": {
