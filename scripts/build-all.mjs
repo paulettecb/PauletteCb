@@ -106,6 +106,9 @@ copy(path.join(root, 'proyectos/ceneval/flashcards'), path.join(dist, 'proyectos
 copy(path.join(root, 'proyectos/lsm/index.html'), path.join(dist, 'proyectos/lsm/index.html'));
 copy(path.join(root, 'proyectos/lsm/rescate'), path.join(dist, 'proyectos/lsm/rescate'));
 copy(path.join(root, 'proyectos/KYN Design System'), path.join(dist, 'proyectos/KYN Design System'));
+
+console.log('▶ Copiando Corpus Penitencia (cribado del corpus, datos y runtime del doc)');
+copy(path.join(root, 'proyectos/corpus-penitencia'), path.join(dist, 'proyectos/corpus-penitencia'));
 // Packages compartidos: módulos que las herramientas enlazan (hoy: lector-kyn,
 // con su vendor de MediaPipe). Se copia entero para que el WASM y el bundle
 // lleguen al deploy.
