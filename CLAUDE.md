@@ -53,3 +53,5 @@ Ejemplo canónico: `proyectos/mediapipe-lab/libro-agility.html`. Para repetirlo 
 ## Gotchas técnicos de MotionLab (proyectos/mediapipe-lab)
 - MediaPipe: usar `shallowRef` para landmarkers y resultados por frame (un `ref()` profundo rompe el estado interno del task). WASM se bundlea con imports `?url`, nunca CDN.
 - Tests: motor de maniobras probado en Node con landmarks sintéticos; E2E con Playwright + cámara falsa (`--use-fake-device-for-media-stream`) y modelos .task servidos con `page.route`.
+- Los tests puros de MotionLab (mate de mirada + retos de la alarma) corren con `npm run test:motionlab`.
+- Módulo Alarma (`#/alarma`): alarma que solo se apaga completando un reto físico. El motor de retos vive en `services/alarmChallenges.js` (puro, sin DOM) y toda condición sale con su valor medido y su umbral, para que la pantalla muestre por qué NO está contando. Si la cámara falla, aparece un escape de "mantén 10 s" — es a propósito: sin él, una cámara rota vuelve la alarma una trampa.

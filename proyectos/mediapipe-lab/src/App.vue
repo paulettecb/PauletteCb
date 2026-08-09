@@ -12,6 +12,7 @@ import Agility from './pages/Agility.vue'
 import Exercise from './pages/Exercise.vue'
 import Experiments from './pages/Experiments.vue'
 import Whimsy from './pages/Whimsy.vue'
+import Alarma from './pages/Alarma.vue'
 
 const routes = {
   '/': Home,
@@ -19,7 +20,8 @@ const routes = {
   '/agility': Agility,
   '/exercise': Exercise,
   '/experiments': Experiments,
-  '/whimsy': Whimsy
+  '/whimsy': Whimsy,
+  '/alarma': Alarma
 }
 
 const route = ref(window.location.hash.slice(1) || '/')
