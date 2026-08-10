@@ -68,7 +68,7 @@
         </div>
 
         <div class="ml-section-head">
-          <h2 class="ml-section-title">Cinco formas de moverte</h2>
+          <h2 class="ml-section-title">Seis formas de moverte</h2>
           <button type="button" class="ml-link" @click="go('modulos')">Ver detalle →</button>
         </div>
 
@@ -341,7 +341,8 @@ const GLYPH = {
   pose: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 6.5v6"/><path d="M12 8.5 6.5 11"/><path d="m12 8.5 5.5 2.5"/><path d="M12 12.5 8 21"/><path d="m12 12.5 4 8.5"/></svg>',
   dumbbell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5 17.5 17.5"/><path d="m3.5 8 1.5-1.5"/><path d="M8 3.5 6.5 5"/><rect x="2.2" y="6" width="4.2" height="4.2" rx="1" transform="rotate(45 4.3 8.1)"/><path d="m16 19 1.5-1.5"/><path d="M20.5 16 19 17.5"/></svg>',
   spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4"/><path d="M12 17v4"/><path d="m5 5 2.5 2.5"/><path d="m16.5 16.5 2.5 2.5"/><path d="M3 12h4"/><path d="M17 12h4"/><path d="m5 19 2.5-2.5"/><path d="m16.5 7.5 2.5-2.5"/></svg>',
-  flor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12C12 8.1 9.2 5.5 5.5 5.5 5.5 9.4 8.3 12 12 12Z"/><path d="M12 14c0-3 2.3-5.3 5-5.3 0 3-2.2 5.3-5 5.3Z"/></svg>'
+  flor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9"/><path d="M12 12C12 8.1 9.2 5.5 5.5 5.5 5.5 9.4 8.3 12 12 12Z"/><path d="M12 14c0-3 2.3-5.3 5-5.3 0 3-2.2 5.3-5 5.3Z"/></svg>',
+  alarma: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 10v3.5l2.3 1.6"/><path d="m4.5 4.2 3-2.2"/><path d="m19.5 4.2-3-2.2"/></svg>'
 }
 
 const NAV = [
@@ -356,7 +357,8 @@ const MODULOS = [
   { id: 'agility', nombre: 'Agility', hash: '/agility', pastel: 'var(--pastel-lilac)', icon: GLYPH.pose, chips: ['pose'], desc: 'Entrena las señales de agility con tu perro.', largo: 'Diseña pistas FCI, practica el timing de tus señales frente a la cámara y sigue tu progreso. Tu app de agility canino.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir Agility' },
   { id: 'exercise', nombre: 'Exercise', hash: '/exercise', pastel: 'var(--pastel-mint)', icon: GLYPH.dumbbell, chips: ['pose'], desc: 'Cuenta reps y cuida tu forma.', largo: 'Cuenta repeticiones con una máquina de estados por ángulo y te da feedback geométrico en vivo. Sin promesas médicas.', estado: 'en curso', estadoColor: 'var(--periwinkle-700)', cta: 'Abrir Exercise' },
   { id: 'experiments', nombre: 'Experiments', hash: '/experiments', pastel: 'var(--pastel-peach)', icon: GLYPH.spark, chips: ['manos', 'pose'], desc: 'Controla la pantalla con el cuerpo.', largo: 'Arte interactivo y control creativo de UI: dibuja con el dedo, mueve variables CSS con la mano, campos de partículas alrededor de tu esqueleto.', estado: 'próximo', estadoColor: 'var(--ink-700)', cta: 'Abrir Experiments' },
-  { id: 'whimsy', nombre: 'Jardín de Manos', hash: '/whimsy', pastel: 'var(--pastel-blush)', icon: GLYPH.flor, chips: ['manos'], desc: 'Un jardín que florece con tus gestos.', largo: 'Arte generativo con las manos: pellizca para plantar flores y suelta mariposas al abrir el puño. Pura magia visual, sin objetivos ni métricas.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir Jardín' }
+  { id: 'whimsy', nombre: 'Jardín de Manos', hash: '/whimsy', pastel: 'var(--pastel-blush)', icon: GLYPH.flor, chips: ['manos'], desc: 'Un jardín que florece con tus gestos.', largo: 'Arte generativo con las manos: pellizca para plantar flores y suelta mariposas al abrir el puño. Pura magia visual, sin objetivos ni métricas.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir Jardín' },
+  { id: 'alarma', nombre: 'Alarma', hash: '/alarma', pastel: 'var(--pastel-butter)', icon: GLYPH.alarma, chips: ['pose'], desc: 'No se apaga hasta que te muevas.', largo: 'Alarma que solo se calla si haces el reto físico frente a la cámara (manos arriba, sentadillas, jumping jacks o toques cruzados). Muestra en vivo qué condiciones detecta y cuáles no, para que nunca te quedes adivinando por qué no cuenta.', estado: 'listo', estadoColor: '#2C7551', cta: 'Abrir Alarma' }
 ]
 
 const PRIVACIDAD = [

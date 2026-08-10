@@ -9,7 +9,8 @@
     "build:vite": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "lab": "npm run dev",
-    "test:visitas": "node --test --experimental-test-module-mocks netlify/functions/tests/visitas.test.mjs"
+    "test:visitas": "node --test --experimental-test-module-mocks netlify/functions/tests/visitas.test.mjs",
+    "test:motionlab": "node --test proyectos/mediapipe-lab/tests/*.test.mjs"
   },
   "dependencies": {
     "@mediapipe/hands": "^0.4.1647330206",
