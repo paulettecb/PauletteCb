@@ -301,11 +301,42 @@
     </section>
     </sc-if>
 
+    <sc-if value="{{ mostrarGeografia }}" hint-placeholder-val="{{ false }}">
+    <section style="display:flex; flex-direction:column; gap:18px">
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Origen geográfico · estado y ciudad</h2>
+        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">El origen solo se sabe al leer completo — el cribado léxico no lo captura. Este mapa es de los <strong style="color:#2A2933">{{ nConOrigen }} episodios codificados que sí lo mencionan</strong> ({{ nSinOrigen }} de {{ nCodificados }} no dicen de dónde son). Haz clic en un estado para ver sus ciudades.</p>
+      </div>
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#fff; padding:22px 28px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column">
+        <sc-for list="{{ estadosOrigen }}" as="e" hint-placeholder-count="10">
+          <details style="border-bottom:1px solid #F4F0E8; padding:11px 0">
+            <summary style="cursor:pointer; list-style:none; display:grid; grid-template-columns:190px 1fr 96px; align-items:center; gap:12px">
+              <span style="font-size:13px; font-weight:700; color:#2A2933">{{ e.estado }}</span>
+              <div style="height:16px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ e.barra }}"></div></div>
+              <span style="font-size:12px; font-weight:700; text-align:right; color:#4A4955; font-variant-numeric:tabular-nums">{{ e.n }} · {{ e.pct }}</span>
+            </summary>
+            <div style="padding:10px 0 2px 190px; display:flex; flex-direction:column; gap:7px">
+              <sc-for list="{{ e.ciudades }}" as="c" hint-placeholder-count="4">
+                <div style="display:grid; grid-template-columns:1fr 96px; align-items:center; gap:12px">
+                  <span style="font-size:12px; color:#4A4955">{{ c.ciudad }}</span>
+                  <div style="display:flex; align-items:center; gap:8px; justify-content:flex-end">
+                    <div style="height:8px; width:76px; background:#F4F0E8; border-radius:3px; overflow:hidden"><div style="{{ c.barra }}"></div></div>
+                    <span style="font-size:11px; font-weight:700; color:#75737F; min-width:14px; text-align:right">{{ c.n }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </details>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
     <sc-if value="{{ mostrarHallazgos }}" hint-placeholder-val="{{ false }}">
     <section style="display:flex; flex-direction:column; gap:18px">
       <div style="display:flex; flex-direction:column; gap:8px">
         <h2 style="font-size:13px; letter-spacing:0.16em; text-transform:uppercase; margin:0; font-weight:800">Hallazgos sobre el corpus codificado</h2>
-        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Ocho patrones y dos ausencias que emergen de los {{ nCodificados }} casos codificados por lectura completa — exploratorios, no confirmatorios: la muestra no es aleatoria, el dato es autorreportado y ningún valor faltante se imputó (cada gráfica declara su n real). Donde el hallazgo vive en datos individuales, la gráfica muestra a las personas, no solo promedios.</p>
+        <p style="margin:0; max-width:82ch; font-size:14px; line-height:1.6; color:#4A4955; text-wrap:pretty">Los patrones y ausencias que emergen de los {{ nCodificados }} casos codificados por lectura completa — exploratorios, no confirmatorios: la muestra no es aleatoria, el dato es autorreportado y ningún valor faltante se imputó (cada gráfica declara su n real). Donde el hallazgo vive en datos individuales, la gráfica muestra a las personas, no solo promedios.</p>
       </div>
 
       <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
@@ -328,11 +359,11 @@
 
       <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:22px">
         <div style="display:flex; flex-direction:column; gap:4px">
-          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Brecha de género en tres categorías</h3>
-          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Prevalencia de cada categoría (E o I) calculada por separado sobre mujeres ({{ nMujeres }}) y hombres ({{ nHombres }}) del corpus codificado.</p>
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Brecha de género en las trece categorías</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Prevalencia de cada categoría (E o I) calculada por separado sobre mujeres ({{ nMujeres }}) y hombres ({{ nHombres }}) del corpus codificado. Se muestran las trece, ordenadas por tamaño de brecha — no un subconjunto elegido a mano.</p>
         </div>
-        <sc-for list="{{ brechaGenero }}" as="b" hint-placeholder-count="3">
-          <div style="display:flex; flex-direction:column; gap:7px">
+        <sc-for list="{{ brechaGenero }}" as="b" hint-placeholder-count="13">
+          <div style="display:flex; flex-direction:column; gap:7px; {{ b.marca }}">
             <span style="font-size:13px; font-weight:800; color:#2A2933">{{ b.nombre }} <span style="font-weight:600; color:#75737F; font-size:11.5px">— {{ b.brechaTxt }}</span></span>
             <div style="display:grid; grid-template-columns:64px 1fr 42px; align-items:center; gap:10px">
               <span style="font-size:11px; color:#C23E82; font-weight:700">Mujeres</span>
@@ -346,7 +377,115 @@
             </div>
           </div>
         </sc-for>
-        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Exploratorio: no controla por tipo de delito ni por cuánto habla cada persona de su propia infancia.</p>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">La brecha corre en <strong style="color:#2A2933">los dos sentidos</strong>, y son casi las únicas dos que se despegan: {{ brechaMax.nombre }} ({{ brechaMax.brechaTxt }}) y, en dirección contraria, {{ brechaMin.nombre }} ({{ brechaMin.brechaTxt }}). Las {{ nBrechaIguales }} categorías atenuadas difieren menos de 5 puntos: no es que unas sufran más, es que la adversidad las alcanza <strong style="color:#2A2933">en lugares distintos</strong> — a ellas dentro de casa, a ellos en la calle. Exploratorio: no controla por tipo de delito ni por cuánto habla cada persona de su propia infancia.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">El consumo empieza en la infancia</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Edad a la que declaran haber empezado a consumir, sobre los {{ nConsumo }} casos que la dicen. El más temprano tenía {{ edadMinConsumo }} años.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:11px">
+          <sc-for list="{{ consumoBarras }}" as="k" hint-placeholder-count="5">
+            <div title="{{ k.tip }}" style="display:grid; grid-template-columns:120px 1fr 96px; align-items:center; gap:12px">
+              <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ k.etiqueta }}</span>
+              <div style="height:18px; background:#F4F0E8; border-radius:5px; overflow:hidden"><div style="{{ k.barra }}"></div></div>
+              <span style="font-size:12.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ k.n }} · {{ k.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; padding-top:14px; border-top:1px solid #F4F0E8">
+          <div style="background:#2A2933; border-radius:12px; padding:18px 22px; display:flex; flex-direction:column; gap:4px; min-width:210px; flex:1">
+            <span style="font-size:32px; font-weight:800; letter-spacing:-0.02em; line-height:1; color:#FFFFFF">{{ pctConsumoMenor }}%</span>
+            <span style="font-size:12.5px; color:#E2E6F5; line-height:1.45">empezó a consumir siendo menor de edad. Promedio: {{ promConsumo }} años.</span>
+          </div>
+          <div style="border:1px solid #E9E3D7; border-radius:12px; padding:16px 20px; display:flex; flex-direction:column; gap:7px; min-width:230px; flex:1">
+            <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:700">Y baja con la carga</span>
+            <sc-for list="{{ consumoPorCarga }}" as="cc" hint-placeholder-count="3">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px">
+                <span style="font-size:12.5px; color:#4A4955">{{ cc.etiqueta }}</span>
+                <span style="font-size:14px; font-weight:800; color:#5562A4; font-variant-numeric:tabular-nums">{{ cc.valorTxt }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Es el puente natural hacia van der Kolk: la sustancia como regulación de un cuerpo que no aprendió a calmarse, no como vicio. A mayor carga de adversidad, más temprano el primer consumo.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">Tortura en detención</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Sobre los {{ nCodificados }} casos codificados. Respaldado por {{ nCitasTortura }} citas con marca de tiempo: es la categoría con más evidencia textual de todo el corpus, por encima de cualquier adversidad de infancia.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:11px">
+          <sc-for list="{{ torturaBarras }}" as="t" hint-placeholder-count="3">
+            <div title="{{ t.tip }}" style="display:grid; grid-template-columns:150px 1fr 96px; align-items:center; gap:12px">
+              <span style="font-size:12.5px; font-weight:700; color:#2A2933">{{ t.etiqueta }}</span>
+              <div style="height:18px; background:#F4F0E8; border-radius:5px; overflow:hidden"><div style="{{ t.barra }}"></div></div>
+              <span style="font-size:12.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ t.n }} · {{ t.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; padding-top:14px; border-top:1px solid #F4F0E8">
+          <div style="background:#2A2933; border-radius:12px; padding:18px 22px; display:flex; flex-direction:column; gap:4px; min-width:210px; flex:1">
+            <span style="font-size:32px; font-weight:800; letter-spacing:-0.02em; line-height:1; color:#FFFFFF">{{ pctTortSi }}%</span>
+            <span style="font-size:12.5px; color:#E2E6F5; line-height:1.45">de quienes hablan del tema declaran haber sido torturados: {{ tortSiN }} de {{ tortAbordanN }}.</span>
+          </div>
+          <div style="border:1px solid #E9E3D7; border-radius:12px; padding:16px 20px; display:flex; flex-direction:column; gap:7px; min-width:230px; flex:1">
+            <span style="font-size:10px; letter-spacing:0.11em; text-transform:uppercase; color:#75737F; font-weight:700">Sin diferencia por sexo</span>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px"><span style="font-size:12.5px; color:#4A4955">Hombres</span><span style="font-size:14px; font-weight:800; color:#5562A4; font-variant-numeric:tabular-nums">{{ pctTortH }}%</span></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px"><span style="font-size:12.5px; color:#4A4955">Mujeres</span><span style="font-size:14px; font-weight:800; color:#C23E82; font-variant-numeric:tabular-nums">{{ pctTortM }}%</span></div>
+            <span style="font-size:11.5px; color:#75737F; line-height:1.45">La tortura no distingue: alcanza a la mitad de unos y de otras.</span>
+          </div>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Cierra el arco con Baratta: el sistema que debía responder al daño temprano termina agregando uno nuevo. Del daño temprano al castigo, y del castigo a más daño.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">La textura de la evidencia: de qué está hecha cada categoría</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Cada barra son los {{ nCodificados }} casos repartidos en los cuatro estados posibles del libro de códigos. Muestra dónde la certeza descansa en palabras textuales, dónde en interpretación, y dónde simplemente no se habló del tema.</p>
+        </div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap">
+          <sc-for list="{{ leyendaTextura }}" as="lt" hint-placeholder-count="4">
+            <span style="display:flex; align-items:center; gap:7px; font-size:11.5px; color:#4A4955"><span style="{{ lt.swatch }}"></span>{{ lt.etiqueta }}</span>
+          </sc-for>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px">
+          <sc-for list="{{ textura }}" as="tx" hint-placeholder-count="13">
+            <div style="display:grid; grid-template-columns:186px 1fr 104px; align-items:center; gap:12px">
+              <span style="font-size:12.5px; color:#2A2933; line-height:1.25">{{ tx.nombre }}</span>
+              <div style="display:flex; height:20px; border:1px solid #E9E3D7; border-radius:5px; overflow:hidden; box-sizing:border-box">
+                <sc-for list="{{ tx.segmentos }}" as="sg" hint-placeholder-count="4">
+                  <div title="{{ sg.tip }}" style="{{ sg.style }}"></div>
+                </sc-for>
+              </div>
+              <span style="font-size:11.5px; color:#75737F; text-align:right; font-variant-numeric:tabular-nums">{{ tx.afirmadoTxt }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Es la versión gráfica de una regla del proyecto: <strong style="color:#2A2933">el silencio no es un dato negativo</strong>. Una barra con mucho "no mencionado" no dice que la adversidad no ocurrió, dice que la entrevista no fue por ahí. La categoría que más descansa en inferencia es <strong style="color:#2A2933">{{ masInferida.nombre }}</strong> ({{ masInferida.inferidoTxt }} de lo afirmado) — y esa es exactamente la que hay que leer con más cuidado.</p>
+      </div>
+
+      <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
+        <div style="display:flex; flex-direction:column; gap:4px">
+          <h3 style="margin:0; font-size:16px; font-weight:800; letter-spacing:-0.01em">De qué habla el corpus: {{ nCitasTotal }} citas con minuto exacto</h3>
+          <p style="margin:0; font-size:13px; color:#75737F; line-height:1.55; max-width:90ch">Cada cita guardada durante la codificación lleva su tema y su marca de tiempo. Contarlas por tema revela qué ocupa realmente el relato — y no son las trece categorías.</p>
+        </div>
+        <div style="display:flex; gap:18px; flex-wrap:wrap">
+          <span style="display:flex; align-items:center; gap:7px; font-size:11.5px; color:#4A4955"><span style="width:10px;height:10px;border-radius:3px;background:#8795D2;display:inline-block;flex:none"></span>Adversidad de infancia (las 13)</span>
+          <span style="display:flex; align-items:center; gap:7px; font-size:11.5px; color:#4A4955"><span style="width:10px;height:10px;border-radius:3px;background:#E85DA0;display:inline-block;flex:none"></span>Trayectoria penal (fuera del libro de códigos)</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:9px">
+          <sc-for list="{{ temasCitas }}" as="tc" hint-placeholder-count="14">
+            <div title="{{ tc.tip }}" style="display:grid; grid-template-columns:220px 1fr 96px; align-items:center; gap:12px">
+              <span style="display:flex; align-items:center; gap:9px; font-size:12.5px; color:#2A2933; line-height:1.25"><span style="{{ tc.swatch }}"></span>{{ tc.nombre }}</span>
+              <div style="height:16px; background:#F4F0E8; border-radius:4px; overflow:hidden"><div style="{{ tc.barra }}"></div></div>
+              <span style="font-size:12.5px; font-weight:800; text-align:right; font-variant-numeric:tabular-nums">{{ tc.n }} · {{ tc.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:0; font-size:12px; color:#75737F; line-height:1.6">Lo más citado de todo el corpus no es una adversidad de infancia: es <strong style="color:#2A2933">{{ temaTop.nombre }}</strong>, con {{ temaTop.n }} citas. En conjunto, <strong style="color:#2A2933">{{ pctCitasNoAce }}% de las citas</strong> hablan de trayectoria penal — el Estado, la detención, el castigo — y no de las trece categorías que el libro de códigos fue a buscar. Se muestran los {{ nTemasResto }} temas restantes agregados aparte ({{ nCitasResto }} citas), casi todos con una o dos menciones.</p>
       </div>
 
       <div style="border:1px solid #E9E3D7; border-radius:16px; background:#FFFFFF; padding:26px 28px 22px; box-shadow:0 2px 10px rgba(135,149,210,0.06); display:flex; flex-direction:column; gap:16px">
@@ -508,14 +647,9 @@
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px">
         <div style="border:1px dashed #C9D0ED; border-radius:16px; background:#F8F9FD; padding:22px 24px; display:flex; flex-direction:column; gap:8px">
-          <span style="font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5562A4; font-weight:800">Ausencia que habla · 1</span>
+          <span style="font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5562A4; font-weight:800">Ausencia que habla</span>
           <span style="font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#2A2933; font-variant-numeric:tabular-nums">r = {{ rSentTxt }}</span>
           <p style="margin:0; font-size:12.5px; color:#4A4955; line-height:1.6">La duración de la sentencia no correlaciona con la carga ACE (n={{ nSent }} con sentencia numérica y relato de infancia). El sistema penal es ciego al trauma en ambas direcciones: no lo castiga más, pero tampoco lo mitiga — el daño de infancia es invisible al momento de sentenciar.</p>
-        </div>
-        <div style="border:1px dashed #C9D0ED; border-radius:16px; background:#F8F9FD; padding:22px 24px; display:flex; flex-direction:column; gap:8px">
-          <span style="font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#5562A4; font-weight:800">Ausencia que habla · 2</span>
-          <span style="font-size:26px; font-weight:800; letter-spacing:-0.02em; color:#2A2933; font-variant-numeric:tabular-nums">{{ pctTortSi }}%</span>
-          <p style="margin:0; font-size:12.5px; color:#4A4955; line-height:1.6">De los {{ tortAbordanN }} casos que abordan la tortura en su detención, {{ tortSiN }} la afirman. Y es plana: {{ pctTortH }}% de los hombres y {{ pctTortM }}% de las mujeres del corpus la narran, sin variación relevante por delito ni por carga ACE. No responde a un perfil — es infraestructura del sistema.</p>
         </div>
       </div>
     </section>
@@ -579,6 +713,91 @@ const ACES = [
   ["12","Deserción escolar",          "#4A4955", "#E9E3D7"],
   ["13","Violencia comunitaria",      "#2A2933", "#A8A6B0"]
 ];
+
+// Normaliza el texto libre de "origen" (como lo dice cada quien en la entrevista) a { estado, ciudad }.
+// Solo cubre lo que ya se leyó — el cribado léxico no captura geografía, así que esto
+// nunca representa el corpus entero, solo los episodios ya codificados que mencionan de dónde son.
+const ORIGEN_MAP = {
+  "Ciudad de México, CDMX": ["Ciudad de México", "Ciudad de México"],
+  "Ciudad de México": ["Ciudad de México", "Ciudad de México"],
+  "Iztapalapa, CDMX": ["Ciudad de México", "Iztapalapa"],
+  "Iztapalapa, Ciudad de México": ["Ciudad de México", "Iztapalapa"],
+  "Azcapotzalco, CDMX": ["Ciudad de México", "Azcapotzalco"],
+  "Venustiano Carranza, CDMX": ["Ciudad de México", "Venustiano Carranza"],
+  "Tepito, CDMX": ["Ciudad de México", "Tepito"],
+  "Cuajimalpa, CDMX": ["Ciudad de México", "Cuajimalpa"],
+  "Colonia Paulino Navarro, Ciudad de México": ["Ciudad de México", "Colonia Paulino Navarro"],
+  "Xochimilco, CDMX": ["Ciudad de México", "Xochimilco"],
+  "Gustavo A. Madero, CDMX": ["Ciudad de México", "Gustavo A. Madero"],
+  "Tlalpan, CDMX": ["Ciudad de México", "Tlalpan"],
+  "Colonia Guerrero, CDMX": ["Ciudad de México", "Colonia Guerrero"],
+  "San Felipe de Jesús, CDMX": ["Ciudad de México", "San Felipe de Jesús"],
+  "Gabriel Hernández, Ciudad de México": ["Ciudad de México", "Gabriel Hernández"],
+  "Doctores, CDMX": ["Ciudad de México", "Doctores"],
+  "Nezahualcóyotl, Edomex": ["Estado de México", "Nezahualcóyotl"],
+  "Ciudad Nezahualcóyotl, Edomex": ["Estado de México", "Nezahualcóyotl"],
+  "Cuautitlán Izcalli, Edomex": ["Estado de México", "Cuautitlán Izcalli"],
+  "Los Reyes, Edomex": ["Estado de México", "Los Reyes La Paz"],
+  "Chimalhuacán, Edomex": ["Estado de México", "Chimalhuacán"],
+  "Chalco, Edomex": ["Estado de México", "Chalco"],
+  "Otumba, Edomex": ["Estado de México", "Otumba"],
+  "Ixtapaluca, Edomex": ["Estado de México", "Ixtapaluca"],
+  "Tecamac, Edomex": ["Estado de México", "Tecámac"],
+  "Temascaltepec, Edomex": ["Estado de México", "Temascaltepec"],
+  "Naucalpan, Edomex": ["Estado de México", "Naucalpan"],
+  "Coacalco, Edomex": ["Estado de México", "Coacalco"],
+  "Ecatepec, Edomex": ["Estado de México", "Ecatepec"],
+  "Loma Bonita, Ecatepec, Edomex": ["Estado de México", "Ecatepec"],
+  "San Juan Ixhuatepec, Edomex": ["Estado de México", "San Juan Ixhuatepec"],
+  "Villa Nicolás Romero, Edomex": ["Estado de México", "Nicolás Romero"],
+  "Nicolás Romero, Edomex": ["Estado de México", "Nicolás Romero"],
+  "Atizapán, Edomex": ["Estado de México", "Atizapán"],
+  "Toluca, Edomex": ["Estado de México", "Toluca"],
+  "Santa María del Monte, Edomex": ["Estado de México", "Santa María del Monte"],
+  "Estado de México": ["Estado de México", null],
+  "Edomex": ["Estado de México", null],
+  "Sinaloa": ["Sinaloa", null],
+  "Acapulco, Guerrero": ["Guerrero", "Acapulco"],
+  "Guayameo, Guerrero": ["Guerrero", "Guayameo"],
+  "Loruapa, Guerrero": ["Guerrero", "Loruapa"],
+  "Guerrero": ["Guerrero", null],
+  "Escobedo, Nuevo León": ["Nuevo León", "General Escobedo"],
+  "Monterrey, Nuevo León": ["Nuevo León", "Monterrey"],
+  "Cadereyta, Nuevo León": ["Nuevo León", "Cadereyta"],
+  "Nuevo León": ["Nuevo León", null],
+  "Veracruz": ["Veracruz", null],
+  "Yanga, Veracruz": ["Veracruz", "Yanga"],
+  "Alvarado, Veracruz": ["Veracruz", "Alvarado"],
+  "Guadalajara, Jalisco": ["Jalisco", "Guadalajara"],
+  "Morelos": ["Morelos", null],
+  "Cuernavaca, Morelos": ["Morelos", "Cuernavaca"],
+  "Nuevo Laredo, Tamaulipas": ["Tamaulipas", "Nuevo Laredo"],
+  "Matamoros, Tamaulipas": ["Tamaulipas", "Matamoros"],
+  "Tampico, Tamaulipas": ["Tamaulipas", "Tampico"],
+  "Tijuana, Baja California": ["Baja California", "Tijuana"],
+  "Los Frailes, Oaxaca": ["Oaxaca", "Los Frailes"],
+  "Escárcega, Campeche": ["Campeche", "Escárcega"],
+  "Campeche, Campeche": ["Campeche", "Campeche"],
+  "Pátzcuaro, Michoacán": ["Michoacán", "Pátzcuaro"],
+  "Michoacán": ["Michoacán", null],
+  "Puebla": ["Puebla", null],
+  "Rafael Lara Grajales, Puebla": ["Puebla", "Rafael Lara Grajales"],
+  "Sierra Norte de Puebla, Puebla": ["Puebla", "Sierra Norte de Puebla"],
+  "Tabasco": ["Tabasco", null],
+  "Villahermosa, Tabasco": ["Tabasco", "Villahermosa"],
+  "Cancún, Quintana Roo": ["Quintana Roo", "Cancún"],
+  "Estancia de los López, Nayarit": ["Nayarit", "Estancia de los López"],
+  "Ciudad Juárez, Chihuahua": ["Chihuahua", "Ciudad Juárez"],
+  "Charco Cercado, San Luis Potosí": ["San Luis Potosí", "Charco Cercado"],
+  "Hidalgo": ["Hidalgo", null],
+  "Malasia": ["Extranjero", "Malasia"],
+  "Medellín, Colombia": ["Extranjero", "Medellín, Colombia"],
+  "Neiva, Colombia": ["Extranjero", "Neiva, Colombia"],
+  "Bogotá, Colombia": ["Extranjero", "Bogotá, Colombia"],
+  "Sarasota, Florida, EE.UU.": ["Extranjero", "Sarasota, Florida, EE.UU."],
+  "San José Culco": ["Sin estado identificado", "San José Culco"],
+  "Minas de Cristo": ["Sin estado identificado", "Minas de Cristo"]
+};
 
 function parseCSV(text) {
   const rows = []; let row = [], field = "", q = false;
@@ -981,6 +1200,7 @@ class Component extends DCLogic {
       { id: "distribucion", label: "Distribución" },
       { id: "solapamiento", label: "Solapamiento" },
       { id: "corpus", label: "Corpus" },
+      { id: "geografia", label: "Geografía" },
       { id: "hallazgos", label: "Hallazgos" }
     ];
     const seccionActual = this.state.seccion || "resumen";
@@ -998,7 +1218,41 @@ class Component extends DCLogic {
     const mostrarDistribucion = seccionActual === "distribucion";
     const mostrarSolapamiento = seccionActual === "solapamiento";
     const mostrarCorpus = seccionActual === "corpus";
+    const mostrarGeografia = seccionActual === "geografia";
     const mostrarHallazgos = seccionActual === "hallazgos";
+
+    // ---- Origen geográfico: solo se conoce al leer completo, sale de casos (codificación), no del cribado ----
+    const gruposOrigen = new Map();
+    let nSinOrigen = 0;
+    this.state.casos.forEach(c => {
+      const o = (c.origen || "").trim();
+      const par = ORIGEN_MAP[o];
+      if (!o || o === "NM" || !par) { nSinOrigen++; return; }
+      const [estado, ciudad] = par;
+      if (!gruposOrigen.has(estado)) gruposOrigen.set(estado, new Map());
+      const ciudades = gruposOrigen.get(estado);
+      const clave = ciudad || "(sin ciudad precisada)";
+      ciudades.set(clave, (ciudades.get(clave) || 0) + 1);
+    });
+    const nConOrigen = this.state.casos.length - nSinOrigen;
+    const maxEstado = Math.max(1, ...[...gruposOrigen.values()].map(c => [...c.values()].reduce((a, b) => a + b, 0)));
+    const estadosOrigen = [...gruposOrigen.entries()]
+      .map(([estado, ciudades]) => {
+        const n = [...ciudades.values()].reduce((a, b) => a + b, 0);
+        const maxCiudad = Math.max(1, ...ciudades.values());
+        return {
+          estado, n,
+          pct: nConOrigen ? Math.round(n / nConOrigen * 100) + "%" : "0%",
+          barra: `width:${Math.round(n / maxEstado * 100)}%;height:100%;background:#8795D2;border-radius:4px`,
+          ciudades: [...ciudades.entries()]
+            .sort((a, b) => b[1] - a[1])
+            .map(([ciudad, cn]) => ({
+              ciudad, n: cn,
+              barra: `width:${Math.round(cn / maxCiudad * 100)}%;height:100%;background:#AEB8E2;border-radius:3px`
+            }))
+        };
+      })
+      .sort((a, b) => b.n - a.n);
 
     // ---- Hallazgo 1: dosis-respuesta — puntaje ACE vs edad de inicio delictivo ----
     const scoreACE = c => ACES.filter(([n]) => c["ace"+n] === "E" || c["ace"+n] === "I").length;
@@ -1036,24 +1290,34 @@ class Component extends DCLogic {
     const ultimoGrupo = [...dosisCrudo].reverse().find(d => d.n > 0);
     const brechaAnios = (primerGrupo && ultimoGrupo) ? Math.abs(primerGrupo.promedio - ultimoGrupo.promedio).toFixed(1) : "—";
 
-    // ---- Hallazgo 2: brecha de género en tres categorías ----
+    // ---- Hallazgo 2: brecha de género en las trece categorías ----
+    // Se calculan las 13 (no un subconjunto elegido a mano) y se ordenan por tamaño de brecha:
+    // así se ve que la diferencia corre en los DOS sentidos y que la mayoría son casi idénticas.
     const mujeresCasos = this.state.casos.filter(c => c.sexo === "Mujer");
     const hombresCasos = this.state.casos.filter(c => c.sexo === "Hombre");
-    const CATS_GENERO = [["ace03","Abuso sexual"], ["ace13","Violencia comunitaria"], ["ace02","Maltrato emocional"]];
-    const brechaGenero = CATS_GENERO.map(([key, nombre]) => {
+    const brechaGenero = ACES.map(([n, nombre]) => {
+      const key = "ace" + n;
       const pctM = mujeresCasos.length ? Math.round(100 * mujeresCasos.filter(c => c[key]==="E"||c[key]==="I").length / mujeresCasos.length) : 0;
       const pctH = hombresCasos.length ? Math.round(100 * hombresCasos.filter(c => c[key]==="E"||c[key]==="I").length / hombresCasos.length) : 0;
-      const brechaTxt = pctM === pctH ? "sin diferencia"
+      const delta = pctM - pctH;
+      const brechaTxt = Math.abs(delta) < 5 ? "prácticamente igual"
         : pctH === 0 ? `${pctM}% solo en mujeres`
         : pctM === 0 ? `${pctH}% solo en hombres`
-        : pctM > pctH ? `${(pctM/pctH).toFixed(1)}x más en mujeres`
-        : `${(pctH/pctM).toFixed(1)}x más en hombres`;
+        : delta > 0 ? `${(pctM/pctH).toFixed(1)}× más en mujeres · +${delta} pts`
+        : `${(pctH/pctM).toFixed(1)}× más en hombres · ${delta} pts`;
       return {
-        nombre, pctM, pctH, brechaTxt,
+        nombre, pctM, pctH, brechaTxt, delta,
+        deltaAbs: Math.abs(delta),
+        marca: Math.abs(delta) < 5 ? "opacity:0.55" : "",
         barraM: `width:${pctM}%;height:100%;border-radius:4px;background:#E85DA0`,
         barraH: `width:${pctH}%;height:100%;border-radius:4px;background:#6B7AC1`
       };
-    });
+    }).sort((a, b) => b.deltaAbs - a.deltaAbs);
+    // Las dos puntas opuestas: la mayor brecha hacia mujeres y la mayor hacia hombres.
+    // Contrastar esas dos (y no "la mayor contra la nula") es lo que sostiene que corre en ambos sentidos.
+    const brechaMax = [...brechaGenero].sort((a, b) => b.delta - a.delta)[0] || null;
+    const brechaMin = [...brechaGenero].sort((a, b) => a.delta - b.delta)[0] || null;
+    const nBrechaIguales = brechaGenero.filter(b => b.deltaAbs < 5).length;
 
     // ---- Hallazgos nuevos (análisis 2026-08-03) ----
     const casosCod = this.state.casos;
@@ -1198,16 +1462,146 @@ class Component extends DCLogic {
     const pctTortH = pctTortDe(casosCod.filter(c => c.sexo === "Hombre"));
     const pctTortM = pctTortDe(casosCod.filter(c => c.sexo === "Mujer"));
 
+    // ---- El consumo empieza en la infancia ----
+    const conConsumo = casosCod.filter(c => esNum(c.edad_inicio_consumo));
+    const TRAMOS_CONSUMO = [
+      { k: "9 años o menos", min: 0,  max: 9 },
+      { k: "10 a 12 años",   min: 10, max: 12 },
+      { k: "13 a 15 años",   min: 13, max: 15 },
+      { k: "16 a 17 años",   min: 16, max: 17 },
+      { k: "18 o más",       min: 18, max: 200 }
+    ];
+    const consumoCrudo = TRAMOS_CONSUMO.map(t => ({
+      etiqueta: t.k,
+      n: conConsumo.filter(c => { const v = pf(c.edad_inicio_consumo); return v >= t.min && v <= t.max; }).length,
+      menor: t.min < 18
+    }));
+    const maxConsumo = Math.max(1, ...consumoCrudo.map(t => t.n));
+    const consumoBarras = consumoCrudo.map(t => ({
+      etiqueta: t.etiqueta, n: t.n,
+      pct: conConsumo.length ? (100 * t.n / conConsumo.length).toFixed(1) + "%" : "0%",
+      tip: `${t.n} de ${conConsumo.length} declararon empezar a consumir en este tramo`,
+      barra: `width:${Math.round(t.n / maxConsumo * 100)}%;height:100%;border-radius:5px;background:${t.menor ? "#2A2933" : "#AEB8E2"}`
+    }));
+    const nConsumoMenor = conConsumo.filter(c => pf(c.edad_inicio_consumo) < 18).length;
+    const pctConsumoMenor = conConsumo.length ? (100 * nConsumoMenor / conConsumo.length).toFixed(1) : "0";
+    const promConsumo = conConsumo.length ? (conConsumo.reduce((a, c) => a + pf(c.edad_inicio_consumo), 0) / conConsumo.length).toFixed(1) : "—";
+    const edadMinConsumo = conConsumo.length ? Math.min(...conConsumo.map(c => pf(c.edad_inicio_consumo))) : "—";
+    const CARGA_CONSUMO = [
+      { k: "1 a 3 adversidades", min: 1, max: 3 },
+      { k: "4 a 6 adversidades", min: 4, max: 6 },
+      { k: "7 o más",            min: 7, max: 13 }
+    ];
+    const consumoPorCarga = CARGA_CONSUMO.map(g => {
+      const grupo = conConsumo.filter(c => { const s = scoreACE(c); return s >= g.min && s <= g.max; });
+      return {
+        etiqueta: g.k, n: grupo.length,
+        valorTxt: grupo.length ? (grupo.reduce((a, c) => a + pf(c.edad_inicio_consumo), 0) / grupo.length).toFixed(1) : "—"
+      };
+    });
+
+    // ---- Tortura en detención ----
+    const TORT_ESTADOS = [
+      { k: "La declara",       v: "sí", color: "#2A2933" },
+      { k: "No la menciona",   v: "NM", color: "#AEB8E2" },
+      { k: "Dice que no hubo", v: "no", color: "#E9E3D7" }
+    ];
+    const torturaBarras = TORT_ESTADOS.map(t => {
+      const n = casosCod.filter(c => (c.tortura || "").trim() === t.v).length;
+      return {
+        etiqueta: t.k, n,
+        pct: casosCod.length ? (100 * n / casosCod.length).toFixed(1) + "%" : "0%",
+        tip: `${n} de ${casosCod.length} casos`,
+        barra: `width:${casosCod.length ? Math.round(100 * n / casosCod.length) : 0}%;height:100%;border-radius:5px;background:${t.color}`
+      };
+    });
+    const nCitasTortura = this.state.citas.filter(q => /tortura/i.test(q.categoria || "")).length;
+
+    // ---- La textura de la evidencia: de qué está hecha cada categoría ----
+    const ESTADOS_EV = [
+      { k: "E",  etiqueta: "Explícito",     color: "#8795D2" },
+      { k: "I",  etiqueta: "Inferido",      color: "#C9D0ED" },
+      { k: "NO", etiqueta: "Negado",        color: "#F6D2DD" },
+      { k: "NM", etiqueta: "No mencionado", color: "#F4F0E8" }
+    ];
+    const textura = ACES.map(([n, nombre]) => {
+      const key = "ace" + n;
+      const cuenta = k => casosCod.filter(c => (c[key] || "").trim() === k).length;
+      const total = casosCod.length || 1;
+      const segs = ESTADOS_EV.map(e => {
+        const cn = cuenta(e.k);
+        return {
+          n: cn,
+          tip: `${nombre} · ${e.etiqueta}: ${cn} casos (${Math.round(100 * cn / total)}%)`,
+          style: `width:${(100 * cn / total).toFixed(2)}%;height:100%;background:${e.color}`
+        };
+      });
+      const nE = cuenta("E"), nI = cuenta("I");
+      return {
+        nombre, segmentos: segs, nE, nI,
+        // Qué proporción de lo afirmado descansa en inferencia y no en palabras textuales
+        pctInferido: (nE + nI) ? Math.round(100 * nI / (nE + nI)) : 0,
+        afirmadoTxt: `${nE + nI} afirmados`,
+        inferidoTxt: (nE + nI) ? `${Math.round(100 * nI / (nE + nI))}% inferido` : "—"
+      };
+    }).sort((a, b) => (b.nE + b.nI) - (a.nE + a.nI));
+    const masInferida = [...textura].filter(t => (t.nE + t.nI) >= 20).sort((a, b) => b.pctInferido - a.pctInferido)[0] || null;
+    const leyendaTextura = ESTADOS_EV.map(e => ({
+      etiqueta: e.etiqueta,
+      swatch: `width:12px;height:12px;border-radius:3px;background:${e.color};display:inline-block;flex:none;border:1px solid #E9E3D7;box-sizing:border-box`
+    }));
+
+    // ---- De qué habla el corpus: las 2,057 citas por tema ----
+    // No todas las citas son de una categoría ACE: las de trayectoria penal (falla
+    // institucional, debut, tortura) son las más numerosas, y eso es en sí un hallazgo.
+    const conteoTemas = new Map();
+    this.state.citas.forEach(q => {
+      const raw = (q.categoria || "").trim();
+      if (!raw) return;
+      const m = raw.match(/^ace\d{2}\s+(.*)$/i);
+      const nombre = (m ? m[1] : raw).replace(/\s*\(negado\)\s*$/i, "").trim();
+      if (!nombre) return;
+      const clave = (m ? "ace|" : "otro|") + nombre;
+      conteoTemas.set(clave, (conteoTemas.get(clave) || 0) + 1);
+    });
+    const temasOrdenados = [...conteoTemas.entries()]
+      .map(([clave, n]) => ({ esAce: clave.startsWith("ace|"), nombre: clave.slice(clave.indexOf("|") + 1), n }))
+      .sort((a, b) => b.n - a.n);
+    const TOP_TEMAS = 14;
+    const temasTop = temasOrdenados.slice(0, TOP_TEMAS);
+    const maxTema = Math.max(1, ...temasTop.map(t => t.n));
+    const nCitasTotal = this.state.citas.length;
+    const temasCitas = temasTop.map(t => ({
+      nombre: t.nombre,
+      n: t.n,
+      tipo: t.esAce ? "adversidad de infancia" : "trayectoria penal",
+      pct: nCitasTotal ? (100 * t.n / nCitasTotal).toFixed(1) + "%" : "0%",
+      tip: `${t.n} citas con minuto exacto — ${t.esAce ? "categoría del libro de códigos ACE" : "tema de trayectoria penal, fuera de las 13 categorías"}`,
+      swatch: `width:10px;height:10px;border-radius:3px;flex:none;display:inline-block;background:${t.esAce ? "#8795D2" : "#E85DA0"}`,
+      barra: `width:${Math.round(t.n / maxTema * 100)}%;height:100%;border-radius:4px;background:${t.esAce ? "#8795D2" : "#E85DA0"}`
+    }));
+    const nTemasResto = Math.max(0, temasOrdenados.length - temasTop.length);
+    const nCitasResto = temasOrdenados.slice(TOP_TEMAS).reduce((a, t) => a + t.n, 0);
+    const citasNoAce = temasOrdenados.filter(t => !t.esAce).reduce((a, t) => a + t.n, 0);
+    const pctCitasNoAce = nCitasTotal ? Math.round(100 * citasNoAce / nCitasTotal) : 0;
+    const temaTop = temasOrdenados[0] || null;
+
     return {
+      consumoBarras, nConsumo: conConsumo.length, pctConsumoMenor, promConsumo, edadMinConsumo, consumoPorCarga,
+      torturaBarras, nCitasTortura,
+      textura, leyendaTextura, masInferida,
+      temasCitas, nCitasTotal: nCitasTotal.toLocaleString("es-MX"), nTemasResto, nCitasResto, pctCitasNoAce, temaTop,
+      brechaMax, brechaMin, nBrechaIguales,
       nVentana: parVentana.length, ventanaFilas, ventanaTicks, ventanaNota,
       nPuerta: conPuerta.length, puertaBarras, puertaEstratos, orPuerta,
       nReclSi: reclSi.length, nReclNo: reclNo.length, reclutFilas,
       crianzaFilas, famBarras, negacion, negNota,
       rSentTxt: rSent.toFixed(3), nSent: conSent.length,
       tortAbordanN: tortAbordan.length, tortSiN,
-      pctTortSi: tortAbordan.length ? Math.round(100 * tortSiN / tortAbordan.length) : 0,
+      pctTortSi: tortAbordan.length ? (100 * tortSiN / tortAbordan.length).toFixed(1) : "0",
       pctTortH, pctTortM,
-      navItems, mostrarResumen, mostrarDistribucion, mostrarSolapamiento, mostrarCorpus, mostrarHallazgos,
+      navItems, mostrarResumen, mostrarDistribucion, mostrarSolapamiento, mostrarCorpus, mostrarGeografia, mostrarHallazgos,
+      estadosOrigen, nSinOrigen, nConOrigen,
       dosisBarras, rDosisTxt, nDosis, brechaAnios,
       brechaGenero, nMujeres: mujeresCasos.length, nHombres: hombresCasos.length,
       glosario, preseleccionados, histograma, cuartiles, cobertura, puntos, filas,
