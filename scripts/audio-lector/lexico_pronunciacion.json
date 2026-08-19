@@ -1,0 +1,18 @@
+{
+  "_leeme": "Diccionario de reemplazos de pronunciación aplicado ANTES de mandar el texto a Chatterbox. Cada clave se busca como palabra completa (no como substring) y se reemplaza por su valor. Empieza casi vacío a propósito: se llena con lo que suene mal al escuchar, no adivinando de antemano — ver handoff-voz-ceneval.md sección 6. Las entradas marcadas '_revisar: true' son mi mejor intento, no una pronunciación confirmada — escúchalas y corrígelas tú.",
+
+  "CI": { "reemplazo": "ce i", "_revisar": false, "_nota": "coeficiente intelectual, letra por letra — es el estándar universal en psicometría" },
+
+  "WISC-IV": { "reemplazo": "uisc cuatro", "_revisar": true, "_nota": "compuesta — se procesa antes que la entrada suelta 'WISC' para no partirla mal" },
+  "WISC-V": { "reemplazo": "uisc cinco", "_revisar": true, "_nota": "compuesta — igual que WISC-IV" },
+  "WAIS-IV": { "reemplazo": "gueis cuatro", "_revisar": true, "_nota": "compuesta — igual que WISC-IV" },
+  "WISC": { "reemplazo": "uisc", "_revisar": true, "_nota": "se suele decir como préstamo del inglés (rima con 'whisk'), no letra por letra — verificar" },
+  "WAIS": { "reemplazo": "gueis", "_revisar": true, "_nota": "préstamo del inglés (rima con 'ways') — verificar" },
+  "WPPSI": { "reemplazo": "uipsi", "_revisar": true, "_nota": "menos estandarizado que WISC/WAIS — verificar cómo lo dices tú" },
+  "CIT": { "reemplazo": "ce i te", "_revisar": true, "_nota": "letra por letra, como CI — verificar" },
+  "IAG": { "reemplazo": "i a ge", "_revisar": true, "_nota": "letra por letra — verificar" },
+  "ICV": { "reemplazo": "i ce ve", "_revisar": true, "_nota": "letra por letra — verificar" },
+  "IRP": { "reemplazo": "i erre pe", "_revisar": true, "_nota": "letra por letra — verificar" },
+  "RIAS": { "reemplazo": "rías", "_revisar": true, "_nota": "se pronuncia como palabra, no letra por letra — verificar" },
+  "RIST": { "reemplazo": "rist", "_revisar": true, "_nota": "verificar" }
+}
