@@ -58,14 +58,60 @@ def partir_oraciones(texto: str) -> list[str]:
     return [p for p in partes if p]
 
 
+LATAM_REPO = "ResembleAI/Chatterbox-Multilingual-es-mx-latam"
+
+
+def cargar_modelo_latam(device):
+    """Carga el finetune específico de español latino/mexicano en vez del
+    modelo multilingüe general (que por default sale con acento de España —
+    bug conocido y reportado, no es cosa nuestra). EXPERIMENTAL: solo
+    reemplaza los pesos de T3 y S3Gen (las partes que sí cambian entre
+    idiomas) y reusa el voice-encoder/tokenizer del modelo general (son
+    infraestructura compartida). No hay garantía de que encaje sin ajustes
+    — si truena, el error va a decir exactamente qué archivo/formato no
+    cuadró, y de ahí seguimos."""
+    from huggingface_hub import hf_hub_download, snapshot_download
+    from chatterbox.mtl_tts import ChatterboxMultilingualTTS, REPO_ID
+
+    base_dir = Path(snapshot_download(
+        repo_id=REPO_ID,
+        repo_type="model",
+        revision="main",
+        allow_patterns=["ve.pt", "grapheme_mtl_merged_expanded_v1.json", "conds.pt", "Cangjie5_TC.json"],
+    ))
+
+    carpeta = CARPETA / ".modelo-latam"
+    carpeta.mkdir(exist_ok=True)
+    for nombre in ("ve.pt", "grapheme_mtl_merged_expanded_v1.json", "conds.pt"):
+        origen = base_dir / nombre
+        destino = carpeta / nombre
+        if origen.exists() and not destino.exists():
+            destino.symlink_to(origen)
+
+    # Estos dos SÍ son el finetune LATAM — nombres distintos a los que espera
+    # from_local(), por eso el symlink los renombra al vuelo.
+    renombres = {
+        "t3_es_mx_latam.safetensors": "t3_mtl23ls_v2.safetensors",
+        "s3gen_v3.pt": "s3gen.pt",
+    }
+    for nombre_remoto, nombre_local in renombres.items():
+        destino = carpeta / nombre_local
+        if not destino.exists():
+            origen = hf_hub_download(repo_id=LATAM_REPO, filename=nombre_remoto)
+            destino.symlink_to(origen)
+
+    return ChatterboxMultilingualTTS.from_local(carpeta, device)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--texto-file", type=Path, help="Archivo .txt con el texto a narrar. Si no se pasa, usa el párrafo de prueba WISC/WAIS.")
     ap.add_argument("--out", type=Path, default=CARPETA / "salida.mp3", help="Ruta del mp3 de salida (default: salida.mp3 en esta carpeta).")
     ap.add_argument("--idioma", default="es", help="Código de idioma para Chatterbox Multilingual (default: es).")
+    ap.add_argument("--modelo", choices=["general", "latam"], default="general", help="'general' = modelo multilingüe (default, salió con acento de España). 'latam' = finetune de español latino/mexicano (experimental, descarga ~1GB extra la primera vez).")
     ap.add_argument("--voz", type=Path, default=None, help="WAV de referencia (unos segundos) para clonar una voz específica. Si se omite, usa la voz por defecto del modelo.")
-    ap.add_argument("--exaggeration", type=float, default=0.4, help="Expresividad (default 0.4 — más bajo que el 0.5 típico de demo, para sonar más neutro/narrativo y menos 'actuado'). Experimenta.")
-    ap.add_argument("--cfg-weight", type=float, default=0.4, help="Qué tanto se apega el modelo al texto vs. suena natural (default 0.4). Valores más bajos suelen sonar más pausados. Experimenta.")
+    ap.add_argument("--exaggeration", type=float, default=0.5, help="Expresividad (default 0.5, el estándar de Chatterbox). Valores más bajos (probamos 0.4) generaron audio inestable — repeticiones y cortes forzados. Experimenta con cuidado.")
+    ap.add_argument("--cfg-weight", type=float, default=0.5, help="Qué tanto se apega el modelo al texto vs. suena natural (default 0.5, el estándar). Igual que exaggeration: bajarlo mucho generó inestabilidad en la prueba.")
     ap.add_argument("--pausa-ms", type=int, default=350, help="Silencio insertado entre oraciones, en milisegundos (default 350). Este es el control real y confiable del ritmo entre frases — no depende del modelo.")
     ap.add_argument("--device", default=None, help="cuda / mps / cpu. Si se omite, se detecta solo (mps en Apple Silicon si está disponible).")
     args = ap.parse_args()
@@ -83,8 +129,8 @@ def main():
         )
 
     device = args.device or ("mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"))
-    print(f"Cargando Chatterbox Multilingual en device={device} (la primera vez descarga varios GB de pesos, tarda)…")
-    modelo = ChatterboxMultilingualTTS.from_pretrained(device=device)
+    print(f"Cargando Chatterbox Multilingual ({args.modelo}) en device={device} (la primera vez descarga varios GB de pesos, tarda)…")
+    modelo = cargar_modelo_latam(device) if args.modelo == "latam" else ChatterboxMultilingualTTS.from_pretrained(device=device)
 
     texto_crudo = args.texto_file.read_text(encoding="utf-8") if args.texto_file else TEXTO_PRUEBA
     lexico = cargar_lexico()
