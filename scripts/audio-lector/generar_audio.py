@@ -100,7 +100,47 @@ def cargar_modelo_latam(device):
             origen = hf_hub_download(repo_id=LATAM_REPO, filename=nombre_remoto)
             destino.symlink_to(origen)
 
-    return ChatterboxMultilingualTTS.from_local(carpeta, device)
+    # No usamos ChatterboxMultilingualTTS.from_local() aquí a propósito: el
+    # checkpoint S3Gen del finetune latino ("v3") no trae 2 buffers internos
+    # (tokenizer._mel_filters, tokenizer.window — pinta a cálculo fijo de
+    # filtros mel/ventana, no pesos aprendidos) y from_local() carga con
+    # strict=True, así que truena. Replicamos su misma lógica de carga pero
+    # con strict=False solo para S3Gen. Si el chatterbox instalado cambia
+    # from_local(), hay que revisar que esto siga en sync.
+    import torch
+    from safetensors.torch import load_file as load_safetensors
+    from chatterbox.mtl_tts import VoiceEncoder, T3, T3Config, S3Gen, MTLTokenizer, Conditionals
+
+    map_location = torch.device("cpu") if device in ("cpu", "mps") else None
+
+    ve = VoiceEncoder()
+    ve.load_state_dict(torch.load(carpeta / "ve.pt", map_location=map_location, weights_only=True))
+    ve.to(device).eval()
+
+    t3 = T3(T3Config.multilingual())
+    t3_state = load_safetensors(carpeta / "t3_mtl23ls_v2.safetensors")
+    if "model" in t3_state.keys():
+        t3_state = t3_state["model"][0]
+    t3.load_state_dict(t3_state)
+    t3.to(device).eval()
+
+    s3gen = S3Gen()
+    s3gen_state = torch.load(carpeta / "s3gen.pt", map_location=map_location, weights_only=True)
+    faltantes, sobrantes = s3gen.load_state_dict(s3gen_state, strict=False)
+    if faltantes:
+        print(f"Aviso: al checkpoint latino le faltan estas claves (se quedan con su valor default): {faltantes}")
+    if sobrantes:
+        print(f"Aviso: el checkpoint latino trae claves extra que se ignoraron: {sobrantes}")
+    s3gen.to(device).eval()
+
+    tokenizer = MTLTokenizer(str(carpeta / "grapheme_mtl_merged_expanded_v1.json"))
+
+    conds = None
+    builtin_voice = carpeta / "conds.pt"
+    if builtin_voice.exists():
+        conds = Conditionals.load(builtin_voice, map_location=map_location).to(device)
+
+    return ChatterboxMultilingualTTS(t3, s3gen, ve, tokenizer, device, conds=conds)
 
 
 def main():
