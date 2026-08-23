@@ -35,12 +35,12 @@ function createMainWindow() {
 // pasan a la app de abajo). Valida el mecanismo central antes de enlazar el
 // lector real — ver proyectos/kyn-flotante/README.md.
 function createOverlayWindow() {
-  const { width, height } = screen.getPrimaryDisplay().bounds;
+  const { x, y, width, height } = screen.getPrimaryDisplay().bounds;
   overlayWindow = new BrowserWindow({
     width,
     height,
-    x: 0,
-    y: 0,
+    x,
+    y,
     frame: false,
     transparent: true,
     resizable: false,
