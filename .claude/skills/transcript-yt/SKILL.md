@@ -5,12 +5,18 @@ description: Baja la transcripción de uno o varios videos de YouTube y la deja 
 
 # Bajar transcripciones de YouTube
 
-Script: `bajar_transcript.py` (en esta misma carpeta). Usa **yt-dlp** por debajo.
+Script: `bajar_transcript.py`, **en la misma carpeta que este SKILL.md**. Usa **yt-dlp** por debajo.
+
+> **Para Claude:** resuelve la ruta del script contra la carpeta de esta skill, no contra el repo.
+> Esta skill puede estar instalada como skill de cuenta (carpeta sincronizada) o dentro de un
+> proyecto (`.claude/skills/transcript-yt/`). En los ejemplos de abajo, `$SKILL` es la carpeta
+> donde está este archivo. Si no la sabes de cierto, encuéntrala:
+> `find ~/.claude /workspace . -name bajar_transcript.py 2>/dev/null | head -1`
 
 ## Lo mínimo
 
 ```bash
-python3 .claude/skills/transcript-yt/bajar_transcript.py "<URL del video>" --out <carpeta>
+python3 "$SKILL/bajar_transcript.py" "<URL del video>" --out <carpeta>
 ```
 
 Deja un `.md` por video con este formato:
@@ -38,7 +44,7 @@ tags: [transcripcion]
 Texto corrido de ese minuto...
 ```
 
-Es el mismo formato del corpus Penitencia (`proyectos/corpus-penitencia/`), para que todo lo que baje se vea igual y se pueda citar con minuto exacto.
+Es el mismo formato del corpus Penitencia (el repo `paulettecb/PauletteCb`, en `proyectos/corpus-penitencia/`), para que todo lo que baje se vea igual y se pueda citar con minuto exacto.
 
 ## Opciones
 
@@ -56,18 +62,18 @@ Acepta URL completa, URL corta (`youtu.be/...`), `/shorts/`, `/live/` o el ID pe
 
 ```bash
 # Un video, nombre automático
-python3 .claude/skills/transcript-yt/bajar_transcript.py "https://www.youtube.com/watch?v=ABCdefGHIjk"
+python3 "$SKILL/bajar_transcript.py" "https://www.youtube.com/watch?v=ABCdefGHIjk"
 
 # Con nombre y carpeta propios
-python3 .claude/skills/transcript-yt/bajar_transcript.py ABCdefGHIjk \
+python3 "$SKILL/bajar_transcript.py" ABCdefGHIjk \
   --out ~/Desktop/transcripts --nombre entrevista-01
 
 # Playlist completa, numerada
-python3 .claude/skills/transcript-yt/bajar_transcript.py \
+python3 "$SKILL/bajar_transcript.py" \
   "https://www.youtube.com/playlist?list=PLxxxx" --playlist --out corpus/
 
 # Solo inglés
-python3 .claude/skills/transcript-yt/bajar_transcript.py <URL> --lang "en.*,en"
+python3 "$SKILL/bajar_transcript.py" <URL> --lang "en.*,en"
 ```
 
 ## Requisito
